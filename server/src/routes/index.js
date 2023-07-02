@@ -1,6 +1,6 @@
 const { Router } = require("express");
-const  PostUser = require("../controllers/postUser"); //ejemplo
-const Login = require("../controllers/login")
+const  {PostUser} = require("../controllers/postUser"); //ejemplo
+const {Login} = require("../controllers/login")
 
 
 const router = Router();
@@ -18,5 +18,5 @@ router.post("/login" , (req,res)=>{
 
 
 
-    
+
 module.exports = router;
