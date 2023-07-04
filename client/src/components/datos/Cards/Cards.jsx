@@ -1,18 +1,18 @@
 
 import Card from "../Card/Card";
 
-const Cards = ( { cursos } ) => {
+const Cards = ( { courses } ) => {
     return (
         <div>
             {
-                cursos.map((curso) => {
+                courses.map((course) => {
                     return (
                         <Card
-                            Title = {curso.Title}
-                            Description = {curso.Description}
-                            Rating = {curso.Rating}
-                            Free = {curso.Free}
-                            Language = {curso.Language}
+                            title = {course.title}
+                            description = {course.description}
+                            rating = {course.rating}
+                            free = {course.free}
+                            language = {course.language}
                         />
                     )
                 })

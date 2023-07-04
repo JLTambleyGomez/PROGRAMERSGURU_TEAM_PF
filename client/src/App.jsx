@@ -3,6 +3,8 @@ import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
+import Perfil from './components/Perfil/Perfil';
+import Compras from './components/Compras/Compras';
 
 
 function App () {
@@ -17,10 +19,11 @@ function App () {
         location !== "/" && <NavBar/>
       }
       <Routes>
-        <Route path="/" element = {<LandingPage />} />
-        <Route path="/HomePage" element = {<HomePage />} />
-        <Route path="/CoursePage" element = {<CoursePage />} /> 
-
+        <Route path="/" element = {<LandingPage/>} />
+        <Route path="/HomePage" element = {<HomePage/>} />
+        <Route path="/CoursePage" element = {<CoursePage/>} /> 
+        <Route path="/Profile" element = {<Perfil/>} />
+        <Route path="/Compras" element = {<Compras/>} />
       </Routes>
     </div>
   )

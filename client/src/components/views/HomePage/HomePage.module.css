@@ -1,4 +1,15 @@
 .h1 {
-    font-size: 200px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    font-size: 42px;
     color: rgb(167, 12, 12);
 }
+.container{
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}   
