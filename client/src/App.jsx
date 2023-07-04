@@ -6,10 +6,10 @@ import LandingPage from './components/views/LandingPage/LandingPage';
 function App() {
 
   return (
-    <div >
+    <div>
       <Routes>
         <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/LandingPage" element={<LandingPage />} />
+        <Route path="/" element={<LandingPage />} />
 
       </Routes> 
     </div>
