@@ -8,13 +8,13 @@ const HomePage = () => {
       Title: "hola",
       Description: "un curso",
       Rating: 1,
-      Free: "true",
+      Free: true,
       Language: "java"
     }, {
       Title: "curso2",
       Description: "curso2Description",
       Rating: 10,
-      Free: "false",
+      Free: false,
       Language: "javascript"
     }
   ];
