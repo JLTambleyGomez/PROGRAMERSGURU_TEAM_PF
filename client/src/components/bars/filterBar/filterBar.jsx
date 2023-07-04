@@ -1,6 +1,8 @@
-const FilterBar =()=>{
-    return(
-        <div></div>
+const FilterBar = () => {
+    return (
+        <div>
+
+        </div>
     )
 }
 

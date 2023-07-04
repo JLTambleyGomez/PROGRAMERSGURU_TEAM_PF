@@ -1,6 +1,8 @@
-const SearchBar =()=>{
-    return(
-        <div></div>
+const SearchBar = () => {
+    return (
+        <div>
+            
+        </div>
     )
 }
 

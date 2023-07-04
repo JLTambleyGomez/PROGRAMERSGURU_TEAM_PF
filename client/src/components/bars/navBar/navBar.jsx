@@ -1,6 +1,8 @@
-const NavBar =()=>{
-    return(
-        <div></div>
+const NavBar = () => {
+    return (
+        <div>
+            
+        </div>
     )
 }
 

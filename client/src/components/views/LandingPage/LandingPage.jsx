@@ -1,6 +1,7 @@
 
-const LandingPage =()=>{
-    return(
+const LandingPage = () => {
+
+    return (
         <div>
             hola soy santiago
         </div>
