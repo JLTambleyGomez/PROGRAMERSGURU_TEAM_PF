@@ -5,6 +5,7 @@ import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
 import Perfil from './components/views/Perfil/Perfil';
 import Compras from './components/views/Compras/Compras';
+import styles from "./App.module.css";
 
 
 function App () {
@@ -14,7 +15,7 @@ function App () {
 
 
   return (
-    <div>
+    <div className={styles.app}>
       {
         location !== "/" && <NavBar/>
       }

@@ -149,24 +149,8 @@ const HomePage = () => {
     }
   ];
 
-  /*const [currentPage, setCurrentPage] = useState([]);
-  const [actualPage, setActualPage] = useState(1);
-
-  const itemsPerPage = 3;
-  const totalPages = Math.ceil(courses.length / itemsPerPage);
-
-  useEffect(() => {
-    const startIndex = (actualPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    setCurrentPage(courses.slice(startIndex, endIndex));
-  }, [courses, actualPage]);
-  
-  const handlePageChange = (page) => {
-    setActualPage(page);
-  };*/
-
   const [currentPage, setCurrentPage] = useState(1);
-  const coursesPerPage = 9;
+  const coursesPerPage = 3;
 
   const indexOfLastCourse = currentPage * coursesPerPage;
   const indexOfFirtCourse = indexOfLastCourse - coursesPerPage;
@@ -185,20 +169,11 @@ const HomePage = () => {
     <div className={styles.container}>
       <h1 className={styles.h1}>Homepage</h1>
       <div className={styles.pagination}>
-        {/* {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                className={index + 1 === actualPage ? styles.activePage : ''}
-                onClick={() => handlePageChange(index + 1)}
-              >
-                {index + 1}
-              </button>
-            ))} */}
         {
           pageNumberCourses.map((number, index) => {
             return (
-              <button key={index} className='pageBox' onClick={() => { paginate(number) }}>
-                <div>
+              <button key={index} className={styles.paginationbutton} onClick={() => { paginate(number) }}>
+                <div >
                   {number}
                 </div>
               </button>
@@ -207,7 +182,7 @@ const HomePage = () => {
         }
 
       </div>
-      <Cards courses = {currentAllCourses} /> {/*courses = {currentPage} */}
+      <Cards courses = {currentAllCourses} /> 
     </div>
   );
 }
