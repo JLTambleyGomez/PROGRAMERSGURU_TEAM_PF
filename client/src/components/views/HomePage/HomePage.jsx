@@ -172,8 +172,8 @@ const HomePage = () => {
         {
           pageNumberCourses.map((number, index) => {
             return (
-              <button key={index} className='pageBox' onClick={() => { paginate(number) }}>
-                <div>
+              <button key={index} className={styles.paginationbutton} onClick={() => { paginate(number) }}>
+                <div >
                   {number}
                 </div>
               </button>
