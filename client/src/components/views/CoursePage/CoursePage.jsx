@@ -1,11 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const Coursepage = () => {
-
-    useEffect(() => {
-        
-    }, [])
+const CoursePage = () => {
 
     return (
         <div>
@@ -14,4 +10,4 @@ const Coursepage = () => {
     )
 }
 
-export default Coursepage;
+export default CoursePage;

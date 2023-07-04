@@ -1,7 +1,7 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
-import Coursepage from './components/views/CoursePage/CoursePage';
+import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
 
 
@@ -14,14 +14,14 @@ function App () {
   return (
     <div>
       {
-        location !== "/" && (<NavBar/>)
+        location !== "/" && <NavBar/>
       }
       <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/HomePage" element={<HomePage />} />
-        <Route path="/CoursePage/:id" element={<Coursepage/>} /> 
+        <Route path="/" element = {<LandingPage />} />
+        <Route path="/HomePage" element = {<HomePage />} />
+        <Route path="/CoursePage" element = {<CoursePage />} /> 
 
-      </Routes> 
+      </Routes>
     </div>
   )
 }
