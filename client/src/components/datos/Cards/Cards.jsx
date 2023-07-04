@@ -1,9 +1,10 @@
 
 import Card from "../Card/Card";
+import styles from "./Cards.module.css"
 
 const Cards = ( { courses } ) => {
     return (
-        <div>
+        <div className={styles.container}> 
             {
                 courses.map((course) => {
                     return (
