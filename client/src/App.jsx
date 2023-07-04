@@ -3,8 +3,8 @@ import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
-import Perfil from './components/Perfil/Perfil';
-import Compras from './components/Compras/Compras';
+import Perfil from './components/views/Perfil/Perfil';
+import Compras from './components/views/Compras/Compras';
 
 
 function App () {
