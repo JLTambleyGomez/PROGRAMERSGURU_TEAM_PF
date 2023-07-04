@@ -22,11 +22,25 @@ function NavBar() {
                 Courses
               </NavLink>
             </button>
+            
+            <button className = {style.myButton}>
+              <NavLink to="/Compras" className = {style.link}>
+                Carrito
+              </NavLink>
+            </button>
+
+            <button className = {style.myButton}>
+              <NavLink to="/Profile" className = {style.link}>
+                Perfil
+              </NavLink>
+            </button>
+            
             <button className = {style.myButton}>
               <NavLink to="/" className = {style.link}>
                 Salir
               </NavLink>
             </button>
+
 
           </div>
         </div>
