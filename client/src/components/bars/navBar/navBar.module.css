@@ -21,7 +21,7 @@
     align-items: center;
     width: 100%;
     font-family: 'Open Sans', Arial, sans-serif;
-    overflow: hidden;
+    /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
     display: flex;
     }
 
