@@ -4,7 +4,7 @@
 const AdminPanel=()=>{
     return(
         <div>
-            hola
+            <p>ADMINISTRAR CATEGORIAS</p>
         </div>
     )
 }
