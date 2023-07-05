@@ -1,0 +1,64 @@
+.h1 {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    font-size: 42px;
+    color: rgb(167, 12, 12);
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}   
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width:min-content ;
+}
+.paginationbutton{
+    margin:1%;
+    background-color: rgb(247, 246, 246);
+    color: rgb(0, 0, 0);
+    transition: transform 0.6s;
+
+}
+
+.paginationbutton:hover{
+    background-color: rgb(0, 0, 0);
+    color: rgb(248, 248, 248);
+    transform: scale(1.4);
+
+}
+
+/*
+.Class button{
+    background-color:  rgb(179, 113, 26); 
+  border: solid 2px;
+  border-color:  rgb(58, 39, 0);;
+  border-radius: 4px;
+  color:  rgb(58, 39, 0);;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.2s;
+  box-shadow: 0 3px rgb(58, 39, 0);
+}
+  
+.Class button:hover {
+    background-color: rgb(238, 175, 92); 
+    color: white;
+  }
+  .Class Link{
+    color:rgb(58, 39, 0)
+  }
+  .Class button:active {
+    box-shadow: 0 1px rgb(58, 39, 0);
+    transform: translateY(2px);
+}*/
