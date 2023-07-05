@@ -7,7 +7,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;  
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/countries`, {
+const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/finalproject`, {
   logging: false, 
   native: false, 
 });
@@ -28,14 +28,24 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User } = sequelize.models;  //Sequaliza los modelos > ejemplo
+const { User, Courses, Categories, Comment, Subscription } = sequelize.models;  //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
+Courses.belongsToMany(User, { through: "Favorites", timestamps: false });
+User.belongsToMany(Courses, { through: "Favorites", timestamps: false });
 
-// Country.belongsToMany(Activity, { through: 'Country_Activity', timestamps: false });
-// Activity.belongsToMany(Country, { through: 'Country_Activity', timestamps: false  });
+Courses.belongsToMany(Categories, { through: "categories_courses", timestamps: false });
+Categories.belongsToMany(Courses, { through: "categories_courses", timestamps: false });
 
-// Product.hasMany(Reviews);
+User.hasMany(Comment);
+Comment.belongsTo(User);
+
+Courses.hasMany(Comment);
+Comment.belongsTo(Courses);
+
+User.hasMany(Subscription);
+Subscription.belongsTo(User);
+
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
