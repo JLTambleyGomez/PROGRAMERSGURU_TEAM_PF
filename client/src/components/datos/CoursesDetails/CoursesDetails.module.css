@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    justify-content: center;
+    align-items:center;
+    background-color: rgb(166, 165, 179);
+    width: fit-content;
+    height: 100%;
+}
+
+.imagen{
+    position: relative;
+    width: 80%;
+}
+
+.title{
+    color: white;
+    width: auto;
+    height: auto;
+}
