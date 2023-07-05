@@ -81,4 +81,43 @@
 
 }
 
+/*__________________________________________________*/
+.accountOptionsWrapper {
+  position: relative
+}
 
+.accountOptionsImage {
+  display: flex;
+  align-self: center;
+
+  padding: 35px;
+  cursor: pointer;
+}
+.accountOptionsWrapper:hover {
+  background-color: #588B8B;
+  color: #FFF4ED;
+  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.5)
+}
+
+.accountOptionsList {
+  display: none;
+  z-index: 9999;
+  position: absolute;
+  margin: 0;
+  padding: 1rem;
+  width: 10rem;
+
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+  background-color: bisque;
+  list-style: none;
+  right: 0;
+}
+.accountOptionsList li{
+  padding: 0.25rem;
+  color: black;
+  cursor: pointer;
+}
+
+.accountOptionsWrapper:hover .accountOptionsList {
+  display: block;
+}

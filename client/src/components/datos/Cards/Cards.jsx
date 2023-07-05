@@ -4,11 +4,12 @@ import styles from "./Cards.module.css"
 
 const Cards = ( { courses } ) => {
     return (
-        <div className={styles.container}> 
+        <div className = {styles.container}> 
             {
-                courses.map((course) => {
+                courses.map((course, index) => {
                     return (
                         <Card
+                            key = {index}
                             title = {course.title}
                             description = {course.description}
                             rating = {course.rating}
