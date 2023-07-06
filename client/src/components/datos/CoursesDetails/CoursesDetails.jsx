@@ -1,10 +1,18 @@
-import styles from "./CoursesDetails.module.css";
 import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import styles from "./CoursesDetails.module.css";
 
 const CourseDetails=()=>{
 
+    //const [course, setCourse]=useState({})
+
     const {id}= useParams();
     console.log(id);
+
+    // //useEffect(()=>{
+    //     //dispacth o axios directo para obtener el curso por medio del id 
+    //     setCourse(curso)
+    // },[])/
 
     const ejemplo={ title:"mi curso", description:"con juegos de azar y mujercuelas", imageURL:"https://th.bing.com/th/id/R.cb2bd88e73f7f722a655968d8cc766be?rik=EhZLjZqFstGTIg&pid=ImgRaw&r=0", courseUrl:"https://www.youtube.com/",
      rating:100, released:"30 de febrero", isFree:false, language:"Spanish/Español", categories:["Java","C++"] }
@@ -23,7 +31,7 @@ const CourseDetails=()=>{
                 )
             })}
             </ul>
-            
+
             <h4>Language:{ejemplo.language}</h4>
             <h2>Price: </h2>
             {ejemplo.isFree === true ? (
