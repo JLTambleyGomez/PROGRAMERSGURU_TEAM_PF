@@ -15,7 +15,7 @@ export function dELETE_CATEGORIES(id) {
       try {
         console.log(category)
         
-        const { data } = await axios.delete(`http://localhost:3001/categories/:${id}`);
+        const { data } = await axios.delete(`http://localhost:3001/category/${id}`);
         return dispatch({
           type: DELETE_CATEGORIES,
           payload: data,
@@ -35,7 +35,7 @@ export function pOST_CATEGORIES(category) {
       try {
         console.log(category)
         
-        const { data } = await axios.post("http://localhost:3001/categories",category);
+        const { data } = await axios.post("http://localhost:3001/category",category);
         return dispatch({
           type: POST_CATEGORIES,
           payload: data,
@@ -52,7 +52,8 @@ export function pOST_CATEGORIES(category) {
 export function gET_CATEGORIES () {
     return async function (dispatch) {
       try {
-        const { data } = await axios("http://localhost:3001/categories");
+       
+        const { data } = await axios("http://localhost:3001/category");
         return dispatch({
           type: GET_CATEGORIES,
           payload: data,

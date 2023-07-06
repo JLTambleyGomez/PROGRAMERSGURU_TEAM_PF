@@ -22,20 +22,23 @@ const AdminPanel = () => {
     setInput({ category: value });
   };
 
-  const deleteCategory = () => {
-    const { category } = inputCategory;
-    dispatch(dELETE_CATEGORIES(inputCategory));
-    dispatch(gET_CATEGORIES());
-    setInput({ category: '' })
-  };
-
-  function addCategory (event) {
-    const { category } = inputCategory;
-    dispatch(pOST_CATEGORIES(inputCategory));
-    dispatch(gET_CATEGORIES());
-    setInput({category:''})
+  const deleteCategory = (id) => {
+    dispatch(dELETE_CATEGORIES(id));
+    Promise.resolve().then(() => {
+    setInput({ category: '' }) 
+     dispatch(gET_CATEGORIES());
+    });
   }
-
+  
+  async function addCategory(event) {
+    dispatch(pOST_CATEGORIES(inputCategory));
+    Promise.resolve().then(() => {
+      setInput({ category: '' });
+      dispatch(gET_CATEGORIES());
+    });
+  }
+  
+  
   //useEffect
   useEffect(() => { 
     dispatch(gET_CATEGORIES());
@@ -60,11 +63,12 @@ const AdminPanel = () => {
     <p>ADMINISTRAR CATEGORIAS</p>
       <div>
         <h1>Categories</h1>
-        <ul>{categories?.map((cat, i) => <li key={i}>{cat}</li>)}</ul>
+        <ul>{categories?.map((cat, i) => <li key={i}><p>Id:{cat.id}=  {cat.name} <button onClick={() => { deleteCategory(cat.id) }}
+        >Borrar</button></p></li>)}</ul>
 
         {/* <button onClick={buttonHandler}>Borrar categorias</button> */}
 
-        <h1>Borrar Categoría</h1>
+        <h1>Crear Categoría</h1>
         <input
           onChange={hadleInputChange}
           value={inputCategory.category}
