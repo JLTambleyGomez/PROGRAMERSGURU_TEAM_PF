@@ -1,13 +1,28 @@
-const {Course} = require("../../db");
+const { Course } = require("../../db");
 
 const deleteCourse = async (req, res) => {
     try {
-        const {courseToDelete} = req.body
-        await Course.destroy({where: {courseToDelete}})
-        res.status(200).json({message: "Se eliminó el curso correctamente"})
-    } catch (error) {
-        res.status(500).json({message: "Algo salió mal"})
-    }
-}
+        const { id } = req.params;
 
-module.exports = {deleteCourse}
+        const courseId = await Course.findByPk(id);
+
+        if (!courseId) {
+            return res
+                .status(404)
+                .json({ message: `El curso con el id ${id} no existe` });
+        }
+
+        const name = courseId.title;
+        await courseId.destroy();
+        return res
+            .status(201)
+            .json({ message: `El curso ${name} fue eliminado exitosamente ` });
+
+        // await Course.destroy({where: {}})
+        // res.status(200).json({message: "Se eliminó el curso correctamente"})
+    } catch (error) {
+        return res.status(500).json({ message: "Algo salió mal" });
+    }
+};
+
+module.exports = { deleteCourse };
