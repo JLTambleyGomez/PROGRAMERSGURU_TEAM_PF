@@ -36,7 +36,7 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
             return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
 
         case FILTER_COURSES_BY_PRICING:
-            return { ...state, courses:state.allCourses.filter(course => course.free === payload)}
+            return { ...state, courses:state.allCourses.filter(course => course.isFree === payload)}
 
         case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];

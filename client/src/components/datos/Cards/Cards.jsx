@@ -16,7 +16,7 @@ function Cards ( { courses } ) {
                             title = {course.title}
                             description = {course.description}
                             rating = {course.rating}
-                            free = {course.free}
+                            isFree = {course.isFree}
                             language = {course.language}
                         />
                     )

@@ -4,7 +4,7 @@ import styles from "./Card.module.css";
 
 
 //_________________________module_________________________
-function Card ({ title, description, rating, free, language }) {
+function Card ({ title, description, rating, isFree, language }) {
     
     //component:
     return (
@@ -19,7 +19,7 @@ function Card ({ title, description, rating, free, language }) {
             <h2 className={styles.rating}>{rating}</h2>
             {/* PRICING */}
             {
-                free === true ? (
+                isFree === true ? (
                     <h2 className={styles.free}>This course is free</h2>
                 ) : (
                     <h2 className={styles.payment}>This course requires payment</h2>
