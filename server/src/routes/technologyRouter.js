@@ -1,17 +1,21 @@
 //Router
-const categoryRouter = require("express").Router();
+const technologyRouter = require("express").Router();
 
 //controller
 const { getTechnology } = require("../controllers/Technology/getTechnology");
-const { deleteTechnology } = require('../controllers/Technology/deleteTechnology')
+const {
+    deleteTechnology,
+} = require("../controllers/Technology/deleteTechnology");
 const { postTechnology } = require("../controllers/Technology/postTechnology");
 
-categoryRouter.get('/', getTechnology);
+const { putTechnology } = require("../controllers/Technology/putTechnology");
 
-categoryRouter.post('/', postTechnology)
+technologyRouter.get("/", getTechnology);
 
-categoryRouter.delete('/:id', deleteTechnology)
+technologyRouter.post("/", postTechnology);
 
+technologyRouter.delete("/:id", deleteTechnology);
 
+technologyRouter.put("/:id", putTechnology);
 
-module.exports= categoryRouter
+module.exports = technologyRouter;

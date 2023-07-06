@@ -1,24 +1,25 @@
-const {Technology} = require("../../db")
+const { Technology } = require("../../db");
 
-const deleteTechnology = async (req,res) => {
+const deleteTechnology = async (req, res) => {
     try {
-        
-        const {id} = req.params
-        console.log(id);
-        const deletedTechnology = await Technology.findByPk(id)
-        console.log(deletedTechnology);
-        if (!deletedTechnology) return res.status(404).json({message:`La categoria con el id '${id}' no existe`})
+        const { id } = req.params;
 
-        const name = deletedTechnology.name
+        const deletedTechnology = await Technology.findByPk(id);
+        if (!deletedTechnology)
+            return res
+                .status(404)
+                .json({ message: `La categoria con el id '${id}' no existe` });
 
-        deletedTechnology.destroy()
+        const name = deletedTechnology.name;
 
-        return res.status(200).json({message:`La categoria '${name}' fue borrada con éxito`}) 
+        deletedTechnology.destroy();
 
+        return res
+            .status(200)
+            .json({ message: `La categoria '${name}' fue borrada con éxito` });
     } catch (error) {
-
-        return res.status(500).json({message:error.message})
+        return res.status(500).json({ message: error.message });
     }
-}
+};
 
-module.exports = {deleteTechnology}
+module.exports = { deleteTechnology };

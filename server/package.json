@@ -20,5 +20,7 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.32.1"
   },
-  "prettier": {"tabWidth": 4}
+  "prettier": {
+    "tabWidth": 4
+  }
 }
