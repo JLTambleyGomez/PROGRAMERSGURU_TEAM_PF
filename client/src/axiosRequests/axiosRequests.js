@@ -2,7 +2,7 @@ import axios from "axios";
 
 //COURSES:
 export const getCoursesAllRequest = async () => {
-    const { data } = await axios.get(/* SERVER ENDPOINT */)
+    const { data } = await axios.get("http://localhost:3001/course")
     return data;
 }
 

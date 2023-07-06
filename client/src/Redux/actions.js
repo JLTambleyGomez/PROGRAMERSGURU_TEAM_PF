@@ -32,6 +32,7 @@ export const get_courses_all = () => {
     return async (dispatch) => {
         try {
             const data = await getCoursesAllRequest() // request - completar endpoint en axiosRequests
+            console.log(data)
             return dispatch({
                 type: GET_COURSES_ALL,
                 payload: data

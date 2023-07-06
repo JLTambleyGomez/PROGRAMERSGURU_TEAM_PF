@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { get_courses_all } from '../../../Redux/actions';
 
 import styles from "./HomePage.module.css";
 import Cards from '../../datos/Cards/Cards';
@@ -11,6 +12,13 @@ function HomePage () {
     //const:
     const courses= useSelector((state)=> state.courses)
     const dispatch= useDispatch()
+
+
+    useEffect(()=>{
+        dispatch(get_courses_all())
+    },[])
+
+
 
     //states:
     const [currentPage, setCurrentPage] = useState(1);
