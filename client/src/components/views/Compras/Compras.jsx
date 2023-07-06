@@ -1,10 +1,12 @@
-const Compras=()=>{
+//_________________________module_________________________
+function Compras () {
 
-return(
-    <div>
-        <h1>compras</h1>
-    </div>
-)
+    //component:
+    return(
+        <div>
+            <h1>compras</h1>
+        </div>
+    )
 }
 
 export default Compras;

@@ -13,12 +13,11 @@ module.exports = (sequelize) => {
         allowNull: false,
         unique: true,
         validate: {
-          len: {
-            args: [2, 20],
-          },
+            len: {
+                args: [1, 20],
+            },
         },
       },
     },
-    { timestamps: false, freezeTableName: true }
-  );
+    { timestamps: false, freezeTableName: true });
 }
