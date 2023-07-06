@@ -6,6 +6,7 @@ import NavBar from './components/bars/navBar/navBar';
 import Perfil from './components/views/Perfil/Perfil';
 import Compras from './components/views/Compras/Compras';
 import styles from "./App.module.css";
+import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
 
 
@@ -26,6 +27,7 @@ function App () {
         <Route path="/CoursePage" element = {<CoursePage/>} /> 
         <Route path="/Profile" element = {<Perfil/>} />
         <Route path="/Compras" element = {<Compras/>} />
+        <Route path="/AdminPanel" element = {<AdminPanel/>} />
         <Route path="/CourseDetails/:id" element = {<CourseDetails/>} /> 
       </Routes>
     </div>
