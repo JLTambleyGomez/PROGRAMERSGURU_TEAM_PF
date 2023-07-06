@@ -93,7 +93,7 @@ const goblalStorage = {
         },
     ],
     categories:[],
-    message:[],
+    message:"",
     darkMode:false,
 }
 

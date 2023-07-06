@@ -22,6 +22,7 @@ function AdminPanel () {
     const [error, setError] = useState({});
     const [changeDarkMode, setChangeDarkMode] = useState("");
     const [backmessage, setbackmessage]= useState("")
+    const [back, setBack]= useState(false)
 
     //functions:
     const hadleInputChange = (event) => {
@@ -37,10 +38,11 @@ function AdminPanel () {
             await dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
             setInputCategory({ category: "" })
             await dispatch(gET_CATEGORIES());  
-           
+            setBack(!back)
+
         } catch (error) {
             console.log(error)
-        } setbackmessage(message)
+        } 
     }
 
     const deleteCategory = async (id) => {
@@ -56,6 +58,10 @@ function AdminPanel () {
     useEffect(() => {
         dispatch(gET_CATEGORIES());
     }, []);
+    
+    useEffect(()=>{
+    setbackmessage(message)
+    },[back])
 
     // useEffect(() => {
     //     return () => {
