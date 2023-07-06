@@ -1,35 +1,41 @@
-import React from "react";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
 
 import "./perfilbar.css";
 
-const PerfilBar = () => {
-  const dispatch = useDispatch();
-  const darkMode = useSelector((state) => state.darkMode);
-  const userimage =
-    "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664";
+//_________________________module_________________________
+function PerfilBar () {
 
-  const handleDarkMode = () => {
-    dispatch(Dark_Mode(!darkMode));
-  };
+    //const:
+    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    
+    const userImage = "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
+    
+    const darkMode = useSelector((state) => state.darkMode);
+    
+    const handleDarkMode = () => {
+        dispatch(Dark_Mode(!darkMode));
+    };
+    // component:
+    return  (
+        <div className = "accountOptionsWrapper">
 
-  return (
-    <div className="accountOptionsWrapper">
-      <div className="accountOptionsImage">
-        <img src={userimage} alt="user image" className="image" />
-      </div>
+            <div className = "accountOptionsImage">
+                <img src = {userImage} alt = "user image" className = 'image'/>
+            </div>
 
-      <ul className="accountOptionsList">
-        <li onClick={() => { /* acciones para Account */ }}>Account</li>
-        <li onClick={() => { /* acciones para Courses */ }}>Courses</li>
-        <button onClick={handleDarkMode}>
-          Switch {darkMode ? "light" : "dark"} mode
-        </button>
-        <li onClick={() => { /* acciones para Sign out */ }}>Sign out</li>
-      </ul>
-    </div>
-  );
+            <ul className = "accountOptionsList">
+                <li onClick = {() => {navigate('/profile')}}>Account</li>
+                <li onClick = {() => {navigate('/coursepage')}}>Courses</li>
+                <button onClick={handleDarkMode}>Switch {darkMode ? "light" : "dark"} mode</button>
+                <li onClick = {() => {navigate('/')}}>Sign out</li>
+            </ul>
+
+        </div>
+    )
 };
 
 export default PerfilBar;

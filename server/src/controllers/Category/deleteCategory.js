@@ -1,9 +1,10 @@
-const {Category} = require("../../db")
+const { Category } = require("../../db")
+//__________________________________________________
 
 const deleteCategory = async (req,res) => {
     try {
         
-        const {id} = req.params
+        const { id } = req.params
         console.log(id);
         const deletedCategory = await Category.findByPk(id)
         console.log(deletedCategory);
@@ -21,4 +22,4 @@ const deleteCategory = async (req,res) => {
     }
 }
 
-module.exports = {deleteCategory}
+module.exports = {deleteCategory};

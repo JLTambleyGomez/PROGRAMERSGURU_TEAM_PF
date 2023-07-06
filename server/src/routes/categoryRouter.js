@@ -5,13 +5,13 @@ const categoryRouter = require("express").Router();
 const { getCategory } = require("../controllers/Category/getCategory");
 const { deleteCategory } = require('../controllers/Category/deleteCategory')
 const { postCategory } = require("../controllers/Category/postCategory");
+//__________________________________________________
 
 categoryRouter.get('/', getCategory);
 
-categoryRouter.post('/', postCategory)
+categoryRouter.post('/', postCategory);
 
-categoryRouter.delete('/:id', deleteCategory)
+categoryRouter.delete('/:id', deleteCategory);
 
 
-
-module.exports= categoryRouter
+module.exports = categoryRouter;

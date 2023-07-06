@@ -1,8 +1,11 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
-const CoursePage = () => {
 
+//_________________________module_________________________
+function CoursePage () {
+
+    //component:
     return (
         <div>
             <h1>algo</h1>
