@@ -1,4 +1,17 @@
-import { GET_COURSES, GET_CATEGORIES, FILTER_BY_LANGUAGE, FILTER_BY_PRICING, ORDER, POST_CATEGORIES, DELETE_CATEGORIES, ERROR } from "./actions";
+import { 
+//COURSES:
+    GET_COURSES_ALL, 
+    GET_COURSES_BY_NAME, 
+    FILTER_COURSES_BY_LANGUAGE, 
+    FILTER_COURSES_BY_PRICING, 
+    ORDER_COURSES, 
+//CATEGORIES:
+    GET_CATEGORIES_ALL, 
+    POST_CATEGORIES, 
+    DELETE_CATEGORIES,
+// ERRORS: 
+    ERROR 
+} from "./actions";
 //__________________________________________________
 
 //GLOBAL STORAGE:
@@ -88,13 +101,13 @@ export default function rootReducer ( state = goblalStorage, actions) {
         //case 'GET_COURSES':
         //  return { ...state, allCourses: actions.payload, courses: actions.payload };
 
-        case FILTER_BY_LANGUAGE:
+        case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses:state.allCourses.filter(course=> course.language === actions.payload)};
 
-        case FILTER_BY_PRICING:
+        case FILTER_COURSES_BY_PRICING:
             return { ...state, courses:state.allCourses.filter(course=> course.free === actions.payload)}
 
-        case ORDER:
+        case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];
             const cursosOrdenados = [...state.courses]
 
@@ -107,7 +120,7 @@ export default function rootReducer ( state = goblalStorage, actions) {
             }
             return { ...state, allCourses: todos_cursosOrdenados, courses: cursosOrdenados}
 
-        case GET_CATEGORIES:
+        case GET_CATEGORIES_ALL:
             return {
                 ...state,
                 categories: actions.payload,

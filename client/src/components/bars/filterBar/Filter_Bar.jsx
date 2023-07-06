@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { filter_courses, order, filter_price } from "../../../Redux/actions";
+import { filter_courses_by_language, filter_courses_by_price, order_courses, } from "../../../Redux/actions";
 
 import style from "./Filter_Bar.module.css";
 
@@ -14,17 +14,17 @@ function FilterBar () {
     //functions:
     function languageSelectHandler(event) {
         if (event.target.value !== "")
-        dispacth(filter_courses(event.target.value))
+        dispacth(filter_courses_by_language(event.target.value))
     }
 
     function priceSelectHandler(event) {
         if (event.target.value !== "")
-        dispacth(filter_price(event.target.value))
+        dispacth(filter_courses_by_price(event.target.value))
     }
 
     function orderSelectHandler(event) {
         if (event.target.value !== "")
-        dispacth(order(event.target.value))
+        dispacth(order_courses(event.target.value))
     }
 
     //component:
