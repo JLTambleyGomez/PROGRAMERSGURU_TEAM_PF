@@ -1,13 +1,15 @@
-const { Router } = require("express");
+//Router:
+const router = require("express").Router();
+
+//Controllers:
 const { PostUser } = require("../controllers/User/postUser");
 const { Login } = require("../controllers/User/login");
 const { getCourse } = require("../controllers/Course/getCourse");
 const { postCourse } = require("../controllers/Course/postCourse");
 const { deleteCourse } = require("../controllers/Course/deleteCourse");
-const router = Router();
 
 const categoryRouter = require('./categoryRouter');
-
+//__________________________________________________
 
 router.use('/category',categoryRouter )
 
@@ -20,5 +22,6 @@ router.get("/course", getCourse);
 router.post("/course", postCourse);
 
 router.delete("/course", deleteCourse);
+
 
 module.exports = router;
