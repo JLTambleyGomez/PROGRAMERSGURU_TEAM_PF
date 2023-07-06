@@ -1,4 +1,4 @@
-const {User} = require('../db.js');
+const {User} = require('../../db');
 
 const Login = async (req, res) => {
     const { email, password } = req.query;
@@ -6,7 +6,7 @@ const Login = async (req, res) => {
     if (!email || !password) {
       return res.status(400).json({ message: 'Faltan datos' });
     }
-  
+
     try {
       const user = await User.findOne({ where: { email } });
   

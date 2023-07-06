@@ -2,7 +2,7 @@ const sequelize = require("sequelize");
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-  sequelize.define("Categories", {
+  sequelize.define("Category", {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -22,6 +22,3 @@ module.exports = (sequelize) => {
     { timestamps: false, freezeTableName: true }
   );
 }
-
-
-
