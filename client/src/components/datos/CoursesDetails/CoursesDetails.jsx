@@ -14,9 +14,7 @@ function CourseDetails () {
     console.log(id); // debe ir en useEffect
 
     const ejemplo = { title:"mi curso", description:"con juegos de azar y mujercuelas", imageURL:"https://th.bing.com/th/id/R.cb2bd88e73f7f722a655968d8cc766be?rik=EhZLjZqFstGTIg&pid=ImgRaw&r=0", courseUrl:"https://www.youtube.com/",
-        rating:100, released:"30 de febrero", isFree:false, language:"Spanish/Español", categories:["Java","C++"] }
-
-
+        rating:100, released:"30 de febrero", isFree:false, language:"Spanish/Español", categories:["Java","C++"], commets:[{id: 1, comment:"i like turtles", commentDate:"12-04-2.ac"},{id: 2, comment:"SOY UN TROLAZO, ME GUSTA EL PEDAZO", commentDate:"29-01-1647"}]}
     // //useEffect(()=>{
     //     //dispacth o axios directo para obtener el curso por medio del id 
     //     setCourse(curso)

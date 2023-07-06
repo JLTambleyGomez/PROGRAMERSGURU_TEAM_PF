@@ -23,6 +23,6 @@ export const postCategoriesRequest = async (category) => {
 }
 
 export const deleteCategoriesRequest = async (id) => {
-    const { data } = await axios.delete(`http://localhost:3001/category/:${id}`);
+    const { data } = await axios.delete(`http://localhost:3001/category/${id}`);
     return data;
 }

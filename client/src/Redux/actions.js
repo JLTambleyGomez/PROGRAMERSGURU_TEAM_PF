@@ -117,7 +117,7 @@ export function pOST_CATEGORIES (category) { // request
     };
 }
 
-export function dELETE_CATEGORIES (id) { // request
+export function dELETE_CATEGORIES(id) { // request
     return async function (dispatch) {
         try {
             const data = await deleteCategoriesRequest(id);

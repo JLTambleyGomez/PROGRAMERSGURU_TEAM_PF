@@ -5,7 +5,6 @@ const getCategory = async (req, res) => {
     try {
 
         let categories = await Category.findAll()
-        categories = categories.map(cat => cat.dataValues.name)
         return res.json(categories);
 
     } catch (error) {
