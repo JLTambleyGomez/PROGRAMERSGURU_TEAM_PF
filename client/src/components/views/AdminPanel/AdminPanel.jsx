@@ -43,9 +43,15 @@ function AdminPanel () {
         dispatch(gET_CATEGORIES());
     }, [categories]);
 
-    useEffect(() => {
-        window.alert(message)
-    }, [message])
+    useEffect(() => { 
+        dispatch(gET_CATEGORIES());
+    }, []);
+
+    // useEffect(() => {
+    //     return () => {
+    //         window.alert(message)
+    //     }
+    // }, [message])
 
     useEffect(() => {
         setError(validate(inputCategory));
@@ -59,24 +65,34 @@ function AdminPanel () {
             </div>
             <div className="adminPanelSection2">
                 <div className="adminPanelSection2-1">
-                    <input
-                        onChange={hadleInputChange}
-                        value={inputCategory.category}
-                        name="name"
-                        placeholder="Ingresa el nombre de la categoria"
-                    />
-                    <button onClick={addCategory}>Postear categorias</button>
+                    <span className="adminPanelSection2-1-1">
+                        <input
+                            className="adminPanelSection2-1-1Input"
+                            onChange={hadleInputChange}
+                            value={inputCategory.category}
+                            name="name"
+                            placeholder="Ingresa el nombre de la categoria"
+                        />
+                        <button onClick={addCategory}>Postear categorias</button>
+                    </span>
+                    <span className="adminPanelSection2-1-2">
+                        {
+                            error && (
+                                <p>{error.category}</p>
+                            )
+                        }
+                    </span>
                 </div>
                 <div className="adminPanelSection2-2">
-                    <h1>Categories</h1>
+                    <h2>Categories</h2>
                     <ul className="adminPanelSectionCategoryList">
                         {
                             categories?.map((category, index) => {
                                 return (
-                                    <div className="adminPanelSectionCategoryListItem">
+                                    <span className="adminPanelSectionCategoryListItem">
                                         <li key={index}>{category}</li>
                                         <button onClick={() => deleteCategory(category)}>X</button>
-                                    </div>
+                                    </span>
                                 )
                             })
                         }
@@ -86,11 +102,6 @@ function AdminPanel () {
                     {/* <button onClick={buttonHandler}>Borrar categorias</button> */}
 
                     {/* <h1>Borrar Categoría</h1> */}
-                    {/* {
-                        error && (
-                            <p>{error.category}</p>
-                        )
-                    } */}
                 </div>
             </div>
         </div>

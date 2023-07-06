@@ -2,11 +2,11 @@
     display: flex;
     flex-direction: column;
 }
-
+/* __________________________________________________ */
 .adminPanelSection1 {
     display: flex;
 }
-
+/* __________________________________________________ */
 .adminPanelSection2 {
     display: flex;
     flex-direction: column;
@@ -14,8 +14,22 @@
 
 .adminPanelSection2-1 {
     display:flex;
+    flex-direction: column;
+}
+.adminPanelSection2-1-1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.adminPanelSection2-1-1Input {
+    margin: 0
 }
 
+.adminPanelSection2-1-2 {
+    display: flex;
+}
+
+/* _________________________ */
 .adminPanelSection2-2 {
     display: flex;
     flex-direction: column;
