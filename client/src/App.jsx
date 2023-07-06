@@ -8,16 +8,29 @@ import Compras from './components/views/Compras/Compras';
 import styles from "./App.module.css";
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
+import React,{useState,useEffect}from "react";
+import { useSelector} from "react-redux";
+
 
 
 function App () {
 
   const navigate = useNavigate();
   const location = useLocation().pathname;
+  const [changeDarkMode , setChangeDarkMode] = useState("");
+  const darkmode = useSelector((state)=> state.darkMode);
 
+  useEffect (() => {
+    if (darkmode === true){
+      setChangeDarkMode("darkContainer");
+    }else{
+      setChangeDarkMode("lightContainer");
+    }
+    } , [darkmode])
+  
 
   return (
-    <div className={styles.app}>
+    <div className={`${styles[changeDarkMode]}`}>
       {
         location !== "/" && <NavBar/>
       }

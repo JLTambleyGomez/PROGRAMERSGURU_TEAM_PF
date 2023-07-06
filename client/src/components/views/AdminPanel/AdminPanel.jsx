@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { gET_CATEGORIES, pOST_CATEGORIES, dELETE_CATEGORIES } from "../../../Redux/actions";
 import { useEffect, useState } from "react";
 import validate from "./validate";
+import styles from "./AdminPanel.module.css"
 
 //_______________________.module___________________________
 const AdminPanel = () => {
@@ -9,10 +10,10 @@ const AdminPanel = () => {
   //const
   const categories = useSelector((state) => state.categories);
   const dispatch = useDispatch();
-
+  const darkmode = useSelector((state)=> state.darkMode);
   //states
   const [inputCategory, setInput] = useState({ category: "" });
-
+  const [changeDarkMode , setChangeDarkMode] = useState("");
   const [error, setError] = useState({});
 
   //functions
@@ -45,10 +46,18 @@ const AdminPanel = () => {
   //   console.log(error)
   // }, [inputCategory])
 
+  useEffect (() => {
+  if (darkmode === true){
+    setChangeDarkMode("darkContainer");
+  }else{
+    setChangeDarkMode("lightContainer");
+  }
+  } , [darkmode])
+
 
   return (
-    <div>
-      <p>ADMINISTRAR CATEGORIAS</p>
+    <div className={`${styles[changeDarkMode]}`}>
+    <p>ADMINISTRAR CATEGORIAS</p>
       <div>
         <h1>Categories</h1>
         <ul>{categories?.map((cat, i) => <li key={i}>{cat}</li>)}</ul>

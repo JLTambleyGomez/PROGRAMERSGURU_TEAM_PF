@@ -5,6 +5,8 @@ export const ORDER = "ORDER";
 export const POST_CATEGORIES = "POST_CATEGORIES";
 export const DELETE_CATEGORIES = "DELETE_CATEGORIES";
 export const ERROR = "ERROR";
+export const DARK_MODE = "DARK_MODE";
+
 import axios from "axios";
 
 export function dELETE_CATEGORIES(id) {
@@ -105,3 +107,19 @@ export const order = (R) => {
         payload:R
     }
 }
+export const Dark_Mode = (payload) => {
+  if (payload === true) {
+    return {
+      type: DARK_MODE,
+      payload: true
+    };
+  } else {
+    if (payload === false) {
+      return {
+        type: DARK_MODE,
+        payload: false
+      };
+    }
+  }
+};
+  

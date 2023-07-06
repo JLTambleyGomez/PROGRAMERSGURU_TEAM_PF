@@ -1,4 +1,5 @@
-import { ORDER, FILTER_COURSES_BY_LANGUAGE, FILTER_PRICE, ERROR, GET_CATEGORIES, POST_CATEGORIES } from "./actions";
+import { ORDER, FILTER_COURSES_BY_LANGUAGE, FILTER_PRICE, ERROR, GET_CATEGORIES, 
+  POST_CATEGORIES,DARK_MODE } from "./actions";
 
 
 
@@ -79,6 +80,8 @@ const goblalStorage={
   categories:[],
 
   message:[],
+
+  darkMode:false,
 }
 
 
@@ -120,7 +123,10 @@ export default function rootReducer ( state = goblalStorage, actions) {
         ...state,
         message: actions.payload.data.message
       };
-
+    case DARK_MODE:
+      return{
+        ...state,
+       darkMode:actions.payload};
     default: return {...state}; 
   }
 }
