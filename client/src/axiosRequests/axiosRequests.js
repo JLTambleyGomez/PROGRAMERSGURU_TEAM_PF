@@ -6,8 +6,9 @@ export const getCoursesAllRequest = async () => {
     return data;
 }
 
-export const getCoursesByNameRequest = async (name) => {
-    const { data } = await axios.get(/* SERVER ENDPOINT */);
+export const getCoursesByNameRequest = async (title) => {
+    console.log(title)
+    const { data } = await axios.get(`http://localhost:3001/course/title?title=${title}`);
     return data;
 }
 

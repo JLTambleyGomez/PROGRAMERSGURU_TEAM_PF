@@ -32,6 +32,9 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
          case GET_COURSES_ALL:
              return { ...state, allCourses: payload, courses: payload };
 
+         case GET_COURSES_BY_NAME:
+             return { ...state, allCourses: payload, courses: payload };
+
         case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
 

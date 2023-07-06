@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-
+import { get_courses_by_name } from "../../../Redux/actions";
 import styles from "./searchBar.module.css"
 
 //_________________________module_________________________
@@ -19,6 +19,8 @@ function SearchBar () {
 
     const handleSearchButton = (event) => {
         event.preventDefault();
+        console.log(input)
+        dispatch(get_courses_by_name(input))
         setInput("")
     }
 

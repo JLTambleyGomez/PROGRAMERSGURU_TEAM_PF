@@ -43,16 +43,16 @@ export const get_courses_all = () => {
     }
 }
 
-export const get_courses_by_name = (name) => { //hace un req por cursos por nombre
+export const get_courses_by_name = (title) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
-            const data = await getCoursesByNameRequest(name); // request - completar enpoint en axiosRequests
+            const data = await getCoursesByNameRequest(title); // request - completar enpoint en axiosRequests
             return dispatch({
                 type: GET_COURSES_BY_NAME,
                 payload: data,
             });
         } catch (error) {
-            window.alert(error.response.data);
+            window.alert(error.response.data.message);
         }
     };
 }
