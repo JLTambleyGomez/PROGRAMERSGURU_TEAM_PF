@@ -1,6 +1,7 @@
 //_________________________module_________________________
 function Compras () {
 
+
     //component:
     return(
         <div>

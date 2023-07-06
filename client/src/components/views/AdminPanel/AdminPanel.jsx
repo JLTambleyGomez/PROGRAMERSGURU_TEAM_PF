@@ -56,6 +56,10 @@ function AdminPanel () {
     useEffect(() => {
         dispatch(gET_CATEGORIES());
     }, []);
+    
+    useEffect(()=>{
+    setbackmessage(message)
+    },[back])
 
     // useEffect(() => {
     //     return () => {
