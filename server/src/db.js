@@ -4,7 +4,7 @@ const { Sequelize } = require("sequelize");
 const fs = require('fs');
 const path = require('path');
 // Esto es para importar las variables del archivo .env, descomentar si funciona tambien para el equipo.
-// require('dotenv').config({ path: path.resolve(__dirname, './.env') });
+require('dotenv').config({ path: path.resolve(__dirname, './.env') });
 const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;

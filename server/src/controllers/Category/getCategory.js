@@ -7,10 +7,10 @@ const getCategory = async (req, res) => {
         let categories = await Category.findAll()
         categories = categories.map(cat => cat.dataValues.name)
         console.log(categories);
-        res.json(categories);
+        return res.json(categories);
 
     } catch (error) {
-        res.status(500).json({message: 'Algo salió mal'});
+        return res.status(500).json({message: 'Algo salió mal'});
     }
 }
 

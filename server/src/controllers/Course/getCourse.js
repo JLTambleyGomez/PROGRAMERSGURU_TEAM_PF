@@ -6,12 +6,12 @@ const getCourse = async (req, res) => {
         const allCourses = await Course.findAll();
 
         if (!allCourses.length) {
-            res.status(404).json({message: "No hay cursos disponibles"})
+            return res.status(404).json({message: "No hay cursos disponibles"})
         };
-        res.json(allCourses);
+        return res.json(allCourses);
 
     } catch (error) {
-        res.status(500).json({message: "Algo salió mal"});
+        return res.status(500).json({message: "Algo salió mal"});
     }
 }
 

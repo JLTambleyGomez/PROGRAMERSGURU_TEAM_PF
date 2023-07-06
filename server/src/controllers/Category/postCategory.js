@@ -12,16 +12,16 @@ const postCategory = async (req, res) => {
         });
 
         const response = {
-            category: "",
+            category: category,
             message: created
             ? `The new category '${newCategory.name}' was created successfully`
             : `There is already a category called '${newCategory.name}'`
         }
-        res.status(200).json(response);
+        return res.status(200).json(response);
 
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Something went wrong" });
+        return res.status(500).json({ message: "Something went wrong" });
     }
 }
 

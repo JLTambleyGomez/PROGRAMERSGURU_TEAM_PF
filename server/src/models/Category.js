@@ -14,7 +14,7 @@ module.exports = (sequelize) => {
         unique: true,
         validate: {
             len: {
-                args: [2, 20],
+                args: [1, 20],
             },
         },
       },
