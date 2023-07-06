@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 import style from './navBar.module.css';
 import SearchBar from '../searchBar/searchBar';
-import FilterBar from '../filterBar/Filter_Bar';
+
 import PerfilBar from '../perfilbar/perfilbar';
 
 
@@ -27,11 +27,11 @@ function NavBar () {
                         </NavLink>
                     </button>
                     <PerfilBar/>
-                </div>
+                </div> 
                 </div>
             </div>
             {/* FILTER */}
-            <FilterBar/>
+           
             {/* SEARCH */}
             <div className={style.searchBarContainer}>
                 <SearchBar/>
