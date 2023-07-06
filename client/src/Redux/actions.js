@@ -110,7 +110,7 @@ export function pOST_CATEGORIES (category) { // request
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message, // error.response.data.message
             });
         }
     };

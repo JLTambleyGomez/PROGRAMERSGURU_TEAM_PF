@@ -22,9 +22,9 @@ function NavBar () {
                         </NavLink>
                     </button>
                     <button className={style.myButton}>
-                    <NavLink to="/CoursePage" className = {style.link}>
-                        Courses
-                    </NavLink>
+                        <NavLink to="/CoursePage" className = {style.link}>
+                            Courses
+                        </NavLink>
                     </button>
                     <PerfilBar/>
                 </div>

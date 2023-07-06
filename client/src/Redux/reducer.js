@@ -95,42 +95,51 @@ const goblalStorage = {
 }
 
 //REDUCER:
-export default function rootReducer ( state = goblalStorage, actions) {
-  
-    switch (actions.type) {
-        //case 'GET_COURSES':
-        //  return { ...state, allCourses: actions.payload, courses: actions.payload };
+export default function rootReducer ( state = goblalStorage, { type, payload } ) {
+
+    switch (type) {
+        // case 'GET_COURSES':
+        //     return { ...state, allCourses: payload, courses: payload };
 
         case FILTER_COURSES_BY_LANGUAGE:
-            return { ...state, courses:state.allCourses.filter(course=> course.language === actions.payload)};
+            return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
 
         case FILTER_COURSES_BY_PRICING:
-            return { ...state, courses:state.allCourses.filter(course=> course.free === actions.payload)}
+            return { ...state, courses:state.allCourses.filter(course => course.free === payload)}
 
         case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];
             const cursosOrdenados = [...state.courses]
 
-            if (actions.payload === "ABC+"){
+            if (payload === "ABC+") {
                 todos_cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
                 cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
-            } else if (actions.payload === "ABC-"){
+            } else if (payload === "ABC-") {
                 todos_cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
                 cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
             }
-            return { ...state, allCourses: todos_cursosOrdenados, courses: cursosOrdenados}
+            return { 
+                ...state, 
+                allCourses: todos_cursosOrdenados, 
+                courses: cursosOrdenados
+            }
 
         case GET_CATEGORIES_ALL:
             return {
                 ...state,
-                categories: actions.payload,
+                categories: payload,
             };
 
         case POST_CATEGORIES:
             return {
                 ...state,
-                message: actions.payload.data.message
+                message: payload.message,
             };
+        case ERROR:
+            return {
+                ...state,
+                message: payload
+            }
 
         default: return {...state}; 
     }
