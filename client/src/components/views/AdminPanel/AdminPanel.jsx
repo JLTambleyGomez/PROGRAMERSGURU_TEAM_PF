@@ -44,7 +44,7 @@ function AdminPanel () {
     //useEffect:
     useEffect(() => { 
         dispatch(gET_CATEGORIES());
-    }, [categories]);
+    }, []);
 
     useEffect(() => { 
         dispatch(gET_CATEGORIES());
