@@ -8,6 +8,15 @@ module.exports = (sequelize) => {
          primaryKey: true,
          autoIncrement: true,
      },
+      image: {
+         type: DataTypes.STRING
+      },
+      name: {
+         type: DataTypes.STRING
+      },
+      nickName: {
+         type: DataTypes.STRING
+      },
       email:{
          type: DataTypes.STRING,  
          allowNull: false,
@@ -22,6 +31,16 @@ module.exports = (sequelize) => {
       isAdmin:{
          type: DataTypes.BOOLEAN,
          defaultValue: false,
-      }
+      },
+      isBanned: {
+         type: DataTypes.BOOLEAN,
+         defaultValue: false
+      },
+      // idLastSubscriptionOrder: {
+
+      // },
+      // subscription: {
+         
+      // }
    }, { timestamps: false, freezeTableName: true });
 };

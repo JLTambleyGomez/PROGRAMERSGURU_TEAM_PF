@@ -10,12 +10,12 @@ module.exports = (sequelize) => {
         autoIncrement: true,
         allowNull: false,
       },
-      activationDate: {
+      date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
       },
-      expirationDate: {
-        type: DataTypes.DATEONLY,
+      totalPrice: {
+        type: DataTypes.NUMBER,
         allowNull: false,
       },
       status: {

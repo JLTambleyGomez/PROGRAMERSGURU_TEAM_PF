@@ -28,7 +28,7 @@ let entries = Object.entries(sequelize.models);
 let capsEntries = entries.map((entry) => [entry[0][0].toUpperCase() + entry[0].slice(1), entry[1]]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Course, Technology, Comment, Subscription, Product } = sequelize.models;  //Sequaliza los modelos > ejemplo
+const { User, Course, Technology, Comment, Payment, Product } = sequelize.models;  //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
 Course.belongsToMany(User, { through: "Favorite", timestamps: false });
@@ -37,17 +37,17 @@ User.belongsToMany(Course, { through: "Favorite", timestamps: false });
 Course.belongsToMany(Technology, { through: "technology_course", timestamps: false });
 Technology.belongsToMany(Course, { through: "technology_course", timestamps: false });
 
+Product.belongsToMany(Payment, { through: "shopping_cart", timestamps: false });
+Payment.belongsToMany(Product, { through: "shopping_cart", timestamps: false });
+
 User.hasMany(Comment);
 Comment.belongsTo(User);
 
 Course.hasMany(Comment);
 Comment.belongsTo(Course);
 
-User.hasMany(Subscription);
-Subscription.belongsTo(User);
-
-Product.belongsToMany(User, { through: "user_product", timestamps: false });
-User.belongsToMany(Product, { through: "user_product", timestamps: false });
+User.hasMany(Payment);
+Payment.belongsTo(User);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');

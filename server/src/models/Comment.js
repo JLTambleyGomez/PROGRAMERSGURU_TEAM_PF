@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
           },
         },
       },
-      commentDate: {
+      date: {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
