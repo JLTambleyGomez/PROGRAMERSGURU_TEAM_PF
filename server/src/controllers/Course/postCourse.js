@@ -1,25 +1,15 @@
-const { Tecnology, Course } = require("../../db");
+const { Category, Course } = require("../../db"); 
 
 const postCourse = async (req, res) => {
     try {
-        //Obtener los datos del curso desde el cuerpo de la solicitud
-        const {
-            title,
-            description,
-            imageURL,
-            courseUrl,
-            rating,
-            released,
-            isFree,
-            language,
-            categories,
-        } = req.body;
-
+        //Obtener los datos del curso desde el cuerpo de la solicitud 
+        const { title, description, imageURL, courseUrl, rating, released, isFree, language, categories } = req.body; 
+        
         // Verificar si la categoría existe antes de crear el curso
         // Crear el curso en la base de datos utilizando el modelo Course
         const [course, created] = await Course.findOrCreate({
             where: {
-                title,
+                title
             },
             defaults: {
                 description,
@@ -29,7 +19,7 @@ const postCourse = async (req, res) => {
                 released,
                 isFree,
                 language,
-            },
+            }
         });
 
         // Establecer la relación entre el curso y las categorías
@@ -46,25 +36,27 @@ const postCourse = async (req, res) => {
                 language: "",
             },
             successResponse: created
-                ? "El curso fue creado exitosamente"
-                : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
+            ? "El curso fue creado exitosamente"
+            : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
+
         // Devolver una respuesta con el curso creado
         if (created) {
             for (let i = 0; i < categories.length; i++) {
-                const newCourseCategories = await Tecnology.findByPk(
+                const newCourseCategories = await Category.findByPk(
                     categories[i].id
                 );
-                await course.addTecnology(newCourseCategories);
+                await course.addCategory(newCourseCategories);
             }
             return res.json(response);
         }
-        res.status(201).json(response);
+        return res.status(201).json(response);
+
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Algo salió mal" });
+        return res.status(500).json({ message: "Algo salió mal" });
     }
-};
+}
 
-module.exports = { postCourse };
+module.exports = {postCourse};

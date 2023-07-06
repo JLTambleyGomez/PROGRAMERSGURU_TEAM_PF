@@ -1,34 +1,33 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+
 import styles from "./searchBar.module.css"
 
+//_________________________module_________________________
+function SearchBar () {
 
-const SearchBar = () => {
-
-
+    //const:
     const dispatch = useDispatch()
 
-
+    //states:
     const [input, setInput] = useState("");
-    //valor de la findCourse "name"
 
-
-    const handlerSearchTerm = (event) => {
+    //functions:
+    const handleSearchInput = (event) => {
         setInput(event.target.value)
-        
     }
 
-    const handlerButtonSearch = (event) => {
+    const handleSearchButton = (event) => {
         event.preventDefault();
-        /*dispatch(getRecipes(found.info))*/
         setInput("")
     }
 
+    //component:
     return (
         <div className={styles.Container}>
         <div className={styles.SearchBar}>
-            <input  type = 'search' onChange = {handlerSearchTerm} value = {input} />
-            <button className={styles.button} onClick = {handlerButtonSearch}>search</button>    
+            <input  type = 'search' onChange = {handleSearchInput} value = {input}/>
+            <button className={styles.button} onClick = {handleSearchButton}>search</button>    
         </div>
         </div>
     )

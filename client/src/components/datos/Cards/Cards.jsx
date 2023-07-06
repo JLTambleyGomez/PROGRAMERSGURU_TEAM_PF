@@ -1,8 +1,11 @@
-
-import Card from "../Card/Card";
 import styles from "./Cards.module.css"
+import Card from "../Card/Card";
 
-const Cards = ( { courses } ) => {
+
+//_________________________module_________________________
+function Cards ( { courses } ) {
+
+    //component:
     return (
         <div className = {styles.container}> 
             {
