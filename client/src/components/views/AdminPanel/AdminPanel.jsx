@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { gET_CATEGORIES, pOST_CATEGORIES, dELETE_CATEGORIES } from "../../../Redux/actions";
 import validate from "./validate";
-// import styles from "./AdminPanel.module.css"
 
 import "./AdminPanel.css"
+
+// NOTA: MANDE DIRECTAMENTE EL MESSAGE DEL ESTADO GLOBAL PARA QUE SEA RENDERIZADO, EL MENSAJE SE ACTUALIZA AL INSTANTE. YA NO SE
+// NECESITA EL ESTADO LOCAL BACKMESSAGE.
 //_________________________module_________________________
 function AdminPanel () {
 
@@ -12,7 +14,6 @@ function AdminPanel () {
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
     const darkmode = useSelector((state)=> state.darkMode);
-    
 
     //const:
     const dispatch = useDispatch();
@@ -21,26 +22,25 @@ function AdminPanel () {
     const [inputCategory, setInputCategory] = useState({ category: "" });
     const [error, setError] = useState({});
     const [changeDarkMode, setChangeDarkMode] = useState("");
-    const [backmessage, setbackmessage]= useState("")
+    // const [backmessage, setbackmessage] = useState("")
 
     //functions:
     const hadleInputChange = (event) => {
-        setbackmessage("")
+        // setbackmessage("")
         const { value } = event.target;
         setInputCategory({ category: value });
-    
     };
 
     const addCategory = async (event) => {
         try {
             event.preventDefault();
-            await dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
+            await dispatch(pOST_CATEGORIES({ category: inputCategory.category }));
             setInputCategory({ category: "" })
-            await dispatch(gET_CATEGORIES());  
-           
+            await dispatch(gET_CATEGORIES());
         } catch (error) {
             console.log(error)
-        } setbackmessage(message)
+        }
+        // setbackmessage(message)
     }
 
     const deleteCategory = async (id) => {
@@ -92,7 +92,7 @@ function AdminPanel () {
                             placeholder="Ingresa el nombre de la categoria"
                         />
                         <button onClick={addCategory}>Postear categorias</button>
-                        <p>{backmessage}</p>
+                        <p>{message}</p>
                     </span>
                     <span className="adminPanelSection2-1-2">
                         {
