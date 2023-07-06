@@ -12,6 +12,7 @@ function AdminPanel () {
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
     const darkmode = useSelector((state)=> state.darkMode);
+    
 
     //const:
     const dispatch = useDispatch();
@@ -20,33 +21,39 @@ function AdminPanel () {
     const [inputCategory, setInputCategory] = useState({ category: "" });
     const [error, setError] = useState({});
     const [changeDarkMode, setChangeDarkMode] = useState("");
+    const [backmessage, setbackmessage]= useState("")
 
     //functions:
     const hadleInputChange = (event) => {
+        setbackmessage("")
         const { value } = event.target;
         setInputCategory({ category: value });
+    
     };
 
-    function addCategory (event) {
-        event.preventDefault();
-        dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
-        setInputCategory({ category: "" })
+    const addCategory = async (event) => {
+        try {
+            event.preventDefault();
+            await dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
+            setInputCategory({ category: "" })
+            await dispatch(gET_CATEGORIES());  
+           
+        } catch (error) {
+            console.log(error)
+        } setbackmessage(message)
     }
 
-    const deleteCategory = (event) => {
-        event.preventDefault()
-        const { category } = inputCategory;
-        dispatch(dELETE_CATEGORIES(inputCategory));
-        dispatch(gET_CATEGORIES());
-        setInputCategory({ category: "" })
+    const deleteCategory = async (id) => {
+        try {
+            await dispatch(dELETE_CATEGORIES(id))
+            await dispatch(gET_CATEGORIES())
+        } catch (error) {
+            console.log("error");
+        }
     };
 
     //useEffect:
-    useEffect(() => { 
-        dispatch(gET_CATEGORIES());
-    }, []);
-
-    useEffect(() => { 
+    useEffect(() => {
         dispatch(gET_CATEGORIES());
     }, []);
 
@@ -85,6 +92,7 @@ function AdminPanel () {
                             placeholder="Ingresa el nombre de la categoria"
                         />
                         <button onClick={addCategory}>Postear categorias</button>
+                        <p>{backmessage}</p>
                     </span>
                     <span className="adminPanelSection2-1-2">
                         {
@@ -101,18 +109,13 @@ function AdminPanel () {
                             categories?.map((category, index) => {
                                 return (
                                     <span className="adminPanelSectionCategoryListItem">
-                                        <li key={index}>{category}</li>
-                                        <button onClick={() => deleteCategory(category)}>X</button>
+                                        <p key={index}>{category.id} : {category.name}</p>
+                                        <button onClick={() => deleteCategory(category.id)}>X</button>
                                     </span>
                                 )
                             })
                         }
                     </ul>
-                    {/* boton debe recibir un id al que debe acceder a traves de category. Category debe ser un array de objetos (name, id)*/}
-
-                    {/* <button onClick={buttonHandler}>Borrar categorias</button> */}
-
-                    {/* <h1>Borrar Categoría</h1> */}
                 </div>
             </div>
         </div>
