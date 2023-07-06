@@ -11,7 +11,7 @@ courseRouter.get('/', getCourse);
 
 courseRouter.post('/', postCourse);
 
-courseRouter.delete('/', deleteCourse);
+courseRouter.delete('/:id', deleteCourse);
 
 
 module.exports = courseRouter;
