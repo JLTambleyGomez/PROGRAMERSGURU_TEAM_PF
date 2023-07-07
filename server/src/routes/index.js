@@ -8,7 +8,7 @@ const technologyRouter = require('./technologyRouter');
 const courseRouter = require('./courseRouter');
 //__________________________________________________
 
-router.use('/category', technologyRouter);
+router.use('/technology', technologyRouter);
 
 router.use('/course', courseRouter);
 
