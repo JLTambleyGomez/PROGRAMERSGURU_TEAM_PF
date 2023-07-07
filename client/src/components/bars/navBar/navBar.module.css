@@ -1,20 +1,18 @@
-.container {
-  display: flex;
+.containerslight {
   justify-content: space-around;
   justify-items: center;
-  
-  transition: height 0.4s;
+    transition: height 0.4s;
   height: 30px; /* Establece una altura inicial para el contenedor */
 }
 
-.container:hover {
+.containerslight:hover {
 
   height: 40px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
 }
 
 
   
-  .bar1 {
+  .divlight {
     margin:0%;
     background-color: rgba(251, 251, 252, 0.623);
     color: black;
@@ -26,13 +24,13 @@
     }
 
  
-  .buttonContainer {
+  .buttoncontainerlight {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
 
-  .bar1 a {
+  .divlight a {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.2em;
@@ -47,29 +45,106 @@
   }
 
  
-  .bar1 a:not(.active)::after {
+  .divlight a:not(.active)::after {
     opacity: 0.1;
   }
 
-  .bar1 a:not(.active):hover {
+  .divlight a:not(.active):hover {
     color: rgb(0, 0, 0);
   }
 
-  .bar1 .link {
+  .divlight .linklight {
     display: block;
     font-size: 12px;
     transition: transform 0.6s;
   }
 
-  .bar1 .link:hover {
+  .divlight .linklight:hover {
     text-shadow:  0px 3px 12px rgb(128, 255, 255);
     transform: scale(1.3);
   }
 
-  .bar1 .myButton {
+  .divlight .buttonlight {
     background: none;
     border: none;
     padding: 1%;
     transition: width 2s;
   }
 
+/* /////////////////////////////////////////////////////////// */
+  
+.containersdark {
+  justify-content: space-around;
+  justify-items: center;
+    transition: height 0.4s;
+  height: 30px; /* Establece una altura inicial para el contenedor */
+}
+
+.containersdark:hover {
+
+  height: 40px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
+}
+
+
+  
+  .divdark {
+    margin:0%;
+    background-color: rgba(0, 0, 0, 0.623);
+    color: rgb(255, 255, 255);
+    align-items: center;
+    width: 100%;
+    font-family: 'Open Sans', Arial, sans-serif;
+    /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
+    display: flex;
+    }
+
+ 
+  .buttoncontainerdark {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .divdark a {
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    color: rgba(247, 249, 250, 0.932);
+    
+    transition: all ease-out 300ms;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+    text-align: center;
+  }
+
+ 
+  .divdark a:not(.active)::after {
+    opacity: 0.1;
+  }
+
+  .divdark a:not(.active):hover {
+    color: rgb(253, 251, 251);
+  }
+
+  .divdark .linkdark {
+    display: block;
+    font-size: 12px;
+    transition: transform 0.6s;
+  }
+
+  .divdark .linkdark:hover {
+    text-shadow:  0px 3px 12px rgb(128, 255, 255);
+    transform: scale(1.3);
+  }
+
+  .divdark .buttondark {
+    background: none;
+    border: none;
+    padding: 1%;
+    transition: width 2s;
+  }
+
+
+  

@@ -47,7 +47,7 @@ function AdminPanel () {
       link:"linklight",
       ul:"ullight",
       h2:"h2light",
-      
+
 
 
     });
@@ -183,7 +183,7 @@ function AdminPanel () {
 
     //component:
     return (
-        <div >
+        <div className={`${styles.container} ${styles[elementClasses.container]}`} >
             <div >
                <button className={styles.button} onClick={handleshowcategories} ><h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1></button>
             </div>
