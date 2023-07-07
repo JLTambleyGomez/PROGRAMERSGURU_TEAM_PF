@@ -1,4 +1,4 @@
-const { Course } = require("../../db")
+const { Course, Category } = require("../../db")
 const {Op} = require("sequelize")
 
 const getCourseByName = async (req, res) => {
@@ -7,12 +7,7 @@ const getCourseByName = async (req, res) => {
     console.log(``)
     try {
         const allCourses = await Course.findAll({where: {
-            [Op.or]:[{title: {[Op.like]: `%${title}%`}},
-            {title: {[Op.like]: `%${title.toLowerCase()}%`}},
-            {title: {[Op.like]: `%${title.toUpperCase()}%`}},
-            {title: {[Op.like]: `%${title.slice(0,1).toUpperCase()}${title.slice(1,title.length).toLowerCase()}%`}}
-        ]
-            }
+            title:{[Op.iLike]: `%${title}%`}}
     });
 
         if (!allCourses.length) {
