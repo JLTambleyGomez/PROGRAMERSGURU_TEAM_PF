@@ -33,14 +33,14 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 
 // Todos los modelos:
-const { User, Course, Category, Comment, Subscription, Product } = sequelize.models;  //Sequaliza los modelos > ejemplo
+const { User, Course, Technology, Comment, Subscription, Product } = sequelize.models;  //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
 Course.belongsToMany(User, { through: "Favorite", timestamps: false });
 User.belongsToMany(Course, { through: "Favorite", timestamps: false });
 
-Course.belongsToMany(Category, { through: "category_course", timestamps: false });
-Category.belongsToMany(Course, { through: "category_course", timestamps: false });
+Course.belongsToMany(Technology, { through: "category_course", timestamps: false });
+Technology.belongsToMany(Course, { through: "category_course", timestamps: false });
 
 User.hasMany(Comment);
 Comment.belongsTo(User);
