@@ -15,10 +15,4 @@ router.get("/login", Login);
 
 router.post("/login", PostUser);
 
-// router.use("/course", getCourse);
-
-// router.post("/course", postCourse);
-
-// router.delete("/course", deleteCourse);
-
 module.exports = router;
