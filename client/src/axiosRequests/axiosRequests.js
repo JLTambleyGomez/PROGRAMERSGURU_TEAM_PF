@@ -17,6 +17,11 @@ export const getCoursesByNameRequest = async (name) => {
     return data;
 }
 
+export const getCoursesByIdRequest = async (id) => {console.log(id)
+    const { data } = await axios.get(`http://localhost:3001/course/${id}`);
+    
+    return data;
+}
 
 //CATEGORIES:
 export const getCategoriesAllRequest = async () => {

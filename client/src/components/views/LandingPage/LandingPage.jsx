@@ -11,7 +11,7 @@ function LandingPage () {
     const [backgroundImage, setBackgroundImage] = useState(0);
     const images = [
 
-                "https://www.startechup.com/wp-content/uploads/network-6511448_1280.jpg.webp",
+        "https://www.startechup.com/wp-content/uploads/network-6511448_1280.jpg.webp",
 
         "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2021/09/mejor-aplicacion-fondos-pantalla-animados-llegaria-android-dentro-poco-2482649.jpg?tf=1200x",
         "https://cdn.bhdw.net/im/technology-binary-number-programming-wallpaper-69478_w635.webp",

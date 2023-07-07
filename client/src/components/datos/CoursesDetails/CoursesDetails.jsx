@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { get_courses_by_id,clearCourses,clearMessage, } from "../../../Redux/actions";
 
 import styles from "./CoursesDetails.module.css";
 
@@ -8,22 +9,21 @@ import styles from "./CoursesDetails.module.css";
 //_________________________module_________________________
 function CourseDetails () {
 
-    const [course, setCourse]=useState({})
-
+    const dispatch= useDispatch()
+    const course=useSelector((state)=>state.courseActual)
     const {id}= useParams();
 
-   
-
+    async function getDetails(){
+        dispatch(get_courses_by_id(id))
+    }
     
-    useEffect(async()=>{
-        try {
-             const { data } = await axios.get(`http://localhost:3001/course/${id}`)
-         setCourse(data)
-        } catch (error) {
-            console.log(error.response.data.message);
-        }
-       
-     },[])
+    useEffect(()=>{
+        getDetails();
+        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
+            dispatch(clearMessage()); // limpiar 
+            dispatch(clearCourses()); }
+     },[dispatch])
+
 
     //component:
     return(
