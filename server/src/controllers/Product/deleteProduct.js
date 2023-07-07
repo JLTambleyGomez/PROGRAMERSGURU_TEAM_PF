@@ -1,4 +1,4 @@
-const {Product} = require('../../models/Product')
+const {Product} = require('../../db.js')
 
 const deleteProduct = async (req, res) => {
     try {

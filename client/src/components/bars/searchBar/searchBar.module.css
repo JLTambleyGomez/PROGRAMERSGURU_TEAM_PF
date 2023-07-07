@@ -30,20 +30,17 @@
 
   .buttondark {
     background-color: #302f2c;
-    color: white;
+      color: white;
     border: 2px solid white;
   }
   .inputdark {
     display: flex;
-    background-color: #302f2c;
-    color: white;
+    align-items: center;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
     border: 1px solid rgb(255, 255, 255);
     margin-right: 2%;
-    padding: 5px;
-    font-size: 16px;
-    transition: transform 0.3s
-  }
-
+    font-size: 16px;}
 
   .inputlight {
     display: flex;
@@ -56,9 +53,6 @@
     font-size: 16px;
   }
   
-
-
-
   .buttonlight {
       background-color: white;
     color: black;
