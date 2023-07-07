@@ -13,9 +13,13 @@ import {
 
 //ACTIONS:
 //COURSES:
+    export const POST_COURSE="POST_COURSE"
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
+    export const DELETE_COURSE="DELETE_COURSE";
+
     export const POST_COURSE = "POST_COURSE";
+
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
@@ -40,10 +44,48 @@ export const get_courses_all = () => {
                 payload: data
             })
         } catch (error) {
-            window.alert(error.response.data)
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
         }
     }
 }
+export const post_cuorse = (datos) => {
+    return async (dispatch) => {
+        try {
+            const data = await postCourse(datos) // request - completar endpoint en axiosRequests
+            return dispatch({
+                type: POST_COURSE,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
+export function delete_Course_Request(id) { // request
+    return async function (dispatch) {
+        try {
+            const data = await deleteCourseRequest(id);
+            return dispatch({
+                type: DELETE_COURSE,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+
 
 export const get_courses_by_name = (name) => { //hace un req por cursos por nombre
     return async (dispatch) => {
@@ -54,7 +96,10 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
                 payload: data,
             });
         } catch (error) {
-            window.alert(error.response.data);
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
         }
     };
 }

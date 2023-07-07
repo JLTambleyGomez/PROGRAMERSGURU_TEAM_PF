@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import style from './navBar.module.css';
 import SearchBar from '../searchBar/searchBar';
 import FilterBar from '../filterBar/Filter_Bar';
+
 import PerfilBar from '../perfilbar/perfilbar';
 
 
@@ -25,26 +26,19 @@ function NavBar () {
                         <NavLink to="/CoursePage" className = {style.link}>
                             Courses
                         </NavLink>
-                    </button>
-                    {/* <button className={style.myButton}>
-                        <NavLink to="/Compras" className = {style.link}>
-                            Store
-                        </NavLink>
-                    </button>
-                    <button className={style.myButton}>
-                        <NavLink to="/Cart" className = {style.link}>
-                            Cart
-                        </NavLink>
-                    </button> */}
+                    </button> 
+                    <SearchBar/>
+                    <FilterBar/>
+
                     <PerfilBar/>
-                </div>
+                </div> 
                 </div>
             </div>
             {/* FILTER */}
-            <FilterBar/>
+           
             {/* SEARCH */}
-            <div className={style.searchBarContainer}>
-                <SearchBar/>
+            <div >
+               
             </div>
         </div>
     );

@@ -3,6 +3,7 @@ const { Course } = require("../../db");
 
 const deleteCourse = async (req, res) => {
     try {
+
         const { id } = req.params;
 
         const courseId = await Course.findByPk(id);
@@ -25,3 +26,4 @@ const deleteCourse = async (req, res) => {
 }
 
 module.exports = {deleteCourse};
+

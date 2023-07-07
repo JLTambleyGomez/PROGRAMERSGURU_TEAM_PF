@@ -125,6 +125,7 @@ function AdminPanel () {
 
 
     const handleCoursePost = () => {
+
         dispatch(post_course(newCourse))
           .then(() => {
             setNewCourse({
@@ -148,6 +149,7 @@ function AdminPanel () {
 
     //useEffect:
     useEffect(() => {
+
         dispatch(get_categories());
         dispatch(get_courses_all())
     }, []);

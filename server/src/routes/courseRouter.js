@@ -12,6 +12,7 @@ courseRouter.get("/", getCourse);
 
 courseRouter.get("/title", getCourseByName);
 
+
 courseRouter.post("/", postCourse);
 
 courseRouter.delete("/:id", deleteCourse);
