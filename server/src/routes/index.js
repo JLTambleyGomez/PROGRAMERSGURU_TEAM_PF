@@ -6,10 +6,13 @@ const router = Router();
 
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
+const productRouter = require("./productRouter");
 
-router.use("/technology", technologyRouter); //cambiar a technology.
+router.use("/technology", technologyRouter);
 
 router.use("/course", courseRouter);
+
+router.use("/product", productRouter);
 
 router.get("/login", Login);
 

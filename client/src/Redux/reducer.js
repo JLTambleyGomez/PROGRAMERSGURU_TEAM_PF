@@ -16,11 +16,15 @@ import {
 // DARK MODE:
     DARK_MODE
 } from "./actions";
-//__________________________________________________
+
+// PRUEBA CURSOS
+import jsonData from './cursos.json';
+
+//___________________________________________________
 
 //GLOBAL STORAGE:
 const goblalStorage = {
-    allCourses:[],
+    allCourses: [],
     courses:[],
     categories:[],
     message:"",
@@ -34,11 +38,14 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };
 
+        case GET_COURSES_BY_NAME:
+                return { ...state, allCourses: payload, courses: payload };
+
         case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
 
         case FILTER_COURSES_BY_PRICING:
-            return { ...state, courses:state.allCourses.filter(course => course.free === payload)}
+            return { ...state, courses:state.allCourses.filter(course => course.isFree === payload)}
 
         case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];

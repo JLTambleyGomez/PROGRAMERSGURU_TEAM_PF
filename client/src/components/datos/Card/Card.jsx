@@ -1,32 +1,61 @@
-import { Link } from 'react-router-dom';
-
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState,useEffect } from "react";
 import styles from "./Card.module.css";
 
 
 //_________________________module_________________________
-function Card ({ title, description, rating, free, language }) {
+function Card ({ id,title, description, rating, isFree, language }) {
+
+    console.log(id)
     
+    const darkmode = useSelector((state)=> state.darkMode);
+    const [elementClasses, setElementClasses] = useState({
+          h1: "h1light",
+          input: "inputlight",
+          button: "buttonlight",
+          buttoncontainer:"buttoncontainerlight",
+          container: "containerslight",
+          label: "labellight",
+          p:"plight",
+          div:"divlight",
+          span:"spanlight",
+          form: "formlight",
+          hr: "hrlight",
+          error:"errorlight",
+          success:"successlight",
+          link:"linklight",
+          ul:"ullight",
+          h2:"h2light",
+          
+        });
+    
+ useEffect(() => {
+            const updatedElementClasses = {};
+        
+            Object.keys(elementClasses).forEach((key) => {
+              updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
+            });
+        
+            setElementClasses(updatedElementClasses);
+          }, [darkmode]);
+
+
     //component:
     return (
-        <div className={styles.cardContainer}>
-            {/* TITLE */}
-            <Link to={"/CourseDetails/1"}>
-                <h1 className={styles.title}>{title}</h1>
-            </Link>
-            {/* DESCRIPTION */}
-            <h2 className={styles.description}>{description}</h2>
-            {/* RATING */}
-            <h2 className={styles.rating}>{rating}</h2>
-            {/* PRICING */}
+        <div className={`${styles.container} ${styles[elementClasses.container]}`}>
+        <NavLink  className={`${styles.link} ${styles[elementClasses.link]}`} to={`/CourseDetails/${id}`} >{title}</NavLink>
+            <h2 className={`${styles.p} ${styles[elementClasses.p]}`}>{description}</h2>
+            <h2 className={`${styles.h2} ${styles[elementClasses.h2]}`}>{rating}</h2>
             {
-                free === true ? (
+                isFree === true ? (
                     <h2 className={styles.free}>This course is free</h2>
                 ) : (
                     <h2 className={styles.payment}>This course requires payment</h2>
                 )
             }
-            {/* LANGUAGE */}
-            <h2 className={styles.language}>{language}</h2>
+            <h2 className={`${styles.h2} ${styles[elementClasses.h2]}`}>{language}</h2>
+            <h1>{id}</h1>
         </div>
     );
 };

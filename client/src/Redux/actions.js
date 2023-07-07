@@ -2,14 +2,14 @@ import {
 //COURSES:
     getCoursesAllRequest, 
     getCoursesByNameRequest, 
-    postCourse,
+    postCourseRequest,
     deleteCourseRequest,
 //CATEGORIES:
     getCategoriesAllRequest, 
     postCategoriesRequest, 
     deleteCategoriesRequest, 
 } from "../axiosRequests/axiosRequests";
-//__________________________________________________
+//_________________________________ _________________
 
 //ACTIONS:
 //COURSES:
@@ -26,9 +26,10 @@ import {
     export const GET_CATEGORIES_ALL = "GET_CATEGORIES_ALL";
     export const POST_CATEGORIES = "POST_CATEGORIES";
     export const DELETE_CATEGORIES = "DELETE_CATEGORIES";
-    export const DARK_MODE = "DARK_MODE";
 //ERRORS:
     export const ERROR = "ERROR";
+//DARK MODE:
+    export const DARK_MODE = "DARK_MODE";
 
 //__________________________________________________
 //ACTION CREATORS:
@@ -50,46 +51,11 @@ export const get_courses_all = () => {
         }
     }
 }
-export const post_cuorse = (datos) => {
-    return async (dispatch) => {
-        try {
-            const data = await postCourse(datos) // request - completar endpoint en axiosRequests
-            return dispatch({
-                type: POST_COURSE,
-                payload: data
-            })
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.response.data.message,
-            });
-        }
-    }
-}
-
-export function delete_Course_Request(id) { // request
-    return async function (dispatch) {
-        try {
-            const data = await deleteCourseRequest(id);
-            return dispatch({
-                type: DELETE_COURSE,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.response.data.message,
-            });
-        }
-    };
-}
-
-
 
 export const get_courses_by_name = (name) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
-            const data = await getCoursesByNameRequest(name); // request - completar enpoint en axiosRequests
+            const data = await getCoursesByNameRequest(name); // request
             return dispatch({
                 type: GET_COURSES_BY_NAME,
                 payload: data,
@@ -106,7 +72,7 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
 export const post_course = (datos) => {
     return async (dispatch) => {
         try {
-            const data = await postCourse(datos) // request
+            const data = await postCourseRequest(datos) // request
             return dispatch({
                 type: POST_COURSE,
                 payload: data
@@ -120,7 +86,7 @@ export const post_course = (datos) => {
     }
 }
 
-export function delete_course_request(id) { // request
+export function delete_course(id) { // request
     return async function (dispatch) {
         try {
             const data = await deleteCourseRequest(id);
@@ -182,7 +148,7 @@ export function get_categories () { // request
     };
 }
 
-export function pOST_CATEGORIES (technology) { // request
+export function post_categories (technology) { // request
     return async function (dispatch) {
         try {
             const data = await postCategoriesRequest(technology);
@@ -199,7 +165,7 @@ export function pOST_CATEGORIES (technology) { // request
     };
 }
 
-export function dELETE_CATEGORIES(id) { // request
+export function delete_categories(id) { // request
     return async function (dispatch) {
         try {
             const data = await deleteCategoriesRequest(id);

@@ -26,7 +26,7 @@ const putCourse = async (req, res) => {
             !language
         )
             return res
-                .status(404)
+                .status(400)
                 .json({ message: "Error debe ingresar datos a cambiar" });
 
         const courseDB = await Course.findByPk(id);
@@ -34,7 +34,7 @@ const putCourse = async (req, res) => {
         if (!courseDB)
             return res
                 .status(404)
-                .json({ message: "No existe un videogame con ese id" });
+                .json({ message: "No existe un curso con ese id" });
 
         for (let prop in req.body) {
             if (req.body[prop]) courseDB[prop] = req.body[prop];
