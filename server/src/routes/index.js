@@ -1,13 +1,17 @@
-const { Router } = require("express");
+//Router:
+const router = require("express").Router();
+
+//Controllers:
 const { PostUser } = require("../controllers/User/postUser");
 const { Login } = require("../controllers/User/login");
-
-const router = Router();
-
-const technologyRouter = require("./technologyRouter");
+const { getCourse } = require("../controllers/Course/getCourse");
+const { postCourse } = require("../controllers/Course/postCourse");
+const { deleteCourse } = require("../controllers/Course/deleteCourse");
+const categoryRouter = require("./categoryRouter");
 const courseRouter = require("./courseRouter");
+//__________________________________________________
 
-router.use("/category", technologyRouter);
+router.use("/category", categoryRouter);
 
 router.use("/course", courseRouter);
 
