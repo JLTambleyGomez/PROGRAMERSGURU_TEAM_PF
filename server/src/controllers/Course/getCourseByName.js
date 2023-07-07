@@ -33,7 +33,7 @@ const getCourseByName = async (req, res) => {
         const allCourses = await Course.findAll({
             where: {
                 title: {
-                    [Sequelize.Op.iLike]: `%${title}%`,
+                    [Op.iLike]: `%${title}%`,
                 },
             },
         });

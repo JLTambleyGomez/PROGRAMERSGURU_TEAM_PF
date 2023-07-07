@@ -15,13 +15,6 @@ const postCourse = async (req, res) => {
             categories,
         } = req.body;
 
-        // Verificar si la categoría existe antes de crear el curso
-        const existingCategories = await Technology.findAll({
-            where: {
-                id: categories.map((category) => category.id),
-            },
-        });
-
         // Crear el curso en la base de datos utilizando el modelo Course
         const [course, created] = await Course.findOrCreate({
             where: {
@@ -37,12 +30,7 @@ const postCourse = async (req, res) => {
                 language,
             },
         });
-
-        // Establecer la relación entre el curso y las categorías utilizando una transacción
-        if (created) {
-            await course.addTechnologies(existingCategories, { through: 'CourseTecnology' });
-        }
-
+        
         const response = {
             courseDataEmpty: {
                 title: "",
@@ -54,14 +42,24 @@ const postCourse = async (req, res) => {
                 isFree: "",
                 language: "",
             },
-            successResponse: created
+            message: created
                 ? "El curso fue creado exitosamente"
                 : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
+        
+        // Establecer la relación entre el curso y las categorías utilizando una transacción
+        if (created) {
+            for (let i = 0; i < categories.length; i++) {
+                const newCourseTechnology = await Technology.findByPk(
+                    categories[i].id
+                );
+                await course.addTechnology(newCourseTechnology);
+            }
+            return res.status(201).json(response);
+        }
 
-        // Devolver una respuesta con el curso creado
-        return res.status(created ? 201 : 200).json(response);
+        return res.status(200).json(response);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Algo salió mal" });

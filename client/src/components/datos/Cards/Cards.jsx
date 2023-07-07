@@ -13,6 +13,7 @@ function Cards ( { courses } ) {
                     return (
                         <Card
                             key = {index}
+                            id={course.id}
                             title = {course.title}
                             description = {course.description}
                             rating = {course.rating}

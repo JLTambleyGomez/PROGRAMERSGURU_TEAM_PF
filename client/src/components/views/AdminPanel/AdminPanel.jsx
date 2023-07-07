@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_categories, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_course, delete_course_request } from "../../../Redux/actions";
+import { get_categories, post_categories, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
 import validate from "./validate";
 import styles from "./AdminPanel.module.css";
 
@@ -8,7 +8,7 @@ import styles from "./AdminPanel.module.css";
 //_________________________module_________________________
 function AdminPanel () {
 
-    //global state:
+    //global state: 
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
     const darkmode = useSelector((state)=> state.darkMode);
@@ -23,7 +23,7 @@ function AdminPanel () {
         isFree: false,
         language: "",
         categories: [],
-      });
+    });
       
 
     //const:
@@ -36,7 +36,7 @@ function AdminPanel () {
       h1: "h1light",
       input: "inputlight",
       button: "buttonlight",
-      container: "containerslight",
+      container: "containerslight", 
       label: "labellight",
       p:"plight",
       div:"divlight",
@@ -48,10 +48,8 @@ function AdminPanel () {
       link:"linklight",
       ul:"ullight",
       h2:"h2light",
-
-
-
     });
+
     const [backmessage, setbackmessage]= useState("")
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
@@ -96,7 +94,7 @@ function AdminPanel () {
     const handlePostCategories = async (event) => {
       event.preventDefault();
       try {
-        await dispatch(pOST_CATEGORIES({ technology: inputCategory.category }));
+        await dispatch(post_categories({ technology: inputCategory.category }));
         setInputCategory({ category: "" });
         await dispatch(get_categories());
       } catch (error) {
@@ -107,7 +105,7 @@ function AdminPanel () {
 
     const deleteCategory = async (id) => {
         try {
-            await dispatch(dELETE_CATEGORIES(id))
+            await dispatch(delete_categories(id))
             await dispatch(get_categories())
         } catch (error) {
             console.log("error");
@@ -117,7 +115,7 @@ function AdminPanel () {
 
     const handledeleteCourse = async (id) => {
         try {
-          await dispatch(delete_course_request(id));
+          await dispatch(delete_course(id));
           await dispatch(get_courses_all());
         } catch (error) {
           console.log("error");
