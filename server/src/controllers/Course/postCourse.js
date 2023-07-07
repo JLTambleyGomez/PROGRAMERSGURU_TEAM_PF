@@ -1,15 +1,34 @@
-const { Category, Course } = require("../../db"); 
+const { Technology, Course } = require("../../db");
 
 const postCourse = async (req, res) => {
     try {
-        //Obtener los datos del curso desde el cuerpo de la solicitud 
-        const { title, description, imageURL, courseUrl, rating, released, isFree, language, categories } = req.body; 
-        
+        // Obtener los datos del curso desde el cuerpo de la solicitud
+        const {
+            title,
+            description,
+            imageURL,
+            courseUrl,
+            rating,
+            released,
+            isFree,
+            language,
+            categories,
+        } = req.body;
+
+        // La validación de datos se hace desde front
+
+        // No hace falta porque las tecnologias que se pueden elegir vienen directamente de la base de datos
         // Verificar si la categoría existe antes de crear el curso
+        // const existingCategories = await Technology.findAll({
+        //     where: {
+        //         id: categories.map((category) => category.id),
+        //     },
+        // });
+
         // Crear el curso en la base de datos utilizando el modelo Course
         const [course, created] = await Course.findOrCreate({
             where: {
-                title
+                title,
             },
             defaults: {
                 description,
@@ -19,11 +38,9 @@ const postCourse = async (req, res) => {
                 released,
                 isFree,
                 language,
-            }
+            },
         });
-
-        // Establecer la relación entre el curso y las categorías
-
+        console.log(course);
         const response = {
             courseDataEmpty: {
                 title: "",
@@ -35,28 +52,28 @@ const postCourse = async (req, res) => {
                 isFree: "",
                 language: "",
             },
-            successResponse: created
-            ? "El curso fue creado exitosamente"
-            : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
+            message: created
+                ? "El curso fue creado exitosamente"
+                : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
-
-        // Devolver una respuesta con el curso creado
+        
+        // Establecer la relación entre el curso y las categorías utilizando una transacción
         if (created) {
             for (let i = 0; i < categories.length; i++) {
-                const newCourseCategories = await Category.findByPk(
+                const newCourseTechnology = await Technology.findByPk(
                     categories[i].id
                 );
-                await course.addCategory(newCourseCategories);
+                await course.addTechnology(newCourseTechnology);
             }
-            return res.json(response);
+            return res.status(201).json(response);
         }
-        return res.status(201).json(response);
 
+        return res.status(200).json(response);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Algo salió mal" });
     }
-}
+};
 
-module.exports = {postCourse};
+module.exports = { postCourse };

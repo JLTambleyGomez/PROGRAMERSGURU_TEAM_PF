@@ -1,4 +1,5 @@
-const { Course } = require("../../db")
+const { Course } = require("../../db");
+const { getCourseByName } = require("./getCourseByName");
 //___________________________________________________
 
 const getCourse = async (req, res) => {
@@ -11,7 +12,7 @@ const getCourse = async (req, res) => {
         return res.json(allCourses);
 
     } catch (error) {
-        return res.status(500).json({message: "Algo salió mal"});
+        return res.status(500).json({ message: "Algo salió mal" });
     }
 }
 
