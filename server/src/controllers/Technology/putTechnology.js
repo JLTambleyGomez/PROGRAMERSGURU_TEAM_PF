@@ -11,7 +11,7 @@ const putTechnology = async (req, res) => {
                 .status(404)
                 .json({ message: `La categoria con el id: ${id} no existe` });
 
-        technologyDB.name = name;
+        technologyDB.dataValues.name = name;
         await technologyDB.save();
 
         const response = {
