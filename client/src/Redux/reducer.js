@@ -2,6 +2,7 @@ import {
 //COURSES:
     GET_COURSES_ALL, 
     GET_COURSES_BY_NAME, 
+    POST_COURSE, 
     FILTER_COURSES_BY_LANGUAGE, 
     FILTER_COURSES_BY_PRICING, 
     ORDER_COURSES, 
@@ -93,7 +94,7 @@ const goblalStorage = {
         },
     ],
     categories:[],
-    message:[],
+    message:"",
     darkMode:false,
 }
 
@@ -101,8 +102,8 @@ const goblalStorage = {
 export default function rootReducer ( state = goblalStorage, { type, payload } ) {
 
     switch (type) {
-        // case 'GET_COURSES':
-        //     return { ...state, allCourses: payload, courses: payload };
+        case GET_COURSES_ALL:
+            return { ...state, allCourses: payload, courses: payload };
 
         case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses:state.allCourses.filter(course => course.language === payload)};

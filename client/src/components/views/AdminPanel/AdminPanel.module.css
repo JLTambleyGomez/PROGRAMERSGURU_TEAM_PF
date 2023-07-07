@@ -1,8 +1,138 @@
-.darkContainer{
-    background-color: #302F2C;
-    color: #FFFFFF;
-}
-.lightContainer{
-    color:#FFFFFF;
-    color: #302F2C;
-}
+.darkContainer {
+    background-color: #302f2c;
+    color: #ffffff;
+  }
+  
+  .lightContainer {
+    background-color: #ffffff;
+    color: #302f2c;
+  }
+  
+  .h1light {
+    font-size: 12px;
+    color: black;
+  }
+  
+  .inputlight {
+    background-color: white;
+    color: black;
+  }
+  
+  .buttonlight {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+  }
+  
+  .containerslight {
+    /* Estilos para containers en modo claro */
+  }
+  
+  .labellight {
+    color: black;
+  }
+  
+  .plight {
+    /* Estilos para p en modo claro */
+  }
+  
+  .divlight {
+    /* Estilos para div en modo claro */
+  }
+  
+  .spanlight {
+    /* Estilos para span en modo claro */
+  }
+  
+  .formlight {
+    /* Estilos para form en modo claro */
+  }
+  
+  .hrlight {
+    /* Estilos para hr en modo claro */
+  }
+  
+  .errorlight {
+    /* Estilos para error en modo claro */
+  }
+  
+  .successlight {
+    /* Estilos para success en modo claro */
+  }
+  
+  .linklight {
+    /* Estilos para link en modo claro */
+  }
+  
+  .ullight {
+    /* Estilos para ul en modo claro */
+  }
+  
+  .h2light {
+    /* Estilos para h2 en modo claro */
+  }
+  
+  .h1dark {
+    font-size: 12px;
+    color: white;
+  }
+  
+  .inputdark {
+    background-color: #302f2c;
+    color: white;
+  }
+  
+  .buttondark {
+    background-color: #302f2c;
+    color: white;
+    border: 2px solid white;
+  }
+  
+  .containerdark {
+    /* Estilos para containers en modo oscuro */
+  }
+  
+  .labeldark {
+    color: white;
+  }
+  
+  .pdark {
+    /* Estilos para p en modo oscuro */
+  }
+  
+  .divdark {
+    /* Estilos para div en modo oscuro */
+  }
+  
+  .spandark {
+    /* Estilos para span en modo oscuro */
+  }
+  
+  .formdark {
+    /* Estilos para form en modo oscuro */
+  }
+  
+  .hrdark {
+    /* Estilos para hr en modo oscuro */
+  }
+  
+  .errordark {
+    /* Estilos para error en modo oscuro */
+  }
+  
+  .successdark {
+    /* Estilos para success en modo oscuro */
+  }
+  
+  .linkdark {
+    /* Estilos para link en modo oscuro */
+  }
+  
+  .uldark {
+    /* Estilos para ul en modo oscuro */
+  }
+  
+  .h2dark {
+    /* Estilos para h2 en modo oscuro */
+  }
+  

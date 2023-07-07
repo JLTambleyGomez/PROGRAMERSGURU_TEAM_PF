@@ -18,7 +18,7 @@ function NavBar () {
                 <div className={style.buttonContainer}>
                     <button className={style.myButton}>
                         <NavLink to="/HomePage" className = {style.link}>
-                        Home
+                            Home
                         </NavLink>
                     </button>
                     <button className={style.myButton}>
@@ -26,6 +26,16 @@ function NavBar () {
                             Courses
                         </NavLink>
                     </button>
+                    {/* <button className={style.myButton}>
+                        <NavLink to="/Compras" className = {style.link}>
+                            Store
+                        </NavLink>
+                    </button>
+                    <button className={style.myButton}>
+                        <NavLink to="/Cart" className = {style.link}>
+                            Cart
+                        </NavLink>
+                    </button> */}
                     <PerfilBar/>
                 </div>
                 </div>

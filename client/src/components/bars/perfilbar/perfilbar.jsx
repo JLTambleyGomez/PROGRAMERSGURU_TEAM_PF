@@ -2,6 +2,7 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
+import { FaSun, FaMoon } from "react-icons/fa";
 
 import "./perfilbar.css";
 
@@ -30,7 +31,9 @@ function PerfilBar () {
             <ul className = "accountOptionsList">
                 <li onClick = {() => {navigate('/profile')}}>Account</li>
                 <li onClick = {() => {navigate('/coursepage')}}>Courses</li>
-                <button onClick={handleDarkMode}>Switch {darkMode ? "light" : "dark"} mode</button>
+                <button onClick={handleDarkMode}>
+                    {darkMode ? <FaSun /> : <FaMoon />}
+                </button>
                 <li onClick = {() => {navigate('/')}}>Sign out</li>
             </ul>
 
