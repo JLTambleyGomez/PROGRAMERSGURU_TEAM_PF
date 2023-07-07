@@ -18,7 +18,6 @@ import {
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
     export const DELETE_COURSE="DELETE_COURSE";
 
-    export const POST_COURSE = "POST_COURSE";
 
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_BY_PRICING";

@@ -15,15 +15,6 @@ export const getCoursesByNameRequest = async (name) => {
     return data;
 }
 
-export const postCourse = async (datos) => {
-    const { data } = await axios.post("http://localhost:3001/course", datos)
-    return data;
-}
-
-export const deleteCourseRequest = async (id) => {
-    const { data } = await axios.delete(`http://localhost:3001/course/${id}`);
-    return data;
-}
 
 //CATEGORIES:
 export const getCategoriesAllRequest = async () => {
@@ -31,10 +22,10 @@ export const getCategoriesAllRequest = async () => {
     return data;
 }
 
-export const postCategoriesRequest = async (technology) => {
-    const { data } = await axios.post("http://localhost:3001/technology", technology);
-    return data;
-}
+    export const postCategoriesRequest = async (technology) => {
+        const { data } = await axios.post("http://localhost:3001/technology", technology);
+        return data;
+    }
 
 export const deleteCategoriesRequest = async (id) => {
     const { data } = await axios.delete(`http://localhost:3001/technology/${id}`);

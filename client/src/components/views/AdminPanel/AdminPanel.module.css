@@ -1,7 +1,4 @@
-.darkContainer {
-    background-color: #302f2c;
-    color: #ffffff;
-  }
+
   
   .lightContainer {
     background-color: #ffffff;
@@ -89,6 +86,9 @@
   }
   
   .containerdark {
+    height: 100vh;
+    background-color: #000000;
+    color: #ffffff;
     /* Estilos para containers en modo oscuro */
   }
   

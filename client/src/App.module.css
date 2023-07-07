@@ -1,9 +1,14 @@
 .darkContainer{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     background-color: #010003;
-    color: #FFFFFF;
-    background-size: cover;
+     color: #FFFFFF;
 }
 .lightContainer{
     color:#FFFFFF;
     color: #302F2C;
 }
+

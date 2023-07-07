@@ -1,4 +1,4 @@
-const { Technology } = require("../../db");
+const { Technology  } = require("../../db");
 
 const postTechnology = async (req, res) => {
     try {

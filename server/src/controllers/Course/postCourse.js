@@ -1,8 +1,8 @@
-const { Tecnology, Course } = require("../../db");
+const { Technology, Course } = require("../../db");
 
 const postCourse = async (req, res) => {
     try {
-        //Obtener los datos del curso desde el cuerpo de la solicitud
+        // Obtener los datos del curso desde el cuerpo de la solicitud
         const {
             title,
             description,
@@ -13,8 +13,15 @@ const postCourse = async (req, res) => {
             isFree,
             language,
             categories,
-        } = req.body;        
+        } = req.body;
+
         // Verificar si la categoría existe antes de crear el curso
+        const existingCategories = await Technology.findAll({
+            where: {
+                id: categories.map((category) => category.id),
+            },
+        });
+
         // Crear el curso en la base de datos utilizando el modelo Course
         const [course, created] = await Course.findOrCreate({
             where: {
@@ -31,7 +38,10 @@ const postCourse = async (req, res) => {
             },
         });
 
-        // Establecer la relación entre el curso y las categorías
+        // Establecer la relación entre el curso y las categorías utilizando una transacción
+        if (created) {
+            await course.addTechnologies(existingCategories, { through: 'CourseTecnology' });
+        }
 
         const response = {
             courseDataEmpty: {
@@ -49,22 +59,13 @@ const postCourse = async (req, res) => {
                 : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
-        // Devolver una respuesta con el curso creado
-        if (created) {
-            for (let i = 0; i < categories.length; i++) {
-                const newCourseCategories = await Tecnology.findByPk(
-                    categories[i].id
-                );
-                await course.addTecnology(newCourseCategories);
-            }
-            return res.json(response);
-        }
-        return res.status(201).json(response);
 
+        // Devolver una respuesta con el curso creado
+        return res.status(created ? 201 : 200).json(response);
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Algo salió mal" });
     }
-}
+};
 
-module.exports = {postCourse};
+module.exports = { postCourse };
