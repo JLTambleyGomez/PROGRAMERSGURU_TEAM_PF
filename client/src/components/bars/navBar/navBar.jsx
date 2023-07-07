@@ -55,7 +55,18 @@ function NavBar () {
                         <NavLink to="/CoursePage"className={`${styles.link} ${styles[elementClasses.link]}`}>
                             Courses
                         </NavLink>
-                    </button> 
+                        </button> 
+                              <button className={`${styles.button} ${styles[elementClasses.button]}`}>
+                        <NavLink to="/Compras" className={`${styles.link} ${styles[elementClasses.link]}`}>
+                            Store
+                        </NavLink>
+                    </button>
+                    <button className={`${styles.button} ${styles[elementClasses.button]}`}>
+                        <NavLink to="/Cart"className={`${styles.link} ${styles[elementClasses.link]}`}>
+                            Cart
+                        </NavLink>
+                    </button>
+                   
                     <SearchBar/>
                     <FilterBar/>
 
