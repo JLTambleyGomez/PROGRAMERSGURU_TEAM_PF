@@ -5,6 +5,7 @@ import {
     getCoursesByIdRequest,
     postCourseRequest,
     deleteCourseRequest,
+    getCoursesByIdRequest,
 //CATEGORIES:
     getCategoriesAllRequest, 
     postCategoriesRequest, 
@@ -14,13 +15,14 @@ import {
 
 //ACTIONS:
 //COURSES:
+    export const CLEAR_COURSES = "CLEAR_COUNTRIES";
+    export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
+    export const GET_COURSES_BY_ID = "GET_COURSES_BY_ID";
     export const POST_COURSE="POST_COURSE"
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
     export const GET_COURSES_BY_ID = "GET_COURSES_BY_ID";
     export const DELETE_COURSE="DELETE_COURSE";
-
-
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
@@ -63,6 +65,22 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
             const data = await getCoursesByNameRequest(name); // request
             return dispatch({
                 type: GET_COURSES_BY_NAME,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+export const get_courses_by_id = (id) => { //hace un req por cursos por nombre
+    return async (dispatch) => {
+        try {
+            const data = await getCoursesByIdRequest(id); // request
+            return dispatch({
+                type: GET_COURSES_BY_ID,
                 payload: data,
             });
         } catch (error) {
@@ -217,3 +235,19 @@ export const Dark_Mode = (payload) => {
         };
     }
 };
+
+///////////////////actions clear/////////////////////////////////////////////////////////////////////////////////////////
+
+export function clearMessage() {
+    return function (dispatch) {
+      return dispatch({
+        type: CLEAN_MESSAGE,
+      });
+    };
+  }
+  export function clearCourses() {
+    return {
+      type: CLEAR_COURSES,
+    };
+  }
+  

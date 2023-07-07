@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get_categories,get_courses_all, } from "../../../Redux/actions";
+import { get_categories,get_courses_all,clearCourses,clearMessage,} from "../../../Redux/actions";
 import styles from "./HomePage.module.css";
 import Cards from '../../datos/Cards/Cards';
 
@@ -72,8 +72,11 @@ function HomePage () {
     useEffect(() => {
 
         dispatch(get_categories());
-        dispatch(get_courses_all())
-    }, []);
+        dispatch(get_courses_all());
+        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
+         dispatch(clearMessage()); // limpiar 
+         dispatch(clearCourses()); }
+    }, [dispatch]);
 
 //{<h1>no hay cursos</h1>}
 

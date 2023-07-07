@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_categories, post_categories, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
+import { get_categories, post_categories,clearCourses,clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
 import validate from "./validate";
 import styles from "./AdminPanel.module.css";
 
@@ -57,6 +57,8 @@ function AdminPanel () {
 
     //functions:
     const handleCourseChange = (event) => {
+      event.preventDefault();
+
         const { name, value } = event.target;
         setNewCourse((prevCourse) => ({
           ...prevCourse,
@@ -65,6 +67,8 @@ function AdminPanel () {
       };
       
       const handleCategorySelection = (event) => {
+          event.preventDefault();
+
         const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
           id: option.value,
         }));
@@ -74,18 +78,24 @@ function AdminPanel () {
         }));
       };
       
-    const handleshowcategories =() =>{
+    const handleshowcategories =(event) =>{
+      event.preventDefault();
+
         if (showcategories===false)
         setshowcategories(true);
         else setshowcategories(false)
     }
-    const handleshowcursos =() =>{
+    const handleshowcursos =(event) =>{
+      event.preventDefault();
+
         if (showcursos===false)
         setshowcursos(true);
         else setshowcursos(false)
     }
 
     const hadleInputChange = (event) => {
+      event.preventDefault();
+
         setbackmessage("")
         const { value } = event.target;
         setInputCategory({ category: value });
@@ -125,8 +135,8 @@ function AdminPanel () {
 
 
 
-    const handleCoursePost = () => {
-
+    const handleCoursePost = (event) => {
+      event.preventDefault();
         dispatch(post_course(newCourse))
           .then(() => {
             setNewCourse({
@@ -150,10 +160,13 @@ function AdminPanel () {
 
     //useEffect:
     useEffect(() => {
-
+        dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all())
-    }, []);
+        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
+          dispatch(clearMessage()); // limpiar 
+          dispatch(clearCourses()); }
+    }, [dispatch]);
 
 
 
