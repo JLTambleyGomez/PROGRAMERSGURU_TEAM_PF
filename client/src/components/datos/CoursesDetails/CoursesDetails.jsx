@@ -11,18 +11,18 @@ function CourseDetails () {
     const [course, setCourse]=useState({})
 
     const {id}= useParams();
-
-   
-
+    
+    async function getDetails(){
+        try {
+            const { data } = await axios.get(`http://localhost:3001/course/${id}`)
+        setCourse(data)
+       } catch (error) {
+           console.log(error.response.data.message);
+       }
+    }
     
     useEffect(async()=>{
-        try {
-             const { data } = await axios.get(`http://localhost:3001/course/${id}`)
-         setCourse(data)
-        } catch (error) {
-            console.log(error.response.data.message);
-        }
-       
+        getDetails();
      },[])
 
     //component:
