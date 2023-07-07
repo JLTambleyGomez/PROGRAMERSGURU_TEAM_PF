@@ -1,6 +1,5 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import FilterBar from '../filterBar/Filter_Bar';
 
 import styles from "./searchBar.module.css"
 

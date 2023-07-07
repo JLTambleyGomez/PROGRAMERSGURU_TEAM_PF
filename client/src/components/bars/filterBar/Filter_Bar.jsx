@@ -35,7 +35,7 @@ function FilterBar() {
 
   return (
     <div  className={style.container} onMouseEnter={handleMouseEnter}  >
-       Filtros
+       Filtros : <img className={style.img} src="https://w7.pngwing.com/pngs/403/20/png-transparent-computer-icons-filter-miscellaneous-angle-rectangle-thumbnail.png" alt="sample45" />
       {showBar && (
         <div  onMouseLeave={handleMouseLeave} className={style.bar1}>
           <p>Selecciona Lenguaje</p>

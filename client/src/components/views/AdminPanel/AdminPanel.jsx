@@ -31,7 +31,26 @@ function AdminPanel () {
     //states:
     const [inputCategory, setInputCategory] = useState({ category: "" });
     const [error, setError] = useState({});
-    const [changeDarkMode, setChangeDarkMode] = useState("");
+    const [elementClasses, setElementClasses] = useState({
+      h1: "h1light",
+      input: "inputlight",
+      button: "buttonlight",
+      container: "containerslight",
+      label: "labellight",
+      p:"plight",
+      div:"divlight",
+      span:"spanlight",
+      form: "formlight",
+      hr: "hrlight",
+      error:"errorlight",
+      success:"successlight",
+      link:"linklight",
+      ul:"ullight",
+      h2:"h2light",
+      
+
+
+    });
     const [backmessage, setbackmessage]= useState("")
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
@@ -137,13 +156,26 @@ function AdminPanel () {
     }, []);
 
 
-    useEffect (() => {
-        if (darkmode === true) {
-            setChangeDarkMode("darkContainer");
-        } else {
-            setChangeDarkMode("lightContainer");
-        }
-    } , [darkmode])
+    // useEffect (() => {
+    //     if (darkmode === true) {
+    //         setChangeDarkMode("darkContainer");
+    //     } else {
+    //         setChangeDarkMode("lightContainer");
+    //     }
+    // } , [darkmode])
+
+    useEffect(() => {
+      const updatedElementClasses = {};
+  
+      Object.keys(elementClasses).forEach((key) => {
+        updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
+      });
+  
+      setElementClasses(updatedElementClasses);
+    }, [darkmode]);
+
+
+
 
     useEffect(() => {
         setError(validate(inputCategory));
@@ -151,7 +183,7 @@ function AdminPanel () {
 
     //component:
     return (
-        <div className={`${styles}${changeDarkMode}`}>
+        <div >
             <div >
                <button className={styles.button} onClick={handleshowcategories} ><h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1></button>
             </div>
@@ -294,7 +326,10 @@ function AdminPanel () {
     ))}
   </div>
 )}
-
+<h1 className={`${styles.h1} ${styles[elementClasses.h1]}`}>Heading</h1>
+<input className={`${styles.input} ${styles[elementClasses.input]}`} type="text" />
+<button className={`${styles.button} ${styles[elementClasses.button]}`}>Button</button>
+<label className={`${styles.label} ${styles[elementClasses.label]}`}>Label</label>
 
         </div>
     );
