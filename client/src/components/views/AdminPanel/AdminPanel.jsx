@@ -181,7 +181,7 @@ function AdminPanel () {
     return (
         <div className={`${styles.container} ${styles[elementClasses.container]}`} >
             <div >
-               <button className={styles.button} onClick={handleshowcategories} ><h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1></button>
+               <button className={`${styles.button} ${styles[elementClasses.button]}`} onClick={handleshowcategories} ><h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1></button>
             </div>
             {showcategories&& ( <div >
                 <div >
@@ -221,7 +221,7 @@ function AdminPanel () {
             </div>)  }
 
             <div >
-               <button className={styles.button} onClick={handleshowcursos} ><h1 className={styles.h1}>ADMINISTRAR CURSOS</h1></button>
+               <button className={`${styles.button} ${styles[elementClasses.button]}`} onClick={handleshowcursos} ><h1 className={styles.h1}>ADMINISTRAR CURSOS</h1></button>
             </div>
         
             {showcursos && (

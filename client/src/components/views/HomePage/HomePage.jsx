@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { get_categories,get_courses_all, } from "../../../Redux/actions";
 
 import styles from "./HomePage.module.css";
 import Cards from '../../datos/Cards/Cards';
@@ -32,10 +33,17 @@ function HomePage () {
         }
     })()
 
+    useEffect(() => {
+
+        dispatch(get_categories());
+        dispatch(get_courses_all())
+    }, []);
+
+
     //component:
     return (
         <div className={styles.container}>
-            <h1 className={styles.h1}>Homepage</h1>
+            <h1 className={styles.h1}>Ultimos Cursos del Mercado</h1>
             <div className={styles.pagination}>
                 {
                     pageNumberCourses.map((number, index) => {
