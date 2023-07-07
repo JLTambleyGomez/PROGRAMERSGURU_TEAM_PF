@@ -19,7 +19,7 @@ function NavBar () {
                 <div className={style.buttonContainer}>
                     <button className={style.myButton}>
                         <NavLink to="/HomePage" className = {style.link}>
-                        Home
+                            Home
                         </NavLink>
                     </button>
                     <button className={style.myButton}>
@@ -29,6 +29,7 @@ function NavBar () {
                     </button> 
                     <SearchBar/>
                     <FilterBar/>
+
                     <PerfilBar/>
                 </div> 
                 </div>

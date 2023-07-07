@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { gET_CATEGORIES, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_cuorse,delete_Course_Request } from "../../../Redux/actions";
+import { get_categories, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_course, delete_course_request } from "../../../Redux/actions";
 import validate from "./validate";
 import styles from "./AdminPanel.module.css"
 
@@ -47,9 +47,6 @@ function AdminPanel () {
       link:"linklight",
       ul:"ullight",
       h2:"h2light",
-      
-
-
     });
     const [backmessage, setbackmessage]= useState("")
     const [showcategories,setshowcategories]= useState(false)
@@ -98,7 +95,7 @@ function AdminPanel () {
             event.preventDefault();
             await dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
             setInputCategory({ category: "" })
-            await dispatch(gET_CATEGORIES());  
+            await dispatch(get_categories());  
            
         } catch (error) {
             console.log(error)
@@ -108,7 +105,7 @@ function AdminPanel () {
     const deleteCategory = async (id) => {
         try {
             await dispatch(dELETE_CATEGORIES(id))
-            await dispatch(gET_CATEGORIES())
+            await dispatch(get_categories())
         } catch (error) {
             console.log("error");
         }
@@ -128,7 +125,8 @@ function AdminPanel () {
 
 
     const handleCoursePost = () => {
-        dispatch(post_cuorse(newCourse))
+
+        dispatch(post_course(newCourse))
           .then(() => {
             setNewCourse({
               title: "",
@@ -151,7 +149,8 @@ function AdminPanel () {
 
     //useEffect:
     useEffect(() => {
-        dispatch(gET_CATEGORIES());
+
+        dispatch(get_categories());
         dispatch(get_courses_all())
     }, []);
 

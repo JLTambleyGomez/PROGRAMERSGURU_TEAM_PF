@@ -3,25 +3,38 @@ import { useDispatch } from "react-redux";
 import { filter_courses_by_language, filter_courses_by_price, order_courses } from "../../../Redux/actions";
 import style from "./Filter_Bar.module.css";
 
-function FilterBar() {
-  const dispatch = useDispatch();
-  const [showBar, setShowBar] = useState(false);
 
-  function languageSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(filter_courses_by_language(event.target.value));
+//_________________________module_________________________
+function FilterBar () {
+    const dispatch = useDispatch();
+    const [showBar, setShowBar] = useState(false);
+
+    function languageSelectHandler(event) {
+        if (event.target.value !== "") {
+        dispatch(filter_courses_by_language(event.target.value));
+        }
     }
   }
 
-  function priceSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(filter_courses_by_price(event.target.value));
+    function priceSelectHandler(event) {
+        if (event.target.value !== "") {
+        dispatch(filter_courses_by_price(event.target.value));
+        }
     }
   }
 
-  function orderSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(order_courses(event.target.value));
+    function orderSelectHandler(event) {
+        if (event.target.value !== "") {
+        dispatch(order_courses(event.target.value));
+        }
+    }
+
+    function handleMouseEnter() {
+        setShowBar(true);
+    }
+
+    function handleMouseLeave() {
+        setShowBar(false);
     }
   }
 
@@ -58,6 +71,10 @@ function FilterBar() {
             <option value="ABC+">Nombre Ascendente</option>
             <option value="ABC-">Nombre Descendente</option>
           </select>
+   
+                    </div>
+                )
+            }
         </div>
       )}
       
@@ -66,3 +83,4 @@ function FilterBar() {
 }
 
 export default FilterBar;
+
