@@ -1,8 +1,9 @@
-require("dotenv").config();
 const { Sequelize } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
+
+require('dotenv').config({ path: path.resolve(__dirname, './.env') }); // para recibir las constantes de .env
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
@@ -45,7 +46,7 @@ User.belongsToMany(Course, { through: "Favorite", timestamps: false });
 Course.belongsToMany(Technology, {
     through: "technology_course",
     timestamps: false,
-});
+}); 
 Technology.belongsToMany(Course, {
     through: "technology_course",
     timestamps: false,

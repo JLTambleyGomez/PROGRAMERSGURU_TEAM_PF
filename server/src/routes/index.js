@@ -7,7 +7,7 @@ const router = Router();
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
 
-router.use("/category", technologyRouter); //cambiar a technology.
+router.use("/technology", technologyRouter); //cambiar a technology.
 
 router.use("/course", courseRouter);
 
