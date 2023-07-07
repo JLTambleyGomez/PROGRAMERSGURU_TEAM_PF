@@ -5,13 +5,18 @@ const courseRouter = require("express").Router();
 const { getCourse } = require("../controllers/Course/getCourse");
 const { postCourse } = require("../controllers/Course/postCourse");
 const { deleteCourse } = require("../controllers/Course/deleteCourse");
-//__________________________________________________
+const { putCourse } = require("../controllers/Course/putCourse");
+const { getCourseByName } = require("../controllers/Course/getCourseByName");
 
-courseRouter.get('/', getCourse);
+courseRouter.get("/", getCourse);
 
-courseRouter.post('/', postCourse);
+courseRouter.get("/title", getCourseByName);
 
-courseRouter.delete('/:id', deleteCourse);
 
+courseRouter.post("/", postCourse);
+
+courseRouter.delete("/:id", deleteCourse);
+
+courseRouter.put("/:id", putCourse);
 
 module.exports = courseRouter;

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { gET_CATEGORIES, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_cuorse,delete_Course_Request } from "../../../Redux/actions";
+import { get_categories, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_course, delete_course_request } from "../../../Redux/actions";
 import validate from "./validate";
-import styles from "./AdminPanel.module.css"
+import styles from "./AdminPanel.module.css";
+
 
 //_________________________module_________________________
 function AdminPanel () {
@@ -92,23 +93,22 @@ function AdminPanel () {
         setInputCategory({ category: value });
     
     };
-
-    const addCategory = async (event) => {
-        try {
-            event.preventDefault();
-            await dispatch(pOST_CATEGORIES({ category: inputCategory.category}));
-            setInputCategory({ category: "" })
-            await dispatch(gET_CATEGORIES());  
-           
-        } catch (error) {
-            console.log(error)
-        } setbackmessage(message)
-    }
+    const handlePostCategories = async (event) => {
+      event.preventDefault();
+      try {
+        await dispatch(pOST_CATEGORIES({ technology: inputCategory.category }));
+        setInputCategory({ category: "" });
+        await dispatch(get_categories());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    
 
     const deleteCategory = async (id) => {
         try {
             await dispatch(dELETE_CATEGORIES(id))
-            await dispatch(gET_CATEGORIES())
+            await dispatch(get_categories())
         } catch (error) {
             console.log("error");
         }
@@ -117,7 +117,7 @@ function AdminPanel () {
 
     const handledeleteCourse = async (id) => {
         try {
-          await dispatch(delete_Course_Request(id));
+          await dispatch(delete_course_request(id));
           await dispatch(get_courses_all());
         } catch (error) {
           console.log("error");
@@ -128,7 +128,8 @@ function AdminPanel () {
 
 
     const handleCoursePost = () => {
-        dispatch(post_cuorse(newCourse))
+
+        dispatch(post_course(newCourse))
           .then(() => {
             setNewCourse({
               title: "",
@@ -151,18 +152,13 @@ function AdminPanel () {
 
     //useEffect:
     useEffect(() => {
-        dispatch(gET_CATEGORIES());
+
+        dispatch(get_categories());
         dispatch(get_courses_all())
     }, []);
 
 
-    // useEffect (() => {
-    //     if (darkmode === true) {
-    //         setChangeDarkMode("darkContainer");
-    //     } else {
-    //         setChangeDarkMode("lightContainer");
-    //     }
-    // } , [darkmode])
+
 
     useEffect(() => {
       const updatedElementClasses = {};
@@ -196,7 +192,7 @@ function AdminPanel () {
                             name="name"
                             placeholder="Ingresa el nombre de la categoria"
                         />
-                        <button onClick={addCategory}>Postear categorias</button>
+                        <button onClick={handlePostCategories}>Postear categorias</button>
                         <p>{backmessage}</p>
                     </span>
                     <span >

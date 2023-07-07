@@ -3,6 +3,7 @@ import {
     GET_COURSES_ALL, 
     GET_COURSES_BY_NAME, 
     DELETE_COURSE,
+    POST_COURSE, 
     FILTER_COURSES_BY_LANGUAGE, 
     FILTER_COURSES_BY_PRICING, 
     ORDER_COURSES, 
@@ -22,7 +23,7 @@ const goblalStorage = {
     allCourses:[],
     courses:[],
     categories:[],
-    message:[],
+    message:"",
     darkMode:false,
 }
 

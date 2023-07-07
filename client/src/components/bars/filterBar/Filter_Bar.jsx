@@ -34,10 +34,10 @@ function FilterBar() {
   }
 
   return (
-    <div  className={style.container} onMouseEnter={handleMouseEnter}  >
-       Filtros : <img className={style.img} src="https://w7.pngwing.com/pngs/403/20/png-transparent-computer-icons-filter-miscellaneous-angle-rectangle-thumbnail.png" alt="sample45" />
+    <div className={style.container} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      Filtros : <img className={style.img} src="https://w7.pngwing.com/pngs/403/20/png-transparent-computer-icons-filter-miscellaneous-angle-rectangle-thumbnail.png" alt="sample45" />
       {showBar && (
-        <div  onMouseLeave={handleMouseLeave} className={style.bar1}>
+        <div className={style.bar1}>
           <p>Selecciona Lenguaje</p>
           <select onChange={languageSelectHandler}>
             <option value="">idioma/language</option>
@@ -60,7 +60,6 @@ function FilterBar() {
           </select>
         </div>
       )}
-      
     </div>
   );
 }

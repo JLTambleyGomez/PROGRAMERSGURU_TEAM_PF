@@ -58,6 +58,7 @@ function NavBar () {
                     </button> 
                     <SearchBar/>
                     <FilterBar/>
+
                     <PerfilBar/>
                 </div> 
                 </div>

@@ -4,7 +4,7 @@ const { User } = require('../../db');
 const Login = async (req, res) => {
 
     const { email, password } = req.query;
-  
+
     if (!email || !password) {
         return res.status(400).json({ message: 'Faltan datos' });
     }
@@ -12,7 +12,7 @@ const Login = async (req, res) => {
     try {
 
         const user = await User.findOne({ where: { email } });
-    
+
         if (!user) {
             return res.status(404).json({ message: 'Usuario no encontrado' });
         }

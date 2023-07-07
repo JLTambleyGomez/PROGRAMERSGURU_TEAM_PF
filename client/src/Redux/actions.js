@@ -17,6 +17,8 @@ import {
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
     export const DELETE_COURSE="DELETE_COURSE";
+
+
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
@@ -35,7 +37,7 @@ import {
 export const get_courses_all = () => {
     return async (dispatch) => {
         try {
-            const data = await getCoursesAllRequest() // request - completar endpoint en axiosRequests
+            const data = await getCoursesAllRequest() // request
             return dispatch({
                 type: GET_COURSES_ALL,
                 payload: data
@@ -101,6 +103,40 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
     };
 }
 
+export const post_course = (datos) => {
+    return async (dispatch) => {
+        try {
+            const data = await postCourse(datos) // request
+            return dispatch({
+                type: POST_COURSE,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
+export function delete_course_request(id) { // request
+    return async function (dispatch) {
+        try {
+            const data = await deleteCourseRequest(id);
+            return dispatch({
+                type: DELETE_COURSE,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
 export const filter_courses_by_language = (L) => {
     return {
         type: FILTER_COURSES_BY_LANGUAGE,
@@ -128,10 +164,11 @@ export const order_courses = (R) => {
 }
 
 //CATEGORIES:
-export function gET_CATEGORIES () { // request
+export function get_categories () { // request
     return async function (dispatch) {
         try {
             const data = await getCategoriesAllRequest(); 
+            console.log(data)
             return dispatch({
                 type: GET_CATEGORIES_ALL,
                 payload: data,
@@ -139,16 +176,16 @@ export function gET_CATEGORIES () { // request
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: "get error",
             });
         }
     };
 }
 
-export function pOST_CATEGORIES (category) { // request
+export function pOST_CATEGORIES (technology) { // request
     return async function (dispatch) {
         try {
-            const data = await postCategoriesRequest(category);
+            const data = await postCategoriesRequest(technology);
             return dispatch({
                 type: POST_CATEGORIES,
                 payload: data,
@@ -156,7 +193,7 @@ export function pOST_CATEGORIES (category) { // request
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.message, // error.response.data.message
+                payload: "post error", // error.response.data.message
             });
         }
     };
@@ -173,7 +210,7 @@ export function dELETE_CATEGORIES(id) { // request
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: "delete error",
             });
         }
     };
