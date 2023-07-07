@@ -26,7 +26,7 @@ const PostUser = async(req,res)=>{
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: 'Error al crear el usuario' });
+        return res.status(500).json({message: 'Error al crear el usuario' + error.message});
     }
 };
 

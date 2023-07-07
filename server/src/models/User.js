@@ -32,13 +32,10 @@ module.exports = (sequelize) => {
                 defaultValue: false,
                 allowNull: false,
             },
-            idLastSubscriptionOrder: {
-                type: DataTypes.STRING,
-                unique: true,
-            },
-            subscription: {
-                type: DataTypes.STRING,
-            },
+            // expirationDate: {
+            //     type: DataTypes.DATEONLY,
+            //     defaultValue: null
+            // },
             nickName: {
                 type: DataTypes.STRING,
                 allowNull: false,

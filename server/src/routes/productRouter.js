@@ -5,7 +5,7 @@ const productRouter = require("express").Router();
 const { getProduct } = require("../controllers/Product/getProduct");
 const { postProduct } = require("../controllers/Product/postProduct");
 const { deleteProduct } = require("../controllers/Product/deleteProduct");
-// const { putProduct } = require("../controllers/Product/putProduct");
+const { putProduct } = require("../controllers/Product/putProduct");
 const { postProducts } = require("../controllers/Product/postProducts");
 const { getProductById } = require("../controllers/Product/getProductById");
 
@@ -19,7 +19,7 @@ productRouter.delete("/:id", deleteProduct);
 
 productRouter.get("/:id", getProductById);
 
-// productRouter.put("/:id", putProduct);
+productRouter.put("/:id", putProduct);
 
 
 module.exports = productRouter;
