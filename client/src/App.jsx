@@ -7,6 +7,7 @@ import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
 import Perfil from './components/views/Perfil/Perfil';
 import Compras from './components/views/Compras/Compras';
+import Cart from './components/views/Cart/Cart';
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
 import React,{useState,useEffect}from "react";
@@ -44,6 +45,7 @@ function App () {
                 <Route path="/CoursePage" element = {<CoursePage/>} /> 
                 <Route path="/Profile" element = {<Perfil/>} />
                 <Route path="/Compras" element = {<Compras/>} />
+                <Route path="/Cart" element = {<Cart/>} />
                 <Route path="/AdminPanel" element = {<AdminPanel/>} />
                 <Route path="/CourseDetails/:id" element = {<CourseDetails/>} /> 
             </Routes>

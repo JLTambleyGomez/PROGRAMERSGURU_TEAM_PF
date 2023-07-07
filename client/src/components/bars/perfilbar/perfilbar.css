@@ -1,29 +1,7 @@
-.container{
-    color: aliceblue;
-    background-color: rgba(0, 0, 0, 0.672);
-    width: infinite;
-    height: infinite;
-    display:flex;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right:0;
-    position: absolute;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-    animation:blur-in 0.4s linear both}
-    @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
-  .item{
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-  }
+
 
   .perfilbutton{ 
     margin-right: 10px;
-    padding: 0%;
     border-radius: 100%;
     display: flex;
     justify-content: center;
@@ -47,39 +25,7 @@
 
 
   
-.bar1 {
-  padding-top: 4%;
-  position:fixed;
-  top:0;
-  right: 0;
-  width: 4%;
-  height: 100vh;
 
-  background-color: rgba(238, 136, 153, 0.623);
-  overflow: hidden; /* Ocultar el contenido que excede el tamaño del contenedor */
-  transition: width 0.6s; /* Agregar una transición suave para cambiar el ancho */
-}
-
-.bar1:hover {
-  background-color: rgba(252, 134, 105, 0.795);
-
-  width: 23%; /* Mostrar la barra completa cuando el mouse está encima */
-}
-
-
-.bar1 a {
-  line-height: 4em;
-  text-transform: uppercase;
-  text-decoration: none;
-  letter-spacing: 0.2em;
-  color: rgb(14, 1, 1);
-  display: block;
-  transition: all ease-out 300ms;
-  white-space: nowrap; /* Evitar el salto de línea */
-  overflow: hidden; /* Ocultar el texto que no cabe */
-  text-overflow: ellipsis; /* Reemplazar el texto oculto con puntos suspensivos */
-
-}
 
 /*__________________________________________________*/
 .accountOptionsWrapper {
@@ -90,13 +36,11 @@
   display: flex;
   align-self: center;
 
-  padding: 35px;
   cursor: pointer;
 }
 .accountOptionsWrapper:hover {
-  background-color: #588B8B;
+  background-color: #588b8b00;
   color: #FFF4ED;
-  box-shadow: 0 0.125rem 0.375rem rgba(0, 0, 0, 0.5)
 }
 
 .accountOptionsList {

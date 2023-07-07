@@ -26,12 +26,13 @@ function SearchBar () {
 
     //component:
     return (
-        <div className={styles.Container}>
+       <div  className={styles.container}>
         <div className={styles.SearchBar}>
-            <input  type = 'search' onChange = {handleSearchInput} value = {input}/>
-            <button className={styles.button} onClick = {handleSearchButton}>search</button>    
-        </div>
-        </div>
+            <input className={styles.input} type = 'search' onChange = {handleSearchInput} value = {input}/>
+            <button className={styles.buscar} onClick = {handleSearchButton}>search</button> 
+        </div></div>
+        
+      
     )
 }
 

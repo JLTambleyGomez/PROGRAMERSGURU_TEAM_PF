@@ -1,0 +1,69 @@
+.comprasContainer {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+/* __________________________________________________ */
+.comprasCover {
+    width: 100%;
+    border: 1px solid red;
+    height: 50%
+}
+
+.comprasSection1 {
+    display: flex;
+    width: 98%;
+    align-self: center;
+
+    border: 1px solid black
+}
+
+.comprasFilters {
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 25vw;
+    border: 1px solid blue;
+}
+.comprasFiltersFilter {
+    border: 1px solid black
+}
+.comprasFiltersFilterOptionCategory {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.comprasFiltersFilterOptionCategoryInput {
+    margin: 0;
+    width: 1rem;
+    cursor: pointer;
+    height: 1rem;
+    padding: 0;
+}
+
+.comprasFilterFilterOptionPrice1 {
+    color: brown;
+}
+
+.comprasSection1-2 {
+    width: 75%
+}
+
+.comprasSection1-2Order {
+    display: flex;
+}
+
+.comprasSection1-2Card {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: 300px;
+    font-size: 0.5rem;
+}
+
+.comprasSection1-2Products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
