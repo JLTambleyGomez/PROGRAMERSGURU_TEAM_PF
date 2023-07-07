@@ -1,27 +1,26 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { get_courses_by_id } from "../../../Redux/actions";
 
 import styles from "./CoursesDetails.module.css";
 
 
 //_________________________module_________________________
 function CourseDetails () {
-
-    const [course, setCourse]=useState({})
-
+    
     const {id}= useParams();
+    const course=useSelector((state)=>state.courseActual)
+    const dispatch= useDispatch()
+
+    
     
     async function getDetails(){
-        try {
-            const { data } = await axios.get(`http://localhost:3001/course/${id}`)
-        setCourse(data)
-       } catch (error) {
-           console.log(error.response.data.message);
-       }
+        dispatch(get_courses_by_id(id))
     }
     
-    useEffect(async()=>{
+    useEffect(()=>{
         getDetails();
      },[])
 

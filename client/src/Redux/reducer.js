@@ -2,6 +2,7 @@ import {
 //COURSES:
     GET_COURSES_ALL, 
     GET_COURSES_BY_NAME, 
+    GET_COURSES_BY_ID,
     DELETE_COURSE,
     POST_COURSE, 
     FILTER_COURSES_BY_LANGUAGE, 
@@ -29,6 +30,7 @@ const goblalStorage = {
     categories:[],
     message:"",
     darkMode:false,
+    courseActual:{}
 }
 
 //REDUCER:
@@ -41,8 +43,8 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
          case GET_COURSES_BY_NAME:
              return { ...state, allCourses: payload, courses: payload };
 
-        case GET_COURSES_BY_NAME:
-                return { ...state, allCourses: payload, courses: payload };
+        case GET_COURSES_BY_ID:
+                return { ...state, courseActual: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
