@@ -10,7 +10,8 @@ import Cards from '../../datos/Cards/Cards';
 function HomePage () {
 
     //const:
-    const courses= useSelector((state)=> state.courses)
+    const coursesAll = useSelector((state)=> state.courses)
+    const courses = coursesAll.slice(-6)
     const dispatch= useDispatch()
 
     //states:
@@ -44,7 +45,7 @@ function HomePage () {
     return (
         <div className={styles.container}>
             <h1 className={styles.h1}>Ultimos Cursos del Mercado</h1>
-            <div className={styles.pagination}>
+            {/* <div className={styles.pagination}>
                 {
                     pageNumberCourses.map((number, index) => {
                         return (
@@ -54,8 +55,8 @@ function HomePage () {
                         )
                     })
                 }
-            </div>
-            <Cards courses = {currentAllCourses} /> 
+            </div> */}
+            <Cards courses = {courses} /> 
         </div>
     );
 }
