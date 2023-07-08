@@ -47,6 +47,7 @@ function SearchBar () {
     }, [darkmode]);
 
     const handleSearchInput = (event) => {
+        event.preventDefault();
         setInput(event.target.value)
     }
 
@@ -57,12 +58,11 @@ function SearchBar () {
         setToggleVisibility(true);
     };
 
-    const setDefault = () => {
-        setTimeout(() => {
-            setToggleVisibility(true)
-            setInput('');
-        }, 300)
-    };
+    const setDefault = (event) => {
+        event.preventDefault();
+        setToggleVisibility(true);
+        setInput('');
+      };
 
     //component:
     return (

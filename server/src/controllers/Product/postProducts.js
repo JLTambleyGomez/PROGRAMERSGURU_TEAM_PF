@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const {Product} = require("../../db"); // Importa tu modelo de productos
+const { Product } = require("../../db"); // Importa tu modelo de productos
 
 const productosFilePath = path.join(__dirname, './productos.json');
 

@@ -36,35 +36,40 @@ function FilterBar() {
     setElementClasses(updatedElementClasses);
 }, [darkmode]);
 
+function languageSelectHandler(event) {
+  const { value } = event.target;
+  if (value !== "") {
+    dispatch(filter_courses_by_language(value));
+  }
+}
 
-  function languageSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(filter_courses_by_language(event.target.value));
-    }
+function priceSelectHandler(event) {
+  const { value } = event.target;
+  if (value !== "") {
+    dispatch(filter_courses_by_price(value));
   }
+}
 
-  function priceSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(filter_courses_by_price(event.target.value));
-    }
+function orderSelectHandler(event) {
+  const { value } = event.target;
+  if (value !== "") {
+    dispatch(order_courses(value));
   }
+}
 
-  function orderSelectHandler(event) {
-    if (event.target.value !== "") {
-      dispatch(order_courses(event.target.value));
-    }
-  }
-  function buttonHandler(){
-    dispatch(get_courses_all())
-  }
+function buttonHandler(event) {
+  event.preventDefault();
+  dispatch(get_courses_all());
+}
+//en los handler que se refieren al mouse no es necesario 
+//event.preventDefault(); ya que sus funciones no alteran 
+function handleMouseEnter() {
+  setShowBar(true);
+}
 
-  function handleMouseEnter() {
-    setShowBar(true);
-  }
-
-  function handleMouseLeave() {
-    setShowBar(false);
-  }
+function handleMouseLeave() {
+  setShowBar(false);
+}
 
   return (
     <div className={`${styles.container} ${styles[elementClasses.container]}`}>
@@ -99,7 +104,7 @@ function FilterBar() {
       )} 
     
     </div>
-    <p className={styles.pinvi}>_________</p>
+    <p className={styles.pinvi}>__Micarulz__</p>
           <p className={`${styles.p} ${styles[elementClasses.p]}`} 
       onClick={buttonHandler}>Search/Filter Reset</p>
      </div>

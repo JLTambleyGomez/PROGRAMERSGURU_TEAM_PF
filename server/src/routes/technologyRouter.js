@@ -5,7 +5,6 @@ const technologyRouter = require("express").Router();
 const { getTechnology } = require("../controllers/Technology/getTechnology");
 const { deleteTechnology } = require("../controllers/Technology/deleteTechnology");
 const { postTechnology } = require("../controllers/Technology/postTechnology");
-
 const { putTechnology } = require("../controllers/Technology/putTechnology");
 
 technologyRouter.get("/", getTechnology);

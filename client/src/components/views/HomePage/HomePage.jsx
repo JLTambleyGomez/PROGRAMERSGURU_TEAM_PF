@@ -9,8 +9,8 @@ import Cards from '../../datos/Cards/Cards';
 function HomePage () {
 
     //const:
-    const coursesAll= useSelector((state)=> state.courses)
-    const courses = coursesAll.slice(-6)
+    const courses = useSelector((state)=> state.courses)
+    // const courses = coursesAll.slice(-6)
     const dispatch= useDispatch()
 
     //states:
@@ -63,21 +63,21 @@ function HomePage () {
         }
     })()
 
+    //life-cycles:
     useEffect(() => {   
         dispatch(get_categories());
         dispatch(get_courses_all());
-        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
+        return () => { // return ocupar para hacer algo en el desmontaje          
          dispatch(clearMessage()); // limpiar 
          dispatch(clearCourses()); }
     }, [dispatch]);
-
-//{<h1>no hay cursos</h1>}
 
     //component:
     return (
         <div className={`${styles.container} ${styles[elementClasses.container]}`}>
             <div>
-                <img className={styles.imgcat} src="https://i0.wp.com/www.printmag.com/wp-content/uploads/2021/02/4cbe8d_f1ed2800a49649848102c68fc5a66e53mv2.gif?resize=476%2C280&ssl=1" alt = "banner"/>
+                <img className={styles.imgcat} src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg" alt = "banner"/>
+                <p className={styles.logo}>PROGRAMMER'S GURÚ</p>
             </div>
             {/* <div className = "ultimosCursos"> */}
                 <h1 className={`${styles.h1} ${styles[elementClasses.h1]}`}>Ultimos Cursos del Mercado</h1>
@@ -93,7 +93,7 @@ function HomePage () {
                     }
                 </div> */}
                 <div>
-                    <Cards courses = {currentAllCourses} /> 
+                    <Cards courses = {courses} /> 
                 </div>
             {/* </div> */}
             <div className='categoriasMasBuscadas'>

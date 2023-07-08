@@ -11,7 +11,7 @@ const { getProductById } = require("../controllers/Product/getProductById");
 
 productRouter.get("/", getProduct);
 
-productRouter.get("/all", postProducts);
+productRouter.get("/all", postProducts);// post
 
 productRouter.post("/", postProduct);
 

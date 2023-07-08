@@ -1,12 +1,33 @@
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  margin-bottom: -4%;
+  color: rgb(3, 29, 33);
+  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672); 
+}
+.h2light{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 42px;
+  background-color: #010118;
+  color: rgb(3, 30, 34);
+}
+
+
 .h1light {
     display: flex;
     justify-content: center;
     align-items: center;
+    letter-spacing: 10px;
     font-size: 42px;
     color: rgb(0, 140, 158);
     transition: transform 0.3s, filter 0.3s;
     text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672); 
 }
+
 .h1light:hover {
   transform: scale(1.2);
   transform-origin: center;
@@ -27,6 +48,7 @@
 .containerlight{
     display: flex;
     flex-direction: column;
+   padding-top: 2%;
     width: 100%;
     justify-items: center;
     align-items: center;
@@ -34,6 +56,7 @@
 .containerdark{
     display: flex;
     flex-direction: column;
+    padding-top: 2%;
     width: 100%;
     justify-items: center;
     align-items: center;

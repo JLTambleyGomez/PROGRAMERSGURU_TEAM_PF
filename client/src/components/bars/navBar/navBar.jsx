@@ -41,7 +41,7 @@ function NavBar () {
           }, [darkmode]);
     //component:
     return (
-        <div>
+        <div className={styles.container1}>
         {/* HEADER */}
             <div className={`${styles.container} ${styles[elementClasses.container]}`}>
                 <div className={`${styles.div} ${styles[elementClasses.div]}`}>
@@ -74,10 +74,6 @@ function NavBar () {
                     
                 </div> 
                 </div>
-            </div>
-
-            <div >
-               
             </div>
         </div>
     );
