@@ -41,21 +41,21 @@ function NavBar () {
           }, [darkmode]);
     //component:
     return (
-        <div>
+        <div className={styles.container1}>
         {/* HEADER */}
             <div className={`${styles.container} ${styles[elementClasses.container]}`}>
                 <div className={`${styles.div} ${styles[elementClasses.div]}`}>
                 <div className={`${styles.buttoncontainer} ${styles[elementClasses.buttoncontainer]}`}>
                     <button className={`${styles.button} ${styles[elementClasses.button]}`}>
                         <NavLink to="/HomePage"className={`${styles.link} ${styles[elementClasses.link]}`}>
-                        Home
+                            Home
                         </NavLink>
                     </button>
                     <button className={`${styles.button} ${styles[elementClasses.button]}`}>
                         <NavLink to="/CoursePage"className={`${styles.link} ${styles[elementClasses.link]}`}>
                             Courses
                         </NavLink>
-                        </button> 
+                        </button>
                               <button className={`${styles.button} ${styles[elementClasses.button]}`}>
                         <NavLink to="/Compras" className={`${styles.link} ${styles[elementClasses.link]}`}>
                             Store
@@ -71,12 +71,9 @@ function NavBar () {
                     <FilterBar/>
 
                     <PerfilBar/>
+                    
                 </div> 
                 </div>
-            </div>
-
-            <div >
-               
             </div>
         </div>
     );
