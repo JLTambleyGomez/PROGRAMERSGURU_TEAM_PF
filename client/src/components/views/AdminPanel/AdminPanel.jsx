@@ -57,7 +57,7 @@ function AdminPanel () {
 
     //functions:
     const handleCourseChange = (event) => {
-      event.preventDefault();
+      
 
         const { name, value } = event.target;
         setNewCourse((prevCourse) => ({
@@ -67,7 +67,6 @@ function AdminPanel () {
       };
       
       const handleCategorySelection = (event) => {
-          event.preventDefault();
 
         const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
           id: option.value,
@@ -86,7 +85,6 @@ function AdminPanel () {
         else setshowcategories(false)
     }
     const handleshowcursos =(event) =>{
-      event.preventDefault();
 
         if (showcursos===false)
         setshowcursos(true);
@@ -94,7 +92,6 @@ function AdminPanel () {
     }
 
     const hadleInputChange = (event) => {
-      event.preventDefault();
 
         setbackmessage("")
         const { value } = event.target;
@@ -102,7 +99,6 @@ function AdminPanel () {
     
     };
     const handlePostCategories = async (event) => {
-      event.preventDefault();
       try {
         await dispatch(post_categories({ technology: inputCategory.category }));
         setInputCategory({ category: "" });

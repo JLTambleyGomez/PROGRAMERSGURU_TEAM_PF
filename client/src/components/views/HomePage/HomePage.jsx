@@ -9,7 +9,8 @@ import Cards from '../../datos/Cards/Cards';
 function HomePage () {
 
     //const:
-    const courses= useSelector((state)=> state.courses)
+    const coursesAll= useSelector((state)=> state.courses)
+    const courses = coursesAll.slice(-6)
     const dispatch= useDispatch()
 
     //states:
@@ -62,8 +63,7 @@ function HomePage () {
         }
     })()
 
-    useEffect(() => {
-
+    useEffect(() => {   
         dispatch(get_categories());
         dispatch(get_courses_all());
         return ()=>{                   // return ocupar para hacer algo en el desmontaje          
@@ -81,7 +81,7 @@ function HomePage () {
             </div>
             {/* <div className = "ultimosCursos"> */}
                 <h1 className={`${styles.h1} ${styles[elementClasses.h1]}`}>Ultimos Cursos del Mercado</h1>
-                <div className={styles.pagination}>
+                {/* <div className={styles.pagination}>
                     {
                         pageNumberCourses.map((number, index) => {
                             return (
@@ -91,7 +91,7 @@ function HomePage () {
                             )
                         })
                     }
-                </div>
+                </div> */}
                 <div>
                     <Cards courses = {currentAllCourses} /> 
                 </div>

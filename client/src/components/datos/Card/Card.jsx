@@ -28,17 +28,18 @@ function Card ({ id,title, description, rating, isFree, language }) {
           ul:"ullight",
           h2:"h2light",
           
+    });
+    
+    
+        useEffect(() => {
+        const updatedElementClasses = {};
+    
+        Object.keys(elementClasses).forEach((key) => {
+            updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
         });
     
- useEffect(() => {
-            const updatedElementClasses = {};
-        
-            Object.keys(elementClasses).forEach((key) => {
-              updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
-            });
-        
-            setElementClasses(updatedElementClasses);
-          }, [darkmode]);
+        setElementClasses(updatedElementClasses);
+    }, [darkmode]);
 
 
     //component:
