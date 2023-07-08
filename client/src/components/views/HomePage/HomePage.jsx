@@ -76,8 +76,8 @@ function HomePage () {
     return (
         <div className={`${styles.container} ${styles[elementClasses.container]}`}>
             <div>
-                <img className={styles.imgcat} src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg" alt = "banner"/>
-                <p className={styles.logo}>PROGRAMMER'S GURÚ</p>
+                <p className={styles.logo}> <img className={styles.imgcat} src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg" alt = "banner"/>
+                 PROGRAMMER'S GURÚ</p>
             </div>
             {/* <div className = "ultimosCursos"> */}
                 <h1 className={`${styles.h1} ${styles[elementClasses.h1]}`}>Ultimos Cursos del Mercado</h1>
