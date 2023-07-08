@@ -1,16 +1,22 @@
 .courses-container {
+  align-items: center;
+  justify-items: center;
   min-width: 60rem;
-  min-height: 30rem;
+  min-height: 35rem;
   max-width: 60rem;
-  max-height: 30rem;
+  max-height: 35rem; 
+  margin: 0 4rem;
   /* padding: 20rem; */
   /* border: 2px solid red; */
-}
+  animation:scale-up-horizontal-center 1s}
+  @keyframes scale-up-horizontal-center{0%{transform:scaleX(.2)}100%{transform:scaleX(1)}}
+ 
 
 
-.swiper-container {
-  margin: 4rem;
-}
+
+  .courseCardCointainer {
+    margin: 20px
+  }
 
 /* .container { 
   display: grid;
@@ -45,7 +51,7 @@
     .carouselDots a {
       opacity: 1;
       cursor: pointer;
-    }
+    } */
 
 .carouselSlider {
   scroll-snap-align: start;
@@ -54,4 +60,67 @@
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
-}  */
+} 
+
+/*ssssssssssssssssssssssssssssssss*/
+
+/* .container { 
+    display: grid;
+    margin: 4%;
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: center;
+    transition: transform 0.6s;
+  }
+
+  .container:hover{
+    transform: scale(1.05);
+} */
+
+/* .coursesContainer {
+    margin: 10rem;
+} */
+
+/* .carouselSliderWrapper {
+    position: relative;
+    max-width: 60rem;
+    margin: 0 auto
+} */
+
+/* .carouselSlider {
+    display: flex;
+    aspect-ratio: 16/9;
+    overflow-x: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    transition: transform 0.6s;
+    border-radius: 3rem;
+    border: 1px solid black;
+    }
+    .carouselSlider:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    } */
+
+
+/* .carouselSliderCourse {
+    flex: 1 0 100%;
+    scroll-snap-align: start;
+    border-radius: 3rem;
+} */
+.courses-container {
+    width: 60rem
+}
+
+
+
+
+    .swiper-pagination  {
+      border-radius: 100%;
+      background-color: rgba(255, 255, 255, 0.137);
+      opacity: 0.7;
+      transition: opacity ease 250ms;
+    }
+      .swiper-pagination a:hover {
+        opacity: 1;
+        cursor: pointer;
+    }

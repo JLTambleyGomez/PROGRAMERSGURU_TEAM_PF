@@ -63,7 +63,6 @@ function Card ({ id, title, description, rating, isFree, language , imageURL}) {
                     )
                 }
             </div>
-            <h1>{id}</h1>
         </div>
     );
 };
