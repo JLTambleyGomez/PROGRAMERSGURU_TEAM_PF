@@ -8,7 +8,7 @@ function CoursePage () {
     //component:
     return (
         <div>
-            <h1>algo</h1>
+            <h1>Proximamente</h1>
         </div>
     )
 }

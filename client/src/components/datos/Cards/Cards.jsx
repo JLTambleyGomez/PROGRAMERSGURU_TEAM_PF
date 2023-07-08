@@ -1,19 +1,14 @@
-import React from "react";
-
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
-
-
-import "./Cards.css"
+import "./Cards.css";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination"; 
 import "swiper/css/navigation";
 import Card from "../Card/Card";
 
-
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules"
-
+// ChatGPT 💕
 //_________________________module_________________________
 function Cards ( { courses } ) {
 
@@ -21,26 +16,41 @@ function Cards ( { courses } ) {
     return (
         <div className = "courses-container"> 
             <Swiper
+                enabled={true}
                 modules={[EffectCoverflow, Pagination, Navigation]}
-                // effect={"coverflow"}
+                effect={"coverflow"}
+                spaceBetween={100}
                 grabCursor={true}
                 centeredSlides={true}
                 loop={true}
-                slidesPerView={"auto"}
+                slidesPerView={1}
+                keyboard={{
+                    enabled: true,
+                }}
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
-                    depth: 100,
-                    modifier: 2.5
+                    depth: 200,
+                    modifier: 2.5,
+                    slideShadows: false
                 }}
-                pagination={{clickable: true}}
-                navigation
+                mousewheel
+                pagination={{
+                    el:".swiper-pagination",
+                    clickable: true
+                }}
+                allowSlideNext={true}
+                navigation={{
+                    prevEl:".swiper-button-prev",
+                    nextEl:".swiper-button-next",
+                }}
                 className="swiper-container"
+                nested={true}
             >
                 {
                     courses.map((course, index) => {
                         return (
-                            <SwiperSlide id = {index}>
+                            <SwiperSlide style={{margin: 0}}>
                                 <Card
                                     key = {index}
                                     title = {course.title}
@@ -48,50 +58,27 @@ function Cards ( { courses } ) {
                                     rating = {course.rating}
                                     free = {course.free}
                                     language = {course.language}
+                                    imageURL={course.imageURL}
+                                    className="courseCardContainer"
                                 />
                             </SwiperSlide>
                         )
                     })
                 }
             </Swiper>
-                {/* <div className="slider-controler">
-                    <div className="swiper-button-prev slider-arrow">
-                    </div>
-                    <div className="swiper-button-next slider-arrow">
-                    </div>
-                    <div className="swiper-pagination">
-                    </div>
-                </div> */}
-            {/* <div className = {styles.carouselSliderWrapper}>
-                <div className={styles.carouselSlider}>
-                    {
-                        courses.map((course, index) => {
-                            return (
-                                <div id = {index} className={styles.carouselSliderCourse}>
-                                    <Card
-                                        key = {index}
-                                        title = {course.title}
-                                        description = {course.description}
-                                        rating = {course.rating}
-                                        free = {course.free}
-                                        language = {course.language}
-                                    />
-                                </div>
-                            )
-                        })
-                    }
-                </div>
-
-                <div className={styles.carouselDots}>
-                    {
-                        courses.map((x, index) => {
-                            return (
-                                <a key = {index} href= {`#${index}`}></a>
-                                )
-                            })
-                    }
-                </div>
-            </div> */}
+        {/* NAVIGATION */}
+            <button className="swiper-button-prev"/>
+            <button className="swiper-button-next"/>
+        {/* PAGINATION */}
+            <div class="swiper-pagination swiper-pagination-bullets">
+                {
+                    courses.map(() => {
+                        return (
+                            <span className="swiper-pagination-bullet"></span>
+                        )
+                    })
+                }
+            </div>
         </div>
     )
 }

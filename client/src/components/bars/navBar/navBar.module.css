@@ -1,7 +1,14 @@
+.container1{
+  width: 100%;
+  position: fixed;
+  
+}
+
+
 .containerslight {
   justify-content: space-around;
   justify-items: center;
-    transition: height 0.4s;
+  transition: height 0.4s;
   height: 30px; /* Establece una altura inicial para el contenedor */
 }
 

@@ -29,6 +29,13 @@ module.exports = (sequelize) => {
                     },
                 },
             },
+            rating: {
+                type: DataTypes.INTEGER,
+                validate: {
+                    max: 5,
+                    min: 1,
+                }
+            }
         },
         { timestamps: false, freezeTableName: true }
     );

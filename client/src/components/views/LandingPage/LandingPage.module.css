@@ -1,108 +1,167 @@
-.container{
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-position:absolute;
-    transition: background-image 1s ease-in-out;
-    font-family: Arial, sans-serif;
-    width: 100%;
-    text-align: center;
-    height: 100vh;
-    justify-content: center;
-    display: flex;
-    position: absolute;
-    align-items: center;
-    color:white
+.container {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: absolute;
+  position: fixed;
+  top:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #010003;
+   color: #FFFFFF;
+  transition: background-image 1s ease-in-out;
+  font-family: Arial, sans-serif;
+  width: 100%;
+  text-align: center;
+  height: 100vh;
+  justify-content: center;
+  display: flex;
+  align-items: center;
 }
 
 .container1 {
-    background-image: url("https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-    background-size:cover;
-    width: 100%;
-    height: 45%;
-    animation-name: slideInRight;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    box-shadow: 2px 10px 20px  rgb(255, 250, 250); /* Agrega la sombra con valores personalizables */
+  background-image: url("https://images.pexels.com/photos/4348404/pexels-photo-4348404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  width: 60%;
+  height: 45%;
+  position: relative;
+  border: 2px solid black;
+  animation: slideInRight 1s ease-in-out;
+  transition: transform 0.3s;
+  
+}
 
-  }
+.container1:hover {
+  transform: scale(1.1);
+  transform-origin:left;
+ 
 
-.container2{
-background-image: url("https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-background-size: cover;
-width: 100%;
-height: 45%;
-animation-name: slideInLeft;
-animation-duration: 1s;
-animation-timing-function: ease-in-out;
-box-shadow: 2px 10px 20px  rgb(255, 250, 250); /* Agrega la sombra con valores personalizables */
+}
 
+.container2 {
+  background-image: url("https://images.pexels.com/photos/8721342/pexels-photo-8721342.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+  background-size: cover;
+  width: 60%;
+  height: 45%;
+  position: relative;
+  border: 2px solid black;
+  animation: slideInLeft 1s ease-in-out;
+  transition: transform 0.3s;
+  
+}
+
+.container2:hover {
+  transform: scale(1.1);
+  transform-origin:right;
 }
 
 @keyframes slideIn {
-0% {
-  opacity: 0;
-  transform: translateX(100%);
-}
-100% {
-  opacity: 1;
-  transform: translateX(0);
-}
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInRight {
-0% {
-  opacity: 0;
-  transform: translateX(100%);
-}
-100% {
-  opacity: 1;
-  transform: translateX(0);
-}
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInLeft {
-0% {
-  opacity: 0;
-  transform: translateX(-100%);
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
-100% {
-  opacity: 1;
-  transform: translateX(0);
+.pF{
+  color:rgb(0, 0, 0) ;
+  background-color: #4b484867;
+  font-size: 24px;
+  font-weight:bold;
+  margin-top: 8rem;
+ 
+
 }
+.pS{
+  color:rgb(61, 224, 246) ;
+  background-color:rgba(35, 210, 226, 0.063);
+  font-size: 24px;
+  text-align: center;
+  line-height: normal;
+  font-weight: bold;
+  margin-top: 8rem;
+  text-shadow: 2px 5px 4px hwb(0 0% 100%);
+
 }
-.p{
-text-align: center;
-line-height: normal;
-font-weight: bold;
-margin-top:8rem ;
-    }
-    .h1{
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-       
-    }
+.h1 {
+  text-shadow: 2px 3px 4px rgb(222, 218, 218);
+  padding: 2.5%;
+  animation: scale-up-top 2s;
+  color: #010101;
+  transition: transform 0.3s, filter 0.3s;
+  
+}
+
+.h1:hover {
+  transform: scale(1.2);
+  transform-origin: center;
+}
 
 .button {
-padding: 10px 20px;
-background-color: #ffffffb5;
-color: #010101;
-border: none;
-border-radius: 10px;
-font-size: 16px;
-cursor: pointer;
-transition: background-color 0.3s ease;
+  padding: 7px 20px;
+  background-color: #ffffffb5;
+  color: #010101;
+  border: 2px solid;
+  border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+  background-clip: padding-box;
+  animation: borderGradientAnimation1 infinite 2.5s;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+  
 }
 
 .button:hover {
-background-color: #0000009d;
-color:white;
+  background-color: #000000;
+  color: white;
+  
 }
 
-@keyframes spin {
-0% {
-  transform: rotate(0deg);
-}
-100% {
-  transform: rotate(360deg);
-}
+
+@keyframes borderGradientAnimation1 {
+  0% {
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+  }
+  20% {
+    border-image: linear-gradient(to right, #ff0000, #800080) 1;
+  }
+  40% {
+    border-image: linear-gradient(to right, #800080, #0000ff) 1;
+  }
+  60% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+  }
+  80% {
+    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+  }
+  100% {
+    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+  }
 
 }
+

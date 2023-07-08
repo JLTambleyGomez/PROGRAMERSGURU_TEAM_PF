@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_categories, pOST_CATEGORIES, dELETE_CATEGORIES, get_courses_all, post_course, delete_course_request } from "../../../Redux/actions";
+import { get_categories, post_categories,clearCourses,clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
 import validate from "./validate";
 import styles from "./AdminPanel.module.css";
 
@@ -8,7 +8,7 @@ import styles from "./AdminPanel.module.css";
 //_________________________module_________________________
 function AdminPanel () {
 
-    //global state:
+    //global state: 
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
     const darkmode = useSelector((state)=> state.darkMode);
@@ -23,7 +23,7 @@ function AdminPanel () {
         isFree: false,
         language: "",
         categories: [],
-      });
+    });
       
 
     //const:
@@ -36,7 +36,7 @@ function AdminPanel () {
       h1: "h1light",
       input: "inputlight",
       button: "buttonlight",
-      container: "containerslight",
+      container: "containerslight", 
       label: "labellight",
       p:"plight",
       div:"divlight",
@@ -48,10 +48,8 @@ function AdminPanel () {
       link:"linklight",
       ul:"ullight",
       h2:"h2light",
-
-
-
     });
+
     const [backmessage, setbackmessage]= useState("")
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
@@ -59,6 +57,8 @@ function AdminPanel () {
 
     //functions:
     const handleCourseChange = (event) => {
+      
+
         const { name, value } = event.target;
         setNewCourse((prevCourse) => ({
           ...prevCourse,
@@ -67,6 +67,7 @@ function AdminPanel () {
       };
       
       const handleCategorySelection = (event) => {
+
         const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
           id: option.value,
         }));
@@ -76,27 +77,30 @@ function AdminPanel () {
         }));
       };
       
-    const handleshowcategories =() =>{
+    const handleshowcategories =(event) =>{
+      event.preventDefault();
+
         if (showcategories===false)
         setshowcategories(true);
         else setshowcategories(false)
     }
-    const handleshowcursos =() =>{
+    const handleshowcursos =(event) =>{
+
         if (showcursos===false)
         setshowcursos(true);
         else setshowcursos(false)
     }
 
     const hadleInputChange = (event) => {
+
         setbackmessage("")
         const { value } = event.target;
         setInputCategory({ category: value });
     
     };
     const handlePostCategories = async (event) => {
-      event.preventDefault();
       try {
-        await dispatch(pOST_CATEGORIES({ technology: inputCategory.category }));
+        await dispatch(post_categories({ technology: inputCategory.category }));
         setInputCategory({ category: "" });
         await dispatch(get_categories());
       } catch (error) {
@@ -107,7 +111,7 @@ function AdminPanel () {
 
     const deleteCategory = async (id) => {
         try {
-            await dispatch(dELETE_CATEGORIES(id))
+            await dispatch(delete_categories(id))
             await dispatch(get_categories())
         } catch (error) {
             console.log("error");
@@ -117,7 +121,7 @@ function AdminPanel () {
 
     const handledeleteCourse = async (id) => {
         try {
-          await dispatch(delete_course_request(id));
+          await dispatch(delete_course(id));
           await dispatch(get_courses_all());
         } catch (error) {
           console.log("error");
@@ -127,8 +131,8 @@ function AdminPanel () {
 
 
 
-    const handleCoursePost = () => {
-
+    const handleCoursePost = (event) => {
+      event.preventDefault();
         dispatch(post_course(newCourse))
           .then(() => {
             setNewCourse({
@@ -152,10 +156,13 @@ function AdminPanel () {
 
     //useEffect:
     useEffect(() => {
-
+        dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all())
-    }, []);
+        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
+          dispatch(clearMessage()); // limpiar 
+          dispatch(clearCourses()); }
+    }, [dispatch]);
 
 
 

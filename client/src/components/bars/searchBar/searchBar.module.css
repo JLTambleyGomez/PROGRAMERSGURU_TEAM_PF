@@ -1,23 +1,182 @@
-.container {
+
+  
+  
+  
+  .lightContainer {
     display: flex;
     justify-content: center;
+    background-color: #ffffff;
+    color: #302f2c;
   }
   
-  .SearchBar {
+  .h1light {
+    font-size: 22px;
+    color: black;
+    transition: transform 0.3s
+  }
+  .h1dark {
+    font-size: 22px;
+    color: white;
+    transition: transform 0.3s
+  }
+  .h1light:hover {transform: scale(1.2);
+    cursor: pointer;
+  }
+  .h1dark:hover {transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  
+
+  .buttondark {
+    background-color: #302f2c;
+      color: white;
+    border: 2px solid white;
+  }
+  .inputdark {
     display: flex;
     align-items: center;
-  }
-  
-  .input {
-    width: 100%;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255);
+    margin-right: 2%;
+    font-size: 16px;}
+
+  .inputlight {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 1px solid black;
+    margin-right: 2%;
     padding: 5px;
     font-size: 16px;
   }
   
-  .buscar {
-    height: 30px;
-    margin-left: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
+  .buttonlight {
+      background-color: white;
+    color: black;
+    border: 2px solid black;
+  }
+  
+  .containerlight {
+    display: flex;
+    align-items: center;  }
+  
+  .labellight {
+    color: black;
+  }
+  
+  .plight {
+    background-color: white;
+    width: min-content;
+    color: black;
+    padding:2%;
+    border: 1px solid rgb(7, 0, 0); 
+     border-radius: 50%; 
+      margin-left: 1%;
+     transition: transform 0.3s
+    }
+     
+  .pdark {
+    width: min-content;
+    border-radius: 50%;
+    margin-left: 1%;
+    padding:2%;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(255, 255, 255); 
+    transition: transform 0.3s
+  }
+
+    .plight:hover {transform: scale(1.3);}
+    .pdark:hover {transform: scale(1.3);}
+  
+  .divlight {
+    /* Estilos para div en modo claro */
+  }
+  
+  .spanlight {
+    /* Estilos para span en modo claro */
+  }
+  
+  .formlight {
+    /* Estilos para form en modo claro */
+  }
+  
+  .hrlight {
+    /* Estilos para hr en modo claro */
+  }
+  
+  .errorlight {
+    /* Estilos para error en modo claro */
+  }
+  
+  .successlight {
+    /* Estilos para success en modo claro */
+  }
+  
+  .linklight {
+    /* Estilos para link en modo claro */
+  }
+  
+  .ullight {
+    /* Estilos para ul en modo claro */
+  }
+  
+  .h2light {
+    /* Estilos para h2 en modo claro */
+  }
+  
+
+  
+  .containerdark {
+    display: flex;
+    justify-content: center;
+    background-color: #000000;
+    color: #ffffff;
+    /* Estilos para containers en modo oscuro */
+  }
+  
+  .labeldark {
+    color: white;
+  }
+  
+
+  
+  .divdark {
+    /* Estilos para div en modo oscuro */
+  }
+  
+  .spandark {
+    /* Estilos para span en modo oscuro */
+  }
+  
+  .formdark {
+    /* Estilos para form en modo oscuro */
+  }
+  
+  .hrdark {
+    /* Estilos para hr en modo oscuro */
+  }
+  
+  .errordark {
+    /* Estilos para error en modo oscuro */
+  }
+  
+  .successdark {
+    /* Estilos para success en modo oscuro */
+  }
+  
+  .linkdark {
+    /* Estilos para link en modo oscuro */
+  }
+  
+  .uldark {
+    /* Estilos para ul en modo oscuro */
+  }
+  
+  .h2dark {
+    /* Estilos para h2 en modo oscuro */
   }
   
