@@ -5,8 +5,8 @@
   max-height: 30rem;
   /* padding: 20rem; */
   /* border: 2px solid red; */
-}
-
+  animation:scale-up-horizontal-center 1s}
+  @keyframes scale-up-horizontal-center{0%{transform:scaleX(.2)}100%{transform:scaleX(1)}}
 
 .swiper-container {
   margin: 4rem;

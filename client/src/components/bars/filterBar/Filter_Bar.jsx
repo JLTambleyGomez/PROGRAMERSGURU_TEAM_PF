@@ -62,7 +62,9 @@ function buttonHandler(event) {
   dispatch(get_courses_all());
 }
 //en los handler que se refieren al mouse no es necesario 
-//event.preventDefault(); ya que sus funciones no alteran 
+//event.preventDefault();ya que no se necesita prevenir el 
+//comportamiento predeterminado del evento  By Mica
+ 
 function handleMouseEnter() {
   setShowBar(true);
 }

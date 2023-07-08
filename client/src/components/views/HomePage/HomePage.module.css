@@ -52,7 +52,7 @@
     width: 100%;
     justify-items: center;
     align-items: center;
-}   
+}
 .containerdark{
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@
     width: 100%;
     justify-items: center;
     align-items: center;
-} 
+}
 .pagination{
     display: flex;
     justify-content: center;

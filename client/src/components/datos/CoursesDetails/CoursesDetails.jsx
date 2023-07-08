@@ -13,17 +13,18 @@ function CourseDetails () {
     const course=useSelector((state)=>state.courseActual)
     const {id}= useParams();
 
-    async function getDetails(){
-        dispatch(get_courses_by_id(id))
-    }
-    
-    useEffect(()=>{
-        getDetails();
-        return ()=>{                   // return ocupar para hacer algo en el desmontaje          
-            dispatch(clearMessage()); // limpiar 
-            dispatch(clearCourses()); }
-     },[dispatch])
-
+    //optimize el código eliminando la función getDetails
+    // y llamando directamente a 
+    //dispatch(get_courses_by_id(id)) dentro del useEffect. 
+    useEffect(() => {
+        dispatch(get_courses_by_id(id));
+      
+        return () => {
+          dispatch(clearMessage());
+          dispatch(clearCourses());
+        };
+      }, [dispatch, id]);
+      
 
     //component:
     return(

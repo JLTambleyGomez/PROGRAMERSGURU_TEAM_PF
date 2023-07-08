@@ -38,6 +38,7 @@ function Cards ( { courses } ) {
                             <SwiperSlide id = {index}>
                                 <Card
                                     key = {index}
+                                    id = {course.id}
                                     title = {course.title}
                                     description = {course.description}
                                     rating = {course.rating}
