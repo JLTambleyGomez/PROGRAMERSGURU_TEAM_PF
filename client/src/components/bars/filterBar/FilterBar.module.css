@@ -1,4 +1,4 @@
-
+/* 
 .container{
   display:flex;
   flex-direction: row;
@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center; /* Agregar esta línea */
+  align-items: center;
   position: fixed;
   top: 1%;
   background-color: rgb(255, 255, 255);
@@ -52,4 +52,82 @@
   }
 
   
- 
+  */
+/* _________________________________________________________ */
+
+.filterBarContainer {
+  position: relative;
+}
+
+.filterBarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+/*ESTILOS FIJOS*/
+.filterBarSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 20px;
+  width: 300px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  overflow-y: auto;
+  }
+  /* CASO LIGHT */
+  .filterBarSidebar-light {
+  background-color: #f1f1f1;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+  /* CASO DARK */
+  .filterBarSidebar-dark {
+    background-color: black;
+    border-right: 1px solid green
+  }
+
+    .filterBarMainLabel {
+      font-size: 2rem ;
+      margin: 0 0 4rem;
+    }
+
+    .filterBarSection {
+      font-size: 1.5rem;
+    }
+      .filterBarSection label {
+        border: 1px solid brown;
+        padding: 15px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .filterBarSection label {
+        border: 1px solid brown;
+      }
+      .filterBarSection ul {
+        list-style: none;
+      }
+
+    /* ESTILOS FIJOS */
+    .filterButton {
+        margin-top: 4rem;
+      padding: 10px;
+    }
+    /* CASO LIGHT */
+    .filterButton-light {
+      background-color: #f1f1f1 ;
+      color: black;
+    }
+    /* CASO DARK */
+    .filterButton-dark {
+      background-color: black;
+      color: #f1f1f1;
+    }

@@ -46,10 +46,10 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
     switch (type) {
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };
-
-        case GET_COURSES_BY_NAME:
-            return { ...state, allCourses: payload, courses: payload };
-
+            
+            case GET_COURSES_BY_NAME:
+                return { ...state, allCourses: payload, courses: payload };
+              
         case GET_COURSES_BY_ID:
             return { ...state, courseActual: payload};
 

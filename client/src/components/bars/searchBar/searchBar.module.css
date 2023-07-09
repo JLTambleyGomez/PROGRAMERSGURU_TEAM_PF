@@ -99,8 +99,12 @@
     transition: transform 0.3s
   }
 
-    .plight:hover {transform: scale(1.3);}
-    .pdark:hover {transform: scale(1.3);}
+    .plight:hover {
+      cursor: pointer;
+      transform: scale(1.3);}
+    .pdark:hover {
+      cursor: pointer;
+      transform: scale(1.3);}
   
   .divlight {
     /* Estilos para div en modo claro */

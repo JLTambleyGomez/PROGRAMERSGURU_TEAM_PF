@@ -5,7 +5,7 @@ import styles from "./Card.module.css";
 
 
 //_________________________module_________________________
-function Card ({ id, title, description, rating, isFree, language , imageURL}) {
+function Card ({ id, title, description, rating, isFree, language, imageURL }) {
 
     console.log(id)
     //states:    

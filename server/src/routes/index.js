@@ -7,6 +7,7 @@ const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
 const productRouter = require("./productRouter");
 const favoriteRouter = require("./favoriteRouter");
+const userRouter = require("./userRouter");
 
 router.use("/technology", technologyRouter);
 
@@ -16,10 +17,8 @@ router.use("/product", productRouter);
 
 router.use("/favorite", favoriteRouter);
 
+router.use("/user", userRouter);
 
-router.get("/login", Login);
-
-router.post("/login", PostUser);
 
 
 module.exports = router;
