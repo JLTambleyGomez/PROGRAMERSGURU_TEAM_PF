@@ -2,15 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
+  position: absolute;
+  width: 40%;
+  left: 0;
+  font-size: 32px;
   color: rgb(3, 29, 33);
   text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
 }
 .logodark {
+  width: 40%;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
+  font-size: 32px;
   color: rgb(255, 255, 255);
   text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
 }
@@ -22,6 +27,7 @@
   justify-content: center;
   align-items: center;
   letter-spacing: 10px;
+  padding-top: 8%;
   font-size: 32px;
   color: rgb(0, 140, 158);
   transition: transform 0.3s, filter 0.3s;
@@ -37,6 +43,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 8%;
+
   letter-spacing: 10px;
   font-size: 32px;
   color:  rgba(0, 221, 250, 0.672);
@@ -128,13 +136,14 @@
 }
 
 .imgcat {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  margin-right: 20px;
 }
 .spanlight {
   color: #010118;
-  letter-spacing: 20px;
+  letter-spacing: 10px;
   width: 80%;
 
 margin:3%;}
@@ -142,7 +151,7 @@ margin:3%;}
 
 .spandark {
   color: #ffffff;
-  letter-spacing: 20px;
+  letter-spacing: 10px;
   width: 80%;
 
 margin:3%;}
