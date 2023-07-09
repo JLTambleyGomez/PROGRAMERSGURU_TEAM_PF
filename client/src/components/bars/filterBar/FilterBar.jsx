@@ -29,31 +29,34 @@ function FilterBar () {
         ul:"ullight",
         h2:"h2light",
     });
+
     const [showSideBar, setShowSideBar] = useState(false)
     const [showDropdownOne, setShowDropdownOne] = useState(false);
     const [showDropdownTwo, setShowDropdownTwo] = useState(false);
+    const [showDropdownThree, setShowDropdownThree] = useState(false);
 
     //const:
     const dispatch = useDispatch();
     const darkmode = useSelector((state)=> state.darkMode);
 
     //functions:
-
     const toggleSideBar = () => {
         setShowSideBar(!showSideBar)
     }
 
     const toggleDropDownOne = () => setShowDropdownOne(!showDropdownOne)
-
     const toggleDropDownTwo = () => setShowDropdownTwo(!showDropdownTwo)
+    // const toggleDropDownThree = () => setShowDropdownThree(!showDropdownThree)
 
     const handleFilterByLanguage = (value) => {
         dispatch(filter_courses_by_language(value));
         setShowSideBar(true);
-        setShowDropdownOne(false)
     }
 
-
+    const handleFilterByPricing = (value) => {
+        dispatch(filter_courses_by_price(value));
+        setShowSideBar(true);
+    }
 
     function languageSelectHandler(event) {
         const { value } = event.target;
@@ -100,43 +103,45 @@ function FilterBar () {
         setElementClasses(updatedElementClasses);
     }, [darkmode]);
 
-
     //component:
     return (
         <div>
             <button onClick={toggleSideBar}>
-                <span>
-                    <TbAdjustmentsHorizontal/>
-                    FILTRAR
-                </span>
+                <TbAdjustmentsHorizontal/>
+                FILTRAR
             </button>
             {
                 showSideBar && (
                     <>
-                        <div className={styles.orderBarOverlay} onClick={toggleSideBar}/>
-                        <aside className={styles.orderBarSidebar}>
-                            <div className={styles.orderBarSection}>
+                        <div className={styles.filterBarOverlay} onClick={toggleSideBar}/>
+                        <aside className={`${styles.filterBarSidebar} ${darkmode ? styles['filterBarSidebar-dark'] : styles['filterBarSidebar-light']}`}>
+                            <label className={styles.filterBarMainLabel}>VER TODOS LOS CURSOS</label>
+                            <div className={styles.filterBarSection}>
+                                <label onClick={toggleDropDownTwo}>FILTRAR POR PRECIO</label>
+                                {
+                                    showDropdownTwo && (
+                                        <ul>
+                                            <li onClick={() => handleFilterByPricing(true)}>Acceso libre</li>
+                                            <li onClick={() => handleFilterByPricing(false)}>Requiere compra</li>
+                                        </ul>
+                                    )
+                                }
+                            </div>
+                            <div className={styles.filterBarSection}>
                                 <label onClick={toggleDropDownOne}>FILTRAR POR IDIOMA</label>
-                                    {
-                                        showDropdownOne && (
-                                            <ul>
-                                                <li onClick={() => handleFilterByLanguage("español")}>Español</li>
-                                                <li onClick={() => handleFilterByLanguage("inglés")}>Inglés</li>
-                                            </ul>
-                                        )
-                                    }
+                                {
+                                    showDropdownOne && (
+                                        <ul>
+                                            <li onClick={() => handleFilterByLanguage("español")}>Español</li>
+                                            <li onClick={() => handleFilterByLanguage("inglés")}>Inglés</li>
+                                        </ul>
+                                    )
+                                }
                             </div>
-                            <div className={styles.orderBarSection}>
-                                <label onClick={toggleDropDownTwo}>ORDENAR POR PUNTUACION</label>
-                                    {
-                                        showDropdownTwo && (
-                                            <ul>
-                                                <li onClick={() => console.log("dispatch rating +")}>Más valorado</li>
-                                                <li onClick={() => console.log("dispatch rating -")}>Menos valorado</li>
-                                            </ul>
-                                        )
-                                    }
-                            </div>
+                            {/* AGREGAR INPUT A CADA OPCION Y ALMACENAR LOS FILTROS */}
+                            <button className={`${styles.filterButton} ${darkmode ? styles['filterButton-dark'] : styles['filterButton-light']}`}>
+                                APLICAR FILTROS
+                            </button>
                         </aside>
                     </>
                 )
