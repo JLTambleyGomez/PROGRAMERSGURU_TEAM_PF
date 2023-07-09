@@ -15,30 +15,13 @@ function OrderBar () {
     //const:
     const dispatch = useDispatch();
 
-    const arrayStates = {
-        showDropdownOne: setShowDropdownOne,
-        showDropdownTwo: setShowDropdownTwo
-    }
-
     //functions:
     const toggleSideBar = () => {
         setShowSideBar(!showSideBar)
     }
 
-    const toggleDropDown = (value) => {
-        // value === showDropdownOne && setShowDropdownOne(!sectionNumber)
-        // arrayStates.forEach((state) => {
-        //     if (state.toString().contains(value)) {
-        //         state()
-        //     }
-        // })
-        for (const state in arrayStates) {
-            if (arrayStates.hasOwnProperty(state) && state[prop].toString().contains(value)) {
-                state[prop](!state)
-            }
-        }
-    }
-
+    const toggleDropDownOne = () => setShowDropdownOne(!showDropdownOne)
+    const toggleDropDownTwo = () => setShowDropdownTwo(!showDropdownTwo)
 
     const handleOrder = (value) => {
         if (value !== "") {
@@ -58,7 +41,7 @@ function OrderBar () {
                         <div className="orderBarOverlay" onClick={toggleSideBar}/>
                         <aside className="orderBarSidebar">
                             <div className="orderBarSection">
-                                <label onClick={() => {toggleDropDown("one")}}>ORDENAR POR NOMBRE</label>
+                                <label onClick={() => {toggleDropDownOne("one")}}>ORDENAR POR NOMBRE</label>
                                     {
                                         showDropdownOne && (
                                             <ul>
@@ -69,7 +52,7 @@ function OrderBar () {
                                     }
                             </div>
                             <div className="orderBarSection">
-                                <label onClick={() => {toggleDropDown("two")}}>ORDENAR POR PUNTUACION</label>
+                                <label onClick={() => {toggleDropDownTwo("two")}}>ORDENAR POR PUNTUACION</label>
                                     {
                                         showDropdownTwo && (
                                             <ul>

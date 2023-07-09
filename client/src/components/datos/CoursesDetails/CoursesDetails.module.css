@@ -41,9 +41,9 @@
     object-fit: cover;
   }
   .container2{
-align-items: center;
-justify-content: center;
-justify-items: center;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
     padding: 4%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);

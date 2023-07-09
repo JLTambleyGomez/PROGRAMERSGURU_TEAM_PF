@@ -85,15 +85,15 @@ function LoginForm () {
                                 />
                             </div>
                         {/* TOGGLE PASSWORD VISIBILITY */}
-                            <button onClick={() => setPasswordVisible(!passwordVisible)}>
-                                {passwordVisible ? "Hide Password" : "Show Password"}
+                            <button className={styles.button} onClick={() => setPasswordVisible(!passwordVisible)}>
+                            {passwordVisible ? "Hide Password" : "Show Password"}
                             </button>
                             { errors.password && <p className={styles.error}>{errors.password}</p> }
 
                             <p className={styles.recommendation}>Recomendamos usar una contraseña que incluya una combinación de letras mayúsculas y minúsculas, números y caracteres especiales para mayor seguridad.</p>
 
                         {/* SUBMIT */}
-                            <button type="submit">Submit</button>
+                            <button className={styles.button} type="submit">Submit</button>
                             <hr/>
                         </form>
                     </div>

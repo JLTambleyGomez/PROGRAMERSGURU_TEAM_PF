@@ -45,13 +45,13 @@
                 }
               }
               
-              label {
+              .label {
                 display: flex;
                 flex-direction: column;
                 margin-bottom: 5px;
               }
-              
-              input {
+
+              .input {
                 padding: 3%;
                 width: 70%;
                 border-radius: 8px;
@@ -59,8 +59,8 @@
                 margin-top: 5px;
                 margin-bottom: 3%;
               }
-              
-              button {
+
+              .button {
                 
                 padding: 7px 20px;
                 background-color: #ffffffb5;
@@ -75,10 +75,9 @@
                 
               }
               
-              button:hover {
+              .button:hover {
                 background-color: #000000;
                 color: white;
-                
               }
               
               

@@ -81,13 +81,6 @@ function FilterBar () {
 
     const handleMouseLeave = () => setShowBar(false);
 
-    // function orderSelectHandler(event) {
-    //     const { value } = event.target;
-    //     if (value !== "") {
-    //         dispatch(order_courses(value));
-    //     }
-    // }
-
     //en los handler que se refieren al mouse no es necesario 
     //event.preventDefault();ya que no se necesita prevenir el 
     //comportamiento predeterminado del evento  By Mica
@@ -147,41 +140,6 @@ function FilterBar () {
                 )
             }
         </div>
-        // <div className={`${styles.container} ${styles[elementClasses.container]}`}>
-        //     <div className={`${styles.container} ${styles[elementClasses.container]}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}> Filtros : <img className={styles.img} src="https://w7.pngwing.com/pngs/403/20/png-transparent-computer-icons-filter-miscellaneous-angle-rectangle-thumbnail.png" alt="sample45" />
-        //         {
-        //             showBar && (
-        //                 <div className={styles.bar1}>
-        //                     <p>Selecciona Lenguaje</p>
-        //                     <select onChange={languageSelectHandler}>
-        //                         <option value="">idioma/language</option>
-        //                         <option value="español">español</option>
-        //                         <option value="inglés">ingles</option>
-        //                     </select> 
-
-        //                     <p>Selecciona Coste</p>
-        //                     <select onChange={priceSelectHandler}>
-        //                         <option value="">select price</option>
-        //                         <option value="true">Free/Gratis</option>
-        //                         <option value="false">Pagado/Payed</option>
-        //                     </select>
-
-        //                     {/* <p>Ordenar Asc/Des</p>
-        //                     <select onChange={orderSelectHandler}>
-        //                         <option value="">Ordenar</option>
-        //                         <option value="ABC+">Nombre Ascendente</option>
-        //                         <option value="ABC-">Nombre Descendente</option>
-        //                     </select> */}
-        //                 </div>
-        //             )
-        //         } 
-
-        //     </div>
-        //     <p className={styles.pinvi}>__Micarulz__</p>
-        //     <p className={`${styles.p} ${styles[elementClasses.p]}`} onClick={buttonHandler}>
-        //         Search/Filter Reset
-        //     </p>
-        // </div>
     );
 }
 
