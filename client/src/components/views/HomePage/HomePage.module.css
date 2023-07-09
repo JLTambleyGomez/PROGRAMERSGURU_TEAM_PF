@@ -15,6 +15,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  width: 40%;
+  left: 0;
   font-size: 32px;
   color: rgb(255, 255, 255);
   text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
@@ -65,8 +68,7 @@
   justify-content: center;
   align-items: center;
   padding-bottom:14%;
-}
-
+  animation:blur-in 0.4s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
 
 .containerdark {
@@ -78,8 +80,7 @@
   padding-bottom:14%;
   justify-content: center;
   align-items: center;
-}
-
+  animation:blur-in 0.4s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 .pagination {
   display: flex;
   justify-content: center;

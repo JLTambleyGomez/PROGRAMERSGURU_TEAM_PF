@@ -1,4 +1,4 @@
-const { Course, Technology } = require("../../db");
+const { Course } = require("../../db");
 const { Op } = require("sequelize");
 
 const getCourseByName = async (req, res) => {

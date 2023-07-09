@@ -1,5 +1,6 @@
 import { useDispatch,useSelector } from "react-redux";
 import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom"; 
 import { get_courses_by_name } from "../../../Redux/actions";
 import styles from "./searchBar.module.css"
 
@@ -7,7 +8,9 @@ import styles from "./searchBar.module.css"
 function SearchBar () {
 
     //const:
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
 
     //states:
     const [input, setInput] = useState("");
@@ -46,50 +49,62 @@ function SearchBar () {
         setElementClasses(updatedElementClasses);
     }, [darkmode]);
 
+  
     const handleSearchInput = (event) => {
-        event.preventDefault();
-        setInput(event.target.value)
-    }
-
-    const handleSearchButton = (event) => {
-        event.preventDefault();
-        dispatch(get_courses_by_name(input))
-        setInput("")
-        setToggleVisibility(true);
-    };
-
-    const setDefault = (event) => {
-        event.preventDefault();
-        setToggleVisibility(true);
-        setInput('');
+        setInput(event.target.value);
       };
+    
+      const handleSearchButton = async (event) => {
+        event.preventDefault();
+        try {
+          
+          dispatch(get_courses_by_name(input));
+          setInput("");
+          setToggleVisibility(true);
+          navigate("/CoursePage");
+        } catch (error) {
+          console.log(error);
+        }
 
-    //component:
-    return (
-        <div  className={`${styles.container} ${styles[elementClasses.container]}`}>
-            <div >
-            {
-                toggleVisibility
-                ? (
-                    <div>
-                        <h1  className={`${styles.h1} ${styles[elementClasses.h1]}`} onClick = {() => setToggleVisibility(false)}>S E A R C H</h1>
-                    </div>
-                ) : (
-                    <div className={`${styles.container} ${styles[elementClasses.container]}`} onBlur = {setDefault}>
-                        <input className={`${styles.input} ${styles[elementClasses.input]}`} type = "search" onChange = {handleSearchInput} value = {input} autoFocus placeholder = 'try "Java"'/>
-                        <p className={`${styles.p} ${styles[elementClasses.p]}`} onClick = {handleSearchButton}>
-                        🔎
-                        </p>
-                    </div>
-                )
-            }
-
+      };
+    
+      const setDefault = (event) => {
+        event.preventDefault();
+        setToggleVisibility(true);
+        setInput("");
+      };
+    
+      return (
+        <div className={`${styles.container} ${styles[elementClasses.container]}`}>
+          {toggleVisibility ? (
+            <div>
+              <h1
+                className={`${styles.h1} ${styles[elementClasses.h1]}`}
+                onClick={() => setToggleVisibility(false)}
+              >
+                S E A R C H
+              </h1>
             </div>
+          ) : (
+            <div className={`${styles.container} ${styles[elementClasses.container]}`}>
+              <input
+                className={`${styles.input} ${styles[elementClasses.input]}`}
+                type="search"
+                onChange={handleSearchInput}
+                value={input}
+                autoFocus
+                placeholder='try "Java"'
+              />
+              <p
+                className={`${styles.p} ${styles[elementClasses.p]}`}
+                onClick={handleSearchButton}
+              >
+                🔎
+              </p>
+            </div>
+          )}
         </div>
-        
-      
-    )
-}
-
+      );
+    }
 
 export default SearchBar;

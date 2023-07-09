@@ -5,7 +5,7 @@
 
 .coursePageC-mainBanner {
     height: 60vh;
-    /* width: 100vw; */
+   
     border: 2px solid red;
 }
 
@@ -21,7 +21,6 @@
     justify-content: space-evenly;
     gap:20px;
     border: 2px dotted green;
-
 }
 
 .coursePageC-card {

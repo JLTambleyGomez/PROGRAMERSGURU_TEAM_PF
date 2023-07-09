@@ -12,11 +12,15 @@ export const postCourseRequest = async (datos) => {
 }
 
 export const getCoursesByNameRequest = async (name) => {
-    console.log(name)
-    const { data } = await axios.get(`http://localhost:3001/course/title?title=${name}`);
-    return data;
-}
-
+    try {
+      const response = await axios.get(`http://localhost:3001/course/title?title=${name}`);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
+  };
+  
 export const getCoursesByIdRequest = async (id) => {console.log(id)
     const { data } = await axios.get(`http://localhost:3001/course/${id}`);
     
