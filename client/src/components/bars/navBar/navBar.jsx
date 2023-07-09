@@ -1,44 +1,50 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import styles from './navBar.module.css';
 import SearchBar from '../searchBar/searchBar';
-import FilterBar from '../filterBar/Filter_Bar';
+import FilterBar from '../filterBar/FilterBar';
 import PerfilBar from '../perfilbar/perfilbar';
 
 
 //_________________________module_________________________
 function NavBar () {
+
+    //const:
     const darkmode = useSelector((state)=> state.darkMode);
+    const location = useLocation();
+    //states:
     const [elementClasses, setElementClasses] = useState({
-          h1: "h1light",
-          input: "inputlight",
-          button: "buttonlight",
-          buttoncontainer:"buttoncontainerlight",
-          container: "containerslight",
-          label: "labellight",
-          p:"plight",
-          div:"divlight",
-          span:"spanlight",
-          form: "formlight",
-          hr: "hrlight",
-          error:"errorlight",
-          success:"successlight",
-          link:"linklight",
-          ul:"ullight",
-          h2:"h2light",
-          
+        h1: "h1light",
+        input: "inputlight",
+        button: "buttonlight",
+        buttoncontainer:"buttoncontainerlight",
+        container: "containerslight",
+        label: "labellight",
+        p:"plight",
+        div:"divlight",
+        span:"spanlight",
+        form: "formlight",
+        hr: "hrlight",
+        error:"errorlight",
+        success:"successlight",
+        link:"linklight",
+        ul:"ullight",
+        h2:"h2light",
+    });
+    //life-cycles:
+    useEffect(() => {
+        const updatedElementClasses = {};
+
+        Object.keys(elementClasses).forEach((key) => {
+            updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
         });
-    
- useEffect(() => {
-            const updatedElementClasses = {};
-        
-            Object.keys(elementClasses).forEach((key) => {
-              updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
-            });
-        
-            setElementClasses(updatedElementClasses);
-          }, [darkmode]);
+
+        setElementClasses(updatedElementClasses);
+    }, [darkmode]);
+
+        const isCoursePage = location.pathname === "/CoursePage";
+
     //component:
     return (
         <div className={styles.container1}>
@@ -68,7 +74,7 @@ function NavBar () {
                     </button>
                    
                     <SearchBar/>
-                    <FilterBar/>
+                    {isCoursePage && <FilterBar />}
 
                     <PerfilBar/>
                     

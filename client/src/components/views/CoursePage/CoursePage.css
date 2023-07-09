@@ -1,0 +1,29 @@
+.coursePageComponent {
+    display: flex;
+    flex-direction: column;
+}
+
+.coursePageC-mainBanner {
+    height: 60vh;
+    width: 100vw;
+    border: 2px solid red;
+}
+
+.coursePageC-filters {
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px dotted blue
+}
+
+.coursePageC-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    border: 2px dotted green;
+
+}
+
+.coursePageC-card {
+    min-height: 10rem;
+    min-width: 5rem;
+}

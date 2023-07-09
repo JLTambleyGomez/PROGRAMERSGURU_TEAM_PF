@@ -1,0 +1,21 @@
+.orderBarContainer {
+    display: flex;
+  }
+  
+  .orderBarSidebar {
+    width: 250px;
+    height: 100%;
+    background-color: #f1f1f1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    overflow-y: auto;
+  }
+  
+  .orderBarContent {
+    flex-grow: 1;
+    margin-left: 250px;
+    padding: 16px;
+  }
+  

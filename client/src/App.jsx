@@ -1,5 +1,4 @@
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
-
 import styles from "./App.module.css";
 import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
@@ -8,6 +7,7 @@ import NavBar from './components/bars/navBar/navBar';
 import Perfil from './components/views/Perfil/Perfil';
 import Compras from './components/views/Compras/Compras';
 import Cart from './components/views/Cart/Cart';
+import InfoBar from './components/bars/infoBar/infoBar';
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
 import React,{useState,useEffect}from "react";
@@ -19,12 +19,44 @@ import { useSelector} from "react-redux";
 function App () {
 
     //const:
+    const [isAtBottom, setIsAtBottom] = useState(false);
+
     const navigate = useNavigate();
     const location = useLocation().pathname;
     const [changeDarkMode , setChangeDarkMode] = useState("");
     const darkmode = useSelector((state)=> state.darkMode);
 
     //useEffect:
+    useEffect(() => {
+        const handleScroll = () => {
+            const windowHeight =
+            "innerHeight" in window
+              ? window.innerHeight
+              : document.documentElement.offsetHeight;
+            const body = document.body;
+            const html = document.documentElement;
+            const docHeight = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+            const windowBottom = windowHeight + window.pageYOffset;
+    
+            if (windowBottom >= docHeight) {
+                setIsAtBottom(true);
+            } else {
+                setIsAtBottom(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+      }, []);
+    
     useEffect (() => {
         if (darkmode === true) {
             setChangeDarkMode("darkContainer");
@@ -49,6 +81,10 @@ function App () {
                 <Route path="/AdminPanel" element = {<AdminPanel/>} />
                 <Route path="/CourseDetails/:id" element = {<CourseDetails/>} /> 
             </Routes>
+            {isAtBottom && (
+             <InfoBar></InfoBar>      )}
+           
+
         </div>
     )
 }

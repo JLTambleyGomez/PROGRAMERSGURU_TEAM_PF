@@ -1,9 +1,11 @@
 import { useDispatch,useSelector } from "react-redux";
 import { useState,useEffect } from "react";
 import { filter_courses_by_language, filter_courses_by_price, order_courses , get_courses_all} from "../../../Redux/actions";
-import styles from "./Filter_Bar.module.css";
+import styles from "./FilterBar.module.css";
 
-function FilterBar() {
+
+//_________________________module_________________________
+function FilterBar () {
   const dispatch = useDispatch();
   const [showBar, setShowBar] = useState(false);
   const darkmode = useSelector((state)=> state.darkMode);
@@ -85,7 +87,7 @@ function handleMouseLeave() {
             <option value="">idioma/language</option>
             <option value="español">español</option>
             <option value="inglés">ingles</option>
-          </select>
+          </select> 
 
           <p>Selecciona Coste</p>
           <select onChange={priceSelectHandler}>
@@ -102,7 +104,6 @@ function handleMouseLeave() {
           </select>
      
         </div>
-        
       )} 
     
     </div>

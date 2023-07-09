@@ -47,7 +47,7 @@
     transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
   }
   .containerlight:hover {
-    transform: scale(1.0);
+    transform: scale(1.02);
   }
 
   .containerdark {
@@ -113,18 +113,25 @@
     width: 600px;
     margin-left: 10%;
     overflow: hidden;
-  height: 110px;
-  }
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+    line-clamp: 4; /* Muestra solo 4 líneas */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos */  }
   .pdark {
-    background-color: #000000;
-    color: rgb(243, 242, 242);
+    background-color: #0a0101;
+    color: rgb(255, 255, 255);
     font-size: 24px;
-    margin-left: 10%;
     width: 600px;
-    overflow: hidden;  
-    height: 110px; 
-   
+    margin-left: 10%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+    line-clamp: 4; /* Muestra solo 4 líneas */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos */
   }
+
   .divlight {
     background-color: #f7f7f7;
     color: black;  }

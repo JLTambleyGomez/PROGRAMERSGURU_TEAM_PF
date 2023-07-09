@@ -9,6 +9,8 @@ import {
     getCategoriesAllRequest, 
     postCategoriesRequest, 
     deleteCategoriesRequest, 
+     //FAVORITES
+    getFavoritesRequest
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -32,6 +34,8 @@ import {
     export const ERROR = "ERROR";
 //DARK MODE:
     export const DARK_MODE = "DARK_MODE";
+    //FAVORITES
+export const GET_FAVORITES = "GET_FAVORITES";
 
 //__________________________________________________
 //ACTION CREATORS:
@@ -229,3 +233,21 @@ export function clearMessage() {
     };
   }
   
+
+  //FAVORITES
+  export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
+    return async (dispatch) => {
+        try {
+            const data = await getFavoritesRequest(id); // request
+            return dispatch({
+                type: GET_FAVORITES,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}

@@ -76,7 +76,7 @@ function SearchBar () {
                     </div>
                 ) : (
                     <div className={`${styles.container} ${styles[elementClasses.container]}`} onBlur = {setDefault}>
-                        <input className={`${styles.input} ${styles[elementClasses.input]}`} type = "search" onChange = {handleSearchInput} value = {input} autoFocus placeholder = 'try "beef"'/>
+                        <input className={`${styles.input} ${styles[elementClasses.input]}`} type = "search" onChange = {handleSearchInput} value = {input} autoFocus placeholder = 'try "Java"'/>
                         <p className={`${styles.p} ${styles[elementClasses.p]}`} onClick = {handleSearchButton}>
                         🔎
                         </p>

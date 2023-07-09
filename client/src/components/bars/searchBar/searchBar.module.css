@@ -61,8 +61,9 @@
   
   .containerlight {
     display: flex;
-    align-items: center;  }
-  
+    align-items: center;
+    animation:blur-in 0.5s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
   .labellight {
     color: black;
   }
@@ -135,9 +136,9 @@
     justify-content: center;
     background-color: #000000;
     color: #ffffff;
-    /* Estilos para containers en modo oscuro */
-  }
-  
+    animation:blur-in 0.5s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
+    
   .labeldark {
     color: white;
   }

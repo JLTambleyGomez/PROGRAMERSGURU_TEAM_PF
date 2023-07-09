@@ -17,7 +17,9 @@ import {
     CLEAR_COURSES,
     CLEAN_MESSAGE,
 // DARK MODE:
-    DARK_MODE
+    DARK_MODE,
+    //FAVORITES:
+GET_FAVORITES
 
 } from "./actions";
 
@@ -34,7 +36,8 @@ const goblalStorage = {
     error:"",
     message:"",
     darkMode:false,
-    courseActual:{}
+    courseActual:{},
+    favorites:[]
 }
 
 //REDUCER:
@@ -106,6 +109,9 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
                 ...state,
                 darkMode: payload
             }; 
+        case GET_FAVORITES:
+            return { ...state, favorites: payload};
+
         default: return {...state}; 
     }
 }
