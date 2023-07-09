@@ -1,30 +1,29 @@
 .orderBarContainer {
-    /* position: relative; */
-  }
-  
-  .orderBarOverlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-  }
-  
-  .orderBarSidebar {
-    width: 250px;
-    height: 100vh;
-    background-color: #f1f1f1;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 2;
-    overflow-y: auto;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
-  }
-  
-  .orderBarSection {
-    padding: 20px;
-  }
-  
+  /* position: relative; */
+}
+
+.orderBarOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.orderBarSidebar {
+  width: 250px;
+  height: 100vh;
+  background-color: #f1f1f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  overflow-y: auto;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.orderBarSection {
+  padding: 20px;
+}

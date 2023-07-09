@@ -3,11 +3,10 @@ import { useDispatch } from "react-redux";
 
 import { filter_courses_by_language, filter_courses_by_price, order_courses , get_courses_all } from "../../../Redux/actions";
 
-import "./OrderBar.css";
-
+import "./OrderBar.css"
 //_________________________module_________________________
 function OrderBar () {
-
+    
     //states:
     const [showSideBar, setShowSideBar] = useState(false);
     const [showDropdownOne, setShowDropdownOne] = useState(false);
@@ -16,32 +15,50 @@ function OrderBar () {
     //const:
     const dispatch = useDispatch();
 
+    const arrayStates = {
+        showDropdownOne: setShowDropdownOne,
+        showDropdownTwo: setShowDropdownTwo
+    }
+
     //functions:
     const toggleSideBar = () => {
         setShowSideBar(!showSideBar)
     }
 
-    const toggleDropDownOne = () => setShowDropdownOne(!showDropdownOne)
+    const toggleDropDown = (value) => {
+        // value === showDropdownOne && setShowDropdownOne(!sectionNumber)
+        // arrayStates.forEach((state) => {
+        //     if (state.toString().contains(value)) {
+        //         state()
+        //     }
+        // })
+        for (const state in arrayStates) {
+            if (arrayStates.hasOwnProperty(state) && state[prop].toString().contains(value)) {
+                state[prop](!state)
+            }
+        }
+    }
 
-    const toggleDropDownTwo = () => setShowDropdownTwo(!showDropdownTwo)
 
     const handleOrder = (value) => {
-        dispatch(order_courses(value));
-        setShowSideBar(true);
-        setShowDropdownOne(false)
+        if (value !== "") {
+            dispatch(order_courses(value));
+            setShowSideBar(true);
+            setShowDropdownOne(false)
+        }
     }
 
     //component:
     return (
         <div className="orderBarContainer">
-            <button onClick={toggleSideBar}>ORDENAR</button>
+            <label onClick={toggleSideBar}>ORDENAR</label>
             {
                 showSideBar && (
                     <>
                         <div className="orderBarOverlay" onClick={toggleSideBar}/>
                         <aside className="orderBarSidebar">
                             <div className="orderBarSection">
-                                <label onClick={toggleDropDownOne}>ORDENAR POR NOMBRE</label>
+                                <label onClick={() => {toggleDropDown("one")}}>ORDENAR POR NOMBRE</label>
                                     {
                                         showDropdownOne && (
                                             <ul>
@@ -52,7 +69,7 @@ function OrderBar () {
                                     }
                             </div>
                             <div className="orderBarSection">
-                                <label onClick={toggleDropDownTwo}>ORDENAR POR PUNTUACION</label>
+                                <label onClick={() => {toggleDropDown("two")}}>ORDENAR POR PUNTUACION</label>
                                     {
                                         showDropdownTwo && (
                                             <ul>
@@ -67,7 +84,6 @@ function OrderBar () {
                 )
             }
       </div>
-  
     )
 }
 
