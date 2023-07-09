@@ -25,11 +25,12 @@ function CardsCourse ( { courses } ) {
 
     //component:
     return (
-        <div className={styles.CardsCourseComponent}>
+        <div className={styles.cardsCourseComponent}>
             {
-                courses.map((course) => {
+                courses.map((course, index) => {
                     return (
                         <CardCourse
+                            key={index}
                             id={course.id}
                             title={course.title}
                             description={course.description}

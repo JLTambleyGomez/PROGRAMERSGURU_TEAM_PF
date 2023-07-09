@@ -43,7 +43,6 @@ function Card ({ id, title, description, rating, isFree, language, imageURL }) {
         setElementClasses(updatedElementClasses);
     }, [darkmode]);
 
-
     //component:
     return (
         <div className={`${styles.container} ${styles[elementClasses.container]}`}>

@@ -26,8 +26,7 @@ function CoursePage () {
         } catch (error) {
           // Ignorar errores y no hacer nada
         }
-    }, [dispatch]);
-
+    }, []);
 
     //component:
     return (
@@ -38,16 +37,9 @@ function CoursePage () {
             </div>
             <div className="coursePageC-filters">
                 <FilterBar/>
-                {/* <button>ORDENAR</button> */}
                 <OrderBar/>
             </div>
-            {
-                Array.isArray(courses) ? (
-                    <CardsCourse courses = {courses}/>
-                ) : (
-                    <p>No hay cursos disponibles.</p>
-                )
-            }
+            <CardsCourse courses = {courses}/>
         </div>
     )
 }

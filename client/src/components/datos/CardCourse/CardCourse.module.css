@@ -4,7 +4,8 @@
     align-items: center;
     justify-content: space-around;
     justify-items: center;
-    max-width: 50x;
-    max-height: 150px;
+
+    min-width: 20rem;
+    min-height: 20rem;
     border: 1px solid green;
 }

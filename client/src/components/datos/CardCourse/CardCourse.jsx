@@ -15,6 +15,7 @@ function CardCourse ( { id, title, description, rating, isFree, language, imageU
             <p>{title}</p>
             <p>{rating}</p>
             <p>{isFree}</p>
+            <p>{language}</p>
         </div>
     )
 }
