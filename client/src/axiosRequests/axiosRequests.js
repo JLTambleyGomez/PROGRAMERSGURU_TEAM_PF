@@ -6,6 +6,15 @@ export const getCoursesAllRequest = async () => {
     return data;
 }
 
+export const login = async (userData) =>{
+    const { email, password } = userData;
+    const URL = "http://localhost:3001/user/Login";
+    const {data} = await axios(URL + `?email=${email}&password=${password}`)
+    const { access } = data;
+    return access;
+
+}
+
 export const postCourseRequest = async (datos) => {
     const { data } = await axios.post("http://localhost:3001/course",datos)
     return data;
