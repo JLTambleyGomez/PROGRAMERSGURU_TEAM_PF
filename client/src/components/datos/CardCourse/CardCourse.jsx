@@ -11,7 +11,7 @@ function CardCourse ( { id, title, description, rating, isFree, language, imageU
     //component:
     return (
         <div className = {styles.cardCourseComponent}>
-            <img src={imageURL}/>
+            {/* <img src={imageURL}/> */}
             <p>{title}</p>
             <p>{rating}</p>
             <p>{isFree}</p>
