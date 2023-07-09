@@ -5,7 +5,7 @@
 
 .coursePageC-mainBanner {
     height: 60vh;
-    width: 100vw;
+    /* width: 100vw; */
     border: 2px solid red;
 }
 
@@ -19,11 +19,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
+    gap:20px;
     border: 2px dotted green;
 
 }
 
 .coursePageC-card {
-    min-height: 10rem;
-    min-width: 5rem;
+    min-height: 20rem;
+    min-width: 15rem;
+    border: 2px solid red;
 }

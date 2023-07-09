@@ -3,53 +3,69 @@ import { useDispatch } from "react-redux";
 
 import { filter_courses_by_language, filter_courses_by_price, order_courses , get_courses_all } from "../../../Redux/actions";
 
+import "./OrderBar.css";
+
 //_________________________module_________________________
 function OrderBar () {
+
+    //states:
+    const [showSideBar, setShowSideBar] = useState(false);
+    const [showDropdownOne, setShowDropdownOne] = useState(false);
+    const [showDropdownTwo, setShowDropdownTwo] = useState(false);
 
     //const:
     const dispatch = useDispatch();
 
-    //states:
-    const [showOrderBarSection, setShowOrderBarSection] = useState(false);
-    const [showDropdown, setShowDropdown] = useState(false)
-
-
     //functions:
-    const toggleOrderBarSection = () => {
-        setShowOrderBarSection(!showOrderBarSection)
+    const toggleSideBar = () => {
+        setShowSideBar(!showSideBar)
     }
 
-    const toggleDropDown = () => {
-        setShowDropdown(!showDropdown)
-    }
+    const toggleDropDownOne = () => setShowDropdownOne(!showDropdownOne)
+
+    const toggleDropDownTwo = () => setShowDropdownTwo(!showDropdownTwo)
 
     const handleOrder = (value) => {
-        if (value !== "") {
-            dispatch(order_courses(value));
-            setShowOrderBarSection(true);
-            setShowDropdown(false)
-        }
+        dispatch(order_courses(value));
+        setShowSideBar(true);
+        setShowDropdownOne(false)
     }
 
     //component:
     return (
         <div className="orderBarContainer">
-        <sidebar className={`orderBarSidebar ${showOrderBarSection ? "active" : ""}`}>
-          <div className="orderBarSection">
-            <label onClick={toggleDropDown}>ORDENAR POR NOMBRE</label>
-            {showDropdown && (
-              <ul>
-                <li onClick={() => handleOrder("ABC+")}>Ascendente</li>
-                <li onClick={() => handleOrder("ABC-")}>Descendente</li>
-              </ul>
-            )}
-          </div>
-        </sidebar>
-        <div className="orderBarContent">
-          <div className="orderBarComponent">
-            <div onClick={toggleOrderBarSection}>ORDENAR</div>
-          </div>
-        </div>
+            <button onClick={toggleSideBar}>ORDENAR</button>
+            {
+                showSideBar && (
+                    <>
+                        <div className="orderBarOverlay" onClick={toggleSideBar}/>
+                        <aside className="orderBarSidebar">
+                            <div className="orderBarSection">
+                                <label onClick={toggleDropDownOne}>ORDENAR POR NOMBRE</label>
+                                    {
+                                        showDropdownOne && (
+                                            <ul>
+                                                <li onClick={() => handleOrder("ABC+")}>Ascendente</li>
+                                                <li onClick={() => handleOrder("ABC-")}>Descendente</li>
+                                            </ul>
+                                        )
+                                    }
+                            </div>
+                            <div className="orderBarSection">
+                                <label onClick={toggleDropDownTwo}>ORDENAR POR PUNTUACION</label>
+                                    {
+                                        showDropdownTwo && (
+                                            <ul>
+                                                <li onClick={() => console.log("dispatch rating +")}>Más valorado</li>
+                                                <li onClick={() => console.log("dispatch rating -")}>Menos valorado</li>
+                                            </ul>
+                                        )
+                                    }
+                            </div>
+                        </aside>
+                    </>
+                )
+            }
       </div>
   
     )
