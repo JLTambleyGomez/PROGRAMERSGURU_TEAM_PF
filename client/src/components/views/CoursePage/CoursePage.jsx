@@ -5,7 +5,7 @@ import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/acti
 import styles from "./CoursePage.module.css";
 import CardsCourse from "../../datos/CardsCourse/CardsCourse";
 import FilterBar from "../../bars/filterBar/FilterBar";
-import OrderBar from "../../bars/orderBar/OrderBar";
+import OrderBar from "../../bars/OrderBar/OrderBar";
 
 //_________________________module_________________________
 function CoursePage () {

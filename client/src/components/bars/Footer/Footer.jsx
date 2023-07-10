@@ -1,8 +1,8 @@
-import styles from './infoBar.module.css';
+import styles from './Footer.module.css';
 import React from 'react';
 
 //_________________________module_________________________
-const InfoBar = () => {
+const Footer = () => {
     return(
         <div className={styles.informacion}>
             <p>Politica de la Web</p>
@@ -14,4 +14,4 @@ const InfoBar = () => {
     )
 }
 
-export default InfoBar
+export default Footer;

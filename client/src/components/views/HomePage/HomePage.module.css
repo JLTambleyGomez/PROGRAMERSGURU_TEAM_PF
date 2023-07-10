@@ -1,4 +1,26 @@
-.logolight {
+.component {
+    margin-top: 4rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .logolight {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -203,9 +225,9 @@ margin:3%;}
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-  line-clamp: 4; /* Muestra solo 4 líneas */
-  text-overflow: ellipsis; /* Agrega puntos suspensivos */
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  text-overflow: ellipsis;
 }
 
 .uldark {
@@ -216,9 +238,9 @@ margin:3%;}
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-  line-clamp: 4; /* Muestra solo 4 líneas */
-  text-overflow: ellipsis; /* Agrega puntos suspensivos */}
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  text-overflow: ellipsis;}
 
   .alight {
     margin-left: 3%;
@@ -249,4 +271,4 @@ margin:3%;}
 }
 .news:hover{
   transform: scale(1.1);
-}
+} */
