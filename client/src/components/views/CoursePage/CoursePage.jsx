@@ -35,7 +35,7 @@ function CoursePage () {
             </div>
             <div className={styles.filterOrder}>
                 <FilterBar/>
-                <OrderBar/>
+                {/* <OrderBar/> */}
             </div >
             <div className = {styles.cardComponent}>
                 <CardsCourse allCourses = {allCourses}/>
