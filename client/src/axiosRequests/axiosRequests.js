@@ -6,13 +6,12 @@
         return data;
     }
 
-    export const login = async (userData) =>{
+    export const login = async (userData) => {
         const { email, password } = userData;
         const URL = "http://localhost:3001/user/Login";
-        const {data} = await axios(URL + `?email=${email}&password=${password}`)
+        const { data } = await axios(URL + `?email=${email}&password=${password}`)
         const { access } = data;
         return access;
-
     }
 
     export const postCourseRequest = async (datos) => {
@@ -22,17 +21,17 @@
 
     export const getCoursesByNameRequest = async (name) => {
         try {
-        const response = await axios.get(`http://localhost:3001/course/title?title=${name}`);
-        return response.data;
+            const response = await axios.get(`http://localhost:3001/course/title?title=${name}`);
+            return response.data;
         } catch (error) {
-        console.log(error);
-        throw error;
+            console.log(error);
+            throw error;
         }
     };
     
-    export const getCoursesByIdRequest = async (id) => {console.log(id)
+    export const getCoursesByIdRequest = async (id) => {
         const { data } = await axios.get(`http://localhost:3001/course/${id}`);
-        
+        console.log(id)
         return data;
     }
 
@@ -58,9 +57,8 @@
     }
 
     //FAVORITES:
-
     export const getFavoritesRequest = async (id) => {
         const { data } = await axios.get(`http://localhost:3001/favorite/${id}`);
-        const cursos= data[0].Courses;
+        const cursos = data[0].Courses;
         return cursos;
     }

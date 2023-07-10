@@ -24,7 +24,7 @@ function NavBar () {
 
     //component:
     return (
-        <div className={`${s.component} ${s[theme("component")]}`}>
+        <nav className={`${s.component} ${s[theme("component")]}`}>
             <button className={`${s.button} ${s[theme("button")]}`}>
                 <NavLink to="/HomePage" className={`${s.link} ${s[theme("link")]}`}>
                     Home
@@ -47,7 +47,7 @@ function NavBar () {
             </button>
             <SearchBar/>
             <PerfilBar/>
-        </div>
+        </nav>
     );
 }
 

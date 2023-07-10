@@ -1,6 +1,62 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  margin-top: 10vh;
+  padding: 2vh 0 0;
+  min-height: 90vh;
+}
 
+.mainButton {
   
-  .h1light {
+}
+
+.categoriesPanel {
+  display: flex;
+  flex-direction: column;
+  width: 96vw;
+  margin: 2vw;
+  }
+  .categoriesPosting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+    .categoriesPostBar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      }
+      .categoriesInput {
+        height: 2rem;
+        width: 20rem;
+        padding: 1rem;
+        font-size: 1.25rem;
+      }
+      .categoriesPostButton {
+        height: 3rem;
+      }
+
+  .categoriesBox {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    }
+    .category {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .deleteCategory {
+
+    }
+
+
+
+
+
+
+/* .h1light {
     margin: 3%;
     width: 60%;
     height: 20%;
@@ -10,14 +66,13 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-    line-clamp: 4; /* Muestra solo 4 líneas */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */
+    -webkit-line-clamp: 4; 
+    line-clamp: 4; 
+    text-overflow: ellipsis;
     font-size: 12px;
     color: rgb(0, 0, 0);
   }
   
-   
   .h1dark  {
     margin: 3%;
     width: 60%;
@@ -27,9 +82,9 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-    line-clamp: 4; /* Muestra solo 4 líneas */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */
+    -webkit-line-clamp: 4; 
+    line-clamp: 4; 
+    text-overflow: ellipsis;
     font-size: 12px;
     color: black;
   }
@@ -109,7 +164,6 @@
   .containerlight {
     padding-bottom: 20%;
     padding-top:10% ;
-    /* Estilos para containers en modo claro */
   }
   .containerdark {
     padding-bottom: 20%;
@@ -121,43 +175,6 @@
     color: black;
   }
   
-  .plight {
-    /* Estilos para p en modo claro */
-  }
-  
-  .divlight {
-    /* Estilos para div en modo claro */
-  }
-  
-  .spanlight {
-    /* Estilos para span en modo claro */
-  }
-  
-
-  
-  .hrlight {
-    /* Estilos para hr en modo claro */
-  }
-  
-  .errorlight {
-    /* Estilos para error en modo claro */
-  }
-  
-  .successlight {
-    /* Estilos para success en modo claro */
-  }
-  
-  .linklight {
-    /* Estilos para link en modo claro */
-  }
-  
-  .ullight {
-    /* Estilos para ul en modo claro */
-  }
-  
-  .h2light {
-    /* Estilos para h2 en modo claro */
-  }
   
   .h1dark {
     display: flex;
@@ -199,50 +216,8 @@
     height: 100vh;
     background-color: #000000;
     color: #ffffff;
-    /* Estilos para containers en modo oscuro */
   }
   
   .labeldark {
     color: white;
-  }
-  
-  .pdark {
-    /* Estilos para p en modo oscuro */
-  }
-  
-  .divdark {
-    /* Estilos para div en modo oscuro */
-  }
-  
-  .spandark {
-    /* Estilos para span en modo oscuro */
-  }
-  
-  .formdark {
-    /* Estilos para form en modo oscuro */
-  }
-  
-  .hrdark {
-    /* Estilos para hr en modo oscuro */
-  }
-  
-  .errordark {
-    /* Estilos para error en modo oscuro */
-  }
-  
-  .successdark {
-    /* Estilos para success en modo oscuro */
-  }
-  
-  .linkdark {
-    /* Estilos para link en modo oscuro */
-  }
-  
-  .uldark {
-    /* Estilos para ul en modo oscuro */
-  }
-  
-  .h2dark {
-    /* Estilos para h2 en modo oscuro */
-  }
-  
+  } */

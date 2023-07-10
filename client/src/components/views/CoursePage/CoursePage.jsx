@@ -19,14 +19,13 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-    if (!allCourses.length){dispatch(get_courses_all());}
-        
+    // if (allCourses.length) {}
+    dispatch(get_courses_all());
         return () => { 
-          dispatch(clearMessage());
-          dispatch(clearCourses());
+            dispatch(clearMessage());
+            dispatch(clearCourses());
         };
-      }, [dispatch]);
-      
+    }, [dispatch]);
 
     //component:
     return (

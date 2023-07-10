@@ -79,6 +79,7 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
         }
     };
 }
+
 export const get_courses_by_id = (id) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
@@ -247,20 +248,21 @@ export const Dark_Mode = (payload) => {
 
 export function clearMessage() {
     return function (dispatch) {
-      return dispatch({
-        type: CLEAN_MESSAGE,
-      });
+        return dispatch({
+            type: CLEAN_MESSAGE,
+        });
     };
-  }
-  export function clearCourses() {
+}
+
+export function clearCourses() {
     return {
-      type: CLEAR_COURSES,
+        type: CLEAR_COURSES,
     };
-  }
+}
 
 
-  //FAVORITES
-  export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
+//FAVORITES
+export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
             const data = await getFavoritesRequest(id); // request
