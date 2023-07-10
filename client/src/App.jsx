@@ -19,13 +19,16 @@ import Commingsoon from './components/views/Commingsoon/Commingsoon';
 //_________________________module_________________________
 function App () {
 
-    //const:
-    const [isAtBottom, setIsAtBottom] = useState(false);
+    //global state:
+    const darkmode = useSelector((state)=> state.darkMode);
 
+    //states:
+    const [isAtBottom, setIsAtBottom] = useState(false);
+    const [changeDarkMode , setChangeDarkMode] = useState("");
+
+    //const:
     const navigate = useNavigate();
     const location = useLocation().pathname;
-    const [changeDarkMode , setChangeDarkMode] = useState("");
-    const darkmode = useSelector((state)=> state.darkMode);
 
     //life-cycles:
     useEffect(() => {
@@ -85,10 +88,7 @@ function App () {
 
                 Commingsoon
             </Routes>
-            {isAtBottom && (
-                <InfoBar/>
-            )}
-
+                { isAtBottom && <InfoBar/> }
         </div>
     )
 }
