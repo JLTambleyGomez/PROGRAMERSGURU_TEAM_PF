@@ -1,0 +1,22 @@
+.container{
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.672);
+    width:20%;
+    height: 20%;
+    display:flex;
+    top: 0;
+    left: 0;
+   bottom: 0;
+   right:0;
+    position: absolute;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    animation:blur-in 0.4s linear both}
+     @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+  .item{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+  }

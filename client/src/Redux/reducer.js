@@ -17,7 +17,11 @@ import {
     CLEAR_COURSES,
     CLEAN_MESSAGE,
 // DARK MODE:
-    DARK_MODE
+    DARK_MODE,
+//FAVORITES:
+    GET_FAVORITES,
+//USERS:
+    LOGIN
 
 } from "./actions";
 
@@ -28,42 +32,44 @@ import jsonData from './cursos.json';
 
 //GLOBAL STORAGE:
 const goblalStorage = {
-    allCourses: [],
+    allCourses:[],
     courses:[],
     categories:[],
     error:"",
     message:"",
     darkMode:false,
-    courseActual:{}
+    favorites:[],
+    access:false
 }
 
 //REDUCER:
 export default function rootReducer ( state = goblalStorage, { type, payload } ) {
 
     switch (type) {
+
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };
 
         case GET_COURSES_BY_NAME:
-            return { ...state, allCourses: payload, courses: payload };
+            return { ...state, allCourses: payload,courses: payload  };
 
         case GET_COURSES_BY_ID:
-            return { ...state, courseActual: payload};
+            return { ...state, allCourses: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
-            return { ...state, courses:state.allCourses.filter(course => course.language === payload)};
+            return { ...state, courses: state.courses.filter((course) => course.language== payload)};
 
         case FILTER_COURSES_BY_PRICING:
-            return { ...state, courses:state.allCourses.filter(course => course.isFree === payload)}
+            return { ...state, courses: state.courses.filter((course) => course.isFree === payload)}
 
         case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];
             const cursosOrdenados = [...state.courses]
 
-            if (payload === "ABC+") {
+            if (payload === "Ascendente") {
                 todos_cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
                 cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
-            } else if (payload === "ABC-") {
+            } else if (payload === "Desendente") {
                 todos_cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
                 cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
             }
@@ -84,28 +90,34 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
                 ...state,
                 message: payload.message,
             };
-            case ERROR:
-                return {
-                  ...state,
-                  error: action.payload,
-                };
-              case CLEAN_MESSAGE:
-                return {
-                  ...state,
-                  error: "",
-                  message:"",
-                };
-              case CLEAR_COURSES:
-                return {
-                  ...state,
-                  allCourses: [],
-                  courseActual:{}
-                };
+        case ERROR:
+            return {
+                ...state,
+                error: action.payload,
+            };
+        case CLEAN_MESSAGE:
+            return {
+                ...state,
+                error: "",
+                message:"",
+            };
+        case CLEAR_COURSES:
+            return {
+                ...state,
+                allCourses: [],
+                courses: [],
+            };
         case DARK_MODE:
             return {
                 ...state,
                 darkMode: payload
             }; 
+        case GET_FAVORITES:
+            return { ...state, favorites: payload};
+
+        case LOGIN:
+            return { ...state, access: payload};
+
         default: return {...state}; 
     }
 }

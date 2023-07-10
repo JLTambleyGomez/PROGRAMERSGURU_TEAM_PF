@@ -42,6 +42,7 @@ function AdminPanel () {
       div:"divlight",
       span:"spanlight",
       form: "formlight",
+      form2:"form2light",
       hr: "hrlight",
       error:"errorlight",
       success:"successlight",
@@ -233,8 +234,10 @@ function AdminPanel () {
         
             {showcursos && (
   <div>
-    <h2>Cursos</h2>
-    <div>
+          <form className={`${styles.form} ${styles[elementClasses.form]}`}>
+
+    <h2>Nuevo Curso</h2>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Título:</label>
       <input
         type="text"
@@ -243,15 +246,15 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
-      <label>Descripción:</label>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
+      <label >Descripción:</label>
       <textarea
         name="description"
         value={newCourse.description}
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>URL de la imagen:</label>
       <input
         type="text"
@@ -260,7 +263,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>URL del curso:</label>
       <input
         type="text"
@@ -269,7 +272,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Rating:</label>
       <input
         type="number"
@@ -278,7 +281,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Fecha de lanzamiento:</label>
       <input
         type="date"
@@ -287,7 +290,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Es gratuito:</label>
       <input
         type="checkbox"
@@ -296,7 +299,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Idioma:</label>
       <input
         type="text"
@@ -305,7 +308,7 @@ function AdminPanel () {
         onChange={handleCourseChange}
       />
     </div>
-    <div>
+    <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
       <label>Categorías:</label>
       <select multiple name="categories" onChange={handleCategorySelection}>
         {categories.map((category) => (
@@ -314,25 +317,26 @@ function AdminPanel () {
           </option>
         ))}
       </select>
-    </div>
-    <button onClick={handleCoursePost}>Postear curso</button>
+    </div> <button onClick={handleCoursePost}>Postear curso</button>
+    </form>
+    <div className={styles.containeradmin}>
     {courses.map((course) => (
-      <div key={course.id}>
-        <h3>
-          <p>ID: {course.id}</p> {course.title}                                
+      <div  >
+      <div className={`${styles.form2} ${styles[elementClasses.form2]}`} key={course.id}>
+      
+          <p>ID: {course.id}</p> {course.title} 
+          <p>Fecha De Lanzamiento {course.released} </p>                               
         <button onClick={() =>handledeleteCourse(course.id)}>X</button>
-
-
-        </h3>
-        <p>{course.description}</p>
-      </div>
+         
+</div>
+        
+      </div> 
     ))}
+</div>
+   
+
   </div>
 )}
-<h1 className={`${styles.h1} ${styles[elementClasses.h1]}`}>Heading</h1>
-<input className={`${styles.input} ${styles[elementClasses.input]}`} type="text" />
-<button className={`${styles.button} ${styles[elementClasses.button]}`}>Button</button>
-<label className={`${styles.label} ${styles[elementClasses.label]}`}>Label</label>
 
         </div>
     );

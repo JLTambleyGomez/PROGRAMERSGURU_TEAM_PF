@@ -3,9 +3,11 @@
      color: #FFFFFF;
 }
 .lightContainer{
-    color:#FFFFFF;
+   background-color: rgb(253, 245, 245);
     color: #302F2C;
 }
 body {
-    margin: 0
+    margin: 0;
+    font-family: Arial, sans-serif !important;
+
 }

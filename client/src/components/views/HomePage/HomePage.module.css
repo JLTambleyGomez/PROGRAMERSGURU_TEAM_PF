@@ -1,26 +1,36 @@
-.logo {
+.logolight {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
+  position: absolute;
+  width: 40%;
+  left: 0;
+  font-size: 32px;
   color: rgb(3, 29, 33);
-  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+  text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
+}
+.logodark {
+  width: 40%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  width: 40%;
+  left: 0;
+  font-size: 32px;
+  color: rgb(255, 255, 255);
+  text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
 }
 
-.h2light {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 42px;
-  background-color: #010118;
-  color: rgb(3, 30, 34);
-}
+
 
 .h1light {
   display: flex;
   justify-content: center;
   align-items: center;
   letter-spacing: 10px;
+  padding-top: 8%;
   font-size: 32px;
   color: rgb(0, 140, 158);
   transition: transform 0.3s, filter 0.3s;
@@ -36,10 +46,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 42px;
-  color: rgb(70, 233, 255);
+  padding-top: 8%;
+
+  letter-spacing: 10px;
+  font-size: 32px;
+  color:  rgba(0, 221, 250, 0.672);
   transition: transform 0.3s, filter 0.3s;
-  text-shadow: 2px 3.5px 2px rgb(0, 140, 158);
+  text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
 }
 
 .h1dark:hover {
@@ -50,23 +63,24 @@
 .containerlight {
   display: flex;
   flex-direction: column;
-  padding-top: 2%;
+  padding-top: 4%;
   width: 100%;
   justify-content: center;
   align-items: center;
-}
-
+  padding-bottom:14%;
+  animation:blur-in 0.4s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
 
 .containerdark {
+  margin-bottom:4%;
   display: flex;
   flex-direction: column;
-  padding-top: 2%;
+  padding-top: 4%;
   width: 100%;
+  padding-bottom:14%;
   justify-content: center;
   align-items: center;
-}
-
+  animation:blur-in 0.4s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 .pagination {
   display: flex;
   justify-content: center;
@@ -123,7 +137,116 @@
 }
 
 .imgcat {
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
+  margin-right: 20px;
+}
+.spanlight {
+  color: #010118;
+  letter-spacing: 10px;
+  width: 80%;
+
+margin:3%;}
+
+
+.spandark {
+  color: #ffffff;
+  letter-spacing: 10px;
+  width: 80%;
+
+margin:3%;}
+
+.h2light {
+  display: flex;
+  margin-left: 3%;
+  width: 80%;
+  align-items: center;
+  font-size: 22px;
+  color: rgb(3, 30, 34);
+}
+.h2dark {
+  display: flex;
+  margin-left: 3%;
+  width: 80%;
+  align-items: center;
+  font-size: 22px;
+  color: rgb(253, 255, 255);
+}
+.newsimg{
+  margin-left:4%;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.plight {
+ margin-left: 3%;
+ font-size: 11px;
+ width: 80%;
+
+}
+.pdark {
+  width: 80%;
+
+  margin-left: 3%;
+  font-size: 11px;
+ }
+
+ .ullight {
+  margin: 3%;
+  width: 60%;
+  height: 20%;
+  overflow: hidden;
+  font-size:  1.3em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+  line-clamp: 4; /* Muestra solo 4 líneas */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos */
+}
+
+.uldark {
+  margin: 3%;
+  overflow: hidden;
+  width: 60%;
+  font-size:  1.3em;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+  line-clamp: 4; /* Muestra solo 4 líneas */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos */}
+
+  .alight {
+    margin-left: 3%;
+    width: 80%;
+    font-size: 20px; 
+    color: #000000;
+    text-decoration: none;
+   }
+   .alight:hover {
+    cursor: pointer;
+   }
+   .adark {
+    color: #ffffff;
+    width: 80%;
+    text-decoration: none;
+     margin-left: 3%;
+     font-size: 20px;
+    }
+    .adark:hover {
+      cursor: pointer;
+      }
+
+.news{
+  margin-top:-10%;
+  width:90%;
+  transition: transform 0.3s, filter 0.3s;
+
+}
+.news:hover{
+  transform: scale(1.1);
 }
