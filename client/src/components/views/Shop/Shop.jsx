@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 
-import "./Compras.css"
+import 'rc-slider/assets/index.css';
+import s from "./Shop.module.css"
 
 //_________________________module_________________________
 function Compras () {

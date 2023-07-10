@@ -1,10 +1,9 @@
-import styles from './Footer.module.css';
-import React from 'react';
+import s from './Footer.module.css';
 
 //_________________________module_________________________
-const Footer = () => {
+function Footer () {
     return(
-        <div className={styles.informacion}>
+        <div className={s.component}>
             <p>Politica de la Web</p>
             <p>Sobre nosotros</p>
             <p>Contacto</p>

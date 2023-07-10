@@ -30,7 +30,7 @@ function SearchBar () {
     };
 
     const handleSearchButton = async () => {
-        await dispatch(get_courses_by_name(input));
+        dispatch(get_courses_by_name(input)); // agregar await?
         setInput("");
         setToggleVisibility(true);
         navigate("/CoursePage");

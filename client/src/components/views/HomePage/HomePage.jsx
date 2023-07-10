@@ -5,6 +5,7 @@ import { get_categories, get_courses_all, clearCourses, clearMessage, get_Favori
 import s from "./HomePage.module.css";
 import Cards from '../../datos/Cards/Cards';
 import Comments from '../../datos/Comments/Comments';
+import Footer from '../../bars/Footer/Footer'
 
 
 //_________________________module_________________________

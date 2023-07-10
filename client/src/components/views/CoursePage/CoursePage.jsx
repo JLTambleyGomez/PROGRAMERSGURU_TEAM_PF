@@ -2,9 +2,10 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
+
 import styles from "./CoursePage.module.css";
 import CardsCourse from "../../datos/CardsCourse/CardsCourse";
-import FilterBar from "../../bars/filterBar/FilterBar";
+import FilterBar from "../../bars/FilterBar/FilterBar";
 import OrderBar from "../../bars/OrderBar/OrderBar";
 
 //_________________________module_________________________
