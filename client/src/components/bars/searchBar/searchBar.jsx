@@ -90,6 +90,7 @@ function SearchBar() {
             onChange={handleSearchInput}
             value={input}
             placeholder='try "Java"'
+            autoFocus
           />
           <p
             className={`${styles.p} ${styles[elementClasses.p]}`}

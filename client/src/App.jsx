@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 import styles from "./App.module.css";
 
-import NavBar from './components/bars/navBar/navBar';
+import NavBar from './components/bars/NavBar/NavBar';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import HomePage from './components/views/HomePage/HomePage';
 import CoursePage from './components/views/CoursePage/CoursePage';
@@ -33,7 +33,7 @@ function App () {
 
     //component:
     return (
-        <div className={`${styles.component} ${getClassNames(styles.component, darkMode)}`}>
+        <div className={`${styles.component} ${styles[getClassNames("component")]}`}>
             {
                 location !== "/" && <NavBar/>
             }

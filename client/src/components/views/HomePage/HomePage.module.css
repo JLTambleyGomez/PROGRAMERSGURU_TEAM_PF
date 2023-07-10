@@ -1,8 +1,105 @@
 .component {
-    margin-top: 4rem;
+  margin: 10vh 0 0;
+  padding: 2% 7% 10vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+
+
+  animation:blur-in 0.4s linear both
+  }
+  @keyframes blur-in {
+    0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
+  }
+  .component-light {
+    background-color: rgba(251, 251, 252, 0.623);
+  }
+  .component-dark {
+    background-color: #010003;
+  }
+
+.sectionBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  transition: transform 0.3s, filter 0.3s;
+  }
+  .sectionBanner:hover {
+    transform: scale(1.1);
+  }
+  .bannerImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+.sectionCourses {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, filter 0.3s;
+  }
+  .sectionCourses:hover {
+    transform: scale(1.025);
+  }
+
+.sectionNews {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, filter 0.3s;
+  }
+  .sectionNews:hover {
+    transform: scale(1.025);
+  }
+  .newsBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+    .newsImg {
+      margin-left:4%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+  .newsText {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Show only 4 lines in WebKit-based browsers */
+    line-clamp: 4; /* Show only 4 lines in other modern browsers */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos */
+  }
+  .newsLink {
+    text-decoration: none;
+  }
+  .newsLink:hover {
+    text-shadow:  0px 3px 12px rgb(128, 255, 255);
+  }
+
+.title-light {
+  color: black;
+  }
+  .title-light:hover {
+    text-shadow: 0px 1px 20px #010003;
+    cursor: default;
+  }
+.title-dark {
+  color: white;
+  }
+  .title-dark:hover {
+    text-shadow: 0px 1px 20px whitesmoke;
+    cursor: default;
+  }
+
+.text-light {
+  color: black;
 }
-
-
+.text-dark {
+  color: white;
+}
 
 
 
