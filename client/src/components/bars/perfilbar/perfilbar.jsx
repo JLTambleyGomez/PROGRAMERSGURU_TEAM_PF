@@ -13,7 +13,8 @@ function PerfilBar () {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     
-    const userImage = "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
+    const userImage = "https://media.tenor.com/v9sdELSzVw4AAAAC/nyan-cat-kawaii.gif";
+    // "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
     
     const darkMode = useSelector((state) => state.darkMode);
     

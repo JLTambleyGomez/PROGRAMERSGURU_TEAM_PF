@@ -9,22 +9,25 @@ import {
     getCategoriesAllRequest, 
     postCategoriesRequest, 
     deleteCategoriesRequest, 
-    //FAVORITES
-    getFavoritesRequest
+//FAVORITES
+    getFavoritesRequest,
+// USER
+    login    
+
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
 //ACTIONS:
 //COURSES:
-    export const CLEAR_COURSES = "CLEAR_COUNTRIES";
+    export const CLEAR_COURSES = "CLEAR_COURSES";
     export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
     export const GET_COURSES_BY_ID = "GET_COURSES_BY_ID";
     export const POST_COURSE="POST_COURSE"
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
     export const DELETE_COURSE="DELETE_COURSE";
-    export const FILTER_COURSES_BY_LANGUAGE = "FILTER_BY_LANGUAGE";
-    export const FILTER_COURSES_BY_PRICING = "FILTER_BY_PRICING";
+    export const FILTER_COURSES_BY_LANGUAGE = "FILTER_COURSES_BY_LANGUAGE";
+    export const FILTER_COURSES_BY_PRICING = "FILTER_COURSES_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
 //CATEGORIES:
     export const GET_CATEGORIES_ALL = "GET_CATEGORIES_ALL";
@@ -34,8 +37,10 @@ import {
     export const ERROR = "ERROR";
 //DARK MODE:
     export const DARK_MODE = "DARK_MODE";
-//FAVORITES
-export const GET_FAVORITES = "GET_FAVORITES";
+//FAVORITES:
+    export const GET_FAVORITES = "GET_FAVORITES";
+//USER:
+    export const LOGIN ="LOGIN"
 
 //__________________________________________________
 //ACTION CREATORS:
@@ -128,15 +133,35 @@ export function delete_course(id) { // request
     };
 }
 
-export const filter_courses_by_language = (L) => {
+export const filter_courses_by_language = (language) => {
     return {
         type: FILTER_COURSES_BY_LANGUAGE,
-        payload: L
+        payload: language
     }
 }
 
+
+export const getloged =(userData)=>{
+    return async function (dispatch) {
+        try {
+            const data = await login(userData); 
+            console.log(data)
+            return dispatch({
+                type: LOGIN,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: "get error",
+            });
+        }
+    };
+}
+
+
 export const filter_courses_by_price = (P) => {
-    if (P === "true") {
+    if (P === "free") {
         P = true
     } else {
         P = false
@@ -147,10 +172,10 @@ export const filter_courses_by_price = (P) => {
     }
 }
 
-export const order_courses = (R) => {
+export const order_courses = (direccion) => {
     return {
         type: ORDER_COURSES,
-        payload: R
+        payload: direccion
     }
 }
 
@@ -222,22 +247,7 @@ export const Dark_Mode = (payload) => {
 };
 
 
-export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
-    return async (dispatch) => {
-        try {
-            const data = await getFavoritesRequest(id); // request
-            return dispatch({
-                type: GET_FAVORITES,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.response.data.message,
-            });
-        }
-    };
-}
+
 
 ///////////////////actions clear/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -254,4 +264,20 @@ export function clearMessage() {
     };
   }
 
-  
+  //FAVORITES
+  export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
+    return async (dispatch) => {
+        try {
+            const data = await getFavoritesRequest(id); // request
+            return dispatch({
+                type: GET_FAVORITES,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}

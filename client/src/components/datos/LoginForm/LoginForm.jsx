@@ -1,16 +1,22 @@
 import { useState} from "react";
-
 import styles from './LoginForm.module.css';
 import validate from "./validate";
+import { useNavigate } from "react-router-dom"; 
+import { getloged } from "../../../Redux/actions";
+import { useSelector,useDispatch} from "react-redux";
 
 
 //_________________________module_________________________
 function LoginForm () {
+   const dispatch = useDispatch()
+   const navigate = useNavigate();
 
     //states:
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showButton, setShowButton] = useState(true);
+    const access = useSelector((state) => state.access)
+
 
     const [userData, setUserData]=useState({
         email:"",
@@ -40,16 +46,19 @@ function LoginForm () {
         setShowButton(true);
     };
     const handleSubmit = (event) => {
+        dispatch(getloged(userData));
+        access && navigate('/HomePage');
+
         event.preventDefault();
     };
 
     //component:
     return (
-        <div>
+        <div className={styles.loginFormContainer}>
             {
                 showButton && (
                     <button onClick={handleToggleForm} className={styles.openButton}>
-                    Ingresar
+                        Ingresar
                     </button>
                 )
             }
@@ -85,15 +94,15 @@ function LoginForm () {
                                 />
                             </div>
                         {/* TOGGLE PASSWORD VISIBILITY */}
-                            <button onClick={() => setPasswordVisible(!passwordVisible)}>
-                                {passwordVisible ? "Hide Password" : "Show Password"}
+                            <button className={styles.button} onClick={() => setPasswordVisible(!passwordVisible)}>
+                            {passwordVisible ? "Hide Password" : "Show Password"}
                             </button>
                             { errors.password && <p className={styles.error}>{errors.password}</p> }
 
                             <p className={styles.recommendation}>Recomendamos usar una contraseña que incluya una combinación de letras mayúsculas y minúsculas, números y caracteres especiales para mayor seguridad.</p>
 
                         {/* SUBMIT */}
-                            <button type="submit">Submit</button>
+                            <button className={styles.button} type="submit">Submit</button>
                             <hr/>
                         </form>
                     </div>

@@ -1,57 +1,71 @@
+/* BOX */
+.mainContainer1 .mainContainer1dark{
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.mainContainer2light .mainContainer2dark {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
 
   .free {
     color: rgb(71, 238, 71);
     font-size: 12px;
+    padding-left: 40%;
     font-weight: bold;
+  }
+  .img{
+    height: 200px;
+    width: 200px;
+    padding-left: 30%;
+    object-fit: cover;
   }
   
   .payment {
     font-size: 12px;
-
+    padding-left: 40%;
     color: rgb(187, 50, 50);
     font-weight: bold;
   }
-  
+
   .containerlight {
-    margin: 4%;
-    padding:40px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    min-height: 23rem;
+    max-height: 23rem;
+    overflow: hidden;
+    padding:10px;
     border: 2px solid rgb(12, 1, 1);
     background-color: #ffffff;
     color: #030000;
-    width: 200px;
-    max-height: 150px;
-    width: 30.8%;
-    overflow: hidden;
     animation: borderGradientAnimation1 infinite 2.5s;
-    transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
   }
   .containerlight:hover {
-
-    max-height: max-content;
-   width: 100%;
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
 
-
   .containerdark {
-    margin: 4%;
-    padding:40px;
-    border: 2px solid rgb(255, 254, 254);
-    background-color: #000000;
-    color: #fcfcfc;
-    width: 200px;
-    max-height: 150px;
-    width: 30.8%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    min-height: 23rem;
+    max-height: 23rem;
     overflow: hidden;
-    animation: borderGradientAnimation1 infinite 2.5s;
+    padding:10px;
+    border: 2px solid rgb(255, 253, 253);
+    background-color: #000000;
+    color: #ffffff;
+    animation: borderGradientAnimation2 infinite 2.5s;
     transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
   }
 
   .containerdark:hover {
-
-    max-height: max-content;
-   width: 70%;
-    transform: scale(1.1);
+    transform: scale(1.02);
   }
   .h1light {
     font-size: 12px;
@@ -94,13 +108,29 @@
     
     background-color: #f7f7f7;
     color: rgb(0, 0, 0);
-    font-size: 14px;
-  }
+    font-size: 24px;
+    width: 600px;
+    margin-left: 10%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+    line-clamp: 4; /* Muestra solo 4 líneas */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos */  }
   .pdark {
-    background-color: #000000;
-    color: rgb(243, 242, 242);
-    font-size: 14px;
+    background-color: #0a0101;
+    color: rgb(255, 255, 255);
+    font-size: 24px;
+    width: 600px;
+    margin-left: 10%;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+    line-clamp: 4; /* Muestra solo 4 líneas */
+    text-overflow: ellipsis; /* Agrega puntos suspensivos */
   }
+
   .divlight {
     background-color: #f7f7f7;
     color: black;  }
@@ -124,21 +154,21 @@
   
   .formdark {
     background-color: #000000;
-    color: rgb(243, 242, 242);   }
+    color: rgb(243, 242, 242);
+  }
 
   .hrlight {
-  background-color: #f7f7f7;
-    color: black;  }
-   .hrdark{
-   background-color: #000000;
-     color: rgb(255, 255, 255);  }
+    background-color: #f7f7f7;
+    color: black; }
+  .hrdark {
+    background-color: #000000;
+     color: rgb(255, 255, 255); }
   
   .errorlight {
     background-color: #f7f7f7;
     color: black; 
   }
-  
-    
+
   .errordark {
     background-color: #000000;
     color: rgb(255, 255, 255);   }
@@ -155,14 +185,18 @@
   .linklight {
     background-color: #f7f7f7;
     color: black;  
-    font-size: 40px;
+    font-size: 70px;
+    align-self: start;
+     letter-spacing:10px;
      text-decoration: none; }
   
     
   .linkdark {
+    align-self: start;
     background-color: #000000;
     color: rgb(255, 255, 255); 
-      font-size: 40px;
+    font-size: 70px;
+    letter-spacing:10px;
     text-decoration: none; }
 
   .ullight {
@@ -176,19 +210,15 @@
   
   .h2light {
     background-color: #f7f7f7;
-    color: black;   }
-      
-  
-    
-
-  
+    color: black;
+    margin-left: 10%;   }
 
   .h2dark {
+    margin-left: 10%;
     background-color: #000000;
     color: rgb(255, 255, 255);   }  
   
   
-
     @keyframes borderGradientAnimation1 {
       0% {
         border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
@@ -231,8 +261,3 @@
       }
     
     }
-    
-
-
-
-

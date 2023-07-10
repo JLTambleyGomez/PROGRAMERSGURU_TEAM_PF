@@ -1,5 +1,5 @@
-const { Course, Category } = require("../../db")
-const {Op} = require("sequelize")
+const { Course } = require("../../db");
+const { Op } = require("sequelize");
 
 const getCourseByName = async (req, res) => {
     const {title}= req.query

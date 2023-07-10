@@ -1,0 +1,61 @@
+.container {
+  scale: 0.8;
+  
+  display: flex;
+  justify-content: center;
+}
+
+.courses-container {
+  align-items: center;
+  justify-items: center;
+  min-width: 60rem;
+  min-height: 35rem;
+  max-width: 60rem;
+  max-height: 35rem;
+  width: 120%;
+
+  margin: 0 4rem;
+  position: relative; /* Agregado para posicionar los botones relativos a este contenedor */
+}
+
+.navigation-container {
+  position: absolute;
+  top: 32%;
+  left: -15%;
+  width: 130%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: rgba(255, 254, 254, 0);
+  color: #fff;
+  padding:3rem;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+    .swiper-pagination  {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.7;
+      padding-bottom: 20%;
+
+      transition: opacity ease 250ms;
+    }
+      .swiper-pagination:hover {
+        opacity: 1;
+         cursor: pointer;
+
+    }
+
+ .swiper-pagination-bullet{
+  scale: 1.8;
+  border: 1px solid  rgb(255, 255, 255);
+ }
+    
+    
