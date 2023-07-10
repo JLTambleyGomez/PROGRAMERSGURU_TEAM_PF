@@ -1,133 +1,70 @@
-/* 
 .container{
-  display:flex;
-  flex-direction: row;
-  align-items: center;
-}
-.bar1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 1%;
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  font-size: 14px;
-  width: min-content;
-}
-
-.bar1:hover{
-  cursor: pointer;
-
-}
-.img{
-  height: 20px;
-  width: 20px;
-}
-
-.plight {
-  background-color: white;
-  color: black;
-  transition: transform 0.3s
-  }
-  
-  .pinvi{
-  color: rgba(0, 0, 0, 0);
-  }
-.pdark {
-  
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  transition: transform 0.3s
-}
-
-  .plight:hover {
-    transform: scale(1.1);
-    cursor: pointer;
-
- }
-  .pdark:hover {transform: scale(1.3);
-    cursor: pointer;
-  }
-
-  
-  */
-/* _________________________________________________________ */
-
-.filterBarContainer {
-  position: relative;
-}
-
-.filterBarOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.672);
+  width:400px;
+  height: 9%;
+  position: absolute;
   z-index: 1;
+  animation:scale-up-vertical-top 0.4s linear} 
+  @keyframes scale-up-vertical-top{0%{transform:scaleY(.4);transform-origin:center top}100%{transform:scaleY(1);transform-origin:center top}}
+   
+  
+  .Box{
+    margin-bottom:-4%;
+   }
+.item{
+  font-size: 70%;
+  margin-bottom:-1%;
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  
+}
+.options{
+  scale:0.7;
+  margin-top: 4%;
+  font-size:80%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
 }
 
-/*ESTILOS FIJOS*/
-.filterBarSidebar {
+
+.buttonContainer {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  align-items: center;
+  justify-content: space-around;
+  width: 400px;
+}
 
-  padding: 20px;
-  width: 300px;
-  height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  overflow-y: auto;
+.mainButton {
+  display: flex;
+  padding: 4% 37%;
+  background-color: black;
+  color: white;
+  border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+  background-clip: padding-box;
+  animation: borderGradientAnimation1 infinite 2.5s;
+}
+
+@keyframes borderGradientAnimation1 {
+  0% {
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
   }
-  /* CASO LIGHT */
-  .filterBarSidebar-light {
-  background-color: #f1f1f1;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  20% {
+    border-image: linear-gradient(to right, #ff0000, #800080) 1;
   }
-  /* CASO DARK */
-  .filterBarSidebar-dark {
-    background-color: black;
-    border-right: 1px solid green
+  40% {
+    border-image: linear-gradient(to right, #800080, #0000ff) 1;
   }
-
-    .filterBarMainLabel {
-      font-size: 2rem ;
-      margin: 0 0 4rem;
-    }
-
-    .filterBarSection {
-      font-size: 1.5rem;
-    }
-      .filterBarSection label {
-        border: 1px solid brown;
-        padding: 15px;
-        border-radius: 10px;
-        cursor: pointer;
-      }
-      .filterBarSection label {
-        border: 1px solid brown;
-      }
-      .filterBarSection ul {
-        list-style: none;
-      }
-
-    /* ESTILOS FIJOS */
-    .filterButton {
-        margin-top: 4rem;
-      padding: 10px;
-    }
-    /* CASO LIGHT */
-    .filterButton-light {
-      background-color: #f1f1f1 ;
-      color: black;
-    }
-    /* CASO DARK */
-    .filterButton-dark {
-      background-color: black;
-      color: #f1f1f1;
-    }
+  60% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+  }
+  80% {
+    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+  }
+  100% {
+    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+  }
+}

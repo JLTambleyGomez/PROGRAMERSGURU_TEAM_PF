@@ -1,15 +1,12 @@
 .container1{
-  display: flex;
-  justify-content: space-evenly;
-
   width: 100%;
   position: fixed;
   z-index: 2;
   height: 4rem;
-  border-bottom: 2px solid red;
 }
 
 .containerslight {
+  /* align-items: center; */
   justify-content: space-around;
   justify-items: center;
   transition: height 0.4s;
@@ -17,7 +14,6 @@
 }
 
 .containerslight:hover {
-
   height: 40px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
 }
  
@@ -37,7 +33,9 @@
  
   .buttoncontainerlight {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    padding: 0 10px;
     width: 100%;
   }
 
@@ -87,7 +85,7 @@
 .containersdark {
   justify-content: space-around;
   justify-items: center;
-    transition: height 0.4s;
+  transition: height 0.4s;
   height: 30px; /* Establece una altura inicial para el contenedor */
 }
 
@@ -99,20 +97,22 @@
 
   
   .divdark {
+    display: flex;
+    align-items: center;
     margin:0%;
     background-color: rgba(0, 0, 0, 0.623);
     color: rgb(255, 255, 255);
-    align-items: center;
     width: 100%;
     font-family: 'Open Sans', Arial, sans-serif;
     /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
-    display: flex;
     }
 
- 
+
   .buttoncontainerdark {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 0 10px;
     width: 100%;
   }
 
@@ -156,6 +156,3 @@
     padding: 1%;
     transition: width 2s;
   }
-
-
-  

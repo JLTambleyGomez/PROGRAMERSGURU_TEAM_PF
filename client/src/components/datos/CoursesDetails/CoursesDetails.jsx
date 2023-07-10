@@ -9,7 +9,7 @@ import styles from "./CoursesDetails.module.css";
 function CourseDetails () {
 
     const dispatch= useDispatch()
-    const course=useSelector((state)=>state.courseActual)
+    const course=useSelector((state)=>state.allCourses)
     const favorites= useSelector((state)=>state.favorites)
     const [isFav, setFav]= useState(false);
 
@@ -67,8 +67,7 @@ function CourseDetails () {
     if (fav.id == id) {
        setFav(true); 
     }});
-      
-        return () => {
+           return () => {
           dispatch(clearMessage());
           dispatch(clearCourses());
         };

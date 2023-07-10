@@ -60,7 +60,7 @@
                 margin-bottom: 3%;
               }
 
-              .button {
+              .loginFormContainer button{
                 
                 padding: 7px 20px;
                 background-color: #ffffffb5;
@@ -75,7 +75,7 @@
                 
               }
               
-              .button:hover {
+              .loginFormContainer button:hover {
                 background-color: #000000;
                 color: white;
               }

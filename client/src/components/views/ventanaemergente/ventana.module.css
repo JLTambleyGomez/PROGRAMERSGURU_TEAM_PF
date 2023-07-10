@@ -1,8 +1,8 @@
 .container{
     color: aliceblue;
     background-color: rgba(0, 0, 0, 0.672);
-    width: infinite;
-    height: infinite;
+    width:20%;
+    height: 20%;
     display:flex;
     top: 0;
     left: 0;

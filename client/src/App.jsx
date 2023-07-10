@@ -1,4 +1,6 @@
+import React, { useState, useEffect }from "react";
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+import { useSelector } from "react-redux";
 import styles from "./App.module.css";
 import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
@@ -10,8 +12,7 @@ import Cart from './components/views/Cart/Cart';
 import InfoBar from './components/bars/infoBar/infoBar';
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
-import React,{useState,useEffect}from "react";
-import { useSelector} from "react-redux";
+import Commingsoon from './components/views/Commingsoon/Commingsoon';
 
 
 
@@ -26,7 +27,7 @@ function App () {
     const [changeDarkMode , setChangeDarkMode] = useState("");
     const darkmode = useSelector((state)=> state.darkMode);
 
-    //useEffect:
+    //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight =
@@ -80,10 +81,13 @@ function App () {
                 <Route path="/Cart" element = {<Cart/>} />
                 <Route path="/AdminPanel" element = {<AdminPanel/>} />
                 <Route path="/CourseDetails/:id" element = {<CourseDetails/>} /> 
+                <Route path="/Commingsoon" element = {<Commingsoon/>} />
+
+                Commingsoon
             </Routes>
             {isAtBottom && (
-             <InfoBar></InfoBar>      )}
-           
+                <InfoBar/>
+            )}
 
         </div>
     )

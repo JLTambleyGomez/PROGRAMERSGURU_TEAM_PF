@@ -1,23 +1,52 @@
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
+import React, { useState } from "react";
+import Card from "react-bootstrap/Card";
 import styles from "./CardCourse.module.css";
 
 //_________________________module_________________________
-function CardCourse ( { id, title, description, rating, isFree, language, imageURL } ) {
+const CardCourse = ({ id, title, meanRating, isFree, language, courseUrl, released, description, imageURL }) => {
+  //states:
+  const [isFlipped, setIsFlipped] = useState(false);
 
-    //component:
-    return (
-        <div className = {styles.cardCourseComponent}>
-            {/* <img src={imageURL}/> */}
-            <p>{title}</p>
-            <p>{rating}</p>
-            <p>{isFree}</p>
-            <p>{language}</p>
+  //const:
+  const handleMouseEnter = () => {
+    setIsFlipped(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsFlipped(false);
+  };
+
+  //component:
+  return (
+    <div className={styles.cardContainer}>
+      <Card
+        className={styles.card}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className={`${styles.cardContent} ${isFlipped ? styles.flipped : ""}`}>
+          <div className={styles.front}>
+            <Card.Body>
+              <Card.Title className={styles.title}>{title}</Card.Title>
+              <Card.Text> <img className={styles.img}src={imageURL} alt="sample45" /> </Card.Text>
+            </Card.Body>
+          </div>
+         
+          <div className={styles.back}>
+            <Card.Body>
+            <Card.Title>Coste:{isFree}</Card.Title>  
+             <Card.Title>Rating : {meanRating}</Card.Title>  
+            <Card.Title>Idioma : {language}</Card.Title>  
+             <Card.Title><a className={styles.link} href= {courseUrl} target="_blank" rel="noopener noreferrer">VISITAR</a>
+            </Card.Title>  
+             <Card.Title>Fecha de lanzamiento {released}</Card.Title>  
+              <Card.Text className={styles.description}> {description}</Card.Text>
+            </Card.Body>
+          </div>
         </div>
-    )
-}
+      </Card>
+    </div>
+  );
+};
 
 export default CardCourse;

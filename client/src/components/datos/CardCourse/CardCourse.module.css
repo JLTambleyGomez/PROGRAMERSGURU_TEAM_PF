@@ -1,11 +1,76 @@
-.cardCourseComponent {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    justify-items: center;
 
-    min-width: 20rem;
-    min-height: 20rem;
-    border: 1px solid green;
+.cardContainer {
+  display: inline-block;
+  margin: 10px;
+  animation:scale-up-horizontal-center 0.6s}
+   @keyframes scale-up-horizontal-center{0%{transform:scaleX(.2)}100%{transform:scaleX(1)}}
+
+.card {
+  padding: 10%;
+  width: 300px;
+  height: 200px;
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.cardContent {
+  width: 100%;
+  height: 100%;
+
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.front,
+.back {
+  font-size: 18px;
+  padding: 2%;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  background-color: #f8f9fa;
+}
+
+.back {
+  transform: rotateY(180deg);
+  background-color: #e9ecef;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.img{
+  width: 300px;
+  height: 200px;
+}
+
+.title{
+  background-color: rgb(0, 0, 0);
+  align-items: center;
+  position: absolute;
+  left: 40%;
+  color: #e9ecef;
+}
+
+.description  {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+  line-clamp: 4; /* Muestra solo 4 líneas */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos */
+}
+
+.link{
+  text-decoration: none;
+  font-size: 20px;
 }
