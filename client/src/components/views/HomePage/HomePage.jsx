@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { get_categories,get_courses_all,clearCourses,clearMessage,} from "../../../Redux/actions";
+import { get_categories,get_courses_all,clearCourses,clearMessage, get_Favorites_Request} from "../../../Redux/actions";
 import styles from "./HomePage.module.css";
 import Cards from '../../datos/Cards/Cards';
 
@@ -14,6 +14,7 @@ function HomePage () {
 
 
     useEffect(()=>{
+        dispatch(get_Favorites_Request(1))
         dispatch(get_courses_all())
     },[])
 

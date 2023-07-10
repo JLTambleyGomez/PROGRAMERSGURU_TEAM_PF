@@ -7,8 +7,7 @@ import {
     POST_COURSE, 
     FILTER_COURSES_BY_LANGUAGE, 
     FILTER_COURSES_BY_PRICING, 
-    ORDER_COURSES, 
-    GET_COURSES_BY_ID,
+    ORDER_COURSES,
 //CATEGORIES:
     GET_CATEGORIES_ALL, 
     POST_CATEGORIES, 
@@ -18,7 +17,9 @@ import {
     CLEAR_COURSES,
     CLEAN_MESSAGE,
 // DARK MODE:
-    DARK_MODE
+    DARK_MODE,
+//FAVORITES:
+GET_FAVORITES
 
 } from "./actions";
 
@@ -35,7 +36,8 @@ const goblalStorage = {
     error:"",
     message:"",
     darkMode:false,
-    courseActual:{}
+    courseActual:{},
+    favorites:[]
 }
 
 //REDUCER:
@@ -107,6 +109,8 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
                 ...state,
                 darkMode: payload
             }; 
+            case GET_FAVORITES:
+                return { ...state, favorites: payload};
         default: return {...state}; 
     }
 }

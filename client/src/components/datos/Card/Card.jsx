@@ -6,8 +6,7 @@ import styles from "./Card.module.css";
 
 //_________________________module_________________________
 function Card ({ id,title, description, rating, isFree, language }) {
-
-    console.log(id)
+    
     
     const darkmode = useSelector((state)=> state.darkMode);
     const [elementClasses, setElementClasses] = useState({
@@ -56,6 +55,7 @@ function Card ({ id,title, description, rating, isFree, language }) {
             }
             <h2 className={`${styles.h2} ${styles[elementClasses.h2]}`}>{language}</h2>
             <h1>{id}</h1>
+           
         </div>
     );
 };

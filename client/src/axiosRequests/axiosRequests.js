@@ -43,3 +43,8 @@ export const deleteCourseRequest = async (id) => {
     const { data } = await axios.delete(`http://localhost:3001/course/${id}`);
     return data;
 }
+
+export const getFavoritesRequest = async (id) => {
+    const { data } = await axios.get(`http://localhost:3001/favorite/${id}`);
+    return data;
+}
