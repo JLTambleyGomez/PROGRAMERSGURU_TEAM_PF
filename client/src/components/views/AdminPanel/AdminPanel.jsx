@@ -84,21 +84,21 @@ function AdminPanel () {
     };
 
     const deleteCategory = async (id) => {
-        // try {
-        //     await dispatch(delete_categories(id))
-        //     await dispatch(get_categories())
-        // } catch (error) {
-        //     console.log("error");
-        // }
+        try {
+            await dispatch(delete_categories(id))
+            await dispatch(get_categories())
+        } catch (error) {
+            console.log("error");
+        }
     };
 
     const handleDeleteCourse = async (id) => {
-        // try {
-        //     await dispatch(delete_course(id));
-        //     await dispatch(get_courses_all());
-        // } catch (error) {
-        //     console.log("error");
-        // }
+        try {
+            await dispatch(delete_course(id));
+            await dispatch(get_courses_all());
+        } catch (error) {
+            console.log("error");
+        }
     };
 
     const handleCoursePost = (event) => {
