@@ -3,8 +3,8 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 import s from "./NavBar.module.css";
-import SearchBar from '../searchBar/searchBar';
-import PerfilBar from '../perfilbar/perfilbar';
+import SearchBar from '../SearchBar/SearchBar';
+import PerfilBar from '../PerfilBar/PerfilBar';
 
 //_________________________module_________________________
 function NavBar () {

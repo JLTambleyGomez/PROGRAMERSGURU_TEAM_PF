@@ -2,9 +2,9 @@ import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
-import { FaSun, FaMoon } from "react-icons/fa";
 
-import "./perfilbar.css";
+import { FaSun, FaMoon } from "react-icons/fa";
+import "./PerfilBar.css";
 
 //_________________________module_________________________
 function PerfilBar () {
@@ -21,6 +21,7 @@ function PerfilBar () {
     const handleDarkMode = () => {
         dispatch(Dark_Mode(!darkMode));
     };
+
     // component:
     return  (
         <div className = "accountOptionsWrapper">
