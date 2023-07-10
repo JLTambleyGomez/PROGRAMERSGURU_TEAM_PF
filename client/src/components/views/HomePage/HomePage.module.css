@@ -1,6 +1,7 @@
 .component {
-  margin: 10vh 0 0;
-  padding: 2% 7% 10vh;
+  margin-top: 10vh;
+  min-height: 90vh;
+  padding: 2% 7% 20vh;
   display: flex;
   flex-direction: column;
   justify-content: center;

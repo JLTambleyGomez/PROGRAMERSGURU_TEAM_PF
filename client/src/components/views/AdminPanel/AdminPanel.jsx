@@ -152,7 +152,7 @@ function AdminPanel () {
             </div>
             {showcategories&& ( 
                 <section className={`${styles.categoriesPanel}`}>
-                    <div className={`${styles.categoriesPosting}`}>
+                    <form className={`${styles.categoriesForm}`}>
                         <span className={`${styles.categoriesPostBar}`}>
                             <input
                                 className={`${styles.categoriesInput}`}
@@ -166,12 +166,11 @@ function AdminPanel () {
                         </span>
                         <span>
                             {
-                                error && (
-                                    <p>{error.category}</p>
-                                )
+                                error && <p>{error.category}</p>
                             }
                         </span>
-                    </div>
+                    </form>
+
                     <div className={`${styles.categoriesContainer}`}>
                         <h2>Categories</h2>
                         <div className={`${styles.categoriesBox}`}>
@@ -180,7 +179,7 @@ function AdminPanel () {
                                     return (
                                         <span className={`${styles.category}`}>
                                             <label key={index}>{category.id} : {category.name}</label>
-                                            <button className={`${styles.deleteCategory}`} onClick={() => deleteCategory(category.id)}>X</button>
+                                            <button className={`${styles.deleteCategoryButton}`} onClick={() => deleteCategory(category.id)}>X</button>
                                         </span>
                                     )
                                 })
@@ -190,14 +189,14 @@ function AdminPanel () {
                 </section>
             )}
 
-            <div >
+            <div>
                 <button className={`${styles.mainButton}`} onClick={handleshowcursos}>
                     <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
                 </button>
             </div>
             {showcursos && (
                 <section className={`${styles.coursesPanel}`}>
-                    <form className={`${styles.form}`}>
+                    <form className={`${styles.coursesForm}`}>
                         <h2>Nuevo Curso</h2>
                         <div className={`${styles.h1}`}>
                             <label>Título:</label>
@@ -292,16 +291,19 @@ function AdminPanel () {
                         <button onClick={handleCoursePost}>Postear curso</button>
                     </form>
 
-                    <div className={styles.containeradmin}>
-                        {courses.map((course) => (
-                            <div>
-                                <div className={`${styles.form2}`} key={course.id}>
-                                    <p>ID: {course.id}</p> {course.title} 
-                                    <p>Fecha De Lanzamiento {course.released} </p>                               
-                                    <button onClick={() =>handleDeleteCourse(course.id)}>X</button>    
-                                </div>
-                            </div> 
-                        ))}
+                    <div className={`${styles.coursesContainer}`}>
+                        <h1>Courses</h1>
+                        <div className={`${styles.coursesBox}`}>
+                            {courses.map((course) => (
+                                <div>
+                                    <div className={`${styles.course}`} key={course.id}>
+                                        <p>ID: {course.id}</p> {course.title} 
+                                        <p>Fecha De Lanzamiento {course.released} </p>                               
+                                        <button onClick={() =>handleDeleteCourse(course.id)}>X</button>    
+                                    </div>
+                                </div> 
+                            ))}
+                        </div>
                     </div>
                 </section>
             )}

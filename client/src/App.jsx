@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 
@@ -12,12 +13,16 @@ import Shop from './components/views/Shop/Shop';
 import Cart from './components/views/Cart/Cart';
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import Commingsoon from './components/views/Commingsoon/Commingsoon';
+import Footer from './components/bars/Footer/Footer';
 
 //_________________________module_________________________
 function App () {
 
     //global state:
     const dark = useSelector((state)=> state.darkMode);
+
+    //states:
+    const [isAtBottom, setIsAtBottom] = useState(false);
 
     //const:
     const navigate = useNavigate();
@@ -28,6 +33,37 @@ function App () {
         const suffix = dark ? 'dark' : 'light';
         return `${baseClassName}-${suffix}`;
     };
+
+    //life-cycles:
+    useEffect(() => {
+        const handleScroll = () => {
+            const windowHeight =
+            "innerHeight" in window
+              ? window.innerHeight
+              : document.documentElement.offsetHeight;
+            const body = document.body;
+            const html = document.documentElement;
+            const docHeight = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+            const windowBottom = windowHeight + window.pageYOffset;
+    
+            if (windowBottom >= docHeight) {
+                setIsAtBottom(true);
+            } else {
+                setIsAtBottom(false);
+            }
+        };
+        window.addEventListener("scroll", handleScroll);
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+      }, []);
 
     //component:
     return (
@@ -46,6 +82,9 @@ function App () {
                 <Route path="/Commingsoon" element = {<Commingsoon/>} />
                 <Route path="/AdminPanel" element = {<AdminPanel/>} />
             </Routes>
+            {
+                isAtBottom && <Footer/>
+            }
         </div>
     )
 }
