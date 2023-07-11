@@ -19,14 +19,15 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-    // if (allCourses.length) {}
-    dispatch(get_courses_all());
+        if (!allCourses.length){
+          dispatch(get_courses_all());
+        }
         return () => { 
             dispatch(clearMessage());
             dispatch(clearCourses());
         };
-    }, [dispatch]);
-
+      }, [dispatch]);
+      
     //component:
     return (
         <div className = {styles.component}>
@@ -38,7 +39,7 @@ function CoursePage () {
                 <OrderBar/>
             </div >
             <div className = {styles.cardComponent}>
-                <CoursesCard allCourses = {allCourses}/>
+               {allCourses.length?(<CoursesCard allCourses = {allCourses}/>):""} 
             </div>
         </div>
     )
