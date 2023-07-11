@@ -7,18 +7,21 @@ import CardsCourse from "../../datos/CardsCourse/CardsCourse";
 import FilterBar from "../../bars/filterBar/FilterBar";
 import OrderBar from "../../bars/orderBar/OrderBar";
 
+
 //_________________________module_________________________
 function CoursePage () {
-
     //states:
     const allCourses = useSelector((state) => state.courses)
 
     //const:
     const dispatch = useDispatch();
 
+ 
+    
     //life-cycles:
     useEffect(() => {
     if (!allCourses.length){dispatch(get_courses_all());}
+
         
         return () => { 
           dispatch(clearMessage());
@@ -38,7 +41,8 @@ function CoursePage () {
                 {/* <OrderBar/> */}
             </div >
             <div className = {styles.cardComponent}>
-                <CardsCourse allCourses = {allCourses}/>
+
+                { allCourses.length?(<CardsCourse allCourses = {allCourses}/>):""}
             </div>
         </div>
     )
