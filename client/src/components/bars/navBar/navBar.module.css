@@ -23,7 +23,6 @@
     }
 
     .link {
-      font-size: 120%;
       text-transform: uppercase;
       text-decoration: none;
       letter-spacing: 0.2em;
@@ -31,7 +30,7 @@
       font-weight: bold;
     }
     .link:hover {
-      font-size: 135%;
+      font-size: 110%;
       text-shadow:  0px 3px 12px rgb(128, 255, 255);
       cursor: pointer;
     }
