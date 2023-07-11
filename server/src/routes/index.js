@@ -1,8 +1,5 @@
 const router = require("express").Router();
 
-const { PostUser } = require("../controllers/User/postUser");
-const { Login } = require("../controllers/User/login");
-
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
 const productRouter = require("./productRouter");
