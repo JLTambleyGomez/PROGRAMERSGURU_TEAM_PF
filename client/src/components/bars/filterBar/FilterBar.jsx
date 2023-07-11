@@ -12,6 +12,11 @@ function FilterBar () {
     const [orden, setOrden] = useState("")
     const [idioma, setIdioma] = useState("")
 
+
+
+
+    
+
     //const:
     const dispatch = useDispatch();
     const darkmode = useSelector((state)=> state.darkMode);
@@ -83,6 +88,7 @@ function FilterBar () {
                         <option value="Ascendente">Nombre Ascendente</option>
                         <option value="Desendente">Nombre Descendente</option>
                     </select>
+
                     <p>Idioma</p>
                     <select onChange={handleLanguageChange}>
                         <option value="">Ordenar</option>
