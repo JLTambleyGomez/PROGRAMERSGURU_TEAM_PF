@@ -1,18 +1,16 @@
-import styles from "./CardsCourse.module.css";
-import CardCourse from "../CardCourse/CardCourse";
+import s from "./CoursesCard.module.css";
+import CourseCard from "../CourseCard/CourseCard";
 
 //_________________________module_________________________
-function CardsCourse ( { allCourses } ) {
-
- 
+function CoursesCard ( { allCourses } ) {
 
     //component:
     return (
-        <div className={styles.cardsCourseComponent}>
+        <div className={s.component}>
             {
                 allCourses.map((course, index) => {
                     return (
-                        <CardCourse
+                        <CourseCard
                             key={index}
                             id={course.id}
                             title={course.title}
@@ -31,4 +29,4 @@ function CardsCourse ( { allCourses } ) {
     )
 }
 
-export default CardsCourse;
+export default CoursesCard;

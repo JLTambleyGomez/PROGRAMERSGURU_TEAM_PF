@@ -13,6 +13,7 @@
   
 }
 
+
 .container{
   color: aliceblue;
   background-color: rgba(0, 0, 0, 0.672);
@@ -31,9 +32,6 @@
   @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
 
-  
-  
-  
               @keyframes scale-up-vertical-top {
                 0% {
                   transform: scaleY(0.4);

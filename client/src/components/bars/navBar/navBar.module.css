@@ -1,158 +1,46 @@
-.container1{
-  width: 100%;
+.component {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   position: fixed;
-  z-index: 2;
-  height: 4rem;
-}
+  z-index: 9998;
+  /* TOP: ELIMINA CUALQUIER ESPACIO ENTRE EL TOPE DE LA PAGINA Y EL ELEMENTO */
+  top: 0;
+  width: 100%;
+  height: 10vh;
+  animation:blur-in 0.4s linear both
+  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
-.containerslight {
-  /* align-items: center; */
-  justify-content: space-around;
-  justify-items: center;
-  transition: height 0.4s;
-  height: 30px; /* Establece una altura inicial para el contenedor */
-}
-
-.containerslight:hover {
-  height: 40px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
-}
- 
-
-  
-  .divlight {
-    margin:0%;
+  .component-light {
     background-color: rgba(251, 251, 252, 0.623);
-    color: black;
-    align-items: center;
-    width: 100%;
-    font-family: 'Open Sans', Arial, sans-serif;
-    /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
-    display: flex;
+  }
+  .component-dark {
+    background-color: #010003;
+  }
+
+  .button {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ;
+    }
+    .button:hover{
+      transform: scale(1.04);
     }
 
- 
-  .buttoncontainerlight {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 10px;
-    width: 100%;
-  }
-
-  .divlight a {
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 0.2em;
-    color: rgba(2, 14, 17, 0.932);
-    
-    transition: all ease-out 300ms;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    text-align: center;
-  }
-
- 
-  .divlight a:not(.active)::after {
-    opacity: 0.1;
-  }
-
-  .divlight a:not(.active):hover {
-    color: rgb(0, 0, 0);
-  }
-
-  .divlight .linklight {
-    display: block;
-    font-size: 12px;
-    transition: transform 0.6s;
-  }
-
-  .divlight .linklight:hover {
-    text-shadow:  0px 3px 12px rgb(128, 255, 255);
-    transform: scale(1.3);
-  }
-
-  .divlight .buttonlight {
-    background: none;
-    border: none;
-    padding: 1%;
-    transition: width 2s;
-  }
-
-/* /////////////////////////////////////////////////////////// */
-  
-.containersdark {
-  justify-content: space-around;
-  justify-items: center;
-  transition: height 0.4s;
-  height: 30px; /* Establece una altura inicial para el contenedor */
-}
-
-.containersdark:hover {
-
-  height: 40px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
-}
-
-
-  
-  .divdark {
-    display: flex;
-    align-items: center;
-    margin:0%;
-    background-color: rgba(0, 0, 0, 0.623);
-    color: rgb(255, 255, 255);
-    width: 100%;
-    font-family: 'Open Sans', Arial, sans-serif;
-    /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
+    .link {
+      font-size: 100%;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      font-weight: bold;
     }
-
-
-  .buttoncontainerdark {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 0 10px;
-    width: 100%;
-  }
-
-  .divdark a {
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 0.2em;
-    color: rgba(247, 249, 250, 0.932);
-    
-    transition: all ease-out 300ms;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    text-align: center;
-  }
-
- 
-  .divdark a:not(.active)::after {
-    opacity: 0.1;
-  }
-
-  .divdark a:not(.active):hover {
-    color: rgb(253, 251, 251);
-  }
-
-  .divdark .linkdark {
-    display: block;
-    font-size: 12px;
-    transition: transform 0.6s;
-  }
-
-  .divdark .linkdark:hover {
-    text-shadow:  0px 3px 12px rgb(128, 255, 255);
-    transform: scale(1.3);
-  }
-
-  .divdark .buttondark {
-    background: none;
-    border: none;
-    padding: 1%;
-    transition: width 2s;
-  }
+    .link:hover {
+      text-shadow:  0px 3px 12px rgb(128, 255, 255);
+      cursor: pointer;
+    }
+    .link-light {
+      color: rgba(2, 14, 17, 0.932);
+    }
+    .link-dark {
+      color: rgba(247, 249, 250, 0.932);
+    }

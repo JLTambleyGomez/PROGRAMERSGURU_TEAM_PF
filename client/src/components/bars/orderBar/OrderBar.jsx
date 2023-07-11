@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { order_courses } from "../../../Redux/actions";
 
-import styles from "./OrderBar.module.css"
+import s from "./OrderBar.module.css"
+
 //_________________________module_________________________
 function OrderBar () {
     
@@ -15,10 +16,7 @@ function OrderBar () {
     const dispatch = useDispatch();
 
     //functions:
-    const toggleSideBar = () => {
-        setShowSideBar(!showSideBar)
-    }
-
+    const toggleSideBar = () => setShowSideBar(!showSideBar)
     const toggleDropDownOne = () => setShowDropdownOne(!showDropdownOne)
     const toggleDropDownTwo = () => setShowDropdownTwo(!showDropdownTwo)
 
@@ -33,15 +31,15 @@ function OrderBar () {
     //component:
     return (
         <div >
-            <div  className={styles.buttonContainer}>
-                <button className={styles.mainButton} onClick={toggleSideBar}>O R D E N A R</button>
+            <div  className={s.buttonContainer}>
+                <button className={s.mainButton} onClick={toggleSideBar}>O R D E N A R</button>
             </div>
             {
                 showSideBar && (
                     <>
-                        <div className={styles.orderBarOverlay} onClick={toggleSideBar}/>
-                        <aside className={styles.orderBarSidebar}>
-                            <div className={styles.orderBarSection}>
+                        <div className={s.orderBarOverlay} onClick={toggleSideBar}/>
+                        <aside className={s.orderBarSidebar}>
+                            <div className={s.orderBarSection}>
                                 <div >
                                 <button onClick={() => {toggleDropDownOne("one")}}>ORDENAR POR NOMBRE</button></div>
                                     {
@@ -53,7 +51,7 @@ function OrderBar () {
                                         )
                                     }
                             </div>
-                            <div className={styles.orderBarSection}>
+                            <div className={s.orderBarSection}>
                                 <label onClick={() => {toggleDropDownTwo("two")}}>ORDENAR POR PUNTUACION</label>
                                     {
                                         showDropdownTwo && (

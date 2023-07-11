@@ -1,10 +1,10 @@
-import styles from './infoBar.module.css';
+import s from './Footer.module.css';
 import React from 'react';
 
 //_________________________module_________________________
-const InfoBar = () => {
-    return(
-        <div className={styles.informacion}>
+function Footer () {
+    return (
+        <div className={s.component}>
             <p>Politica de la Web</p>
             <p>Sobre nosotros</p>
             <p>Contacto</p>
@@ -14,4 +14,4 @@ const InfoBar = () => {
     )
 }
 
-export default InfoBar
+export default Footer;

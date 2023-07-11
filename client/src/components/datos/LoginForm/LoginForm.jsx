@@ -1,10 +1,10 @@
 import { useState} from "react";
-import styles from './LoginForm.module.css';
-import validate from "./validate";
 import { useNavigate } from "react-router-dom"; 
-import { getloged } from "../../../Redux/actions";
 import { useSelector,useDispatch} from "react-redux";
+import { getloged } from "../../../Redux/actions";
+import validate from "./validate";
 
+import styles from './LoginForm.module.css';
 
 //_________________________module_________________________
 function LoginForm () {
@@ -30,8 +30,7 @@ function LoginForm () {
 
     //functions:
     const handleOnchange = (event) => {
-        const property = event.target.name;
-        const value = event.target.value;
+        const {property, value} = event.target;
         setUserData({...userData, [property]: value});
         validate({...userData, [property]: value}, errors, setErrors);
     };
@@ -45,11 +44,12 @@ function LoginForm () {
         setShowForm(false);
         setShowButton(true);
     };
+
     const handleSubmit = (event) => {
+        event.preventDefault();
+
         dispatch(getloged(userData));
         access && navigate('/HomePage');
-
-        event.preventDefault();
     };
 
     //component:

@@ -1,20 +1,19 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
 
-import "./Cards.css";
+import "./CoursesPreview.css";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination"; 
 import "swiper/css/navigation";
-import Card from "../Card/Card";
+import CoursePreview from "../CoursePreview/CoursePreview";
 
 // ChatGPT 💕
 //_________________________module_________________________
-function Cards ( { courses } ) {
+function CoursesPreview ( { courses } ) {
 
     //component:
     return (
-
         <div className = "container"> 
             <div className = "courses-container"> 
                 <Swiper
@@ -52,7 +51,7 @@ function Cards ( { courses } ) {
                     {
                         courses.map((course) => (
                             <SwiperSlide key={course.id} style={{ margin: 0 }}>
-                            <Card
+                            <CoursePreview
                                 id={course.id}
                                 title={course.title}
                                 description={course.description}
@@ -82,4 +81,4 @@ function Cards ( { courses } ) {
     )
 }
 
-export default Cards;
+export default CoursesPreview;

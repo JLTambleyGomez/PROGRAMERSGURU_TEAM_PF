@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
 
-import styles from "./CardCourse.module.css";
+import styles from "./CourseCard.module.css";
 
 //_________________________module_________________________
-function CardCourse ({ id, title, meanRating, isFree, language, courseUrl, released, description, imageURL }) {
+function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, released, description, imageURL }) {
 
     //states:
     const [isFlipped, setIsFlipped] = useState(false);
@@ -51,4 +51,4 @@ function CardCourse ({ id, title, meanRating, isFree, language, courseUrl, relea
     );
 };
 
-export default CardCourse;
+export default CourseCard;
