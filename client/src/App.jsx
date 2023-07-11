@@ -1,31 +1,38 @@
-import React, { useState, useEffect }from "react";
+import { useState, useEffect }from "react";
 import { Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import styles from "./App.module.css";
+
+import s from "./App.module.css";
 import HomePage from './components/views/HomePage/HomePage';
 import LandingPage from './components/views/LandingPage/LandingPage';
 import CoursePage from './components/views/CoursePage/CoursePage';
 import NavBar from './components/bars/navBar/navBar';
-import Perfil from './components/views/Perfil/Perfil';
-import Compras from './components/views/Compras/Compras';
+import Profile from './components/views/Profile/Profile';
+import Shop from './components/views/Shop/Shop';
 import Cart from './components/views/Cart/Cart';
-import InfoBar from './components/bars/infoBar/infoBar';
+import Footer from './components/bars/Footer/Footer';
 import AdminPanel from './components/views/AdminPanel/AdminPanel';
 import CourseDetails from './components/datos/CoursesDetails/CoursesDetails';
 import Commingsoon from './components/views/Commingsoon/Commingsoon';
 
-
-
 //_________________________module_________________________
 function App () {
 
-    //const:
+    //global states:
+    const dark = useSelector((state)=> state.darkMode);
+
+    //states:
+    const [changeDarkMode , setChangeDarkMode] = useState("");
     const [isAtBottom, setIsAtBottom] = useState(false);
 
-    const navigate = useNavigate();
+    //const:
     const location = useLocation().pathname;
-    const [changeDarkMode , setChangeDarkMode] = useState("");
-    const darkmode = useSelector((state)=> state.darkMode);
+
+    //functions:
+    const theme = (base) => {
+        const suffix = dark ? 'dark' : 'light';
+        return `${base}-${suffix}`;
+    };
 
     //life-cycles:
     useEffect(() => {
@@ -52,23 +59,15 @@ function App () {
             }
         };
         window.addEventListener("scroll", handleScroll);
-
+        //--desmontado
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-      }, []);
-    
-    useEffect (() => {
-        if (darkmode === true) {
-            setChangeDarkMode("darkContainer");
-        } else{
-            setChangeDarkMode("lightContainer");
-        }
-    } , [darkmode])
+    }, []);
 
     //component:
     return (
-        <div className={`${styles[changeDarkMode]}`}>
+        <div className={`${s[theme("component")]}`}>
             {
                 location !== "/" && <NavBar/>
             }
@@ -76,18 +75,15 @@ function App () {
                 <Route path="/" element = {<LandingPage/>} />
                 <Route path="/HomePage" element = {<HomePage/>} />
                 <Route path="/CoursePage" element = {<CoursePage/>} /> 
-                <Route path="/Profile" element = {<Perfil/>} />
-                <Route path="/Compras" element = {<Compras/>} />
+                <Route path="/Profile" element = {<Profile/>} />
+                <Route path="/Store" element = {<Shop/>} />
                 <Route path="/Cart" element = {<Cart/>} />
                 <Route path="/AdminPanel" element = {<AdminPanel/>} />
                 <Route path="/CourseDetails/:id" element = {<CourseDetails/>} /> 
                 <Route path="/Commingsoon" element = {<Commingsoon/>} />
-
                 Commingsoon
             </Routes>
-            {isAtBottom && (
-                <InfoBar/>
-            )}
+            {isAtBottom && <Footer/>}
 
         </div>
     )

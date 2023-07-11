@@ -2,8 +2,9 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
+
 import styles from "./CoursePage.module.css";
-import CardsCourse from "../../datos/CardsCourse/CardsCourse";
+import CoursesCard from "../../datos/CoursesCard/CoursesCard";
 import FilterBar from "../../bars/filterBar/FilterBar";
 import OrderBar from "../../bars/orderBar/OrderBar";
 
@@ -35,10 +36,10 @@ function CoursePage () {
             </div>
             <div className={styles.filterOrder}>
                 <FilterBar/>
-                {/* <OrderBar/> */}
+                <OrderBar/>
             </div >
             <div className = {styles.cardComponent}>
-                <CardsCourse allCourses = {allCourses}/>
+                <CoursesCard allCourses = {allCourses}/>
             </div>
         </div>
     )

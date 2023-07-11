@@ -6,6 +6,22 @@
         return data;
     }
 
+    export const getProducts = async () => {
+        const { data } = await axios.get("http://localhost:3001/product")
+        return data;
+    }
+
+    export const postProducts = async () => {
+        const { data } = await axios.get("http://localhost:3001/product")
+        return data;
+    }
+    
+    export const deleteProducts = async (id) => {
+        const { data } = await axios.delete(`http://localhost:3001/product/${id}`);
+        return data;
+
+    }
+
     export const login = async (userData) =>{
         const { email, password } = userData;
         const URL = "http://localhost:3001/user/Login";
@@ -50,7 +66,6 @@
     export const deleteCategoriesRequest = async (id) => {
         const { data } = await axios.delete(`http://localhost:3001/technology/${id}`);
         return data;
-
     }
     export const deleteCourseRequest = async (id) => {
         const { data } = await axios.delete(`http://localhost:3001/course/${id}`);
@@ -63,4 +78,15 @@
         const { data } = await axios.get(`http://localhost:3001/favorite/${id}`);
         const cursos= data[0].Courses;
         return cursos;
+    }
+
+    export const postFavoritesRequest = async () => {
+        const ids={idCourse:id, idUser:1}
+        await axios.post("http://localhost:3001/favorite", ids)
+        setFav(true)
+    }
+
+    export const deleteFavoritesRequest = async () => {
+        await axios.delete(`http://localhost:3001/favorite/${id}`);
+        setFav(false)
     }

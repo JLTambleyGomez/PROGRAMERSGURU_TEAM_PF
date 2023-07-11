@@ -1,5 +1,6 @@
 // import global storage con los productos agregados
 
+//_________________________module_________________________
 function Cart () {
 
     //global state:
