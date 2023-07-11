@@ -6,7 +6,6 @@ import s from "./FilterBar.module.css";
 
 //_________________________module_________________________
 function FilterBar () {
-
     //states:
     const [showBar, setShowBar] = useState(false);
     const [currentValue, setCurrentValue] = useState("");
@@ -57,7 +56,6 @@ function FilterBar () {
         }
     };
       
-
     const handleFilterReset = (event) => {
         event.preventDefault();
         dispatch(get_courses_all());
