@@ -1,11 +1,11 @@
-import "./Comments.css"
+import s from "./Comments.module.css";
 
+//_________________________module_________________________
 function Comments () {
+
     //component:
     return (
-        <div className="commentsComponent">
-            <div className="">
-            </div>
+        <div className={s.component}>
         </div>
     )
 }

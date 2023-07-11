@@ -4,9 +4,9 @@ import { useDispatch } from "react-redux";
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
 
 import styles from "./CoursePage.module.css";
-import CardsCourse from "../../datos/CardsCourse/CardsCourse";
-import FilterBar from "../../bars/FilterBar/FilterBar";
-import OrderBar from "../../bars/OrderBar/OrderBar";
+import CoursesCard from "../../datos/CoursesCard/CoursesCard";
+import FilterBar from "../../bars/filterBar/FilterBar";
+import OrderBar from "../../bars/orderBar/OrderBar";
 
 //_________________________module_________________________
 function CoursePage () {
@@ -35,10 +35,10 @@ function CoursePage () {
             </div>
             <div className={styles.filterOrder}>
                 <FilterBar/>
-                {/* <OrderBar/> */}
+                <OrderBar/>
             </div >
             <div className = {styles.cardComponent}>
-                <CardsCourse allCourses = {allCourses}/>
+                <CoursesCard allCourses = {allCourses}/>
             </div>
         </div>
     )

@@ -12,7 +12,11 @@ import {
 //FAVORITES
     getFavoritesRequest,
 // USER
-    login    
+    login,
+//Products
+    getProducts,
+    postProducts,
+    deleteProducts,
 
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
@@ -22,10 +26,10 @@ import {
     export const CLEAR_COURSES = "CLEAR_COURSES";
     export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
     export const GET_COURSES_BY_ID = "GET_COURSES_BY_ID";
-    export const POST_COURSE="POST_COURSE"
+    export const POST_COURSE = "POST_COURSE"
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
-    export const DELETE_COURSE="DELETE_COURSE";
+    export const DELETE_COURSE = "DELETE_COURSE";
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_COURSES_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_COURSES_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
@@ -40,12 +44,19 @@ import {
 //FAVORITES:
     export const GET_FAVORITES = "GET_FAVORITES";
 //USER:
-    export const LOGIN ="LOGIN"
+    export const LOGIN = "LOGIN"
+//PRODUCTS
+    export const GET_PRODUCTS = "GET_PRODUCTS"
+    export const POST_PRODUCTS = "POST_PRODUCTS"
+    export const DELETE_PRODUCT = "DELETE_PRODUCT"
 
+    
 //__________________________________________________
 //ACTION CREATORS:
 
 //COURSES:
+
+
 export const get_courses_all = () => {
     return async (dispatch) => {
         try {
@@ -120,7 +131,7 @@ export function delete_course(id) { // request
             const data = await deleteCourseRequest(id);
             return dispatch({
                 type: DELETE_COURSE,
-                payload: data,
+                payload: data.message   ,
             });
         } catch (error) {
             return dispatch({
@@ -130,7 +141,6 @@ export function delete_course(id) { // request
         }
     };
 }
-
 export const filter_courses_by_language = (language) => {
     return {
         type: FILTER_COURSES_BY_LANGUAGE,
@@ -139,7 +149,7 @@ export const filter_courses_by_language = (language) => {
 }
 
 
-export const getloged =(userData)=>{
+export const getloged = (userData) => {
     return async function (dispatch) {
         try {
             const data = await login(userData); 
@@ -158,15 +168,15 @@ export const getloged =(userData)=>{
 }
 
 
-export const filter_courses_by_price = (P) => {
-    if (P === "free") {
-        P = true
+export const filter_courses_by_price = (price) => {
+    if (price === "free") {
+        price = true
     } else {
-        P = false
+        price = false
     }
     return {
         type: FILTER_COURSES_BY_PRICING,
-        payload: P
+        payload: price
     }
 }
 
@@ -219,7 +229,7 @@ export function delete_categories(id) { // request
             const data = await deleteCategoriesRequest(id);
             return dispatch({
                 type: DELETE_CATEGORIES,
-                payload: data,
+                payload: data.message,
             });
         } catch (error) {
             return dispatch({
@@ -278,3 +288,59 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
         }
     };
 }
+
+
+////////////////////////////////PRODUCTS///////////////////////////////////////////
+
+export const getallProducts = () => {
+    return async (dispatch) => {
+        try {
+            const data = await getProducts () // request
+            return dispatch({
+                type: GET_PRODUCTS,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
+export const post_Products = (datos) => {
+    return async (dispatch) => {
+        try {
+            const data = await postProducts(datos) // request
+            return dispatch({
+                type: POST_PRODUCTS,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
+export function delete_Products(id) { // request
+    return async function (dispatch) {
+        try {
+            const data = await deleteProducts(id);
+            return dispatch({
+                type: DELETE_PRODUCT,
+                payload: data.message,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////

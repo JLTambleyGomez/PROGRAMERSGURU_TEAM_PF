@@ -1,12 +1,34 @@
 .component {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  margin-top: 10vh;
-  padding: 2vh 0 0;
-  min-height: 90vh;
+  margin-top:4%;
 }
 
+.Panel{
+  position: absolute;
+  padding: 4%;
+  top: 40%;
+  padding-bottom:20%;
+  background-color: rgba(0, 0, 0, 0.26);
+ 
+
+}
+.contain{
+  display: flex;
+  justify-items: center;
+  padding: 2%;
+  margin:2%;
+  justify-content: space-evenly;
+}
+.message{
+  position: fixed;
+  top: 8%;
+  width:80%;
+  height: 4%;
+  z-index: 999999;
+  background-color: black;
+  color: white;
+}
 .mainButton {
   background-color: white;
   color: black;
@@ -101,170 +123,3 @@
   font-size: 12px;
   color: rgb(0, 0, 0);
 }
-
-
-/* .h1light {
-    margin: 3%;
-    width: 60%;
-    height: 20%;
-    
-    overflow: hidden;
-    font-size:  1.3em;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; 
-    line-clamp: 4; 
-    text-overflow: ellipsis;
-    font-size: 12px;
-    color: rgb(0, 0, 0);
-  }
-  
-  .h1dark  {
-    margin: 3%;
-    width: 60%;
-    height: 20%;
-    overflow: hidden;
-    font-size:  1.3em;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; 
-    line-clamp: 4; 
-    text-overflow: ellipsis;
-    font-size: 12px;
-    color: black;
-  }
-  .inputlight {
-    background-color: white;
-    color: black;
-  }
-  
-  .buttonlight {
-    background-color: white;
-    color: black;
-    padding: 1%;
-    margin-bottom: 2%;
-    border: 2px solid black;
-  }
-  .buttondark{
-    background-color: rgb(0, 0, 0);
-    color: rgb(248, 248, 248);
-    padding: 1%;
-    margin-bottom: 2%;
-    border: 2px solid rgb(255, 255, 255);
-  }
-
-  .formlight {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background-color: white;
-    color: black;
-    padding: 20px;
-  }
-  
-  .formdark {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background-color: #302f2c;
-    color: white;
-    padding: 20px;
-  }
-
-  .form2light {
-    display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    justify-items: center;
-    margin:1%;
-    width: 80%;
-    border: 2px solid wheat;
-    height:100px;
-    justify-content: space-evenly;  
-    background-color: #fafafa;
-    color: rgb(0, 0, 0);
-    padding: 20px;
-  }
-  
-  
-  .form2dark {
-    display: grid;
-    grid-template-columns: repeat(3, 2fr);
-    justify-items: center;
-    margin:1%;
-    width: 80%;
-    border: 2px solid wheat;
-    height:100px;
-    justify-content: space-evenly;  
-    background-color: #302f2c;
-    color: white;
-    padding: 20px;
-  }
-  
-  .buttondark{  
-    margin-bottom: 2%;
-    background-color: white;
-    color: black;
-    padding: 1%;
-    border: 2px solid black;
-  }
-  
-  .containerlight {
-    padding-bottom: 20%;
-    padding-top:10% ;
-  }
-  .containerdark {
-    padding-bottom: 20%;
-    padding-top:10% ;
-
-  }
-
-  .labellight {
-    color: black;
-  }
-  
-  
-  .h1dark {
-    display: flex;
-    justify-items: center;
-    width: 100%;
-    height: 40px;
-    align-items: center;
-    font-size: 12px;
-    color: white;
-    margin-bottom: 1%;
-  }
-  .h1light{display: flex;
-    justify-items: center;
-    width: 100%;
-    height: 40px;
-    align-items: center;
-    font-size: 12px;
-    color: rgb(15, 1, 1);
-    margin-bottom: 1%;}
-  .inputdark {
-    background-color: #302f2c;
-    color: white;
-  }
-  .containeradmin{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding-bottom: 10%;
-
-    background-color: #302f2c54;
-
-  }
-  .buttondark {
-    background-color: #302f2c;
-    color: white;
-    border: 2px solid white;
-  }
-  
-  .containerdark {
-    height: 100vh;
-    background-color: #000000;
-    color: #ffffff;
-  }
-  
-  .labeldark {
-    color: white;
-  } */

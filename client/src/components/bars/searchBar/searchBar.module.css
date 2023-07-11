@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.searchOff {
+  animation:blur-in-1 0.4s linear both
+} @keyframes blur-in-1{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
 .label {
   margin: 0;
   font-size: 150%;
@@ -24,7 +28,9 @@
   justify-content: space-between;
   align-items: center;
   gap: 5px;
-  }
+  animation:blur-in-2 0.4s linear both
+  } @keyframes blur-in-2{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
   .input {
     height: 5vh;
     width: 15rem;

@@ -3,15 +3,15 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { get_courses_by_name } from "../../../Redux/actions";
 
-import s from "./SearchBar.module.css";
+import s from "./searchBar.module.css";
 
 //_________________________module_________________________
-function SearchBar () {
+function SearchBar() {
 
-    // Global states:
+    //global states:
     const dark = useSelector((state) => state.darkMode);
-    
-    // States:
+        
+    //states:
     const [input, setInput] = useState("");
     const [toggleVisibility, setToggleVisibility] = useState(true);
 
@@ -19,7 +19,7 @@ function SearchBar () {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    // Functions:
+    //functions:
     const theme = (base) => {
         const suffix = dark ? 'dark' : 'light';
         return `${base}-${suffix}`;
@@ -30,10 +30,10 @@ function SearchBar () {
     };
 
     const handleSearchButton = async () => {
-        dispatch(get_courses_by_name(input)); // agregar await?
-        setInput("");
-        setToggleVisibility(true);
-        navigate("/CoursePage");
+       dispatch(get_courses_by_name(input)); // agregar await?
+       setInput("");
+       setToggleVisibility(true);
+       navigate("/CoursePage");
     };
 
     const setDefault = (event) => {
@@ -44,8 +44,8 @@ function SearchBar () {
         }, 300);
     };
 
-    // Component:
-    return (
+   //component:
+   return (
         <div className={`${s.component} ${s[theme("component")]}`}>
             {
                 toggleVisibility ? (
@@ -54,7 +54,7 @@ function SearchBar () {
                             className={`${s.label} ${s[theme("label")]}`}
                             onClick={() => setToggleVisibility(false)}
                         >
-                            SEARCH
+                            BUSCAR
                         </h1>
                     </div>
                 ) : (
@@ -62,10 +62,10 @@ function SearchBar () {
                         <input
                             className={`${s.input}`}
                             type="search"
-                            autoFocus
+                            autoFocus  
                             onChange={handleSearchInput}
                             value={input}
-                            placeholder='try "Java"'
+                            placeholder='Intenta "Java"'
                         />
                         <button
                             className={`${s.button}`}

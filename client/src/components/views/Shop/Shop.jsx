@@ -5,7 +5,7 @@ import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css"
 
 //_________________________module_________________________
-function Compras () {
+function Shop () {
 
     //states:
     const [priceRange, setPriceRange] = useState([0, 1000]);
@@ -163,4 +163,4 @@ function Compras () {
     )
 }
 
-export default Compras;
+export default Shop;

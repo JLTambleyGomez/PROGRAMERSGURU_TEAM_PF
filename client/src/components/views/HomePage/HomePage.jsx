@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { get_categories, get_courses_all, clearCourses, clearMessage, get_Favorites_Request } from "../../../Redux/actions";
 
 import s from "./HomePage.module.css";
-import Cards from '../../datos/Cards/Cards';
+import CoursesPreview from '../../datos/CoursesPreview/CoursesPreview';
 import Comments from '../../datos/Comments/Comments';
 import Footer from '../../bars/Footer/Footer'
-
 
 //_________________________module_________________________
 function HomePage () {
@@ -36,21 +35,20 @@ function HomePage () {
         };
     }, [dispatch]);
 
-    //component:
     return (
         <div className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
             <section className={`${s.sectionBanner}`}>
                 <img className={`${s.bannerImg}`} src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg" alt="mainBanner" />
-                <h1 className={`${s.title} ${s[theme("title")]}`}>PROGRAMMER'S GURU</h1>
+                <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>PROGRAMMER'S GURU</h1>
             </section>
         {/* COURSES */}
             <section className={`${s.sectionCourses}`}>
-                <h1 className={`${s.title} ${s[theme("title")]}`}>ÚLTIMOS CURSOS DEL MERCADO</h1>
+                <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>ÚLTIMOS CURSOS DEL MERCADO</h1>
                 <div>
                     {
                         latestCourses.length > 0 ? (
-                            <Cards courses={latestCourses}/>
+                            <CoursesPreview courses={latestCourses}/>
                             ) : (
                             <p>No hay cursos disponibles.</p>
                         )
@@ -68,7 +66,7 @@ function HomePage () {
 
         {/* NEWS */}
             <section className={`${s.sectionNews}`}>
-                <h1 className={`${s.title} ${s[theme("title")]}`}>NOTICIAS</h1>
+                <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>
                 <span className={`${s.newsBanner}`}>
                     <h2 className={`${s[theme("text")]}`}>Programación web desde casa: el nuevo curso gratis online basado en inteligencia artificial</h2>
                     <img className={`${s.newsImg}`} src="https://www.cronista.com/files/image/525/525496/6446a76145585.jpg" alt="newsBanner" />

@@ -1,15 +1,15 @@
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState,useEffect } from "react";
-import styles from "./Card.module.css";
 
+import styles from "./CoursePreview.module.css";
 
 //_________________________module_________________________
-function Card ({ id, title, description, rating, isFree, language, imageURL }) {
+function CoursePreview ({ id, title, description, rating, isFree, language, imageURL }) {
 
     console.log(id)
     //states:    
-    const darkmode = useSelector((state)=> state.darkMode);
+    const darkmode = useSelector((state) => state.darkMode);
     const [elementClasses, setElementClasses] = useState({
         h1: "h1light",
         input: "inputlight",
@@ -32,7 +32,7 @@ function Card ({ id, title, description, rating, isFree, language, imageURL }) {
         mainContainer2:"mainContainer1",
     });
     
-    //life-cyles:
+    //life-cycles:
     useEffect(() => {
         const updatedElementClasses = {};
 
@@ -66,4 +66,4 @@ function Card ({ id, title, description, rating, isFree, language, imageURL }) {
     );
 };
 
-export default Card;
+export default CoursePreview;

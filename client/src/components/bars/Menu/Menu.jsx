@@ -3,22 +3,20 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
 
-import { FaSun, FaMoon } from "react-icons/fa";
-import s from "./PerfilBar.module.css";
+import s from "./Menu.module.css";
 
 //_________________________module_________________________
-function PerfilBar () {
+function Menu () {
 
-    //global states:
+    //global state:
     const dark = useSelector((state) => state.darkMode);
 
     //const:
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    
+
     const userImage = "https://media.tenor.com/v9sdELSzVw4AAAAC/nyan-cat-kawaii.gif";
     // "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
-    
     //functions:
     const theme = (base) => {
         const suffix = dark ? 'dark' : 'light';
@@ -29,7 +27,7 @@ function PerfilBar () {
         dispatch(Dark_Mode(!dark));
     };
 
-    //component:
+    // component:
     return  (
         <div className={`${s.component}`}>
 
@@ -50,4 +48,4 @@ function PerfilBar () {
     )
 };
 
-export default PerfilBar;
+export default Menu;

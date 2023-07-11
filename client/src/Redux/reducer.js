@@ -21,7 +21,10 @@ import {
 //FAVORITES:
     GET_FAVORITES,
 //USERS:
-    LOGIN
+    LOGIN,
+//PRODUCTS
+    GET_PRODUCTS,
+    DELETE_PRODUCT,
 
 } from "./actions";
 
@@ -32,15 +35,17 @@ import jsonData from './cursos.json';
 
 //GLOBAL STORAGE:
 const goblalStorage = {
-    allCourses:[],
+    allCourses:[],              //NO TOCAR SIN AVISAR ANTES
     courses:[],
     categories:[],
     error:"",
     message:"",
     darkMode:false,
     favorites:[],
-    access:false
+    access:false,
+    products:[],
 }
+
 
 //REDUCER:
 export default function rootReducer ( state = goblalStorage, { type, payload } ) {
@@ -90,6 +95,13 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
                 ...state,
                 message: payload.message,
             };
+
+        case POST_COURSE:
+            return {
+                ...state,
+                message: payload.message,
+            };
+            
         case ERROR:
             return {
                 ...state,
@@ -117,6 +129,20 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
 
         case LOGIN:
             return { ...state, access: payload};
+
+        case  DELETE_COURSE:
+            return { ...state, message: payload};
+
+
+        case DELETE_CATEGORIES:
+            return { ...state, message: payload};
+
+        case GET_PRODUCTS:
+            return { ...state, products: payload};
+
+         case DELETE_PRODUCT:
+            return { ...state, message: payload};
+            
 
         default: return {...state}; 
     }

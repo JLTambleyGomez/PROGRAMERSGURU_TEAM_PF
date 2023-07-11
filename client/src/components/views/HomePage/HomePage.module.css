@@ -1,13 +1,16 @@
 .component {
-  margin-top: 10vh;
-  min-height: 90vh;
-  padding: 2% 7% 20vh;
+  /* REGLA PARA TODOS LOS .component, DONDE SE RENDERICEN NAVBAR Y/O FOOTER*/
+  /* AJUSTAR MARGIN TOP DE ACUERDO A LA ALTURA DEL NAV BAR */
+  /* EJ. NAVBAR.module.css.styles.component {height: 10vh} => APLICAR: margin-top: 10vh al component actual*/
+  margin-top: 4%; 
+  /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
+  /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
+  padding: 2% 7% 20vh; 
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 30px;
-
   animation:blur-in 0.4s linear both
+
   }
   @keyframes blur-in {
     0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
@@ -21,15 +24,15 @@
 
 .sectionBanner {
   display: flex;
-  justify-content: center;
+  position: absolute;
+  top:0;
+  left: 0;
+  flex-direction: row;
   align-items: center;
-  gap: 20px;
-  margin: 5% 0;
+  scale: 0.5;
   transition: transform 0.3s, filter 0.3s;
   }
-  .sectionBanner:hover {
-    transform: scale(1.1);
-  }
+
   .bannerImg {
     width: 100px;
     height: 100px;
@@ -37,8 +40,10 @@
   }
 
 .sectionCourses {
+  margin-top: 4%;
   display: flex;
   flex-direction: column;
+  align-items: center;
   transition: transform 0.3s, filter 0.3s;
   }
   .sectionCourses:hover {
@@ -69,9 +74,9 @@
     overflow: hidden;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Show only 4 lines in WebKit-based browsers */
-    line-clamp: 4; /* Show only 4 lines in other modern browsers */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    text-overflow: ellipsis;
   }
   .newsLink {
     text-decoration: none;
@@ -80,24 +85,56 @@
     text-shadow:  0px 3px 12px rgb(128, 255, 255);
   }
 
-.title-light {
-  color: black;
-  }
-  .title-light:hover {
-    text-shadow: 0px 1px 20px #010003;
-    cursor: default;
-  }
-.title-dark {
-  color: white;
-  }
-  .title-dark:hover {
-    text-shadow: 0px 1px 20px whitesmoke;
-    cursor: default;
-  }
 
-.text-light {
-  color: black;
+/* MAIN TITLE */
+.mainTitle {
+  font-size: 2rem;
+  cursor: default;
 }
-.text-dark {
-  color: white;
+.mainTitle-light {
+  text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
+}
+.mainTitle-dark {
+  text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
+}
+
+/* COURSES TITLE */
+.coursesTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 10px;
+  font-size: 3rem;
+  transition: transform 0.3s, filter 0.3s;
+}
+.coursesTitle:hover {
+  transform: scale(1.04);
+  transform-origin: center;
+  cursor: default;
+}
+.coursesTitle-light{
+  color: rgb(0, 140, 158);
+  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+}
+.coursesTitle-dark {
+  color:  rgba(0, 221, 250, 0.672);
+  text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+}
+
+/* NEWS TITLE */
+.newsTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  letter-spacing: 10px;
+  font-size: 3rem;
+  transition: transform 0.3s, filter 0.3s;
+}
+.newsTitle-light {
+  color: rgb(0, 140, 158);
+  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+}
+.newsTitle-dark {
+  color:  rgba(0, 221, 250, 0.672);
+  text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
 }

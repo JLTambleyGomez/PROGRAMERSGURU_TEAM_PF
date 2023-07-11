@@ -1,14 +1,14 @@
 .container{
     color: aliceblue;
     background-color: rgba(0, 0, 0, 0.672);
-    width:20%;
-    height: 20%;
+    width:100%;
+    height: 100%;
     display:flex;
     top: 0;
     left: 0;
    bottom: 0;
    right:0;
-    position: absolute;
+    position: fixed;
     justify-content: center;
     justify-items: center;
     align-items: center;

@@ -1,16 +1,13 @@
-.component {
-  background-color: #FFFFFF;
-  }
-  .component-dark{
-    background-color: #010003;
-    color: #FFFFFF;
-  }
-  .component-light{
-    background-color: rgb(253, 245, 245);
-    color: #302F2C;
-  }
+.component-dark{
+  background-color: #010003;
+  color: #FFFFFF;
+}
+.component-light{
+  background-color: rgb(253, 245, 245);
+  color: #302F2C;
+}
 
 body {
-    margin: 0;
-    font-family: Arial, sans-serif !important;
+  margin: 0;
+  font-family: Arial, sans-serif !important;
 }

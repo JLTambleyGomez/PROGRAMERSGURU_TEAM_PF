@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
+import { getallProducts, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
 import validate from "./validate";
-import styles from "./AdminPanel.module.css";
 
+import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
 function AdminPanel () {
@@ -11,8 +11,12 @@ function AdminPanel () {
     //global state:
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
-    const dark = useSelector((state)=> state.darkMode);
-    const courses = useSelector((state)=> state.allCourses);
+    const dark = useSelector((state) => state.darkMode);
+    const courses = useSelector((state) => state.allCourses);
+    const products = useSelector((state) => state.products);
+    
+    //const:
+    const dispatch = useDispatch();
 
     //states:
     const [newCourse, setNewCourse] = useState({
@@ -32,11 +36,15 @@ function AdminPanel () {
     const [backmessage, setbackmessage]= useState("")
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
-    
-    //const:
-    const dispatch = useDispatch();
-    
+    const [showproducts, setshowproducts]=useState(false)
+
+
     //functions:
+    const theme = (base) => {
+        const suffix = dark ? 'dark' : 'light';
+        return `${base}-${suffix}`;
+    };
+
     const handleCourseChange = (event) => {
         const { name, value } = event.target;
         setNewCourse((prevCourse) => ({
@@ -44,7 +52,6 @@ function AdminPanel () {
             [name]: value,
         }));
     };
-      
     const handleCategorySelection = (event) => {
         const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
             id: option.value,
@@ -54,17 +61,21 @@ function AdminPanel () {
             categories: selectedCategories,
         }));
     };
-      
-    const handleshowcategories = (event) => {
+
+    const handleShowCategories = (event) =>{
         event.preventDefault();
-        if (showcategories===false)
-        setshowcategories(true);
-        else setshowcategories(false)
+        if (showcategories === false) setshowcategories(true);
+        else setshowcategories(false);
     }
-    const handleshowcursos = (event) => {
-        if (showcursos===false)
-        setshowcursos(true);
-        else setshowcursos(false)
+
+    const handleShowCursos = (event) =>{
+        if (showcursos === false) setshowcursos(true);
+        else setshowcursos(false);
+    }
+
+    const handleShowProducts = (event) =>{
+      if (showproducts === false) setshowproducts(true);
+      else setshowproducts(false);
     }
 
     const hadleInputChange = (event) => {
@@ -74,6 +85,8 @@ function AdminPanel () {
     };
 
     const handlePostCategories = async (event) => {
+        event.preventDefault();
+
         try {
             await dispatch(post_categories({ technology: inputCategory.category }));
             setInputCategory({ category: "" });
@@ -106,15 +119,15 @@ function AdminPanel () {
         dispatch(post_course(newCourse))
         .then(() => {
             setNewCourse({
-            title: "",
-            description: "",
-            imageURL: "",
-            courseUrl: "",
-            rating: 0,
-            released: "",
-            isFree: false,
-            language: "",
-            categories: [],
+                title: "",
+                description: "",
+                imageURL: "",
+                courseUrl: "",
+                rating: 0,
+                released: "",
+                isFree: false,
+                language: "",
+                categories: [],
             });
             dispatch(get_courses_all());
         })
@@ -123,35 +136,51 @@ function AdminPanel () {
         });
     };
 
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
+    const handleProductDelete =(id)=>{
+        try {
+            dispatch (delete_Products(id))
+            dispatch(getallProducts());
+        } catch (error) {
+            console.log("error");
+        }
+    }
 
     //life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
         dispatch(get_categories());
-        dispatch(get_courses_all())
+        dispatch(get_courses_all());
+        dispatch(getallProducts());
+
+        
+
         return () => {                // return ocupar para hacer algo en el desmontaje          
             dispatch(clearMessage()); // limpiar 
-            dispatch(clearCourses()); }
+            dispatch(clearCourses()); 
+        }
     }, [dispatch]);
 
     useEffect(() => {
         setError(validate(inputCategory));
     }, [inputCategory])
 
+
+      
+
     //component:
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`} >
+
+            <div className={styles.message}>Respuesta desde Servidor: {message}</div>
+
+            <div className={styles.contain} >
             <div>
-                <button className={`${styles.mainButton}`} onClick={handleshowcategories} >
+                <button className={`${styles.mainButton}`} onClick={handleShowCategories} >
                     <h1 className={`${styles.h1}`}>ADMINISTRAR CATEGORIAS</h1>
                 </button>
             </div>
             {showcategories&& ( 
-                <section className={`${styles.categoriesPanel}`}>
+                <section className={`${styles.Panel}`}>
                     <form className={`${styles.categoriesForm}`}>
                         <span className={`${styles.categoriesPostBar}`}>
                             <input
@@ -190,12 +219,12 @@ function AdminPanel () {
             )}
 
             <div>
-                <button className={`${styles.mainButton}`} onClick={handleshowcursos}>
+                <button className={`${styles.mainButton}`} onClick={handleShowCursos}>
                     <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
                 </button>
             </div>
             {showcursos && (
-                <section className={`${styles.coursesPanel}`}>
+                <section className={`${styles.Panel}`}>
                     <form className={`${styles.coursesForm}`}>
                         <h2>Nuevo Curso</h2>
                         <div className={`${styles.h1}`}>
@@ -307,6 +336,42 @@ function AdminPanel () {
                     </div>
                 </section>
             )}
+
+              <div>
+                <button className={`${styles.mainButton}`} onClick={handleShowProducts}>
+                    <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
+                </button>
+                 </div>
+                 {showproducts&& ( 
+                <section className={`${styles.Panel}`}>
+                  
+
+                    <div className={`${styles.categoriesContainer}`}>
+                        <h2>Productos</h2>
+                        <div className={`${styles.categoriesBox}`}>
+                            {
+                                products?.map((product, index) => {
+                                    return (
+                                        <span className={`${styles.category}`}>
+                                            <label key={index}>
+                                              <p>{product.name}</p>
+                                               <p>{product.id}</p> 
+                                               <p>{product.price}</p> 
+                                               <p>{product.category}</p> 
+                                               
+                                               </label>
+                                            <button className={`${styles.deleteCategoryButton}`} onClick={() => handleProductDelete(product.id)}>X</button>
+                                        </span>
+                                    )
+                                })
+                            }
+                        </div>
+                    </div>
+                </section>
+            )}
+              
+
+              </div>
         </div>
     );
 };
