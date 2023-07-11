@@ -2,7 +2,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './Redux/store';
 import { BrowserRouter } from 'react-router-dom';
-//import "../src/config/firebase";
+// import "./config/firebase";
 import './index.css';
 import App from './App';
 

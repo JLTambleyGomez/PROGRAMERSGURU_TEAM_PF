@@ -19,6 +19,20 @@ router.use("/favorite", favoriteRouter);
 
 router.use("/user", userRouter);
 
+router.get('/loginWithGoogle', (req, res) => {
+	
+	const {user_id, name, picture, email} = req.user;
 
+	return res.json({
+		userData: {
+			id: user_id,
+			name: name,
+			nickName: name,
+			image: picture,
+			email: email,
+			password: email,
+		},
+	});
+})
 
 module.exports = router;

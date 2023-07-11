@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: "pepito"
             },
             email: {
                 type: DataTypes.STRING,
@@ -19,7 +18,7 @@ module.exports = (sequelize) => {
                     isEmail: true,
                 },
             },
-            password: {
+            picture: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -40,7 +39,6 @@ module.exports = (sequelize) => {
             nickName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: "pepito"
             },
         },
         { timestamps: false, freezeTableName: true }
