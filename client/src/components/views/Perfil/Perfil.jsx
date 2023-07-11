@@ -1,10 +1,9 @@
 import { useState } from "react";
 
-import './Perfil.css'
-
+import './Profile.css'
 
 //_________________________module_________________________
-function Perfil () {
+function Profile () {
 
     //const:
     const user = {
@@ -105,4 +104,4 @@ function Perfil () {
     )
 }
 
-export default Perfil;
+export default Profile;

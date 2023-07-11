@@ -1,4 +1,4 @@
-const { Course, Technology } = require("../../db");
+const { Course } = require("../../db");
 const { Op } = require("sequelize");
 
 const getCourseByName = async (req, res) => {
@@ -8,7 +8,7 @@ const getCourseByName = async (req, res) => {
         const allCourses = await Course.findAll({
             where: {
                 title: {
-                    [Sequelize.Op.iLike]: `%${title}%`,
+                    [Op.iLike]: `%${title}%`,
                 },
             },
         });

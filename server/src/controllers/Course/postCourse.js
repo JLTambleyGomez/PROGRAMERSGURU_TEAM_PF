@@ -15,16 +15,6 @@ const postCourse = async (req, res) => {
             categories,
         } = req.body;
 
-        // La validación de datos se hace desde front
-
-        // No hace falta porque las tecnologias que se pueden elegir vienen directamente de la base de datos
-        // Verificar si la categoría existe antes de crear el curso
-        // const existingCategories = await Technology.findAll({
-        //     where: {
-        //         id: categories.map((category) => category.id),
-        //     },
-        // });
-
         // Crear el curso en la base de datos utilizando el modelo Course
         const [course, created] = await Course.findOrCreate({
             where: {
@@ -40,7 +30,7 @@ const postCourse = async (req, res) => {
                 language,
             },
         });
-        console.log(course);
+        
         const response = {
             courseDataEmpty: {
                 title: "",

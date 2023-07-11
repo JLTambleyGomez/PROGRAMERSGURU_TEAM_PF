@@ -1,23 +1,79 @@
-.container {
-    display: flex;
-    justify-content: center;
+.component:hover {
+  cursor: pointer;
+}
+
+.searchOff {
+  animation:blur-in-1 0.4s linear both
+} @keyframes blur-in-1{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
+.label {
+  margin: 0;
+  font-size: 150%;
+  letter-spacing: 0.3em;
+  transition: transform 0.3s;
   }
-  
-  .SearchBar {
-    display: flex;
-    align-items: center;
+  .label:hover {
+    transform: scale(1.2);
+    text-shadow:  0px 3px 12px rgb(128, 255, 255);
   }
-  
+  .label-light {
+    color: black
+  }
+  .label-dark {
+    color: white;
+  }
+
+.searchOn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  animation:blur-in-2 0.4s linear both
+  } @keyframes blur-in-2{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
   .input {
-    width: 100%;
-    padding: 5px;
-    font-size: 16px;
+    height: 5vh;
+    width: 15rem;
+    padding: 10px;
+    outline: none;
+    border: 3px solid;
+    background-clip: padding-box;
+    animation: borderGradientAnimation1 3s linear infinite;
   }
-  
-  .buscar {
-    height: 30px;
-    margin-left: 10px;
-    padding: 5px 10px;
-    font-size: 16px;
+  @keyframes borderGradientAnimation1 {
+    0% {
+      border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    }
+    20% {
+      border-image: linear-gradient(to right, #ff0000, #800080) 1;
+    }
+    40% {
+      border-image: linear-gradient(to right, #800080, #0000ff) 1;
+    }
+    60% {
+      border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+    }
+    80% {
+      border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+    }
+    100% {
+      border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+    }
   }
-  
+
+  .button {
+    background: none;
+    border: none;
+    }
+    .button:hover {
+      cursor: pointer;
+      }
+      .buttonIcon {
+        font-size: 20px;
+      }
+      .buttonIcon-light {
+        fill: black;
+      }
+      .buttonIcon-dark {
+        fill: white;
+      }

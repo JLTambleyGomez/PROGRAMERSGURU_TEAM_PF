@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import Slider from 'rc-slider';
-import 'rc-slider/assets/index.css';
 
-import "./Compras.css"
+import 'rc-slider/assets/index.css';
+import s from "./Shop.module.css"
 
 //_________________________module_________________________
-function Compras () {
+function Shop () {
 
     //states:
     const [priceRange, setPriceRange] = useState([0, 1000]);
@@ -74,20 +74,20 @@ function Compras () {
 
     //component:
     return (
-        <div className="comprasContainer">
-            <div className="comprasCover">
+        <div className={`${s.component}`}>
+            <div className={`${s.mainBanner}`}>
                 <h1>EL LOGO VA AQUI</h1>
             </div>
-            <div className="comprasSection1">
-                <div className="comprasFilters">
-                    <div className="comprasFiltersFilter">
+            <div className={`${s.comprasSection1}`}>
+                <div className={`${s.comprasFilters}`}>
+                    <div className={`${s.comprasFiltersFilter}`}>
                         <label onClick={toggleVisibilityPrice}>FILTER BY PRICE</label>
                         {
                             isVisiblePrice && (
-                                <div className="comprasFilterFilterOptionPrice">
+                                <div className={`${s.comprasFilterFilterOptionPrice}`}>
                                     {/* <input type="range" min={10} step={10}></input> */}
                                     <Slider
-                                        className="comprasFilterFilterOptionPrice1"
+                                        className={`${s.comprasFilterFilterOptionPrice1}`}
                                         range
                                         min={0}
                                         max={1000}  
@@ -101,11 +101,11 @@ function Compras () {
                             )
                         }
                     </div>
-                    <div className="comprasFiltersFilter">
+                    <div className={`${s.comprasFiltersFilter}`}>
                         <label onClick={toggleVisibilityCategory}>FILTER BY CATEGORY</label>
                         {
                             isVisibleCategory && (
-                                <div className="comprasFiltersFilterOptionCategory">
+                                <div className={`${s.comprasFiltersFilterOptionCategory}`}>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input className="comprasFiltersFilterOptionCategoryInput" type = "checkbox"/>Books</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input className="comprasFiltersFilterOptionCategoryInput" type = "checkbox"/>Computers</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input className="comprasFiltersFilterOptionCategoryInput" type = "checkbox"/>Storage</span>
@@ -116,8 +116,8 @@ function Compras () {
                         }
                     </div>
                 </div>
-                <div className="comprasSection1-2">
-                    <span className="comprasSection1-2Order">
+                <div className={s["comprasSection1-2"]}>
+                    <span className={s['comprasSection1-2Order']}>
                         <div>
                             <h1 onClick={toggleVisibilitySortByName}>ORDERNAR POR NOMBRE</h1>
                             {
@@ -143,11 +143,11 @@ function Compras () {
                         <input value={input} onChange={syncInput}></input>
                         <button>search</button>
                     </span>
-                    <div className="comprasSection1-2Products">
+                    <div className={`${s['comprasSection1-2Products']}`}>
                         {
                             electronicProducts.map((product) => {
                                 return (
-                                    <div className="comprasSection1-2Card">
+                                    <div className={s['comprasSection1-2Card']}>
                                         <img src = {product.image}></img>
                                         <h1>{product.name}</h1>
                                         <h1>{product.price}</h1>
@@ -163,4 +163,4 @@ function Compras () {
     )
 }
 
-export default Compras;
+export default Shop;

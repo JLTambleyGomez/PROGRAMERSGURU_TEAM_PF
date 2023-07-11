@@ -1,138 +1,125 @@
+.component {
+  display: flex;
+  flex-direction: column;
+  margin-top:4%;
+}
 
-  
-  .lightContainer {
-    background-color: #ffffff;
-    color: #302f2c;
+.Panel{
+  position: absolute;
+  padding: 4%;
+  top: 40%;
+  padding-bottom:20%;
+  background-color: rgba(0, 0, 0, 0.26);
+ 
+
+}
+.contain{
+  display: flex;
+  justify-items: center;
+  padding: 2%;
+  margin:2%;
+  justify-content: space-evenly;
+}
+.message{
+  position: fixed;
+  top: 8%;
+  width:80%;
+  height: 4%;
+  z-index: 999999;
+  background-color: black;
+  color: white;
+}
+.mainButton {
+  background-color: white;
+  color: black;
+  padding: 1%;
+
+  border: 2px solid black;
   }
-  
-  .h1light {
-    font-size: 12px;
-    color: black;
+  .mainButton h1 {
+    font-size: 1.3em;
   }
-  
-  .inputlight {
+
+.categoriesPanel {
+  display: flex;
+  flex-direction: column;
+  width: 96vw;
+  margin: 2vw;
+  }
+  .categoriesForm {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    }
+    .categoriesPostBar {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      }
+      .categoriesInput {
+        height: 2rem;
+        width: 20rem;
+        padding: 1rem;
+        font-size: 1.25rem;
+      }
+      .categoriesPostButton {
+        height: 3rem;
+      }
+
+  .categoriesBox {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    }
+    .category {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+/* /////////////////////////////////////////////////////// */
+.coursesPanel {
+  display: flex;
+  flex-direction: column;
+  width: 96vw;
+  margin: 2vw;
+  }
+  .coursesForm {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     background-color: white;
     color: black;
+    padding: 20px;
+
   }
-  
-  .buttonlight {
+  .coursesBox {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     background-color: white;
     color: black;
-    border: 2px solid black;
-  }
-  
-  .containerslight {
-    /* Estilos para containers en modo claro */
-  }
-  
-  .labellight {
-    color: black;
-  }
-  
-  .plight {
-    /* Estilos para p en modo claro */
-  }
-  
-  .divlight {
-    /* Estilos para div en modo claro */
-  }
-  
-  .spanlight {
-    /* Estilos para span en modo claro */
-  }
-  
-  .formlight {
-    /* Estilos para form en modo claro */
-  }
-  
-  .hrlight {
-    /* Estilos para hr en modo claro */
-  }
-  
-  .errorlight {
-    /* Estilos para error en modo claro */
-  }
-  
-  .successlight {
-    /* Estilos para success en modo claro */
-  }
-  
-  .linklight {
-    /* Estilos para link en modo claro */
-  }
-  
-  .ullight {
-    /* Estilos para ul en modo claro */
-  }
-  
-  .h2light {
-    /* Estilos para h2 en modo claro */
-  }
-  
-  .h1dark {
-    font-size: 12px;
-    color: white;
-  }
-  
-  .inputdark {
-    background-color: #302f2c;
-    color: white;
-  }
-  
-  .buttondark {
-    background-color: #302f2c;
-    color: white;
-    border: 2px solid white;
-  }
-  
-  .containerdark {
-    height: 100vh;
-    background-color: #000000;
-    color: #ffffff;
-    /* Estilos para containers en modo oscuro */
-  }
-  
-  .labeldark {
-    color: white;
-  }
-  
-  .pdark {
-    /* Estilos para p en modo oscuro */
-  }
-  
-  .divdark {
-    /* Estilos para div en modo oscuro */
-  }
-  
-  .spandark {
-    /* Estilos para span en modo oscuro */
-  }
-  
-  .formdark {
-    /* Estilos para form en modo oscuro */
-  }
-  
-  .hrdark {
-    /* Estilos para hr en modo oscuro */
-  }
-  
-  .errordark {
-    /* Estilos para error en modo oscuro */
-  }
-  
-  .successdark {
-    /* Estilos para success en modo oscuro */
-  }
-  
-  .linkdark {
-    /* Estilos para link en modo oscuro */
-  }
-  
-  .uldark {
-    /* Estilos para ul en modo oscuro */
-  }
-  
-  .h2dark {
-    /* Estilos para h2 en modo oscuro */
-  }
-  
+    padding: 20px;
+    }
+    .course {
+      display: grid;
+      grid-template-columns: repeat(3, 2fr);
+      justify-items: center;
+      margin:1%;
+      width: 80%;
+      border: 2px solid wheat;
+      height:100px;
+      justify-content: space-evenly;  
+      background-color: #fafafa;
+      color: rgb(0, 0, 0);
+      padding: 20px;  
+    }
+
+.h1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; 
+  line-clamp: 4; 
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: rgb(0, 0, 0);
+}

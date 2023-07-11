@@ -25,8 +25,8 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        rating: {
-          type: DataTypes.INTEGER,
+        meanRating: {
+            type: DataTypes.INTEGER,
         },
         released: {
           type: DataTypes.DATEONLY,

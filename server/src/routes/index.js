@@ -1,24 +1,24 @@
-const { Router } = require("express");
+const router = require("express").Router();
+
 const { PostUser } = require("../controllers/User/postUser");
 const { Login } = require("../controllers/User/login");
 
-const router = Router();
-
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
+const productRouter = require("./productRouter");
+const favoriteRouter = require("./favoriteRouter");
+const userRouter = require("./userRouter");
 
-router.use("/technology", technologyRouter); //cambiar a technology.
+router.use("/technology", technologyRouter);
 
 router.use("/course", courseRouter);
 
-router.get("/login", Login);
+router.use("/product", productRouter);
 
-router.post("/login", PostUser);
+router.use("/favorite", favoriteRouter);
 
-// router.use("/course", getCourse);
+router.use("/user", userRouter);
 
-// router.post("/course", postCourse);
 
-// router.delete("/course", deleteCourse);
 
 module.exports = router;

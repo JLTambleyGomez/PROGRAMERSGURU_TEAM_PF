@@ -1,5 +1,4 @@
 const { Course } = require("../../db");
-const { getCourseByName } = require("./getCourseByName");
 //___________________________________________________
 
 const getCourse = async (req, res) => {

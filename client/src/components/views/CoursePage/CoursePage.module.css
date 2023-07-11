@@ -1,0 +1,22 @@
+.component {
+  margin-top: 10vh; 
+  padding-bottom: 20%;
+  animation:blur-in 0.4s linear both
+  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
+
+.mainBanner {
+    background-image: linear-gradient(to right,  #000000, #434343);
+    height: 26%;
+    padding: 2%;
+    margin-bottom:1%;
+  }
+  .mainBanner h1 {
+      color: white;
+  }
+
+.filterOrder {
+  margin-bottom: 1%;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}

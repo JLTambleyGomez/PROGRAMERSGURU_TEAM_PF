@@ -1,0 +1,8 @@
+.component {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  padding: 2%;
+  margin:2%;
+  justify-content: space-evenly;
+}

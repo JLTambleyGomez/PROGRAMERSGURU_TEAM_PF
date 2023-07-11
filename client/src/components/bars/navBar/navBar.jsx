@@ -1,84 +1,53 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useState,useEffect } from "react";
-import styles from './navBar.module.css';
-import SearchBar from '../searchBar/searchBar';
-import FilterBar from '../filterBar/Filter_Bar';
-import PerfilBar from '../perfilbar/perfilbar';
+import { useState, useEffect } from "react";
 
+// import styles from './navBar.module.css';
+import s from "./navBar.module.css";
+import SearchBar from '../searchBar/searchBar';
+import Menu from '../Menu/Menu';
 
 //_________________________module_________________________
 function NavBar () {
-    const darkmode = useSelector((state)=> state.darkMode);
-    const [elementClasses, setElementClasses] = useState({
-          h1: "h1light",
-          input: "inputlight",
-          button: "buttonlight",
-          buttoncontainer:"buttoncontainerlight",
-          container: "containerslight",
-          label: "labellight",
-          p:"plight",
-          div:"divlight",
-          span:"spanlight",
-          form: "formlight",
-          hr: "hrlight",
-          error:"errorlight",
-          success:"successlight",
-          link:"linklight",
-          ul:"ullight",
-          h2:"h2light",
-          
-        });
-    
- useEffect(() => {
-            const updatedElementClasses = {};
-        
-            Object.keys(elementClasses).forEach((key) => {
-              updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
-            });
-        
-            setElementClasses(updatedElementClasses);
-          }, [darkmode]);
+
+    //global states:
+    const dark = useSelector((state) => state.darkMode);
+
+    //functions:
+    const theme = (base) => {
+        const suffix = dark ? 'dark' : 'light';
+        return `${base}-${suffix}`;
+    };
+
+    //const:
+    const location = useLocation();
+
     //component:
     return (
-        <div>
-        {/* HEADER */}
-            <div className={`${styles.container} ${styles[elementClasses.container]}`}>
-                <div className={`${styles.div} ${styles[elementClasses.div]}`}>
-                <div className={`${styles.buttoncontainer} ${styles[elementClasses.buttoncontainer]}`}>
-                    <button className={`${styles.button} ${styles[elementClasses.button]}`}>
-                        <NavLink to="/HomePage"className={`${styles.link} ${styles[elementClasses.link]}`}>
-                        Home
-                        </NavLink>
-                    </button>
-                    <button className={`${styles.button} ${styles[elementClasses.button]}`}>
-                        <NavLink to="/CoursePage"className={`${styles.link} ${styles[elementClasses.link]}`}>
-                            Courses
-                        </NavLink>
-                        </button> 
-                              <button className={`${styles.button} ${styles[elementClasses.button]}`}>
-                        <NavLink to="/Compras" className={`${styles.link} ${styles[elementClasses.link]}`}>
-                            Store
-                        </NavLink>
-                    </button>
-                    <button className={`${styles.button} ${styles[elementClasses.button]}`}>
-                        <NavLink to="/Cart"className={`${styles.link} ${styles[elementClasses.link]}`}>
-                            Cart
-                        </NavLink>
-                    </button>
-                   
-                    <SearchBar/>
-                    <FilterBar/>
-
-                    <PerfilBar/>
-                </div> 
-                </div>
-            </div>
-
-            <div >
-               
-            </div>
-        </div>
+        <nav className={`${s.component} ${s[theme("component")]}`}>
+            <button className={`${s.button} ${s[theme("button")]}`}>
+                <NavLink to="/HomePage" className={`${s.link} ${s[theme("link")]}`}>
+                    Inicio
+                </NavLink>
+            </button>
+            <button className={`${s.button} ${s[theme("button")]}`}>
+                <NavLink to="/CoursePage" className={`${s.link} ${s[theme("link")]}`}>
+                    Cursos
+                </NavLink>
+            </button>
+            <button className={`${s.button} ${s[theme("button")]}`}>
+                <NavLink to="/Commingsoon" className={`${s.link} ${s[theme("link")]}`}>
+                    Tienda ¡Pronto!
+                </NavLink>
+            </button>
+            <button className={`${s.button} ${s[theme("button")]}`}>
+                <NavLink to="/Commingsoon" className={`${s.link} ${s[theme("link")]}`}>
+                    Lista de Deseos ¡Pronto!
+                </NavLink>
+            </button>
+            <SearchBar/>
+            <Menu/>
+        </nav>
     );
 }
 
