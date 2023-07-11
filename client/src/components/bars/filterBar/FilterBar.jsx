@@ -26,26 +26,38 @@ function FilterBar () {
     const handlebuttonModal = () => {
         setShowBar((prevShowBar) => !prevShowBar);
     }
+
     const handleSortChange = async (event) => {
         const value = event.target.value;
         setOrden(value);
-        await dispatch(order_courses(value));
-        if (idioma !== "") {
+      
+        if (idioma === "") {
+            await dispatch(order_courses(value));
+        } else {
             await dispatch(filter_courses_by_language(idioma));
-        } else return;
+            await dispatch(order_courses(value));
+        }
     };
 
-    const handleLanguageChange = async (event) => {
-        const value = event.target.value;
-        if (value!==idioma) {
-            await dispatch(get_courses_all()) }
-        setIdioma(value);
-        await dispatch(filter_courses_by_language(value));
+      const handleLanguageChange = async (event) => {
+            const value = event.target.value;
+        
+        if (value === "") {
+            await dispatch(get_courses_all());
+        } else {
+            if (value !== idioma) {
+                await dispatch(get_courses_all());
+            }
+            await dispatch(filter_courses_by_language(value));
+        }
+            setIdioma(value);
+        
         if (orden !== "") {
             await dispatch(order_courses(orden));
-        } else return;
+        }
     };
       
+
     const handleFilterReset = (event) => {
         event.preventDefault();
         dispatch(get_courses_all());
@@ -61,6 +73,8 @@ function FilterBar () {
         console.log(idioma);
         console.log(orden)
     }, [])
+
+
 
     //component:
     return (
