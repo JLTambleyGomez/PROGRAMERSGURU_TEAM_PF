@@ -36,7 +36,7 @@ function CoursePage () {
         }, 500);
     }, [allCourses])
 
-    
+
     //component:
     return (
         <div className = {styles.component}>

@@ -9,7 +9,6 @@
 .paginado{
   display: flex;
   justify-content: space-around;
-  width: 100vw;
   margin-top: -3%;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.672);

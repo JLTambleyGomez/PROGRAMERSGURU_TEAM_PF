@@ -48,7 +48,8 @@ import {
 //PRODUCTS
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
-    export const DELETE_PRODUCT = "DELETE_PRODUCT"
+    export const DELETE_PRODUCT = "DELETE_PRODUCT";
+    export const GET_USER= "GET_USER";
 
     
 //__________________________________________________
@@ -343,4 +344,22 @@ export function delete_Products(id) { // request
     };
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//USER___________________________________________________________________//
+
+export const getOneUser = (userData) => {
+    return async function (dispatch) {
+        try {
+            const data = await login(userData); 
+            console.log(data)
+            return dispatch({
+                type: LOGIN,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: "get error",
+            });
+        }
+    };
+}

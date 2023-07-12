@@ -9,9 +9,9 @@
   transition: background-image 1s ease-in-out;
   font-family: Arial, sans-serif;
   text-align: center;
-  justify-content: center;
   height: 100vh;
   display: flex;
+  justify-content: center;
   align-items: center;
   animation: blur-in 1s linear both;
 }
@@ -31,7 +31,6 @@
   background-size: cover;
   width: 60%;
   height: 45%;
-  position: relative;
   border: 2px solid black;
   animation: slideInRight 1s ease-in-out;
   transition: transform 0.3s;
@@ -40,7 +39,6 @@
 
 .container1:hover {
   transform: scale(1.1);
-  transform-origin:left;
  
 
 }
