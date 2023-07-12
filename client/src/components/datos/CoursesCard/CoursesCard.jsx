@@ -1,6 +1,5 @@
 import s from "./CoursesCard.module.css";
 import CourseCard from "../CourseCard/CourseCard";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useEffect, useState, useRef } from "react";
 import { useSelector } from "react-redux";
 
