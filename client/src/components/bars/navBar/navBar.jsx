@@ -8,7 +8,7 @@ import SearchBar from '../searchBar/searchBar';
 import Menu from '../Menu/Menu';
 
 //_________________________module_________________________
-function NavBar () {
+function NavBar ({logoutUser}) {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
@@ -46,7 +46,7 @@ function NavBar () {
                 </NavLink>
             </button>
             <SearchBar/>
-            <Menu/>
+            <Menu logoutUser={logoutUser}/>
         </nav>
     );
 }

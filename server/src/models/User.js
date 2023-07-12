@@ -1,7 +1,9 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("User", {
+    sequelize.define(
+        "User",
+        {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -32,10 +34,10 @@ module.exports = (sequelize) => {
                 defaultValue: false,
                 allowNull: false,
             },
-            // expirationDate: {
-            //     type: DataTypes.DATEONLY,
-            //     defaultValue: null
-            // },
+            expirationDate: {
+                type: DataTypes.DATE,
+                defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+            },
             nickName: {
                 type: DataTypes.STRING,
                 allowNull: false,
