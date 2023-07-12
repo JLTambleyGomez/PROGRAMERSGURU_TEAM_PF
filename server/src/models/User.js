@@ -20,18 +20,17 @@ module.exports = (sequelize) => {
                     isEmail: true,
                 },
             },
-
             picture: {
 
                 type: DataTypes.STRING,
                 allowNull: false,
             },
-            isAdmin: {
+            admin: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false,
             },
-            isBanned: {
+            banned: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false,

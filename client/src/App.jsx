@@ -21,9 +21,17 @@ import {
   getAuth,
   signInWithPopup,
   signOut,
+  setPersistence,
+  inMemoryPersistence,
+  browserSessionPersistence,
+  signInWithEmailAndPassword,
+  signInWithRedirect,
+  getRedirectResult,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 //_________________________module_________________________
 function App() {
+  //------------------------------------------------
   //------------------------------------------------
   const [authorizedUser, setAuthorizedUser] = useState(
     false || sessionStorage.getItem("accessToken")
@@ -33,18 +41,20 @@ function App() {
 
   const auth = getAuth();
 
+  //------------------------signInWithGoolge------------------------
   function signInwithGoogle() {
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        const user = result.user;
-        console.log(result);
-        if (user) {
-          user.getIdToken().then((tkn) => {
-            // set access token in session storage
-            sessionStorage.setItem("accessToken", tkn);
-            setAuthorizedUser(true);
-          });
-        }
+    setPersistence(auth, inMemoryPersistence)
+      .then(() => {
+        signInWithPopup(auth, provider).then((userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+            user.getIdToken().then((tkn) => {
+              // set access token in session storage
+              sessionStorage.setItem("accessToken", tkn);
+              setAuthorizedUser(true);
+            });
+          }
+        });
       })
       .catch((error) => {
         // Handle Errors here.
@@ -57,7 +67,63 @@ function App() {
         return [errorCode, errorMessage, email, credential];
       });
   }
+  
+  //------------------------------------------------
+  //------------------------signInWithEmailAndPassword------------------------
+  function signIn(email, password) {
+    setPersistence(auth, inMemoryPersistence)
+      .then(() => {
+          signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+              const token = user.accessToken
+              sessionStorage.setItem("accessToken", token);
+              setAuthorizedUser(true);
+          }
+        })
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        return [errorCode, errorMessage, email, credential];
+      });
+  }
+
+  //------------------------------------------------
+  //------------------------signInWithEmailAndPassword------------------------
+  function createUser(email, password) {
+    setPersistence(auth, inMemoryPersistence)
+      .then(() => {
+        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+              const token = user.accessToken
+              sessionStorage.setItem("accessToken", token);
+              setAuthorizedUser(true);
+          }
+        })
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        return [errorCode, errorMessage, email, credential];
+      });
+  }
+  
   const navigate = useNavigate();
+
+  //------------------------------------------------
+  //------------------------signOut------------------------
   function logoutUser() {
     signOut(auth)
       .then(() => {
@@ -74,6 +140,7 @@ function App() {
       });
   }
 
+  //------------------------------------------------
   //------------------------------------------------
 
   //global states:
@@ -126,10 +193,24 @@ function App() {
   //component:
   return (
     <div className={`${s[theme("component")]}`}>
-      {location !== "/" && <NavBar logoutUser={logoutUser}/>}
+      {location !== "/" && <NavBar logoutUser={logoutUser} />}
       <Routes>
-        <Route path="/" element={<LandingPage signInwithGoogle={signInwithGoogle} authorizedUser={authorizedUser}/>} />
-        <Route path="/HomePage" element={<HomePage token={sessionStorage.getItem("accessToken")}/>} />
+        <Route
+          path="/"
+          element={
+            <LandingPage
+              signInwithGoogle={signInwithGoogle}
+              createUser={createUser}
+              signIn={signIn}
+              authorizedUser={authorizedUser}
+              setAuthorizedUser={setAuthorizedUser}
+            />
+          }
+        />
+        <Route
+          path="/HomePage"
+          element={<HomePage token={sessionStorage.getItem("accessToken")} />}
+        />
         <Route path="/CoursePage" element={<CoursePage />} />
         <Route path="/Profile" element={<Profile />} />
         <Route path="/Store" element={<Shop />} />
