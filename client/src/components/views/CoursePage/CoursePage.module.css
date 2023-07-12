@@ -1,5 +1,7 @@
 .component {
-  margin-top: 10vh; 
+  margin-top: 10vh;
+  display: flex;
+  flex-direction: column; 
   padding-bottom: 20%;
   animation:blur-in 0.4s linear both
   } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
@@ -8,15 +10,20 @@
     background-image: linear-gradient(to right,  #000000, #434343);
     height: 26%;
     padding: 2%;
+    width: 96%;
     margin-bottom:1%;
   }
   .mainBanner h1 {
-      color: white;
+    color: white;
   }
 
 .filterOrder {
-  margin-bottom: 1%;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
+}
+
+.cardComponent{
+  
+  margin-top: 3%;
 }

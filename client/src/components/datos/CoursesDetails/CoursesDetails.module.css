@@ -1,170 +1,92 @@
-.container{
-    scale: 0.8;
-    padding-bottom: 10%;
+.component {
+  height: 100vh;
+  scale: 0.8;
+  padding-bottom: 10%;
 }
+.component-dark {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.title {
+  position: absolute;
+  padding-left: 2%;
+  padding-top: 4%;
+  font-size: 44px;
+}
+.title-light {
+  color: black;
+}
+.title-dark {
+  color: rgb(255, 255, 255);
+}
+
 .container1{
-    padding-top: 12%;
-    display: flex;
-    align-items: center;
- 
-    justify-content: space-around;
-}
-  
-  .h1light {
-    position: absolute;
-    padding-left: 2%;
-    padding-top: 4%;
-    font-size: 44px;
-    color: black;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: 12%;
   }
-  .h1dark {
-    padding-left: 2%;
-
-    position: absolute;
-    padding-top: 4%;
-    font-size: 44px;
-    color: rgb(255, 255, 255);
-  }
-  .h2light {
-    font-size: 18px;
-    width: 60%;
-  }
-  .h2dark {
-    font-size: 18px;
-    width: 60%;
-  }
-
-  
-  .img{
+  .img {
     width: 400px;
     height: 400px;
     object-fit: cover;
   }
-  .container2{
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    padding: 4%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+  .description {
+    font-size: 18px;
+    width: 60%;  
   }
-  
-  .labellight {
-    color: black;
+
+.container-2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-content: center;
+  justify-items: center;
+  padding: 4%;
   }
-  
-  .plight {
-    color: #000000;
+
+  .p {
     padding-top:0%;
     font-size: 22px;
-  } 
-  
-  .pdark {
-    color: #fcf5f5;
-    font-size: 22px;
   }
-  .alight {
+  .p-light {
     color: #000000;
-    font-size: 42px;
-  } 
-  .adark {
+  }
+  .p-dark {
     color: #fcf5f5;
+  }
+
+  .link {
     font-size: 42px;
   }
+  .link-light {
+    color: #000000;
+  }
+  .link-dark {
+    color: #fcf5f5;
+  }
 
+.button-light {
+  border: 2px solid #302f2c;
+  background-color: white;
+  color: #302f2c;
+}
+.button-dark {
+  border: 2px solid white;
+  background-color: #302f2c;
+  color: white;
+}
 
-
-  .divlight {
-    /* Estilos para div en modo claro */
-  }
+/* //////////////////////////////////// */
   
-  .spanlight {
-    /* Estilos para span en modo claro */
-  }
-  
-  .formlight {
-    /* Estilos para form en modo claro */
-  }
-  
-  .hrlight {
-    /* Estilos para hr en modo claro */
-  }
-  
-  .errorlight {
-    /* Estilos para error en modo claro */
-  }
-  
-  .successlight {
-    /* Estilos para success en modo claro */
-  }
-  
-  .linklight {
-    /* Estilos para link en modo claro */
-  }
-  
-  .ullight {
-    /* Estilos para ul en modo claro */
-  }
-  
-
-  
-  .inputdark {
+  .input-dark {
     background-color: #302f2c;
     color: white;
   }
-  
-  .buttondark {
-    background-color: #302f2c;
-    color: white;
-    border: 2px solid white;
+  .label-light {
+    color: black;
   }
-  
-  .containerdark {
-    height: 100vh;
-    background-color: #000000;
-    color: #ffffff;
-    /* Estilos para containers en modo oscuro */
-  }
-  
-  .labeldark {
+  .label-dark {
     color: white;
   }
-  
- 
-  
-  .divdark {
-    /* Estilos para div en modo oscuro */
-  }
-  
-  .spandark {
-    /* Estilos para span en modo oscuro */
-  }
-  
-  .formdark {
-    /* Estilos para form en modo oscuro */
-  }
-  
-  .hrdark {
-    /* Estilos para hr en modo oscuro */
-  }
-  
-  .errordark {
-    /* Estilos para error en modo oscuro */
-  }
-  
-  .successdark {
-    /* Estilos para success en modo oscuro */
-  }
-  
-  .linkdark {
-    /* Estilos para link en modo oscuro */
-  }
-  
-  .uldark {
-    /* Estilos para ul en modo oscuro */
-  }
-  
-  .h2dark {
-    /* Estilos para h2 en modo oscuro */
-  }
-  

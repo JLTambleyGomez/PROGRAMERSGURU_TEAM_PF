@@ -3,14 +3,13 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
     sequelize.define("User", {
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                autoIncrement: true,
             },
             name: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: "pepito"
             },
             email: {
                 type: DataTypes.STRING,
@@ -19,7 +18,7 @@ module.exports = (sequelize) => {
                     isEmail: true,
                 },
             },
-            password: {
+            image: {
                 type: DataTypes.STRING,
                 allowNull: false,
             },
@@ -33,14 +32,13 @@ module.exports = (sequelize) => {
                 defaultValue: false,
                 allowNull: false,
             },
-            // expirationDate: {
-            //     type: DataTypes.DATEONLY,
-            //     defaultValue: null
-            // },
+            expirationDate: {
+                type: DataTypes.DATE,
+                defaultValue: sequelize.literal('CURRENT_TIMESTAMP')
+            },
             nickName: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: "pepito"
             },
         },
         { timestamps: false, freezeTableName: true }

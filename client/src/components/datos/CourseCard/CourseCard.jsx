@@ -1,21 +1,36 @@
 import { useState } from "react";
 import Card from "react-bootstrap/Card";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./CourseCard.module.css";
 
 //_________________________module_________________________
 function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, released, description, imageURL }) {
+const dark = useSelector((state) => state.darkMode);
+const navigate = useNavigate();
+
 
     //states:
     const [isFlipped, setIsFlipped] = useState(false);
 
     //const:
+
+    const handleclickcardtodetail = ()=>{
+        navigate(`/CourseDetails/${id}`)
+
+    }
     const handleMouseEnter = () => {
         setIsFlipped(true);
     };
 
     const handleMouseLeave = () => {
         setIsFlipped(false);
+    };
+
+    const theme = (base) => {
+        const suffix = dark ? 'dark' : 'light';
+        return `${base}-${suffix}`;
     };
 
     //component:
@@ -26,7 +41,8 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <div className={`${styles.cardContent} ${isFlipped ? styles.flipped : ""}`}>
+                <div onClick={handleclickcardtodetail} className={`${styles.cardContent} ${isFlipped ? styles.flipped : ""}`}>
+
                     <div className={styles.front}>
                         <Card.Body>
                             <Card.Title className={styles.title}>{title}</Card.Title>
@@ -36,7 +52,7 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
 
                     <div className={styles.back}>
                         <Card.Body>
-                            <Card.Title>Coste:{isFree}</Card.Title>  
+                            <Card.Title>Coste:{isFree ? "gratis" : "pago"}</Card.Title>  
                             <Card.Title>Rating : {meanRating}</Card.Title>  
                             <Card.Title>Idioma : {language}</Card.Title>  
                             <Card.Title><a className={styles.link} href= {courseUrl} target="_blank" rel="noopener noreferrer">VISITAR</a>

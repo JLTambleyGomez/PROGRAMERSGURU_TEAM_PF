@@ -2,7 +2,30 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
-  padding: 2%;
-  margin:2%;
+  margin:0 2% 2%;
   justify-content: space-evenly;
+}
+
+.paginado{
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  margin-top: -3%;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.672);
+  color: rgb(246, 251, 255);
+  animation:scale-up-horizontal-left 0.4s } @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
+  .paginado a {
+    text-decoration: none;
+    color: white;
+  }
+
+.numberBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 3px solid white;
+  width: 10%;
+  padding: 7px 100%;
+  border-radius: 4px;
 }

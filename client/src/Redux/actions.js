@@ -2,9 +2,9 @@ import {
 //COURSES:
     getCoursesAllRequest, 
     getCoursesByNameRequest, 
+    getCoursesByIdRequest,
     postCourseRequest,
     deleteCourseRequest,
-    getCoursesByIdRequest,
 //CATEGORIES:
     getCategoriesAllRequest, 
     postCategoriesRequest, 
@@ -168,9 +168,9 @@ export const getloged = (userData) => {
 
 
 export const filter_courses_by_price = (price) => {
-    if (price === "free") {
+    if (price === "true") {
         price = true
-    } else {
+    } else if(price==="false") {
         price = false
     }
     return {
@@ -262,15 +262,16 @@ export function clearMessage() {
       });
     };
   }
-  export function clearCourses() {
+
+export function clearCourses() {
     return {
-      type: CLEAR_COURSES,
+        type: CLEAR_COURSES,
     };
-  }
+}
 
 
-  //FAVORITES
-  export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
+//FAVORITES
+export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
             const data = await getFavoritesRequest(id); // request

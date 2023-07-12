@@ -34,6 +34,7 @@ function HomePage () {
         };
     }, [dispatch]);
 
+    //component:
     return (
         <div className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
