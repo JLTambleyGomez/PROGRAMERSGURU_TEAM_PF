@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
@@ -13,6 +13,7 @@ function CoursePage () {
 
     //states:
     const allCourses = useSelector((state) => state.courses)
+    const [isloading, setIsloading] = useState(true);
 
     //const:
     const dispatch = useDispatch();
@@ -26,8 +27,16 @@ function CoursePage () {
             dispatch(clearMessage());
             dispatch(clearCourses());
         };
-      }, [dispatch]);
-      
+    }, [dispatch]);
+
+    useEffect(() => {
+        setIsloading(true);
+        const timer = setTimeout(() => {
+            setIsloading(false);
+        }, 500);
+    }, [allCourses])
+
+    
     //component:
     return (
         <div className = {styles.component}>
@@ -36,10 +45,15 @@ function CoursePage () {
             </div>
             <div className={styles.filterOrder}>
                 <FilterBar/>
-                <OrderBar/>
-            </div >
+            </div>
+           
             <div className = {styles.cardComponent}>
-               {allCourses.length?(<CoursesCard allCourses = {allCourses}/>):""} 
+               {/* {allCourses.length?(<CoursesCard allCourses = {allCourses}/>):""}  */}
+                {
+                    isloading ? (<h1>CARGANDO...</h1>)
+                    : <CoursesCard/>
+                }
+                {/* {allCourses ? (<CoursesCard/>):"isLoading"}  */}
             </div>
         </div>
     )

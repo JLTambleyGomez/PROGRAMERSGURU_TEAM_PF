@@ -2,9 +2,9 @@ import {
 //COURSES:
     getCoursesAllRequest, 
     getCoursesByNameRequest, 
+    getCoursesByIdRequest,
     postCourseRequest,
     deleteCourseRequest,
-    getCoursesByIdRequest,
 //CATEGORIES:
     getCategoriesAllRequest, 
     postCategoriesRequest, 
@@ -169,9 +169,9 @@ export const getloged = (userData) => {
 
 
 export const filter_courses_by_price = (price) => {
-    if (price === "free") {
+    if (price === "true") {
         price = true
-    } else {
+    } else if(price==="false") {
         price = false
     }
     return {
@@ -262,7 +262,7 @@ export function clearMessage() {
             type: CLEAN_MESSAGE,
         });
     };
-}
+  }
 
 export function clearCourses() {
     return {

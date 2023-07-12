@@ -77,3 +77,21 @@
       .buttonIcon-dark {
         fill: white;
       }
+
+
+   .mensaje{
+    position: absolute;
+    top:50%;
+    right:10%;
+    color: rgb(247, 247, 247);
+    background-color: rgba(0, 0, 0, 0.418);
+    
+    animation:scale-up-horizontal-left 0.4s } 
+    
+    @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
+    /* COMPLETAR */
+    @keyframes hide-left {
+      0% {
+        transform: translate(-1000);
+      }
+    }

@@ -105,7 +105,7 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
         case ERROR:
             return {
                 ...state,
-                error: action.payload,
+                error: payload.message,
             };
         case CLEAN_MESSAGE:
             return {

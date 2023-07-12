@@ -5,7 +5,7 @@ import styles from "./LandingPage.module.css";
 import LoginForm from "../../datos/LoginForm/LoginForm";
 
 //_________________________module_________________________
-function LandingPage () {
+function LandingPage ({signInwithGoogle, authorizedUser}) {
 
     //states:
     const [backgroundImage, setBackgroundImage] = useState(0);
@@ -41,7 +41,7 @@ function LandingPage () {
                 <div className={styles.container2}>
                 <p className={styles.pS}>Acceso Para Suscriptores</p>
 
-                <LoginForm/>
+                <LoginForm  signInwithGoogle={signInwithGoogle} authorizedUser={authorizedUser}/>
             </div>
         </div>
     )
