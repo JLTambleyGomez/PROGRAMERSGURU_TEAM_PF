@@ -7,10 +7,16 @@ module.exports = (sequelize) => {
             primaryKey: true,
             autoIncrement: true,
         },
-        status: {
-            type: DataTypes.BOOLEAN
+        title: {
+            type: DataTypes.STRING
         },
-        subscriptionType: {
+        description: {
+            type: DataTypes.STRING
+        },
+        image: {
+            type: DataTypes.STRING
+        },
+        type: {
             type: DataTypes.ENUM('mensual', 'trimestral', 'anual'), // tipo de suscripcion: mensual, anual, etc
         }
     }, { timestamps: false , freezeTableName: true });
