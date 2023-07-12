@@ -70,19 +70,18 @@ function App() {
   
   //------------------------------------------------
   function createUser(email, password) {
-    // setPersistence(auth, inMemoryPersistence)
-    //   .then(() => {
-        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+    setPersistence(auth, inMemoryPersistence)
+      .then(() => {
+        // createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+          signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
           const user = userCredential.user;
           if (user) {
-            user.getIdToken().then((tkn) => {
-              // set access token in session storage
-              sessionStorage.setItem("accessToken", tkn);
+              const token = user.accessToken
+              sessionStorage.setItem("accessToken", token);
               setAuthorizedUser(true);
-            });
           }
         })
-      // })
+      })
       .catch((error) => {
         // Handle Errors here.
         const errorCode = error.code;
@@ -176,6 +175,7 @@ function App() {
               signInwithGoogle={signInwithGoogle}
               createUser={createUser}
               authorizedUser={authorizedUser}
+              setAuthorizedUser={setAuthorizedUser}
             />
           }
         />

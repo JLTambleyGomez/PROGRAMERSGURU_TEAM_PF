@@ -34,8 +34,9 @@ function HomePage({token}) {
     nickName: "",
     image: "",
     email: "",
-    password: "",
+    token: "",
   });
+  
   const fetchData = async (token) => {
     const response = await axios.get("http://localhost:3001/loginWithGoogle", {
       headers: {
@@ -43,15 +44,15 @@ function HomePage({token}) {
       },
     });
     
-    const { user_id, name, picture, email } = response.data.userData;
+    const { id, name, image, email } = response.data.userData;
     setUserData({
       ...userData,
-      id: user_id,
-      name: name,
-      nickName: name.split(" ")[0],
-      image: picture,
-      email: email,
-      password: token,
+      id,
+      name,
+      nickName: name,
+      image,
+      email,
+      token
     });
   };
   

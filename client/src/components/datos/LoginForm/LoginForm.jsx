@@ -118,6 +118,7 @@ function LoginForm({signInwithGoogle, authorizedUser, createUser}) {
                 Submit
               </button>
               <hr />
+            </form>
               {/* BOTON PARA INGRESAR CON GOOGLE */}
               <button
                 className={styles.button}
@@ -133,7 +134,6 @@ function LoginForm({signInwithGoogle, authorizedUser, createUser}) {
               ) : (
                 ""
               )}
-            </form>
           </div>
         </div>
       )}
