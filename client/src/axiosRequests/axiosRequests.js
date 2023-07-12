@@ -90,3 +90,10 @@
         await axios.delete(`http://localhost:3001/favorite/${id}`);
         setFav(false)
     }
+
+    //user______________________________
+
+    export const postCourseRequest = async (datos) => {
+        const { data } = await axios.get("http://localhost:3001/course",datos)
+        return data;
+    }

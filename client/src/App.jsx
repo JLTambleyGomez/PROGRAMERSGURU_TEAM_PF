@@ -139,7 +139,7 @@ function App() {
         <Route path="/Commingsoon" element={<Commingsoon />} />
         Commingsoon
       </Routes>
-      {isAtBottom && <Footer />}
+      {location !== "/" && location !== "/AdminPanel" && location !== "/CoursePage" && isAtBottom && <Footer />}
     </div>
   );
 }
