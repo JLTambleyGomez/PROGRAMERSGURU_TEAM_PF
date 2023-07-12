@@ -6,23 +6,27 @@ import styles from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 
 //_________________________module_________________________
-function LoginForm({signInwithGoogle, authorizedUser}) {
-  const dispatch = useDispatch()
+function LoginForm({signInwithGoogle, authorizedUser, createUser}) {
+  // const dispatch = useDispatch()
   //states:
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
   const [errors, setErrors] = useState({
     email: "",
     password: "",
   });
 
   //functions:
-  const handleOnchange = (event) => {
-    const { property, value } = event.target;
-    setUserData({ ...userData, [property]: value });
-    validate({ ...userData, [property]: value }, errors, setErrors);
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
+    validate({ ...userData, [name]: value }, errors, setErrors);
   };
 
   const handleToggleForm = () => {
@@ -35,12 +39,15 @@ function LoginForm({signInwithGoogle, authorizedUser}) {
     setShowButton(true);
   };
 
+  const showPassword = (event) => {
+    event.preventDefault()
+    setPasswordVisible(!passwordVisible)
+  }
+
   const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    //   dispatch(getloged(userData));
-    // access && navigate("/HomePage");
+    createUser(userData.email, userData.password)
   };
 
   //component:
@@ -66,14 +73,14 @@ function LoginForm({signInwithGoogle, authorizedUser}) {
                 Email
               </label>
               <input
-                onChange={handleOnchange}
+                onChange={handleChange}
                 className={styles.input}
                 name="email"
                 type="email"
                 placeholder="Ingresa Email"
               />
-              {errors.username && (
-                <p className={styles.error}>{errors.username}</p>
+              {errors.email && (
+                <p className={styles.error}>{errors.email}</p>
               )}
 
               {/* PASSWORD */}
@@ -82,7 +89,7 @@ function LoginForm({signInwithGoogle, authorizedUser}) {
               </label>
               <div className={styles.password}>
                 <input
-                  onChange={handleOnchange}
+                  onChange={handleChange}
                   className={styles.input}
                   name="password"
                   type={passwordVisible ? "text" : "password"}
@@ -92,7 +99,7 @@ function LoginForm({signInwithGoogle, authorizedUser}) {
               {/* TOGGLE PASSWORD VISIBILITY */}
               <button
                 className={styles.button}
-                onClick={() => setPasswordVisible(!passwordVisible)}
+                onClick={showPassword}
               >
                 {passwordVisible ? "Hide Password" : "Show Password"}
               </button>
@@ -122,7 +129,6 @@ function LoginForm({signInwithGoogle, authorizedUser}) {
               {authorizedUser ? (
                 <>
                   {authorizedUser && navigate("/HomePage")}
-                  {/* <FetchData token={sessionStorage.getItem("accessToken")}/> */}
                 </>
               ) : (
                 ""

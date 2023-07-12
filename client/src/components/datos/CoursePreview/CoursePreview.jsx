@@ -7,7 +7,7 @@ import styles from "./CoursePreview.module.css";
 //_________________________module_________________________
 function CoursePreview ({ id, title, description, rating, isFree, language, imageURL }) {
 
-    console.log(id)
+    // console.log(id)
     //states:    
     const darkmode = useSelector((state) => state.darkMode);
     const [elementClasses, setElementClasses] = useState({

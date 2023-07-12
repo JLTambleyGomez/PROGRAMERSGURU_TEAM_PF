@@ -61,7 +61,6 @@ function HomePage({token}) {
   useEffect(() => {
     dispatch(get_categories());
     dispatch(get_courses_all());
-    dispatch(get_Favorites_Request(1));
 
     if (token) {
         fetchData(token);
