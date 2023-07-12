@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   get_categories,
   get_courses_all,
-  clearCourses,
   clearMessage,
   get_Favorites_Request,
 } from "../../../Redux/actions";

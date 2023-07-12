@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { get_courses_by_id, clearCourses, clearMessage, } from "../../../Redux/actions";
+import { get_courses_by_id, clearCourses, clearMessage, get_courses_all} from "../../../Redux/actions";
 
 import axios from "axios"; //remover axios => axiosRequests.js
 import styles from "./CoursesDetails.module.css";
@@ -12,7 +12,7 @@ function CourseDetails () {
     //global states:
     const course = useSelector((state) => state.allCourses);
     const favorites = useSelector((state) => state.favorites);
-    const darkmode = useSelector((state)=> state.darkMode);
+    const dark = useSelector((state)=> state.darkMode);
 
     //states:
     const [isFav, setFav] = useState(false);
@@ -22,27 +22,12 @@ function CourseDetails () {
     let { id } = useParams();
     id = parseInt(id);
 
-    const [elementClasses, setElementClasses] = useState({
-        h1: "h1light",
-        input: "inputlight",
-        button: "buttonlight",
-        buttoncontainer:"buttoncontainerlight",
-        container: "containerslight",
-        label: "labellight",
-        a:"alight",
-        p:"plight",
-        div:"divlight",
-        span:"spanlight",
-        form: "formlight",
-        hr: "hrlight",
-        error:"errorlight",
-        success:"successlight",
-        link:"linklight",
-        ul:"ullight",
-        h2:"h2light",
-    });
-
     //functions:
+    const theme = (base) => {
+        const suffix = dark ? 'dark' : 'light';
+        return `${base}-${suffix}`;
+    };
+
     const getDetails = async () => {
         await dispatch(get_courses_by_id(id))
     }
@@ -66,42 +51,33 @@ function CourseDetails () {
     // dispatch(get_courses_by_id(id)) dentro del useEffect. 
     //life-cycles:
     useEffect(() => {
-        getDetails()
+        getDetails();
         favorites?.forEach((fav) => {
-            console.log(fav)
+            console.log(fav);
             if (fav.id == id) setFav(true); 
-        });
-        return () => {
-            dispatch(clearMessage());
-            dispatch(clearCourses());
+        })
+        return async () => {
+            await dispatch(clearMessage());
+            await dispatch (clearCourses())
+            await dispatch(get_courses_all())
         };
     }, [dispatch]);
 
-    useEffect(() => {
-        const updatedElementClasses = {};
-
-        Object.keys(elementClasses).forEach((key) => {
-            updatedElementClasses[key] = `${key}${darkmode ? "dark" : "light"}`;
-        });
-
-        setElementClasses(updatedElementClasses);
-    }, [darkmode]);
-
     //component:
     return(
-        <div className={styles.container}>
-            <h1  className={`${styles.h1} ${styles[elementClasses.h1]}`}>{course.title}</h1>
+        <div className={`${styles.component} ${styles[theme("component")]}`}>
+            <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1>
 
-            <div className={styles.container1} >
-                <img src={course.imageURL} className={styles.img}/>
-                <h2 className={`${styles.h2} ${styles[elementClasses.h2]}`}> {course.description}</h2>
+            <div className={styles.container1}>
+                <img className={styles.img} src={course.imageURL}/>
+                <h2 className={`${styles.description} ${styles[theme("description")]}`}>{course.description}</h2>
             </div>
 
             <div className={styles.container2}>
-                <h2 className={`${styles.p} ${styles[elementClasses.p]}`}> Ratings: {course.rating}</h2>
-                <h3 className={`${styles.p} ${styles[elementClasses.p]}`}>Release date: {course.released}</h3>
-                <h2 className={`${styles.p} ${styles[elementClasses.p]}`}>Categories:</h2>
-                <h4  className={`${styles.p} ${styles[elementClasses.p]}`}>Language: {course.language}</h4>
+                <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
+                <h3 className={`${styles.p} ${styles[theme("p")]}`}>Release date: {course.released}</h3>
+                <h2 className={`${styles.p} ${styles[theme("p")]}`}>Categories:</h2>
+                <h4 className={`${styles.p} ${styles[theme("p")]}`}>Language: {course.language}</h4>
                 {
                     course.isFree === true ? (
                         <h3>This course is free</h3>
@@ -109,13 +85,14 @@ function CourseDetails () {
                         <h3>This course requires payment</h3>
                     )
                 }
-                <a  className={`${styles.a} ${styles[elementClasses.a]}`} href={course.courseUrl}>Entrar aquí</a>
+                <a className={`${styles.link} ${styles[theme("link")]}`} href={course.courseUrl} target="_blank">Entrar aquí</a>
             </div>
-            { 
+
+            {
                 isFav ? (
-                    <button onClick={deleteFavoritesRequest}>Quitar de favoritos ❤️</button>
+                    <button className={`${styles.button} ${styles[theme("button")]}`} onClick={deleteFavoritesRequest}>Quitar de favoritos ❤️</button>
                 ) : (
-                    <button onClick={postFavoritesRequest}>Añadir a favoritos 🤍</button>
+                    <button className={`${styles.button} ${styles[theme("button")]}`} onClick={postFavoritesRequest}>Añadir a favoritos 🤍</button>
                 )
             }
         </div>

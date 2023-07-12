@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
         "User",
         {
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.UUID,
+                defaultValue: DataTypes.UUIDV4,
                 primaryKey: true,
-                autoIncrement: true,
             },
             name: {
                 type: DataTypes.STRING,
@@ -20,7 +20,9 @@ module.exports = (sequelize) => {
                     isEmail: true,
                 },
             },
+
             picture: {
+
                 type: DataTypes.STRING,
                 allowNull: false,
             },
