@@ -1,0 +1,25 @@
+{"products" : [{
+    "name": "Laptop or Desktop Computer",
+    "price": 1000,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_741120-MLA52367887280_112022-O.webp",
+    "description": "A powerful computer for programming and development tasks."
+  },
+  {
+    "name": "High-resolution Monitor",
+    "price": 200,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_615006-MLU69482630056_052023-O.webp",
+    "description": "A large display with high resolution for better productivity."
+  },
+  {
+    "name": "Mechanical Keyboard",
+    "price": 100,
+    "image": "https://http2.mlstatic.com/D_NQ_NP_876249-MLA51700399267_092022-O.webp",
+    "description": "A keyboard with mechanical switches for a comfortable typing experience."
+  },
+  {
+    "name": "Ergonomic Mouse",
+    "price": 50,
+    "image":"https://http2.mlstatic.com/D_NQ_NP_989281-MLA49016297014_022022-O.webp",
+    "description": "A mouse designed to provide comfort and reduce strain during long hours of work."
+  }]
+}
