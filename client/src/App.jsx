@@ -41,7 +41,7 @@ function App() {
 
   const auth = getAuth();
 
-  //------------------------------------------------
+  //------------------------signInWithGoolge------------------------
   function signInwithGoogle() {
     setPersistence(auth, inMemoryPersistence)
       .then(() => {
@@ -69,11 +69,37 @@ function App() {
   }
   
   //------------------------------------------------
+  //------------------------signInWithEmailAndPassword------------------------
+  function signIn(email, password) {
+    setPersistence(auth, inMemoryPersistence)
+      .then(() => {
+          signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+          const user = userCredential.user;
+          if (user) {
+              const token = user.accessToken
+              sessionStorage.setItem("accessToken", token);
+              setAuthorizedUser(true);
+          }
+        })
+      })
+      .catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.customData.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        return [errorCode, errorMessage, email, credential];
+      });
+  }
+
+  //------------------------------------------------
+  //------------------------signInWithEmailAndPassword------------------------
   function createUser(email, password) {
     setPersistence(auth, inMemoryPersistence)
       .then(() => {
-        // createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
-          signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
           const user = userCredential.user;
           if (user) {
               const token = user.accessToken
@@ -97,6 +123,7 @@ function App() {
   const navigate = useNavigate();
 
   //------------------------------------------------
+  //------------------------signOut------------------------
   function logoutUser() {
     signOut(auth)
       .then(() => {
@@ -174,6 +201,7 @@ function App() {
             <LandingPage
               signInwithGoogle={signInwithGoogle}
               createUser={createUser}
+              signIn={signIn}
               authorizedUser={authorizedUser}
               setAuthorizedUser={setAuthorizedUser}
             />
