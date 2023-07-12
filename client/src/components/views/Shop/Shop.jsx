@@ -22,21 +22,21 @@ function Shop () {
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
     const [isVisibleSortByPrice, setIsVisibleSortByPrice] = useState(false);
 
+    const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
     const [cartItems, setCartItems] = useState([]);
-    const [isCartExpanded, setCartExpanded] = useState(false); // no se esta usando el estado.
 
     //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
-      };
+    };
 
     const syncInput = (event) => {
         const { value } = event.target;
         setInput(value);
     }
-
+//___________________
     const toggleVisibilityPrice = () => {
         setIsVisiblePrice(!isVisiblePrice);
     }
@@ -56,7 +56,7 @@ function Shop () {
     const handlePriceChange = (values) => {
         setPriceRange(values);
     };
-    
+//_________________
     const handleMouseEnter = (index) => {
         const newCartTooltips = [...cartTooltips];
         newCartTooltips[index] = true;
@@ -71,16 +71,13 @@ function Shop () {
 
     const addToCart = (item) => {
         setCartItems([...cartItems, item]);
-        setCartExpanded(true);
+        setSelectQuantity()
     };
 
     const removeFromCart = (index) => {
         const newCartItems = [...cartItems];
-            newCartItems.splice(index, 1);
-            setCartItems(newCartItems);
-        if (newCartItems.length === 0) {
-            setCartExpanded(false);
-        }
+        newCartItems.splice(index, 1);
+        setCartItems(newCartItems);
     };
 
     const calculateTotal = () => {
@@ -100,9 +97,7 @@ function Shop () {
     }, []);
 
     useEffect(() => {
-        console.log(cartItems)
-        console.log(cartTooltips);
-    }, [cartItems, cartTooltips])
+    }, [])
 
     //component:
     return (
@@ -177,7 +172,7 @@ function Shop () {
                         {
                             products.map((product, index) => {
                                 return (
-                                    <div className={s['item']}>
+                                    <div className={`${s['item']}`} >
                                         <img className={s["itemImage"]} src={product.image}></img>
                                         <h1 className={s["name"]} >{product.name}</h1>
                                         <div className={s.priceAndCart}>
