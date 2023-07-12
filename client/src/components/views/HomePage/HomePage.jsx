@@ -38,15 +38,11 @@ function HomePage({token}) {
     password: "",
   });
   const fetchData = async (token) => {
-    console.log(token)
     const response = await axios.get("http://localhost:3001/loginWithGoogle", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-
-    console.log("homepage fetchdata");
-    console.log(response);
     
     const { user_id, name, picture, email } = response.data.userData;
     setUserData({
@@ -58,17 +54,16 @@ function HomePage({token}) {
       email: email,
       password: token,
     });
-    console.log(email);
   };
   
   //-------------------------------------------------------------------------
-  
+
   //life-cycles:
   useEffect(() => {
     dispatch(get_categories());
     dispatch(get_courses_all());
     dispatch(get_Favorites_Request(1));
-    console.log("me rendericé");
+
     if (token) {
         fetchData(token);
       }

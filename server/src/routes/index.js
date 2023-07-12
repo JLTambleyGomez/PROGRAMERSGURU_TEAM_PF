@@ -24,11 +24,8 @@ router.use("/user", userRouter);
 
 router.use(middleware.decodeToken);
 router.get('/loginWithGoogle', (req, res) => {
-    console.log("ruta logingoogle")
-
 	try {
         const {user_id, name, picture, email} = req.user;
-        console.log(req.user);
         return res.json({
             userData: {
                 id: user_id,
