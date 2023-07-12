@@ -1,8 +1,8 @@
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, signOut, GoogleAuthProvider,  onAuthStateChanged } from "firebase/auth";
 import app from "../../../config/firebase";
 import "firebase/auth";
 import { useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 import { useSelector,useDispatch} from "react-redux";
 import { getloged } from "../../../Redux/actions";
 import validate from "./validate";
@@ -22,29 +22,39 @@ function LoginForm () {
 
     const [auth, setAuth] = useState(false);
 
+    
     // useEffect(() => {
-    //     firebase.auth().onAuthStateChanged((userCred));
-    //     console.log(userCred);
-    //     if(userCred) {
-    //         setAuth(true);
-    //     }
-    // }, [])
-      
-    const loginWithGoogle = () => {
-        const auth = getAuth(app);
-        const provider = new GoogleAuthProvider();
-      
-        signInWithPopup(auth, provider)
-          .then((userCred) => {
-            console.log(userCred);
+        //     const auth = getAuth(app);
+        
+        //     const unsubscribe = onAuthStateChanged(auth, (user) => {
+            //       if (user) {
+                //         setAuth(true);
+                //         console.log(user);
+                //       }
+                //     });
+                
+                //     return () => unsubscribe();
+                //   }, []);
+                
+                
+        const loginWithGoogle = () => {
+          const auth = getAuth(app);
+          const provider = new GoogleAuthProvider();
+          signInWithPopup(auth, provider)
+         .then((userCred) => {
+          console.log(userCred);
             if (userCred) {
-              setAuth(true);
+                setAuth(true);
+            } else {
+                setAuth(false);
             }
-          })
+        })
           .catch((error) => {
             console.log(error);
           });
       };
+
+     
       
 
     const [userData, setUserData]=useState({
@@ -92,7 +102,7 @@ function LoginForm () {
                 )
             }
             {
-                showForm && ( 
+                showForm && (
                     <div className={styles.container}>
                     <div className={styles.form}>
                     {/* CLOSE FORM */}
@@ -134,21 +144,12 @@ function LoginForm () {
                             <button className={styles.button} type="submit">Submit</button>
                             <hr/>
                             {/* BOTON PARA INGRESAR CON GOOGLE */}
-                            
+
                             {auth ? (
-                                navigate("/HomePage")) : 
-                                
+                                navigate("/HomePage")) :
+
                                 <button onClick ={loginWithGoogle}>Sign in with Google</button>
                             }
-                              
-                            {/* <div xlassName = "App">
-                             {auth ? (
-                             <h1>Todos</h1>
-                              ) : (
-                              <button onClick={loginWithGoogle}>Sign in with Google</button>
-                                   )
-                            )}
-                             </div> */}
                         </form>
                     </div>
                     </div>
