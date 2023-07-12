@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
             },
             expirationDate: {
                 type: DataTypes.DATE,
-                defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+                defaultValue: sequelize.literal("CURRENT_TIMESTAMP"),
             },
             nickName: {
                 type: DataTypes.STRING,
