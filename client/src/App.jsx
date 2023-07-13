@@ -39,7 +39,7 @@ function App() {
     try {
       
       const {data} = await axios.post("http://localhost:3001/user/signup", userData)
-      return alert(data.message)
+      return "usuario posteado"
     } catch (error) {
       console.log(error);
       return console.log(error.message);
@@ -58,7 +58,6 @@ function App() {
         picture: user.photoURL,
         name: user.displayName
       }
-      console.log(user);
       
       postUserRequest(userData);
 

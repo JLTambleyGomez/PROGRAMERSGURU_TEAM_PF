@@ -43,7 +43,7 @@ function HomePage({token}) {
   });
   
   const fetchData = async (token) => {
-    const response = await axios.get("http://localhost:3001/loginWithGoogle", {
+    const response = await axios.get("http://localhost:3001/user/loginWithGoogle", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -84,14 +84,16 @@ function HomePage({token}) {
     };
   }, [dispatch]);
 
-  useEffect(() => {
-    if (token) {
-      fetchData(token);
-    }
-    // if (userData.token) {
-    //   postNewUser()
-    // }
-  }, [])
+  // let cont = 0
+  // useEffect(() => {
+  //   if (token && cont === 0) {
+  //     cont += 1
+  //     fetchData(token);
+  //   }
+  //   // if (userData.token) {
+  //   //   postNewUser()
+  //   // }
+  // }, [])
 
   return (
     <div className={`${s.component} ${s[theme("component")]}`}>
