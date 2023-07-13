@@ -37,10 +37,9 @@ function App() {
 
   const postUserRequest = async (userData) => {
     try {
-      // const dataUser = JSON.parse(userData)
+      
       const {data} = await axios.post("http://localhost:3001/user/signup", userData)
-      console.log(data);
-      return console.log("se hizo el pedido")
+      return alert(data.message)
     } catch (error) {
       console.log(error);
       return console.log(error.message);
@@ -60,7 +59,7 @@ function App() {
         name: user.displayName
       }
       console.log(user);
-      // const dataUser = JSON.stringify(userData)
+      
       postUserRequest(userData);
 
       } else {

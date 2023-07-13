@@ -7,7 +7,8 @@ const putProduct = async (req, res) => {
             description,
             image,
             price,
-            category
+            category,
+            stock
         } = req.body;
 
         const { id } = req.params;
@@ -15,7 +16,8 @@ const putProduct = async (req, res) => {
             !description,
             !image,
             !price,
-            !category)
+            !category,
+            !stock)
         return res.status(400).json({ message: "Error, debe ingresar datos a cambiar"});
 
         const productDB = await Product.findByPk(id);

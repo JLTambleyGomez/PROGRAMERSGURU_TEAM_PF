@@ -33,50 +33,6 @@ function HomePage({token}) {
   };
 
   //-------------------------------------------------------------------------
-  // const postUserRequest = async (data) => {
-  //   try {
-  //     const {data} = await axios.post("http://localhost:3001/user/signup", data)
-  //     console.log(data);
-  //     return console.log("se hizo el pedido")
-  //   } catch (error) {
-  //     console.log(error);
-  //     return console.log(error.message);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (user) => {
-  //     if (user) {
-  //       // El usuario está autenticado
-  //       // Acciones a realizar cuando el usuario está autenticado
-  //     console.log("el usuario fue autenticado correctamente");
-  //     console.log({
-  //       id: user.uid,
-  //       email: user.email,
-  //       picture: user.photoURL,
-  //       name: user.displayName
-  //     });
-  //     const userData = {
-  //       id: user.uid,
-  //       email: user.email,
-  //       picture: user.photoURL,
-  //       name: user.displayName
-  //     }
-      
-  //     postUserRequest(userData)
-
-  //     } else {
-  //       // El usuario no está autenticado
-  //       // Acciones a realizar cuando el usuario no está autenticado
-  //       console.log("el usuario no esta autenticado");
-  //     }
-  //   });
-
-  //   return () => {
-  //     unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
-  //   };
-  // }, []);
-  //-------------------------------------------------------------------------
   const [userData, setUserData] = useState({
     id: "",
     name: "",
