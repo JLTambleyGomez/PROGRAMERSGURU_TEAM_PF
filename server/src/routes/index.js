@@ -15,7 +15,6 @@ router.use("/product", productRouter);
 
 router.use("/favorite", favoriteRouter);
 
-
 router.use("/user", userRouter);
 // router.use(middleware.decodeToken);
 // router.get("/loginWithGoogle", async (req, res) => {
