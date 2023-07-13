@@ -22,6 +22,7 @@ import {
 
     getUserByEmail,
 
+
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -56,6 +57,9 @@ import {
 
     //USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+
+    //CART
+    export const SET_CART= "SET_CART";
 
     
 //__________________________________________________
@@ -309,7 +313,7 @@ export const get_products_all = () => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message // error.response.data.message,
             });
         }
     }
@@ -373,4 +377,13 @@ export const get_User_By_Email = (userEmail) => {
             });
         }
     };/*/
+}
+
+//CART_____________________________________________//
+
+export const set_cart = () => {
+    return {
+        type: SET_CART,
+        payload: JSON.parse(localStorage.getItem("cart"))
+    }
 }

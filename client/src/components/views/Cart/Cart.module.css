@@ -1,13 +1,14 @@
 .container{
-    margin-top: 5%;
-    padding-top: 4%;
-    padding-bottom: 15%;
-    width: 100%;
-    background-color: rgb(94, 121, 148);
-    color: aliceblue;
-    animation:blur-in 1s linear both}
-     @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
-    
+  margin-top: 10vh;
+  padding-top: 4%;
+  padding-bottom: 15%;
+  width: 100%;
+  min-height: 90vh;
+  background-color: rgb(94, 121, 148);
+  color: aliceblue;
+  animation:blur-in 1s linear both}
+    @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+ 
 .img{
     width:100px;
     height: 100px;

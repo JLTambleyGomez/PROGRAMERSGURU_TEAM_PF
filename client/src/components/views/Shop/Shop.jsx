@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all } from "../../../Redux/actions"
+import { get_products_all, set_cart } from "../../../Redux/actions"
 
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,10 +25,7 @@ function Shop () {
 
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
-    const [cartItems, setCartItems] = useState([]);
-
-    //local storage:
-    localStorage.setItem("cart",JSON.stringify(cartItems));
+    const cartItems = useSelector((state)=> state.cart)
 
     //const:
     const dispatch = useDispatch();
@@ -76,16 +73,33 @@ function Shop () {
         setCartTooltips(newCartTooltips);
     };
 
-    const addToCart = (item) => {
-        setCartItems([...cartItems, item]);
-        setSelectQuantity()
-        localStorage.setItem("cart",JSON.stringify(cartItems));
-    };
+    const addToCart = async (item) => {
+        // setCartItems([...cartItems, item]);
+        // setSelectQuantity()
+        const cart = await localStorage.getItem("cart")
+        if (!cart) {
+            await localStorage.setItem("cart", "[]")
+        }
+        if(!cart.includes(item)) {
+        item.quantity = 1; // crea una nueva propiedad al producto.
 
-    const removeFromCart = (index) => {
-        const newCartItems = [...cartItems];
+        const oldCart = JSON.parse(localStorage.getItem("cart")) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+        oldCart.push(item)
+        localStorage.setItem("cart", JSON.stringify(oldCart))
+        dispatch(set_cart())
+    }};
+
+    const removeFromCart = async (id) => {
+        const cart = await localStorage.getItem("cart")
+        if (!cart) {
+            await localStorage.setItem("cart", "[]")
+        }
+        const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+        localStorage.setItem("cart", JSON.stringify(oldCart))
+        dispatch(set_cart())
+      /*  const newCartItems = [...cartItems];
         newCartItems.splice(index, 1);
-        setCartItems(newCartItems);
+        setCartItems(newCartItems);*/
     };
 
     const calculateTotal = () => {
@@ -100,10 +114,16 @@ function Shop () {
     //life-cycles:
     useEffect(() => {
         // Initialize the cartTooltips array with the same length as the number of items
+        // (async () => {
         dispatch(get_products_all());
+        // })()
         const initialCartTooltips = new Array(4).fill(false);
         setCartTooltips(initialCartTooltips);
     }, []);
+
+    useEffect(() => {
+        dispatch(set_cart())
+    }, [])
 
     //component:
     return (
@@ -210,13 +230,13 @@ function Shop () {
             </section>
             <section className={s.section4}>
                 <h2>Resumen de compras</h2>
-                {cartItems.length > 0 ? (
+                {cartItems?.length > 0 ? (
                     <>
                         <ul>
                         {cartItems.map((item, index) => (
                             <li key={index}>
                                 {item.name} - ${item.price}
-                                <button onClick={() => removeFromCart(index)}>
+                                <button onClick={() => removeFromCart(item.id)}>
                                     <FontAwesomeIcon icon={faTrash} />
                                 </button>
                             </li>
@@ -228,7 +248,6 @@ function Shop () {
                     <p>Tu carrito de compras está vacío</p>
                 )}
             </section>
-
         </main>
     )
 }

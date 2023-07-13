@@ -15,7 +15,7 @@ import AdminPanel from "./components/views/AdminPanel/AdminPanel";
 import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
-
+import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
 
 
 
@@ -43,7 +43,7 @@ function App() {
     try {
       
       const {data} = await axios.post("http://localhost:3001/user/signup", userData)
-      return alert(data.message)
+      return "usuario posteado"
     } catch (error) {
       console.log(error);
       return console.log(error.message);
@@ -62,9 +62,9 @@ function App() {
         picture: user.photoURL,
         name: user.displayName
       }
-      console.log(user);
       
-      postUserRequest(userData);
+      postUserRequest(userData)
+      
 
       } else {
         // El usuario no está autenticado
@@ -267,6 +267,7 @@ function App() {
         <Route path="/CourseDetails/:id" element={<CourseDetails />} />
         <Route path="/Commingsoon" element={<Commingsoon />} />
         <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+        <Route path="/PruebaMetamask" element={<PagoMetamask />} />
 
         
       </Routes>

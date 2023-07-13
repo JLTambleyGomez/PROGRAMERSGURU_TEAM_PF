@@ -25,7 +25,7 @@ function HomePage({token}) {
   //const:
   const dispatch = useDispatch();
   const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
-
+  const token2 = sessionStorage.getItem("accessToken")
   //functions:
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
@@ -43,7 +43,7 @@ function HomePage({token}) {
   });
   
   const fetchData = async (token) => {
-    const response = await axios.get("http://localhost:3001/loginWithGoogle", {
+    const response = await axios.get("http://localhost:3001/user/loginWithGoogle", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -66,7 +66,6 @@ function HomePage({token}) {
       const response = await axios.post("http://localhost:3001/user/signup", 
         userData
       );
-      console.log(response.data.userData);
       return response.data.userData.newUser
     } catch (error) {
       // return error.data.message
@@ -84,13 +83,12 @@ function HomePage({token}) {
     };
   }, [dispatch]);
 
+  let cont = 0 
   useEffect(() => {
-    if (token) {
+    if (token && cont === 0) {
+      cont += 1
       fetchData(token);
     }
-    // if (userData.token) {
-    //   postNewUser()
-    // }
   }, [])
 
   return (

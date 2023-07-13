@@ -26,7 +26,9 @@ import {
     GET_PRODUCTS,
     DELETE_PRODUCT,
     //USER
-    GET_USER_BY_EMAIL
+    GET_USER_BY_EMAIL,
+    //
+    SET_CART
 
 } from "./actions";
 
@@ -36,7 +38,7 @@ import {
 //___________________________________________________
 
 //GLOBAL STORAGE:
-const goblalStorage = {
+const globalStorage = {
     allCourses:[],              //NO TOCAR SIN AVISAR ANTES
     courses:[],
     categories:[],
@@ -52,7 +54,7 @@ const goblalStorage = {
 
 
 //REDUCER:
-export default function rootReducer ( state = goblalStorage, { type, payload } ) {
+export default function rootReducer ( state = globalStorage, { type, payload } ) {
 
     switch (type) {
 
@@ -147,14 +149,28 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
          case DELETE_PRODUCT:
             return { ...state, message: payload};
 
-
         case GET_USER_BY_EMAIL:
             return {
                 ...state,
                 user: payload,
             };
-            
+
+        case SET_CART:
+            return {
+                ...state,
+                cart: payload
+            };
 
         default: return {...state}; 
     }
 }
+
+
+
+// const cart = await localStorage.getItem("cart")
+// if (!cart) {
+//     await localStorage.setItem("cart", "[]")
+// }
+// const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+// localStorage.setItem("cart", JSON.stringify(oldCart))
+// dispatch(add_to_cart())
