@@ -27,8 +27,7 @@ function Shop () {
     const [cartTooltips, setCartTooltips] = useState([]);
     const [cartItems, setCartItems] = useState([]);
 
-    //localstorage
-    
+    //local storage:
     localStorage.setItem("cart",JSON.stringify(cartItems));
 
     //const:
@@ -180,6 +179,8 @@ function Shop () {
                             products.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
+                                        <div>
+                                        </div>
                                         <img className={s["itemImage"]} src={product.image}></img>
                                         <h1 className={s["name"]} >{product.name}</h1>
                                         <div className={s.priceAndCart}>
@@ -187,7 +188,7 @@ function Shop () {
                                             <button 
                                                 onMouseEnter={() => handleMouseEnter(index)}
                                                 onMouseLeave={() => handleMouseLeave(index)}
-                                                onClick={() => addToCart(product)} >
+                                                onClick={() => addToCart(product)}>
                                             <FontAwesomeIcon
                                                 icon={faShoppingCart}
                                                 className={s.cartIcon}

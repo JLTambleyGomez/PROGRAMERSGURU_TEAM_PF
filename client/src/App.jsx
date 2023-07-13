@@ -265,7 +265,9 @@ function App() {
         <Route path="/AdminPanel" element={<AdminPanel />} />
         <Route path="/CourseDetails/:id" element={<CourseDetails />} />
         <Route path="/Commingsoon" element={<Commingsoon />} />
-        Commingsoon
+        <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+
+        
       </Routes>
       {isAtBottom && <Footer />}
     </div>
