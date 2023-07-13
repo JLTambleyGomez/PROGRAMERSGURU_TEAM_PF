@@ -1,8 +1,9 @@
 import styles from "./Cart.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "../ventanaemergente/ventana";
+import { set_cart } from "../../../Redux/actions"
 //import { products } from "../../../Redux/product.json";
 
 //_________________________module_________________________
@@ -10,21 +11,30 @@ function Cart () {
 
     //global state:
     const user = useSelector((state) => state.user);
-    const cart = useSelector((state)=>state.cart)
+    const cart = useSelector((state) => state.cart)
 
     //states:
     const [ventana, setVentana] = useState(true);
 
     //const:
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const handleAddButton = (type, P) => {
         if (type === "suma" && P.quantity < P.stock) {
-            cart.quantity = cart.quantity + 1;
+            P.quantity = P.quantity + 1;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            dispatch(set_cart())
         } else if (type === "resta" && P.quantity > 0) {
-            cart.quantity = cart.quantity - 1;
+            P.quantity = P.quantity - 1;
+            localStorage.setItem("cart", JSON.stringify(cart))
+            dispatch(set_cart())
         }
     };
+
+    // const addProduct = (id) => {
+    //     cart.filter()
+    // }
 
     const handleDetailButtons= (id)=>{
         navigate(`/ProductDetail/${id}`)
@@ -35,8 +45,12 @@ function Cart () {
         if (user.name) {
             setVentana(false);
         }
-        console.log(cart)
+        dispatch(set_cart())
     }, []);
+
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
 
     //component:
     return (

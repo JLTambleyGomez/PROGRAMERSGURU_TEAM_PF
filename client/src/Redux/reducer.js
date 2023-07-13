@@ -158,7 +158,7 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case SET_CART:
             return {
                 ...state,
-                cart: payload
+                cart: JSON.parse(localStorage.getItem("cart"))
             };
 
         default: return {...state}; 

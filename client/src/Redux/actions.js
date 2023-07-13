@@ -384,6 +384,6 @@ export const get_User_By_Email = (userEmail) => {
 export const set_cart = () => {
     return {
         type: SET_CART,
-        payload: JSON.parse(localStorage.getItem("cart"))
     }
 }
+

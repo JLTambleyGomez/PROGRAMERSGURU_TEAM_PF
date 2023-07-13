@@ -80,14 +80,15 @@ function Shop () {
         if (!cart) {
             await localStorage.setItem("cart", "[]")
         }
-        if(!cart.includes(item)) {
+        // if(!cart.includes(item)) {
         item.quantity = 1; // crea una nueva propiedad al producto.
 
         const oldCart = JSON.parse(localStorage.getItem("cart")) //convierte el JSON del carrito en un objeto js, en este caso, un array.
         oldCart.push(item)
         localStorage.setItem("cart", JSON.stringify(oldCart))
         dispatch(set_cart())
-    }};
+        // }
+    };
 
     const removeFromCart = async (id) => {
         const cart = await localStorage.getItem("cart")
