@@ -56,7 +56,7 @@ function LandingPage({ signInwithGoogle, authorizedUser, createUser, signIn }) {
       <div className={styles.container2}>
         <p className={styles.pS}>Acceso Para Suscriptores</p>
 
-        <LoginForm
+        <LoginForm //formulario para suscriptores
           signInwithGoogle={signInwithGoogle}
           authorizedUser={authorizedUser}
           signIn={signIn}          

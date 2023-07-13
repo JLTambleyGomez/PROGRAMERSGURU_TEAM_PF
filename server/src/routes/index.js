@@ -1,15 +1,11 @@
 const router = require("express").Router();
 
-const middleware = require("../middleware/index");
-
-const { PostUser } = require("../controllers/User/postUser");
-const { Login } = require("../controllers/User/login");
-
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
 const productRouter = require("./productRouter");
 const favoriteRouter = require("./favoriteRouter");
 const userRouter = require("./userRouter");
+const middleware = require("../middleware/index");
 
 router.use("/technology", technologyRouter);
 
@@ -19,17 +15,18 @@ router.use("/product", productRouter);
 
 router.use("/favorite", favoriteRouter);
 
-router.use("/user", userRouter);
 
+router.use("/user", userRouter);
 router.use(middleware.decodeToken);
-router.get("/loginWithGoogle", (req, res) => {
+router.get("/loginWithGoogle", async (req, res) => {
     try {
-        const { user_id, uid, name, picture, email, emailVerified } = req.user;
+        const { user_id, name, picture, email } = req.user;
+
         return res.json({
             userData: {
-                id:  user_id === undefined ? user_id : uid,
+                id: `${user_id}`,
                 email: email,
-                name: emailVerified ? name : email,
+                name: name,
                 image: picture,
             },
         });

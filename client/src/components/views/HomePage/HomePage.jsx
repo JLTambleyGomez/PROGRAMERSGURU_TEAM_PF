@@ -11,6 +11,11 @@ import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 
+// import "../../../config/firebase-config";
+// import {
+//   onAuthStateChanged
+// } from "firebase/auth";
+
 //_________________________module_________________________
 function HomePage({token}) {
   //global state:
@@ -27,6 +32,50 @@ function HomePage({token}) {
     return `${base}-${suffix}`;
   };
 
+  //-------------------------------------------------------------------------
+  // const postUserRequest = async (data) => {
+  //   try {
+  //     const {data} = await axios.post("http://localhost:3001/user/signup", data)
+  //     console.log(data);
+  //     return console.log("se hizo el pedido")
+  //   } catch (error) {
+  //     console.log(error);
+  //     return console.log(error.message);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, async (user) => {
+  //     if (user) {
+  //       // El usuario está autenticado
+  //       // Acciones a realizar cuando el usuario está autenticado
+  //     console.log("el usuario fue autenticado correctamente");
+  //     console.log({
+  //       id: user.uid,
+  //       email: user.email,
+  //       picture: user.photoURL,
+  //       name: user.displayName
+  //     });
+  //     const userData = {
+  //       id: user.uid,
+  //       email: user.email,
+  //       picture: user.photoURL,
+  //       name: user.displayName
+  //     }
+      
+  //     postUserRequest(userData)
+
+  //     } else {
+  //       // El usuario no está autenticado
+  //       // Acciones a realizar cuando el usuario no está autenticado
+  //       console.log("el usuario no esta autenticado");
+  //     }
+  //   });
+
+  //   return () => {
+  //     unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
+  //   };
+  // }, []);
   //-------------------------------------------------------------------------
   const [userData, setUserData] = useState({
     id: "",
@@ -56,20 +105,37 @@ function HomePage({token}) {
     });
   };
   
+  const postNewUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/user/signup", 
+        userData
+      );
+      console.log(response.data.userData);
+      return response.data.userData.newUser
+    } catch (error) {
+      // return error.data.message
+    }
+  };
+
   //-------------------------------------------------------------------------
 
   //life-cycles:
   useEffect(() => {
     dispatch(get_categories());
     dispatch(get_courses_all());
-
-    if (token) {
-        fetchData(token);
-      }
     return () => {
       dispatch(clearMessage());
     };
   }, [dispatch]);
+
+  useEffect(() => {
+    if (token) {
+      fetchData(token);
+    }
+    // if (userData.token) {
+    //   postNewUser()
+    // }
+  }, [])
 
   return (
     <div className={`${s.component} ${s[theme("component")]}`}>
@@ -146,6 +212,7 @@ function HomePage({token}) {
           Link para visitar
         </a>
       </section>
+      <button onClick={postNewUser}>crearuser</button>
     </div>
   );
 }

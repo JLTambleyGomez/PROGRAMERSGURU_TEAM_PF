@@ -15,7 +15,7 @@ import AdminPanel from "./components/views/AdminPanel/AdminPanel";
 import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 
-import "../src/config/firebase-config";
+import "./config/firebase-config";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -23,14 +23,58 @@ import {
   signOut,
   setPersistence,
   inMemoryPersistence,
-  browserSessionPersistence,
   signInWithEmailAndPassword,
-  signInWithRedirect,
-  getRedirectResult,
   createUserWithEmailAndPassword,
+  onAuthStateChanged
 } from "firebase/auth";
+import axios from "axios";
+
+
 //_________________________module_________________________
 function App() {
+  //------------------------------------------------
+  //------------------------------------------------
+
+  const postUserRequest = async (userData) => {
+    try {
+      // const dataUser = JSON.parse(userData)
+      const {data} = await axios.post("http://localhost:3001/user/signup", userData)
+      console.log(data);
+      return console.log("se hizo el pedido")
+    } catch (error) {
+      console.log(error);
+      return console.log(error.message);
+    }
+  }
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        // El usuario está autenticado
+        // Acciones a realizar cuando el usuario está autenticado
+      console.log("el usuario fue autenticado correctamente");
+      
+      let userData = {
+        email: user.email,
+        picture: user.photoURL,
+        name: user.displayName
+      }
+      console.log(user);
+      // const dataUser = JSON.stringify(userData)
+      postUserRequest(userData);
+
+      } else {
+        // El usuario no está autenticado
+        // Acciones a realizar cuando el usuario no está autenticado
+        console.log("el usuario no esta autenticado")
+      }
+    });
+
+    return () => {
+      unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
+    };
+  }, []);
+
   //------------------------------------------------
   //------------------------------------------------
   const [authorizedUser, setAuthorizedUser] = useState(
@@ -101,6 +145,7 @@ function App() {
       .then(() => {
         createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
           const user = userCredential.user;
+          console.log(user);
           if (user) {
               const token = user.accessToken
               sessionStorage.setItem("accessToken", token);
