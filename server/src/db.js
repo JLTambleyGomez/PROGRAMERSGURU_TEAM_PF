@@ -56,8 +56,8 @@ Technology.belongsToMany(Course, {
 const shopping_cart = sequelize.define('shopping_cart', {
     amount: {
       type: DataTypes.INTEGER,
-    }
-  });
+    },
+}, {timestamps: false, freezeTableName: true });
 Product.belongsToMany(Payment, { through: shopping_cart, timestamps: false });
 Payment.belongsToMany(Product, { through: shopping_cart, timestamps: false });
 
