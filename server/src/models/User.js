@@ -5,9 +5,9 @@ module.exports = (sequelize) => {
         "User",
         {
             id: {
-                type: DataTypes.UUID,
-                defaultValue: DataTypes.UUIDV4,
+                type: DataTypes.INTEGER,
                 primaryKey: true,
+                autoIncrement: true
             },
             name: {
                 type: DataTypes.STRING,
@@ -15,23 +15,19 @@ module.exports = (sequelize) => {
             },
             email: {
                 type: DataTypes.STRING,
-                allowNull: false,
-                validate: {
-                    isEmail: true,
-                },
+                allowNull: false
             },
-
             picture: {
-
                 type: DataTypes.STRING,
-                allowNull: false,
+                allowNull: true,
+                defaultValue: "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-24.jpg"
             },
-            isAdmin: {
+            admin: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false,
             },
-            isBanned: {
+            banned: {
                 type: DataTypes.BOOLEAN,
                 defaultValue: false,
                 allowNull: false,

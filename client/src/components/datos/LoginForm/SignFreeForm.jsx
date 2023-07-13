@@ -6,13 +6,14 @@ import styles from "./LoginForm.module.css";
 import { useNavigate } from "react-router-dom";
 
 //_________________________module_________________________
-function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
+function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
   // const dispatch = useDispatch()
   //states:
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
+  const [alreadySignedUp, setAlreadySignedUp] = useState(false)
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -44,10 +45,23 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
     setPasswordVisible(!passwordVisible)
   }
 
+  const setState = (event) => {
+    if (event.target.name === "signUp") {
+      setAlreadySignedUp(false)
+    } else {
+      setAlreadySignedUp(true)
+    }
+  }
+
   const navigate = useNavigate()
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    signIn(userData.email, userData.password)
+    if (alreadySignedUp) {
+      signIn(userData.email, userData.password)
+    } else {
+      createUser(userData.email, userData.password)
+    }
   };
 
   //component:
@@ -114,8 +128,11 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
               </p>
 
               {/* SUBMIT */}
-              <button className={styles.button} type="submit">
-                Submit
+              <button className={styles.button} type="submit" name="logIn" onClick={setState}>
+                Acceder
+              </button>
+              <button className={styles.button} type="submit" name="signUp" onClick={setState}>
+                Registrarme
               </button>
               <hr />
             </form>
@@ -141,4 +158,4 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
   );
 }
 
-export default LoginForm;
+export default SignFreeForm;

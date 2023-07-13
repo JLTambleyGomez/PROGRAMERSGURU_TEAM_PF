@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
                 unique: true,
             },
             price: {
-                type: DataTypes.FLOAT,
+                type: DataTypes.DECIMAL,
                 allowNull: false,
             },
             description: {
@@ -27,6 +27,9 @@ module.exports = (sequelize) => {
             },
             category: {
                 type: DataTypes.STRING,
+            },
+            stock: {
+                type: DataTypes.INTEGER,
             },
         },
         { timestamps: false }

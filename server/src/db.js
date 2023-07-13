@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
@@ -52,8 +53,13 @@ Technology.belongsToMany(Course, {
     timestamps: false,
 });
 
-Product.belongsToMany(Payment, { through: "shopping_cart", timestamps: false });
-Payment.belongsToMany(Product, { through: "shopping_cart", timestamps: false });
+const shopping_cart = sequelize.define('shopping_cart', {
+    amount: {
+      type: DataTypes.INTEGER,
+    }
+  });
+Product.belongsToMany(Payment, { through: shopping_cart, timestamps: false });
+Payment.belongsToMany(Product, { through: shopping_cart, timestamps: false });
 
 User.hasMany(Comment);
 Comment.belongsTo(User);

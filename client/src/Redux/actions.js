@@ -193,7 +193,7 @@ export function get_categories () { // request
     return async function (dispatch) {
         try {
             const data = await getCategoriesAllRequest(); 
-            console.log(data)
+            // console.log(data)
             return dispatch({
                 type: GET_CATEGORIES_ALL,
                 payload: data,
