@@ -18,9 +18,8 @@ const signUp = async (req,res) => {
                 nickName: !name ? email : name
             }
         })
-        console.log(created)
         if (!created) {
-            return res.json({message: "Ya existe un usuario con este mail"})
+            return res.json({message: `Bienvenido nuevamente ${name?name:email.split('@')[0]}!`})
         }
         console.log(newUser)
         return res.status(201).json({message: "El usuario fue creado correctamente"})

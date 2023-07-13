@@ -179,10 +179,14 @@ function Shop () {
                             products.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
-                                        <div>
+                                        <div style={{display: "flex", flexDirection: "column"}}>
+                                            <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                                <img className={s["itemImage"]} src={product.image}></img>
+                                            </div>
+                                            <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                                <h1 className={s["name"]} >{product.name}</h1>
+                                            </div>
                                         </div>
-                                        <img className={s["itemImage"]} src={product.image}></img>
-                                        <h1 className={s["name"]} >{product.name}</h1>
                                         <div className={s.priceAndCart}>
                                             <h1 className={s["price"]}>${product.price}</h1>
                                             <button 
