@@ -18,6 +18,10 @@ import {
     postProducts,
     deleteProducts,
 
+    //user
+
+    getUserByEmail,
+
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -49,7 +53,9 @@ import {
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
-    export const GET_USER= "GET_USER";
+
+    //USER
+    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
 
     
 //__________________________________________________
@@ -283,7 +289,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message,
             });
         }
     };
@@ -292,7 +298,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 
 ////////////////////////////////PRODUCTS///////////////////////////////////////////
 
-export const getallProducts = () => {
+export const get_products_all = () => {
     return async (dispatch) => {
         try {
             const data = await getProducts () // request
@@ -344,14 +350,20 @@ export function delete_Products(id) { // request
 }
 
 //USER___________________________________________________________________//
+import {user} from './user.json';
 
-export const getOneUser = (userData) => {
-    return async function (dispatch) {
+export const get_User_By_Email = (userEmail) => {
+    return {
+        type: GET_USER_BY_EMAIL,
+        payload: user
+    }
+
+    /*return async function (dispatch) {
         try {
-            const data = await login(userData); 
+            const data = await login(userEmail); 
             console.log(data)
             return dispatch({
-                type: LOGIN,
+                type: GET_USER_BY_EMAIL,
                 payload: data,
             });
         } catch (error) {
@@ -360,5 +372,5 @@ export const getOneUser = (userData) => {
                 payload: "get error",
             });
         }
-    };
+    };/*/
 }

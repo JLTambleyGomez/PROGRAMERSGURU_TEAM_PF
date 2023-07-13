@@ -24,9 +24,25 @@
 }
 
 .image{
-  width: 100px;
-  height: 100px;
+
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
-  border: solid 1px;
-  border-color:rgb(76, 114, 165) ;
+  border: solid 4px;
+  border-color:rgb(255, 255, 255) ;
+}
+
+
+.profile{
+  margin-top: 4%;
+  padding: 4%;
+}
+
+.main{
+  display: flex;
+}
+
+.name{
+  width: 100px ;
+  margin-left: 100px
 }

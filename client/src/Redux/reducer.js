@@ -25,11 +25,13 @@ import {
 //PRODUCTS
     GET_PRODUCTS,
     DELETE_PRODUCT,
+    //USER
+    GET_USER_BY_EMAIL
 
 } from "./actions";
 
 // PRUEBA CURSOS
-import jsonData from './cursos.json';
+//import jsonData from './cursos.json';
 
 //___________________________________________________
 
@@ -44,6 +46,8 @@ const goblalStorage = {
     favorites:[],
     access:false,
     products:[],
+    user:{},
+    cart:[]
 }
 
 
@@ -142,6 +146,13 @@ export default function rootReducer ( state = goblalStorage, { type, payload } )
 
          case DELETE_PRODUCT:
             return { ...state, message: payload};
+
+
+        case GET_USER_BY_EMAIL:
+            return {
+                ...state,
+                user: payload,
+            };
             
 
         default: return {...state}; 

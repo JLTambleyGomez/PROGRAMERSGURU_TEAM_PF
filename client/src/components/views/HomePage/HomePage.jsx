@@ -93,7 +93,7 @@ function HomePage({token}) {
           {latestCourses.length > 0 ? (
             <CoursesPreview courses={latestCourses} />
           ) : (
-            <p>No hay cursos disponibles.</p>
+            <p className={s.cargando}>Cargando</p>
           )}
         </div>
       </section>

@@ -93,7 +93,7 @@
 
     //user______________________________
 
-    export const postCourseRequest = async (datos) => {
-        const { data } = await axios.get("http://localhost:3001/course",datos)
+    export const getUserByEmail= async (email) => {
+        const { data } = await axios.get("http://localhost:3001/user/email",email)
         return data;
     }

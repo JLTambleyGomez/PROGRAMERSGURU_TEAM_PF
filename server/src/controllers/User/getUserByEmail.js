@@ -1,4 +1,6 @@
-const GetOneUser = async (req, res) => {
+const { User } = require('../../db');
+
+const GetUserByEmail = async (req, res) => {
     const {email} = req.body;
     try {
       const user = await User.findOne({where:{email}});
@@ -10,5 +12,5 @@ const GetOneUser = async (req, res) => {
     }
   };
   
-  module.exports = { GetOneUser };
+  module.exports = { GetUserByEmail };
   

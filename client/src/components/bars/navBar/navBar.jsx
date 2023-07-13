@@ -36,12 +36,12 @@ function NavBar ({logoutUser}) {
                 </NavLink>
             </button>
             <button className={`${s.button} ${s[theme("button")]}`}>
-                <NavLink to="/Commingsoon" className={`${s.link} ${s[theme("link")]}`}>
+                <NavLink to="/store" className={`${s.link} ${s[theme("link")]}`}>
                     Tienda ¡Pronto!
                 </NavLink>
             </button>
             <button className={`${s.button} ${s[theme("button")]}`}>
-                <NavLink to="/Commingsoon" className={`${s.link} ${s[theme("link")]}`}>
+                <NavLink to="/Cart" className={`${s.link} ${s[theme("link")]}`}>
                     Lista de Deseos ¡Pronto!
                 </NavLink>
             </button>

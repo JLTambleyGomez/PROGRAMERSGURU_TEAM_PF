@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getallProducts, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
+import { get_products_all, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
 import validate from "./validate";
 
 import styles from "./AdminPanel.module.css";
@@ -142,7 +142,7 @@ function AdminPanel () {
     const handleProductDelete =(id)=>{
         try {
             dispatch (delete_Products(id))
-            dispatch(getallProducts());
+            dispatch(get_products_all());
         } catch (error) {
             console.log("error");
         }
@@ -153,7 +153,7 @@ function AdminPanel () {
         dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all());
-        dispatch(getallProducts());
+        dispatch(get_products_all());
 
         
 

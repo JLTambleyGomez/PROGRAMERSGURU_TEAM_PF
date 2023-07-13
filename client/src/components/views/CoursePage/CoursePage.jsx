@@ -39,7 +39,7 @@ function CoursePage () {
 
     //component:
     return (
-        <div className = {styles.component}>
+        <main className = {styles.component}>
             <div className={styles.mainBanner}>
                 <h1>Explora todos nuestros cursos</h1>
             </div>
@@ -49,12 +49,12 @@ function CoursePage () {
            
             <div className = {styles.cardComponent}>
                 {
-                    isloading ? (<h1>CARGANDO...</h1>)
+                    isloading ? (<h1 className={styles.cargando}>CARGANDO...</h1>)
                     : <CoursesCard/>
                 }
                 {/* {allCourses ? (<CoursesCard/>):"isLoading"}  */}
             </div>
-        </div>
+        </main>
     )
 }
 
