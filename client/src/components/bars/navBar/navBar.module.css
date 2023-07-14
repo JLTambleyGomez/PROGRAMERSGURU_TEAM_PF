@@ -1,12 +1,10 @@
 .component {
-  /* AJUSTAR LAS DEMAS PAGINAS EN BASE AL HEIGHT DE ESTE COMPONENTE => PAGINA 1 - .component {margin-top: 10vh}*/
-  height: 10vh;
+  height: var(--navBarHeight);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   position: fixed;
   z-index: 9998;
-  /* TOP: ELIMINA CUALQUIER ESPACIO ENTRE EL TOPE DE LA PAGINA Y EL ELEMENTO */
   top: 0;
   width: 100%;
   animation:blur-in 0.4s linear both
@@ -45,23 +43,34 @@
     .link-dark {
       color: rgba(247, 249, 250, 0.932);
     }
-
-.shopbagOverlay {
-    z-index: 9998;
-    top: 10vh;
-    position: fixed;
-    height: 90vh;
-    width: 100vw;
-    background-color: rgba(0, 0, 0, 0.5);
+    
+/* .shopbagOverlay {
+  position: fixed;
+  top: 10vh;
+  z-index: 9998;
+  height: 90vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .shopbag {
-    top: 10vh;
-    z-index: 9999;
-    background-color: blue;
-    width: 30vw;
-    height: 90vh;
-    right: 0;
-    position: fixed;
-    border: 1px solid black;
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  z-index: 9999;
+  height: 90vh;
+  width: 30vw;
+  background-color: blue;
+  border: 1px solid black;
+} */
+
+.bolsita{
+  transition: transform 0.5s;
+    /*  */
+  z-index: 9998;
+    /*  */
+}
+.bolsita:hover{
+  transform:scale(2);
+  cursor: pointer;
 }

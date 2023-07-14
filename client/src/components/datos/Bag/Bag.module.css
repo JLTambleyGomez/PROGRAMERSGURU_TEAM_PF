@@ -1,0 +1,64 @@
+.shopbagOverlay {
+ 
+  position: fixed;
+  top:0;
+  bottom: 0;
+  z-index: 9998;
+  width: 100vw;
+  animation:scale-up-horizontal-right 0.4s } 
+  @keyframes scale-up-horizontal-right{0%{transform:scaleX(.4);transform-origin:right center}100%{transform:scaleX(1);transform-origin:right center}}
+  
+  
+  .shopbag {
+    top: var(--navBarHeight);
+    right: 0;
+    min-height: calc(100vh - var(--navBarHeight));
+    width: 25vw;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2vw 0;
+    gap: 10px;
+    z-index: 9999;
+    overflow-y: auto;
+  }
+  .shopbag-light {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
+  }
+  .shopbag-dark {
+    background-color: #212121;
+    box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
+  }
+  
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 12rem;
+  height: 8rem;
+  /* background-color: black; */
+  box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
+  }
+  .minusPlus {
+    width: 2rem;
+    height: 2rem;
+  }
+  .section1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    }
+    .section1 img {
+      width: 4rem;
+      height: 4rem;
+      object-fit: cover;
+      border-radius: 100%;
+      border: solid 2px;
+      border-color: rgba(248, 248, 248, 0.658);
+    }
+    .section1 p {
+      height: 1rem;
+    }

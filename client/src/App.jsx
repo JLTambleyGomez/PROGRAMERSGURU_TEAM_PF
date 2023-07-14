@@ -14,18 +14,22 @@ import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
 import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
+import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
+import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
+import Bag from "./components/datos/Bag/Bag";
+
 
 import "./config/firebase-config";
 import {
-  GoogleAuthProvider,
-  getAuth,
-  signInWithPopup,
-  signOut,
-  setPersistence,
-  inMemoryPersistence,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
+    GoogleAuthProvider,
+    getAuth,
+    signInWithPopup,
+    signOut,
+    setPersistence,
+    inMemoryPersistence,
+    signInWithEmailAndPassword,
+    createUserWithEmailAndPassword,
+    onAuthStateChanged
 } from "firebase/auth";
 import axios from "axios";
 
@@ -37,13 +41,11 @@ function App () {
 
     const postUserRequest = async (userData) => {
         try {
-        // const dataUser = JSON.parse(userData)
-        const {data} = await axios.post("http://localhost:3001/user/signup", userData)
-            console.log(data);
-        return console.log("se hizo el pedido")
+            const {data} = await axios.post("http://localhost:3001/user/signup", userData)
+            return "usuario posteado"
         } catch (error) {
             console.log(error);
-        return console.log(error.message);
+            return console.log(error.message);
         }
     }
 
@@ -53,15 +55,15 @@ function App () {
             // El usuario está autenticado
             // Acciones a realizar cuando el usuario está autenticado
         console.log("el usuario fue autenticado correctamente");
-        
+ 
         let userData = {
             email: user.email,
             picture: user.photoURL,
             name: user.displayName
         }
-        console.log(user);
-        // const dataUser = JSON.stringify(userData)
-        postUserRequest(userData);
+        
+        postUserRequest(userData)
+        
 
         } else {
             // El usuario no está autenticado
@@ -71,34 +73,35 @@ function App () {
         });
 
         return () => {
-        unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
+            unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
         };
     }, []);
 
-    //------------------------------------------------
-    //------------------------------------------------
+  //------------------------------------------------
+  //------------------------------------------------
     const [authorizedUser, setAuthorizedUser] = useState(
         false || sessionStorage.getItem("accessToken")
     );
     const provider = new GoogleAuthProvider();
     provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
-    const auth = getAuth();
+        const auth = getAuth();
 
     //------------------------signInWithGoolge------------------------
-    function signInwithGoogle () {
+    function signInwithGoogle() {
         setPersistence(auth, inMemoryPersistence)
         .then(() => {
             signInWithPopup(auth, provider)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user) {
-                user.getIdToken().then((tkn) => {
-                // set access token in session storage
-                sessionStorage.setItem("accessToken", tkn);
-                setAuthorizedUser(true);
-                });
-            }
+            .then((userCredential) => {
+                const user = userCredential.user;
+                if (user) {
+                    user.getIdToken()
+                    .then((tkn) => {
+                        // set access token in session storage
+                        sessionStorage.setItem("accessToken", tkn);
+                        setAuthorizedUser(true);
+                    });
+                }
             });
         })
         .catch((error) => {
@@ -115,17 +118,17 @@ function App () {
     
     //------------------------------------------------
     //------------------------signInWithEmailAndPassword------------------------
-    function signIn (email, password) {
+    function signIn(email, password) {
         setPersistence(auth, inMemoryPersistence)
         .then(() => {
             signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            if (user) {
-                const token = user.accessToken
-                sessionStorage.setItem("accessToken", token);
-                setAuthorizedUser(true);
-            }
+            .then((userCredential) => {
+                const user = userCredential.user;
+                if (user) {
+                    const token = user.accessToken
+                    sessionStorage.setItem("accessToken", token);
+                    setAuthorizedUser(true);
+                }
             })
         })
         .catch((error) => {
@@ -142,18 +145,18 @@ function App () {
 
     //------------------------------------------------
     //------------------------signInWithEmailAndPassword------------------------
-    function createUser (email, password) {
+    function createUser(email, password) {
         setPersistence(auth, inMemoryPersistence)
         .then(() => {
             createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const user = userCredential.user;
-            console.log(user);
-            if (user) {
-                const token = user.accessToken
-                sessionStorage.setItem("accessToken", token);
-                setAuthorizedUser(true);
-            }
+            .then((userCredential) => {
+                const user = userCredential.user;
+                console.log(user);
+                if (user) {
+                    const token = user.accessToken
+                    sessionStorage.setItem("accessToken", token);
+                    setAuthorizedUser(true);
+                }
             })
         })
         .catch((error) => {
@@ -169,6 +172,24 @@ function App () {
     }
     
     const navigate = useNavigate();
+
+    //------------------------------------------------
+    //------------------------signOut------------------------
+    function logoutUser() {
+        signOut(auth)
+        .then(() => {
+            // clear session storage
+            sessionStorage.clear();
+            setAuthorizedUser(false);
+            // window.location.replace("/");
+            navigate("/");
+            alert("Logged Out Successfully");
+        })
+        .catch((error) => {
+            // An error happened.
+            alert(error);
+        });
+    }
 
     //------------------------------------------------
     //------------------------signOut------------------------
@@ -188,11 +209,9 @@ function App () {
         });
     }
 
-    //------------------------------------------------
-    //------------------------------------------------
-
     //global states:
     const dark = useSelector((state) => state.darkMode);
+    const shopbag = useSelector((state) => state.shopbag);
 
     //states:
     const [changeDarkMode, setChangeDarkMode] = useState("");
@@ -210,65 +229,69 @@ function App () {
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
-            const windowHeight =
-                "innerHeight" in window
-                ? window.innerHeight
-                : document.documentElement.offsetHeight;
-            const body = document.body;
-            const html = document.documentElement;
-            const docHeight = Math.max(
-                body.scrollHeight,
-                body.offsetHeight,
-                html.clientHeight,
-                html.scrollHeight,
-                html.offsetHeight
-            );
-            const windowBottom = windowHeight + window.pageYOffset;
+        const windowHeight =
+            "innerHeight" in window
+            ? window.innerHeight
+            : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(
+            body.scrollHeight,
+            body.offsetHeight,
+            html.clientHeight,
+            html.scrollHeight,
+            html.offsetHeight
+        );
+        const windowBottom = windowHeight + window.pageYOffset;
 
-            if (windowBottom >= docHeight) {
-                setIsAtBottom(true);
-            } else {
-                setIsAtBottom(false);
-            }
+        if (windowBottom >= docHeight) {
+            setIsAtBottom(true);
+        } else {
+            setIsAtBottom(false);
+        }
         };
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
-    //component:
-    return (
+  //component:
+  return (
         <div className={`${s[theme("component")]}`}>
-        {location !== "/" && <NavBar logoutUser={logoutUser} />}
-        <Routes>
-            <Route
+            {location !== "/" && <NavBar logoutUser={logoutUser} />}
+            {location !== "/" && shopbag && <Bag/>}
+            <Routes>
+                <Route
                 path="/"
                 element={
                     <LandingPage
-                        signInwithGoogle={signInwithGoogle}
-                        createUser={createUser}
-                        signIn={signIn}
-                        authorizedUser={authorizedUser}
-                        setAuthorizedUser={setAuthorizedUser}
+                    signInwithGoogle={signInwithGoogle}
+                    createUser={createUser}
+                    signIn={signIn}
+                    authorizedUser={authorizedUser}
+                    setAuthorizedUser={setAuthorizedUser}
                     />
                 }
-            />
-            <Route
+                />
+                <Route
                 path="/HomePage"
                 element={<HomePage token={sessionStorage.getItem("accessToken")} />}
-            />
-            <Route path="/CoursePage" element={<CoursePage />} />
-            <Route path="/Profile" element={<Profile />} />
-            <Route path="/Store" element={<Shop />} />
-            <Route path="/Cart" element={<Cart />} />
-            <Route path="/AdminPanel" element={<AdminPanel />} />
-            <Route path="/CourseDetails/:id" element={<CourseDetails />} />
-            <Route path="/Commingsoon" element={<Commingsoon />} />
-            Commingsoon
-        </Routes>
-        {location !== "/" && location !== "/AdminPanel" && location !== "/CoursePage" && isAtBottom && <Footer />}
+                />
+                <Route path="/CoursePage" element={<CoursePage />} />
+                <Route path="/Profile" element={<Profile />} />
+                <Route path="/Store" element={<Shop />} />
+                <Route path="/Cart" element={<Cart />} />
+                <Route path="/AdminPanel" element={<AdminPanel />} />
+                <Route path="/CourseDetails/:id" element={<CourseDetails />} />
+                <Route path="/Commingsoon" element={<Commingsoon />} />
+                <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+                <Route path="/PruebaMetamask" element={<PagoMetamask />} />
+
+                
+            </Routes>
+            {isAtBottom && <Footer />}
         </div>
     );
 }

@@ -25,57 +25,13 @@ function HomePage({token}) {
   //const:
   const dispatch = useDispatch();
   const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
-
+  const token2 = sessionStorage.getItem("accessToken")
   //functions:
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
     return `${base}-${suffix}`;
   };
 
-  //-------------------------------------------------------------------------
-  // const postUserRequest = async (data) => {
-  //   try {
-  //     const {data} = await axios.post("http://localhost:3001/user/signup", data)
-  //     console.log(data);
-  //     return console.log("se hizo el pedido")
-  //   } catch (error) {
-  //     console.log(error);
-  //     return console.log(error.message);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const unsubscribe = onAuthStateChanged(auth, async (user) => {
-  //     if (user) {
-  //       // El usuario está autenticado
-  //       // Acciones a realizar cuando el usuario está autenticado
-  //     console.log("el usuario fue autenticado correctamente");
-  //     console.log({
-  //       id: user.uid,
-  //       email: user.email,
-  //       picture: user.photoURL,
-  //       name: user.displayName
-  //     });
-  //     const userData = {
-  //       id: user.uid,
-  //       email: user.email,
-  //       picture: user.photoURL,
-  //       name: user.displayName
-  //     }
-      
-  //     postUserRequest(userData)
-
-  //     } else {
-  //       // El usuario no está autenticado
-  //       // Acciones a realizar cuando el usuario no está autenticado
-  //       console.log("el usuario no esta autenticado");
-  //     }
-  //   });
-
-  //   return () => {
-  //     unsubscribe(); // Se cancela la suscripción cuando el componente se desmonta
-  //   };
-  // }, []);
   //-------------------------------------------------------------------------
   const [userData, setUserData] = useState({
     id: "",
@@ -87,7 +43,7 @@ function HomePage({token}) {
   });
   
   const fetchData = async (token) => {
-    const response = await axios.get("http://localhost:3001/loginWithGoogle", {
+    const response = await axios.get("http://localhost:3001/user/loginWithGoogle", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -105,17 +61,6 @@ function HomePage({token}) {
     });
   };
   
-  const postNewUser = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/user/signup", 
-        userData
-      );
-      console.log(response.data.userData);
-      return response.data.userData.newUser
-    } catch (error) {
-      // return error.data.message
-    }
-  };
 
   //-------------------------------------------------------------------------
 
@@ -128,13 +73,12 @@ function HomePage({token}) {
     };
   }, [dispatch]);
 
+  let cont = 0 
   useEffect(() => {
-    if (token) {
+    if (token && cont === 0) {
+      cont += 1
       fetchData(token);
     }
-    // if (userData.token) {
-    //   postNewUser()
-    // }
   }, [])
 
   return (
@@ -159,7 +103,7 @@ function HomePage({token}) {
           {latestCourses.length > 0 ? (
             <CoursesPreview courses={latestCourses} />
           ) : (
-            <p>No hay cursos disponibles.</p>
+            <p className={s.cargando}>Cargando</p>
           )}
         </div>
       </section>
@@ -212,7 +156,6 @@ function HomePage({token}) {
           Link para visitar
         </a>
       </section>
-      <button onClick={postNewUser}>crearuser</button>
     </div>
   );
 }

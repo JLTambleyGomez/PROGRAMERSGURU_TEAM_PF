@@ -11,12 +11,13 @@ function Menu ({logoutUser}) {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
+    const logo= useSelector((state)=>state.user.picture)
 
     //const:
     const navigate = useNavigate()
     const dispatch = useDispatch();
 
-    const userImage = "https://media.tenor.com/v9sdELSzVw4AAAAC/nyan-cat-kawaii.gif";
+    const userImage = logo;
     // "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
 
     //functions:
@@ -24,7 +25,7 @@ function Menu ({logoutUser}) {
         const suffix = dark ? 'dark' : 'light';
         return `${base}-${suffix}`;
     };
-
+{}
     const handleDarkMode = () => {
         dispatch(Dark_Mode(!dark));
     };
@@ -34,16 +35,15 @@ function Menu ({logoutUser}) {
         <div className={`${s.component}`}>
 
             <div className={`${s.imageWrapper}`}>
-                <img src = {userImage} alt = "user image" className={`${s.image}`}/>
+            {logo?( <img src = {logo} alt = "user image" className={`${s.image}`}/>):( <img src = {"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"} alt = "user image" className={`${s.image}`}/>)}
             </div>
 
             <ul className={`${s.options}`}>
-                <li onClick = {() => {navigate('/profile')}}>Account</li>
-                <li onClick = {() => {navigate('/coursepage')}}>Courses</li>
+                <li onClick = {() => {navigate('/profile')}}>Perfil</li>
                 <button className={`${s.themeButton} ${s[theme("themeButton")]}`} onClick={handleDarkMode}>
                     {dark ? <FaSun className={s.sun}/> : <FaMoon className={s.moon}/>}
                 </button>
-                <li onClick = {logoutUser}>Sign out</li>
+                <li onClick = {logoutUser}>Salir</li>
             </ul>
 
         </div>

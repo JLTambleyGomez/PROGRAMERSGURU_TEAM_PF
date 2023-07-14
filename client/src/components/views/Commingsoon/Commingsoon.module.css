@@ -1,5 +1,5 @@
 .h1light{
-    margin-top: 4%;
+    margin-top: var(--navBarHeight);
     justify-content: center;
     align-items: center;
     background-color: rgb(0, 0, 0);

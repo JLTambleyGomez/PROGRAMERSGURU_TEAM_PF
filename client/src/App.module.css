@@ -2,13 +2,12 @@
   background-color: #010003;
   /* rgb(32,33,36) */
   color: #FFFFFF;
-}
-.component-light{
-  background-color: rgb(253, 245, 245);
-  color: #302F2C;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif !important;
+  margin: 0
 }

@@ -1,9 +1,10 @@
 .component {
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
   display: flex;
   flex-direction: column;
-  margin-top:4%;
 }
-
+Se
 .Panel{
   position: absolute;
   padding: 4%;

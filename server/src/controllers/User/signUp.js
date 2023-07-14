@@ -4,9 +4,13 @@ const signUp = async (req,res) => {
     console.log("controler signup");
     const defaultPicture = "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-24.jpg"
     try {
-        // const  = req.body;
         const { email, name, picture } = req.body
         console.log("este es el signup");
+
+        const isReg = await User.findOne({where: {email}})
+        if (isReg !== null) {
+            return res.json({message: "ya existe el usuario"})
+        }
 
         const [newUser, created] = await User.findOrCreate({
             where: {
@@ -18,9 +22,8 @@ const signUp = async (req,res) => {
                 nickName: !name ? email : name
             }
         })
-        console.log(created)
         if (!created) {
-            return res.json({message: "Ya existe un usuario con este mail"})
+            return res.json({message: `Bienvenido nuevamente ${name?name:email.split('@')[0]}!`})
         }
         console.log(newUser)
         return res.status(201).json({message: "El usuario fue creado correctamente"})

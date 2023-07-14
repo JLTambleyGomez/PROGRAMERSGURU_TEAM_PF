@@ -7,19 +7,22 @@ const putProduct = async (req, res) => {
             description,
             image,
             price,
-            category
+            category,
+            stock
         } = req.body;
-
+        console.log(stock);
         const { id } = req.params;
-        if(!name,
-            !description,
-            !image,
-            !price,
-            !category)
+        if(!name &&
+            !description &&
+            !image &&
+            !price &&
+            !category &&
+            !stock)
         return res.status(400).json({ message: "Error, debe ingresar datos a cambiar"});
 
         const productDB = await Product.findByPk(id);
         if(!productDB) {
+            console.log("no hay producto con ese id");
             return res.status(404).json({message: "No existe un curso con ese id"})
         }
         for (let prop in req.body) {

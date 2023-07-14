@@ -18,6 +18,11 @@ import {
     postProducts,
     deleteProducts,
 
+    //user
+
+    getUserByEmail,
+
+
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -49,9 +54,15 @@ import {
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
-    export const GET_USER= "GET_USER";
-//CART:
-    export const ADD_TO_CART = "ADD_TO_CART";
+
+    //USER
+    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+
+    //CART
+    export const SET_CART= "SET_CART";
+    
+//SHOPBAG
+export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
     
 //__________________________________________________
 //ACTION CREATORS:
@@ -285,7 +296,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message,
             });
         }
     };
@@ -294,7 +305,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 
 ////////////////////////////////PRODUCTS///////////////////////////////////////////
 
-export const getallProducts = () => {
+export const get_products_all = () => {
     return async (dispatch) => {
         try {
             const data = await getProducts () // request
@@ -305,7 +316,7 @@ export const getallProducts = () => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message // error.response.data.message,
             });
         }
     }
@@ -346,14 +357,20 @@ export function delete_Products(id) { // request
 }
 
 //USER___________________________________________________________________//
+import {user} from './user.json';
 
-export const getOneUser = (userData) => {
-    return async function (dispatch) {
+export const get_User_By_Email = (userEmail) => {
+    return {
+        type: GET_USER_BY_EMAIL,
+        payload: user
+    }
+
+    /*return async function (dispatch) {
         try {
-            const data = await login(userData); 
+            const data = await login(userEmail); 
             console.log(data)
             return dispatch({
-                type: LOGIN,
+                type: GET_USER_BY_EMAIL,
                 payload: data,
             });
         } catch (error) {
@@ -362,29 +379,23 @@ export const getOneUser = (userData) => {
                 payload: "get error",
             });
         }
-    };
+    };/*/
 }
 
-export const get_cart = () => {
-    return async function (dispatch) {
-        try {
-            localStorage.getItem("cart")
-        } catch (error) {
-            
-        }
+//CART_____________________________________________//
+
+export const set_cart = () => {
+    return {
+        type: SET_CART,
+        payload: JSON.parse(localStorage.getItem("cart"))
     }
 }
 
-export const add_to_cart = async (item) => {
-        try {
-            const cart = await localStorage.getItem("cart")
-            if (!cart) {
-                await localStorage.setItem("cart", "[]")
-            } else {
-                const oldCart = JSON.parse(localStorage.getItem("cart"))
-                oldCart.push(item)
-            }
-            localStorage.setItem("data", JSON.stringify(oldCart))
-        } catch (error) {
-        }
+//SHOPBAG
+
+export const toggle_shopbag = (status) => {
+	return {
+		type: TOGGLE_SHOPBAG,
+		payload: status
+	}
 }
