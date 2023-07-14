@@ -19,4 +19,8 @@ router.use("/favorite", favoriteRouter);
 
 router.use("/user", userRouter);
 
+router.use("/comment", commentRouter);
+
+router.use("/payment", paymentRouter);
+
 module.exports = router;
