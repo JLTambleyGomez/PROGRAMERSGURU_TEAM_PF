@@ -2,12 +2,10 @@ const userRouter = require("express").Router();
 
 //controller
 const {signUp} = require("../controllers/User/signUp");
-const { getUser } = require("../controllers/User/getUser");
 const { putPerfilUser } = require("../controllers/User/putPerfilUser");
-const { loginWithGoogle } = require("../controllers/User/loginWithGoogle");
-const { hideProfile } = require("../controllers/User/hideProfile");
-const { makeAdmin } = require("../controllers/User/makeAdmin");
-// const { GetUserByEmail } = require("../controllers/User/getUserByEmail");
+//const { GetUsers } = require("../controllers/User/GetUser")
+
+
 
 //routes 
 userRouter.get("/", getUser);
@@ -22,5 +20,7 @@ userRouter.put("/admin", makeAdmin)
 
 userRouter.get("/loginWithGoogle", loginWithGoogle);
 userRouter.post("/signup", signUp);
+//userRouter.get("/user", GetUsers);
 
+userRouter.put("/profile", putPerfilUser);
 module.exports = userRouter;

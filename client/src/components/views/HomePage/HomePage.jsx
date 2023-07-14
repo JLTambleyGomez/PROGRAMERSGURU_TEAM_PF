@@ -25,7 +25,7 @@ function HomePage({token}) {
   //const:
   const dispatch = useDispatch();
   const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
-
+  const token2 = sessionStorage.getItem("accessToken")
   //functions:
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
@@ -61,6 +61,16 @@ function HomePage({token}) {
     });
   };
   
+  const postNewUser = async () => {
+    try {
+      const response = await axios.post("http://localhost:3001/user/signup", 
+        userData
+      );
+      return response.data.userData.newUser
+    } catch (error) {
+      // return error.data.message
+    }
+  };
 
   //-------------------------------------------------------------------------
 
@@ -73,8 +83,10 @@ function HomePage({token}) {
     };
   }, [dispatch]);
 
+  let cont = 0 
   useEffect(() => {
-    if (token) {
+    if (token && cont === 0) {
+      cont += 1
       fetchData(token);
     }
   }, [])
@@ -101,7 +113,7 @@ function HomePage({token}) {
           {latestCourses.length > 0 ? (
             <CoursesPreview courses={latestCourses} />
           ) : (
-            <p>No hay cursos disponibles.</p>
+            <p className={s.cargando}>Cargando</p>
           )}
         </div>
       </section>

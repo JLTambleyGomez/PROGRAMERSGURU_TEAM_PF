@@ -14,6 +14,10 @@ import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
 import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
+import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
+import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
+
+
 
 import "./config/firebase-config";
 import {
@@ -59,7 +63,8 @@ function App() {
         name: user.displayName
       }
       
-      postUserRequest(userData);
+      postUserRequest(userData)
+      
 
       } else {
         // El usuario no está autenticado
@@ -81,7 +86,7 @@ function App() {
   const provider = new GoogleAuthProvider();
   provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
 
-  const auth = getAuth();
+    const auth = getAuth();
 
   //------------------------signInWithGoolge------------------------
   function signInwithGoogle() {
@@ -186,52 +191,52 @@ function App() {
   //------------------------------------------------
   //------------------------------------------------
 
-  //global states:
-  const dark = useSelector((state) => state.darkMode);
+    //global states:
+    const dark = useSelector((state) => state.darkMode);
 
-  //states:
-  const [changeDarkMode, setChangeDarkMode] = useState("");
-  const [isAtBottom, setIsAtBottom] = useState(false);
+    //states:
+    const [changeDarkMode, setChangeDarkMode] = useState("");
+    const [isAtBottom, setIsAtBottom] = useState(false);
 
-  //const:
-  const location = useLocation().pathname;
+    //const:
+    const location = useLocation().pathname;
 
-  //functions:
-  const theme = (base) => {
-    const suffix = dark ? "dark" : "light";
-    return `${base}-${suffix}`;
-  };
-
-  //life-cycles:
-  useEffect(() => {
-    const handleScroll = () => {
-      const windowHeight =
-        "innerHeight" in window
-          ? window.innerHeight
-          : document.documentElement.offsetHeight;
-      const body = document.body;
-      const html = document.documentElement;
-      const docHeight = Math.max(
-        body.scrollHeight,
-        body.offsetHeight,
-        html.clientHeight,
-        html.scrollHeight,
-        html.offsetHeight
-      );
-      const windowBottom = windowHeight + window.pageYOffset;
-
-      if (windowBottom >= docHeight) {
-        setIsAtBottom(true);
-      } else {
-        setIsAtBottom(false);
-      }
+    //functions:
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
     };
-    window.addEventListener("scroll", handleScroll);
-    //--desmontado
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+
+    //life-cycles:
+    useEffect(() => {
+        const handleScroll = () => {
+        const windowHeight =
+            "innerHeight" in window
+            ? window.innerHeight
+            : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(
+            body.scrollHeight,
+            body.offsetHeight,
+            html.clientHeight,
+            html.scrollHeight,
+            html.offsetHeight
+        );
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+            setIsAtBottom(true);
+        } else {
+            setIsAtBottom(false);
+        }
+        };
+        window.addEventListener("scroll", handleScroll);
+        //--desmontado
+        return () => {
+        window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
   //component:
   return (
@@ -261,7 +266,10 @@ function App() {
         <Route path="/AdminPanel" element={<AdminPanel />} />
         <Route path="/CourseDetails/:id" element={<CourseDetails />} />
         <Route path="/Commingsoon" element={<Commingsoon />} />
-        Commingsoon
+        <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+        <Route path="/PruebaMetamask" element={<PagoMetamask />} />
+
+        
       </Routes>
       {isAtBottom && <Footer />}
     </div>

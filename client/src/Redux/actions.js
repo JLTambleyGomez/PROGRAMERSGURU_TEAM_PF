@@ -18,6 +18,11 @@ import {
     postProducts,
     deleteProducts,
 
+    //user
+
+    getUserByEmail,
+
+
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -48,7 +53,13 @@ import {
 //PRODUCTS
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
-    export const DELETE_PRODUCT = "DELETE_PRODUCT"
+    export const DELETE_PRODUCT = "DELETE_PRODUCT";
+
+    //USER
+    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+
+    //CART
+    export const SET_CART= "SET_CART";
 
     
 //__________________________________________________
@@ -282,7 +293,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message,
             });
         }
     };
@@ -291,7 +302,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 
 ////////////////////////////////PRODUCTS///////////////////////////////////////////
 
-export const getallProducts = () => {
+export const get_products_all = () => {
     return async (dispatch) => {
         try {
             const data = await getProducts () // request
@@ -302,7 +313,7 @@ export const getallProducts = () => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.message // error.response.data.message,
             });
         }
     }
@@ -342,4 +353,37 @@ export function delete_Products(id) { // request
     };
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//USER___________________________________________________________________//
+import {user} from './user.json';
+
+export const get_User_By_Email = (userEmail) => {
+    return {
+        type: GET_USER_BY_EMAIL,
+        payload: user
+    }
+
+    /*return async function (dispatch) {
+        try {
+            const data = await login(userEmail); 
+            console.log(data)
+            return dispatch({
+                type: GET_USER_BY_EMAIL,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: "get error",
+            });
+        }
+    };/*/
+}
+
+//CART_____________________________________________//
+
+export const set_cart = () => {
+    return {
+        type: SET_CART,
+    }
+}
+

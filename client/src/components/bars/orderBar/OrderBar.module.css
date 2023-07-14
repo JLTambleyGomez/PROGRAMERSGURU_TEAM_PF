@@ -63,6 +63,7 @@
     height: 100vh;
     background-color: #f1f1f1;
     position: fixed;
+    /* REMOVER TOP PARA QUE FIXED TENGA EFECTO */
     top: 0;
     left: 0;
     z-index: 2;

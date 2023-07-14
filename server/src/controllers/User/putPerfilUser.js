@@ -3,15 +3,17 @@ const { User } = require("../../db");
 const putPerfilUser = async (req, res) => {
     const { name, picture, nickName,email } = req.body; 
 
+    
     try {
-    if(!email) return  res.status(400).json({message: "Debe mandar un email"})
-
      if(
         !name,
         !picture,
         !nickName,
         !email
      ) return res.status(400).json({ message: "Debe ingresar datos al cambiar"});
+
+     const users= await User.findAll()
+     console.log(users)
 
      const profile = await User.findOne({
         where: {
@@ -35,5 +37,9 @@ const putPerfilUser = async (req, res) => {
         return res.status(500).json({message: error.message})
     }
 }
+
+module.exports = { putPerfilUser };
+
+
 
 module.exports = { putPerfilUser };

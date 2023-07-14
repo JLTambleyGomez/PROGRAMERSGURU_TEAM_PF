@@ -11,7 +11,7 @@ const signUp = async (req,res) => {
         if (isReg !== null) {
             return res.json({message: "ya existe el usuario"})
         }
-
+        
         const [newUser, created] = await User.findOrCreate({
             where: {
                 email: email
