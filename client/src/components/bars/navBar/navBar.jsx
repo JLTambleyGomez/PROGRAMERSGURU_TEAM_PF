@@ -23,7 +23,7 @@ function NavBar ({logoutUser}) {
 
     //const:
     const location = useLocation();
-    const disptach = useDispatch();
+    const dispatch = useDispatch();
 
     //functions:
     const theme = (base) => {
@@ -57,11 +57,13 @@ function NavBar ({logoutUser}) {
                 <NavLink to="/Cart" className={`${s.link} ${s[theme("link")]}`}>
                     Carrito
                 </NavLink>
-            </button>
+            </button>  
             <SearchBar/>
-            <PagoMetamask></PagoMetamask>
-            <Menu logoutUser={logoutUser}/>
+                      <PagoMetamask></PagoMetamask>
+
+           
             <FontAwesomeIcon
+                className={s.bolsita}
                 onClick={toggleShopbag}
                 icon={faBagShopping}
             />
@@ -74,6 +76,7 @@ function NavBar ({logoutUser}) {
                     </div>
                 )
             } */}
+             <Menu logoutUser={logoutUser}/>
         </nav>
     );
 }

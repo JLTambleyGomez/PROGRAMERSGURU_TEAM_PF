@@ -1,6 +1,6 @@
 .component {
-  margin-top: 10vh;
-  min-height: 90vh;
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
   display: flex;
   flex-direction: column; 
   padding-bottom: 20%;

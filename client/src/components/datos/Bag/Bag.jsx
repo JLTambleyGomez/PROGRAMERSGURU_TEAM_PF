@@ -21,7 +21,7 @@ function Bag () {
             {
                 shopbag && (
                     <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-                        <aside className={s.shopbag} onClick={(event) => event.stopPropagation()}>
+                        <aside className={`${s.shopbag} ${shopbag ? s.open : ''}`} onClick={(event) => event.stopPropagation()}>
                             elementos
                         </aside>
                     </div>

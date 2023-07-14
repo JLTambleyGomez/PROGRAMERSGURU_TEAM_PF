@@ -1,5 +1,5 @@
 .component {
-  height: 12%;
+  height: var(--navBarHeight);
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -44,7 +44,7 @@
       color: rgba(247, 249, 250, 0.932);
     }
     
-.shopbagOverlay {
+/* .shopbagOverlay {
   position: fixed;
   top: 10vh;
   z-index: 9998;
@@ -62,4 +62,12 @@
   width: 30vw;
   background-color: blue;
   border: 1px solid black;
+} */
+
+.bolsita{
+  transition: transform 0.5s;
+}
+.bolsita:hover{
+  transform:scale(2);
+  cursor: pointer;
 }

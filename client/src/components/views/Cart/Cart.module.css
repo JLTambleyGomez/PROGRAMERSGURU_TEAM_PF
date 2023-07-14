@@ -1,5 +1,5 @@
 .container{
-  margin-top: 10vh;
+  margin-top: var(--navBarHeight);
   padding-top: 4%;
   padding-bottom: 15%;
   min-height: 90vh;

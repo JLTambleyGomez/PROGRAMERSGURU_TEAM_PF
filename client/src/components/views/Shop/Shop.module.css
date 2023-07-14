@@ -1,9 +1,9 @@
 .component {
-  margin-top: 10vh;
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
   padding-bottom: 20vh;
   display: flex;
   flex-direction: column;
-  min-height: 70vh;
   animation: blur-in 0.8s ease;
 }   @keyframes blur-in {
   0% {

@@ -2,7 +2,8 @@
   /* REGLA PARA TODOS LOS .component, DONDE SE RENDERICEN NAVBAR Y/O FOOTER*/
   /* AJUSTAR MARGIN TOP DE ACUERDO A LA ALTURA DEL NAV BAR */
   /* EJ. NAVBAR.module.css.styles.component {height: 10vh} => APLICAR: margin-top: 10vh al component actual*/
-  margin-top: 10vh; 
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
   /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
   /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
   padding: 2% 7% 20vh; 
