@@ -61,7 +61,7 @@ const shopping_cart = sequelize.define(
             type: DataTypes.INTEGER,
         },
     },
-    { freezeTableName: true }
+    { timestamps: false, freezeTableName: true }
 );
 Product.belongsToMany(Payment, { through: shopping_cart, timestamps: false });
 Payment.belongsToMany(Product, { through: shopping_cart, timestamps: false });

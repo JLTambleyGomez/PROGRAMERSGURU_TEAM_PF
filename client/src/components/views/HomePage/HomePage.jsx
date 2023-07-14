@@ -61,17 +61,6 @@ function HomePage({token}) {
     });
   };
   
-  const postNewUser = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/user/signup", 
-        userData
-      );
-      console.log(response.data.userData);
-      return response.data.userData.newUser
-    } catch (error) {
-      // return error.data.message
-    }
-  };
 
   //-------------------------------------------------------------------------
 
@@ -84,16 +73,11 @@ function HomePage({token}) {
     };
   }, [dispatch]);
 
-  // let cont = 0
-  // useEffect(() => {
-  //   if (token && cont === 0) {
-  //     cont += 1
-  //     fetchData(token);
-  //   }
-  //   // if (userData.token) {
-  //   //   postNewUser()
-  //   // }
-  // }, [])
+  useEffect(() => {
+    if (token) {
+      fetchData(token);
+    }
+  }, [])
 
   return (
     <div className={`${s.component} ${s[theme("component")]}`}>
@@ -170,7 +154,6 @@ function HomePage({token}) {
           Link para visitar
         </a>
       </section>
-      <button onClick={postNewUser}>crearuser</button>
     </div>
   );
 }
