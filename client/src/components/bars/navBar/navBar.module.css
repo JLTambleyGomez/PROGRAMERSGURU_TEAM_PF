@@ -1,13 +1,10 @@
 .component {
-  /* AJUSTAR LAS DEMAS PAGINAS EN BASE AL HEIGHT DE ESTE COMPONENTE => PAGINA 1 - .component {margin-top:0 10vh}*/
-  height: 10vh;
+  height: 12%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* te parece si vamos al otro canal? */
   position: fixed;
   z-index: 9998;
-  /* TOP: ELIMINA CUALQUIER ESPACIO ENTRE EL TOPE DE LA PAGINA Y EL ELEMENTO */
   top: 0;
   width: 100%;
   animation:blur-in 0.4s linear both

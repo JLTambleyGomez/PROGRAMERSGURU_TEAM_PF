@@ -25,7 +25,7 @@ function Shop () {
 
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
-    const cartItems = useSelector((state)=> state.cart)
+    const cart = useSelector((state)=> state.cart)
 
     //const:
     const dispatch = useDispatch();
@@ -76,18 +76,19 @@ function Shop () {
     const addToCart = async (item) => {
         // setCartItems([...cartItems, item]);
         // setSelectQuantity()
-        const cart = await localStorage.getItem("cart")
-        if (!cart) {
-            await localStorage.setItem("cart", "[]")
+        // si el producto existe en el array de cart, ya no entra al condicional a hacer el push, solo le modifica la propiedad cantidad +1
+        if (!cart?.filter((product)=> product.id === item.id).length) {
+            item.quantity = 1; // crea una nueva propiedad al producto.
+            const oldCart = JSON.parse(localStorage.getItem("cart")) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+            oldCart.push(item)
+            localStorage.setItem("cart", JSON.stringify(oldCart))
+            dispatch(set_cart())
+        } else if (item.quantity < item.stock) {
+            item.quantity = item.quantity + 1;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            dispatch(set_cart())
         }
-        // if(!cart.includes(item)) {
-        item.quantity = 1; // crea una nueva propiedad al producto.
-
-        const oldCart = JSON.parse(localStorage.getItem("cart")) //convierte el JSON del carrito en un objeto js, en este caso, un array.
-        oldCart.push(item)
-        localStorage.setItem("cart", JSON.stringify(oldCart))
-        dispatch(set_cart())
-        // }
+        console.log(cart);
     };
 
     const removeFromCart = async (id) => {
@@ -105,9 +106,9 @@ function Shop () {
 
     const calculateTotal = () => {
         let total = 0;
-        for (let i = 0; i < cartItems.length; i++) {
+        for (let i = 0; i < cart.length; i++) {
             // Assuming each item has a price property
-            total += cartItems[i].price;
+            total += cart[i].price;
         }
         return +total;
     };
@@ -123,6 +124,12 @@ function Shop () {
     }, []);
 
     useEffect(() => {
+        (async () => {
+            const cart = await localStorage.getItem("cart")
+            if (!cart) {
+                await localStorage.setItem("cart", "[]")
+            }
+        })()
         dispatch(set_cart())
     }, [])
 
@@ -231,10 +238,10 @@ function Shop () {
             </section>
             <section className={s.section4}>
                 <h2>Resumen de compras</h2>
-                {cartItems?.length > 0 ? (
+                {cart?.length > 0 ? (
                     <>
                         <ul>
-                        {cartItems.map((item, index) => (
+                        {cart.map((item, index) => (
                             <li key={index}>
                                 {item.name} - ${item.price}
                                 <button onClick={() => removeFromCart(item.id)}>

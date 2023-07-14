@@ -9,7 +9,6 @@ import styles from "./PagoMetamask.module.css"
 const PagoMetamask =()=>{
     const [errorMessage,setErrorMessage]= useState(null)
     const [defaulAccount, setDefaultAccount]= useState(null)
-    const [userBalance, setUserBalance] = useState(null);
 
 const connectionwallet=()=> {
     if (window.ethereum){
@@ -22,24 +21,24 @@ const connectionwallet=()=> {
         }
     const accountChanged=(accountName)=>{
         setDefaultAccount(accountName);
-        getUserBalance(accountName)
     }
 
-    const getUserBalance=(accountAddress)=>{
-     window.ethereum.request({method:"eth_getBalance",params:[String(accountAddress),"lasted"]})
-     .then(balance=>{
-        setUserBalance(ethers.utils.formatEther(balance));
-     })
-    }
+ 
 
 
 
     return(
-        <div className={styles.container}>
-            <button onClick={connectionwallet}>CONECTA TU METAMASK </button>
-            <h2>{userBalance}</h2> <p>{defaulAccount}</p>
-            <p>{errorMessage}</p>
-            <h1>conexión a metamask</h1>
+        <div className={styles.container}  >
+            <img onClick={connectionwallet}
+            className={styles.img}
+            src="https://forum.bubble.io/uploads/default/optimized/3X/9/4/9484da71ef3ee1881ae37a3cc8c75d529e4159ac_2_150x150.png"
+            alt="newsBanner"
+            
+          /> 
+          <div className={styles.txt}>
+          {defaulAccount?  <p className={styles.conectada}>Conectada</p>:<p >Desconectada  </p>}
+        </div>
+            <h1>{errorMessage}</h1>
         </div>
     )
     }

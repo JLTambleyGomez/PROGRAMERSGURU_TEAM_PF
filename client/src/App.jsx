@@ -16,7 +16,7 @@ import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
-
+import Bag from "./components/datos/Bag/Bag";
 
 
 import "./config/firebase-config";
@@ -193,6 +193,7 @@ function App() {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
+    const shopbag = useSelector((state) => state.shopbag);
 
     //states:
     const [changeDarkMode, setChangeDarkMode] = useState("");
@@ -240,40 +241,41 @@ function App() {
 
   //component:
   return (
-    <div className={`${s[theme("component")]}`}>
-      {location !== "/" && <NavBar logoutUser={logoutUser} />}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LandingPage
-              signInwithGoogle={signInwithGoogle}
-              createUser={createUser}
-              signIn={signIn}
-              authorizedUser={authorizedUser}
-              setAuthorizedUser={setAuthorizedUser}
-            />
-          }
-        />
-        <Route
-          path="/HomePage"
-          element={<HomePage token={sessionStorage.getItem("accessToken")} />}
-        />
-        <Route path="/CoursePage" element={<CoursePage />} />
-        <Route path="/Profile" element={<Profile />} />
-        <Route path="/Store" element={<Shop />} />
-        <Route path="/Cart" element={<Cart />} />
-        <Route path="/AdminPanel" element={<AdminPanel />} />
-        <Route path="/CourseDetails/:id" element={<CourseDetails />} />
-        <Route path="/Commingsoon" element={<Commingsoon />} />
-        <Route path="/ProductDetail/:id" element={<ProductDetail />} />
-        <Route path="/PruebaMetamask" element={<PagoMetamask />} />
+        <div className={`${s[theme("component")]}`}>
+            {location !== "/" && <NavBar logoutUser={logoutUser} />}
+            {location !== "/" && <Bag/>}
+            <Routes>
+                <Route
+                path="/"
+                element={
+                    <LandingPage
+                    signInwithGoogle={signInwithGoogle}
+                    createUser={createUser}
+                    signIn={signIn}
+                    authorizedUser={authorizedUser}
+                    setAuthorizedUser={setAuthorizedUser}
+                    />
+                }
+                />
+                <Route
+                path="/HomePage"
+                element={<HomePage token={sessionStorage.getItem("accessToken")} />}
+                />
+                <Route path="/CoursePage" element={<CoursePage />} />
+                <Route path="/Profile" element={<Profile />} />
+                <Route path="/Store" element={<Shop />} />
+                <Route path="/Cart" element={<Cart />} />
+                <Route path="/AdminPanel" element={<AdminPanel />} />
+                <Route path="/CourseDetails/:id" element={<CourseDetails />} />
+                <Route path="/Commingsoon" element={<Commingsoon />} />
+                <Route path="/ProductDetail/:id" element={<ProductDetail />} />
+                <Route path="/PruebaMetamask" element={<PagoMetamask />} />
 
-        
-      </Routes>
-      {isAtBottom && <Footer />}
-    </div>
-  );
+                
+            </Routes>
+            {isAtBottom && <Footer />}
+        </div>
+    );
 }
 
 export default App;
