@@ -145,16 +145,18 @@ function Shop () {
           alt="mainBanner"
         />
         <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
-          PROGRAMMER'S GURU
+          PROGRAMMER'S GURU STORE
         </h1>
       </section>
-      <div >
+      <div className={s.flex}>
   <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
-  <button className={`${s.searchButton}`}>
-    <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"class="bi bi-search"viewBox="0 0 16 16">
+   
+  <p className={`${s.searchButton}`}>
+     <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"class="bi bi-search"viewBox="0 0 16 16">
       <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-  </button>
-</div>                <section className={`${s.section3}`}>
+  </p>
+
+</div>   <section className={`${s.section3}`}>
                   <aside className={`${s.sidebar}`}>  
                     <h2>FILTROS</h2>
                 <div>
