@@ -5,7 +5,7 @@ const courseRouter = require("./courseRouter");
 const productRouter = require("./productRouter");
 const favoriteRouter = require("./favoriteRouter");
 const userRouter = require("./userRouter");
-const commentRouter = require("./commentROuter");
+const commentRouter = require("./commentRouter");
 const paymentRouter = require("./paymentRouter");
 // const middleware = require("../middleware/index");
 

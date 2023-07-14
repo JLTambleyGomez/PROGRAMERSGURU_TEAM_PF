@@ -61,16 +61,6 @@ function HomePage({token}) {
     });
   };
   
-  const postNewUser = async () => {
-    try {
-      const response = await axios.post("http://localhost:3001/user/signup", 
-        userData
-      );
-      return response.data.userData.newUser
-    } catch (error) {
-      // return error.data.message
-    }
-  };
 
   //-------------------------------------------------------------------------
 
