@@ -37,11 +37,13 @@ const PagoMetamask = () => {
       />
       <div className={styles.txt}>
         {defaultAccount ? (
-          <p className={styles.conectada}>Conectada</p>
+          <p className={styles.conectada}>Conectada  
+          </p>
         ) : (
           <p>Desconectada</p>
         )}
-      </div>
+     
+      </div>   <p className={styles.walletid}>{defaultAccount}</p>  
       <div>{errorMessage && <ModalMetamask />}</div>
     </div>
   );

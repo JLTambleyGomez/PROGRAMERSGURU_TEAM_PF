@@ -13,10 +13,10 @@
     width:80px;
     height: 80px;
     margin-left: 5%;
+    margin-right: 4%;
     border-radius: 100%;
     border: solid 2px;
     border-color: rgba(248, 248, 248, 0.658);
-    margin-right: 4%;
     
 }
 .price{

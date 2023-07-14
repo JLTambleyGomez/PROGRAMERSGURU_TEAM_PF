@@ -5,8 +5,9 @@
     position: absolute;
     flex-direction: column;
     align-items: center;
-    right: 12.4%; 
+    right: 6.4%; 
     top: 28%;
+    
 }
 
 
@@ -17,7 +18,7 @@
     height: 30px;
     border-radius: 100%;
     transition: transform 0.5s;
-    margin-bottom: -19%;
+    margin-bottom: -10%;
 }
 
 .img:hover{
@@ -30,10 +31,15 @@
 .conectada{
     color: rgb(20, 255, 196);
     text-shadow: 1px 1px 1px  black;
+    margin-bottom:-20%;
 }
 
 .desconectada{
 
     color: rgba(255, 254, 254, 0.897);
 
+}
+
+.walletid{
+    font-size: 10px;
 }

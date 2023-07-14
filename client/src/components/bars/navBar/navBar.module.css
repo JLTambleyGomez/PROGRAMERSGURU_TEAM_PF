@@ -66,6 +66,9 @@
 
 .bolsita{
   transition: transform 0.5s;
+    /*  */
+  z-index: 9998;
+    /*  */
 }
 .bolsita:hover{
   transform:scale(2);
