@@ -136,75 +136,63 @@ function Shop () {
     //component:
     return (
         <main className={`${s.component}`}>
-            <section className={`${s.section1}`}>
-                <h1>EL LOGO VA AQUI</h1>
-            </section>
-            <section className={s.section2}>
+          
+            <section className={`${s.sectionBanner}`}>
+                
+        <img
+          className={`${s.bannerImg}`}
+          src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
+          alt="mainBanner"
+        />
+        <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
+          PROGRAMMER'S GURU
+        </h1>
+      </section>
+      <div >
+  <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
+  <button className={`${s.searchButton}`}>
+    <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"class="bi bi-search"viewBox="0 0 16 16">
+      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
+  </button>
+</div>                <section className={`${s.section3}`}>
+                  <aside className={`${s.sidebar}`}>  
+                    <h2>FILTROS</h2>
                 <div>
-                    <h1 onClick={toggleVisibilitySortByName}>ORDERNAR POR NOMBRE</h1>
-                    {
-                        isVisibleSortByName && (
+                    <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
+                       { isVisibleSortByName && (
                             <ul>
                                 <li>Ascendente</li>
                                 <li>Descendente</li>
-                            </ul>
-                        )
-                    }
-                </div>
-                <div>
-                    <h1 onClick={toggleVisibilitySortByPrice}>ORDENAR POR PRECIO</h1>
-                    {
-                        isVisibleSortByPrice && (
-                            <ul>
-                                <li>Menor a mayor</li>
-                                <li>Mayor a menor</li>
-                            </ul>
-                        )
-                    }
-                </div>
-                <input value={input} onChange={syncInput}></input>
-                <button>search</button>
-            </section>
-            <section className={`${s.section3}`}>
-                <aside className={`${s.sidebar}`}>
-                    <div className={`${s.filterOption}`}>
-                        <label onClick={toggleVisibilityPrice}>FILTER BY PRICE</label>
-                        {
-                            isVisiblePrice && ( 
-                                <div className={`${s.filterPrice}`}>
+                            </ul>)}
+                </div> 
+                <div> 
+                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                        {isVisiblePrice && (
+                             <div className={`${s.filterPrice}`}>
                                     <Slider
                                         className={`${s["filterPriceSlider"]}`}
                                         range
                                         min={0}
                                         max={1000}  
                                         defaultValue={priceRange}
-                                        onChange={handlePriceChange}
-                                    />
-                                    <div>
-                                        Price Range: ${priceRange[0]} - ${priceRange[1]}
-                                    </div>
-                                </div>
-                            )
-                        }
+                                        onChange={handlePriceChange}/>
+                     <div>Rango de Precio: ${priceRange[0]} - ${priceRange[1]}</div>
+                                </div> ) }
                     </div>
                     <div className={`${s.filterOption}`}>
-                        <label onClick={toggleVisibilityCategory}>FILTER BY CATEGORY</label>
-                        {
-                            isVisibleCategory && (
+                        <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
+                           { isVisibleCategory && (
                                 <div className={`${s.filterCategory}`}>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Libros</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Computadoras</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Almacenamiento</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Audio</span>
                                     <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Accesorios</span>
-                                </div>
-                            )
-                        }
+                                </div>) }
                     </div>
                 </aside>
                     <div className={`${s['productBox']}`}>
-                        {
-                            products.map((product, index) => {
+                         {products.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
@@ -221,10 +209,8 @@ function Shop () {
                                                 onMouseEnter={() => handleMouseEnter(index)}
                                                 onMouseLeave={() => handleMouseLeave(index)}
                                                 onClick={() => addToCart(product)}>
-                                            <FontAwesomeIcon
-                                                icon={faShoppingCart}
-                                                className={s.cartIcon}
-                                            />
+                                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart3" viewBox="0 0 16 16">
+                                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
                                             </button>
                                         </div>
                                         {cartTooltips[index] && (
@@ -236,7 +222,7 @@ function Shop () {
                         }
                     </div>
             </section>
-            <section className={s.section4}>
+            <section className={s.Resumen}>
                 <h2>Resumen de compras</h2>
                 {cart?.length > 0 ? (
                     <>
@@ -245,7 +231,9 @@ function Shop () {
                             <li key={index}>
                                 {item.name} - ${item.price}
                                 <button onClick={() => removeFromCart(item.id)}>
-                                    <FontAwesomeIcon icon={faTrash} />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                </svg>
                                 </button>
                             </li>
                         ))}
@@ -262,157 +250,3 @@ function Shop () {
 
 export default Shop;
 
-
-//   return (
-//     <div className={styles.container}>
-//       <div className={`${styles.h1} ${styles[elementClasses.h1]}`}>
-//         <h1>Encuentra lo que necesites para programar de la mejor manera</h1>
-//       </div>
-//       <div className={`${styles.containerItems} ${isCartExpanded ? styles.expanded : ""}`}>
-//         <div className={styles.item}>
-//           <figure>
-//             <img
-//               src="https://http2.mlstatic.com/D_NQ_NP_741120-MLA52367887280_112022-O.webp"
-//               alt="producto"
-//             />
-//           </figure>
-//           <div className={styles.infoProduct}>
-//             <h2>Laptop Computer</h2>
-//             <div className={styles.priceAndCart}>
-//               <p className={styles.price}>$1000 </p>
-//               <button
-//                 onMouseEnter={() => handleMouseEnter(0)}
-//                 onMouseLeave={() => handleMouseLeave(0)}
-//                 onClick={() =>
-//                   handleAddToCart({ name: "Laptop Computer", price: 1000 })
-//                 }
-//               >
-//                 <FontAwesomeIcon
-//                   icon={faShoppingCart}
-//                   className={styles.cartIcon}
-//                 />
-//               </button>
-//             </div>
-//             {cartTooltips[0] && (
-//               <span className={styles.cartTooltip}>Añadir al carrito</span>
-//             )}
-//           </div>
-//         </div>
-//         <div className={styles.item}>
-//           <figure>
-//             <img
-//               src="https://http2.mlstatic.com/D_NQ_NP_615006-MLU69482630056_052023-O.webp"
-//               alt="producto"
-//             />
-//           </figure>
-//           <div className={styles.infoProduct}>
-//             <h2>High-resolution Monitor</h2>
-//             <div className={styles.priceAndCart}>
-//               <p className={styles.price}>$1000 </p>
-//               <button
-//                 onMouseEnter={() => handleMouseEnter(1)}
-//                 onMouseLeave={() => handleMouseLeave(1)}
-//                 onClick={() =>
-//                   handleAddToCart({
-//                     name: "High-resolution Monitor",
-//                     price: 1000,
-//                   })
-//                 }
-//               >
-//                 <FontAwesomeIcon
-//                   icon={faShoppingCart}
-//                   className={styles.cartIcon}
-//                 />
-//               </button>
-//             </div>
-//             {cartTooltips[1] && (
-//               <span className={styles.cartTooltip}>Añadir al carrito</span>
-//             )}
-//           </div>
-//         </div>
-//         <div className={styles.item}>
-//           <figure>
-//             <img
-//               src="https://http2.mlstatic.com/D_NQ_NP_876249-MLA51700399267_092022-O.webp"
-//               alt="producto"
-//             />
-//           </figure>
-//           <div className={styles.infoProduct}>
-//             <h2>Mechanical Keyboard</h2>
-//             <div className={styles.priceAndCart}>
-//               <p className={styles.price}>$1000 </p>
-//               <button
-//                 onMouseEnter={() => handleMouseEnter(2)}
-//                 onMouseLeave={() => handleMouseLeave(2)}
-//                 onClick={() =>
-//                   handleAddToCart({ name: "Mechanical Keyboard", price: 1000 })
-//                 }
-//               >
-//                 <FontAwesomeIcon
-//                   icon={faShoppingCart}
-//                   className={styles.cartIcon}
-//                 />
-//               </button>
-//             </div>
-//             {cartTooltips[2] && (
-//               <span className={styles.cartTooltip}>Añadir al carrito</span>
-//             )}
-//           </div>
-//         </div>
-//         <div className={styles.item}>
-//           <figure>
-//             <img
-//               src="https://http2.mlstatic.com/D_NQ_NP_989281-MLA49016297014_022022-O.webp"
-//               alt="producto"
-//             />
-//           </figure>
-//           <div className={styles.infoProduct}>
-//             <h2>Ergonomic Mouse</h2>
-//             <div className={styles.priceAndCart}>
-//               <p className={styles.price}>$1000 </p>
-//               <button
-//                 onMouseEnter={() => handleMouseEnter(3)}
-//                 onMouseLeave={() => handleMouseLeave(3)}
-//                 onClick={() =>
-//                   handleAddToCart({ name: "Ergonomic Mouse", price: 1000 })
-//                 }
-//               >
-//                 <FontAwesomeIcon
-//                   icon={faShoppingCart}
-//                   className={styles.cartIcon}
-//                 />
-//               </button>
-//             </div>
-//             {cartTooltips[3] && (
-//               <span className={styles.cartTooltip}>Añadir al carrito</span>
-//             )}
-//           </div>
-//         </div>
-//       </div>
-//       <hr/>
-//       <div className={styles.cart}>
-//         <h2>Resumen de compras</h2>
-//         {cartItems.length > 0 ? (
-//           <>
-//             <ul>
-//               {cartItems.map((item, index) => (
-//                 <li key={index}>
-//                   {item.name} - ${item.price}
-//                   <button onClick={() => handleRemoveFromCart(index)}>
-//                     <FontAwesomeIcon icon={faTrash} />
-//                   </button>
-//                 </li>
-//               ))}
-//             </ul>
-//             <p>Total: ${calculateTotal()}</p>
-//           </>
-//         ) : (
-//           <p>Tu carrito de compras está vacío</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-
-// export default Tienda;

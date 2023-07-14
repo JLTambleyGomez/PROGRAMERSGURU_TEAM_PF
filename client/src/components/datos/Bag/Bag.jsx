@@ -5,18 +5,22 @@ import { toggle_shopbag, set_cart } from "../../../Redux/actions";
 import s from "./Bag.module.css";
 
 //_________________________module_________________________
-
 function Bag () {
 
     //global state:
     const shopbag = useSelector((state) => state.shopbag)
     const cart = useSelector((state) => state.cart);
-    const arr = [1,2,3,4,5]
+    const dark = useSelector((state) => state.darkMode);
 
     //const:
     const dispatch = useDispatch();
 
     //function:
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`
+    }
+
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag))
     }
@@ -33,6 +37,15 @@ function Bag () {
         }
     };
 
+    const calculateTotal = () => {
+        let total = 0;
+        cart.forEach((product) => {
+            const sum = product.price * product.quantity;
+            total += sum;
+        });
+        return total;
+    };
+
     //life-cycles:
     useEffect(() => {
         dispatch(set_cart());
@@ -44,29 +57,32 @@ function Bag () {
             {
                 shopbag && (
                     <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-                        <aside className={`${s.shopbag} ${shopbag ? s.open : ''}`} onClick={(event) => event.stopPropagation()}>
+                        <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
                             {
                                 cart.map((product) => {
                                     return (
-                                        <div className={s.item}>
-                                            <button
-                                                onClick={() => handleAddButton("resta", product)}
-                                                className={s.minusPlus}
-                                            >
-                                                -
-                                            </button>
-                                            <img className={s.img} src={product.image} alt={product.name} />
-                                            <button
-                                                onClick={() => handleAddButton("suma", product)}
-                                                className={s.minusPlus}
-                                            >
-                                                +
-                                            </button>
+                                        <div className={`${s.item} ${s[theme("item")]}`}>
+                                            <div className={s.section1}>
+                                                <button
+                                                    onClick={() => handleAddButton("resta", product)}
+                                                    className={s.minusPlus}
+                                                >
+                                                    -
+                                                </button>
+                                                    <img src={product.image} alt={product.name} />
+                                                <button
+                                                    onClick={() => handleAddButton("suma", product)}
+                                                    className={s.minusPlus}
+                                                    >
+                                                    +
+                                                </button>
+                                            </div>
+                                            <p>{product.name} x {product.quantity}</p>
                                         </div>
                                     )
                                 })
                             }
-                            TOTAL: 
+                            Subtotal: $ {calculateTotal()}
                         </aside>
                     </div>
                 )
