@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
-import { ModalMetamask } from '../../views/MetamaskAlert/MetamaskAlert';
+import  ModalMetamask  from '../../views/MetamaskAlert/MetamaskAlert';
 import styles from './PagoMetamask.module.css';
 
 const PagoMetamask = () => {
