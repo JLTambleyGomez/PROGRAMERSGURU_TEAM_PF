@@ -1,5 +1,6 @@
 .component {
-  position: relative
+  position: absolute;
+  right:3%
 }
 .component:hover {
   background-color: #588b8b00;

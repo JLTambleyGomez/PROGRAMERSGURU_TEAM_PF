@@ -1,5 +1,6 @@
 .component {
-  margin-top: 10vh;
+  margin-top: var(--navBarHeight);
+  /* min-height: calc(100vh - var(--navBarHeight)); */
   display: flex;
   border: 1px solid black;
   height: 900px

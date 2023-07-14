@@ -28,7 +28,9 @@ import {
     //USER
     GET_USER_BY_EMAIL,
     //
-    SET_CART
+    SET_CART,
+    //
+    TOGGLE_SHOPBAG,
 
 } from "./actions";
 
@@ -49,7 +51,8 @@ const globalStorage = {
     access:false,
     products:[],
     user:{},
-    cart:[]
+    cart:[],
+    shopbag: false
 }
 
 
@@ -158,8 +161,14 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case SET_CART:
             return {
                 ...state,
-                cart: JSON.parse(localStorage.getItem("cart"))
+                cart: payload
             };
+        
+        case TOGGLE_SHOPBAG:
+            return {
+                ...state,
+                shopbag: payload
+            }
 
         default: return {...state}; 
     }

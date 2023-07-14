@@ -60,7 +60,9 @@ import {
 
     //CART
     export const SET_CART= "SET_CART";
-
+    
+//SHOPBAG
+export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
     
 //__________________________________________________
 //ACTION CREATORS:
@@ -384,6 +386,15 @@ export const get_User_By_Email = (userEmail) => {
 export const set_cart = () => {
     return {
         type: SET_CART,
+        payload: JSON.parse(localStorage.getItem("cart"))
     }
 }
 
+//SHOPBAG
+
+export const toggle_shopbag = (status) => {
+	return {
+		type: TOGGLE_SHOPBAG,
+		payload: status
+	}
+}

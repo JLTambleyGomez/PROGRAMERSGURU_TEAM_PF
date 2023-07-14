@@ -4,7 +4,7 @@ const { DataTypes } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
 
-require('dotenv').config({ path: path.resolve(__dirname, './.env') }); // para recibir las constantes de .env
+require("dotenv").config({ path: path.resolve(__dirname, "./.env") }); // para recibir las constantes de .env
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
@@ -38,7 +38,8 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Course, Technology, Comment, Product, Payment } = sequelize.models; //Sequaliza los modelos > ejemplo
+const { User, Course, Technology, Comment, Product, Payment } =
+    sequelize.models; //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
 Course.belongsToMany(User, { through: "Favorite", timestamps: false });
@@ -47,28 +48,32 @@ User.belongsToMany(Course, { through: "Favorite", timestamps: false });
 Course.belongsToMany(Technology, {
     through: "technology_course",
     timestamps: false,
-}); 
+});
 Technology.belongsToMany(Course, {
     through: "technology_course",
     timestamps: false,
 });
 
-const shopping_cart = sequelize.define('shopping_cart', {
-    amount: {
-      type: DataTypes.INTEGER,
-    }
-  });
+const shopping_cart = sequelize.define(
+    "shopping_cart",
+    {
+        amount: {
+            type: DataTypes.INTEGER,
+        },
+    },
+    { timestamps: false, freezeTableName: true }
+);
 Product.belongsToMany(Payment, { through: shopping_cart, timestamps: false });
 Payment.belongsToMany(Product, { through: shopping_cart, timestamps: false });
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+User.hasMany(Comment, { foreignKey: "userId" });
+Comment.belongsTo(User, { foreignKey: "userId" });
 
-Course.hasMany(Comment);
-Comment.belongsTo(Course);
+Course.hasMany(Comment, { foreignKey: "courseId" });
+Comment.belongsTo(Course, { foreignKey: "courseId" });
 
-User.hasMany(Payment);
-Payment.belongsTo(User);
+User.hasMany(Payment, { foreignKey: "userId" });
+Payment.belongsTo(User, { foreignKey: "userId" });
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
