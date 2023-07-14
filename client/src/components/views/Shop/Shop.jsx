@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { products } from "./products.json"
+import { add_to_cart } from "../../../Redux/actions"
 
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,9 @@ function Shop () {
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
     const [cartItems, setCartItems] = useState([]);
+
+    //const:
+    const dispatch = useDispatch();
 
     //functions:
     const theme = (base) => {
@@ -69,9 +73,22 @@ function Shop () {
         setCartTooltips(newCartTooltips);
     };
 
-    const addToCart = (item) => {
-        setCartItems([...cartItems, item]);
-        setSelectQuantity()
+    const addToCart = async (item) => {
+        // setCartItems([...cartItems, item]);
+        // dispatch(add_to_cart(item))
+        try {
+            const cart = await localStorage.getItem("cart")
+            if (!cart) {
+                await localStorage.setItem("cart", "[]")
+            }
+            const oldCart = JSON.parse(localStorage.getItem("cart"))
+            oldCart.push(item)
+            localStorage.setItem("cart", JSON.stringify(oldCart))
+        } catch (error) {
+        }        
+        // add item to local storage:
+        // localStorage.setItem("cart", [localStorage.getItem("cart")])
+        // setSelectQuantity()
     };
 
     const removeFromCart = (index) => {

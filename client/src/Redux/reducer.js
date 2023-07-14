@@ -25,6 +25,8 @@ import {
 //PRODUCTS
     GET_PRODUCTS,
     DELETE_PRODUCT,
+//CART:
+ADD_TO_CART
 
 } from "./actions";
 
@@ -44,6 +46,7 @@ const goblalStorage = {
     favorites:[],
     access:false,
     products:[],
+    cart:[]
 }
 
 
@@ -51,6 +54,9 @@ const goblalStorage = {
 export default function rootReducer ( state = goblalStorage, { type, payload } ) {
 
     switch (type) {
+        case ADD_TO_CART:
+            const copyCart = [...state.cart]
+            return { ...state, cart: [...copyCart, payload]}
 
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 
 // import styles from './navBar.module.css';
 import s from "./navBar.module.css";
@@ -13,14 +15,21 @@ function NavBar ( { logoutUser } ) {
     //global states:
     const dark = useSelector((state) => state.darkMode);
 
+    //states:
+    const [shopbag, setShopbag] = useState(false);
+
+    //const:
+    const location = useLocation();
+
     //functions:
     const theme = (base) => {
         const suffix = dark ? 'dark' : 'light';
         return `${base}-${suffix}`;
     };
 
-    //const:
-    const location = useLocation();
+    const toggleShopbag = () => {
+        setShopbag(!shopbag)
+    }
 
     //component:
     return (
@@ -47,6 +56,19 @@ function NavBar ( { logoutUser } ) {
             </button>
             <SearchBar/>
             <Menu logoutUser={logoutUser}/>
+            <FontAwesomeIcon
+                onClick={toggleShopbag}
+                icon={faBagShopping}
+            />
+            {
+                shopbag && (
+                    <div className={s.shopbagOverlay} onClick={toggleShopbag}>
+                        <aside className={s.shopbag} onClick={(event) => event.stopPropagation()}> 
+                            bag
+                        </aside>
+                    </div>
+                )
+            }
         </nav>
     );
 }

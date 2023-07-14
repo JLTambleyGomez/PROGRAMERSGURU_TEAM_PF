@@ -50,7 +50,8 @@ import {
     export const POST_PRODUCTS = "POST_PRODUCTS"
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
     export const GET_USER= "GET_USER";
-
+//CART:
+    export const ADD_TO_CART = "ADD_TO_CART";
     
 //__________________________________________________
 //ACTION CREATORS:
@@ -362,4 +363,28 @@ export const getOneUser = (userData) => {
             });
         }
     };
+}
+
+export const get_cart = () => {
+    return async function (dispatch) {
+        try {
+            localStorage.getItem("cart")
+        } catch (error) {
+            
+        }
+    }
+}
+
+export const add_to_cart = async (item) => {
+        try {
+            const cart = await localStorage.getItem("cart")
+            if (!cart) {
+                await localStorage.setItem("cart", "[]")
+            } else {
+                const oldCart = JSON.parse(localStorage.getItem("cart"))
+                oldCart.push(item)
+            }
+            localStorage.setItem("data", JSON.stringify(oldCart))
+        } catch (error) {
+        }
 }
