@@ -1,7 +1,9 @@
-const { DataTypes, Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("Payment", {
+    sequelize.define(
+        "Payment",
+        {
             id: {
                 type: DataTypes.INTEGER,
                 primaryKey: true,
@@ -10,13 +12,14 @@ module.exports = (sequelize) => {
             },
             date: {
                 type: DataTypes.DATEONLY,
-                allowNull: false,
+                defaultValue: null,
             },
             status: {
                 type: DataTypes.ENUM("fullfiled", "rejected", "pending"),
+                defaultValue: "pending",
             },
             totalPrice: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.FLOAT,
             },
         },
         { timestamps: false, freezeTableName: true }
