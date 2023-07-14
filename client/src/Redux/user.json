@@ -1,0 +1,15 @@
+
+   { "user":{
+        "name": "John Doe",
+        "email": "johndoe@example.com",
+        "picture": "https://media.tenor.com/v9sdELSzVw4AAAAC/nyan-cat-kawaii.gif",
+        "isAdmin": false,
+        "isBanned": false,
+        "expirationDate": "2023-07-12T00:00:00Z",
+        "nickName": "johndoe",
+        "favorites":[{"id":1,"name":"curso1"},{"name":"curso2","id":7},{"name":"curso3","id":3},{"id":8,"name":"curso4"}],
+        "comments":[{"comentario":"hola que tal"},{"comentario":"hello its me, the great papayrus"}],
+        "subscription":[{"id":"123123", "type":"3 meses" },{"id":"23123123","type":"1año"}]
+      }
+    }
+    

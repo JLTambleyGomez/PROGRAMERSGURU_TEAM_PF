@@ -8,7 +8,7 @@ const postProducts = async (req, res) => {
   try {
     const archivoProductos = fs.readFileSync(productosFilePath, 'utf8');
 
-    const productos = JSON.parse(archivoProductos).productos;
+    const productos = JSON.parse(archivoProductos).products;
 
     await Product.bulkCreate(productos);
 

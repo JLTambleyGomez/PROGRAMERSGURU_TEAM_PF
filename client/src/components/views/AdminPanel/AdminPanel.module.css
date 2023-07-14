@@ -1,9 +1,10 @@
 .component {
+  margin-top:10vh;
+  min-height: 90vh;
   display: flex;
   flex-direction: column;
-  margin-top:4%;
 }
-
+Se
 .Panel{
   position: absolute;
   padding: 4%;

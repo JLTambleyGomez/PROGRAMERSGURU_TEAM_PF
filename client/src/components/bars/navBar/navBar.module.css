@@ -1,9 +1,10 @@
 .component {
-  /* AJUSTAR LAS DEMAS PAGINAS EN BASE AL HEIGHT DE ESTE COMPONENTE => PAGINA 1 - .component {margin-top: 10vh}*/
+  /* AJUSTAR LAS DEMAS PAGINAS EN BASE AL HEIGHT DE ESTE COMPONENTE => PAGINA 1 - .component {margin-top:0 10vh}*/
   height: 10vh;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  /* te parece si vamos al otro canal? */
   position: fixed;
   z-index: 9998;
   /* TOP: ELIMINA CUALQUIER ESPACIO ENTRE EL TOPE DE LA PAGINA Y EL ELEMENTO */
@@ -45,3 +46,23 @@
     .link-dark {
       color: rgba(247, 249, 250, 0.932);
     }
+    
+.shopbagOverlay {
+  position: fixed;
+  top: 10vh;
+  z-index: 9998;
+  height: 90vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.shopbag {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  z-index: 9999;
+  height: 90vh;
+  width: 30vw;
+  background-color: blue;
+  border: 1px solid black;
+}

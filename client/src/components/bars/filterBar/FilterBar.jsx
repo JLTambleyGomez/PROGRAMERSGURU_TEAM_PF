@@ -183,7 +183,7 @@ function FilterBar() {
             <option value="true">Gratis</option>
             <option value="false">De Pago</option>
           </select>
-    
+
           <button onClick={handleFilterReset}>Mostrar Todos</button>
         </div>
       );
