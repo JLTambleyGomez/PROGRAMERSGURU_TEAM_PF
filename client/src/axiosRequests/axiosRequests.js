@@ -1,5 +1,14 @@
 import axios from "axios";
 
+// Agregar encabezado de autorización a todas las solicitudes
+let token = sessionStorage.getItem("accessToken");
+
+// Intercepta todas las solicitudes salientes
+axios.interceptors.request.use(function (config) {
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+});
+
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/course");

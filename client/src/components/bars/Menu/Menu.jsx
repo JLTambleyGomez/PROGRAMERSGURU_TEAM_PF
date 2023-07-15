@@ -4,10 +4,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
 import { FaSun, FaMoon } from "react-icons/fa";
 
+import logoutUser from "../../../user/logOut"
+
 import s from "./Menu.module.css";
 
 //_________________________module_________________________
-function Menu ({logoutUser}) {
+function Menu () {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);

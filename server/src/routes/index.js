@@ -8,8 +8,10 @@ const userRouter = require("./userRouter");
 const commentRouter = require("./commentRouter");
 const paymentRouter = require("./paymentRouter");
 const suscriptionRouter = require("./suscriptionRouter");
-// const middleware = require("../middleware/index");
 const mecadoPagoRouter = require("./mecadoPagoRouter");
+const middleware = require("../middleware/index");
+
+router.use(middleware.decodeToken)
 
 router.use("/technology", technologyRouter);
 

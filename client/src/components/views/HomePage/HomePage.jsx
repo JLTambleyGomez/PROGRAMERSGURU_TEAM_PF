@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   get_categories,
@@ -6,18 +6,14 @@ import {
   clearMessage,
   get_Favorites_Request,
 } from "../../../Redux/actions";
-import axios from "axios";
+
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 
-// import "../../../config/firebase-config";
-// import {
-//   onAuthStateChanged
-// } from "firebase/auth";
 
 //_________________________module_________________________
-function HomePage({token}) {
+function HomePage() {
   //global state:
   const dark = useSelector((state) => state.darkMode);
   const allCourses = useSelector((state) => state.allCourses);
@@ -25,7 +21,7 @@ function HomePage({token}) {
   //const:
   const dispatch = useDispatch();
   const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
-  const token2 = sessionStorage.getItem("accessToken")
+  
   //functions:
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
@@ -33,37 +29,7 @@ function HomePage({token}) {
   };
 
   //-------------------------------------------------------------------------
-  const [userData, setUserData] = useState({
-    id: "",
-    name: "",
-    nickName: "",
-    image: "",
-    email: "",
-    token: "",
-  });
   
-  const fetchData = async (token) => {
-    const response = await axios.get("http://localhost:3001/user/loginWithGoogle", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    
-    const { id, name, image, email } = response.data.userData;
-    setUserData({
-      ...userData,
-      id,
-      name,
-      nickName: name,
-      image,
-      email,
-      token
-    });
-  };
-  
-
-  //-------------------------------------------------------------------------
-
   //life-cycles:
   useEffect(() => {
     dispatch(get_categories());
@@ -72,14 +38,6 @@ function HomePage({token}) {
       dispatch(clearMessage());
     };
   }, [dispatch]);
-
-  let cont = 0 
-  useEffect(() => {
-    if (token && cont === 0) {
-      cont += 1
-      fetchData(token);
-    }
-  }, [])
 
   return (
     <div className={`${s.component} ${s[theme("component")]}`}>
