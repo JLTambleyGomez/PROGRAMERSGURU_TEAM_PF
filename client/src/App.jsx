@@ -17,6 +17,7 @@ import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
 import Bag from "./components/datos/Bag/Bag";
+import Success from "./components/views/MercadopagoFeedback/Success"
 
 
 import "./config/firebase-config";
@@ -273,6 +274,7 @@ function App() {
                 <Route path="/Commingsoon" element={<Commingsoon />} />
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />
+                <Route path="/MercadoPagoFeedback" element={<Success/>} />
 
                 
             </Routes>
