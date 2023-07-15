@@ -2,6 +2,8 @@ import { useState } from "react";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
 import signInwithGoogle from "../../../user/signInWithGoogle";
+import signIn from "../../../user/signIn"
+import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
 function LoginForm() {
@@ -44,6 +46,7 @@ function LoginForm() {
 
   const handleLogIn = (event) => {
     event.preventDefault();
+    get_User_By_Email(userData.email)
     signIn(userData.email, userData.password)
   }
 
@@ -63,7 +66,7 @@ function LoginForm() {
               <span className={styles.closeIcon}>x</span>
             </button>
             {/* FORM */}
-            <form onSubmit={handleSubmit}>
+            <form>
               <h1 className={styles.title}>BIENVENIDO</h1>
               {/* EMAIL */}
               <label className={styles.label} htmlFor="email">

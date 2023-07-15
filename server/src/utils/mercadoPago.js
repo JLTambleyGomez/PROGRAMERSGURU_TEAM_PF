@@ -35,6 +35,8 @@ const PagoconMercadopago = async (req, res) => {
     });
 };
 
+
+
 const FeedbackMercadoPago = async (req, res) => {
   res.json({
     Payment: req.query.payment_id,

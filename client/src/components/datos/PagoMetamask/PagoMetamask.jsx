@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './PagoMetamask.module.css';
-import axios from 'axios';
+import {getEthvalue} from "../../../axiosRequests/axiosRequests"
 
 const PagoMetamask = ({total}) => {
   const [errorMessage, setErrorMessage] = useState(null);
@@ -12,9 +12,7 @@ const PagoMetamask = ({total}) => {
 
   const getEthValue = async (UsdtValue) => {
 
-    const response = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
-
-    const ethUSDTPrice = parseFloat(response.data.price);
+    const ethUSDTPrice = await getEthvalue();
 
     const usdtToEther = UsdtValue / ethUSDTPrice; 
 

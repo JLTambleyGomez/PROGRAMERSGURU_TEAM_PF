@@ -5,6 +5,9 @@ let token = sessionStorage.getItem("accessToken");
 
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
+  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
+    return config;
+  }
     config.headers.Authorization = `Bearer ${token}`;
     return config;
 });
@@ -14,6 +17,14 @@ export const getCoursesAllRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/course");
   return data;
 };
+
+export const getEthvalue = async () =>{
+  const response = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
+
+  const ethUSDTPrice = parseFloat(response.data.price);
+
+  return ethUSDTPrice;
+}
 
 export const getProducts = async () => {
   const { data } = await axios.get("http://localhost:3001/product");
@@ -107,7 +118,7 @@ export const deleteFavoritesRequest = async () => {
 //user______________________________
 
 export const getUserByEmail = async (email) => {
-  const { data } = await axios.get("http://localhost:3001/user/email", email);
+  const { data } = await axios.get("http://localhost:3001/user", email);
   return data;
 };
 

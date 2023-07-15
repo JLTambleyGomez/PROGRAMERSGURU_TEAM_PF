@@ -360,14 +360,13 @@ export function delete_Products(id) { // request
 }
 
 //USER___________________________________________________________________//
-import {user} from './user.json';
 
-export const get_User_By_Email = (userEmail) => {
-    return {
+export const get_User_By_Email = async (email) => {
+    const data = await getUserByEmail(email); 
+    return dispatch({
         type: GET_USER_BY_EMAIL,
-        payload: user
-    }
-
+        payload: data,
+    })
     /*return async function (dispatch) {
         try {
             const data = await login(userEmail); 
