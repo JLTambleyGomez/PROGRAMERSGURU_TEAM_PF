@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";

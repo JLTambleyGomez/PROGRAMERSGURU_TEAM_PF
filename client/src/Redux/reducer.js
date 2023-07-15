@@ -60,9 +60,6 @@ const globalStorage = {
 export default function rootReducer ( state = globalStorage, { type, payload } ) {
 
     switch (type) {
-        case ADD_TO_CART:
-            const copyCart = [...state.cart]
-            return { ...state, cart: [...copyCart, payload]}
 
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };

@@ -39,7 +39,7 @@ function Bag () {
 
     const calculateTotal = () => {
         let total = 0;
-        cart.forEach((product) => {
+        cart?.forEach((product) => {
             const sum = product.price * product.quantity;
             total += sum;
         });
@@ -53,41 +53,35 @@ function Bag () {
 
     //component:
     return (
-        <>
-            {
-                shopbag && (
-                    <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-                        <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
-                            {
-                                cart.map((product) => {
-                                    return (
-                                        <div className={`${s.item} ${s[theme("item")]}`}>
-                                            <div className={s.section1}>
-                                                <button
-                                                    onClick={() => handleAddButton("resta", product)}
-                                                    className={s.minusPlus}
-                                                >
-                                                    -
-                                                </button>
-                                                    <img src={product.image} alt={product.name} />
-                                                <button
-                                                    onClick={() => handleAddButton("suma", product)}
-                                                    className={s.minusPlus}
-                                                    >
-                                                    +
-                                                </button>
-                                            </div>
-                                            <p>{product.name} x {product.quantity}</p>
-                                        </div>
-                                    )
-                                })
-                            }
-                            Subtotal: $ {calculateTotal()}
-                        </aside>
-                    </div>
-                )
-            }
-        </>
+        <div className={s.shopbagOverlay} onClick={toggleShopbag}>
+            <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
+                {
+                    cart?.map((product) => {
+                        return (
+                            <div className={`${s.item} ${s[theme("item")]}`}>
+                                <div className={s.section1}>
+                                    <button
+                                        onClick={() => handleAddButton("resta", product)}
+                                        className={s.minusPlus}
+                                    >
+                                        -
+                                    </button>
+                                        <img src={product.image} alt={product.name} />
+                                    <button
+                                        onClick={() => handleAddButton("suma", product)}
+                                        className={s.minusPlus}
+                                        >
+                                        +
+                                    </button>
+                                </div>
+                                <p>{product.name} x {product.quantity}</p>
+                            </div>
+                        )
+                    })
+                }
+                Subtotal: $ {calculateTotal()}
+            </aside>
+        </div>
     )
 }
 

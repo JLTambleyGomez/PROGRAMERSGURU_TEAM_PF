@@ -253,9 +253,11 @@ function App () {
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
-        window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
+
+//sessionstorage.getitem("")
 
   //component:
   return (
@@ -264,16 +266,16 @@ function App () {
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
                 <Route
-                path="/"
-                element={
-                    <LandingPage
-                    signInwithGoogle={signInwithGoogle}
-                    createUser={createUser}
-                    signIn={signIn}
-                    authorizedUser={authorizedUser}
-                    setAuthorizedUser={setAuthorizedUser}
-                    />
-                }
+                    path="/"
+                    element={
+                        <LandingPage
+                            signInwithGoogle={signInwithGoogle}
+                            createUser={createUser}
+                            signIn={signIn}
+                            authorizedUser={authorizedUser}
+                            setAuthorizedUser={setAuthorizedUser}
+                        />
+                    }
                 />
                 <Route
                 path="/HomePage"

@@ -108,9 +108,9 @@ function Shop () {
         let total = 0;
         for (let i = 0; i < cart.length; i++) {
             // Assuming each item has a price property
-            total += cart[i].price;
+            total += +cart[i].price;
         }
-        return +total;
+        return total;
     };
 
     //life-cycles:
