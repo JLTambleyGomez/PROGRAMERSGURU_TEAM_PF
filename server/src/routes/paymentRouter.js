@@ -5,8 +5,8 @@ const {
 
 const paymentRouter = require("express").Router();
 
-paymentRouter.get("/:id", getPayment);
-
 paymentRouter.post("/", addProductToPayment);
+
+paymentRouter.get("/:id", getPayment);
 
 module.exports = paymentRouter;
