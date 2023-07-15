@@ -1,12 +1,10 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getloged } from "../../../Redux/actions";
+import { useState } from "react";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
-import { useNavigate } from "react-router-dom";
+import signInwithGoogle from "../../../user/signInWithGoogle";
 
 //_________________________module_________________________
-function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
+function LoginForm() {
   // const dispatch = useDispatch()
   //states:
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -44,11 +42,10 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
     setPasswordVisible(!passwordVisible)
   }
 
-  const navigate = useNavigate()
-  const handleSubmit = (event) => {
+  const handleLogIn = (event) => {
     event.preventDefault();
     signIn(userData.email, userData.password)
-  };
+  }
 
   //component:
   return (
@@ -114,8 +111,8 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
               </p>
 
               {/* SUBMIT */}
-              <button className={styles.button} type="submit">
-                Submit
+              <button className={styles.button} type="submit" onClick={handleLogIn}>
+                Acceder
               </button>
               <hr />
             </form>
@@ -127,13 +124,6 @@ function LoginForm({signInwithGoogle, authorizedUser,signIn}) {
               >
                 Acceder con Google
               </button>
-              {authorizedUser ? (
-                <>
-                  {authorizedUser && navigate("/HomePage")}
-                </>
-              ) : (
-                ""
-              )}
           </div>
         </div>
       )}

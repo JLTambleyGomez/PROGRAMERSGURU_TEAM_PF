@@ -38,7 +38,7 @@ let capsEntries = entries.map((entry) => [
 ]);
 sequelize.models = Object.fromEntries(capsEntries);
 
-const { User, Course, Technology, Comment, Product, Payment } =
+const { User, Course, Technology, Comment, Product, Payment, Subscription } =
     sequelize.models; //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
@@ -74,6 +74,9 @@ Comment.belongsTo(Course, { foreignKey: "courseId" });
 
 User.hasMany(Payment, { foreignKey: "userId" });
 Payment.belongsTo(User, { foreignKey: "userId" });
+
+Payment.belongsTo(Subscription, { foreignKey: "payment_id" });
+Subscription.hasMany(Payment, { foreignKey: "payment_id" });
 
 module.exports = {
     ...sequelize.models, // para poder importar los modelos así: const { Product, User } = require('./db.js');
