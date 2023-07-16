@@ -63,7 +63,7 @@ function LoginForm() {
               <span className={styles.closeIcon}>x</span>
             </button>
             {/* FORM */}
-            <form onSubmit={handleSubmit}>
+            <form >
               <h1 className={styles.title}>BIENVENIDO</h1>
               {/* EMAIL */}
               <label className={styles.label} htmlFor="email">

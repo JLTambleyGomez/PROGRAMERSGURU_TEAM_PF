@@ -5,6 +5,7 @@ import styles from "./LoginForm.module.css";
 import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
+import GoogleButton from 'react-google-button'
 
 //_________________________module_________________________
 function SignFreeForm() {
@@ -128,13 +129,14 @@ function SignFreeForm() {
               <hr />
             </form>
               {/* BOTON PARA INGRESAR CON GOOGLE */}
-              <button
+              {/* <button
                 className={styles.button}
                 type="submit"
                 onClick={signInwithGoogle}
               >
                 Acceder con Google
-              </button>
+              </button> */}
+              <GoogleButton onClick={signInwithGoogle}/>
           </div>
         </div>
       )}
