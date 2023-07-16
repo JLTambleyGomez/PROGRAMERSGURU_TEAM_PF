@@ -11,21 +11,12 @@ import {
     deleteCategoriesRequest, 
 //FAVORITES
     getFavoritesRequest,
-// USER
-    login,
 //Products
     getProducts,
     postProducts,
     deleteProducts,
-
-
-
-
-    //user
-
+//user
     getUserByEmail,
-
-
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -60,7 +51,8 @@ import {
 
     //USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
-
+    export const SET_USER_EMAIL = "SET_USER_EMAIL"
+    export const SET_TOKEN = "SET_TOKEN"
     //CART
     export const SET_CART= "SET_CART";
     
@@ -361,16 +353,10 @@ export function delete_Products(id) { // request
 
 //USER___________________________________________________________________//
 
-export const get_User_By_Email = async (email) => {
-    const data = await getUserByEmail(email); 
-    return dispatch({
-        type: GET_USER_BY_EMAIL,
-        payload: data,
-    })
-    /*return async function (dispatch) {
+export const get_User_By_Email = (email) => {
+    return async function (dispatch) {
         try {
-            const data = await login(userEmail); 
-            console.log(data)
+            const data = await getUserByEmail(email);
             return dispatch({
                 type: GET_USER_BY_EMAIL,
                 payload: data,
@@ -378,10 +364,10 @@ export const get_User_By_Email = async (email) => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: "get error",
+                payload: error.response.data.message,
             });
         }
-    };/*/
+    };
 }
 
 //CART_____________________________________________//

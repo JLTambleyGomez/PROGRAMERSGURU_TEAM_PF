@@ -12,7 +12,7 @@ function Cart() {
   const cart = useSelector((state) => state.cart);
   const [ventana, setVentana] = useState(true);
   const [compra, setCompra] = useState({});
-  const [MostrarPagos,setMostrarPagos] = useState(false)
+  const [MostrarPagos, setMostrarPagos] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -56,36 +56,32 @@ function Cart() {
 
   useEffect(() => {
     if (user.name) {
-        setVentana(false);
+      setVentana(false);
     }
     dispatch(set_cart());
 
-    let description = [];
+    const arrayListOfProducts = cart.map(
+      (product) =>
+        `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
+    );
+    const stringListOfProducts = arrayListOfProducts.join("\n");
+    const listOfProducts = stringListOfProducts
+      ? "Lista de productos comprados: \n" + stringListOfProducts
+      : "No hay productos en el carrito";
+    console.log(listOfProducts);
 
-    const productNames = cart.filter((product) => {
-      description.push(
-        `name: ${product.name} price: ${product.price} quantity: ${product.quantity}-`
-      );
-      return description;
-    });
-
-    const Description = description.join(",");
-
-    console.log(Description); 
-
-    
     const referencia = {
-      description: Description,
+      description: listOfProducts,
       price: calculateTotal(),
       quantity: 1,
     };
-    console.log(referencia);
+
     setCompra(referencia);
   }, []);
 
-    const handlePagarButton=()=>{
-        setMostrarPagos(true)
-     }
+  const handlePagarButton = () => {
+    setMostrarPagos(true);
+  };
 
   return (
     <main>
@@ -144,16 +140,16 @@ function Cart() {
                   )}
                   <hr />
                   <h1>Valor Total: $ {calculateTotal()}</h1>
-                    <p onClick={handlePagarButton}>ir a Pagar</p>
-                  {MostrarPagos &&(
-                  <div >
-                    <p>Escoge tu medio de Pago</p>
-                  {compra.description && (
-                    <PagoMercadopago reference={compra} />
+                  <p onClick={handlePagarButton}>ir a Pagar</p>
+                  {MostrarPagos && (
+                    <div>
+                      <p>Escoge tu medio de Pago</p>
+                      {compra.description && (
+                        <PagoMercadopago reference={compra} />
+                      )}
+                      <PagoMetamask total={calculateTotal()} />
+                    </div>
                   )}
-                  <PagoMetamask total={calculateTotal()} />
-                  </div>)}
-
                 </ul>
               </div>
             </div>
