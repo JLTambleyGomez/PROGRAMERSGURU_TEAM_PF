@@ -44,7 +44,7 @@ function SignFreeForm() {
   const showPassword = (event) => {
     event.preventDefault()
     setPasswordVisible(!passwordVisible)
-  }
+  } 
 
   const handleLogIn = (event) => {
     event.preventDefault();

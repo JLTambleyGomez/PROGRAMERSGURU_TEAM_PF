@@ -47,6 +47,11 @@ function LoginForm() {
     event.preventDefault();
     signIn(userData.email, userData.password)
   }
+  
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
+  }
 
   const handleLoginWithGoogle = (event) => {
     event.preventDefault();

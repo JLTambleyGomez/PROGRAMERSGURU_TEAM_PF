@@ -1,12 +1,20 @@
 import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./Success.module.css";
+import {get_User_By_Email} from "../../../Redux/actions";
 
+//_________________________module_________________________
 function Success() {
   const location = useLocation();
   const [paymentInfo, setPaymentInfo] = useState(null);
+  const email = sessionStorage.getItem("email")
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(get_User_By_Email(email))
+  }, [])
 
   useEffect(() => {
     async function getPayment() {
