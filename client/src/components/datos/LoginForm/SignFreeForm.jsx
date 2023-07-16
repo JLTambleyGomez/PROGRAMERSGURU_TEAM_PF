@@ -5,7 +5,7 @@ import styles from "./LoginForm.module.css";
 import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
-import GoogleButton from 'react-google-button'
+import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
 function SignFreeForm() {
@@ -15,7 +15,6 @@ function SignFreeForm() {
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
-  const [alreadySignedUp, setAlreadySignedUp] = useState(false)
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -49,11 +48,18 @@ function SignFreeForm() {
 
   const handleLogIn = (event) => {
     event.preventDefault();
+    get_User_By_Email(userData.email)
     signIn(userData.email, userData.password)
   }
   const handleSignUp = (event) => {
     event.preventDefault();
+    get_User_By_Email(userData.email)
     createUser(userData.email, userData.password)
+  }
+
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
   }
 
   //component:
@@ -132,7 +138,7 @@ function SignFreeForm() {
               {/* <button
                 className={styles.button}
                 type="submit"
-                onClick={signInwithGoogle}
+                onClick={handleLoginWithGoogle}
               >
                 Acceder con Google
               </button> */}

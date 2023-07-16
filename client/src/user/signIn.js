@@ -17,6 +17,7 @@ export default function signIn(email, password) {
             if (user) {
                 const token = user.accessToken
                 sessionStorage.setItem("accessToken", token);
+                sessionStorage.setItem("email", email)
                 window.location.replace('/HomePage')
             }
         })

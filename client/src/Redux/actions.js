@@ -11,18 +11,12 @@ import {
     deleteCategoriesRequest, 
 //FAVORITES
     getFavoritesRequest,
-// USER
-    login,
 //Products
     getProducts,
     postProducts,
     deleteProducts,
-
-    //user
-
+//user
     getUserByEmail,
-
-
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -57,12 +51,14 @@ import {
 
     //USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
-
+    export const SET_USER_EMAIL = "SET_USER_EMAIL"
+    export const SET_TOKEN = "SET_TOKEN"
     //CART
     export const SET_CART= "SET_CART";
     
 //SHOPBAG
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
+
     
 //__________________________________________________
 //ACTION CREATORS:
@@ -356,18 +352,11 @@ export function delete_Products(id) { // request
 }
 
 //USER___________________________________________________________________//
-import {user} from './user.json';
 
-export const get_User_By_Email = (userEmail) => {
-    return {
-        type: GET_USER_BY_EMAIL,
-        payload: user
-    }
-
-    /*return async function (dispatch) {
+export const get_User_By_Email = (email) => {
+    return async function (dispatch) {
         try {
-            const data = await login(userEmail); 
-            console.log(data)
+            const data = await getUserByEmail(email);
             return dispatch({
                 type: GET_USER_BY_EMAIL,
                 payload: data,
@@ -375,10 +364,10 @@ export const get_User_By_Email = (userEmail) => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: "get error",
+                payload: error.response.data.message,
             });
         }
-    };/*/
+    };
 }
 
 //CART_____________________________________________//
@@ -398,3 +387,4 @@ export const toggle_shopbag = (status) => {
 		payload: status
 	}
 }
+
