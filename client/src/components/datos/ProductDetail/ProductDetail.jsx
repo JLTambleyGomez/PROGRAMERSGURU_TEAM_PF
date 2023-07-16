@@ -3,11 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 
-
-
 function ProductDetail() {
   const [product, setProduct] = useState(null);
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
     fetchProductById();
@@ -17,37 +15,33 @@ function ProductDetail() {
     try {
       const response = await axios.get(`http://localhost:3001/product/${id}`);
       setProduct(response.data);
-    } catch (error){
-      window.alert("algo fallo");
-    } 
-   }
-   
+    } catch (error) {
+      window.alert("Algo falló");
+    }
+  }
+
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container}`}>
       {product ? (
         <div>
-          <h2>{product.name}</h2>
-          <p>{product.description}</p>
-          <p>Price: ${product.price}</p>
-          <div>
-          <img src={product.image} alt={product.name} />
+          <h1 className={`${styles.title}`}>Detalles del Producto</h1>
+          <div className={styles.productInfo}>
+          <div className={`${styles.productImage}`}>
+              <img src={product.image} alt={product.name}/>
+            </div>
+            <div className={styles.description}>
+              <h2 className={styles.descriptionh2}>{product.name}</h2>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+              <p>Category: {product.category}</p>
+            </div>
           </div>
-          <p>Category: {product.category}</p>
         </div>
       ) : (
-        <p>Loading...</p>
+        <p>Cargando...</p>
       )}
-      <div >
-          <>
-            <h1 className={styles.title}>Detalles del Producto </h1>
-           
-              <h1 className={styles.total}>TOTAL :</h1>
-            <span>
-              {/* sumar */}
-            </span>
-          </>
-        </div>
     </div>
   );
-};
+}
+
 export default ProductDetail;

@@ -7,11 +7,6 @@ const signUp = async (req,res) => {
         const { email, name, picture } = req.body
         console.log("este es el signup");
 
-        const isReg = await User.findOne({where: {email}})
-        if (isReg !== null) {
-            return res.json({message: "ya existe el usuario"})
-        }
-
         const [newUser, created] = await User.findOrCreate({
             where: {
                 email: email
@@ -23,7 +18,7 @@ const signUp = async (req,res) => {
             }
         })
         if (!created) {
-            return res.json({message: `Bienvenido nuevamente ${name?name:email.split('@')[0]}!`})
+            return res.json({message: "El usuario ya está en la base de datos"})
         }
         console.log(newUser)
         return res.status(201).json({message: "El usuario fue creado correctamente"})
