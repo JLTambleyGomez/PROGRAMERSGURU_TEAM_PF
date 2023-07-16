@@ -1,25 +1,20 @@
 const userRouter = require("express").Router();
 
 //controller
-const {signUp} = require("../controllers/User/signUp");
-const { getUser } = require("../controllers/User/getUser");
+const { getUserByEmail } = require("../controllers/User/getUserByEmail")
+const { getUsers } = require("../controllers/User/getUsers");
 const { putPerfilUser } = require("../controllers/User/putPerfilUser");
-const { loginWithGoogle } = require("../controllers/User/loginWithGoogle");
 const { hideProfile } = require("../controllers/User/hideProfile");
 const { makeAdmin } = require("../controllers/User/makeAdmin");
-// const { GetUserByEmail } = require("../controllers/User/getUserByEmail");
+const { loginWithGoogle } = require("../controllers/User/loginWithGoogle");
+const {signUp} = require("../controllers/User/signUp");
 
 //routes 
-userRouter.get("/", getUser);
+userRouter.get("/", getUserByEmail);
+userRouter.get("/all", getUsers);
 userRouter.put("/profile", putPerfilUser);
 userRouter.put("/hide", hideProfile)  
 userRouter.put("/admin", makeAdmin)
-//userRouter.get("/user", GetUserByEmail)
-
-//------------------Middleware----------------------
-// const middleware = require("../middleware/index");
-// userRouter.use(middleware.decodeToken);
-
 userRouter.get("/loginWithGoogle", loginWithGoogle);
 userRouter.post("/signup", signUp);
 

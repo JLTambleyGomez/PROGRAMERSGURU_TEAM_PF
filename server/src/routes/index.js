@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const MercadoPagoRouter = require("./MercadoPagoRouter")
 const technologyRouter = require("./technologyRouter");
 const courseRouter = require("./courseRouter");
 const productRouter = require("./productRouter");
@@ -8,8 +8,12 @@ const userRouter = require("./userRouter");
 const commentRouter = require("./commentRouter");
 const paymentRouter = require("./paymentRouter");
 const suscriptionRouter = require("./suscriptionRouter");
-// const middleware = require("../middleware/index");
 const mecadoPagoRouter = require("./mecadoPagoRouter");
+const middleware = require("../middleware/index");
+
+router.use(middleware.decodeToken)
+
+router.use ("/Mp", MercadoPagoRouter);
 
 router.use("/technology", technologyRouter);
 

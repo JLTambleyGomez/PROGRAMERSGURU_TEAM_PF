@@ -10,8 +10,8 @@
   .shopbag {
     /* top: var(--navBarHeight); */
     right: 0;
-    min-height: 90vh;
-    max-height: 90vh;
+    min-height: calc(90vh - var(--navBarHeight));
+    max-height: calc(90vh - var(--navBarHeight));
     width: 25vw;
     position: fixed;
     display: flex;

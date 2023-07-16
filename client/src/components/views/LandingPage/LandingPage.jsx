@@ -32,13 +32,7 @@ function LandingPage({ signInwithGoogle, authorizedUser, createUser, signIn }) {
             </div> */}
       <div className={styles.container1}>
         <p className={styles.pF}>Acceso gratuito</p>
-
-        <SignFreeForm
-          signInwithGoogle={signInwithGoogle}
-          authorizedUser={authorizedUser}
-          signIn={signIn}          
-          createUser={createUser}
-        />
+        <SignFreeForm/>
       </div>
       <h1 className={styles.h1}>
         BIENVENIDOS A{" "}
@@ -56,11 +50,7 @@ function LandingPage({ signInwithGoogle, authorizedUser, createUser, signIn }) {
       <div className={styles.container2}>
         <p className={styles.pS}>Acceso Para Suscriptores</p>
 
-        <LoginForm //formulario para suscriptores
-          signInwithGoogle={signInwithGoogle}
-          authorizedUser={authorizedUser}
-          signIn={signIn}          
-        />
+        <LoginForm/>
       </div>
     </div>
   );

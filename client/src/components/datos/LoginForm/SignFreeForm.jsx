@@ -1,19 +1,20 @@
-import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getloged } from "../../../Redux/actions";
+import { useState } from "react";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
-import { useNavigate } from "react-router-dom";
+
+import signIn from "../../../user/signIn";
+import createUser from "../../../user/createUser";
+import signInwithGoogle from "../../../user/signInWithGoogle";
+import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
-function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
+function SignFreeForm() {
   // const dispatch = useDispatch()
   //states:
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
-  const [alreadySignedUp, setAlreadySignedUp] = useState(false)
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -45,24 +46,16 @@ function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
     setPasswordVisible(!passwordVisible)
   }
 
-  const setState = (event) => {
-    if (event.target.name === "signUp") {
-      setAlreadySignedUp(false)
-    } else {
-      setAlreadySignedUp(true)
-    }
-  }
-
-  const navigate = useNavigate()
-
-  const handleSubmit = (event) => {
+  const handleLogIn = (event) => {
     event.preventDefault();
-    if (alreadySignedUp) {
-      signIn(userData.email, userData.password)
-    } else {
-      createUser(userData.email, userData.password)
-    }
-  };
+    get_User_By_Email(userData.email)
+    signIn(userData.email, userData.password)
+  }
+  const handleSignUp = (event) => {
+    event.preventDefault();
+    get_User_By_Email(userData.email)
+    createUser(userData.email, userData.password)
+  }
 
   //component:
   return (
@@ -80,7 +73,7 @@ function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
               <span className={styles.closeIcon}>x</span>
             </button>
             {/* FORM */}
-            <form onSubmit={handleSubmit}>
+            <form>
               <h1 className={styles.title}>BIENVENIDO</h1>
               {/* EMAIL */}
               <label className={styles.label} htmlFor="email">
@@ -128,10 +121,10 @@ function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
               </p>
 
               {/* SUBMIT */}
-              <button className={styles.button} type="submit" name="logIn" onClick={setState}>
+              <button className={styles.button} type="submit" onClick={handleLogIn}>
                 Acceder
               </button>
-              <button className={styles.button} type="submit" name="signUp" onClick={setState}>
+              <button className={styles.button} type="submit" onClick={handleSignUp} >
                 Registrarme
               </button>
               <hr />
@@ -144,13 +137,6 @@ function SignFreeForm({signInwithGoogle, authorizedUser, signIn, createUser}) {
               >
                 Acceder con Google
               </button>
-              {authorizedUser ? (
-                <>
-                  {authorizedUser && navigate("/HomePage")}
-                </>
-              ) : (
-                ""
-              )}
           </div>
         </div>
       )}

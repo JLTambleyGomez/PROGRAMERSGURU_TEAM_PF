@@ -39,10 +39,12 @@
     }
   .input{
     text-shadow:black;
+    background-color:#a1f7be7c;
+    ;
     
   }
   .input:hover{
-    background-color:7px solid #a1f7be7c;
+    border: 2px solid beige;
   }
 
   .flex{
@@ -52,9 +54,9 @@
     align-items: center;
   }
     .searchButton {
-      width: 20px;
-      margin-left: 1%;
-      transition: transform 0.3s, filter 0.3s;
+      position: absolute;
+      margin-left: 14%;
+      transition: transform 0.3;
       background-color:#a1f7be7c;
     } 
     .searchButton:hover{
