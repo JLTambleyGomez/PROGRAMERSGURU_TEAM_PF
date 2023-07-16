@@ -39,7 +39,7 @@ function Bag () {
 
     const calculateTotal = () => {
         let total = 0;
-        cart.forEach((product) => {
+        cart?.forEach((product) => {
             const sum = product.price * product.quantity;
             total += sum;
         });
@@ -56,7 +56,7 @@ function Bag () {
         <div className={s.shopbagOverlay} onClick={toggleShopbag}>
             <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
                 {
-                    cart.map((product) => {
+                    cart?.map((product) => {
                         return (
                             <div className={`${s.item} ${s[theme("item")]}`}>
                                 <div className={s.section1}>

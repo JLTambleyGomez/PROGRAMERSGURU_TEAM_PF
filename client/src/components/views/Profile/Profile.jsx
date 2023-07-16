@@ -14,11 +14,6 @@ function Profile () {
     
     //const:
     const time = Date.now()
-
-    //functions:
-    // const handleDesactivateButton = () => {
-
-    // }
     
     //component:
     return (
@@ -26,7 +21,7 @@ function Profile () {
 
             <div className={s.main}>
                 <div>
-                {user.picture?(<img className={s.image} src={user.picture}/>): (<img className={s.image} src={"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"}/>) }
+                {user?.picture?(<img className={s.image} src={user.picture}/>): (<img className={s.image} src={"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"}/>) }
                 </div>
                 <div className={ s.name }>
                     <h1>Bienvenido {user.nickName}!</h1>

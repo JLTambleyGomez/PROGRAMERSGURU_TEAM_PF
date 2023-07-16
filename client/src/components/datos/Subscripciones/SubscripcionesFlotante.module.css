@@ -1,0 +1,7 @@
+.component {
+    position: sticky;
+    top: var(--navBarHeight);
+    width: 5rem;
+    height: 3rem;
+    background-color: beige;
+}

@@ -18,17 +18,20 @@ import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
 import Bag from "./components/datos/Bag/Bag";
 import Success from "./components/views/MercadopagoFeedback/Success"
-
+import MercadoPagoFailure from "./components/views/MercadopagoFeedback/fracaso"
+import MercadoPagoPendiente from "./components/views/MercadopagoFeedback/pendiente";
+import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
+import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
+import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 
 //_________________________module_________________________
-function App() {
+function App () {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
 
     //states:
-    const [changeDarkMode, setChangeDarkMode] = useState("");
     const [isAtBottom, setIsAtBottom] = useState(false);
 
     //const:
@@ -43,36 +46,36 @@ function App() {
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
-        const windowHeight =
-            "innerHeight" in window
-            ? window.innerHeight
-            : document.documentElement.offsetHeight;
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        );
-        const windowBottom = windowHeight + window.pageYOffset;
+            const windowHeight =
+                "innerHeight" in window
+                ? window.innerHeight
+                : document.documentElement.offsetHeight;
+            const body = document.body;
+            const html = document.documentElement;
+            const docHeight = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+            const windowBottom = windowHeight + window.pageYOffset;
 
-        if (windowBottom >= docHeight) {
-            setIsAtBottom(true);
-        } else {
-            setIsAtBottom(false);
-        }
+            if (windowBottom >= docHeight) {
+                setIsAtBottom(true);
+            } else {
+                setIsAtBottom(false);
+            }
         };
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
-        window.removeEventListener("scroll", handleScroll);
-        };
+            window.removeEventListener("scroll", handleScroll);
+            };
     }, []);
 
-  //component:
-  return (
+    //component:
+    return (
         <div className={`${s[theme("component")]}`}>
             {location !== "/" && <NavBar />}
             {location !== "/" && shopbag && <Bag/>}
@@ -95,10 +98,13 @@ function App() {
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />
                 <Route path="/MercadoPagoFeedback" element={<Success/>} />
-
+                <Route path ="/MercadoPagoFailure" element ={<MercadoPagoFailure/>}/>
+                <Route path ="/MercadoPagoPending" element ={<MercadoPagoPendiente/>}/>
+                <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
+                <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
                 
             </Routes>
-            {isAtBottom && <Footer />}
+            {location !== "/" && isAtBottom && <Footer />}
         </div>
     );
 }
