@@ -6,19 +6,12 @@ import { NavLink } from "react-router-dom";
 
 //_________________________module_________________________
 function Profile () {
-
-    
     //global states:
     const user = useSelector((state)=>state.user)
     console.log(user);
     
     //const:
     const time = Date.now()
-
-    //functions:
-    // const handleDesactivateButton = () => {
-
-    // }
     
     //component:
     return (

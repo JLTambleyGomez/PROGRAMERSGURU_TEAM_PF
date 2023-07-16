@@ -48,6 +48,11 @@ function LoginForm() {
     signIn(userData.email, userData.password)
   }
 
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
+  }
+
   //component:
   return (
     <div className={styles.loginFormContainer}>
@@ -121,7 +126,7 @@ function LoginForm() {
               <button
                 className={styles.button}
                 type="submit"
-                onClick={signInwithGoogle}
+                onClick={handleLoginWithGoogle}
               >
                 Acceder con Google
               </button>
