@@ -1,25 +1,31 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import s from './Profile.module.css'
-import { get_User_By_Email } from "../../../Redux/actions";
-import { NavLink } from "react-router-dom";
+import { get_comments_by_user, get_User_By_Email } from "../../../Redux/actions";
+import { useEffect } from "react";
 
 //_________________________module_________________________
 function Profile () {
     //global states:
     const user = useSelector((state)=>state.user)
-    console.log(user);
+    const userComments = useSelector((state)=>state.userComments)
     
     //const:
-    const time = Date.now()
-    
+    const expirationDate = new Date(user.expirationDate)
+    const actualDate = new Date()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(get_User_By_Email(sessionStorage.getItem("email")))
+        dispatch(get_comments_by_user(user.id))   
+    }, [])
+
     //component:
     return (
         <div className={s.profile}>
 
             <div className={s.main}>
                 <div>
-                {user.picture?(<img className={s.image} src={user.picture}/>): (<img className={s.image} src={"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"}/>) }
+                <img className={s.image} src={user.picture}/>
                 </div>
                 <div className={ s.name }>
                     <h1>Bienvenido {user.nickName}!</h1>
@@ -27,21 +33,32 @@ function Profile () {
             </div>
 
             <div >
-                <p>nombre:  {user.name}</p>
-                <p>Correo:  {user.email}</p>
-                <h3>Fecha de expiracion: {user.expirationDate}</h3>
+                <h1>Nombre:  {user.name}</h1>
+                <h3>Correo:  {user.email}</h3>
+                <h4>{actualDate > expirationDate 
+                    ? "No posee suscripción activa" 
+                    : `Su suscripción vence en ${(expirationDate - actualDate) / (1000 * 60 * 60 * 24)} días`}
+                </h4>
                 <ul>
                 <h2>Favoritos:</h2>
-                {user.favorites?.map((fav,index)=>(<li  key={index}><NavLink to={`/CourseDetails/${fav.id}`}><h4>{fav.name}</h4></NavLink></li>))}
+                <p>Próximamente</p>
                 </ul>
 
                 <ul>
                 <h2>Comentarios destacados:</h2>
-                {user.comments?.map((com, index)=>(<li key={index}><h4>{com.comentario}</h4></li>))}
+                {!userComments.length
+                    ? "Todavía no hiciste ningún comentario!"
+                    : userComments.map(({date, message, rating}, index) => {
+                        return (
+                            <li key={index}>
+                                <h5>Fecha: {date}</h5>
+                                <h4>Mensaje: {message}</h4>
+                            </li>
+                    )})}
                 </ul>
-                <h4>Language: {user.language}</h4>
+                {/* <h4>Language: {user.language}</h4> */}
                 {
-                    user.isBanned === true ? (
+                    user.isBanned ? (
                         <h3>Este cuenta NO está activa</h3>
                     ) : (
                         <h3>Este cuenta está activa</h3>

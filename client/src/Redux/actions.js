@@ -17,6 +17,9 @@ import {
     deleteProducts,
 //user
     getUserByEmail,
+//comments
+    getCommentsByCourse,
+    getCommentsByUser
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -53,6 +56,10 @@ import {
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
     export const SET_USER_EMAIL = "SET_USER_EMAIL"
     export const SET_TOKEN = "SET_TOKEN"
+    //COMMENTS:
+    export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
+    export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
+
     //CART
     export const SET_CART= "SET_CART";
     
@@ -388,3 +395,39 @@ export const toggle_shopbag = (status) => {
 	}
 }
 
+
+//Comments
+
+export const get_comments_by_user = (userId)=>{
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByUser(userId);
+            return dispatch({
+                type: GET_COMMENTS_BY_USER,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+export const get_comments_by_course = (courseId)=>{
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByCourse(courseId);
+            return dispatch({
+                type: GET_COMMENTS_BY_COURSE,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}

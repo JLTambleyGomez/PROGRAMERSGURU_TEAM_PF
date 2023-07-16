@@ -135,14 +135,14 @@ function SignFreeForm() {
               <hr />
             </form>
               {/* BOTON PARA INGRESAR CON GOOGLE */}
-              {/* <button
+              <button
                 className={styles.button}
                 type="submit"
                 onClick={handleLoginWithGoogle}
               >
                 Acceder con Google
-              </button> */}
-              <GoogleButton onClick={signInwithGoogle}/>
+              </button>
+              {/* <GoogleButton onClick={signInwithGoogle}/> */}
           </div>
         </div>
       )}
