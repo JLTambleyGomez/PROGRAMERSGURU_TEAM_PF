@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
 
@@ -12,6 +12,9 @@ function Bag () {
     const cart = useSelector((state) => state.cart);
     const dark = useSelector((state) => state.darkMode);
 
+    //state:
+    const [isOpen, setIsOpen] = useState(false)
+
     //const:
     const dispatch = useDispatch();
 
@@ -22,7 +25,11 @@ function Bag () {
     }
 
     const toggleShopbag = () => {
-        dispatch(toggle_shopbag(!shopbag))
+        setIsOpen(true)
+        setTimeout(() => {
+            dispatch(toggle_shopbag(!shopbag));
+            setIsOpen(false)
+        }, 400)
     }
 
     const handleAddButton = (type, product) => {
@@ -54,9 +61,9 @@ function Bag () {
     //component:
     return (
         <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-            <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
+            <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${isOpen ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
                 {
-                    cart.map((product) => {
+                    cart?.map((product) => {
                         return (
                             <div className={`${s.item} ${s[theme("item")]}`}>
                                 <div className={s.section1}>
@@ -79,6 +86,7 @@ function Bag () {
                         )
                     })
                 }
+                {isOpen && "sdfg"}
                 Subtotal: $ {calculateTotal()}
             </aside>
         </div>
