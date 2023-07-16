@@ -12,21 +12,21 @@
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@mercadopago/sdk-react": "^0.0.12",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
-    "ethers": "^6.6.3",
     "firebase": "^10.0.0",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
+    "react-google-button": "^0.7.2",
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.3.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.4.2",
-    "swiper": "^10.0.3",
-    "web3": "^4.0.3"
+    "swiper": "^10.0.3"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

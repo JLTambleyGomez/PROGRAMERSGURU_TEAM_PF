@@ -5,7 +5,14 @@ import {
   get_courses_all,
   clearMessage,
   get_Favorites_Request,
+  get_User_By_Email,
 } from "../../../Redux/actions";
+
+import "../../../config/firebase-config";
+import {
+    getAuth,
+    onAuthStateChanged
+} from "firebase/auth";
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
@@ -21,6 +28,7 @@ function HomePage() {
   //const:
   const dispatch = useDispatch();
   const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
+  const auth = getAuth()
   
   //functions:
   const theme = (base) => {
@@ -29,9 +37,13 @@ function HomePage() {
   };
 
   //-------------------------------------------------------------------------
+  // obtener el email
+  const email = sessionStorage.getItem("email")
+  //-------------------------------------------------------------------------
   
   //life-cycles:
   useEffect(() => {
+    dispatch(get_User_By_Email(email))
     dispatch(get_categories());
     dispatch(get_courses_all());
     return () => {

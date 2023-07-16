@@ -6,6 +6,20 @@ import {
     setPersistence,
     inMemoryPersistence
 } from "firebase/auth";
+import axios from "axios";
+
+const postUserRequest = async (userData) => {
+    try {
+        const { data } = await axios.post(
+            "http://localhost:3001/user/signup",
+            userData
+        );
+        return data.message;
+    } catch (error) {
+        console.log(error);
+        return console.log(error.message);
+    }
+};
 
 export default function signInwithGoogle() {
     const provider = new GoogleAuthProvider();
@@ -17,10 +31,18 @@ export default function signInwithGoogle() {
         .then((userCredential) => {
             const user = userCredential.user;
             if (user) {
+                let userData = {
+                    email: user.email,
+                    picture: user.photoURL,
+                    name: user.displayName,
+                };
+                const email = user.email
                 user.getIdToken()
                 .then((tkn) => {
                     // set access token in session storage
                     sessionStorage.setItem("accessToken", tkn);
+                    sessionStorage.setItem("email", email)                    
+                    postUserRequest(userData)
                     window.location.replace('/HomePage')
                 });
             }

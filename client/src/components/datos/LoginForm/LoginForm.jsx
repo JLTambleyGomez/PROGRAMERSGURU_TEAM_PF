@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
 import signInwithGoogle from "../../../user/signInWithGoogle";
+import signIn from "../../../user/signIn"
 
 //_________________________module_________________________
 function LoginForm() {
@@ -47,6 +48,11 @@ function LoginForm() {
     signIn(userData.email, userData.password)
   }
 
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
+  }
+
   //component:
   return (
     <div className={styles.loginFormContainer}>
@@ -63,7 +69,7 @@ function LoginForm() {
               <span className={styles.closeIcon}>x</span>
             </button>
             {/* FORM */}
-            <form onSubmit={handleSubmit}>
+            <form>
               <h1 className={styles.title}>BIENVENIDO</h1>
               {/* EMAIL */}
               <label className={styles.label} htmlFor="email">
@@ -120,7 +126,7 @@ function LoginForm() {
               <button
                 className={styles.button}
                 type="submit"
-                onClick={signInwithGoogle}
+                onClick={handleLoginWithGoogle}
               >
                 Acceder con Google
               </button>

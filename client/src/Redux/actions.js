@@ -11,18 +11,15 @@ import {
     deleteCategoriesRequest, 
 //FAVORITES
     getFavoritesRequest,
-// USER
-    login,
 //Products
     getProducts,
     postProducts,
     deleteProducts,
-
-    //user
-
+//user
     getUserByEmail,
-
-
+//comments
+    getCommentsByCourse,
+    getCommentsByUser
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -57,12 +54,18 @@ import {
 
     //USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+    export const SET_USER_EMAIL = "SET_USER_EMAIL"
+    export const SET_TOKEN = "SET_TOKEN"
+    //COMMENTS:
+    export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
+    export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
 
     //CART
     export const SET_CART= "SET_CART";
     
 //SHOPBAG
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
+
     
 //__________________________________________________
 //ACTION CREATORS:
@@ -356,18 +359,11 @@ export function delete_Products(id) { // request
 }
 
 //USER___________________________________________________________________//
-import {user} from './user.json';
 
-export const get_User_By_Email = (userEmail) => {
-    return {
-        type: GET_USER_BY_EMAIL,
-        payload: user
-    }
-
-    /*return async function (dispatch) {
+export const get_User_By_Email = (email) => {
+    return async function (dispatch) {
         try {
-            const data = await login(userEmail); 
-            console.log(data)
+            const data = await getUserByEmail(email);
             return dispatch({
                 type: GET_USER_BY_EMAIL,
                 payload: data,
@@ -375,10 +371,10 @@ export const get_User_By_Email = (userEmail) => {
         } catch (error) {
             return dispatch({
                 type: ERROR,
-                payload: "get error",
+                payload: error.response.data.message,
             });
         }
-    };/*/
+    };
 }
 
 //CART_____________________________________________//
@@ -397,4 +393,41 @@ export const toggle_shopbag = (status) => {
 		type: TOGGLE_SHOPBAG,
 		payload: status
 	}
+}
+
+
+//Comments
+
+export const get_comments_by_user = (userId)=>{
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByUser(userId);
+            return dispatch({
+                type: GET_COMMENTS_BY_USER,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+export const get_comments_by_course = (courseId)=>{
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByCourse(courseId);
+            return dispatch({
+                type: GET_COMMENTS_BY_COURSE,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
 }

@@ -1,6 +1,6 @@
 const { User } = require('../../db');
 
-const getUser = async (req, res) => {
+const getUsers = async (req, res) => {
   try {
     const users = await User.findAll();
     if(!users) { 
@@ -12,4 +12,4 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { getUser };
+module.exports = { getUsers };

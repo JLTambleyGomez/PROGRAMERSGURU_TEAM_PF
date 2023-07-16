@@ -32,6 +32,12 @@ import {
     //
     TOGGLE_SHOPBAG,
 
+//COMMENTS
+GET_COMMENTS_BY_USER,
+GET_COMMENTS_BY_COURSE,
+
+
+
 } from "./actions";
 
 // PRUEBA CURSOS
@@ -52,7 +58,10 @@ const globalStorage = {
     products:[],
     user:{},
     cart:[],
-    shopbag: false
+    shopbag: false,
+    metamask:false,
+    userComments: [],
+    courseComments: [],
 }
 
 
@@ -170,16 +179,20 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 shopbag: payload
             }
 
+        case GET_COMMENTS_BY_USER:
+            return{
+                ...state,
+                userComments: payload
+        }
+        case GET_COMMENTS_BY_COURSE:
+            return{
+                ...state,
+                courseComments: payload
+        }
+
         default: return {...state}; 
     }
 }
 
 
 
-// const cart = await localStorage.getItem("cart")
-// if (!cart) {
-//     await localStorage.setItem("cart", "[]")
-// }
-// const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
-// localStorage.setItem("cart", JSON.stringify(oldCart))
-// dispatch(add_to_cart())
