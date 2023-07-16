@@ -15,7 +15,6 @@ function SignFreeForm() {
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
-  const [alreadySignedUp, setAlreadySignedUp] = useState(false)
   const [userData, setUserData] = useState({
     email: "",
     password: "",

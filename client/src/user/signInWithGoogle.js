@@ -17,10 +17,12 @@ export default function signInwithGoogle() {
         .then((userCredential) => {
             const user = userCredential.user;
             if (user) {
+                const email = user.email
                 user.getIdToken()
                 .then((tkn) => {
                     // set access token in session storage
                     sessionStorage.setItem("accessToken", tkn);
+                    sessionStorage.setItem("email", email)
                     window.location.replace('/HomePage')
                 });
             }
