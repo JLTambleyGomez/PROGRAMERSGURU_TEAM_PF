@@ -32,6 +32,10 @@ import {
     //
     TOGGLE_SHOPBAG,
 
+//COMMENTS
+GET_COMMENTS_BY_USER,
+GET_COMMENTS_BY_COURSE,
+
 
 
 } from "./actions";
@@ -55,7 +59,9 @@ const globalStorage = {
     user:{},
     cart:[],
     shopbag: false,
-    metamask:false
+    metamask:false,
+    userComments: [],
+    courseComments: [],
 }
 
 
@@ -173,6 +179,16 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 shopbag: payload
             }
 
+        case GET_COMMENTS_BY_USER:
+            return{
+                ...state,
+                userComments: payload
+        }
+        case GET_COMMENTS_BY_COURSE:
+            return{
+                ...state,
+                courseComments: payload
+        }
 
         default: return {...state}; 
     }

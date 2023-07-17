@@ -1,12 +1,13 @@
 const { Comment } = require("../../db");
-const getAllComments = async (req, res) => {
+const getCommentsByCourse = async (req, res) => {
     try {
-        const comments = await Comment.findAll();
+        const {courseId} = req.params
+        const comments = await Comment.findAll({where: {courseId}});
 
         if (!comments.length)
             return res
                 .status(404)
-                .json({ message: `No se encontraron comentarios en la db` });
+                .json({ message: "Este curso no tiene comentarios" });
 
         return res.status(200).json(comments);
     } catch (error) {
@@ -14,4 +15,4 @@ const getAllComments = async (req, res) => {
     }
 };
 
-module.exports = { getAllComments };
+module.exports = { getCommentsByCourse };
