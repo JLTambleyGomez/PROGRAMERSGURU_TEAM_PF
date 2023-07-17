@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
 
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
 import FilterBar from "../../bars/filterBar/FilterBar";
 import OrderBar from "../../bars/orderBar/OrderBar";
+import Modal from "../ventanaemergente/ventana";
 
 //_________________________module_________________________
 function CoursePage () {
@@ -20,6 +21,8 @@ function CoursePage () {
 
     //const:
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const token = sessionStorage.getItem("accessToken")
 
     //life-cycles:
     useEffect(() => {
@@ -54,13 +57,18 @@ function CoursePage () {
             </div>
 
         {/* CURSOS */}
-            <div className = {styles.cardComponent}>
-                {
-                    isloading 
-                    ? <h1 className={styles.cargando}>CARGANDO...</h1>
-                    : <CoursesCard/>
-                }
-            </div>
+
+            {
+                
+                (<div className = {styles.cardComponent}>
+                    {
+                        isloading 
+                        ? <h1 className={styles.cargando}>CARGANDO...</h1>
+                        : <CoursesCard/>
+                    }
+                </div>)
+
+            }
         </main>
     )
 }

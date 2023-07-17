@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
+
 import { toggle_shopbag } from "../../../Redux/actions";
-import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import s from "./navBar.module.css";
+import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
+import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton";
 import SearchBar from '../searchBar/searchBar';
 import Menu from '../Menu/Menu';
 
@@ -21,6 +22,7 @@ function NavBar ( { logoutUser } ) {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //functions:
     const theme = (base) => {
@@ -31,6 +33,13 @@ function NavBar ( { logoutUser } ) {
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag))
     }
+
+    //life-cycles:
+    useEffect(() => {
+        // const token = sessionStorage.getItem("email")
+        // if (!token) navigate("/IniciaSession")
+    }, [])
+
 
     //component:
     return (

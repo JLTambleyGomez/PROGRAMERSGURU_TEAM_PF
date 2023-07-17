@@ -23,7 +23,11 @@ function Products () {
         return `${base}-${suffix}`;
     };
 
-
+    const handleProductPost = (event) => {
+        event.preventDefault();
+        // dispatch(post_Products())
+        
+    }
 
 
 

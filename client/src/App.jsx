@@ -24,26 +24,32 @@ import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
+import Modal from "./components/views/ventanaemergente/ventana";
 
 //_________________________module_________________________
-function App () {
+const App = () =>{
 
+  
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
 
+
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
 
+    
     //const:
     const location = useLocation().pathname;
 
+    
     //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
 
+    
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
@@ -75,20 +81,15 @@ function App () {
             };
     }, []);
 
+
     //component:
     return (
         <div className={`${s[theme("component")]}`}>
             {location !== "/" && <NavBar />}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
-                <Route
-                path="/"
-                element={<LandingPage/>}
-                />
-                <Route
-                path="/HomePage"
-                element={<HomePage />}
-                />
+                <Route path="/" element={<LandingPage/>}/>
+                <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/CoursePage" element={<CoursePage />} />
                 <Route path="/Profile" element={<Profile />} />
                 <Route path="/Store" element={<Shop />} />
@@ -104,7 +105,7 @@ function App () {
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
-                
+                <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
             </Routes>
             {location !== "/" && isAtBottom && <Footer />}
         </div>

@@ -26,7 +26,7 @@ function MercadoPagoFailure () {
     }, [location.state]);
 
 
-//__component_____________________
+    //component:
     return (
         <div className={styles.container}>
             <div className={styles.container2}>

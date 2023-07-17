@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { set_cart } from '../../../Redux/actions';
+
 import styles from './MetamaskFeedback.module.css';
+
 
 //_________________________module_________________________
 const MetaMaskSucces = () => {
@@ -39,6 +42,7 @@ const MetaMaskSucces = () => {
         console.log("este es el carrito:" + " " + cart);
         console.log("este es el email:" + " " + email)
     }, [])
+
 
     //component:
     return (

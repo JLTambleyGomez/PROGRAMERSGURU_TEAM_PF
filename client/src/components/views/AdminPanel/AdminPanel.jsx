@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_products_all, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
-import validate from "./validate";
 import Categories from "./Categories";
 import Courses from "./Courses"
 import Products from "./Products"
 import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
-function AdminPanel () {
+const  AdminPanel =() =>{
 
     //global state: 
     const message = useSelector((state) => state.message);

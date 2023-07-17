@@ -1,16 +1,19 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, get_products_by_name, set_cart } from "../../../Redux/actions"
-
+import { useNavigate } from "react-router-dom";
+import { get_products_all, get_products_by_name, set_cart } from "../../../Redux/actions";
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
+import Modal from "../ventanaemergente/ventana";
 
 //_________________________module_________________________
-function Shop () {
+const Shop =() =>{
+    const navigate = useNavigate()
 
+  
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
@@ -22,13 +25,14 @@ function Shop () {
     const [isVisibleCategory, setIsVisibleCategory] = useState(false);
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
     const [isVisibleSortByPrice, setIsVisibleSortByPrice] = useState(false);
-
+    const [currentAllProducts,setcurrentAllProducts] = useState(null)
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
     const cart = useSelector((state)=> state.cart)
 
     //const:
     const dispatch = useDispatch();
+
 
     //functions:
     const theme = (base) => {
@@ -117,8 +121,15 @@ function Shop () {
         return total;
     };
 
+
     //life-cycles:
     useEffect(() => {
+        const token = sessionStorage.getItem("accessToken")
+
+        if (!token) navigate("/IniciaSession")
+        else   
+        setcurrentAllProducts(products.slice(indexOfFirstProduct, indexOfLastProduct))
+
         // Initialize the cartTooltips array with the same length as the number of items
         // (async () => {
         dispatch(get_products_all());
@@ -138,23 +149,25 @@ function Shop () {
     }, [])
 
     const [currentPage, setCurrentPage] = useState(1);
-
     const productsPerPage = 15
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
-    // indice:
-    const pageNumbers = [];
-    (() => {
-        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
-            pageNumbers.push(i);
-        }
-    })()
+        // indice:
+        const pageNumbers = [];
+        (() => {
+            for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
+                pageNumbers.push(i);
+            }
+        })()
+    
+
+
 
     //component:
     return (
         <main className={`${s.component}`}>
-         
+
+        {/* BANNER */}
             <section className={`${s.sectionBanner}`}>
                 
                 <img
@@ -166,9 +179,11 @@ function Shop () {
                     PROGRAMMER'S GURU STORE
                 </h1>
             </section>
+
+        {/* PAGINADO */}
             <div className={s.paginado}>
                 {
-                    pageNumbers.map((number, index) => {
+                    pageNumbers?.map((number, index) => {
                         return (
                             <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
                                 <div className={s.numberBox}>
@@ -179,6 +194,8 @@ function Shop () {
                     })
                 }
             </div>
+
+        {/* SEARCHBAR */}
             <div className={s.flex}>
                 <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
                 
@@ -188,19 +205,22 @@ function Shop () {
                 </button>
 
             </div>
+
             <section className={`${s.section3}`}>
+            {/* SIDEBAR */}
                 <aside className={`${s.sidebar}`}>  
                     <h2>FILTROS</h2>
-                <div>
-                    <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                       { isVisibleSortByName && (
-                            <ul>
-                                <li>Ascendente</li>
-                                <li>Descendente</li>
-                            </ul>)}
-                </div> 
-                <div> 
-                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                    <div>
+                        <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
+                        { isVisibleSortByName && (
+                                <ul>
+                                    <li>Ascendente</li>
+                                    <li>Descendente</li>
+                                </ul>
+                        )}
+                    </div> 
+                    <div> 
+                        <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
                         {
                             isVisiblePrice && (
                                 <div className={`${s.filterPrice}`}>
@@ -219,70 +239,83 @@ function Shop () {
                     </div>
                     <div className={`${s.filterOption}`}>
                         <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                           { isVisibleCategory && (
-                                <div className={`${s.filterCategory}`}>
-                                    <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Libros</span>
-                                    <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Computadoras</span>
-                                    <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Almacenamiento</span>
-                                    <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Audio</span>
-                                    <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Accesorios</span>
-                                </div>) }
-                    </div>
-                </aside>
-                    <div className={`${s['productBox']}`}>
-                         {currentAllProducts?.map((product, index) => {
-                                return (
-                                    <div className={`${s['item']}`} key={index}>
-                                        <div style={{display: "flex", flexDirection: "column"}}>
-                                            <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                                <img className={s["itemImage"]} src={product.image}></img>
-                                            </div>
-                                            <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                                <h1 className={s["name"]} >{product.name}</h1>
-                                            </div>
-                                        </div>
-                                        <div className={s.priceAndCart}>
-                                            <h1 className={s["price"]}>${product.price}</h1>
-                                            <button 
-                                                onMouseEnter={() => handleMouseEnter(index)}
-                                                onMouseLeave={() => handleMouseLeave(index)}
-                                                onClick={() => addToCart(product)}>
-                                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
-                                               <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-                                            </button>
-                                        </div>
-                                        {cartTooltips[index] && (
-                                            <span className={s["cartTooltip"]}>Añadir al carrito</span>
-                                        )}
+                            { 
+                                isVisibleCategory && (
+                                    <div className={`${s.filterCategory}`}>
+                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Libros</span>
+                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Computadoras</span>
+                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Almacenamiento</span>
+                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Audio</span>
+                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Accesorios</span>
                                     </div>
                                 )
-                            })
-                        }
+                            }
                     </div>
+                </aside>
+
+            {/* PRODUCTS */}
+                <div className={`${s['productBox']}`}>
+                    {
+                        currentAllProducts ? currentAllProducts.map((product, index) => {
+                            return (
+                                <div className={`${s['item']}`} key={index}>
+                                    <div style={{display: "flex", flexDirection: "column"}}>
+                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                            <img className={s["itemImage"]} src={product.image}></img>
+                                        </div>
+                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                            <h1 className={s["name"]} >{product.name}</h1>
+                                        </div>
+                                    </div>
+                                    <div className={s.priceAndCart}>
+                                        <h1 className={s["price"]}>${product.price}</h1>
+                                        <button 
+                                            onMouseEnter={() => handleMouseEnter(index)}
+                                            onMouseLeave={() => handleMouseLeave(index)}
+                                            onClick={() => addToCart(product)}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                                        </button>
+                                    </div>
+                                    {
+                                        cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
+                                    }
+                                </div>
+                            )
+                        }) : (
+                            <Modal/>
+                        )
+                    }
+                </div>
             </section>
+
+        {/* RESUMEN */}
             <section className={s.Resumen}>
                 <h2>Resumen de compras</h2>
-                {cart?.length > 0 ? (
-                    <>
-                        <ul>
-                        {cart.map((item, index) => (
-                            <li key={index}>
-                                {item.name} - ${item.price}
-                                <button onClick={() => removeFromCart(item.id)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
-                                  <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                </svg>
-                                </button>
-                            </li>
-                        ))}
-                        </ul>
-                        <p>Total: ${calculateTotal()}</p>
-                    </>
-                    ) : (
-                    <p>Tu carrito de compras está vacío</p>
-                )}
+                {
+                    cart?.length > 0 ? (
+                        <>
+                            <ul>
+                            {cart.map((item, index) => (
+                                <li key={index}>
+                                    {item.name} - ${item.price}
+                                    <button onClick={() => removeFromCart(item.id)}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
+                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                    </svg>
+                                    </button>
+                                </li>
+                            ))}
+                            </ul>
+                            <p>Total: ${calculateTotal()}</p>
+                        </>
+                        ) : (
+                        <p>Tu carrito de compras está vacío</p>
+                    )
+                }
             </section> 
         </main>
     )
 }
+
 export default Shop;  

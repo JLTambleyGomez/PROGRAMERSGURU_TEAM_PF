@@ -7,6 +7,8 @@ import {
     signInWithEmailAndPassword
 } from "firebase/auth";
 
+
+//_________________________module_________________________
 export default function signIn(email, password) {
     const auth = getAuth();
     setPersistence(auth, inMemoryPersistence)

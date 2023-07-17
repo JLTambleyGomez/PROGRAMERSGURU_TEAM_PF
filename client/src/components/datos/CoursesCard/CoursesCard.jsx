@@ -17,7 +17,7 @@ function CoursesCard () {
 // ______________
 
     //global state:
-    const allCourses = useSelector((state) => state.courses);
+    const allCourses = useSelector((state) => state.courses) ? useSelector((state) => state.courses) : [];
 
     //states:
     const [currentPage, setCurrentPage] = useState(1);
@@ -128,7 +128,7 @@ function CoursesCard () {
 
             </div>
                 {
-                    allCourses.map((course, index) => {
+                    allCourses ? allCourses.map((course, index) => {
                         return (
                             <CourseCard
                                 key={index}
@@ -143,7 +143,9 @@ function CoursesCard () {
                                 imageURL={course?.imageURL}
                             />
                         )
-                    })
+                    }) : (
+                        <p>REGISTRATE</p>
+                    )
                 }
             {/* <InfiniteScroll 
                 dataLength={uniqueCourses.length}

@@ -52,7 +52,10 @@ import {
     export const GET_FAVORITES = "GET_FAVORITES";
 
 //USER:
-    export const LOGIN = "LOGIN"
+    export const LOGIN = "LOGIN";
+    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+    export const SET_USER_EMAIL = "SET_USER_EMAIL";
+    export const SET_TOKEN = "SET_TOKEN";
 
 //COMMENTS:
     export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
@@ -64,15 +67,10 @@ import {
     export const POST_PRODUCTS = "POST_PRODUCTS";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-//USER:
-    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
-    export const SET_USER_EMAIL = "SET_USER_EMAIL"
-    export const SET_TOKEN = "SET_TOKEN"
-
 //CART:
     export const SET_CART= "SET_CART";
     export const CLEAR_CART = "CLEAR_CART";
-    
+
 //SHOPBAG:
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
@@ -167,6 +165,21 @@ export const delete_course = (id) => { // request
             });
         }
     };
+}
+///////////////////// PUT COURSE //////////////////////////
+export const put_course = (id, course) => {
+    return async function (dispatch) {
+        try {
+            const data = await putCourse(id,course)
+            return dispatch({})
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+        }
+    }
+
 }
 
 export const filter_courses_by_language = (language) => {
@@ -391,6 +404,26 @@ export const delete_Products = (id) => { // request
             });
         }
     };
+}
+///////////////////// PUT PRODUCT //////////////////////////
+export const put_Products = (id, product) => {
+    return async function (dispatch) {
+        try {
+            const data = await putProducts(id,product)
+            console.log(data)
+            return dispatch({
+                type: PUT_PRODUCT,
+                payload: data.message
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+            
+        }
+    }
+
 }
 
 //USER___________________________________________________________________//

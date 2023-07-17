@@ -7,6 +7,7 @@ import {
   get_courses_all,
   post_course,
   delete_course,
+  put_course
 } from "../../../Redux/actions";
 import styles from "./AdminPanel.module.css";
 
