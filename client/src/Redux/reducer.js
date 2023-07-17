@@ -32,7 +32,8 @@ import {
     CLEAR_CART,
 //SHOPBAG
     TOGGLE_SHOPBAG,
-
+//METAMASK
+METAMASK_ADDRESS,
 //COMMENTS
 GET_COMMENTS_BY_USER,
 GET_COMMENTS_BY_COURSE,
@@ -61,6 +62,7 @@ const globalStorage = {
     metamask:false,
     userComments: [],
     courseComments: [],
+    metamaskaddress:null,
     
 }
 
@@ -197,6 +199,11 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 courseComments: payload
         }
+        case METAMASK_ADDRESS:
+            return{
+                ...state,
+                metamaskaddress: payload
+            }
 
         default: return {...state}; 
     }
