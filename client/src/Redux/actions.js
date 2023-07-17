@@ -48,12 +48,13 @@ import {
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
+    export const ORDER_PRODUCTS = "ORDER_PRODUCTS";
 
-    //USER
+//USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
     export const SET_USER_EMAIL = "SET_USER_EMAIL"
     export const SET_TOKEN = "SET_TOKEN"
-    //CART
+//CART
     export const SET_CART= "SET_CART";
     
 //SHOPBAG
@@ -350,6 +351,13 @@ export function delete_Products(id) { // request
             });
         }
     };
+}
+
+export const order_products = (order) => {
+    return {
+        type: ORDER_PRODUCTS,
+        payload: order
+    }
 }
 
 //USER___________________________________________________________________//

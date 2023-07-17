@@ -13,7 +13,7 @@ function Menu () {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
-    const logo= useSelector((state)=>state.user.picture)
+    const logo= useSelector((state)=>state.user?.picture)
 
     //const:
     const navigate = useNavigate()
@@ -27,7 +27,7 @@ function Menu () {
         const suffix = dark ? 'dark' : 'light';
         return `${base}-${suffix}`;
     };
-{}
+
     const handleDarkMode = () => {
         dispatch(Dark_Mode(!dark));
     };
@@ -37,7 +37,7 @@ function Menu () {
         <div className={`${s.component}`}>
 
             <div className={`${s.imageWrapper}`}>
-            {logo?( <img src = {logo} alt = "user image" className={`${s.image}`}/>):( <img src = {"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"} alt = "user image" className={`${s.image}`}/>)}
+            {logo ? ( <img src = {logo} alt = "user image" className={`${s.image}`}/>):( <img src = {"https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"} alt = "user image" className={`${s.image}`}/>)}
             </div>
 
             <ul className={`${s.options}`}>

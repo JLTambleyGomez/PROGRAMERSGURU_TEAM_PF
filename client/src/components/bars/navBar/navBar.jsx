@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
 import { toggle_shopbag } from "../../../Redux/actions";
+import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton"
 
 // import styles from './navBar.module.css';
 import s from "./navBar.module.css";
@@ -66,7 +67,9 @@ function NavBar ( { logoutUser } ) {
                 </NavLink>
             </button>  
             <SearchBar/>
-                      <ConexionMetamask></ConexionMetamask>
+            <SubscripcionesButton></SubscripcionesButton>
+                      <ConexionMetamask/>
+                
 
            
             <FontAwesomeIcon

@@ -29,7 +29,7 @@ function Bag () {
         setTimeout(() => {
             dispatch(toggle_shopbag(!shopbag));
             setIsOpen(false)
-        }, 400)
+        }, 0)
     }
 
     const handleAddButton = (type, product) => {
@@ -62,32 +62,34 @@ function Bag () {
     return (
         <div className={s.shopbagOverlay} onClick={toggleShopbag}>
             <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${isOpen ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
+                <h1>Revisa tu orden</h1>
                 {
-                    cart?.map((product) => {
+                    cart?.map((product, index) => {
                         return (
-                            <div className={`${s.item} ${s[theme("item")]}`}>
+                            <div key={index} className={`${s.item} ${s[theme("item")]}`}>
                                 <div className={s.section1}>
                                     <button
                                         onClick={() => handleAddButton("resta", product)}
-                                        className={s.minusPlus}
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
                                     >
                                         -
                                     </button>
                                         <img src={product.image} alt={product.name} />
                                     <button
                                         onClick={() => handleAddButton("suma", product)}
-                                        className={s.minusPlus}
-                                        >
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
+                                    >
                                         +
                                     </button>
+                                    <hr style={{height: "1rem"}}/>
+                                    <p>{product.quantity}</p>
                                 </div>
-                                <p>{product.name} x {product.quantity}</p>
+                                <p>{product.name}</p>
                             </div>
                         )
                     })
                 }
-                {isOpen && "sdfg"}
-                Subtotal: $ {calculateTotal()}
+                <h1>Subtotal: $ {calculateTotal()}</h1>
             </aside>
         </div>
     )

@@ -25,6 +25,7 @@ import {
 //PRODUCTS
     GET_PRODUCTS,
     DELETE_PRODUCT,
+    ORDER_PRODUCTS,
     //USER
     GET_USER_BY_EMAIL,
     //
@@ -154,6 +155,19 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
 
          case DELETE_PRODUCT:
             return { ...state, message: payload};
+
+        case ORDER_PRODUCTS:
+            const products = [...state.products]
+
+            if (payload === "ascendente") {
+                products.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
+            } else if (payload === "descendente") {
+                products.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
+            }
+            return { 
+                ...state, 
+                products: products, 
+            }
 
         case GET_USER_BY_EMAIL:
             return {

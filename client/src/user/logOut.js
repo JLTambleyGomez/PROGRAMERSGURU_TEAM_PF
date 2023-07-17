@@ -5,6 +5,7 @@ export default function logoutUser() {
     const auth = getAuth();
     signOut(auth)
         .then(() => {
+            //clear local storage
             localStorage.clear();
             // clear session storage
             sessionStorage.clear();

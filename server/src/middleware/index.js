@@ -6,6 +6,7 @@ class Middleware {
 			return next()
 		}
 		try {
+			//split aqui
 			const token = req.headers.authorization.split(' ')[1] 
 			const decodeValue = await admin.auth().verifyIdToken(token);
 			if (decodeValue) {

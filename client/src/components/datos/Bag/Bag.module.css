@@ -10,7 +10,7 @@
   .shopbag {
     position: fixed;
     right: 0;
-    height: 100vh;
+    height: 90vh;
     width: 25vw;
     display: flex;
     flex-direction: column;
@@ -34,7 +34,7 @@
   }
   .shopbag-light {
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
+    box-shadow: -10px 0px 1rem #34333350
   }
   .shopbag-dark {
     background-color: #212121;
@@ -55,19 +55,46 @@
           }
   }
 
+.itemContainer {
+    display: flex;
+    align-items: center;
+}
+
 .item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 12rem;
-  height: 8rem;
+  gap: 1rem;
+  width: 14rem;
+  height: 10rem;
+  padding: 1rem;
   /* background-color: black; */
   box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
   }
   .minusPlus {
     width: 2rem;
     height: 2rem;
+    font-weight: 900;
+    background-color: #0FFF50;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: white;
   }
+  .minusPlus-light:hover {
+    background-color: #3333FF;
+    color: white;
+  }
+  .minusPlus-dark:hover {
+    background-color: #FFFF33;
+    color: black;
+  }
+
+  .item p {
+    text-align: center;
+    margin: 0;
+  }
+
   .section1 {
     display: flex;
     justify-content: center;
@@ -83,5 +110,5 @@
       border-color: rgba(248, 248, 248, 0.658);
     }
     .section1 p {
-      height: 1rem;
+      font-size: 1rem;
     }

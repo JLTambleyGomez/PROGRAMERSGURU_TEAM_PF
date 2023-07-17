@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_products_all, set_cart } from "../../../Redux/actions"
+import { order_products } from "../../../Redux/actions";
 
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,6 +40,11 @@ function Shop () {
     const syncInput = (event) => {
         const { value } = event.target;
         setInput(value);
+    }
+
+    const handleSort = (event) => {
+        const value = event.target.value;
+        dispatch(order_products(value))
     }
 //___________________
     const toggleVisibilityPrice = () => {
@@ -164,9 +170,10 @@ function Shop () {
                     <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
                        { isVisibleSortByName && (
                             <ul>
-                                <li>Ascendente</li>
-                                <li>Descendente</li>
-                            </ul>)}
+                                <li onClick={() => {dispatch(order_products("ascendente"))}}>Ascendente</li>
+                                <li onClick={() => {dispatch(order_products("descendente"))}}>Descendente</li>
+                            </ul>
+                        )}
                 </div> 
                 <div> 
                     <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>

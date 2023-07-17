@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 
 const PagoMercadopago=({reference})=>{
 console.log(reference)
+
 initMercadoPago('TEST-74e77fab-e33b-4709-8aef-3cb739639cc5');
 
 const [preferenceId,setPreferenceId]= useState(null);
@@ -14,6 +15,7 @@ const createMercadopagoReference = async()=>{
     try {
         console.log(reference)
         const {data}= await axios.post("http://localhost:3001/Mp/create_preference", reference)
+        console.log(data);
         const id = data.id
         return id;
     } catch (error) {
@@ -25,7 +27,6 @@ const handleBuy= async()=>{
     const id= await createMercadopagoReference();
     if(id){
         setPreferenceId(id)
-    
     }
 }
 useEffect(()=>{

@@ -44,7 +44,7 @@ function SignFreeForm() {
   const showPassword = (event) => {
     event.preventDefault()
     setPasswordVisible(!passwordVisible)
-  }
+  } 
 
   const handleLogIn = (event) => {
     event.preventDefault();
@@ -55,6 +55,11 @@ function SignFreeForm() {
     event.preventDefault();
     get_User_By_Email(userData.email)
     createUser(userData.email, userData.password)
+  }
+
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
   }
 
   //component:
@@ -133,7 +138,7 @@ function SignFreeForm() {
               <button
                 className={styles.button}
                 type="submit"
-                onClick={signInwithGoogle}
+                onClick={handleLoginWithGoogle}
               >
                 Acceder con Google
               </button>
