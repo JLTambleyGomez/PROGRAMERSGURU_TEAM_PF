@@ -5,9 +5,8 @@ module.exports = (sequelize) => {
         "Payment",
         {
             id: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.STRING,
                 primaryKey: true,
-                autoIncrement: true,
                 allowNull: false,
             },
             date: {

@@ -1,10 +1,14 @@
 import axios from "axios";
+// import store from "../Redux/store";
+
 
 // Agregar encabezado de autorización a todas las solicitudes
-let token = sessionStorage.getItem("accessToken");
-
+let token = sessionStorage.getItem("accessToken")
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
+  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
+    return config;
+  }
     config.headers.Authorization = `Bearer ${token}`;
     return config;
 });
@@ -14,6 +18,14 @@ export const getCoursesAllRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/course");
   return data;
 };
+
+export const getEthvalue = async () =>{
+  const response = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
+
+  const ethUSDTPrice = parseFloat(response.data.price);
+
+  return ethUSDTPrice;
+}
 
 export const getProducts = async () => {
   const { data } = await axios.get("http://localhost:3001/product");
@@ -28,14 +40,6 @@ export const postProducts = async () => {
 export const deleteProducts = async (id) => {
   const { data } = await axios.delete(`http://localhost:3001/product/${id}`);
   return data;
-};
-
-export const login = async (userData) => {
-  const { email, password } = userData;
-  const URL = "http://localhost:3001/user/Login";
-  const { data } = await axios(URL + `?email=${email}&password=${password}`);
-  const { access } = data;
-  return access;
 };
 
 export const postCourseRequest = async (datos) => {
@@ -107,7 +111,7 @@ export const deleteFavoritesRequest = async () => {
 //user______________________________
 
 export const getUserByEmail = async (email) => {
-  const { data } = await axios.get("http://localhost:3001/user/email", email);
+  const { data } = await axios.get(`http://localhost:3001/user/?email=${email}`);
   return data;
 };
 
@@ -115,5 +119,17 @@ export const getUserByEmail = async (email) => {
 
 export const createOrder = async () => {
   const { data } = await axios.post("http://localhost:3001/create-order"); // agregar array de productos para postear, y modificar el controlador en el back.
+  return data;
+};
+
+//Comments
+
+export const getCommentsByUser = async (userId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${userId}`);
+  return data;
+};
+
+export const getCommentsByCourse = async (courseId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${courseId}`);
   return data;
 };

@@ -14,7 +14,6 @@ const postUserRequest = async (userData) => {
             "http://localhost:3001/user/signup",
             userData
         );
-        window.location.replace("/HomePage");
         return data.message;
     } catch (error) {
         console.log(error);
@@ -37,8 +36,9 @@ export default function createUser(email, password) {
                         };
                         const token = user.accessToken;
                         sessionStorage.setItem("accessToken", token);
+                        sessionStorage.setItem("email", email)
                         postUserRequest(userData)
-                        // window.location.replace("/HomePage");
+                        window.location.replace("/HomePage");
                     }
                 }
             );

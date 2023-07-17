@@ -57,7 +57,7 @@ Technology.belongsToMany(Course, {
 const shopping_cart = sequelize.define(
     "shopping_cart",
     {
-        amount: {
+        quantity: {
             type: DataTypes.INTEGER,
         },
     },

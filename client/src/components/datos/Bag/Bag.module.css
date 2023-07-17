@@ -1,50 +1,99 @@
 .shopbagOverlay {
- 
   position: fixed;
   top:0;
   bottom: 0;
   z-index: 9998;
   width: 100vw;
-  animation:scale-up-horizontal-right 0.4s } 
-  @keyframes scale-up-horizontal-right{0%{transform:scaleX(.4);transform-origin:right center}100%{transform:scaleX(1);transform-origin:right center}}
-  
-  
+  background-color: rgba(0, 0, 0, 0.5);
+}
   .shopbag {
-    top: var(--navBarHeight);
-    right: 0;
-    min-height: calc(100vh - var(--navBarHeight));
-    width: 25vw;
     position: fixed;
+    right: 0;
+    height: 90vh;
+    width: 25vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2vw 0;
+    padding: 5vh 0;
     gap: 10px;
     z-index: 9999;
     overflow-y: auto;
+    animation: scale-up-horizontal-right 0.4s;
+  } @keyframes scale-up-horizontal-right {
+    0% {
+      transform: scaleX(0.4);
+      transform-origin: right center;
+      opacity: 0;
+    }
+    100% {
+      transform: scaleX(1);
+      transform-origin: right center;
+      opacity: 1;
+    }
   }
   .shopbag-light {
     background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
+    box-shadow: -10px 0px 1rem #34333350
   }
   .shopbag-dark {
     background-color: #212121;
     box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
   }
-  
+  .shopbagOpen {
+        animation: sdf 0.4 ;
+    } @keyframes sdf {
+        0% {
+            transform: scaleX(1);
+            transform-origin: left center;
+            opacity: 1;
+          }
+          100% {
+            transform: scaleX(0.4);
+            transform-origin: left center;
+            opacity: 0;
+          }
+  }
+
+.itemContainer {
+    display: flex;
+    align-items: center;
+}
+
 .item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 12rem;
-  height: 8rem;
+  gap: 1rem;
+  width: 14rem;
+  height: 10rem;
+  padding: 1rem;
   /* background-color: black; */
   box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
   }
   .minusPlus {
     width: 2rem;
     height: 2rem;
+    font-weight: 900;
+    background-color: #0FFF50;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
   }
+  .minusPlus-light:hover {
+    background-color: #3333FF;
+    color: white;
+  }
+  .minusPlus-dark:hover {
+    background-color: #FFFF33;
+    color: black;
+  }
+
+  .item p {
+    text-align: center;
+    margin: 0;
+    font-size: 1rem;
+  }
+
   .section1 {
     display: flex;
     justify-content: center;
@@ -58,7 +107,4 @@
       border-radius: 100%;
       border: solid 2px;
       border-color: rgba(248, 248, 248, 0.658);
-    }
-    .section1 p {
-      height: 1rem;
     }

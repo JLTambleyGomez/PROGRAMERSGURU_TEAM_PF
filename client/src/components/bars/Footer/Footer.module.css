@@ -8,7 +8,6 @@
   bottom: -35%;
   padding-bottom: 20%;
   width: 100%;
-  color: #000000;
   border-radius:100%;
   animation: blur-in 0.2s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}
 }

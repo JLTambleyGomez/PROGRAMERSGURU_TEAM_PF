@@ -1,0 +1,30 @@
+.component {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: var(--navBarHeight);
+    width: 20rem;
+    height: 3rem;
+    padding: 0 10px;
+    background-color: beige;
+    align-self: center;
+    animation: slide-up 1s ease-out;
+    z-index: 9999;
+} @keyframes slide-up {
+    /* 0% {
+        transform: 0;
+    }
+    100% */
+}
+.component p {
+    margin: 0;
+    font-size: 1.25rem;
+    color: black
+}
+
+.component button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
 
@@ -39,7 +40,7 @@ function Bag () {
 
     const calculateTotal = () => {
         let total = 0;
-        cart.forEach((product) => {
+        cart?.forEach((product) => {
             const sum = product.price * product.quantity;
             total += sum;
         });
@@ -53,41 +54,38 @@ function Bag () {
 
     //component:
     return (
-        <>
-            {
-                shopbag && (
-                    <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-                        <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
-                            {
-                                cart.map((product) => {
-                                    return (
-                                        <div className={`${s.item} ${s[theme("item")]}`}>
-                                            <div className={s.section1}>
-                                                <button
-                                                    onClick={() => handleAddButton("resta", product)}
-                                                    className={s.minusPlus}
-                                                >
-                                                    -
-                                                </button>
-                                                    <img src={product.image} alt={product.name} />
-                                                <button
-                                                    onClick={() => handleAddButton("suma", product)}
-                                                    className={s.minusPlus}
-                                                    >
-                                                    +
-                                                </button>
-                                            </div>
-                                            <p>{product.name} x {product.quantity}</p>
-                                        </div>
-                                    )
-                                })
-                            }
-                            Subtotal: $ {calculateTotal()}
-                        </aside>
-                    </div>
-                )
-            }
-        </>
+        <div className={s.shopbagOverlay} onClick={toggleShopbag}>
+            <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${shopbag ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
+            <h1>Revisa tu orden</h1>
+                {
+                    cart?.map((product, index) => {
+                        return (
+                            <div key={index} className={`${s.item} ${s[theme("item")]}`}>
+                                <div className={s.section1}>
+                                    <button
+                                        onClick={() => handleAddButton("resta", product)}
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
+                                    >
+                                        -
+                                    </button>
+                                        <img src={product.image} alt={product.name} />
+                                    <button
+                                        onClick={() => handleAddButton("suma", product)}
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
+                                        >
+                                        +
+                                    </button>
+                                    <hr style={{height: "1rem"}}/>
+                                    {product.quantity}
+                                </div>
+                                <p>{product.name}</p>
+                            </div>
+                        )
+                    })
+                }
+                <h1>Subtotal: $ {calculateTotal()}</h1>
+            </aside>
+        </div>
     )
 }
 

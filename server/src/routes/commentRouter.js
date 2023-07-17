@@ -1,19 +1,19 @@
 //Router
 const commentRouter = require("express").Router();
 
-const { deleteComment } = require("../controllers/Comment/deleteComment");
-const { getAllComments } = require("../controllers/Comment/getAllComments");
 //controllers
-const { getComment } = require("../controllers/Comment/getComment");
+const { deleteComment } = require("../controllers/Comment/deleteComment");
+const { getCommentsByUser } = require("../controllers/Comment/getCommentsByUser");
+const { getCommentsByCourse } = require("../controllers/Comment/getCommentsByCourse");
 const { postComment } = require("../controllers/Comment/postComment");
 const { putComment } = require("../controllers/Comment/putComment");
 
 //routes
+commentRouter.get("/:userId", getCommentsByUser);
+
+commentRouter.get("/:courseId", getCommentsByCourse);
+
 commentRouter.post("/:courseId", postComment);
-
-commentRouter.get("/", getAllComments);
-
-commentRouter.get("/:id", getComment);
 
 commentRouter.delete("/:id", deleteComment);
 
