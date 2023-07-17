@@ -149,7 +149,7 @@ function Cart () {
                             )}
                             <hr />
                             <h1>Valor Total: $ {calculateTotal()}</h1>
-                            <p onClick={handlePagarButton}>ir a Pagar</p>
+                            <button onClick={handlePagarButton}>ir a Pagar</button>
                             {MostrarPagos && (
                                 <div>
                                     <p>Escoge tu medio de Pago</p>
