@@ -12,7 +12,7 @@ mercadoPagoRouter.get("/success", (req, res) => {
 mercadoPagoRouter.get("/failure", (req, res) => {
     return res.send("failure");
 });
-mercadoPagoRouter.get("pending", (req, res) => {
+mercadoPagoRouter.get("/pending", (req, res) => {
     return res.send("pending");
 });
 mercadoPagoRouter.post("/webhook", recieveWebhook);

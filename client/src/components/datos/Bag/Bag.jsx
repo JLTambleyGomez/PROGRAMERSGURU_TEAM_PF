@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
-import theme from "../../../theme/theme";
+// import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
 
@@ -13,6 +13,9 @@ function Bag () {
     const cart = useSelector((state) => state.cart);
     const dark = useSelector((state) => state.darkMode);
 
+    //state:
+    const [isOpen, setIsOpen] = useState(false)
+
     //const:
     const dispatch = useDispatch();
 
@@ -23,7 +26,11 @@ function Bag () {
     }
 
     const toggleShopbag = () => {
-        dispatch(toggle_shopbag(!shopbag))
+        setIsOpen(true)
+        setTimeout(() => {
+            dispatch(toggle_shopbag(!shopbag));
+            setIsOpen(false)
+        }, 0)
     }
 
     const handleAddButton = (type, product) => {

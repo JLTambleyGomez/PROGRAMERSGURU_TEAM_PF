@@ -1,11 +1,12 @@
 const mercadopago = require("mercadopago");
 
 const recieveWebhook = async (req, res) => {
+
+    const payment = req.query;
+    console.log(payment);
     try {
-        const payment = req.query;
-        console.log(payment);
         if (payment.type === "payment") {
-            const response = await mercadopago.paymentfindByPk(
+            const response = await mercadopago.payment.findById(
                 payment["data.id"]
             );
             console.log(req.query);
@@ -13,6 +14,7 @@ const recieveWebhook = async (req, res) => {
             console.log(payment);
             return res.status(200);
         }
+
     } catch (error) {
         return res.status(500).json({ error: error.message });
     }

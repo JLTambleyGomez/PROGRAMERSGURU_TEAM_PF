@@ -47,7 +47,7 @@
     border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
   }
 }
-  
+
   .orderBarOverlay {
     position: fixed;
     top: 0;
@@ -57,7 +57,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
   }
-  
+
   .orderBarSidebar {
     width: 250px;
     height: 100vh;
@@ -70,8 +70,7 @@
     overflow-y: auto;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
   }
-  
+
   .orderBarSection {
     padding: 20px;
   }
-  

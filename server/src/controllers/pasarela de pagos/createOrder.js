@@ -21,17 +21,17 @@ const createOrder = async (req, res) => {
                 failure: "http://localhost:3001/mercadoPago/failure",
                 pending: "http://localhost:3001/mercadoPago/pending",
             },
-            notification_url: "7510-179-6-215-95.ngrok.io/webhook",
+            notification_url: "https://88b1-179-6-215-95.ngrok.io/webhook",
         }); //7510-179-6-215-95.ngrok.io
 
         console.log(result);
 
         // mandar el link para pagar el producto, cambiar luego para el front.
         // return res.status(200).result["init_point"];
-        return res.json({
+        return res.status(200).json({
             message: "Creando orden",
             result: result.body,
-            id: result.data.id,
+            id: result.body.id,
         });
     } catch (error) {
         return res.status(500).json({ message: error.message });
