@@ -23,6 +23,7 @@ import MercadoPagoPendiente from "./components/views/MercadopagoFeedback/pendien
 import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
+import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 
 //_________________________module_________________________
 function App () {
@@ -102,6 +103,7 @@ function App () {
                 <Route path ="/MercadoPagoPending" element ={<MercadoPagoPendiente/>}/>
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
+                <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
                 
             </Routes>
             {location !== "/" && isAtBottom && <Footer />}

@@ -64,8 +64,8 @@ function HomePage () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                     PROGRAMMER'S GURU
                 </h1>
-            <SubscripcionesFlotante/>
             </section>
+            <SubscripcionesFlotante/>
         {/* COURSES */}
             <section className={`${s.sectionCourses}`}>
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>

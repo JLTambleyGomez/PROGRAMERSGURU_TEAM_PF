@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
 
@@ -54,32 +55,35 @@ function Bag () {
     //component:
     return (
         <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-            <aside className={`${s.shopbag} ${s[theme("shopbag")]}`} onClick={(event) => event.stopPropagation()}>
+            <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${shopbag ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
+            <h1>Revisa tu orden</h1>
                 {
-                    cart?.map((product) => {
+                    cart?.map((product, index) => {
                         return (
-                            <div className={`${s.item} ${s[theme("item")]}`}>
+                            <div key={index} className={`${s.item} ${s[theme("item")]}`}>
                                 <div className={s.section1}>
                                     <button
                                         onClick={() => handleAddButton("resta", product)}
-                                        className={s.minusPlus}
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
                                     >
                                         -
                                     </button>
                                         <img src={product.image} alt={product.name} />
                                     <button
                                         onClick={() => handleAddButton("suma", product)}
-                                        className={s.minusPlus}
+                                        className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
                                         >
                                         +
                                     </button>
+                                    <hr style={{height: "1rem"}}/>
+                                    {product.quantity}
                                 </div>
-                                <p>{product.name} x {product.quantity}</p>
+                                <p>{product.name}</p>
                             </div>
                         )
                     })
                 }
-                Subtotal: $ {calculateTotal()}
+                <h1>Subtotal: $ {calculateTotal()}</h1>
             </aside>
         </div>
     )

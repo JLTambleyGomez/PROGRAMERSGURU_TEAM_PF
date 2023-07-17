@@ -25,15 +25,18 @@ import {
 //PRODUCTS
     GET_PRODUCTS,
     DELETE_PRODUCT,
-    //USER
+//USER
     GET_USER_BY_EMAIL,
-    //
+//CART
     SET_CART,
-    //
+    CLEAR_CART,
+//SHOPBAG
     TOGGLE_SHOPBAG,
-
-
-
+//METAMASK
+    METAMASK_ADDRESS,
+//COMMENTS
+    GET_COMMENTS_BY_USER,
+    GET_COMMENTS_BY_COURSE,
 } from "./actions";
 
 // PRUEBA CURSOS
@@ -55,9 +58,11 @@ const globalStorage = {
     user:{},
     cart:[],
     shopbag: false,
-    metamask:false
+    metamask:false,
+    userComments: [],
+    courseComments: [],
+    metamaskaddress:null,
 }
-
 
 //REDUCER:
 export default function rootReducer ( state = globalStorage, { type, payload } ) {
@@ -119,23 +124,27 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 error: payload.message,
             };
+
         case CLEAN_MESSAGE:
             return {
                 ...state,
                 error: "",
                 message:"",
             };
+
         case CLEAR_COURSES:
             return {
                 ...state,
                 allCourses: [],
                 courses: [],
             };
+
         case DARK_MODE:
             return {
                 ...state,
                 darkMode: payload
             }; 
+
         case GET_FAVORITES:
             return { ...state, favorites: payload};
 
@@ -144,7 +153,6 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
 
         case  DELETE_COURSE:
             return { ...state, message: payload};
-
 
         case DELETE_CATEGORIES:
             return { ...state, message: payload};
@@ -167,16 +175,35 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 cart: payload
             };
         
+        case CLEAR_CART:
+            return {
+                ...state,
+                cart: payload
+            }
+
         case TOGGLE_SHOPBAG:
             return {
                 ...state,
                 shopbag: payload
             }
 
+        case GET_COMMENTS_BY_USER:
+            return{
+                ...state,
+                userComments: payload
+            }
+
+        case GET_COMMENTS_BY_COURSE:
+            return{
+                ...state,
+                courseComments: payload
+            }
+        case METAMASK_ADDRESS:
+            return{
+                ...state,
+                metamaskaddress: payload
+            }
 
         default: return {...state}; 
     }
 }
-
-
-
