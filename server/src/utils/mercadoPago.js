@@ -1,4 +1,5 @@
 const mercadoPago = require("mercadopago");
+//const { Payment } = require("../db"); 
 require("dotenv").config();
 
 mercadoPago.configure({
@@ -17,19 +18,20 @@ const PagoconMercadopago = async (req, res) => {
     ],
     back_urls: {
       success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: "http://localhost:5173/MercadoPagoFailure",
-      pending: "http://localhost:5173/MercadoPagoPending",
+      failure: "http://localhost:5173/HomePage",
+      pending: "http://localhost:5173/HomePage",
     },
     auto_return: "approved",
   };
 
-  mercadoPago.preferences
+  const result = mercadoPago.preferences
     .create(preference)
     .then(function (response) {
       res.json({
         id: response.body.id,
       });
     })
+    
     .catch(function (error) {
       console.log(error);
     });

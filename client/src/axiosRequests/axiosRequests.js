@@ -4,7 +4,6 @@ import axios from "axios";
 
 // Agregar encabezado de autorización a todas las solicitudes
 let token = sessionStorage.getItem("accessToken")
-// let token = store.getState().token;
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
   if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
@@ -120,5 +119,17 @@ export const getUserByEmail = async (email) => {
 
 export const createOrder = async () => {
   const { data } = await axios.post("http://localhost:3001/create-order"); // agregar array de productos para postear, y modificar el controlador en el back.
+  return data;
+};
+
+//Comments
+
+export const getCommentsByUser = async (userId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${userId}`);
+  return data;
+};
+
+export const getCommentsByCourse = async (courseId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${courseId}`);
   return data;
 };

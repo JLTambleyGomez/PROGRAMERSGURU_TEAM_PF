@@ -4,12 +4,12 @@
   width: 340px;
   margin: 0 auto;
   margin-top: 5%;
+  left: 100%;
   padding: 20px;
   background-image: linear-gradient(to right, rgba(27, 149, 155, 0.68), rgba(102, 51, 153, 0.401));
   border-radius: 4px;
   animation: scale-up-vertical-top 0.4s linear;
-  position: relative;
-  display: fixed;
+  position: fixed;
 }
 
 
@@ -19,7 +19,6 @@
   width: infinite;
   height: infinite;
   display:flex;
- 
   position: absolute;
   justify-content: center;
   justify-items: center;

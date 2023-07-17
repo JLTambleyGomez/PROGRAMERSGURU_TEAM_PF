@@ -5,9 +5,9 @@ const loginWithGoogle = async (req, res) => {
         return res.json({
             userData: {
                 id: `${user_id}`,
-                email: email,
-                name: name,
-                image: picture,
+                email: email ? email : "",
+                name: name ? name : "",
+                image: picture ? picture : "",
             },
         });
     } catch (error) {
