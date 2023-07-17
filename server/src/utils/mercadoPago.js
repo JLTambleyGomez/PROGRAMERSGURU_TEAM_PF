@@ -3,7 +3,7 @@ const mercadoPago = require("mercadopago");
 require("dotenv").config();
 
 mercadoPago.configure({
-  access_token: "TEST-7366931760156988-071417-9f721ac6bad881e7546f0df180920193-1423375235",
+  access_token: "APP_USR-8277578497653004-071418-c51188f2051d9d2476ace948ca7cbda1-1423373513",
 });
 
 const PagoconMercadopago = async (req, res) => {
@@ -23,6 +23,7 @@ const PagoconMercadopago = async (req, res) => {
     },
     auto_return: "approved",
   };
+  console.log(preference);
 
   const result = mercadoPago.preferences
     .create(preference)
@@ -35,6 +36,8 @@ const PagoconMercadopago = async (req, res) => {
     .catch(function (error) {
       console.log(error);
     });
+
+    console.log(result);
 };
 
 

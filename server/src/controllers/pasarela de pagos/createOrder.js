@@ -4,7 +4,7 @@ const createOrder = async (req, res) => {
     try {
         mercadopago.configure({
             access_token:
-                "TEST-7366931760156988-071417-9f721ac6bad881e7546f0df180920193-1423375235",
+                "TEST-8277578497653004-071418-3f9e23a6d3437d2b53e3b14fb0089cf3-1423373513",
         });
 
         const result = await mercadopago.preferences.create({
@@ -24,7 +24,7 @@ const createOrder = async (req, res) => {
             notification_url: "7510-179-6-215-95.ngrok.io/webhook",
         }); //7510-179-6-215-95.ngrok.io
 
-        console.log(result);
+        console.log(result.data);
 
         // mandar el link para pagar el producto, cambiar luego para el front.
         // return res.status(200).result["init_point"];
