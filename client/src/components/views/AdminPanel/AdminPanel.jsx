@@ -1,43 +1,51 @@
 import { useSelector, useDispatch } from "react-redux";
-import { gET_CATEGORIES, pOST_CATEGORIES, dELETE_CATEGORIES } from "../../../Redux/actions";
+import {
+  gET_CATEGORIES,
+  pOST_CATEGORIES,
+  dELETE_CATEGORIES,
+} from "../../../Redux/actions";
 import { useEffect, useState } from "react";
 import validate from "./validate";
-import styles from "./AdminPanel.module.css"
+import styles from "./AdminPanel.module.css";
 
-//_______________________.module___________________________
-const AdminPanel = () => {
-
-  //const
+import "./AdminPanel.css";
+//_________________________module_________________________
+function AdminPanel() {
+  //global state:
   const categories = useSelector((state) => state.categories);
-  const dispatch = useDispatch();
-  const darkmode = useSelector((state)=> state.darkMode);
-  //states
-  const [inputCategory, setInput] = useState({ category: "" });
-  const [changeDarkMode , setChangeDarkMode] = useState("");
-  const [error, setError] = useState({});
+  const message = useSelector((state) => state.message);
+  const darkmode = useSelector((state) => state.darkMode);
 
-  //functions
+  //const:
+  const dispatch = useDispatch();
+
+  //states:
+  const [inputCategory, setInputCategory] = useState({ category: "" });
+  const [error, setError] = useState({});
+  const [changeDarkMode, setChangeDarkMode] = useState("");
+
+  //functions:
   const hadleInputChange = (event) => {
     const { value } = event.target;
-    setInput({ category: value });
+    setInputCategory({ category: value });
   };
 
   const deleteCategory = () => {
     const { category } = inputCategory;
     dispatch(dELETE_CATEGORIES(inputCategory));
     dispatch(gET_CATEGORIES());
-    setInput({ category: '' })
+    setInput({ category: "" });
   };
 
-  function addCategory (event) {
+  function addCategory(event) {
     const { category } = inputCategory;
     dispatch(pOST_CATEGORIES(inputCategory));
     dispatch(gET_CATEGORIES());
-    setInput({category:''})
+    setInput({ category: "" });
   }
 
   //useEffect
-  useEffect(() => { 
+  useEffect(() => {
     dispatch(gET_CATEGORIES());
   }, []);
 
@@ -46,21 +54,28 @@ const AdminPanel = () => {
   //   console.log(error)
   // }, [inputCategory])
 
-  useEffect (() => {
-  if (darkmode === true){
-    setChangeDarkMode("darkContainer");
-  }else{
-    setChangeDarkMode("lightContainer");
-  }
-  } , [darkmode])
+  useEffect(() => {
+    if (darkmode === true) {
+      setChangeDarkMode("darkContainer");
+    } else {
+      setChangeDarkMode("lightContainer");
+    }
+  }, [darkmode]);
 
+  useEffect(() => {
+    setError(validate(inputCategory));
+  }, [inputCategory]);
 
   return (
     <div className={`${styles[changeDarkMode]}`}>
-    <p>ADMINISTRAR CATEGORIAS</p>
+      <p>ADMINISTRAR CATEGORIAS</p>
       <div>
         <h1>Categories</h1>
-        <ul>{categories?.map((cat, i) => <li key={i}>{cat}</li>)}</ul>
+        <ul>
+          {categories?.map((cat, i) => (
+            <li key={i}>{cat}</li>
+          ))}
+        </ul>
 
         {/* <button onClick={buttonHandler}>Borrar categorias</button> */}
 
@@ -75,6 +90,6 @@ const AdminPanel = () => {
       </div>
     </div>
   );
-};
+}
 
 export default AdminPanel;

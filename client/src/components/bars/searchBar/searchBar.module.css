@@ -1,24 +1,126 @@
 .SearchBar {
-    margin-top: 1%;
-
+  margin-top: 1%;
 }
 
-.Container {
-    display: flex;
-
-    width: 100%;
-    justify-content: center;
-    align-items: center
+.searchOff {
+  animation: blur-in-1 0.4s linear both;
+}
+@keyframes blur-in-1 {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
 }
 
+.label {
+  margin: 0;
+  font-size: 150%;
+  letter-spacing: 0.3em;
+  transition: transform 0.3s;
+}
+.label:hover {
+  transform: scale(1.2);
+  text-shadow: 0px 3px 12px rgb(128, 255, 255);
+}
+.label-light {
+  color: black;
+}
+.label-dark {
+  color: white;
+}
+
+.searchOn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
+  animation: blur-in-2 0.4s linear both;
+}
+@keyframes blur-in-2 {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.input {
+  height: 5vh;
+  width: 15rem;
+  padding: 10px;
+  outline: none;
+  border: 3px solid;
+  background-clip: padding-box;
+  animation: borderGradientAnimation1 3s linear infinite;
+}
+@keyframes borderGradientAnimation1 {
+  0% {
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+  }
+  20% {
+    border-image: linear-gradient(to right, #ff0000, #800080) 1;
+  }
+  40% {
+    border-image: linear-gradient(to right, #800080, #0000ff) 1;
+  }
+  60% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+  }
+  80% {
+    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+  }
+  100% {
+    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+  }
+}
 
 .button {
-    color: antiquewhite;
-    background-color: rgb(7, 146, 146);
-    border: 2px solid rgb(255, 0, 0) ;
-    border-radius: 5%;
+  background: none;
+  border: none;
+}
+.button:hover {
+  cursor: pointer;
+}
+.buttonIcon {
+  font-size: 20px;
+}
+.buttonIcon-light {
+  fill: black;
+}
+.buttonIcon-dark {
+  fill: white;
 }
 
-.button:hover {
-    scale: 1.1    
+.mensaje {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  color: rgb(247, 247, 247);
+  background-color: rgba(0, 0, 0, 0.418);
+  z-index: 99998;
+  animation: scale-up-horizontal-left 0.4s;
+}
+
+@keyframes scale-up-horizontal-left {
+  0% {
+    transform: scaleX(0.4);
+    transform-origin: left center;
+  }
+  100% {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+/* COMPLETAR */
+@keyframes hide-left {
+  0% {
+    transform: translate(-1000);
+  }
 }

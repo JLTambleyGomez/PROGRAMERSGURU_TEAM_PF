@@ -14,8 +14,7 @@ courseRouter.get("/title", getCourseByName);
 
 courseRouter.post("/", postCourse);
 
-courseRouter.delete("/:id", deleteCourse);
-
-courseRouter.put("/:id", putCourse);
+courseRouter.get("/:id", getCourseById);
+courseRouter.post("/", postCourse);
 
 module.exports = courseRouter;

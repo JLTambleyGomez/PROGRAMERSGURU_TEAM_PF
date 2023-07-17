@@ -1,0 +1,32 @@
+.component {
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
+  display: flex;
+  flex-direction: column; 
+  padding-bottom: 20%;
+  animation:blur-in 0.4s linear both
+  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
+
+.mainBanner {
+    background-image: linear-gradient(to right,  #000000, #434343);
+    height: 26%;
+    /* padding: 2%; */
+    margin-bottom:1%;
+  }
+  .mainBanner h1 {
+    color: white;
+  }
+
+.filterOrder {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cardComponent{
+  margin-top: 3%;
+}
+
+
+.cargando{
+
+  animation:vibrate .5s linear both} @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}

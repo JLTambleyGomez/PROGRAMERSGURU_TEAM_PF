@@ -1,0 +1,13 @@
+.component {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  justify-items: center;
+  position: fixed;
+  /* bottom => 0 */
+  bottom: -35%;
+  padding-bottom: 20%;
+  width: 100%;
+  border-radius:100%;
+  animation: blur-in 0.2s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}
+}

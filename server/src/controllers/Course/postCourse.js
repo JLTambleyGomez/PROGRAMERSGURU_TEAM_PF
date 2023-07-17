@@ -1,4 +1,4 @@
-const { Tecnology, Course } = require("../../db");
+const { Category, Course } = require("../../db");
 
 const postCourse = async (req, res) => {
     try {
@@ -32,8 +32,6 @@ const postCourse = async (req, res) => {
             },
         });
 
-        // Establecer la relación entre el curso y las categorías
-
         const response = {
             courseDataEmpty: {
                 title: "",
@@ -50,17 +48,18 @@ const postCourse = async (req, res) => {
                 : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
+
         // Devolver una respuesta con el curso creado
         if (created) {
             for (let i = 0; i < categories.length; i++) {
-                const newCourseCategories = await Tecnology.findByPk(
+                const newCourseCategories = await Category.findByPk(
                     categories[i].id
                 );
-                await course.addTecnology(newCourseCategories);
+                await course.addTechnology(newCourseTechnology);
             }
-            return res.json(response);
+
+            await course.addTecnology(newCourseCategories);
         }
-        res.status(201).json(response);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Algo salió mal" });

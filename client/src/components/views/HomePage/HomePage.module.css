@@ -1,64 +1,147 @@
-.h1 {
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    font-size: 42px;
-    color: rgb(167, 12, 12);
-}
-.container{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    justify-items: center;
-    align-items: center;
-}   
+.component {
+  /* REGLA PARA TODOS LOS .component, DONDE SE RENDERICEN NAVBAR Y/O FOOTER*/
+  /* AJUSTAR MARGIN TOP DE ACUERDO A LA ALTURA DEL NAV BAR */
+  /* EJ. NAVBAR.module.css.styles.component {height: 10vh} => APLICAR: margin-top: 10vh al component actual*/
+  margin-top: var(--navBarHeight);
+  min-height: calc(100vh - var(--navBarHeight));
+    /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
+  /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
+  padding: 2% 7% 20vh; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  animation:blur-in 0.4s linear both
+  }
+  @keyframes blur-in {
+    0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
+  }
+  .component-light {
+    background-color: rgba(251, 251, 252, 0.623);
+  }
+  .component-dark {
+    background-color: #010003;
+  }
 
-.pagination{
+.sectionBanner {
+  display: flex;
+  position: absolute;
+  top:0;
+  left: 0;
+  flex-direction: row;
+  align-items: center;
+  scale: 0.5;
+  transition: transform 0.3s, filter 0.3s;
+  }
+
+  .bannerImg {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+  }
+
+.sectionCourses {
+  margin-top: 4%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s, filter 0.3s;
+  }
+  .sectionCourses:hover {
+    transform: scale(1.025);
+  }
+
+.sectionNews {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s, filter 0.3s;
+  }
+  .sectionNews:hover {
+    transform: scale(1.025);
+  }
+  .newsBanner {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    width:min-content ;
-}
-.paginationbutton{
-    margin:1%;
-    background-color: rgb(247, 246, 246);
-    color: rgb(0, 0, 0);
-    transition: transform 0.6s;
-
-}
-
-.paginationbutton:hover{
-    background-color: rgb(0, 0, 0);
-    color: rgb(248, 248, 248);
-    transform: scale(1.4);
-
-}
-
-/*
-.Class button{
-    background-color:  rgb(179, 113, 26); 
-  border: solid 2px;
-  border-color:  rgb(58, 39, 0);;
-  border-radius: 4px;
-  color:  rgb(58, 39, 0);;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  transition-duration: 0.2s;
-  box-shadow: 0 3px rgb(58, 39, 0);
-}
-  
-.Class button:hover {
-    background-color: rgb(238, 175, 92); 
-    color: white;
   }
-  .Class Link{
-    color:rgb(58, 39, 0)
+    .newsImg {
+      margin-left:4%;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      border: 2px solid white;
+    }
+  .newsText {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    text-overflow: ellipsis;
   }
-  .Class button:active {
-    box-shadow: 0 1px rgb(58, 39, 0);
-    transform: translateY(2px);
-}*/
+  .newsLink {
+    text-decoration: none;
+  }
+  .newsLink:hover {
+    text-shadow:  0px 3px 12px rgb(128, 255, 255);
+  }
+
+
+/* MAIN TITLE */
+.mainTitle {
+  font-size: 2rem;
+  cursor: default;
+}
+.mainTitle-light {
+  text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
+}
+.mainTitle-dark {
+  text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
+}
+
+/* COURSES TITLE */
+.coursesTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 10px;
+  font-size: 3rem;
+  transition: transform 0.3s, filter 0.3s;
+}
+.coursesTitle:hover {
+  transform: scale(1.04);
+  transform-origin: center;
+  cursor: default;
+}
+.cargando{
+font-size: 40px;
+animation:bounce-top 2s linear both infinite} @keyframes bounce-top{0%{transform:translateY(-35px);animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{transform:translateY(-24px);animation-timing-function:ease-in}65%{transform:translateY(-12px);animation-timing-function:ease-in}82%{transform:translateY(-6px);animation-timing-function:ease-in}93%{transform:translateY(-4px);animation-timing-function:ease-in}25%,55%,75%,87%{transform:translateY(0);animation-timing-function:ease-out}100%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}}
+
+
+
+
+.coursesTitle-light{
+  color: rgb(0, 140, 158);
+  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+}
+.coursesTitle-dark {
+  color:  rgba(0, 221, 250, 0.672);
+  text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+}
+
+/* NEWS TITLE */
+.newsTitle {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  letter-spacing: 10px;
+  font-size: 3rem;
+  transition: transform 0.3s, filter 0.3s;
+}
+.newsTitle-light {
+  color: rgb(0, 140, 158);
+  text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+}
+.newsTitle-dark {
+  color:  rgba(0, 221, 250, 0.672);
+  text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+}

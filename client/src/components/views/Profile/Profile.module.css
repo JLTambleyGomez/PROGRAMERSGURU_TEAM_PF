@@ -1,0 +1,49 @@
+.component {
+  margin-top: var(--navBarHeight);
+  /* min-height: calc(100vh - var(--navBarHeight)); */
+  display: flex;
+  border: 1px solid black;
+  height: 900px
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  min-width: 30%;
+  border: 1px solid blue;
+  font-size: 2rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid red;
+
+  min-width: 70%;
+}
+
+.image{
+
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: solid 4px;
+  border-color:rgb(255, 255, 255) ;
+}
+
+
+.profile{
+  margin-top: 4%;
+  padding: 4%;
+}
+
+.main{
+  display: flex;
+}
+
+.name{
+  width: 100px ;
+  margin-left: 100px
+}

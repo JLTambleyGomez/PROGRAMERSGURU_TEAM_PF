@@ -1,13 +1,20 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import {
+  get_courses_all,
+  clearMessage,
+  clearCourses,
+} from "../../../Redux/actions";
 
-const CoursePage = () => {
-
-    return (
-        <div>
-            <h1>algo</h1>
-        </div>
-    )
+//_________________________module_________________________
+function CoursePage() {
+  //component:
+  return (
+    <div>
+      <h1>algo</h1>
+    </div>
+  );
 }
 
 export default CoursePage;

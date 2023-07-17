@@ -1,0 +1,137 @@
+{
+  "products": [
+    {
+      "name": "Portátil Bangho con procesador Intel i7",
+      "description": "Portátil de alta gama con procesador Intel Core i7, 16 GB de RAM y SSD de 512 GB.",
+      "price": 359,
+      "image": "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/NOT00205/1200x900-NOT00205-1.jpg&w=500&q=100",
+      "category": "Hardware"
+    },
+    {
+      "name": "Monitor Dell de 27 pulgadas 4K",
+      "description": "Monitor de alta resolución de 27 pulgadas con resolución 4K para una calidad de imagen impresionante.",
+      "price": 400,
+      "image": "https://www.bhphotovideo.com/cdn-cgi/image/format=auto,fit=scale-down,width=500,quality=95/https://www.bhphotovideo.com/images/images500x500/dell_p2723qe_27_4k_ips_usb_c_1652178921_1699552.jpg",
+      "category": "Hardware"
+    },
+    {
+      "name": "Kit de desarrollo Arduino Gadnic",
+      "description": "Kit completo de desarrollo Arduino con una placa Arduino UNO, componentes y cables para crear proyectos electrónicos.",
+      "price": 44,
+      "image": "https://images.bidcom.com.ar/resize?src=https://www.bidcom.com.ar/publicacionesML/productos/ARDUIN01/1200x900-ARDUIN01-1.jpg&w=1000&q=100",
+      "category": "Electrónica"
+    },
+    {
+      "name": "Impresora 3D",
+      "description": "Impresora 3D de alta precisión que te permite materializar tus diseños tridimensionales.",
+      "price": 699,
+      "image": "https://example.com/impresora3d.jpg",
+      "category": "Hardware"
+    },
+    {
+      "name": "Raspberry Pi 4",
+      "description": "Miniordenador Raspberry Pi 4 con 8 GB de RAM, ideal para proyectos de IoT y desarrollo de software.",
+      "price": 33,
+      "image": "https://i.ebayimg.com/images/g/evsAAOSw5w1kbFZ5/s-l500.jpg",
+      "category": "Hardware"
+    },
+    {
+      "name": "Kit de inicio de LEGO Mindstorms",
+      "description": "Kit de inicio de LEGO Mindstorms para construir y programar robots con bloques LEGO y software intuitivo.",
+      "price": 723,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_725164-MLA31594322095_072019-F.webp",
+      "category": "Juguetes educativos"
+    },
+    {
+      "name": "Cámara web Full HD",
+      "description": "Cámara web Full HD con micrófono integrado para videollamadas y transmisiones en vivo.",
+      "price": 10,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_725633-MLA45259319403_032021-F.webp",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Kit de herramientas de reparación de electrónica",
+      "description": "Kit completo de herramientas para reparación de dispositivos electrónicos, incluyendo destornilladores, pinzas y más.",
+      "price": 24,
+      "image": "https://example.com/herramientas.jpg",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Teclado mecánico RGB",
+      "description": "Teclado mecánico con retroiluminación RGB y switches personalizables para una experiencia de escritura única.",
+      "price": 15,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_688536-MLA49433329469_032022-F.webp",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Altavoces Bluetooth",
+      "description": "Altavoces portátiles con tecnología Bluetooth para disfrutar de tu música favorita mientras trabajas.",
+      "price": 79,
+      "image": "https://example.com/altavoces.jpg",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Disco duro externo de 1 TB",
+      "description": "Disco duro externo de alta capacidad de 1 TB para almacenar y hacer copias de seguridad de tus archivos.",
+      "price": 24,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_693301-MLA70018321396_062023-F.webp",
+      "category": "Almacenamiento"
+    },
+    {
+      "name": "Mochila para portátil",
+      "description": "Mochila resistente y espaciosa diseñada especialmente para transportar portátiles y accesorios de forma segura.",
+      "price": 49,
+      "image": "https://example.com/mochila.jpg",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Reloj inteligente",
+      "description": "Reloj inteligente con funciones avanzadas como monitorización de la actividad física y notificaciones de smartphone.",
+      "price": 16,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_715167-MLA46041221450_052021-F.webp",
+      "category": "Electrónica"
+    },
+    {
+      "name": "Auriculares inalámbricos",
+      "description": "Auriculares inalámbricos con cancelación de ruido y calidad de sonido excepcional.",
+      "price": 149,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_990510-MLA46540370833_062021-F.webp",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Impresora láser",
+      "description": "Impresora láser monocromática de alta velocidad para imprimir documentos con calidad profesional.",
+      "price": 103,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_614875-MLA51445383260_092022-F.webp",
+      "category": "Hardware"
+    },
+    {
+      "name": "Micrófono USB",
+      "description": "Micrófono de calidad profesional con conexión USB para grabaciones de voz y transmisiones en vivo.",
+      "price": 33,
+      "image": "https://www.bhphotovideo.com/images/images1500x1500/hyperx_4p5p6aa_quadcast_usb_microphone_black_red_1721786.jpg",
+      "category": "Accesorios"
+    },
+    {
+      "name": "Kit de desarrollo de realidad virtual",
+      "description": "Kit de desarrollo de realidad virtual para crear experiencias inmersivas con dispositivos de realidad virtual.",
+      "price": 300,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_732367-MLA50679472799_072022-F.webp",
+      "category": "Hardware"
+    },
+    {
+      "name": "Tableta gráfica",
+      "description": "Tableta gráfica con sensibilidad a la presión y lápiz digital para dibujar y diseñar de forma intuitiva.",
+      "price": 35,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_958164-MLA46881729105_072021-F.webp",
+      "category": "Hardware"
+    },
+    {
+      "name": "Caja de herramientas",
+      "description": "Caja de herramientas resistente y espaciosa para almacenar y transportar tus herramientas de forma organizada.",
+      "price": 7,
+      "image": "https://http2.mlstatic.com/D_NQ_NP_2X_672755-MLA52372827748_112022-F.webp",
+      "category": "Accesorios"
+    }
+  ]
+}

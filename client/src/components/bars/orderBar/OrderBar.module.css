@@ -1,0 +1,77 @@
+.component {
+    /* position: relative; */
+    padding: 1rem 10rem;
+    background-color: black;
+    color: white;
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    background-clip: padding-box;
+    animation: borderGradientAnimation1 infinite 2.5s;
+    border-style: solid;
+    border-width: 2px;
+  }
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    width: 400px;
+  }
+
+  .mainButton {
+    display: flex;
+    padding: 4% 38%;
+    
+    background-color: black;
+    color: white;
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    background-clip: padding-box;
+    animation: borderGradientAnimation1 infinite 2.5s;
+  }
+    
+@keyframes borderGradientAnimation1 {
+  0% {
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+  }
+  20% {
+    border-image: linear-gradient(to right, #ff0000, #800080) 1;
+  }
+  40% {
+    border-image: linear-gradient(to right, #800080, #0000ff) 1;
+  }
+  60% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+  }
+  80% {
+    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+  }
+  100% {
+    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+  }
+}
+  
+  .orderBarOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+  }
+  
+  .orderBarSidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: #f1f1f1;
+    position: fixed;
+    /* REMOVER TOP PARA QUE FIXED TENGA EFECTO */
+    top: 0;
+    left: 0;
+    z-index: 2;
+    overflow-y: auto;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .orderBarSection {
+    padding: 20px;
+  }
+  

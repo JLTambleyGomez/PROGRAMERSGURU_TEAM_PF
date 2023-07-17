@@ -1,0 +1,41 @@
+
+
+.container{
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 4%;
+    width: 92%;
+    background-color: rgb(248, 172, 7);
+    border-radius: 6%;
+    
+}
+.container:hover{
+    background-color: rgb(199, 142, 20);
+    cursor: pointer;
+
+}
+
+
+
+.img{
+    padding-left: 8%;
+
+    width: 40px;
+    height: 40px;
+    border-radius: 100%;
+    transition: transform 0.5s;
+}
+
+
+
+
+.txt{
+    margin-left: 5%;
+    font-size: 16px;
+}
+.paymentButton{
+    width: 150px;
+    font-size: 16px;
+
+}

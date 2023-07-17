@@ -8,9 +8,10 @@ const getTechnology = async (req, res) => {
         technologies = technologies.map((cat) => cat.dataValues);
         // categories = categories.map((cat) => cat.dataValues.name);
 
-        res.json(technologies);
+        return res.json(technologies);
+
     } catch (error) {
-        res.status(500).json({ message: "Algo salió mal" });
+        return res.status(500).json({ message: "Algo salió mal" });
     }
 };
 

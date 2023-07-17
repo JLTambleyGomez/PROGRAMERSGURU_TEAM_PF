@@ -1,9 +1,12 @@
-.darkContainer{
-    background-color: #302F2C;
-    color: #FFFFFF;
-    background-size: cover;
+.component-dark{
+  background-color: #010003;
+  color: #FFFFFF;
+  position: absolute;
+  top:0;
+  left: 0;
+  right: 0;
 }
-.lightContainer{
-    color:#FFFFFF;
-    color: #302F2C;
+
+body {
+  margin: 0
 }

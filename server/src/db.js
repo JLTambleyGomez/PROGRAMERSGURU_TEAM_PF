@@ -1,8 +1,10 @@
-require("dotenv").config();
 const { Sequelize } = require("sequelize");
+const { DataTypes } = require("sequelize");
 
 const fs = require("fs");
 const path = require("path");
+const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+require("dotenv").config({ path: path.resolve(__dirname, "./.env") }); // para recibir las constantes de .env
 const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
 
 const sequelize = new Sequelize(
@@ -38,6 +40,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Course, Technology, Comment, Product, Payment } =
     sequelize.models; //Sequaliza los modelos > ejemplo
+const { User, Course, Technology, Comment, Product, Payment, Subscription } =
+    sequelize.models; //Sequaliza los modelos > ejemplo
 
 // Aca vendrian las relaciones
 Course.belongsToMany(User, { through: "Favorite", timestamps: false });
@@ -55,11 +59,20 @@ Technology.belongsToMany(Course, {
 Product.belongsToMany(Payment, { through: "shopping_cart", timestamps: false });
 Payment.belongsToMany(Product, { through: "shopping_cart", timestamps: false });
 
-User.hasMany(Comment);
-Comment.belongsTo(User);
+const shopping_cart = sequelize.define(
+    "shopping_cart",
+    {
+        quantity: {
+            type: DataTypes.INTEGER,
+        },
+    },
+    { timestamps: false, freezeTableName: true }
+);
+Product.belongsToMany(Payment, { through: shopping_cart, timestamps: false });
+Payment.belongsToMany(Product, { through: shopping_cart, timestamps: false });
 
-Course.hasMany(Comment);
-Comment.belongsTo(Course);
+User.hasMany(Comment, { foreignKey: "userId" });
+Comment.belongsTo(User, { foreignKey: "userId" });
 
 User.hasMany(Payment);
 Payment.belongsTo(User);

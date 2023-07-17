@@ -1,85 +1,76 @@
-.container {
+.component {
+  height: var(--navBarHeight);
   display: flex;
-  justify-content: space-around;
-  justify-items: center;
-  
-  transition: height 1s;
-  height: 70px; /* Establece una altura inicial para el contenedor */
-}
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  width: 100%;
+  animation:blur-in 0.4s linear both
+  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
-.container:hover {
+  .component-light {
+    background-color: rgba(251, 251, 252, 0.623);
+  }
+  .component-dark {
+    background-color: #010003;
+  }
 
-  height: 110px; /* Aumenta la altura del contenedor cuando el cursor está sobre él */
-}
-
-
-  
-  .bar1 {
-    margin:0%;
-  
-    background-color: rgba(12, 17, 68, 0.623);
-    align-items: center;
-    width: 100%;
-    font-family: 'Open Sans', Arial, sans-serif;
-    /* overflow: hidden; --COMENTADO PARA QUE EL DESPLIEGUE DE OPCIONES DEL USUARIO FUNCIONE CORRECTAMENTE*/
-    display: flex;
+  .button {
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ;
+    }
+    .button:hover{
+      transform: scale(1.04);
     }
 
- 
-  .buttonContainer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-  }
-
-  .bar1 a {
-    text-transform: uppercase;
-    text-decoration: none;
-    letter-spacing: 0.2em;
-    color: rgba(2, 14, 17, 0.932);
+    .link {
+      font-size: 100%;
+      text-transform: uppercase;
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      font-weight: bold;
+    }
+    .link:hover {
+      text-shadow:  0px 3px 12px rgb(128, 255, 255);
+      cursor: pointer;
+    }
+    .link-light {
+      color: rgba(2, 14, 17, 0.932);
+    }
+    .link-dark {
+      color: rgba(247, 249, 250, 0.932);
+    }
     
-    transition: all ease-out 300ms;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    flex-grow: 1;
-    text-align: center;
-  }
+/* .shopbagOverlay {
+  position: fixed;
+  top: 10vh;
+  z-index: 9998;
+  height: 90vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .bar1 a.active {
-    color: rgb(126, 255, 249);
-  }
+.shopbag {
+  position: fixed;
+  top: 10vh;
+  right: 0;
+  z-index: 9999;
+  height: 90vh;
+  width: 30vw;
+  background-color: blue;
+  border: 1px solid black;
+} */
 
-  .bar1 a:not(.active)::after {
-    opacity: 0.1;
-  }
-
-  .bar1 a:not(.active):hover {
-    color: rgb(255, 255, 255);
-  }
-
-  .bar1 .link {
-    display: block;
-    
-    font-size: 12px;
-    transition: transform 0.6s;
-  }
-
-  .bar1 .link:hover {
-    text-shadow:  0px 3px 12px rgb(128, 255, 255);
-
-    transform: scale(1.3);
-  }
-
-  .bar1 .myButton {
-    background: none;
-    border: none;
-    padding: 1%;
-    transition: width 2s;
-  }
-
-
-  .searchBarContainer {
-    display: flex;
-    align-items: center;
-  }
+.bolsita{
+  transition: transform 0.5s;
+    /*  */
+  z-index: 9998;
+    /*  */
+}
+.bolsita:hover{
+  transform:scale(2);
+  cursor: pointer;
+}

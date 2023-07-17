@@ -1,32 +1,29 @@
-import { useState} from "react";
-import styles from './LoginForm.module.css';
+import { useState } from "react";
+import styles from "./LoginForm.module.css";
 import validate from "./validate";
+import styles from "./LoginForm.module.css";
+import signInwithGoogle from "../../../user/signInWithGoogle";
+import signIn from "../../../user/signIn";
 
-
-const LoginForm = () => {
+//_________________________module_________________________
+function LoginForm() {
+  // const dispatch = useDispatch()
+  //states:
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [showButton, setShowButton] = useState(true);
 
-
-  const [userData, setUserData]=useState({
-    email:"",
-    password:"",
-})
-
-  const [errors, setErrors] = useState({
-    email:"",
-    password:"",
-  })
-
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+  });
 
   const handleOnchange = (event) => {
-    const property= event.target.name;
-    const value= event.target.value;
-    setUserData({...userData, [property]: value});
-    validate({...userData, [property]: value},errors, setErrors);
-    };
-
+    const property = event.target.name;
+    const value = event.target.value;
+    setUserData({ ...userData, [property]: value });
+    validate({ ...userData, [property]: value }, errors, setErrors);
+  };
 
   const handleToggleForm = () => {
     setShowForm(!showForm);
@@ -39,7 +36,6 @@ const LoginForm = () => {
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    
   };
 
   return (
@@ -49,7 +45,7 @@ const LoginForm = () => {
           Ingresar
         </button>
       )}
-      {showForm && ( 
+      {showForm && (
         <div className={styles.container}>
           <div className={styles.form}>
             <button onClick={handleCloseForm} className={styles.closeButton}>
@@ -57,18 +53,26 @@ const LoginForm = () => {
             </button>
             <form onSubmit={handleSubmit}>
               <h1 className={styles.title}>BIENVENIDO</h1>
-              <label className={styles.label} htmlFor="email">Email</label>
-              <input onChange={handleOnchange}
+              <label className={styles.label} htmlFor="email">
+                Email
+              </label>
+              <input
+                onChange={handleOnchange}
                 className={styles.input}
                 name="email"
                 type="email"
                 placeholder="Ingresa Email"
               />
-    {errors.username && <p className={styles.error}>{errors.username}</p>}
+              {errors.username && (
+                <p className={styles.error}>{errors.username}</p>
+              )}
 
-              <label className={styles.label} htmlFor="password">Contraseña</label>
+              <label className={styles.label} htmlFor="password">
+                Contraseña
+              </label>
               <div className={styles.password}>
-                <input onChange={handleOnchange}
+                <input
+                  onChange={handleOnchange}
                   className={styles.input}
                   name="password"
                   type={passwordVisible ? "text" : "password"}
@@ -76,25 +80,27 @@ const LoginForm = () => {
                 />
               </div>
 
-              <button  onClick={() => setPasswordVisible(!passwordVisible)}>
+              <button onClick={() => setPasswordVisible(!passwordVisible)}>
                 {passwordVisible ? "Hide Password" : "Show Password"}
               </button>
 
-              {errors.password && <p className={styles.error}>{errors.password}</p>}
+              {errors.password && (
+                <p className={styles.error}>{errors.password}</p>
+              )}
 
-              <p className={styles.recommendation}>Recomendamos usar una contraseña que incluya una combinación de letras mayúsculas y minúsculas, números y caracteres especiales para mayor seguridad.</p>
+              <p className={styles.recommendation}>
+                Recomendamos usar una contraseña que incluya una combinación de
+                letras mayúsculas y minúsculas, números y caracteres especiales
+                para mayor seguridad.
+              </p>
 
-              <button  type="submit">Submit</button>
-
+              <button type="submit">Submit</button>
 
               <hr />
             </form>
           </div>
         </div>
       )}
-      
     </div>
   );
-};
-
-export default LoginForm;
+}
