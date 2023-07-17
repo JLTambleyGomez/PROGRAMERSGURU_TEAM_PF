@@ -143,6 +143,20 @@ function Shop () {
         dispatch(set_cart())
     }, [])
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const productsPerPage = 15
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    // indice:
+    const pageNumbers = [];
+    (() => {
+        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
+            pageNumbers.push(i);
+        }
+    })()
+
     //component:
     return (
         <main className={`${s.component}`}>
@@ -157,7 +171,22 @@ function Shop () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                     PROGRAMMER'S GURU STORE
                 </h1>
+                
             </section>
+            <div className={s.paginado}>
+
+                {
+                    pageNumbers.map((number, index) => {
+                        return (
+                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
+                                <div className={s.numberBox}>
+                                    {number}
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+                </div>
             <div className={s.flex}>
                 <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
                 
@@ -210,7 +239,7 @@ function Shop () {
                     </div>
                 </aside>
                     <div className={`${s['productBox']}`}>
-                         {products?.map((product, index) => {
+                         {currentAllProducts?.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
