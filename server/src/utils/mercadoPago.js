@@ -18,8 +18,8 @@ const PagoconMercadopago = async (req, res) => {
     ],
     back_urls: {
       success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: "http://localhost:5173/MercadoPagoFailure",
-      pending: "http://localhost:5173/MercadoPagoPending",
+      failure: "http://localhost:5173/HomePage",
+      pending: "http://localhost:5173/HomePage",
     },
     auto_return: "approved",
   };

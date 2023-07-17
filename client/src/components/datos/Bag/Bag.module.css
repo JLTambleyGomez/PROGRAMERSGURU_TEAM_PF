@@ -1,5 +1,4 @@
 .shopbagOverlay {
- 
   position: fixed;
   top:0;
   bottom: 0;
@@ -47,13 +46,13 @@
             transform: scaleX(1);
             transform-origin: left center;
             opacity: 1;
-          }
-          100% {
-            transform: scaleX(0.4);
-            transform-origin: left center;
-            opacity: 0;
-          }
-  }
+        }
+        100% {
+        transform: scaleX(0.4);
+        transform-origin: left center;
+        opacity: 0;
+        }
+    }
 
 .itemContainer {
     display: flex;
@@ -79,7 +78,6 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
-    color: white;
   }
   .minusPlus-light:hover {
     background-color: #3333FF;
@@ -93,6 +91,7 @@
   .item p {
     text-align: center;
     margin: 0;
+    font-size: 1rem;
   }
 
   .section1 {
@@ -108,7 +107,4 @@
       border-radius: 100%;
       border: solid 2px;
       border-color: rgba(248, 248, 248, 0.658);
-    }
-    .section1 p {
-      font-size: 1rem;
     }

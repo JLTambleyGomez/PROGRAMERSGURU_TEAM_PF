@@ -17,6 +17,9 @@ import {
     deleteProducts,
 //user
     getUserByEmail,
+//comments
+    getCommentsByCourse,
+    getCommentsByUser
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -32,18 +35,28 @@ import {
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_COURSES_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_COURSES_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
+
 //CATEGORIES:
     export const GET_CATEGORIES_ALL = "GET_CATEGORIES_ALL";
     export const POST_CATEGORIES = "POST_CATEGORIES";
     export const DELETE_CATEGORIES = "DELETE_CATEGORIES";
+
 //ERRORS:
     export const ERROR = "ERROR";
+
 //DARK MODE:
     export const DARK_MODE = "DARK_MODE";
+
 //FAVORITES:
     export const GET_FAVORITES = "GET_FAVORITES";
+
 //USER:
     export const LOGIN = "LOGIN"
+
+//COMMENTS:
+    export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
+    export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
+    
 //PRODUCTS
     export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
@@ -56,17 +69,19 @@ import {
     export const SET_TOKEN = "SET_TOKEN"
 //CART
     export const SET_CART= "SET_CART";
+    export const CLEAR_CART = "CLEAR_CART";
     
 //SHOPBAG
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
+
+// METAMASK
+export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
 
     
 //__________________________________________________
 //ACTION CREATORS:
 
-//COURSES:
-
-
+//COURSES_____________________________________________//
 export const get_courses_all = () => {
     return async (dispatch) => {
         try {
@@ -135,7 +150,7 @@ export const post_course = (datos) => {
     }
 }
 
-export function delete_course(id) { // request
+export const delete_course = (id) => { // request
     return async function (dispatch) {
         try {
             const data = await deleteCourseRequest(id);
@@ -151,13 +166,13 @@ export function delete_course(id) { // request
         }
     };
 }
+
 export const filter_courses_by_language = (language) => {
     return {
         type: FILTER_COURSES_BY_LANGUAGE,
         payload: language
     }
 }
-
 
 export const getloged = (userData) => {
     return async function (dispatch) {
@@ -176,7 +191,6 @@ export const getloged = (userData) => {
         }
     };
 }
-
 
 export const filter_courses_by_price = (price) => {
     if (price === "true") {
@@ -197,8 +211,8 @@ export const order_courses = (direccion) => {
     }
 }
 
-//CATEGORIES:
-export function get_categories () { // request
+//CATEFGORIES_____________________________________________//
+export const get_categories = () => { // request
     return async function (dispatch) {
         try {
             const data = await getCategoriesAllRequest(); 
@@ -216,7 +230,7 @@ export function get_categories () { // request
     };
 }
 
-export function post_categories (technology) { // request
+export const post_categories = (technology) => { // request
     return async function (dispatch) {
         try {
             const data = await postCategoriesRequest(technology);
@@ -233,7 +247,7 @@ export function post_categories (technology) { // request
     };
 }
 
-export function delete_categories(id) { // request
+export const delete_categories = (id) => { // request
     return async function (dispatch) {
         try {
             const data = await deleteCategoriesRequest(id);
@@ -264,9 +278,9 @@ export const Dark_Mode = (payload) => {
     }
 };
 
-///////////////////actions clear/////////////////////////////////////////////////////////////////////////////////////////
+///////////////////ACTIONS CLEAR/////////////////////////////////////////////////////////////////////////////////////////
 
-export function clearMessage() {
+export const clearMessage = () => {
     return function (dispatch) {
         return dispatch({
             type: CLEAN_MESSAGE,
@@ -274,14 +288,21 @@ export function clearMessage() {
     };
   }
 
-export function clearCourses() {
+export const clearCourses = () => {
     return {
         type: CLEAR_COURSES,
     };
 }
 
+export const clear_cart = () => {
 
-//FAVORITES
+    return {
+        type: CLEAR_CART,
+    }
+}
+
+//FAVOURITES_____________________________________________//
+
 export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
@@ -300,7 +321,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 }
 
 
-////////////////////////////////PRODUCTS///////////////////////////////////////////
+//PRODUCTS_____________________________________________//
 
 export const get_products_all = () => {
     return async (dispatch) => {
@@ -336,7 +357,7 @@ export const post_Products = (datos) => {
     }
 }
 
-export function delete_Products(id) { // request
+export const delete_Products = (id) => { // request
     return async function (dispatch) {
         try {
             const data = await deleteProducts(id);
@@ -388,11 +409,55 @@ export const set_cart = () => {
     }
 }
 
-//SHOPBAG
+//SHOPBAG_____________________________________________//
 
 export const toggle_shopbag = (status) => {
 	return {
 		type: TOGGLE_SHOPBAG,
 		payload: status
 	}
+}
+
+
+//COMMENTS_____________________________________________//
+
+export const get_comments_by_user = (userId)=>{
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByUser(userId);
+            return dispatch({
+                type: GET_COMMENTS_BY_USER,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+export const get_comments_by_course = (courseId) => {
+    return async function (dispatch) {
+        try {
+            const data = await getCommentsByCourse(courseId);
+            return dispatch({
+                type: GET_COMMENTS_BY_COURSE,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+}
+
+export const set_metamask_address = (address) => {
+        return {
+            type: METAMASK_ADDRESS,
+            payload: address
+        }   
 }

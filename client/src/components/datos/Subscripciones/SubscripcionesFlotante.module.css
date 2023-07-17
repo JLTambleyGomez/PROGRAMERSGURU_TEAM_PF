@@ -20,11 +20,11 @@
 .component p {
     margin: 0;
     font-size: 1.25rem;
+    color: black
 }
 
 .component button {
     background-color: transparent;
-    font-weight: 900;
     border: none;
     cursor: pointer;
 }

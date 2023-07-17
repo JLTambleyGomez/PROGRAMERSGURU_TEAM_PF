@@ -69,15 +69,15 @@ function Cart () {
         const arrayListOfProducts = cart?.map(
             (product) =>
             `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
-            );
-            const stringListOfProducts = arrayListOfProducts?.join("\n");
-            const listOfProducts = stringListOfProducts
-            ? "Lista de productos comprados: \n" + stringListOfProducts
-            : "No hay productos en el carrito";
-            console.log(listOfProducts);
-            
-            const referencia = {
-                description: listOfProducts,
+        );
+        const stringListOfProducts = arrayListOfProducts?.join("\n");
+        const listOfProducts = stringListOfProducts
+        ? "Lista de productos comprados: \n" + stringListOfProducts
+        : "No hay productos en el carrito";
+        console.log(listOfProducts);
+
+        const referencia = {
+            description: listOfProducts,
             price: calculateTotal(),
             quantity: 1,
         };
@@ -152,11 +152,11 @@ function Cart () {
                             <p onClick={handlePagarButton}>ir a Pagar</p>
                             {MostrarPagos && (
                                 <div>
-                                <p>Escoge tu medio de Pago</p>
-                                {compra.description && (
-                                    <PagoMercadopago reference={compra} />
-                                )}
-                                <PagoMetamask total={calculateTotal()} />
+                                    <p>Escoge tu medio de Pago</p>
+                                    {compra.description && (
+                                        <PagoMercadopago reference={compra} />
+                                    )}
+                                    <PagoMetamask total={calculateTotal()} />
                                 </div>
                             )}
                             </ul>

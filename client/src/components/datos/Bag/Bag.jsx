@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
 
@@ -61,8 +62,8 @@ function Bag () {
     //component:
     return (
         <div className={s.shopbagOverlay} onClick={toggleShopbag}>
-            <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${isOpen ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
-                <h1>Revisa tu orden</h1>
+            <aside className={`${s.shopbag} ${s[theme("shopbag")]} ${shopbag ? s.shopbagOpen : ""}`} onClick={(event) => event.stopPropagation()}>
+            <h1>Revisa tu orden</h1>
                 {
                     cart?.map((product, index) => {
                         return (
@@ -78,11 +79,11 @@ function Bag () {
                                     <button
                                         onClick={() => handleAddButton("suma", product)}
                                         className={`${s.minusPlus} ${s[theme("minusPlus")]}`}
-                                    >
+                                        >
                                         +
                                     </button>
                                     <hr style={{height: "1rem"}}/>
-                                    <p>{product.quantity}</p>
+                                    {product.quantity}
                                 </div>
                                 <p>{product.name}</p>
                             </div>

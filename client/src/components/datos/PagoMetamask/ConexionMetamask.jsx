@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 import styles from './ConexionMetamask.module.css';
+import { useDispatch,useSelector } from 'react-redux';
+import {set_metamask_address} from "../../../Redux/actions"
+
 import axios from 'axios';
 
 const ConexionMetamask = () => {
+ const dispatch = useDispatch()
   const [errorMessage, setErrorMessage] = useState(null);
-  const [defaultAccount, setDefaultAccount] = useState(null);
   const [metamaskinstall, setMetamaskinstall] = useState(false);
+  const defaultAccount = useSelector((state)=>state.metamaskaddress)
 
   const connectionWallet = async () => {
     if (window.ethereum) {
@@ -23,7 +27,9 @@ const ConexionMetamask = () => {
   };
 
   const accountChanged = (accountName) => {
-    setDefaultAccount(accountName);
+    dispatch(set_metamask_address(accountName));
+
+  
   };
 
   return (
