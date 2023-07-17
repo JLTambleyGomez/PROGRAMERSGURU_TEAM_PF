@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import styles from "./LandingPage.module.css";
 import LoginForm from "../../datos/LoginForm/LoginForm";
-import SignFreeForm from "../../datos/LoginForm/SignFreeForm"
+import SignFreeForm from "../../datos/LoginForm/SignFreeForm";
 import { images } from "./images";
 
 //_________________________module_________________________

@@ -53,6 +53,11 @@ function LoginForm() {
     signInwithGoogle()
   }
 
+  const handleLoginWithGoogle = (event) => {
+    event.preventDefault();
+    signInwithGoogle()
+  }
+
   //component:
   return (
     <div className={styles.loginFormContainer}>

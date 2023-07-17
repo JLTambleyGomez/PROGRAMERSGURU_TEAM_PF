@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from './Profile.module.css'
 import { get_comments_by_user, get_User_By_Email } from "../../../Redux/actions";
-import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 
 //_________________________module_________________________
 function Profile () {
@@ -47,7 +46,7 @@ function Profile () {
 
                 <ul>
                 <h2>Comentarios destacados:</h2>
-                {!userComments.length 
+                {!userComments.length
                     ? "Todavía no hiciste ningún comentario!"
                     : userComments.map(({date, message, rating}, index) => {
                         return (

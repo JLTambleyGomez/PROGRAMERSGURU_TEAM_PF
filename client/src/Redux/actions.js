@@ -412,7 +412,7 @@ export const toggle_shopbag = (status) => {
 }
 
 
-//COMMENTS_____________________________________________//
+//Comments
 
 export const get_comments_by_user = (userId)=>{
     return async function (dispatch) {
@@ -431,7 +431,7 @@ export const get_comments_by_user = (userId)=>{
     };
 }
 
-export const get_comments_by_course = (courseId) => {
+export const get_comments_by_course = (courseId)=>{
     return async function (dispatch) {
         try {
             const data = await getCommentsByCourse(courseId);
@@ -446,11 +446,4 @@ export const get_comments_by_course = (courseId) => {
             });
         }
     };
-}
-
-export const set_metamask_address = (address) => {
-        return {
-            type: METAMASK_ADDRESS,
-            payload: address
-        }   
 }
