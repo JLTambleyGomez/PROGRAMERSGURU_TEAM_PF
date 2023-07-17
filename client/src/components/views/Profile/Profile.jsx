@@ -6,6 +6,7 @@ import { NavLink } from "react-router-dom";
 
 //_________________________module_________________________
 function Profile () {
+
     //global states:
     const user = useSelector((state)=>state.user)
     const userComments = useSelector((state)=>state.userComments)
@@ -15,9 +16,11 @@ function Profile () {
     const actualDate = new Date()
     const dispatch = useDispatch()
 
-    useEffect(() => {
+    //life-cycles:
+        useEffect(() => {
         dispatch(get_User_By_Email(sessionStorage.getItem("email")))
         dispatch(get_comments_by_user(user.id))   
+        console.log(user)
     }, [])
 
     //component:
@@ -29,16 +32,20 @@ function Profile () {
                 <img className={s.image} src={user.picture}/>
                 </div>
                 <div className={ s.name }>
-                    <h1>Bienvenido {user.nickName}!</h1>
+                    <h1>Bienvenido {user.nickName ? user.nickName : "Invitado"}!</h1>
                 </div>
             </div>
 
             <div >
                 <h1>Nombre:  {user.name}</h1>
                 <h3>Correo:  {user.email}</h3>
-                <h4>{actualDate > expirationDate 
-                    ? "No posee suscripción activa" 
-                    : `Su suscripción vence en ${(expirationDate - actualDate) / (1000 * 60 * 60 * 24)} días`}
+                <h4>{ 
+                        user.expirationDate ?
+                            actualDate > expirationDate 
+                            ? "No posee suscripción activa" 
+                            : `Su suscripción vence en ${(expirationDate - actualDate) / (1000 * 60 * 60 * 24)} días`
+                        : "Regístrese y adquiera una suscripción"
+                    }
                 </h4>
                 <ul>
                 <h2>Favoritos:</h2>
@@ -58,14 +65,23 @@ function Profile () {
                     )})}
                 </ul>
                 {/* <h4>Language: {user.language}</h4> */}
-                {
-                    user.isBanned ? (
-                        <h3>Este cuenta NO está activa</h3>
-                    ) : (
-                        <h3>Este cuenta está activa</h3>
-                    )
-                }
-                <button>Desactivar tu cuenta</button>
+                <h3>
+                    {
+                        user.nickName ?
+                            user.isBanned ? 
+                            "Esta cuenta NO está activa"
+                            :
+                            "Esta cuenta está activa"
+                        : "Regístrese para activar su cuenta"
+                    }
+                </h3>
+                <button>
+                    {
+                        user.nickName ? 
+                        "Desactivar tu cuenta"
+                        : "Regístrese"
+                    }        
+                </button>
             </div>
         </div>
     )

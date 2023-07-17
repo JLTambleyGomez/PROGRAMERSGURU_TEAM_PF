@@ -29,6 +29,7 @@ function Menu () {
     };
 
     const handleDarkMode = () => {
+        // localStorage.setItem("darkMode", `${!dark}`)
         dispatch(Dark_Mode(!dark));
     };
 

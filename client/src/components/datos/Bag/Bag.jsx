@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggle_shopbag, set_cart } from "../../../Redux/actions";
-import theme from "../../../theme/theme";
+// import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
 

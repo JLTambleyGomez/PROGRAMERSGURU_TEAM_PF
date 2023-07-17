@@ -45,7 +45,7 @@ function CoursePage () {
             <div className={styles.filterOrder}>
                 <FilterBar/>
             </div>
-           
+
             <div className = {styles.cardComponent}>
                {/* {allCourses.length?(<CoursesCard allCourses = {allCourses}/>):""}  */}
                 {
