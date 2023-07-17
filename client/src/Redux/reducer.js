@@ -24,6 +24,7 @@ import {
     LOGIN,
 //PRODUCTS
     GET_PRODUCTS,
+    GET_PRODUCTS_BY_NAME,
     DELETE_PRODUCT,
 //USER
     GET_USER_BY_EMAIL,
@@ -159,8 +160,11 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
 
         case GET_PRODUCTS:
             return { ...state, products: payload};
+        
+        case GET_PRODUCTS_BY_NAME:
+            return { ...state, products: payload };
 
-         case DELETE_PRODUCT:
+        case DELETE_PRODUCT:
             return { ...state, message: payload};
 
         case GET_USER_BY_EMAIL:

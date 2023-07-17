@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, set_cart } from "../../../Redux/actions"
+import { get_products_all, get_products_by_name, set_cart } from "../../../Redux/actions"
 
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
-import s from "./Shop.module.css"
+import s from "./Shop.module.css";
 
 //_________________________module_________________________
 function Shop () {
@@ -61,6 +61,10 @@ function Shop () {
         setPriceRange(values);
     };
 //_________________
+    const handleSearch = () => {
+        dispatch(get_products_by_name(input))
+    }
+
     const handleMouseEnter = (index) => {
         const newCartTooltips = [...cartTooltips];
         newCartTooltips[index] = true;
@@ -133,6 +137,20 @@ function Shop () {
         dispatch(set_cart())
     }, [])
 
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const productsPerPage = 15
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    // indice:
+    const pageNumbers = [];
+    (() => {
+        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
+            pageNumbers.push(i);
+        }
+    })()
+
     //component:
     return (
         <main className={`${s.component}`}>
@@ -148,15 +166,28 @@ function Shop () {
                     PROGRAMMER'S GURU STORE
                 </h1>
             </section>
+            <div className={s.paginado}>
+                {
+                    pageNumbers.map((number, index) => {
+                        return (
+                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
+                                <div className={s.numberBox}>
+                                    {number}
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+            </div>
             <div className={s.flex}>
                 <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
                 
-                <p className={`${s.searchButton}`}>
+                <button className={`${s.searchButton}`} onClick={handleSearch}>
                     <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"className="bi bi-search"viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-                </p>
+                </button>
 
-            </div>   
+            </div>
             <section className={`${s.section3}`}>
                 <aside className={`${s.sidebar}`}>  
                     <h2>FILTROS</h2>
@@ -199,7 +230,7 @@ function Shop () {
                     </div>
                 </aside>
                     <div className={`${s['productBox']}`}>
-                         {products?.map((product, index) => {
+                         {currentAllProducts?.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
@@ -250,8 +281,7 @@ function Shop () {
                     ) : (
                     <p>Tu carrito de compras está vacío</p>
                 )}
-            </section>
- 
+            </section> 
         </main>
     )
 }

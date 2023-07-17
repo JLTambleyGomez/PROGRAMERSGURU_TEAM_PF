@@ -58,6 +58,7 @@
       margin-left: 14%;
       transition: transform 0.3;
       background-color:#a1f7be7c;
+      border: none;
     } 
     .searchButton:hover{
       cursor: pointer;

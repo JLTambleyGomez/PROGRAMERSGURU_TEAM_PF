@@ -13,6 +13,7 @@ import {
     getFavoritesRequest,
 //Products
     getProducts,
+    getProductsByName,
     postProducts,
     deleteProducts,
 //user
@@ -57,24 +58,25 @@ import {
     export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
     export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
     
-//PRODUCTS
-    export const GET_PRODUCTS = "GET_PRODUCTS"
-    export const POST_PRODUCTS = "POST_PRODUCTS"
+//PRODUCTS:
+    export const GET_PRODUCTS = "GET_PRODUCTS";
+    export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
+    export const POST_PRODUCTS = "POST_PRODUCTS";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-//USER
+//USER:
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
     export const SET_USER_EMAIL = "SET_USER_EMAIL"
     export const SET_TOKEN = "SET_TOKEN"
 
-//CART
+//CART:
     export const SET_CART= "SET_CART";
     export const CLEAR_CART = "CLEAR_CART";
     
-//SHOPBAG
+//SHOPBAG:
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
-// METAMASK
+//METAMASK:
 export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
 
     
@@ -211,7 +213,7 @@ export const order_courses = (direccion) => {
     }
 }
 
-//CATEFGORIES_____________________________________________//
+//CATEGORIES_____________________________________________//
 export const get_categories = () => { // request
     return async function (dispatch) {
         try {
@@ -330,6 +332,23 @@ export const get_products_all = () => {
             return dispatch({
                 type: GET_PRODUCTS,
                 payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.message // error.response.data.message,
+            });
+        }
+    }
+}
+
+export const get_products_by_name = (name) => {
+    return async (dispatch) => {
+        try {
+            const products = await getProductsByName(name);
+            return dispatch({
+                type: GET_PRODUCTS_BY_NAME,
+                payload: products
             })
         } catch (error) {
             return dispatch({

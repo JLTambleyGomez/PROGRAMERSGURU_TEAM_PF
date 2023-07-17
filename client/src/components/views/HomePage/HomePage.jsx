@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../../../config/firebase-config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import {
     get_categories,
     get_courses_all,
@@ -7,12 +10,6 @@ import {
     get_Favorites_Request,
     get_User_By_Email,
 } from "../../../Redux/actions";
-
-import "../../../config/firebase-config";
-import {
-    getAuth,
-    onAuthStateChanged
-} from "firebase/auth";
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
@@ -52,6 +49,8 @@ function HomePage () {
         };
     }, [dispatch]);
 
+
+    //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
@@ -66,7 +65,7 @@ function HomePage () {
                 </h1>
             </section>
             <SubscripcionesFlotante/>
-        {/* COURSES */}
+        {/* LAST COURSES */}
             <section className={`${s.sectionCourses}`}>
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>
                     ÚLTIMOS CURSOS DEL MERCADO

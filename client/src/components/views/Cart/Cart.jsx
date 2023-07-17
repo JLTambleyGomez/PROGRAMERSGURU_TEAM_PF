@@ -1,12 +1,13 @@
-import styles from "./Cart.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+import { set_cart, get_User_By_Email } from "../../../Redux/actions";
+
+import styles from "./Cart.module.css";
 import Modal from "../ventanaemergente/ventana";
-import { set_cart } from "../../../Redux/actions";
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
-import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
 function Cart () {
@@ -90,77 +91,89 @@ function Cart () {
     useEffect(() => {
         if (user.name) setVentana(false);
     }, []);
-    
+
     //component:
     return (
         <main>
             {ventana && <Modal />}
             {!ventana && (
                 <div className={styles.container}>
+                {/* PRODUCTOS DEL CARRO */}
                     <h1 className={styles.title}>TU CARRITO DE COMPRAS</h1>
                     <div className={styles.flex}>
                         <ul className={styles.productscontainer}>
-                        {cart?.map((P, index) => (
-                            <li className={styles.product} key={index}>
-                            <div className={styles.info}>
-                                <h3
-                                onClick={() => handleDetailButtons(P.id)}
-                                className={styles.name}
-                                >
-                                {P.name}
-                                </h3>
-                                <h3 className={styles.price}>Precio: {P.price}</h3>
-                            </div>
-                            <img className={styles.img} src={P.image} alt={P.name} />
-                            <div>
-                                Cantidad
-                                <div className={styles.cantidad}>
-                                <button
-                                    onClick={() => handleAddButton("resta", P)}
-                                    className={styles.cantidad_button}
-                                >
-                                    -
-                                </button>
-                                <p>{P.quantity}</p>
-                                <button
-                                    onClick={() => handleAddButton("suma", P)}
-                                    className={styles.cantidad_button}
-                                >
-                                    +
-                                </button>
-                                </div>
-                                <button onClick={() => removeFromCart(P.id)}>X</button>
-                            </div>
-                            </li>
-                        ))}
-                        </ul>
-                        <div className={styles.total}>
-                        <h1>LO QUE LLEVAS:</h1>
-                        <div className={styles.totalcontainer}>
-                            <ul>
-                            {cart?.map((P, index) =>
-                                P.quantity !== 0 ? (
-                                <li className={styles.items} key={index}>
-                                    <h4>
-                                    {P.name} X {P.quantity}
-                                    </h4>
+                        {
+                            cart?.map((P, index) => (
+                                <li className={styles.product} key={index}>
+                                    <div className={styles.info}>
+                                    {/* NOMBRE */}
+                                        <h3 onClick={() => handleDetailButtons(P.id)} className={styles.name}>
+                                            {P.name}
+                                        </h3>
+                                    {/* PRECIO */}
+                                        <h3 className={styles.price}>
+                                            Precio: {P.price}
+                                        </h3>
+                                    </div>
+                                {/* IMAGEN */}
+                                    <img className={styles.img} src={P.image} alt={P.name} />
+                                {/* CANTIDAD */}
+                                    <div>
+                                        Cantidad
+                                        <div className={styles.cantidad}>
+                                            <button
+                                                onClick={() => handleAddButton("resta", P)}
+                                                className={styles.cantidad_button}
+                                            >
+                                                -
+                                            </button>
+                                            <p>{P.quantity}</p>
+                                            <button
+                                                onClick={() => handleAddButton("suma", P)}
+                                                className={styles.cantidad_button}
+                                            >
+                                                +
+                                            </button>
+                                        </div>
+                                        <button onClick={() => removeFromCart(P.id)}>X</button>
+                                    </div>
                                 </li>
-                                ) : null
-                            )}
-                            <hr />
-                            <h1>Valor Total: $ {calculateTotal()}</h1>
-                            <p onClick={handlePagarButton}>ir a Pagar</p>
-                            {MostrarPagos && (
-                                <div>
-                                    <p>Escoge tu medio de Pago</p>
-                                    {compra.description && (
-                                        <PagoMercadopago reference={compra} />
-                                    )}
-                                    <PagoMetamask total={calculateTotal()} />
-                                </div>
-                            )}
-                            </ul>
-                        </div>
+                            ))
+                        }
+                        </ul>
+                    {/* RESUMEN */}
+                        <div className={styles.total}>
+                            <h1>LO QUE LLEVAS:</h1>
+                            <div className={styles.totalcontainer}>
+                                <ul>
+                                {/* PRODUCTOS DEL RESUMEN */}
+                                    {
+                                        cart?.map((product, index) =>
+                                            product.quantity !== 0 ? (
+                                            <li className={styles.items} key={index}>
+                                                <h4>{product.name} X {product.quantity}</h4>
+                                            </li>
+                                            ) : null
+                                        )
+                                    }
+                                {/* VALOR TOTAL DEL RESUMEN */}
+                                    <hr />
+                                    <h1>Valor Total: $ {calculateTotal()}</h1>
+                                    <p onClick={handlePagarButton}>ir a Pagar</p>
+                                {/* MEDIOS DE PAGO */}
+                                    {
+                                        MostrarPagos && (
+                                            <div>
+                                                <p>Escoge tu medio de Pago</p>
+                                                {
+                                                    compra.description && <PagoMercadopago reference={compra} />
+                                                }
+                                                <PagoMetamask total={calculateTotal()} />
+                                            </div>
+                                        )
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

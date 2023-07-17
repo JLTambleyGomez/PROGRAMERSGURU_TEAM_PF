@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
 
 import styles from "./CoursePage.module.css";
@@ -11,8 +11,11 @@ import OrderBar from "../../bars/orderBar/OrderBar";
 //_________________________module_________________________
 function CoursePage () {
 
-    //states:
+
+    //global states:
     const allCourses = useSelector((state) => state.courses)
+
+    //states:
     const [isloading, setIsloading] = useState(true);
 
     //const:
@@ -20,12 +23,12 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-        if (!allCourses.length){
-          dispatch(get_courses_all());
-        }
+        if (!allCourses.length) dispatch(get_courses_all());
+
+        //--desmontado
         return () => { 
-          dispatch(clearMessage());
-          dispatch(clearCourses());
+            dispatch(clearMessage());
+            dispatch(clearCourses());
         };
     }, [dispatch]);
 
@@ -36,22 +39,27 @@ function CoursePage () {
         }, 500);
     }, [allCourses])
 
+
     //component:
     return (
         <main className = {styles.component}>
+        {/* BANNER */}
             <div className={styles.mainBanner}>
                 <h1>Explora todos nuestros cursos</h1>
             </div>
+
+        {/* FILTROS */}
             <div className={styles.filterOrder}>
                 <FilterBar/>
             </div>
-           
+
+        {/* CURSOS */}
             <div className = {styles.cardComponent}>
                 {
-                    isloading ? (<h1 className={styles.cargando}>CARGANDO...</h1>)
+                    isloading 
+                    ? <h1 className={styles.cargando}>CARGANDO...</h1>
                     : <CoursesCard/>
                 }
-                {/* {allCourses ? (<CoursesCard/>):"isLoading"}  */}
             </div>
         </main>
     )

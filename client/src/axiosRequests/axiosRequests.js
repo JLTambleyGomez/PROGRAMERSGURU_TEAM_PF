@@ -13,6 +13,10 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
+//HOST:
+
+const URL = "http://localhost:3001"
+
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/course");
@@ -88,6 +92,14 @@ export const deleteCourseRequest = async (id) => {
   const { data } = await axios.delete(`http://localhost:3001/course/${id}`);
   return data;
 };
+
+
+//PRODUCTS_______________________________
+
+export const getProductsByName = async (name) => {
+  const { data } = await axios(`${URL}/product/name/${name}`)
+  return data;
+}
 
 //FAVORITES______________________________
 
