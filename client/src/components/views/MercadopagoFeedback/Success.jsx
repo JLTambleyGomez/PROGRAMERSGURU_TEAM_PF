@@ -1,10 +1,13 @@
-import { useLocation } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
 import axios from "axios";
-import styles from "./Success.module.css";
+
+import { useState, useEffect } from "react";
+import { useLocation, NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
 import {get_User_By_Email} from "../../../Redux/actions";
-import { NavLink } from "react-router-dom";
+
+import styles from "./Success.module.css";
+
 
 //_________________________module_________________________
 function Success  () {
@@ -25,10 +28,6 @@ function Success  () {
         return total;
     };
 
-
-
-    
-
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
@@ -42,8 +41,7 @@ function Success  () {
     }, [])
 
     useEffect(() => {
-
-        async function getPayment () {
+        (async () => {
             try {
                 const searchParams = new URLSearchParams(location.search);
                 const paymentId = searchParams.get("payment_id");
@@ -57,14 +55,11 @@ function Success  () {
             } catch (error) {
                 console.error("Error al obtener el recibo de Mercado Pago:", error);
             }
-        }
-
-        getPayment();
+        })()
     }, []);
 
+
     //component:
-
-
     return (
         <div className={styles.container}>
             <div className={styles.container2}>
@@ -76,15 +71,17 @@ function Success  () {
                     />
                 </div>
             </div>
-            {paymentInfo && (
-            <div className={styles.detalles}>
-                <div className={styles.detalles2}>
-                    <h1 className={styles.h1}>Se obtuvo el recibo de Mercado Pago</h1>
-                    <h3 className={styles.idtransaccion}>ID de la transacción: {paymentInfo.Payment}</h3>
-                    <NavLink className={styles.tohome} to="/HomePage">Ir a Home</NavLink>
-                </div>
-            </div>
-            )}
+            {
+                paymentInfo && (
+                    <div className={styles.detalles}>
+                        <div className={styles.detalles2}>
+                            <h1 className={styles.h1}>Se obtuvo el recibo de Mercado Pago</h1>
+                            <h3 className={styles.idtransaccion}>ID de la transacción: {paymentInfo.Payment}</h3>
+                            <NavLink className={styles.tohome} to="/HomePage">Ir a Home</NavLink>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     );
 };

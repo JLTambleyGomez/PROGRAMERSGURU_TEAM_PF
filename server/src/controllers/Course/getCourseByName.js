@@ -5,6 +5,7 @@ const getCourseByName = async (req, res) => {
     const { title } = req.query;
 
     try {
+        console.log(title)
         const allCourses = await Course.findAll({
             where: {
                 title: {

@@ -15,6 +15,7 @@ function MercadoPagoPendiente () {
         dispatch(get_User_By_Email(email))
     }, [])
 
+
     //component:
     return (        
         <div>

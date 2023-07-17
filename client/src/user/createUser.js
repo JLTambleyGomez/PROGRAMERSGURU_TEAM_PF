@@ -1,3 +1,4 @@
+import axios from "axios";
 import "../config/firebase-config";
 import {
     GoogleAuthProvider,
@@ -6,8 +7,9 @@ import {
     inMemoryPersistence,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-import axios from "axios";
 
+
+//_________________________module_________________________
 const postUserRequest = async (userData) => {
     try {
         const { data } = await axios.post(
@@ -54,5 +56,3 @@ export default function createUser(email, password) {
             return [errorCode, errorMessage, email, credential];
         });
 }
-
-

@@ -2,20 +2,22 @@ import axios from "axios";
 // import store from "../Redux/store";
 
 
+
+//HOST:
+const URL = "http://localhost:3001"
+
 // Agregar encabezado de autorización a todas las solicitudes
-let token = sessionStorage.getItem("accessToken")
+let token = sessionStorage.getItem("accessToken");
+
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
-  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
-    return config;
-  }
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") return config;
+  if (config.method === "get" && config.url.startsWith(`${URL}/course`)) return config;
+
+
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
-
-
-//SERVER URL:
-const URL = "http://localhost:3001";
 
 
 //COURSES______________________________
@@ -47,6 +49,12 @@ export const deleteProducts = async (id) => {
   return data;
 };
 
+export const putProducts = async (id, product) => {
+  const {data} = await axios.put(`http://localhost:3001/product/${id}`, product)
+  return data;
+
+}
+
 export const postCourseRequest = async (datos) => {
   const { data } = await axios.post("http://localhost:3001/course", datos);
   return data;
@@ -71,6 +79,11 @@ export const getCoursesByIdRequest = async (id) => {
   return data;
 };
 
+export const putCourse = async (id,course)=>{
+  const {data} = await axios.put(`http://localhost:3001/course/${id}`, course)
+  return data;
+}
+
 //CATEGORIES______________________________
 export const getCategoriesAllRequest = async () => {
   const { data } = await axios("http://localhost:3001/technology");
@@ -94,13 +107,13 @@ export const deleteCourseRequest = async (id) => {
   return data;
 };
 
-//PRODUCTS______________________________
 
-export const getProductByNameRequest = async (name) => {
-    const { data } = await axios(`${URL}/product/name?name=${name}`)
-    return data;
+//PRODUCTS_______________________________
+
+export const getProductsByName = async (name) => {
+  const { data } = await axios(`${URL}/product/name/${name}`)
+  return data;
 }
-
 
 //FAVORITES______________________________
 
@@ -121,7 +134,7 @@ export const deleteFavoritesRequest = async () => {
   setFav(false);
 };
 
-//USER______________________________
+//user______________________________
 
 export const getUserByEmail = async (email) => {
   const { data } = await axios.get(`http://localhost:3001/user/?email=${email}`);
@@ -135,7 +148,7 @@ export const createOrder = async () => {
   return data;
 };
 
-//COMMENTS______________________________
+//Comments
 
 export const getCommentsByUser = async (userId) => {
   const { data } = await axios.get(`http://localhost:3001/comment/${userId}`);

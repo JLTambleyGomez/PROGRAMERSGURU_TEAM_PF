@@ -11,7 +11,7 @@ const suscriptionRouter = require("./suscriptionRouter");
 const mecadoPagoRouter = require("./mecadoPagoRouter");
 const middleware = require("../middleware/index");
 
-// router.use(middleware.decodeToken)
+router.use(middleware.decodeToken)
 
 router.use ("/Mp", MercadoPagoRouter);
 

@@ -13,9 +13,9 @@ import {
     getFavoritesRequest,
 //Products
     getProducts,
+    getProductsByName,
     postProducts,
     deleteProducts,
-    getProductByNameRequest,
 //user
     getUserByEmail,
 //comments
@@ -52,31 +52,29 @@ import {
     export const GET_FAVORITES = "GET_FAVORITES";
 
 //USER:
-    export const LOGIN = "LOGIN"
+    export const LOGIN = "LOGIN";
+    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
+    export const SET_USER_EMAIL = "SET_USER_EMAIL";
+    export const SET_TOKEN = "SET_TOKEN";
 
 //COMMENTS:
     export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
     export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
     
-//PRODUCTS
+//PRODUCTS:
     export const GET_PRODUCTS = "GET_PRODUCTS";
-    export const GET_PRODUCT_BY_NAME = "GET_PRODUCT_BY_NAME";
-    export const POST_PRODUCTS = "POST_PRODUCTS"
+    export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
+    export const POST_PRODUCTS = "POST_PRODUCTS";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
-    export const ORDER_PRODUCTS = "ORDER_PRODUCTS";
 
-//USER
-    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
-    export const SET_USER_EMAIL = "SET_USER_EMAIL"
-    export const SET_TOKEN = "SET_TOKEN"
-//CART
+//CART:
     export const SET_CART= "SET_CART";
     export const CLEAR_CART = "CLEAR_CART";
-    
-//SHOPBAG
+
+//SHOPBAG:
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
-// METAMASK
+//METAMASK:
 export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
 
     
@@ -167,6 +165,21 @@ export const delete_course = (id) => { // request
             });
         }
     };
+}
+///////////////////// PUT COURSE //////////////////////////
+export const put_course = (id, course) => {
+    return async function (dispatch) {
+        try {
+            const data = await putCourse(id,course)
+            return dispatch({})
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+        }
+    }
+
 }
 
 export const filter_courses_by_language = (language) => {
@@ -267,9 +280,6 @@ export const delete_categories = (id) => { // request
 }
 
 export const Dark_Mode = (payload) => {
-
-    // const darkMode = localStorage.getItem("darkMode")
-
     if (payload === true) {
         return {
             type: DARK_MODE,
@@ -282,26 +292,6 @@ export const Dark_Mode = (payload) => {
         };
     }
 };
-
-//PRODUCTS_____________________________________________//
-
-export const get_product_by_name = (name) => {
-    return async (dispatch) => {
-        try {
-            const data = await getProductByNameRequest(name);
-            return dispatch({
-                type: GET_PRODUCT_BY_NAME,
-                payload: data
-            })
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.message
-            })   
-        }
-    }
-}
-
 
 ///////////////////ACTIONS CLEAR/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -365,6 +355,23 @@ export const get_products_all = () => {
     }
 }
 
+export const get_products_by_name = (name) => {
+    return async (dispatch) => {
+        try {
+            const products = await getProductsByName(name);
+            return dispatch({
+                type: GET_PRODUCTS_BY_NAME,
+                payload: products
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.message // error.response.data.message,
+            });
+        }
+    }
+}
+
 export const post_Products = (datos) => {
     return async (dispatch) => {
         try {
@@ -398,12 +405,25 @@ export const delete_Products = (id) => { // request
         }
     };
 }
-
-export const order_products = (order) => {
-    return {
-        type: ORDER_PRODUCTS,
-        payload: order
+///////////////////// PUT PRODUCT //////////////////////////
+export const put_Products = (id, product) => {
+    return async function (dispatch) {
+        try {
+            const data = await putProducts(id,product)
+            console.log(data)
+            return dispatch({
+                type: PUT_PRODUCT,
+                payload: data.message
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+            
+        }
     }
+
 }
 
 //USER___________________________________________________________________//
