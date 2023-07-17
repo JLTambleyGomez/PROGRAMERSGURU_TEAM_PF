@@ -24,9 +24,7 @@ import {
     LOGIN,
 //PRODUCTS
     GET_PRODUCTS,
-    GET_PRODUCT_BY_NAME,
     DELETE_PRODUCT,
-    ORDER_PRODUCTS,
 //USER
     GET_USER_BY_EMAIL,
 //CART
@@ -75,7 +73,7 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
             return { ...state, allCourses: payload, courses: payload };
 
         case GET_COURSES_BY_NAME:
-            return { ...state, allCourses: payload, courses: payload  };
+            return { ...state, allCourses: payload,courses: payload  };
 
         case GET_COURSES_BY_ID:
             return { ...state, allCourses: payload};
@@ -162,24 +160,8 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case GET_PRODUCTS:
             return { ...state, products: payload};
 
-        case GET_PRODUCT_BY_NAME:
-            return { ...state, products: payload};
-
-        case DELETE_PRODUCT:
+         case DELETE_PRODUCT:
             return { ...state, message: payload};
-
-        case ORDER_PRODUCTS:
-            const products = [...state.products]
-
-            if (payload === "ascendente") {
-                products.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-            } else if (payload === "descendente") {
-                products.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-            }
-            return { 
-                ...state, 
-                products: products, 
-            }
 
         case GET_USER_BY_EMAIL:
             return {

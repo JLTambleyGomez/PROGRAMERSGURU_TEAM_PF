@@ -58,10 +58,6 @@
     .moon {
       fill: black
     }
-<<<<<<<< HEAD:client/src/components/bars/perfilbar/PerfilBar.module.css
-  
-========
->>>>>>>> 044bcd63cfcc62eccb513fd2398e507d30771ed5:client/src/components/bars/perfilbar/SettingsBar.module.css
 
 .component:hover .options {
   display: block;

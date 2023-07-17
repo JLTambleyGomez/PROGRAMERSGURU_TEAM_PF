@@ -8,7 +8,7 @@ import styles from "./AdminPanel.module.css";
 //_________________________module_________________________
 function AdminPanel () {
 
-    //global state:
+    //global state: 
     const categories = useSelector((state) => state.categories);
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
@@ -52,6 +52,7 @@ function AdminPanel () {
             [name]: value,
         }));
     };
+
     const handleCategorySelection = (event) => {
         const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
             id: option.value,
@@ -79,9 +80,11 @@ function AdminPanel () {
     }
 
     const hadleInputChange = (event) => {
+
         setbackmessage("")
         const { value } = event.target;
         setInputCategory({ category: value });
+    
     };
 
     const handlePostCategories = async (event) => {

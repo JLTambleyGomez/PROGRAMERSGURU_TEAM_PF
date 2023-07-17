@@ -1,52 +1,36 @@
-import { useState,useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState,useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux";
-
-// import theme from "../../../theme/theme";
 import s from "./SubscripcionesFlotante.module.css"
 
 //_________________________module_________________________
 function SubscripcionFlotante () {
 
     //global state:
-    const dark = useSelector((state) => state.darkMode);
+    const dark = useSelector((state) => state.darkMode)
 
     //states:
-    const [mostrarboton, setMostrarboton] = useState(true);
-    const [navigateAux, setNavigateAux] = useState(false);
-
-    //const:
-    const navigate = useNavigate();
+    const [mostrarboton, setMostrarboton] = useState(true)
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
-    const handleclosebutton = () => {
+    const handleclosebutton=()=>{
         setMostrarboton(false)
     }
-
+    
     //life-cycles:
     useEffect(() => {
-        setMostrarboton(true);
+        setMostrarboton(true)
     },[])
-
-    useEffect(() => {
-        navigateAux && navigate("/pagosubscripcion");
-    }, [navigateAux])
 
     //copmonent:
     return (
         <>
             {
                 mostrarboton && (
-                    <div className={`${s.component} ${s[theme("component")]}`} onClick={() => setNavigateAux(true)}>
+                    <div className={s.component}>
                         <p>
                             Subscribete por tan solo 2 dólares
                         </p>
-                        <p className={s.close} onClick={(event) => {handleclosebutton(); event.stopPropagation()}}>x</p>
+                        <p onClick={handleclosebutton}>x</p>
                     </div>
                 )
             }

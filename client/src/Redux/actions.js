@@ -15,7 +15,6 @@ import {
     getProducts,
     postProducts,
     deleteProducts,
-    getProductByNameRequest,
 //user
     getUserByEmail,
 //comments
@@ -59,16 +58,15 @@ import {
     export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
     
 //PRODUCTS
-    export const GET_PRODUCTS = "GET_PRODUCTS";
-    export const GET_PRODUCT_BY_NAME = "GET_PRODUCT_BY_NAME";
+    export const GET_PRODUCTS = "GET_PRODUCTS"
     export const POST_PRODUCTS = "POST_PRODUCTS"
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
-    export const ORDER_PRODUCTS = "ORDER_PRODUCTS";
 
 //USER
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
     export const SET_USER_EMAIL = "SET_USER_EMAIL"
     export const SET_TOKEN = "SET_TOKEN"
+
 //CART
     export const SET_CART= "SET_CART";
     export const CLEAR_CART = "CLEAR_CART";
@@ -213,7 +211,7 @@ export const order_courses = (direccion) => {
     }
 }
 
-//CATEGORIES_____________________________________________//
+//CATEFGORIES_____________________________________________//
 export const get_categories = () => { // request
     return async function (dispatch) {
         try {
@@ -267,9 +265,6 @@ export const delete_categories = (id) => { // request
 }
 
 export const Dark_Mode = (payload) => {
-
-    // const darkMode = localStorage.getItem("darkMode")
-
     if (payload === true) {
         return {
             type: DARK_MODE,
@@ -282,26 +277,6 @@ export const Dark_Mode = (payload) => {
         };
     }
 };
-
-//PRODUCTS_____________________________________________//
-
-export const get_product_by_name = (name) => {
-    return async (dispatch) => {
-        try {
-            const data = await getProductByNameRequest(name);
-            return dispatch({
-                type: GET_PRODUCT_BY_NAME,
-                payload: data
-            })
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.message
-            })   
-        }
-    }
-}
-
 
 ///////////////////ACTIONS CLEAR/////////////////////////////////////////////////////////////////////////////////////////
 
@@ -397,13 +372,6 @@ export const delete_Products = (id) => { // request
             });
         }
     };
-}
-
-export const order_products = (order) => {
-    return {
-        type: ORDER_PRODUCTS,
-        payload: order
-    }
 }
 
 //USER___________________________________________________________________//

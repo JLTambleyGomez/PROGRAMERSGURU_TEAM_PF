@@ -24,8 +24,8 @@ function CoursePage () {
           dispatch(get_courses_all());
         }
         return () => { 
-            dispatch(clearMessage());
-            dispatch(clearCourses());
+          dispatch(clearMessage());
+          dispatch(clearCourses());
         };
     }, [dispatch]);
 
@@ -45,9 +45,8 @@ function CoursePage () {
             <div className={styles.filterOrder}>
                 <FilterBar/>
             </div>
-
+           
             <div className = {styles.cardComponent}>
-               {/* {allCourses.length?(<CoursesCard allCourses = {allCourses}/>):""}  */}
                 {
                     isloading ? (<h1 className={styles.cargando}>CARGANDO...</h1>)
                     : <CoursesCard/>
