@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, get_product_by_name, set_cart, order_products } from "../../../Redux/actions"
+import { get_products_all, set_cart } from "../../../Redux/actions"
 
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -39,15 +39,6 @@ function Shop () {
     const syncInput = (event) => {
         const { value } = event.target;
         setInput(value);
-    }
-
-    const handleSearch = () => {
-        dispatch(get_product_by_name(input))
-    }
-
-    const handleSort = (event) => {
-        const value = event.target.value;
-        dispatch(order_products(value))
     }
 //___________________
     const toggleVisibilityPrice = () => {
@@ -127,7 +118,6 @@ function Shop () {
         // Initialize the cartTooltips array with the same length as the number of items
         // (async () => {
         dispatch(get_products_all());
-        console.log(products)
         // })()
         const initialCartTooltips = new Array(4).fill(false);
         setCartTooltips(initialCartTooltips);
@@ -146,9 +136,9 @@ function Shop () {
     //component:
     return (
         <main className={`${s.component}`}>
-
+         
             <section className={`${s.sectionBanner}`}>
-
+                
                 <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
@@ -161,10 +151,10 @@ function Shop () {
             <div className={s.flex}>
                 <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
                 
-                <button className={`${s.searchButton}`} onClick={handleSearch}>
+                <p className={`${s.searchButton}`}>
                     <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"className="bi bi-search"viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-                </button>
+                </p>
 
             </div>   
             <section className={`${s.section3}`}>
@@ -174,10 +164,9 @@ function Shop () {
                     <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
                        { isVisibleSortByName && (
                             <ul>
-                                <li onClick={() => {dispatch(order_products("ascendente"))}}>Ascendente</li>
-                                <li onClick={() => {dispatch(order_products("descendente"))}}>Descendente</li>
-                            </ul>
-                        )}
+                                <li>Ascendente</li>
+                                <li>Descendente</li>
+                            </ul>)}
                 </div> 
                 <div> 
                     <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>

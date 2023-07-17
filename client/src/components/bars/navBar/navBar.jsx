@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
@@ -13,15 +13,18 @@ import SearchBar from '../searchBar/searchBar';
 import Menu from '../Menu/Menu';
 
 //_________________________module_________________________
-function NavBar ( { logoutUser } ) {
+function NavBar ({logoutUser}) {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
-    
+
+    //states:
+    // const [shopbag, setShopbag] = useState(false);
+
     //const:
-    const dispatch = useDispatch();
     const location = useLocation();
+    const dispatch = useDispatch();
 
     //functions:
     const theme = (base) => {
@@ -90,5 +93,6 @@ function NavBar ( { logoutUser } ) {
         </nav>
     );
 }
+
 
 export default NavBar;

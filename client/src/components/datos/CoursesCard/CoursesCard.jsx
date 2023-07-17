@@ -113,7 +113,7 @@ function CoursesCard () {
     return (
         <div>
             <div className={s.paginado}>
-                {
+                {/* {
                     pageNumbers.map((number, index) => {
                         return (
                             <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
@@ -123,12 +123,12 @@ function CoursesCard () {
                             </a>
                         )
                     })
-                }
+                } */}
             <h2>Cursos encontrados : {allCourses.length}</h2>
 
             </div>
                 {
-                    currentAllCourses.map((course, index) => {
+                    allCourses.map((course, index) => {
                         return (
                             <CourseCard
                                 key={index}

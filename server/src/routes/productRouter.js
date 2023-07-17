@@ -8,7 +8,6 @@ const { deleteProduct } = require("../controllers/Product/deleteProduct");
 const { putProduct } = require("../controllers/Product/putProduct");
 const { postProducts } = require("../controllers/Product/postProducts");
 const { getProductById } = require("../controllers/Product/getProductById");
-const getProductByName = require("../controllers/Product/getProductByName");
 
 productRouter.get("/", getProduct);
 
@@ -22,6 +21,5 @@ productRouter.get("/:id", getProductById);
 
 productRouter.put("/:id", putProduct);
 
-productRouter.get("/name/:name", getProductByName);
 
 module.exports = productRouter;
