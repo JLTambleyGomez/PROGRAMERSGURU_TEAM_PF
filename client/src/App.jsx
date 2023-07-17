@@ -19,6 +19,9 @@ import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
 import Bag from "./components/datos/Bag/Bag";
 import Success from "./components/views/MercadopagoFeedback/Success"
 
+import axios from "axios";
+axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
+// axios.defaults.baseURL = 'http://localhost:3001/' 
 
 //_________________________module_________________________
 function App() {
