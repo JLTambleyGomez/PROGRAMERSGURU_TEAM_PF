@@ -15,7 +15,7 @@ function Shop () {
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
 
-    //states:}
+    //states:
     const [priceRange, setPriceRange] = useState([0, 1000]);
     const [input, setInput] = useState("");
     const [isVisiblePrice, setIsVisiblePrice] = useState(false);
@@ -199,7 +199,7 @@ function Shop () {
                     </div>
                 </aside>
                     <div className={`${s['productBox']}`}>
-                         {products.map((product, index) => {
+                         {products?.map((product, index) => {
                                 return (
                                     <div className={`${s['item']}`} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>

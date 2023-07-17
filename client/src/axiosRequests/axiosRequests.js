@@ -121,3 +121,15 @@ export const createOrder = async () => {
   const { data } = await axios.post("http://localhost:3001/create-order"); // agregar array de productos para postear, y modificar el controlador en el back.
   return data;
 };
+
+//Comments
+
+export const getCommentsByUser = async (userId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${userId}`);
+  return data;
+};
+
+export const getCommentsByCourse = async (courseId) => {
+  const { data } = await axios.get(`http://localhost:3001/comment/${courseId}`);
+  return data;
+};

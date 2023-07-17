@@ -1,29 +1,40 @@
-import s from "./SubscripcionesFlotante.module.css"
 import { useState,useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux";
+import s from "./SubscripcionesFlotante.module.css"
 
 //_________________________module_________________________
-const SubscripcionFlotante = () => {
+function SubscripcionFlotante () {
+
+    //global state:
+    const dark = useSelector((state) => state.darkMode)
 
     //states:
-    const [mostrarboton, setMostrarboton] = useState(false)
+    const [mostrarboton, setMostrarboton] = useState(true)
 
     //functions:
     const handleclosebutton=()=>{
         setMostrarboton(false)
     }
-
+    
     //life-cycles:
-    useEffect(()=>{
+    useEffect(() => {
         setMostrarboton(true)
     },[])
 
-
     //copmonent:
     return (
-        <div className={s.component}>
-            Subscribete por tan solo 2 dólares
-            <p onClick={handleclosebutton}>x</p>
-        </div>
+        <>
+            {
+                mostrarboton && (
+                    <div className={s.component}>
+                        <p>
+                            Subscribete por tan solo 2 dólares
+                        </p>
+                        <p onClick={handleclosebutton}>x</p>
+                    </div>
+                )
+            }
+        </>
     )
 }
 
