@@ -1,29 +1,23 @@
 const { Product } = require('../../db.js')
 const { Op } = require("sequelize");
+const { get_products_by_name } = require("../../handlers/productHandlers.js")
 
-//FUNCIONA MAL, DEVUELVE TODOS LOS PRODUCTOS A PESAR DEL OPERADOR.
+
 const getProductByName = async (req, res) => {
 
-    const { name } = req.query
+    const { name } = req.params
 
     try {
-        const productsFound = await Product.findAll({
-            where: {
-                name: {
-                    [Op.iLike]: `%${name}%`
-                }
-            }
-        })
+        const productsFound = await get_products_by_name(name)
 
-        if (productsFound.length === 0) {
-            return res.status(404).json({message: "No se encontraron coincidencias"})
-        } else {
-            return res.status(200).json(productsFound)
-        }
+        if (productsFound.length === 0) return res.status(404).json({ message: "No se encontraron coincidencias" });
+
+        else return res.json(productsFound);
 
     } catch (error) {
-        return res.status(500).json({message: error.message})
+        console.log(error);
+        return res.status(500).json({ message: "Algo salió mal" });
     }
 }
 
-module.exports = getProductByName;
+module.exports = {getProductByName};
