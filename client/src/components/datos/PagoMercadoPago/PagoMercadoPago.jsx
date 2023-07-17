@@ -13,7 +13,7 @@ const dispatch = useDispatch()
 const createMercadopagoReference = async()=>{
     try {
         console.log(reference)
-        const {data}= await axios.post("http://localhost:3001/Mp/create_preference", reference)
+        const {data}= await axios.post("/Mp/create_preference", reference)
         const id = data.id
         return id;
     } catch (error) {
