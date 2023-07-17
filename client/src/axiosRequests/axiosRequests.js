@@ -7,7 +7,7 @@ import axios from "axios";
 const URL = "http://localhost:3001"
 
 // Agregar encabezado de autorización a todas las solicitudes
-let token = sessionStorage.getItem("accessToken");
+let token = localStorage.getItem("accessToken");
 
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {

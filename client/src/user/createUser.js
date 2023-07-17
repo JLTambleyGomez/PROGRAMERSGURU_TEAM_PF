@@ -37,8 +37,8 @@ export default function createUser(email, password) {
                             name: user.displayName,
                         };
                         const token = user.accessToken;
-                        sessionStorage.setItem("accessToken", token);
-                        sessionStorage.setItem("email", email)
+                        localStorage.setItem("accessToken", token);
+                        localStorage.setItem("email", email)
                         postUserRequest(userData)
                         window.location.replace("/HomePage");
                     }

@@ -35,7 +35,7 @@ function HomePage () {
 
     //-------------------------------------------------------------------------
     // obtener el email
-    const email = sessionStorage.getItem("email")
+    const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
 
     //life-cycles:

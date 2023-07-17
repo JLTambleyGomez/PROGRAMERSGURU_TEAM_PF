@@ -46,7 +46,7 @@ function SearchBar () {
         setTimeout(() => {
             setInput("");
             setToggleVisibility(true);
-        }, 300);
+        }, 400);
     };
 
    //component:

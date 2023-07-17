@@ -20,7 +20,10 @@ import {
     getUserByEmail,
 //comments
     getCommentsByCourse,
-    getCommentsByUser
+    getCommentsByUser,
+
+    //products filters
+    
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -76,6 +79,8 @@ export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
 //METAMASK:
 export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
+//PRODUCTS FILTERS:
+export const FILTER_PRODUCTS_BY_CATEGORY= "FILTER_PRODUCTS_BY_CATEGORY";
 
     
 //__________________________________________________
@@ -189,6 +194,8 @@ export const filter_courses_by_language = (language) => {
     }
 }
 
+
+//LOGIN NO EXISTE
 export const getloged = (userData) => {
     return async function (dispatch) {
         try {
@@ -341,7 +348,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 export const get_products_all = () => {
     return async (dispatch) => {
         try {
-            const data = await getProducts () // request
+            const data = await getProducts() // request
             return dispatch({
                 type: GET_PRODUCTS,
                 payload: data
@@ -505,4 +512,13 @@ export const set_metamask_address = (address) => {
             type: METAMASK_ADDRESS,
             payload: address
         }   
+}
+
+
+//SHOP FILTERS_________________________________________//
+export const filter_product_by_gategory = (category) => {
+    return {
+        type: FILTER_PRODUCTS_BY_CATEGORY,
+        payload: category
+    }
 }

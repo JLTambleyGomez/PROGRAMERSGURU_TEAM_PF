@@ -19,7 +19,7 @@ const MetaMaskSucces = () => {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
+    const email = localStorage.getItem("email");
 
     //functions:
     const calculateTotal = () => {

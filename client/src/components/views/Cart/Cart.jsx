@@ -9,6 +9,7 @@ import Modal from "../ventanaemergente/ventana";
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 
+
 //_________________________module_________________________
 function Cart () {
 
@@ -66,7 +67,7 @@ function Cart () {
 
     const handlePagarButton = () => {
         dispatch(set_cart());
-        
+
         const arrayListOfProducts = cart?.map(
             (product) =>
             `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
@@ -82,14 +83,15 @@ function Cart () {
             price: calculateTotal(),
             quantity: 1,
         };
-        
+
         setCompra(referencia);
         setMostrarPagos(true);
     };
 
     //life-cycles:
     useEffect(() => {
-        if (user.name) setVentana(false);
+        const email = localStorage.getItem("email")
+        if (email) setVentana(false);
     }, []);
 
     //component:

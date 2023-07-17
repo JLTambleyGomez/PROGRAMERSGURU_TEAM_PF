@@ -9,8 +9,6 @@ export default function logoutUser () {
         .then(() => {
             //clear local storage
             localStorage.clear();
-            // clear session storage
-            sessionStorage.clear();
         }).then(() => {
             window.location.replace("/");
         })

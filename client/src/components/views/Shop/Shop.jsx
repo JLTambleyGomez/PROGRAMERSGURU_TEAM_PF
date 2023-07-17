@@ -11,12 +11,12 @@ import Modal from "../ventanaemergente/ventana";
 
 //_________________________module_________________________
 const Shop =() =>{
-    const navigate = useNavigate()
 
   
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
+
 
     //states:
     const [priceRange, setPriceRange] = useState([0, 1000]);
@@ -25,14 +25,15 @@ const Shop =() =>{
     const [isVisibleCategory, setIsVisibleCategory] = useState(false);
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
     const [isVisibleSortByPrice, setIsVisibleSortByPrice] = useState(false);
-    const [currentAllProducts,setcurrentAllProducts] = useState(null)
+    // const [currentAllProducts,setCurrentAllProducts] = useState([])
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
     const cart = useSelector((state)=> state.cart)
 
     //const:
     const dispatch = useDispatch();
-
+    const navigate = useNavigate()
+    
 
     //functions:
     const theme = (base) => {
@@ -122,22 +123,21 @@ const Shop =() =>{
     };
 
 
-    //life-cycles:
+    // life-cycles:
     useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
-
-        if (!token) navigate("/IniciaSession")
-        else   
-        setcurrentAllProducts(products.slice(indexOfFirstProduct, indexOfLastProduct))
-
-        // Initialize the cartTooltips array with the same length as the number of items
-        // (async () => {
-        dispatch(get_products_all());
-        // })()
-        const initialCartTooltips = new Array(4).fill(false);
-        setCartTooltips(initialCartTooltips);
+            const token = localStorage.getItem("accessToken")
+            if (!token) navigate("/IniciaSession");
+ 
+            const initialCartTooltips = new Array(4).fill(false);
+            setCartTooltips(initialCartTooltips);
+            
     }, []);
-
+    
+    useEffect(() => {
+        if (!products.length) dispatch(get_products_all());   
+    }, [dispatch])
+   
+    // CART:
     useEffect(() => {
         (async () => {
             const cart = await localStorage.getItem("cart")
@@ -148,19 +148,20 @@ const Shop =() =>{
         dispatch(set_cart())
     }, [])
 
+    // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 15
+    const productsPerPage = 10
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-        // indice:
-        const pageNumbers = [];
-        (() => {
-            for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
-                pageNumbers.push(i);
-            }
-        })()
-    
+    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
+    // indice:
+    const pageNumbers = [];
+    (() => {
+        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
+            pageNumbers.push(i);
+        }
+    })()
 
 
     //component:
@@ -257,7 +258,7 @@ const Shop =() =>{
             {/* PRODUCTS */}
                 <div className={`${s['productBox']}`}>
                     {
-                        currentAllProducts ? currentAllProducts.map((product, index) => {
+                        currentAllProducts? currentAllProducts?.map((product, index) => {
                             return (
                                 <div className={`${s['item']}`} key={index}>
                                     <div style={{display: "flex", flexDirection: "column"}}>
