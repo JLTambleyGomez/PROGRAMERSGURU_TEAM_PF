@@ -447,3 +447,10 @@ export const get_comments_by_course = (courseId)=>{
         }
     };
 }
+
+export const set_metamask_address = (address) => {
+    return {
+        type: METAMASK_ADDRESS,
+        payload: address
+    }   
+}
