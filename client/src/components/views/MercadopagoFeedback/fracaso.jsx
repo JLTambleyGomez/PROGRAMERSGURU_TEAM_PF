@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
-
+import { useNavigate } from "react-router-dom";
 import { get_User_By_Email } from "../../../Redux/actions"
 
 
 //_________________________module_________________________
 function MercadoPagoFailure () {
 
+
     //const:
+    const navigate = useNavigate();
     const [error, setError] = useState('');
     
     //const:
@@ -17,6 +19,12 @@ function MercadoPagoFailure () {
     const email = sessionStorage.getItem("email");
 
     //life-cycles:
+    useEffect(() => {
+        const token = sessionStorage.getItem("accessToken")
+        if (!token) navigate("/IniciaSession")
+    },[])
+
+
     useEffect(() => {
         dispatch(get_User_By_Email(email))
     }, [])

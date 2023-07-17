@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,6 +12,7 @@ import styles from "./Success.module.css";
 //_________________________module_________________________
 function Success  () {
 
+    const navigate = useNavigate()
     //global states:
     const cart = useSelector((state) => state.cart)
 
@@ -34,6 +35,12 @@ function Success  () {
     const email = sessionStorage.getItem("email");
 
     //life-cycles:
+    useEffect(() => {
+        const token = sessionStorage.getItem("accessToken")
+        if (!token) navigate("/IniciaSession")
+    },[])
+
+
     useEffect(() => {
         dispatch(get_User_By_Email(email));
         console.log("este es el carrito:" + " " + cart);

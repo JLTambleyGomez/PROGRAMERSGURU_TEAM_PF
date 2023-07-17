@@ -5,6 +5,7 @@ import {
     getCoursesByIdRequest,
     postCourseRequest,
     deleteCourseRequest,
+    putCourseRequest,
 //CATEGORIES:
     getCategoriesAllRequest, 
     postCategoriesRequest, 
@@ -12,12 +13,13 @@ import {
 //FAVORITES
     getFavoritesRequest,
 //Products
-    getProducts,
-    getProductsByName,
-    postProducts,
-    deleteProducts,
+    getProductsRequest,
+    getProductsByNameRequest,
+    postProductsRequest,
+    deleteProductsRequest,
+    putProductsRequest,
 //user
-    getUserByEmail,
+   getUserByEmailRequest,
 //comments
     getCommentsByCourse,
     getCommentsByUser
@@ -36,11 +38,13 @@ import {
     export const FILTER_COURSES_BY_LANGUAGE = "FILTER_COURSES_BY_LANGUAGE";
     export const FILTER_COURSES_BY_PRICING = "FILTER_COURSES_BY_PRICING";
     export const ORDER_COURSES = "ORDER_COURSES";
+    export const PUT_COURSE = "PUT_COURSE"
 
 //CATEGORIES:
     export const GET_CATEGORIES_ALL = "GET_CATEGORIES_ALL";
     export const POST_CATEGORIES = "POST_CATEGORIES";
     export const DELETE_CATEGORIES = "DELETE_CATEGORIES";
+    
 
 //ERRORS:
     export const ERROR = "ERROR";
@@ -66,6 +70,7 @@ import {
     export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
     export const POST_PRODUCTS = "POST_PRODUCTS";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
+    export const PUT_PRODUCTS = "PUT_PRODUCTS"
 
 //CART:
     export const SET_CART= "SET_CART";
@@ -76,6 +81,12 @@ export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
 //METAMASK:
 export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
+
+//SUSCRIPTIONS
+export const GET_SUSCRIPTIONS = "GET_SUSCRIPTIONS";
+export const DELETE_SUSCRIPTION = "DELETE_SUSCRIPTION";
+export const PUT_SUSCRIPTION = "PUT_SUSCRIPTION";
+export const POST_SUSCRIPTION = "POST_SUSCRIPTION";
 
     
 //__________________________________________________
@@ -166,12 +177,16 @@ export const delete_course = (id) => { // request
         }
     };
 }
+
 ///////////////////// PUT COURSE //////////////////////////
 export const put_course = (id, course) => {
     return async function (dispatch) {
         try {
-            const data = await putCourse(id,course)
-            return dispatch({})
+            const data = await putCourseRequest(id,course)
+            return dispatch({
+                type: PUT_COURSE,
+                payload: data.message
+            })
         } catch (error) {
             return dispatch({
                 type: ERROR,
@@ -431,7 +446,7 @@ export const put_Products = (id, product) => {
 export const get_User_By_Email = (email) => {
     return async function (dispatch) {
         try {
-            const data = await getUserByEmail(email);
+            const data = await getUserByEmailRequest(email);
             return dispatch({
                 type: GET_USER_BY_EMAIL,
                 payload: data,
@@ -505,4 +520,76 @@ export const set_metamask_address = (address) => {
             type: METAMASK_ADDRESS,
             payload: address
         }   
+}
+
+
+//SUBSCRIPTIONS 
+
+export const get_suscriptions = () => {
+    return async function (dispatch)  {
+        try {
+            const data = await getSubscriptionsRequest();
+            return dispatch ({
+                type: GET_SUSCRIPTIONS,
+                payload: data
+            })
+
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
+export const put_suscription = (id,suscription) => {
+    return async function (dispatch) {
+        try {
+            const data = await putSuscriptionRequest(id, suscription)
+            return dispatch({
+                type:PUT_SUSCRIPTION,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR, 
+                payload: error.response.data.message
+            })
+        }
+    }
+}
+
+export const delete_suscription = () => {
+    return async function (dispatch) {
+        try {
+            const data = await deleteSuscriptionRequest()
+            return dispatch ({
+                type: DELETE_SUSCRIPTION,
+                payload: data   
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+        }
+    }
+}
+
+export const post_suscription = (id,suscription) => {
+    return  async function (dispatch) {
+        try {
+            const data = await postSuscriptionRequest(id,suscription)
+            return dispatch({
+                type: POST_SUSCRIPTION,
+                payload: data
+            })
+        } catch (error) {
+            return dispatch({
+                type: ERROR, 
+                payload: error.response.data.message
+            })
+        }
+    }
 }

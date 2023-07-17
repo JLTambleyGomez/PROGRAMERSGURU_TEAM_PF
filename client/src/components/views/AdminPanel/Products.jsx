@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, post_Products, delete_Products, clearMessage } from "../../../Redux/actions";
+import { get_products_all, post_Products, delete_Products, clearMessage, put_Products } from "../../../Redux/actions";
 
 import styles from "./AdminPanel.module.css";
 
@@ -15,7 +15,7 @@ function Products () {
     //const:
     const dispatch = useDispatch();
 
-    
+    console.log(products)
 
     //functions:
     const theme = (base) => {
@@ -44,8 +44,6 @@ function Products () {
     useEffect(() => {
         dispatch(clearMessage());
         dispatch(get_products_all());
-
-        
 
         return () => {                // return ocupar para hacer algo en el desmontaje          
             dispatch(clearMessage()); // limpiar 

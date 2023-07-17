@@ -86,7 +86,7 @@ const Categories = () => {
           <h2>Categories</h2>
           <div className={`${styles.categoriesBox}`}>
             {categories &&
-              categories.map((category, index) => (
+              categories?.map((category, index) => (
                 <span className={`${styles.category}`} key={index}>
                   <label>
                     {category.id} : {category.name}
