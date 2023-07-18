@@ -7,7 +7,8 @@ import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage from "./components/views/LandingPage/LandingPage";
 import CoursePage from "./components/views/CoursePage/CoursePage";
 import NavBar from "./components/bars/navBar/navBar";
-import Profile from "./components/views/Profile/Profile";
+import Profile_v2 from "./components/views/Profile/Profile_v2";
+// import Profile from "./components/views/Profile/Profile";
 import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
@@ -26,8 +27,8 @@ import SubscripcionesFlotante from "./components/datos/Subscripciones/Subscripci
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 
 import axios from "axios";
-axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
-// axios.defaults.baseURL = 'http://localhost:3001/' 
+// axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
+axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
 function App () {
 
@@ -93,7 +94,8 @@ function App () {
                 element={<HomePage />}
                 />
                 <Route path="/CoursePage" element={<CoursePage />} />
-                <Route path="/Profile" element={<Profile />} />
+                <Route path="/Profile" element={<Profile_v2 />} />
+                {/* <Route path="/Profile" element={<Profile />} /> */}
                 <Route path="/Store" element={<Shop />} />
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />

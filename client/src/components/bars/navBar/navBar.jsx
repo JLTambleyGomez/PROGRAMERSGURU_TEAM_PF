@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
 import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
-import { toggle_shopbag } from "../../../Redux/actions";
+import { toggle_shopbag, get_User_By_Email } from "../../../Redux/actions";
 import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton"
 
 // import styles from './navBar.module.css';
@@ -21,6 +21,7 @@ function NavBar ({logoutUser}) {
 
     //states:
     // const [shopbag, setShopbag] = useState(false);
+    const [collapseNavBar, setCollapseNavBar] = useState(false)
 
     //const:
     const location = useLocation();
@@ -36,6 +37,14 @@ function NavBar ({logoutUser}) {
         dispatch(toggle_shopbag(!shopbag))
     }
 
+       //-------------------------------------------------------------------------
+    // obtener el email
+    const email = localStorage.getItem("email")
+    //-------------------------------------------------------------------------
+
+    useEffect(() => {
+        dispatch(get_User_By_Email(email))
+    }, [dispatch])
     //component:
     return (
         <nav className={`${s.component} ${s[theme("component")]}`}>

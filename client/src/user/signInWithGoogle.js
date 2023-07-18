@@ -41,7 +41,7 @@ export default function signInwithGoogle() {
                 .then((tkn) => {
                     // set access token in session storage
                     sessionStorage.setItem("accessToken", tkn);
-                    sessionStorage.setItem("email", email)                    
+                    localStorage.setItem("email", email)                    
                     postUserRequest(userData)
                     window.location.replace('/HomePage')
                 });

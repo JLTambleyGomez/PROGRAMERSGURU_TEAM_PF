@@ -115,6 +115,11 @@ export const getUserByEmail = async (email) => {
   return data;
 };
 
+export const editUserData = async (userData) => {
+  const { data } = await axios.put('/user/profile', userData);
+  return data;
+};
+
 //MERCADOPAGO______________________________
 
 export const createOrder = async () => {

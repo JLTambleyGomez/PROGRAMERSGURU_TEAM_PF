@@ -51,7 +51,7 @@ import {
     export const GET_FAVORITES = "GET_FAVORITES";
 
 //USER:
-    export const LOGIN = "LOGIN"
+    export const EDIT_USER_DATA = "EDIT_USER_DATA"
 
 //COMMENTS:
     export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
@@ -172,24 +172,6 @@ export const filter_courses_by_language = (language) => {
         type: FILTER_COURSES_BY_LANGUAGE,
         payload: language
     }
-}
-
-export const getloged = (userData) => {
-    return async function (dispatch) {
-        try {
-            const data = await login(userData); 
-            console.log(data)
-            return dispatch({
-                type: LOGIN,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: "get error",
-            });
-        }
-    };
 }
 
 export const filter_courses_by_price = (price) => {

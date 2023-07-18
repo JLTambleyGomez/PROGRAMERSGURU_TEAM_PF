@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./SubscriptionForm.module.css";
 import validation from "./validation";
-import { getloged } from "../../../Redux/actions";
+// import { getloged } from "../../../Redux/actions";
 import { useNavigate } from "react-router-dom";
 
 const SubscriptionForm = () => {
@@ -46,7 +46,7 @@ const SubscriptionForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    dispatch(getloged(inputData));
+    // dispatch(getloged(inputData));
     access && setShowForm(false);
   };
 

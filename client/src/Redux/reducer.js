@@ -20,8 +20,6 @@ import {
     DARK_MODE,
 //FAVORITES:
     GET_FAVORITES,
-//USERS:
-    LOGIN,
 //PRODUCTS
     GET_PRODUCTS,
     DELETE_PRODUCT,
@@ -149,9 +147,6 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
 
         case GET_FAVORITES:
             return { ...state, favorites: payload};
-
-        case LOGIN:
-            return { ...state, access: payload};
 
         case  DELETE_COURSE:
             return { ...state, message: payload};
