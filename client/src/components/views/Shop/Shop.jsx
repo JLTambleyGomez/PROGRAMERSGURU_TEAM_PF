@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
-import FilterBarShop from "./filterBarShop";
+import FilterBarShop from "./FilterBarShop";
 import Modal from "../ventanaemergente/ventana";
 
 
@@ -101,7 +103,7 @@ function Shop () {
     };
 
 
-    // life-cycles:
+    //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession");
@@ -158,6 +160,8 @@ function Shop () {
                 </h1>
                 
             </section>
+        {/* SIDEBAR */}
+            <FilterBarShop/>
 
         {/* PAGINADO */}
             <div className={s.paginado}>
@@ -175,10 +179,10 @@ function Shop () {
             </div>
 
         {/* SEARCHBAR */}
-            <div className={s.flex}>
-                <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
-                
-                <button className={`${s.searchButton}`} onClick={handleSearch}>
+        <div className={s.searchBar}>
+                <input value={input} onChange={syncInput} placeholder="Buscar Producto"></input>
+
+                <button onClick={handleSearch}>
                     <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"className="bi bi-search"viewBox="0 0 16 16">
                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
                 </button>
@@ -186,14 +190,12 @@ function Shop () {
             </div>
 
             <section className={`${s.section3}`}>
-            {/* SIDEBAR */}
-               <FilterBarShop/>
 
             {/* PRODUCTS */}
                 <div className={`${s['productBox']}`}>
-                    { 
-                        currentAllProducts? currentAllProducts?.map((product, index) => {
-                            return (
+                    {
+                        currentAllProducts ? currentAllProducts.map((product, index) => {
+                            if (product.stock > 0) { return (
                                 <div className={`${s['item']}`} key={index}>
                                     <div style={{display: "flex", flexDirection: "column"}}>
                                         <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
@@ -205,13 +207,31 @@ function Shop () {
                                     </div>
                                     <div className={s.priceAndCart}>
                                         <h1 className={s["price"]}>${product.price}</h1>
-                                        <button 
+                                        <button
                                             onMouseEnter={() => handleMouseEnter(index)}
                                             onMouseLeave={() => handleMouseLeave(index)}
                                             onClick={() => addToCart(product)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
                                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
                                         </button>
+                                    </div>
+                                    {
+                                        cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
+                                    }
+                                </div>
+                            )} else return (
+                                <div className={`${s['item']}`} key={index}>
+                                    <div style={{display: "flex", flexDirection: "column"}}>
+                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                            <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product.image}></img>
+                                        </div>
+                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                            <h1 className={s["name"]} >{product.name}</h1>
+                                        </div>
+                                    </div>
+                                    <div className={s.priceAndCart}>
+                                        <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product.price}</h1>
+                                        <p>No quendan existencias</p>
                                     </div>
                                     {
                                         cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>

@@ -18,7 +18,7 @@ function FilterBarShop () {
     console.log(products)
 
     //states:
-    const [priceRange, setPriceRange] = useState([0, 500]);
+    const [priceRange, setPriceRange] = useState([0, 1000]);
     const [isVisiblePrice, setIsVisiblePrice] = useState(false);
     const [isVisibleCategory, setIsVisibleCategory] = useState(false);
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
@@ -27,7 +27,7 @@ function FilterBarShop () {
     
     //const:
     const dispatch = useDispatch();
-    
+
     // const price = productsCopy.length && productsCopy.filter(product => product.price)
 
     const mayor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
@@ -50,7 +50,7 @@ function FilterBarShop () {
     const toggleVisibilityCategory = () => {
         setIsVisibleCategory(!isVisibleCategory);
     }
-1
+
     const toggleVisibilitySortByName = () => {
         setIsVisibleSortByName(!isVisibleSortByName);
     }
@@ -100,58 +100,61 @@ function FilterBarShop () {
         dispatch(get_categories())
     }, [dispatch])
 
+    useEffect(() => {
+        setPriceRange([mayorPrice, menorPrice])
+    }, [mayorPrice, menorPrice])
+
 
     //component:
     return (
-        <aside className={`${s.sidebar}`}>  
-            <h2>FILTROS</h2>
-            <div>
-                <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                { isVisibleSortByName && (
-                    // value = {order}
-                    <select onChange={handleSortChange}>
-                        <option value="">Destacados</option>
-                        <option value="ascendente">Ascendente</option>
-                        <option value="descendente">Descendente</option>
-                    </select>
-                )}
-            </div> 
-            <div> 
-                <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
-                {
-                    isVisiblePrice && (
-                        <div className={`${s.filterPrice}`}>
-                            <Slider
-                                className={`${s["filterPriceSlider"]}`}
-                                range
-                                min={menorPrice}
-                                max={mayorPrice}
-                                defaultValue={priceRange}
-                                onChange={handlePriceChange}
-                            />
-                            <div>Rango de Precio: ${priceRange[0]} - ${priceRange[1]}</div>
-                        </div>  
-                    ) 
-                }
-            </div>
-            <div className={`${s.filterOption}`}>
-                <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                    <select onChange={handleCategory}>
-                        { categories.length &&
-                            categories.map((category, index) => {
-                                return <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
-                            })
-                        }
-                    </select>
-                    { 
-                        isVisibleCategory && (
-                            <div className={`${s.filterCategory}`}></div>
-                        )
+        <div className={`${s.sidebar}`}>
+                <div>
+                    <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
+                    { isVisibleSortByName && (
+                        // value = {order}
+                        <select onChange={handleSortChange}>
+                            <option value="">Destacados</option>
+                            <option value="ascendente">Ascendente</option>
+                            <option value="descendente">Descendente</option>
+                        </select>
+                    )}
+                </div> 
+                <div> 
+                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                    {
+                        isVisiblePrice && (
+                            <div className={`${s.filterPrice}`}>
+                                <Slider
+                                    className={`${s["filterPriceSlider"]}`}
+                                    range
+                                    min={menorPrice}
+                                    max={mayorPrice}
+                                    defaultValue={priceRange}
+                                    onChange={handlePriceChange}
+                                />
+                                <div>Rango de Precio: ${priceRange[0]} - ${priceRange[1]}</div>
+                            </div>  
+                        ) 
                     }
-            </div>
-            <button onClick={handle}>FILTRAR</button>
-            <button onClick={() => {dispatch(get_products_all())}}>Mostrar todos</button>
-        </aside>
+                </div>
+                <div className={`${s.filterOption}`}>
+                    <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
+                        <select onChange={handleCategory}>
+                            { categories.length &&
+                                categories.map((category, index) => {
+                                    return <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
+                                })
+                            }
+                        </select>
+                        { 
+                            isVisibleCategory && (
+                                <div className={`${s.filterCategory}`}></div>
+                            )
+                        }
+                </div>
+                <button onClick={handle}>FILTRAR</button>
+                <button onClick={() => {dispatch(get_products_all())}}>MOSTRAR TODOS</button>
+        </div>
     )
 }
 

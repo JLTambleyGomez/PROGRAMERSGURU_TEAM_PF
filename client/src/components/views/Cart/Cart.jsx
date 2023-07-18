@@ -90,6 +90,7 @@ function Cart () {
 
     //life-cycles:
     useEffect(() => {
+        console.log(cart)
         const email = localStorage.getItem("email")
         if (email) setVentana(false);
     }, []);

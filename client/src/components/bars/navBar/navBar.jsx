@@ -39,7 +39,9 @@ function NavBar ( { logoutUser } ) {
 
     //life-cycles:
     useEffect(() => {
-        if (!user.email) dispatch(get_User_By_Email(email));
+        if (email) {
+            if (!user?.email) dispatch(get_User_By_Email(email));
+        }
     }, [user])
 
 
