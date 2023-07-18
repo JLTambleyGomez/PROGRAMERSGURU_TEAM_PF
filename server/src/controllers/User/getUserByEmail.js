@@ -1,4 +1,5 @@
 const { User } = require('../../db');
+const { get_user_by_email } = require("../../handlers/userHandlers");
 
 const getUserByEmail = async (req, res) => {
     const {email} = req.query;

@@ -57,7 +57,7 @@ color: rgb(0, 0, 0);
 
 .total{
     padding-left: 20%;
-    width: 65%;
+    /* width: 65%; */
     text-align: center;
 
 }
@@ -108,7 +108,7 @@ width: 300px;
 
 .totalcontainer{
     display: flex;
-    width: 400px;
+    /* width: 400px; */
     justify-content: center;
     background-color: rgba(2, 11, 19, 0.26)
 

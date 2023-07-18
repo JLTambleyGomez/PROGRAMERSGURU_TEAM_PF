@@ -8,6 +8,7 @@ import {
     FILTER_COURSES_BY_PRICING, 
     ORDER_COURSES, 
     GET_COURSES_BY_ID,
+    PUT_COURSE,
 //CATEGORIES:
     GET_CATEGORIES_ALL, 
     POST_CATEGORIES, 
@@ -20,11 +21,16 @@ import {
     DARK_MODE,
 //FAVORITES:
     GET_FAVORITES,
+//USERS:
+    GET_USER_BY_EMAIL,
 //PRODUCTS
     GET_PRODUCTS,
+    GET_PRODUCTS_BY_NAME,
     DELETE_PRODUCT,
-//USER
-    GET_USER_BY_EMAIL,
+    FILTER_PRODUCTS_BY_PRICING,
+    FILTER_PRODUCTS_BY_CATEGORY,
+    SORT_PRODUCTS,
+    PUT_PRODUCTS,
 //CART
     SET_CART,
     CLEAR_CART,
@@ -33,10 +39,15 @@ import {
 //METAMASK
 METAMASK_ADDRESS,
 //COMMENTS
-GET_COMMENTS_BY_USER,
-GET_COMMENTS_BY_COURSE,
-
+    GET_COMMENTS_BY_USER,
+    GET_COMMENTS_BY_COURSE,
+//SUBSCRIPTIONS
+GET_SUSCRIPTIONS,
+DELETE_SUSCRIPTION,
+PUT_SUSCRIPTION,
+POST_SUSCRIPTION
 } from "./actions";
+
 
 // PRUEBA CURSOS
 //import jsonData from './cursos.json';
@@ -61,7 +72,8 @@ const globalStorage = {
     userComments: [],
     courseComments: [],
     metamaskaddress:null,
-    
+    productsCopy: [],
+    subscriptions:[] ////   <---------- MODIFICADO              
 }
 
 //REDUCER:
@@ -155,11 +167,43 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
             return { ...state, message: payload};
 
         case GET_PRODUCTS:
-            return { ...state, products: payload};
+            return { ...state, products: payload, productsCopy: payload};
+        
+        case GET_PRODUCTS_BY_NAME:
+            return { ...state, products: payload };
 
-         case DELETE_PRODUCT:
+        case DELETE_PRODUCT:
             return { ...state, message: payload};
 
+        case FILTER_PRODUCTS_BY_CATEGORY:
+            return { ...state, products: state.products.filter((product) => product.category === payload)};
+
+        case FILTER_PRODUCTS_BY_PRICING:
+            return { ...state, products: state.products.filter((product) => product.price > payload[0] && product.price < payload[1] )}
+
+        case SORT_PRODUCTS:
+            const todos_productosOrdenados = [...state.products];
+            const productosOrdenados = [...state.productsCopy];
+
+            if (payload === "ascendente") {
+                todos_productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
+                productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
+            } else if (payload === "descendente") {
+                todos_productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
+                productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
+            }
+
+            return { 
+                ...state, 
+                products: productosOrdenados, 
+                productsCopy: todos_productosOrdenados
+            }
+
+
+//////////////////         MODIFICADO              //////////////////////////////
+        case PUT_PRODUCTS: 
+            return {...state,products: payload}
+//////////////////////////////////////////////////////////////////////////////////////////
         case GET_USER_BY_EMAIL:
             return {
                 ...state,
@@ -199,7 +243,31 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 metamaskaddress: payload
             }
+        
+//////////////////         MODIFICADO              //////////////////////////////
 
+        case GET_SUSCRIPTIONS:
+            return {
+                ...state,
+                subscriptions: payload
+            }
+        case DELETE_SUSCRIPTION:
+            return {
+                ...state,
+                message: payload
+            }
+        case PUT_SUSCRIPTION:
+            return {
+                ...state,
+                subscriptions: payload
+            }
+
+        case POST_SUSCRIPTION:
+            return {
+                ...state,
+                subscriptions: payload
+            }
+//////////////////////////////////////////////////////////////////////////////////////////
         default: return {...state}; 
     }
 }

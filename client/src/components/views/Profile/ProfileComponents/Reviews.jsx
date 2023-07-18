@@ -1,4 +1,4 @@
-import s from "../Profile_v2.module.css";
+import s from "../Profile.module.css";
 
 export function Reviews () {
     return (

@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
+
 import { set_cart } from '../../../Redux/actions';
+
 import styles from './MetamaskFeedback.module.css';
+
 
 //_________________________module_________________________
 const MetaMaskSucces = () => {
@@ -17,6 +21,7 @@ const MetaMaskSucces = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const email = sessionStorage.getItem("email");
+    const navigate = useNavigate()
 
     //functions:
     const calculateTotal = () => {
@@ -30,6 +35,13 @@ const MetaMaskSucces = () => {
 
     //life-cycle:
     useEffect(() => {
+        const token = sessionStorage.getItem("accessToken")
+        if (!token) navigate("/IniciaSession")
+    },[])
+
+
+
+    useEffect(() => {
         if (location.state) setTransaction(location.state.transaction);
     }, [location.state]);
 
@@ -39,6 +51,7 @@ const MetaMaskSucces = () => {
         console.log("este es el carrito:" + " " + cart);
         console.log("este es el email:" + " " + email)
     }, [])
+
 
     //component:
     return (

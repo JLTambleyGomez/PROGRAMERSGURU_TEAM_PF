@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import s from "./App.module.css";
 import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage from "./components/views/LandingPage/LandingPage";
+import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
 import NavBar from "./components/bars/navBar/navBar";
-import Profile_v2 from "./components/views/Profile/Profile_v2";
-// import Profile from "./components/views/Profile/Profile";
+import Profile from "./components/views/Profile/Profile";
 import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
@@ -25,29 +25,35 @@ import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
+import Modal from "./components/views/ventanaemergente/ventana";
 
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
 axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
-function App () {
+const App = () =>{
 
+  
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
 
+
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
 
+    
     //const:
     const location = useLocation().pathname;
 
+    
     //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
 
+    
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
@@ -79,23 +85,17 @@ function App () {
             };
     }, []);
 
+
     //component:
     return (
         <div className={`${s[theme("component")]}`}>
             {location !== "/" && <NavBar />}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
-                <Route
-                path="/"
-                element={<LandingPage/>}
-                />
-                <Route
-                path="/HomePage"
-                element={<HomePage />}
-                />
+                <Route path="/" element={<LandingPage/>}/>
+                <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/CoursePage" element={<CoursePage />} />
-                <Route path="/Profile" element={<Profile_v2 />} />
-                {/* <Route path="/Profile" element={<Profile />} /> */}
+                <Route path="/Profile" element={<Profile />} />
                 <Route path="/Store" element={<Shop />} />
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
@@ -109,7 +109,7 @@ function App () {
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
-                
+                <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
             </Routes>
             {location !== "/" && isAtBottom && <Footer />}
         </div>

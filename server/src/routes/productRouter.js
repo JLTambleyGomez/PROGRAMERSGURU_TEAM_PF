@@ -8,6 +8,8 @@ const { deleteProduct } = require("../controllers/Product/deleteProduct");
 const { putProduct } = require("../controllers/Product/putProduct");
 const { postProducts } = require("../controllers/Product/postProducts");
 const { getProductById } = require("../controllers/Product/getProductById");
+const { getProductsByName } = require("../controllers/Product/getProductsByName");
+
 
 productRouter.get("/", getProduct);
 
@@ -20,6 +22,8 @@ productRouter.delete("/:id", deleteProduct);
 productRouter.get("/:id", getProductById);
 
 productRouter.put("/:id", putProduct);
+
+productRouter.get("/name/:name", getProductsByName); // localhost:3001/product/name/impresora
 
 
 module.exports = productRouter;

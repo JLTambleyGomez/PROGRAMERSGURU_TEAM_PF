@@ -17,7 +17,7 @@ function CoursesCard () {
 // ______________
 
     //global state:
-    const allCourses = useSelector((state) => state.courses);
+    const allCourses = useSelector((state) => state.courses) ? useSelector((state) => state.courses) : [];
 
     //states:
     const [currentPage, setCurrentPage] = useState(1);
@@ -113,7 +113,7 @@ function CoursesCard () {
     return (
         <div>
             <div className={s.paginado}>
-                {/* {
+                {
                     pageNumbers.map((number, index) => {
                         return (
                             <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
@@ -123,12 +123,12 @@ function CoursesCard () {
                             </a>
                         )
                     })
-                } */}
+                }
             <h2>Cursos encontrados : {allCourses.length}</h2>
 
             </div>
                 {
-                    allCourses.map((course, index) => {
+                    currentAllCourses ? currentAllCourses.map((course, index) => {
                         return (
                             <CourseCard
                                 key={index}
@@ -143,7 +143,9 @@ function CoursesCard () {
                                 imageURL={course?.imageURL}
                             />
                         )
-                    })
+                    }) : (
+                        <p>REGISTRATE</p>
+                    )
                 }
             {/* <InfiniteScroll 
                 dataLength={uniqueCourses.length}

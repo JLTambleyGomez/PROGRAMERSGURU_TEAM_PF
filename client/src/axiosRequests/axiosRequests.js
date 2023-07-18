@@ -2,16 +2,22 @@ import axios from "axios";
 // import store from "../Redux/store";
 
 
+
+//HOST:
+const URL = ""
+
 // Agregar encabezado de autorización a todas las solicitudes
-let token = sessionStorage.getItem("accessToken")
+let token = localStorage.getItem("accessToken");
+
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
-  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
-    return config;
-  }
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") return config;
+  if (config.method === "get" && config.url.startsWith(`${URL}/course`)) return config;
+
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
+
 
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
@@ -27,20 +33,27 @@ export const getEthvalue = async () =>{
   return ethUSDTPrice;
 }
 
-export const getProducts = async () => {
+export const getProductsRequest = async () => {
   const { data } = await axios.get("/product");
   return data;
 };
 
-export const postProducts = async () => {
+export const postProductsRequest = async () => {
   const { data } = await axios.get("/product");
   return data;
 };
 
-export const deleteProducts = async (id) => {
+export const deleteProductsRequest = async (id) => {
   const { data } = await axios.delete(`/product/${id}`);
   return data;
 };
+
+//////////////   PUT PRODUCTS   ////////////
+export const putProductsRequest = async (id, product) => {
+  const {data} = await axios.put(`/product/${id}`, product)
+  return data;
+
+}
 
 export const postCourseRequest = async (datos) => {
   const { data } = await axios.post("/course", datos);
@@ -66,6 +79,12 @@ export const getCoursesByIdRequest = async (id) => {
   return data;
 };
 
+///////////// PUT COURSE ////////////
+export const putCourseRequest = async (id,course)=>{
+  const {data} = await axios.put(`/course/${id}`, course)
+  return data;
+}
+
 //CATEGORIES______________________________
 export const getCategoriesAllRequest = async () => {
   const { data } = await axios("/technology");
@@ -89,6 +108,34 @@ export const deleteCourseRequest = async (id) => {
   return data;
 };
 
+/////////////////////////////////////////////////////////////////////////////////
+// SUBSCRIPTIONS
+export const getSubscriptionsRequest = async () => {
+  const {data} = await axios.get("/subscription")
+  return data;
+}
+
+export const deleteSuscriptionRequest = async (id) => {
+  const {data} = axios.delete(`/subscription/${id}`)
+  return data;
+}
+
+export const putSuscriptionRequest = async (id, suscription) => {
+  const {data} = axios.put(`/subscription/${id}`, suscription)
+  return data;
+}
+
+export const postSuscriptionRequest = async (suscription) => {
+  const {data} = axios.post("/subscription",suscription)
+  return data;
+}
+//PRODUCTS_______________________________
+
+export const getProductsByNameRequest = async (name) => {
+  const { data } = await axios(`${URL}/product/name/${name}`)
+  return data;
+}
+
 //FAVORITES______________________________
 
 export const getFavoritesRequest = async (id) => {
@@ -110,7 +157,7 @@ export const deleteFavoritesRequest = async () => {
 
 //user______________________________
 
-export const getUserByEmail = async (email) => {
+export const getUserByEmailRequest = async (email) => {
   const { data } = await axios.get(`/user/?email=${email}`);
   return data;
 };
@@ -118,6 +165,19 @@ export const getUserByEmail = async (email) => {
 export const editUserData = async (userData) => {
   const { data } = await axios.put('/user/profile', userData);
   return data;
+};
+
+export const postUserRequest = async (userData) => {
+  try {
+      const { data } = await axios.post(
+          "/user/signup",
+          userData
+      );
+      return data.message;
+  } catch (error) {
+      console.log(error);
+      return console.log(error.message);
+  }
 };
 
 //MERCADOPAGO______________________________

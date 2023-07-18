@@ -6,11 +6,11 @@ import { get_courses_by_name } from "../../../Redux/actions";
 import s from "./searchBar.module.css";
 
 //_________________________module_________________________
-function SearchBar() {
+function SearchBar () {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
-        
+
     //states:
     const [input, setInput] = useState("");
     const [toggleVisibility, setToggleVisibility] = useState(true);
@@ -39,14 +39,14 @@ function SearchBar() {
         const timer = setTimeout(() => {
           setMensajeBusqueda(false);
         }, 2000);
-      }
+    }
 
     const setDefault = (event) => {
         event.preventDefault();
         setTimeout(() => {
             setInput("");
             setToggleVisibility(true);
-        }, 300);
+        }, 400);
     };
 
    //component:

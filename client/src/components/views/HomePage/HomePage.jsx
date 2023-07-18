@@ -1,5 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import "../../../config/firebase-config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
 import {
     get_categories,
     get_courses_all,
@@ -30,10 +33,10 @@ function HomePage () {
         return `${base}-${suffix}`;
     };
 
-    // //-------------------------------------------------------------------------
-    // // obtener el email
-    // const email = sessionStorage.getItem("email")
-    // //-------------------------------------------------------------------------
+    //-------------------------------------------------------------------------
+    // obtener el email
+    const email = localStorage.getItem("email")
+    //-------------------------------------------------------------------------
 
     //life-cycles:
     useEffect(() => {
@@ -46,6 +49,8 @@ function HomePage () {
         };
     }, [dispatch]);
 
+
+    //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
@@ -60,7 +65,7 @@ function HomePage () {
                 </h1>
             </section>
             <SubscripcionesFlotante/>
-        {/* COURSES */}
+        {/* LAST COURSES */}
             <section className={`${s.sectionCourses}`}>
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>
                     ÚLTIMOS CURSOS DEL MERCADO

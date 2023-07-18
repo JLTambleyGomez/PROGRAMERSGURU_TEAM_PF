@@ -102,3 +102,28 @@
                 right: 4px;
                 scale: 0.8;
               }
+
+
+              .boton {
+   
+                display: inline-block;
+                border-radius: 4px;
+                background-color: #28b0b4;
+                border: none;
+                color: #ffffff;
+                text-align: center;
+                font-size: 28px;
+                padding: 20px;
+                width: 200px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin: 5px;
+              }
+              
+              .boton:hover {
+                background-color: #0023944f;
+                opacity: 1;
+                padding-right: 425px;
+            
+              }
+              

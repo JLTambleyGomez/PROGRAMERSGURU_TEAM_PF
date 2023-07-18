@@ -66,9 +66,9 @@ function SignFreeForm() {
   return (
     <div className={styles.loginFormContainer}>
       {showButton && (
-        <button onClick={handleToggleForm} className={styles.openButton}>
+        <p onClick={handleToggleForm} className={styles.boton}>
           Ingresar
-        </button>
+        </p>
       )}
       {showForm && (
         <div className={styles.container}>
