@@ -36,14 +36,14 @@ function Success  () {
 
     //life-cycles:
     useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
+        const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
     },[])
 
 
     useEffect(() => {
         dispatch(get_User_By_Email(email));
-        console.log("este es el carrito:" + " " + cart);
+        console.log(cart);
         console.log("este es el email:" + " " + email)
     }, [])
 

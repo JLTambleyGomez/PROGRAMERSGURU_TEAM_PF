@@ -104,7 +104,6 @@ function FilterBarShop () {
         setPriceRange([mayorPrice, menorPrice])
     }, [mayorPrice, menorPrice])
 
-
     //component:
     return (
         <div className={`${s.sidebar}`}>

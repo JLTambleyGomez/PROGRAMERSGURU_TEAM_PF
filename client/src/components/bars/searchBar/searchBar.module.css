@@ -9,7 +9,7 @@
 .label {
   margin: 0;
   font-size: 150%;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.07em;
   transition: transform 0.3s;
   }
   .label:hover {

@@ -13,14 +13,12 @@ function MetaMaskFailure () {
     //const:
     const location = useLocation();
     const navigate = useNavigate()
+    const token = localStorage.getItem("accessToken")
 
     //life-cycles:
-  //life-cycle:
-  useEffect(() => {
-    const token = sessionStorage.getItem("accessToken")
-    if (!token) navigate("/IniciaSession")
-},[])
-
+    useEffect(() => {
+        if (!token) navigate("/IniciaSession")
+    },[])
 
     useEffect(() => {
         if (location.state && location.state.error) setError(location.state.error);
