@@ -1,34 +1,32 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { get_products_all, get_products_by_name, set_cart } from "../../../Redux/actions";
+import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
+import FilterBarShop from "./filterBarShop";
 import Modal from "../ventanaemergente/ventana";
 
-//_________________________module_________________________
-const Shop =() =>{
 
-  
+//_________________________module_________________________
+function Shop () {
+
+
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
+    const productsCopy = useSelector((state) => state.productsCopy);
+    const cart = useSelector((state)=> state.cart)
 
 
     //states:
-    const [priceRange, setPriceRange] = useState([0, 1000]);
     const [input, setInput] = useState("");
-    const [isVisiblePrice, setIsVisiblePrice] = useState(false);
-    const [isVisibleCategory, setIsVisibleCategory] = useState(false);
-    const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
-    const [isVisibleSortByPrice, setIsVisibleSortByPrice] = useState(false);
-    // const [currentAllProducts,setCurrentAllProducts] = useState([])
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
-    const cart = useSelector((state)=> state.cart)
+    const [orden, setOrden] = useState("");
 
     //const:
     const dispatch = useDispatch();
@@ -45,26 +43,6 @@ const Shop =() =>{
         const { value } = event.target;
         setInput(value);
     }
-//___________________
-    const toggleVisibilityPrice = () => {
-        setIsVisiblePrice(!isVisiblePrice);
-    }
-
-    const toggleVisibilityCategory = () => {
-        setIsVisibleCategory(!isVisibleCategory);
-    }
-
-    const toggleVisibilitySortByName = () => {
-        setIsVisibleSortByName(!isVisibleSortByName);
-    }
-
-    const toggleVisibilitySortByPrice = () => {
-        setIsVisibleSortByPrice(!isVisibleSortByPrice);
-    }
-
-    const handlePriceChange = (values) => {
-        setPriceRange(values);
-    };
 //_________________
     const handleSearch = () => {
         dispatch(get_products_by_name(input))
@@ -125,18 +103,17 @@ const Shop =() =>{
 
     // life-cycles:
     useEffect(() => {
-            const token = localStorage.getItem("accessToken")
-            if (!token) navigate("/IniciaSession");
- 
-            const initialCartTooltips = new Array(4).fill(false);
-            setCartTooltips(initialCartTooltips);
-            
+        const token = localStorage.getItem("accessToken")
+        if (!token) navigate("/IniciaSession");
+
+        const initialCartTooltips = new Array(4).fill(false);
+        setCartTooltips(initialCartTooltips);
     }, []);
     
     useEffect(() => {
         if (!products.length) dispatch(get_products_all());   
     }, [dispatch])
-   
+
     // CART:
     useEffect(() => {
         (async () => {
@@ -150,7 +127,7 @@ const Shop =() =>{
 
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 10
+    const productsPerPage = 6
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
@@ -158,7 +135,7 @@ const Shop =() =>{
     // indice:
     const pageNumbers = [];
     (() => {
-        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(productsCopy.length / productsPerPage); i++) {
             pageNumbers.push(i);
         }
     })()
@@ -210,54 +187,11 @@ const Shop =() =>{
 
             <section className={`${s.section3}`}>
             {/* SIDEBAR */}
-                <aside className={`${s.sidebar}`}>  
-                    <h2>FILTROS</h2>
-                    <div>
-                        <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                        { isVisibleSortByName && (
-                                <ul>
-                                    <li>Ascendente</li>
-                                    <li>Descendente</li>
-                                </ul>
-                        )}
-                    </div> 
-                    <div> 
-                        <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
-                        {
-                            isVisiblePrice && (
-                                <div className={`${s.filterPrice}`}>
-                                        <Slider
-                                            className={`${s["filterPriceSlider"]}`}
-                                            range
-                                            min={0}
-                                            max={1000}  
-                                            defaultValue={priceRange}
-                                            onChange={handlePriceChange}
-                                        />
-                                        <div>Rango de Precio: ${priceRange[0]} - ${priceRange[1]}</div>
-                                </div>  
-                            ) 
-                        }
-                    </div>
-                    <div className={`${s.filterOption}`}>
-                        <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                            { 
-                                isVisibleCategory && (
-                                    <div className={`${s.filterCategory}`}>
-                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Libros</span>
-                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Computadoras</span>
-                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Almacenamiento</span>
-                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Audio</span>
-                                        <span style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}}><input type = "checkbox"/>Accesorios</span>
-                                    </div>
-                                )
-                            }
-                    </div>
-                </aside>
+               <FilterBarShop/>
 
             {/* PRODUCTS */}
                 <div className={`${s['productBox']}`}>
-                    {
+                    { 
                         currentAllProducts? currentAllProducts?.map((product, index) => {
                             return (
                                 <div className={`${s['item']}`} key={index}>
@@ -320,4 +254,4 @@ const Shop =() =>{
     )
 }
 
-export default Shop;  
+export default Shop;

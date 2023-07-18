@@ -7,19 +7,25 @@ import styles from "./CourseCard.module.css";
 
 //_________________________module_________________________
 function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, released, description, imageURL }) {
-const dark = useSelector((state) => state.darkMode);
-const navigate = useNavigate();
 
 
+    //global states:
+    const dark = useSelector((state) => state.darkMode);
+    
+    
     //states:
     const [isFlipped, setIsFlipped] = useState(false);
+    
 
     //const:
+    const navigate = useNavigate();
 
+
+    //functions:
     const handleclickcardtodetail = ()=>{
         navigate(`/CourseDetails/${id}`)
-
     }
+
     const handleMouseEnter = () => {
         setIsFlipped(true);
     };
@@ -32,6 +38,7 @@ const navigate = useNavigate();
         const suffix = dark ? 'dark' : 'light';
         return `${base}-${suffix}`;
     };
+
 
     //component:
     return (
