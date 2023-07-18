@@ -41,9 +41,9 @@ export default function signInwithGoogle() {
                 const email = user.email
                 user.getIdToken()
                 .then((tkn) => {
-                    // set access token in session storage
-                    sessionStorage.setItem("accessToken", tkn);
-                    sessionStorage.setItem("email", email)                    
+                    // set access token in local storage
+                    localStorage.setItem("accessToken", tkn);
+                    localStorage.setItem("email", email)                    
                     postUserRequest(userData)
                     window.location.replace('/HomePage')
                 });

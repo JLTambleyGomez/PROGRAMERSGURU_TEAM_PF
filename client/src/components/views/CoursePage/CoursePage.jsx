@@ -22,7 +22,6 @@ function CoursePage () {
     //const:
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const token = sessionStorage.getItem("accessToken")
 
     //life-cycles:
     useEffect(() => {

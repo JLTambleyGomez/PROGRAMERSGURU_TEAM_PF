@@ -9,7 +9,7 @@ function MercadoPagoPendiente () {
     //const:
     const navigate = useNavigate()
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
+    const email = localStorage.getItem("email");
 
     //life-cycles:
     useEffect(() => {

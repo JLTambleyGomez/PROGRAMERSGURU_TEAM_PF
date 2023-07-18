@@ -32,7 +32,7 @@ function Success  () {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
+    const email = localStorage.getItem("email");
 
     //life-cycles:
     useEffect(() => {

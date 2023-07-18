@@ -18,8 +18,8 @@ export default function signIn(email, password) {
             const user = userCredential.user;
             if (user) {
                 const token = user.accessToken
-                sessionStorage.setItem("accessToken", token);
-                sessionStorage.setItem("email", email)
+                localStorage.setItem("accessToken", token);
+                localStorage.setItem("email", email)
                 window.location.replace('/HomePage')
             }
         })

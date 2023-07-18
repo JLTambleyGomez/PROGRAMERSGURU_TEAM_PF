@@ -22,7 +22,10 @@ import {
    getUserByEmailRequest,
 //comments
     getCommentsByCourse,
-    getCommentsByUser
+    getCommentsByUser,
+
+    //products filters
+    
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -204,6 +207,8 @@ export const filter_courses_by_language = (language) => {
     }
 }
 
+
+//LOGIN NO EXISTE
 export const getloged = (userData) => {
     return async function (dispatch) {
         try {
@@ -356,7 +361,7 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
 export const get_products_all = () => {
     return async (dispatch) => {
         try {
-            const data = await getProducts () // request
+            const data = await getProductsRequest() // request
             return dispatch({
                 type: GET_PRODUCTS,
                 payload: data
@@ -373,7 +378,7 @@ export const get_products_all = () => {
 export const get_products_by_name = (name) => {
     return async (dispatch) => {
         try {
-            const products = await getProductsByName(name);
+            const products = await getProductsByNameRequest(name);
             return dispatch({
                 type: GET_PRODUCTS_BY_NAME,
                 payload: products
@@ -407,7 +412,7 @@ export const post_Products = (datos) => {
 export const delete_Products = (id) => { // request
     return async function (dispatch) {
         try {
-            const data = await deleteProducts(id);
+            const data = await deleteProductsRequest(id);
             return dispatch({
                 type: DELETE_PRODUCT,
                 payload: data.message,
@@ -591,5 +596,14 @@ export const post_suscription = (id,suscription) => {
                 payload: error.response.data.message
             })
         }
+    }
+}
+
+
+//SHOP FILTERS_________________________________________//
+export const filter_product_by_gategory = (category) => {
+    return {
+        type: FILTER_PRODUCTS_BY_CATEGORY,
+        payload: category
     }
 }
