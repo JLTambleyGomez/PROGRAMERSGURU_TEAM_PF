@@ -72,6 +72,21 @@
     margin: 5px;
     text-decoration: none;
   }
+  .boton1{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #28b0b4;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 20px;
+    width: 280px;
+    height: 80px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
+  }
   
   .boton:hover {
     background-color: #0023944f;
@@ -80,6 +95,11 @@
     
   }
   
+  .boton1:hover{    background-color: #0023944f;
+    opacity: 1;
+    padding-right: 425px;
+    }
+
   .botoncontainer{
    
    text-align:auto;
