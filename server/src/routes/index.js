@@ -8,7 +8,6 @@ const userRouter = require("./userRouter");
 const commentRouter = require("./commentRouter");
 const paymentRouter = require("./paymentRouter");
 const suscriptionRouter = require("./suscriptionRouter");
-const mecadoPagoRouter = require("./mecadoPagoRouter");
 const middleware = require("../middleware/index");
 
 router.use(middleware.decodeToken)
@@ -31,6 +30,5 @@ router.use("/payment", paymentRouter);
 
 router.use("/subscription", suscriptionRouter);
 
-router.use("/mercadoPago", mecadoPagoRouter);
 
 module.exports = router;

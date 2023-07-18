@@ -5,12 +5,20 @@ import axios from "axios";
 // Agregar encabezado de autorización a todas las solicitudes
 let token = sessionStorage.getItem("accessToken")
 // Intercepta todas las solicitudes salientes
+// axios.interceptors.request.use(function (config) {
+//   if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
+//     return config;
+//   }
+//     config.headers.Authorization = `Bearer ${token}`;
+//     return config;
+// });
+// Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
-  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") {
-    return config;
-  }
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
+  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") return config;
+  if (config.method === "get" && config.url.startsWith(`${URL}/course`)) return config;
+
+  config.headers.Authorization = `Bearer ${token}`;
+  return config;
 });
 
 //COURSES______________________________

@@ -1,8 +1,9 @@
-const {PagoconMercadopago,FeedbackMercadoPago} = require ("../utils/mercadoPago")
+const {PagoconMercadopago,receiveWebhook, FeedbackMercadoPago} = require ("../utils/mercadoPago")
 
 const MPRouter = require("express").Router();
 
-MPRouter.post("/create_preference",PagoconMercadopago)
+MPRouter.post("/create_preference",PagoconMercadopago);
+MPRouter.post("/webhook", receiveWebhook);
 MPRouter.get("/feedbackmp",FeedbackMercadoPago)
 
 

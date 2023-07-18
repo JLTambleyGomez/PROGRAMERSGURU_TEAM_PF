@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 const PagoMercadopago=({reference})=>{
 console.log(reference)
-initMercadoPago('APP_USR-91891ea2-0ef0-4e46-b5b0-8ef1477c71f2');
+initMercadoPago('TEST-76237336-bba7-492c-900c-0bb592ae7b7c');
 
 const [preferenceId,setPreferenceId]= useState(null);
 const dispatch = useDispatch()
