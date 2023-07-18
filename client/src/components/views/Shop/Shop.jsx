@@ -2,12 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
-import Slider from 'rc-slider';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
+
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
-import FilterBarShop from "./filterBarShop"
+import FilterBarShop from "./FilterBarShop";
 import Modal from "../ventanaemergente/ventana";
 
 
@@ -18,6 +16,7 @@ function Shop () {
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
+    
     const productsCopy = useSelector((state) => state.productsCopy);
     const cart = useSelector((state)=> state.cart)
 
@@ -30,8 +29,7 @@ function Shop () {
 
     //const:
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
 
     //functions:
     const theme = (base) => {
@@ -101,18 +99,34 @@ function Shop () {
     };
 
 
-    // life-cycles:
+    //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
+        // if (!products.length) {
+        //     navigate("/IniciaSession");}
+
         if (!token) navigate("/IniciaSession");
 
         const initialCartTooltips = new Array(4).fill(false);
         setCartTooltips(initialCartTooltips);
     }, []);
-    
+
+   
+
+    //con lo de las rutas, el siguiente useEffect no tendria valor:
+    // useEffect(() => {
+    //     if (!token) navigate("/IniciaSession");
+    //     if (!products.length) dispatch(get_products_all());   
+    // }, [dispatch])
+
     useEffect(() => {
-        if (!products.length) dispatch(get_products_all());   
-    }, [dispatch])
+        const token = localStorage.getItem("accessToken")
+        if (token) {
+            if (!products.length) {
+                dispatch(get_products_all())
+            }
+        }
+    }, [products])
 
     // CART:
     useEffect(() => {
@@ -125,12 +139,14 @@ function Shop () {
         dispatch(set_cart())
     }, [])
 
+
+
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 6
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
     // indice:
     const pageNumbers = [];
@@ -154,10 +170,12 @@ function Shop () {
                     alt="mainBanner"
                 />
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
-                    PROGRAMMER'S GURU STORE
+                     TIENDA DE PROGRAMMER'S GURU 
                 </h1>
                 
             </section>
+        {/* SIDEBAR */}
+            <FilterBarShop/>
 
         {/* PAGINADO */}
             <div className={s.paginado}>
@@ -174,38 +192,25 @@ function Shop () {
                 }
             </div>
 
-        {/* SEARCHBAR */}
-            <div className={s.flex}>
-                <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
-                
-                <button className={`${s.searchButton}`} onClick={handleSearch}>
-                    <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"className="bi bi-search"viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-                </button>
-
-            </div>
-
             <section className={`${s.section3}`}>
-            {/* SIDEBAR */}
-               <FilterBarShop/>
 
             {/* PRODUCTS */}
                 <div className={`${s['productBox']}`}>
                     { 
                         currentAllProducts? currentAllProducts?.map((product, index) => {
-                            return (
+                            if (product?.stock > 0) { return (
                                 <div className={`${s['item']}`} key={index}>
                                     <div style={{display: "flex", flexDirection: "column"}}>
                                         <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                            <img className={s["itemImage"]} src={product.image}></img>
+                                            <img className={s["itemImage"]} src={product?.image}></img>
                                         </div>
                                         <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                            <h1 className={s["name"]} >{product.name}</h1>
+                                            <h1 className={s["name"]} >{product?.name}</h1>
                                         </div>
                                     </div>
                                     <div className={s.priceAndCart}>
-                                        <h1 className={s["price"]}>${product.price}</h1>
-                                        <button 
+                                        <h1 className={s["price"]}>${product?.price}</h1>
+                                        <button
                                             onMouseEnter={() => handleMouseEnter(index)}
                                             onMouseLeave={() => handleMouseLeave(index)}
                                             onClick={() => addToCart(product)}>
@@ -216,6 +221,21 @@ function Shop () {
                                     {
                                         cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
                                     }
+                                </div>
+                            )} else return (
+                                <div className={`${s['item']}`} key={index}>
+                                    <div style={{display: "flex", flexDirection: "column"}}>
+                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                            <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
+                                        </div>
+                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                            <h1 className={s["name"]} >{product?.name}</h1>
+                                        </div>
+                                    </div>
+                                    <div className={s.priceAndCart}>
+                                        <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
+                                        <p>No quendan existencias</p>
+                                    </div>
                                 </div>
                             )
                         }) : (

@@ -127,6 +127,8 @@ function CoursesCard () {
             <h2>Cursos encontrados : {allCourses.length}</h2>
 
             </div>
+
+            <div className={s.coursesBox}>
                 {
                     currentAllCourses ? currentAllCourses.map((course, index) => {
                         return (
@@ -179,6 +181,7 @@ function CoursesCard () {
                 }
 
                 </InfiniteScroll> */}
+            </div>
         </div>
     )
 }

@@ -14,7 +14,6 @@ import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 function Cart () {
 
     //global states:
-    const user = useSelector((state) => state.user);
     const cart = useSelector((state) => state.cart);
 
     //states:
@@ -25,6 +24,7 @@ function Cart () {
     //const:
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const email = localStorage.getItem("email")
 
     //function:
     const handleAddButton = (type, P) => {
@@ -90,7 +90,6 @@ function Cart () {
 
     //life-cycles:
     useEffect(() => {
-        const email = localStorage.getItem("email")
         if (email) setVentana(false);
     }, []);
 

@@ -5,8 +5,9 @@ const makeAdmin = async (req, res) => {
         const {email} = req.body;
         const user = await User.findOne({where: {email}})
         
+        if(user.admin) return res.json({message: "El usuario ya es administrador"})
         user.admin 
-        ? user.admin = false
+        ? user.admin = true
         : user.admin = true
         await user.save()
         return res.json({message: user.admin ? "El usuario ahora es administrador" : "El usuario ya no es administrador"})

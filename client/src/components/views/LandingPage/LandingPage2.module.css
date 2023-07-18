@@ -25,12 +25,13 @@
 
 .container {
   position: absolute;
-  left: 50%;
+  left:53.6%;
   transform: translateX(-50%);
   bottom: 20px;
   display: flex;
+  width: 40%;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -38,8 +39,9 @@
   .title {
     font-size: 100px;
     position: fixed;
-    top: 0;
+    top: -12%;
     left: 0;
+    padding-top: 5%;
     width: 100%;
     height: 100%;
     position: center;
@@ -57,32 +59,66 @@
     
   }
   .boton {
-   
     display: inline-block;
     border-radius: 4px;
     background-color: #28b0b4;
     border: none;
     color: #ffffff;
-    text-align: center;
     font-size: 28px;
     padding: 20px;
-    width: 200px;
+    width: 280px;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
+    text-decoration: none;
+  }
+  .boton1{
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #28b0b4;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    padding: 20px;
+    width: 280px;
+    height: 80px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    text-decoration: none;
   }
   
   .boton:hover {
     background-color: #0023944f;
     opacity: 1;
     padding-right: 425px;
-
+    
   }
   
-  .botoncontainer{
-    top: 50;
-    left: 50;
+  .boton1:hover{    background-color: #0023944f;
+    opacity: 1;
+    padding-right: 425px;
+    }
 
+  .botoncontainer{
+   
+   text-align:auto;
     width: 100px;
     height: 100px;
+    
   }
+  .sectionBanner {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    color:#1a936f;
+    width: 100%;
+    height:80%;
+   }
+  
+    .bannerImg {
+      width: 150px;
+      margin-right: 1%;
+      height:150px;
+      border-radius: 50%;
+    }

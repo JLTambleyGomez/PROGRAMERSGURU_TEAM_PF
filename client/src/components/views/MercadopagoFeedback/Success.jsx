@@ -36,14 +36,14 @@ function Success  () {
 
     //life-cycles:
     useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
+        const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
     },[])
 
 
     useEffect(() => {
         dispatch(get_User_By_Email(email));
-        console.log("este es el carrito:" + " " + cart);
+        console.log(cart);
         console.log("este es el email:" + " " + email)
     }, [])
 
@@ -55,8 +55,7 @@ function Success  () {
                 const status = searchParams.get("status");
                 const merchantOrderId = searchParams.get("merchant_order_id");
                 const { data } = await axios.get(
-                    `http://localhost:3001/Mp/feedbackmp?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}`
-                );
+                    `http://localhost:3001/Mp/feedbackmp?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}`, {email});
                 console.log(data)
                 setPaymentInfo(data);
             } catch (error) {
