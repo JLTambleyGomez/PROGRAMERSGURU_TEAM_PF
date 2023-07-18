@@ -37,7 +37,9 @@ function Products () {
         }
     }
 
-    const handlePostProducts = () => {}
+    const handlePostProducts = () => {
+        setPostProduct(true)
+    }
 
     //life-cycles:
     useEffect(() => {
@@ -62,6 +64,7 @@ function Products () {
 
                     <div className={`${styles.categoriesContainer}`}>
                         <h2>Productos</h2>
+                        {postProduct ? (<></>) : (<></>) }
                         <button onClick={handlePostProducts}>Agregar productos</button>
                         <div className={`${styles.categoriesBox}`}>
                             {
