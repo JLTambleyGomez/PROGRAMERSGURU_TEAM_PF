@@ -5,7 +5,7 @@ import { get_products_all, get_products_by_name, set_cart, sort_products, filter
 
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
-import FilterBarShop from "./filterBarShop";
+import FilterBarShop from "./FilterBarShop"
 import Modal from "../ventanaemergente/ventana";
 
 
