@@ -22,7 +22,6 @@ import {
 //FAVORITES:
     GET_FAVORITES,
 //USERS:
-    LOGIN,
     GET_USER_BY_EMAIL,
 //PRODUCTS
     GET_PRODUCTS,
@@ -38,7 +37,7 @@ import {
 //SHOPBAG
     TOGGLE_SHOPBAG,
 //METAMASK
-    METAMASK_ADDRESS,
+METAMASK_ADDRESS,
 //COMMENTS
     GET_COMMENTS_BY_USER,
     GET_COMMENTS_BY_COURSE,
@@ -161,9 +160,6 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case GET_FAVORITES:
             return { ...state, favorites: payload};
 
-        case LOGIN:
-            return { ...state, access: payload};
-
         case  DELETE_COURSE:
             return { ...state, message: payload};
 
@@ -231,18 +227,17 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 shopbag: payload
             }
-
+            
         case GET_COMMENTS_BY_USER:
             return{
                 ...state,
                 userComments: payload
-            }
-
+        }
         case GET_COMMENTS_BY_COURSE:
             return{
                 ...state,
                 courseComments: payload
-            }
+        }
         case METAMASK_ADDRESS:
             return{
                 ...state,

@@ -27,8 +27,9 @@ import {
     getSubscriptionsRequest,
     deleteSuscriptionRequest,
     putSuscriptionRequest,
-    postSuscriptionRequest
-    //products filters
+    postSuscriptionRequest,
+    //sendEmails
+    sendEmail,
     
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
@@ -66,7 +67,7 @@ import {
     export const POST_FAVORITE = "POST_FAVORITE" 
 
 //USER:
-    export const LOGIN = "LOGIN";
+    export const EDIT_USER_DATA = "EDIT_USER_DATA"
     export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
     export const SET_USER_EMAIL = "SET_USER_EMAIL";
     export const SET_TOKEN = "SET_TOKEN";
@@ -216,26 +217,6 @@ export const filter_courses_by_language = (language) => {
     }
 }
 
-
-//LOGIN NO EXISTE
-export const getloged = (userData) => {
-    return async function (dispatch) {
-        try {
-            const data = await login(userData); 
-            console.log(data)
-            return dispatch({
-                type: LOGIN,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: "get error",
-            });
-        }
-    };
-}
-
 export const filter_courses_by_price = (price) => {
     if (price === "true") {
         price = true
@@ -260,7 +241,6 @@ export const get_categories = () => { // request
     return async function (dispatch) {
         try {
             const data = await getCategoriesAllRequest(); 
-          
             return dispatch({
                 type: GET_CATEGORIES_ALL,
                 payload: data,
@@ -427,6 +407,7 @@ export const post_Products = (datos) => {
     return async (dispatch) => {
         try {
             const data = await postProductsRequest(datos) // request
+            console.log(data)
             return dispatch({
                 type: POST_PRODUCTS,
                 payload: data
@@ -523,7 +504,7 @@ export const toggle_shopbag = (status) => {
 }
 
 
-//COMMENTS_____________________________________________//
+//Comments
 
 export const get_comments_by_user = (userId)=>{
     return async function (dispatch) {
@@ -542,7 +523,7 @@ export const get_comments_by_user = (userId)=>{
     };
 }
 
-export const get_comments_by_course = (courseId) => {
+export const get_comments_by_course = (courseId)=>{
     return async function (dispatch) {
         try {
             const data = await getCommentsByCourse(courseId);
@@ -652,3 +633,4 @@ export const filter_product_by_price = (price) => {
         payload: price
     }
 }
+

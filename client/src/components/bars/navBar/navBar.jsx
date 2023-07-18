@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggle_shopbag, get_User_By_Email, get_Favorites_Request} from "../../../Redux/actions";
+import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -18,6 +18,8 @@ function NavBar ( { logoutUser } ) {
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
+
+    //states:
     const user = useSelector((state) => state.user);
     
     //const:
@@ -25,6 +27,7 @@ function NavBar ( { logoutUser } ) {
     const location = useLocation();
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
+    const token = sessionStorage.getItem("accessToken")
 
     //functions:
     const theme = (base) => {
@@ -45,6 +48,9 @@ function NavBar ( { logoutUser } ) {
     }, [user]) //testear con array vacio.
 
     useEffect(()=>{
+        if (token){
+            dispatch (get_products_all())
+        }
         dispatch(get_Favorites_Request(user.id))
     },[])
 

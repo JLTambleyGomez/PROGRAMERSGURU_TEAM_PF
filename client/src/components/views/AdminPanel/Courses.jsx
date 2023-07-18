@@ -33,7 +33,7 @@ function Courses() {
     language: "",
     categories: [],
   });
-
+  const [modificarCourse, setModificarCourse] = useState(false)
 
   //PARA PODER MODIFICAR EL CURSO
   const [modified, setModified] = useState(false)
@@ -61,6 +61,12 @@ function Courses() {
     event.preventDefault();
     dispatch(put_course(modifCourse))
     dispatch(get_courses_all());
+
+  }
+
+  //modificar curso
+  const handleModificarCurso  = (event) => {
+    setModificarCourse(true)
 
   }
 
@@ -197,6 +203,7 @@ function Courses() {
               <div className={`${styles.coursesBox}`}>
                 {courses.map((course) => (
                     <div className={`${styles.course}`} key={course.id}>
+                      <button onClick={handleModificarCurso}>Modificar Curso</button>
                       <p>ID: {course.id}</p> {course.title}
                       <p>Fecha De Lanzamiento {course.released} </p>
                       <button onClick={() => handleDeleteCourse(course.id)}>X</button>

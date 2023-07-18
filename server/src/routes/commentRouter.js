@@ -17,8 +17,6 @@ commentRouter.post("/:courseId", postComment);
 
 commentRouter.delete("/:id", deleteComment);
 
-commentRouter.delete("/:id", deleteComment);
-
 commentRouter.put("/:id", putComment);
 
 module.exports = commentRouter;

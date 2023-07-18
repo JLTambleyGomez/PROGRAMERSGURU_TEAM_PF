@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
@@ -8,14 +9,14 @@ import {
     get_courses_all,
     clearMessage,
     get_Favorites_Request,
-    get_User_By_Email,
+    // get_User_By_Email,
 } from "../../../Redux/actions";
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
-
+import axios from "axios"
 //_________________________module_________________________
 function HomePage () {
 
@@ -36,13 +37,16 @@ function HomePage () {
     // obtener el email
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
+    const sendEmail = async () => {
+        const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, {email: "calderon", message:"enviado"});
+      };
 
     //life-cycles:
     useEffect(() => {
-        dispatch(get_User_By_Email(email))
+        // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-        
+        sendEmail();
         //--desmontado
         return () => {
             dispatch(clearMessage());

@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 //HOST:
-const URL = "http://localhost:3001"
+const URL = ""
 
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
@@ -21,7 +21,7 @@ axios.interceptors.request.use(function (config) {
 
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
-  const { data } = await axios.get("http://localhost:3001/course");
+  const { data } = await axios.get("/course");
   return data;
 };
 
@@ -34,36 +34,37 @@ export const getEthvalue = async () =>{
 }
 
 export const getProductsRequest = async () => {
-  const { data } = await axios.get("http://localhost:3001/product");
+  const { data } = await axios.get("/product");
   return data;
 };
 
-export const postProductsRequest = async () => {
-  const { data } = await axios.get("http://localhost:3001/product");
+
+export const postProductsRequest = async (product) => {
+  const { data } = await axios.get("http://localhost:3001/product", product);
   return data;
 };
 
 export const deleteProductsRequest = async (id) => {
-  const { data } = await axios.delete(`http://localhost:3001/product/${id}`);
+  const { data } = await axios.delete(`/product/${id}`);
   return data;
 };
 
 //////////////   PUT PRODUCTS   ////////////
 export const putProductsRequest = async (id, product) => {
-  const {data} = await axios.put(`http://localhost:3001/product/${id}`, product)
+  const {data} = await axios.put(`/product/${id}`, product)
   return data;
 
 }
 
 export const postCourseRequest = async (datos) => {
-  const { data } = await axios.post("http://localhost:3001/course", datos);
+  const { data } = await axios.post("/course", datos);
   return data;
 };
 
 export const getCoursesByNameRequest = async (name) => {
   try {
     const response = await axios.get(
-      `http://localhost:3001/course/title?title=${name}`
+      `/course/title?title=${name}`
     );
     return response.data;
   } catch (error) {
@@ -74,59 +75,59 @@ export const getCoursesByNameRequest = async (name) => {
 
 export const getCoursesByIdRequest = async (id) => {
   console.log(id);
-  const { data } = await axios.get(`http://localhost:3001/course/${id}`);
+  const { data } = await axios.get(`/course/${id}`);
 
   return data;
 };
 
 ///////////// PUT COURSE ////////////
 export const putCourseRequest = async (id,course)=>{
-  const {data} = await axios.put(`http://localhost:3001/course/${id}`, course)
+  const {data} = await axios.put(`/course/${id}`, course)
   return data;
 }
 
 //CATEGORIES______________________________
 export const getCategoriesAllRequest = async () => {
-  const { data } = await axios("http://localhost:3001/technology");
+  const { data } = await axios("/technology");
   return data;
 };
 
 export const postCategoriesRequest = async (technology) => {
   const { data } = await axios.post(
-    "http://localhost:3001/technology",
+    "/technology",
     technology
   );
   return data;
 };
 
 export const deleteCategoriesRequest = async (id) => {
-  const { data } = await axios.delete(`http://localhost:3001/technology/${id}`);
+  const { data } = await axios.delete(`/technology/${id}`);
   return data;
 };
 export const deleteCourseRequest = async (id) => {
-  const { data } = await axios.delete(`http://localhost:3001/course/${id}`);
+  const { data } = await axios.delete(`/course/${id}`);
   return data;
 };
 
 /////////////////////////////////////////////////////////////////////////////////
 // SUBSCRIPTIONS
 export const getSubscriptionsRequest = async () => {
-  const {data} = await axios.get("http://localhost:3001/subscription")
+  const {data} = await axios.get("/subscription")
   return data;
 }
 
 export const deleteSuscriptionRequest = async (id) => {
-  const {data} = axios.delete(`http://localhost:3001/subscription/${id}`)
+  const {data} = axios.delete(`/subscription/${id}`)
   return data;
 }
 
 export const putSuscriptionRequest = async (id, suscription) => {
-  const {data} = axios.put(`http://localhost:3001/subscription/${id}`, suscription)
+  const {data} = axios.put(`/subscription/${id}`, suscription)
   return data;
 }
 
 export const postSuscriptionRequest = async (suscription) => {
-  const {data} = axios.post("http://localhost:3001/subscription",suscription)
+  const {data} = axios.post("/subscription",suscription)
   return data;
 }
 //PRODUCTS_______________________________
@@ -139,25 +140,53 @@ export const getProductsByNameRequest = async (name) => {
 //FAVORITES______________________________
 
 export const getFavoritesRequest = async (id) => {
-  const { data } = await axios.get(`http://localhost:3001/favorite/${id}`);
+  const { data } = await axios.get(`/favorite/${id}`);
   const cursos = data[0].Courses;
   return cursos;
 };
 
-export const postFavoritesRequest = async (ids) => {
-  const {data} = await axios.post("http://localhost:3001/favorite", ids);
-
+export const postFavoritesRequest = async () => {
+  const ids = { idCourse: id, idUser: 1 };
+  await axios.post("/favorite", ids);
+  setFav(true);
 };
 
 export const deleteFavoritesRequest = async () => {
-  const {data} = await axios.delete(`http://localhost:3001/favorite/${id}`);
-};
+  await axios.delete(`/favorite/${id}`);
+  setFav(false);
+}
+
+// export const postFavoritesRequest = async (ids) => {
+//   const {data} = await axios.post("http://localhost:3001/favorite", ids);
+// };
+
+// export const deleteFavoritesRequest = async () => {
+//   const {data} = await axios.delete(`http://localhost:3001/favorite/${id}`)
+// };
 
 //user______________________________
 
 export const getUserByEmailRequest = async (email) => {
-  const { data } = await axios.get(`http://localhost:3001/user/?email=${email}`);
+  const { data } = await axios.get(`/user/?email=${email}`);
   return data;
+};
+
+export const editUserData = async (userData) => {
+  const { data } = await axios.put('/user/profile', userData);
+  return data;
+};
+
+export const postUserRequest = async (userData) => {
+  try {
+      const { data } = await axios.post(
+          "/user/signup",
+          userData
+      );
+      return data.message;
+  } catch (error) {
+      console.log(error);
+      return console.log(error.message);
+  }
 };
 
 export const getAllUsersRequest = async () => {
@@ -175,10 +204,10 @@ export const putUserRequest = async ( user) => {
   return data 
 }
 
-export const postUserRequest = async (user) => {
-  const {data} = await axios.post(`http://localhost:3001/user/signup`, user)
-  return data
-}
+// export const postUserRequest = async (user) => {
+//   const {data} = await axios.post(`http://localhost:3001/user/signup`, user)
+//   return data
+// }
 
 export const hideUserProfileRequest = async (user) => {
   const {data} = await axios.put(`http://localhost:3001/user/hide`, user)
@@ -190,21 +219,29 @@ export const adminUserRequest = async (user) => {
   return data
 }
 
+
 //MERCADOPAGO______________________________
 
 export const createOrder = async () => {
-  const { data } = await axios.post("http://localhost:3001/create-order"); // agregar array de productos para postear, y modificar el controlador en el back.
+  const { data } = await axios.post("/create-order"); // agregar array de productos para postear, y modificar el controlador en el back.
   return data;
 };
 
 //Comments
 
 export const getCommentsByUser = async (userId) => {
-  const { data } = await axios.get(`http://localhost:3001/comment/${userId}`);
+  const { data } = await axios.get(`/comment/${userId}`);
   return data;
 };
 
 export const getCommentsByCourse = async (courseId) => {
-  const { data } = await axios.get(`http://localhost:3001/comment/${courseId}`);
+  const { data } = await axios.get(`/comment/${courseId}`);
+  return data;
+};
+
+//Post email_______________________//
+
+export const sendEmail = async (carta) => {
+  const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, carta);
   return data;
 };
