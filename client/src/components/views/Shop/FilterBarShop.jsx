@@ -14,7 +14,7 @@ function FilterBarShop () {
     const products = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
   
-    console.log(productsCopy)    
+    console.log(productsCopy)
     console.log(products)
 
     //states:
@@ -31,15 +31,15 @@ function FilterBarShop () {
     // const price = productsCopy.length && productsCopy.filter(product => product.price)
 
     const mayor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
-        return +productoActual.price > +productoMayor.price ? productoActual : productoMayor;
+        return +productoActual?.price > +productoMayor?.price ? productoActual : productoMayor;
     });
 
     const menor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
-        return +productoActual.price < +productoMayor.price ? productoActual : productoMayor;
+        return +productoActual?.price < +productoMayor?.price ? productoActual : productoMayor;
     });
 
-    const mayorPrice = +mayor.price
-    const menorPrice = +menor.price
+    const mayorPrice = +mayor?.price
+    const menorPrice = +menor?.price
 
 
     //functions:
@@ -107,7 +107,7 @@ function FilterBarShop () {
     //component:
     return (
         <div className={`${s.sidebar}`}>
-                <div>
+                <div className={s.option}>
                     <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
                     { isVisibleSortByName && (
                         // value = {order}
@@ -118,10 +118,10 @@ function FilterBarShop () {
                         </select>
                     )}
                 </div> 
-                <div> 
+                <div className={s.option}> 
                     <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
                     {
-                        isVisiblePrice && (
+                        true && (
                             <div className={`${s.filterPrice}`}>
                                 <Slider
                                     className={`${s["filterPriceSlider"]}`}
@@ -136,9 +136,10 @@ function FilterBarShop () {
                         ) 
                     }
                 </div>
-                <div className={`${s.filterOption}`}>
+                <div className={s.option}>
                     <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
                         <select onChange={handleCategory}>
+                            <option value="">Categoría</option>
                             { categories.length &&
                                 categories.map((category, index) => {
                                     return <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>

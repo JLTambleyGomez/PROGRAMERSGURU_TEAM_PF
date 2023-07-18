@@ -32,8 +32,8 @@ function Shop () {
 
     //const:
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+    const token = localStorage.getItem("accessToken")
 
     //functions:
     const theme = (base) => {
@@ -105,16 +105,27 @@ function Shop () {
 
     //life-cycles:
     useEffect(() => {
-        const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession");
 
         const initialCartTooltips = new Array(4).fill(false);
         setCartTooltips(initialCartTooltips);
     }, []);
-    
+
     useEffect(() => {
-        if (!products.length) dispatch(get_products_all());   
-    }, [dispatch])
+        if (token) {
+            if (!products.length) {
+                dispatch(get_products_all())
+            }
+        }
+    }, [products])
+
+    useEffect(() => {
+        if (!products.length) navigate("/IniciaSession");
+    }, [products])
+    
+    // useEffect(() => {
+    //     if (!products.length) dispatch(get_products_all());
+    // }, [dispatch])
 
     // CART:
     useEffect(() => {
@@ -132,7 +143,7 @@ function Shop () {
     const productsPerPage = 6
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
     // indice:
     const pageNumbers = [];
