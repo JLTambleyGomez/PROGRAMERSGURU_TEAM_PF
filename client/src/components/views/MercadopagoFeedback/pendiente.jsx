@@ -10,13 +10,12 @@ function MercadoPagoPendiente () {
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const email = localStorage.getItem("email");
+    const token = localStorage.getItem("accessToken");
 
     //life-cycles:
     useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
     },[])
-
 
     useEffect(() => {
         dispatch(get_User_By_Email(email))

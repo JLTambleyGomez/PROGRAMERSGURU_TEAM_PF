@@ -2,25 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_categories, post_categories, delete_categories, clearMessage } from "../../../Redux/actions";
 import validate from "./validate";
-import styles from "./AdminPanel.module.css";
+import styles from "./Categories.module.css";
 
 const Categories = () => {
-  // global state:
+  // Global state:
   const categories = useSelector((state) => state.categories);
   const dark = useSelector((state) => state.darkMode);
   const dispatch = useDispatch();
 
-  // states:
+  // States:
   const [inputCategory, setInputCategory] = useState({ category: "" });
   const [error, setError] = useState({});
   const [backmessage, setbackmessage] = useState("");
+  const [showitem, setShowitem] = useState(true);
 
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
     return `${base}-${suffix}`;
   };
 
-  const hadleInputChange = (event) => {
+  const handleInputChange = (event) => {
     setbackmessage("");
     const { value } = event.target;
     setInputCategory({ category: value });
@@ -61,44 +62,43 @@ const Categories = () => {
   }, [dispatch]);
 
   return (
-    <div className={styles.contain}>
-      <div>
-      </div>
-      <section className={`${styles.Panel}`}>
-        <form className={`${styles.categoriesForm}`}>
-          <span className={`${styles.categoriesPostBar}`}>
-            <input
-              className={`${styles.categoriesInput}`}
-              onChange={hadleInputChange}
-              value={inputCategory.category}
-              name="name"
-              placeholder="Ingresa el nombre de la categoria"
-            />
-            <button className={`${styles.categoriesPostButton}`} onClick={handlePostCategories}>
-              Postear categorias
-            </button>
-            {backmessage && <p>{backmessage}</p>}
-          </span>
-          <span>{error && <p>{error.category}</p>}</span>
-        </form>
+    <div className={styles.container}>
+      {showitem && (
+        <section className={styles.item}>
+          <form>
+            <span>
+              <input
+                onChange={handleInputChange}
+                value={inputCategory.category}
+                name="name"
+                placeholder="Ingresa el nombre de la categoría"
+              />
+              <button onClick={handlePostCategories}>
+                Postear categorías
+              </button>
+              {backmessage && <p>{backmessage}</p>}
+            </span>
+            <span>{error && <p>{error.category}</p>}</span>
+          </form>
 
-        <div className={`${styles.categoriesContainer}`}>
-          <h2>Categories</h2>
-          <div className={`${styles.categoriesBox}`}>
-            {categories &&
-              categories?.map((category, index) => (
-                <span className={`${styles.category}`} key={index}>
-                  <label>
-                    {category.id} : {category.name}
-                  </label>
-                  <button className={`${styles.deleteCategoryButton}`} onClick={() => deleteCategory(category.id)}>
-                    X
-                  </button>
-                </span>
-              ))}
+          <div>
+            <h2>Categories</h2>
+            <div>
+              {categories &&
+                categories?.map((category, index) => (
+                  <span key={index}>
+                    <label>
+                      {category.id} : {category.name}
+                    </label>
+                    <button onClick={() => deleteCategory(category.id)}>
+                      X
+                    </button>
+                  </span>
+                ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

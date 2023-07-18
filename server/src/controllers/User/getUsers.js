@@ -3,7 +3,7 @@ const { User } = require('../../db');
 const getUsers = async (req, res) => {
   try {
     const users = await User.findAll();
-    if(!users) { 
+    if(!users.length) { 
       return res.status(404).json({ message: "No existe ese usuario" })
     } 
     return res.status(200).json(users);

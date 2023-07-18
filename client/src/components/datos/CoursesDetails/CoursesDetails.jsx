@@ -12,6 +12,7 @@ function CourseDetails () {
     //global states:
     const course = useSelector((state) => state.allCourses);
     const favorites = useSelector((state) => state.favorites);
+    const user= useSelector((state)=> state.user)
     const dark = useSelector((state)=> state.darkMode);
 
     //states:
@@ -34,13 +35,13 @@ function CourseDetails () {
 
     //esto es para renderizar y dar funcion a un boton que agrege un favorito
     const postFavoritesRequest = async () => {
-        const ids={idCourse:id, idUser:1}
-        await axios.post("http://localhost:3001/favorite", ids)
+        const ids={idCourse:id, idUser:user.id}
+        const {data} = await axios.post("http://localhost:3001/favorite", ids)
         setFav(true)
     }
 
     const deleteFavoritesRequest = async () => {
-        await axios.delete(`http://localhost:3001/favorite/${id}`);
+        const {data}= await axios.delete(`http://localhost:3001/favorite/${id}`);
         setFav(false)
     }
     console.log(favorites)

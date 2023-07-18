@@ -23,8 +23,13 @@ import {
 //comments
     getCommentsByCourse,
     getCommentsByUser,
-
-    //products filters
+//suscriptions
+    getSubscriptionsRequest,
+    deleteSuscriptionRequest,
+    putSuscriptionRequest,
+    postSuscriptionRequest,
+    //sendEmails
+    sendEmail,
     
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
@@ -57,6 +62,9 @@ import {
 
 //FAVORITES:
     export const GET_FAVORITES = "GET_FAVORITES";
+    export const DELETE_FAVORITE = "DELETE_FAVORITE";
+    export const PUT_FAVORITE = 'PUT_FAVORITE'
+    export const POST_FAVORITE = "POST_FAVORITE" 
 
 //USER:
     export const EDIT_USER_DATA = "EDIT_USER_DATA"
@@ -336,6 +344,28 @@ export const get_Favorites_Request = (id) => { //hace un req por cursos por nomb
     };
 }
 
+// export const delete_favorite = (id) => {
+
+//         return async (dispatch) => {
+//             try {
+//                 const data = await de(id); // request
+//                 return dispatch({
+//                     type: GET_FAVORITES,
+//                     payload: data,
+//                 });
+//             } catch (error) {
+//                 return dispatch({
+//                     type: ERROR,
+//                     payload: error.message,
+//                 });
+//             }
+//         };
+//     }
+
+// export const put_favorite = (id, favorite) =>{}
+
+// export const post_favorite =(favorite) =>{}
+
 
 //PRODUCTS_____________________________________________//
 
@@ -376,7 +406,8 @@ export const get_products_by_name = (name) => {
 export const post_Products = (datos) => {
     return async (dispatch) => {
         try {
-            const data = await postProducts(datos) // request
+            const data = await postProductsRequest(datos) // request
+            console.log(data)
             return dispatch({
                 type: POST_PRODUCTS,
                 payload: data
@@ -554,10 +585,10 @@ export const put_suscription = (id,suscription) => {
     }
 }
 
-export const delete_suscription = () => {
+export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
-            const data = await deleteSuscriptionRequest()
+            const data = await deleteSuscriptionRequest(id)
             return dispatch ({
                 type: DELETE_SUSCRIPTION,
                 payload: data   
@@ -602,3 +633,4 @@ export const filter_product_by_price = (price) => {
         payload: price
     }
 }
+

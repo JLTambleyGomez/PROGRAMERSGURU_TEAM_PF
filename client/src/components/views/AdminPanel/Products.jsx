@@ -15,21 +15,10 @@ function Products () {
     //const:
     const dispatch = useDispatch();
 
-    console.log(products)
-
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
-
-    const handleProductPost = (event) => {
-        event.preventDefault();
-        // dispatch(post_Products())
-        
-    }
-
-
+    const[postProduct, setPostProduct] = useState(false)
+    const[messagePost, setMessagePost] = useState(false)
+    const[newProduct, setNewProduct] = useState({name:'', price:'', description:'', image:'', category:'',stock:''})
+    const[errorProduct, setErrorProduct] = useState({name:'', price:'', description:'', image:'', category:'',stock:''})
 
     const handleProductDelete =(id)=>{
         try {
@@ -38,6 +27,60 @@ function Products () {
         } catch (error) {
             console.log("error");
         }
+    }
+
+    ///valida los cambios en los inputs
+    const handleChangeProductForm = (event) => {
+        const name = event.target.name;
+        const value = event.target.value
+
+        console.log(name)
+        console.log(value)
+
+        setNewProduct({...newProduct, [name]: value})
+        setErrorProduct(validateProduct({...newProduct, [name]: value}))
+    }
+
+    //validacion del formulario
+    const validateProduct = (form) => {
+        const error = {}
+
+        if(!form.name.length) error.name = 'Debe agregar un nombre válido'
+        else if(form.name.length) error.name = ''
+
+        if(!form.description.length) error.description = 'Debe agregar una descripción válida'
+        else if(form.description.length) error.description = ''
+
+        if(form.price < 0) error.price = 'Debe ingresar un precio válido'
+        else if(form.price.length) error.price = ''
+        
+        if(!form.image.length) error.image = 'Debe ingresar una imagen'
+        else if(form.image.length) error.image = ''
+        
+        if(!form.category.length) error.category = 'Debe ingresar una categoria'
+        else if(form.category.length) error.category = ''
+        
+        if(form.stock < 0) error.stock = 'Debe ingresar el stock'
+        else if(form.stock.length) error.stock = ''
+        
+        return error
+    }
+        
+    //cambia el estado para desplegar el formulario
+    const handlePostProducts = () => {
+        setPostProduct(true)
+    }
+
+
+    //Postea el producto en la db
+    const handleProductSubmit = (event) => {
+        event.preventDefault()
+        
+        dispatch(post_Products(newProduct))
+        dispatch(get_products_all());
+        setMessagePost(true)
+        setPostProduct(false)
+        
     }
 
     //life-cycles:
@@ -58,12 +101,58 @@ function Products () {
             <div className={styles.contain} >
             <div>
                  </div>
-                <section className={`${styles.Panel}`}>
+                <section >
                   
 
-                    <div className={`${styles.categoriesContainer}`}>
+                    <div >
                         <h2>Productos</h2>
-                        <div className={`${styles.categoriesBox}`}>
+                        {
+                            postProduct 
+                            ? 
+                                (<>
+                                    <form>
+                                        <div>
+                                            <label htmlFor="name">Nombre: </label> 
+                                            <input name="name" value={newProduct.name} onChange={handleChangeProductForm}/>
+                                            {errorProduct.name && (<span>{errorProduct.name}</span>)}
+                                        </div>
+
+                                        <div>
+                                            <label  htmlFor="description">Descripción: </label> 
+                                            <input name='description' value={newProduct.description} onChange={handleChangeProductForm} />
+                                            {errorProduct.description && (<span>{errorProduct.description}</span>)}
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="price">Precio: </label> 
+                                            <input name='price' value={newProduct.price} onChange={handleChangeProductForm} type="number" />
+                                            {errorProduct.price && (<span>{errorProduct.price}</span>)}
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="image">Imagen: </label> 
+                                            <input name='image'value={newProduct.image} onChange={handleChangeProductForm} />
+                                            {errorProduct.image && (<span>{errorProduct.image}</span>)}
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="category">Categoria: </label> 
+                                            <input name='category' value={newProduct.category} onChange={handleChangeProductForm} />
+                                            {errorProduct.category && (<span>{errorProduct.category}</span>)}
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="stock">Stock: </label> 
+                                            <input name='stock' value={newProduct.stock} onChange={handleChangeProductForm} type="number" />
+                                            {errorProduct.stock && (<span>{errorProduct.stock}</span>)}
+                                        </div>
+                                        <button onClick={handleProductSubmit}>Postear Producto</button>
+                                    </form>
+                                
+                                </>) 
+                            : (<button onClick={handlePostProducts}>Agregar productos</button>) }
+                        {messagePost && (<span>Se posteo con éxito, creo...</span>)}
+                        <div >
                             {
                                 products?.map((product, index) => {
                                     return (
@@ -75,7 +164,7 @@ function Products () {
                                                <p>{product.category}</p> 
                                                
                                                </label>
-                                            <button className={`${styles.deleteCategoryButton}`} onClick={() => handleProductDelete(product.id)}>X</button>
+                                            <button  onClick={() => handleProductDelete(product.id)}>X</button>
                                         </span>
                                     )
                                 })

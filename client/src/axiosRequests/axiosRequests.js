@@ -38,8 +38,9 @@ export const getProductsRequest = async () => {
   return data;
 };
 
-export const postProductsRequest = async () => {
-  const { data } = await axios.get("/product");
+
+export const postProductsRequest = async (product) => {
+  const { data } = await axios.get("http://localhost:3001/product", product);
   return data;
 };
 
@@ -153,6 +154,14 @@ export const postFavoritesRequest = async () => {
 export const deleteFavoritesRequest = async () => {
   await axios.delete(`/favorite/${id}`);
   setFav(false);
+
+export const postFavoritesRequest = async (ids) => {
+  const {data} = await axios.post("http://localhost:3001/favorite", ids);
+
+};
+
+export const deleteFavoritesRequest = async () => {
+  const {data} = await axios.delete(`http://localhost:3001/favorite/${id}`
 };
 
 //user______________________________
@@ -180,6 +189,37 @@ export const postUserRequest = async (userData) => {
   }
 };
 
+export const getAllUsersRequest = async () => {
+  const {data} = await axios.get(`http://localhost:3001/user/all`)
+  return data
+}
+
+// export const deleteUserRequest = async (id) => {
+//   const {data} = await axios.delete(`http://localhost:3001/user/${id}`)
+//   return data
+// }
+
+export const putUserRequest = async ( user) => {
+  const {data} = await axios.put(`http://localhost:3001/user/profile`, user )
+  return data 
+}
+
+export const postUserRequest = async (user) => {
+  const {data} = await axios.post(`http://localhost:3001/user/signup`, user)
+  return data
+}
+
+export const hideUserProfileRequest = async (user) => {
+  const {data} = await axios.put(`http://localhost:3001/user/hide`, user)
+  return data
+}
+
+export const adminUserRequest = async (user) => {
+  const {data} =  await axios.put(`http://localhost:3001/user/admin`, user)
+  return data
+}
+
+
 //MERCADOPAGO______________________________
 
 export const createOrder = async () => {
@@ -196,5 +236,12 @@ export const getCommentsByUser = async (userId) => {
 
 export const getCommentsByCourse = async (courseId) => {
   const { data } = await axios.get(`/comment/${courseId}`);
+  return data;
+};
+
+//Post email_______________________//
+
+export const sendEmail = async (carta) => {
+  const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, carta);
   return data;
 };

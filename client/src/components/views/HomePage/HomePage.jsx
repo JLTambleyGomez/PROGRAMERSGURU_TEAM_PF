@@ -22,7 +22,6 @@ function HomePage () {
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
-
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
@@ -37,12 +36,16 @@ function HomePage () {
     // obtener el email
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
+    const sendEmail = async () => {
+        const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, {email: "calderon", message:"enviado"});
+      };
 
     //life-cycles:
     useEffect(() => {
         // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
+        sendEmail();
         //--desmontado
         return () => {
             dispatch(clearMessage());
