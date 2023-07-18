@@ -58,7 +58,6 @@ const Subscriptions = () =>{
         if(!form.type.length) error.type=  'Debe ingresar un tipo de suscripción'
         else if(form.type.length) error.type=  ''
 
-
         return error
     }
 
@@ -72,7 +71,7 @@ const Subscriptions = () =>{
         dispatch(get_suscriptions())
     },[])
 
-    
+
     //component:
     return (
         <div>

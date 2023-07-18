@@ -36,13 +36,16 @@ function HomePage () {
     // obtener el email
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
+    const sendEmail = async () => {
+        const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, {email: "calderon", message:"enviado"});
+      };
 
     //life-cycles:
     useEffect(() => {
         dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-        
+        sendEmail();
         //--desmontado
         return () => {
             dispatch(clearMessage());

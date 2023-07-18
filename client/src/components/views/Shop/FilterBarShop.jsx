@@ -6,7 +6,7 @@ import { get_products_all, get_products_by_name, get_categories, sort_products, 
 import s from "./FilterBarShop.module.css";
 
 //_________________________module_________________________
-function FilterBarShop () {
+const FilterBarShop =() =>{
    
 
     //global states:
@@ -31,15 +31,15 @@ function FilterBarShop () {
     // const price = productsCopy.length && productsCopy.filter(product => product.price)
 
     const mayor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
-        return +productoActual.price > +productoMayor.price ? productoActual : productoMayor;
+        return +productoActual?.price > +productoMayor?.price ? productoActual : productoMayor;
     });
 
     const menor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
-        return +productoActual.price < +productoMayor.price ? productoActual : productoMayor;
+        return +productoActual?.price < +productoMayor?.price ? productoActual : productoMayor;
     });
 
-    const mayorPrice = +mayor.price
-    const menorPrice = +menor.price
+    const mayorPrice = mayor?.price ? mayor?.price : 1000
+    const menorPrice = menor?.price ? menor?.price : 0
 
 
     //functions:

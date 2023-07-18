@@ -31,33 +31,47 @@ const  AdminPanel =() =>{
         return `${base}-${suffix}`;
     };
 
-
-    const handleShowCategories = (event) =>{
+    const handleShowCategories = (event) => {
         event.preventDefault();
-        if (showcategories === false) setshowcategories(true);
-        else setshowcategories(false);
-    }
-
-    const handleShowCursos = (event) =>{
-        if (showcursos === false) setshowcursos(true);
-        else setshowcursos(false);
-    }
-
-    const handleShowProducts = (event) =>{
-      if (showproducts === false) setshowproducts(true);
-      else setshowproducts(false);
-    }
-
-    const handleShowUsers=(event)=>{
-        if (showUsers===false) setShowUsers(true)
-        else setShowUsers(false)
-    }
-
-    const handleShowSubscription = (event) => {
-        if (showSubscriptions===false) setShowSubscriptions(true)
-        else setShowSubscriptions(false)
-    }
- 
+        setshowcategories(!showcategories);
+        setshowcursos(false);
+        setshowproducts(false);
+        setShowUsers(false);
+        setShowSubscriptions(false);
+      }
+      
+      const handleShowCursos = (event) => {
+        setshowcursos(!showcursos);
+        setshowcategories(false);
+        setshowproducts(false);
+        setShowUsers(false);
+        setShowSubscriptions(false);
+      }
+      
+      const handleShowProducts = (event) => {
+        setshowproducts(!showproducts);
+        setshowcategories(false);
+        setshowcursos(false);
+        setShowUsers(false);
+        setShowSubscriptions(false);
+      }
+      
+      const handleShowUsers = (event) => {
+        setShowUsers(!showUsers);
+        setshowcategories(false);
+        setshowcursos(false);
+        setshowproducts(false);
+        setShowSubscriptions(false);
+      }
+      
+      const handleShowSubscription = (event) => {
+        setShowSubscriptions(!showSubscriptions);
+        setshowcategories(false);
+        setshowcursos(false);
+        setshowproducts(false);
+        setShowUsers(false);
+      }
+      
 
     //life-cycles:
     useEffect(() => {
@@ -83,45 +97,47 @@ const  AdminPanel =() =>{
 
             <div className={styles.message}>Respuesta desde Servidor: {message}</div>
 
-            <div className={styles.contain} >
             <div>
-                <button className={`${styles.mainButton}`} onClick={handleShowCategories} >
-                    <h1 className={`${styles.h1}`}>ADMINISTRAR CATEGORIAS</h1>
+                <button onClick={handleShowCategories} >
+                    <h1 className={styles.h1} >ADMINISTRAR CATEGORIAS</h1>
                 </button>
                 {showcategories&&(<Categories></Categories>)}
+            
+            <div/>
 
-                <button className={`${styles.mainButton}`} onClick={handleShowCursos}>
+            <div>   
+        
+          <button onClick={handleShowCursos}>
                     <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
                 </button>
-            </div>
-            {showcursos && (
+                {showcursos && (
                <Courses></Courses>
-            )}
+            )}</div>
+            
 
               <div>
-                <button className={`${styles.mainButton}`} onClick={handleShowProducts}>
+                <button onClick={handleShowProducts}>
                     <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
                 </button>
-                 </div>
                  {showproducts&& ( 
               <Products></Products>
             )}
               </div>
 
               <div>
-                <button className={`${styles.mainButton}`} onClick={handleShowUsers}>
+                <button  onClick={handleShowUsers}>
                     <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
                 </button>
                 {showUsers && (<User></User>)}
               </div>
 
               <div>
-                <button className={`${styles.mainButton}`} onClick={handleShowSubscription}>
+                <button  onClick={handleShowSubscription}>
                     <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
                 </button>
                 {showSubscriptions && (<Subscriptions></Subscriptions>)}
               </div>
-              
+              </div>
         </div>
     );
 };

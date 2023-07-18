@@ -3,10 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
 
-import Slider from 'rc-slider';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
 import FilterBarShop from "./filterBarShop";
@@ -20,6 +16,7 @@ function Shop () {
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
+    
     const productsCopy = useSelector((state) => state.productsCopy);
     const cart = useSelector((state)=> state.cart)
 
@@ -32,8 +29,7 @@ function Shop () {
 
     //const:
     const dispatch = useDispatch();
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
 
     //functions:
     const theme = (base) => {
@@ -106,15 +102,31 @@ function Shop () {
     //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
+        // if (!products.length) {
+        //     navigate("/IniciaSession");}
+
         if (!token) navigate("/IniciaSession");
 
         const initialCartTooltips = new Array(4).fill(false);
         setCartTooltips(initialCartTooltips);
     }, []);
-    
+
+   
+
+    //con lo de las rutas, el siguiente useEffect no tendria valor:
+    // useEffect(() => {
+    //     if (!token) navigate("/IniciaSession");
+    //     if (!products.length) dispatch(get_products_all());   
+    // }, [dispatch])
+
     useEffect(() => {
-        if (!products.length) dispatch(get_products_all());   
-    }, [dispatch])
+        const token = localStorage.getItem("accessToken")
+        if (token) {
+            if (!products.length) {
+                dispatch(get_products_all())
+            }
+        }
+    }, [products])
 
     // CART:
     useEffect(() => {
@@ -127,12 +139,14 @@ function Shop () {
         dispatch(set_cart())
     }, [])
 
+
+
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 6
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentAllProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
     // indice:
     const pageNumbers = [];
@@ -184,19 +198,19 @@ function Shop () {
                 <div className={`${s['productBox']}`}>
                     { 
                         currentAllProducts? currentAllProducts?.map((product, index) => {
-                            return (
+                            if (product?.stock > 0) { return (
                                 <div className={`${s['item']}`} key={index}>
                                     <div style={{display: "flex", flexDirection: "column"}}>
                                         <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                            <img className={s["itemImage"]} src={product.image}></img>
+                                            <img className={s["itemImage"]} src={product?.image}></img>
                                         </div>
                                         <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                            <h1 className={s["name"]} >{product.name}</h1>
+                                            <h1 className={s["name"]} >{product?.name}</h1>
                                         </div>
                                     </div>
                                     <div className={s.priceAndCart}>
-                                        <h1 className={s["price"]}>${product.price}</h1>
-                                        <button 
+                                        <h1 className={s["price"]}>${product?.price}</h1>
+                                        <button
                                             onMouseEnter={() => handleMouseEnter(index)}
                                             onMouseLeave={() => handleMouseLeave(index)}
                                             onClick={() => addToCart(product)}>
@@ -207,6 +221,21 @@ function Shop () {
                                     {
                                         cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
                                     }
+                                </div>
+                            )} else return (
+                                <div className={`${s['item']}`} key={index}>
+                                    <div style={{display: "flex", flexDirection: "column"}}>
+                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                            <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
+                                        </div>
+                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                            <h1 className={s["name"]} >{product?.name}</h1>
+                                        </div>
+                                    </div>
+                                    <div className={s.priceAndCart}>
+                                        <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
+                                        <p>No quendan existencias</p>
+                                    </div>
                                 </div>
                             )
                         }) : (

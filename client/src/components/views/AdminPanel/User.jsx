@@ -39,7 +39,7 @@ const User =()=>{
     //boton para modificar
     const handleModificar = (event) => {
         const idUser = event.target.value
-        const modificar = evetn.target.name
+        const modificar = event.target.name
 
         if(modificar === 'datos') {
             console.log(modificar)

@@ -3,6 +3,9 @@ const mercadoPago = require("mercadopago");
 const nodemailer= require("nodemailer")
 //const { Payment } = require("../db"); 
 require("dotenv").config();
+const OUR_EMAIL = process.env.OUR_EMAIL;
+const OUR_PASSWORD = process.env.OUR_PASSWORD;
+
 
 mercadoPago.configure({
   access_token: "TEST-7366931760156988-071417-9f721ac6bad881e7546f0df180920193-1423375235",
@@ -42,19 +45,21 @@ const PagoconMercadopago = async (req, res) => {
 
 
 const FeedbackMercadoPago = async (req, res) => {
+
+  const {email}= req.body;
   var transtorpe= nodemailer.createTransport({//crea un "transporte", se usa para indicar quien lo envia
         host:"smtp.gmail.com",
         port:465,
         secure:true, //debe ser true sí el port es 465
         auth:{
-            user:"caldesanche@gmail.com",
-            pass:"uwnehfrwtlqehqlo" //contraseña de app
+            user: `${OUR_EMAIL}`,
+            pass: `${OUR_PASSWORD}` //contraseña de app
         }
     })
 
     const destino={//la info y el destinatario
         from:"yo",
-        to:"jorgetambleygomez@gmail.com",
+        to: email,
         subject:"notificacion de Mercadopago",
         text:`Su numero de orden es: ${req.query.payment_id}`
     }

@@ -27,8 +27,9 @@ import {
     getSubscriptionsRequest,
     deleteSuscriptionRequest,
     putSuscriptionRequest,
-    postSuscriptionRequest
-    //products filters
+    postSuscriptionRequest,
+    //sendEmails
+    sendEmail,
     
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
@@ -427,6 +428,7 @@ export const post_Products = (datos) => {
     return async (dispatch) => {
         try {
             const data = await postProductsRequest(datos) // request
+            console.log(data)
             return dispatch({
                 type: POST_PRODUCTS,
                 payload: data
@@ -652,3 +654,4 @@ export const filter_product_by_price = (price) => {
         payload: price
     }
 }
+

@@ -38,8 +38,8 @@ export const getProductsRequest = async () => {
   return data;
 };
 
-export const postProductsRequest = async () => {
-  const { data } = await axios.get("http://localhost:3001/product");
+export const postProductsRequest = async (product) => {
+  const { data } = await axios.get("http://localhost:3001/product", product);
   return data;
 };
 
@@ -190,6 +190,7 @@ export const adminUserRequest = async (user) => {
   return data
 }
 
+
 //MERCADOPAGO______________________________
 
 export const createOrder = async () => {
@@ -206,5 +207,12 @@ export const getCommentsByUser = async (userId) => {
 
 export const getCommentsByCourse = async (courseId) => {
   const { data } = await axios.get(`http://localhost:3001/comment/${courseId}`);
+  return data;
+};
+
+//Post email_______________________//
+
+export const sendEmail = async (carta) => {
+  const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, carta);
   return data;
 };
