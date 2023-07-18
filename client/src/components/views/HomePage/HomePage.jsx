@@ -1,3 +1,4 @@
+
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
@@ -15,7 +16,7 @@ import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
-
+import axios from "axios"
 //_________________________module_________________________
 function HomePage () {
 
