@@ -94,6 +94,7 @@ const Categories = () => {
                   <button className={`${styles.deleteCategoryButton}`} onClick={() => deleteCategory(category.id)}>
                     X
                   </button>
+                  
                 </span>
               ))}
           </div>

@@ -2,8 +2,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+
 import Slider from 'rc-slider';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
@@ -101,7 +103,7 @@ function Shop () {
     };
 
 
-    // life-cycles:
+    //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession");
@@ -154,10 +156,12 @@ function Shop () {
                     alt="mainBanner"
                 />
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
-                    PROGRAMMER'S GURU STORE
+                     TIENDA DE PROGRAMMER'S GURU 
                 </h1>
                 
             </section>
+        {/* SIDEBAR */}
+            <FilterBarShop/>
 
         {/* PAGINADO */}
             <div className={s.paginado}>
@@ -174,20 +178,7 @@ function Shop () {
                 }
             </div>
 
-        {/* SEARCHBAR */}
-            <div className={s.flex}>
-                <input value={input} onChange={syncInput} placeholder="Buscar Producto" className={`${s.input}`}></input>
-                
-                <button className={`${s.searchButton}`} onClick={handleSearch}>
-                    <svg xmlns="http://www.w3.org/2000/svg"width="16"height="16"fill="currentColor"className="bi bi-search"viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" /></svg>
-                </button>
-
-            </div>
-
             <section className={`${s.section3}`}>
-            {/* SIDEBAR */}
-               <FilterBarShop/>
 
             {/* PRODUCTS */}
                 <div className={`${s['productBox']}`}>

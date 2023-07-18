@@ -4,6 +4,8 @@ import { get_products_all, post_Products, delete_Products,get_categories, post_c
 import Categories from "./Categories";
 import Courses from "./Courses"
 import Products from "./Products"
+import User from './User'
+import Subscriptions from './Subscriptions'
 import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
@@ -19,6 +21,8 @@ const  AdminPanel =() =>{
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
     const [showproducts, setshowproducts]=useState(false)
+    const [showUsers,setShowUsers] = useState(false)
+    const [showSubscriptions,setShowSubscriptions] = useState(false)
 
 
     //functions:
@@ -44,6 +48,15 @@ const  AdminPanel =() =>{
       else setshowproducts(false);
     }
 
+    const handleShowUsers=(event)=>{
+        if (showUsers===false) setShowUsers(true)
+        else setShowUsers(false)
+    }
+
+    const handleShowSubscription = (event) => {
+        if (showSubscriptions===false) setShowSubscriptions(true)
+        else setShowSubscriptions(false)
+    }
  
 
     //life-cycles:
@@ -93,8 +106,22 @@ const  AdminPanel =() =>{
                  {showproducts&& ( 
               <Products></Products>
             )}
-              
               </div>
+
+              <div>
+                <button className={`${styles.mainButton}`} onClick={handleShowUsers}>
+                    <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
+                </button>
+                {showUsers && (<User></User>)}
+              </div>
+
+              <div>
+                <button className={`${styles.mainButton}`} onClick={handleShowSubscription}>
+                    <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
+                </button>
+                {showSubscriptions && (<Subscriptions></Subscriptions>)}
+              </div>
+              
         </div>
     );
 };

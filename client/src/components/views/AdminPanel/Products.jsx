@@ -16,12 +16,9 @@ function Products () {
     const dispatch = useDispatch();
 
     console.log(products)
+    const[postProduct, setPostProduct] = useState(false)
 
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
+
 
     const handleProductPost = (event) => {
         event.preventDefault();
@@ -39,6 +36,8 @@ function Products () {
             console.log("error");
         }
     }
+
+    const handlePostProducts = () => {}
 
     //life-cycles:
     useEffect(() => {
@@ -63,6 +62,7 @@ function Products () {
 
                     <div className={`${styles.categoriesContainer}`}>
                         <h2>Productos</h2>
+                        <button onClick={handlePostProducts}>Agregar productos</button>
                         <div className={`${styles.categoriesBox}`}>
                             {
                                 products?.map((product, index) => {

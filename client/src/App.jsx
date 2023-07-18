@@ -89,7 +89,7 @@ const App = () =>{
             {location !== "/" && <NavBar />}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
-                <Route path="/" element={<LandingPage/>}/>
+                <Route path="/" element={<LandingPage2/>}/>
                 <Route path="/HomePage" element={<HomePage />} />
                 <Route path="/CoursePage" element={<CoursePage />} />
                 <Route path="/Profile" element={<Profile />} />

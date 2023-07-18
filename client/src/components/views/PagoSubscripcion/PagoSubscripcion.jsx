@@ -18,6 +18,7 @@ function PagoSubscripcion () {
 
 
     const navigate = useNavigate()
+    const token = localStorage.getItem("accessToken")
 
     //functions:
     const handleAddSubscripcion = (selectedSubscripcion) => {
@@ -39,7 +40,6 @@ function PagoSubscripcion () {
     }
 
      useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
     },[])
 

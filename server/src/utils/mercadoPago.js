@@ -1,4 +1,6 @@
 const mercadoPago = require("mercadopago");
+//requiero nodemailer para enviar mensajes de gmail
+const nodemailer= require("nodemailer")
 //const { Payment } = require("../db"); 
 require("dotenv").config();
 
@@ -40,6 +42,29 @@ const PagoconMercadopago = async (req, res) => {
 
 
 const FeedbackMercadoPago = async (req, res) => {
+  var transtorpe= nodemailer.createTransport({//crea un "transporte", se usa para indicar quien lo envia
+        host:"smtp.gmail.com",
+        port:465,
+        secure:true, //debe ser true sí el port es 465
+        auth:{
+            user:"caldesanche@gmail.com",
+            pass:"uwnehfrwtlqehqlo" //contraseña de app
+        }
+    })
+
+    const destino={//la info y el destinatario
+        from:"yo",
+        to:"jorgetambleygomez@gmail.com",
+        subject:"notificacion de Mercadopago",
+        text:`Su numero de orden es: ${req.query.payment_id}`
+    }
+
+    transtorpe.sendMail(destino, (error, info)=>{
+        if(error){
+            res.status(500).send(error.message)
+        }else{
+            console.log("se ha enviado")
+      }})
   res.json({
     Payment: req.query.payment_id,
     Status: req.query.status,

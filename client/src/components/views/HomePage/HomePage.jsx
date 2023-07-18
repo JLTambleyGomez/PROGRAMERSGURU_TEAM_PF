@@ -22,7 +22,6 @@ function HomePage () {
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
-
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
@@ -43,6 +42,7 @@ function HomePage () {
         dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
+        
         //--desmontado
         return () => {
             dispatch(clearMessage());

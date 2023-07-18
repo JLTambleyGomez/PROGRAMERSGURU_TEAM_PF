@@ -20,8 +20,9 @@ const MetaMaskSucces = () => {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const email = localStorage.getItem("email");
+    const token = localStorage.getItem("accessToken");
 
     //functions:
     const calculateTotal = () => {
@@ -35,11 +36,8 @@ const MetaMaskSucces = () => {
 
     //life-cycle:
     useEffect(() => {
-        const token = sessionStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
     },[])
-
-
 
     useEffect(() => {
         if (location.state) setTransaction(location.state.transaction);

@@ -5,7 +5,8 @@ class Middleware {
 		if (
 			req.path === "/user/signup" ||
 			req.path === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT" ||
-			(req.path.startsWith("/course") && req.method === "GET")
+			(req.path.startsWith("/course") && req.method === "GET") 
+
 		  ) {
 			return next();
 		  }
