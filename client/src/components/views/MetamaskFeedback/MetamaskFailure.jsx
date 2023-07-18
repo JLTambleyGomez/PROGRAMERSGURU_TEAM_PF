@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
 import styles from './MetamaskFeedback.module.css';
 
 
@@ -12,8 +12,16 @@ function MetaMaskFailure () {
 
     //const:
     const location = useLocation();
+    const navigate = useNavigate()
 
     //life-cycles:
+  //life-cycle:
+  useEffect(() => {
+    const token = sessionStorage.getItem("accessToken")
+    if (!token) navigate("/IniciaSession")
+},[])
+
+
     useEffect(() => {
         if (location.state && location.state.error) setError(location.state.error);
     }, [location.state]);

@@ -14,7 +14,6 @@ axios.interceptors.request.use(function (config) {
   if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") return config;
   if (config.method === "get" && config.url.startsWith(`${URL}/course`)) return config;
 
-
   config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
@@ -34,22 +33,23 @@ export const getEthvalue = async () =>{
   return ethUSDTPrice;
 }
 
-export const getProducts = async () => {
+export const getProductsRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/product");
   return data;
 };
 
-export const postProducts = async () => {
+export const postProductsRequest = async () => {
   const { data } = await axios.get("http://localhost:3001/product");
   return data;
 };
 
-export const deleteProducts = async (id) => {
+export const deleteProductsRequest = async (id) => {
   const { data } = await axios.delete(`http://localhost:3001/product/${id}`);
   return data;
 };
 
-export const putProducts = async (id, product) => {
+//////////////   PUT PRODUCTS   ////////////
+export const putProductsRequest = async (id, product) => {
   const {data} = await axios.put(`http://localhost:3001/product/${id}`, product)
   return data;
 
@@ -79,7 +79,8 @@ export const getCoursesByIdRequest = async (id) => {
   return data;
 };
 
-export const putCourse = async (id,course)=>{
+///////////// PUT COURSE ////////////
+export const putCourseRequest = async (id,course)=>{
   const {data} = await axios.put(`http://localhost:3001/course/${id}`, course)
   return data;
 }
@@ -107,10 +108,30 @@ export const deleteCourseRequest = async (id) => {
   return data;
 };
 
+/////////////////////////////////////////////////////////////////////////////////
+// SUBSCRIPTIONS
+export const getSubscriptionsRequest = async () => {
+  const {data} = await axios.get("http://localhost:3001/subscription")
+  return data;
+}
 
+export const deleteSuscriptionRequest = async (id) => {
+  const {data} = axios.delete(`http://localhost:3001/subscription/${id}`)
+  return data;
+}
+
+export const putSuscriptionRequest = async (id, suscription) => {
+  const {data} = axios.put(`http://localhost:3001/subscription/${id}`, suscription)
+  return data;
+}
+
+export const postSuscriptionRequest = async (suscription) => {
+  const {data} = axios.post("http://localhost:3001/subscription",suscription)
+  return data;
+}
 //PRODUCTS_______________________________
 
-export const getProductsByName = async (name) => {
+export const getProductsByNameRequest = async (name) => {
   const { data } = await axios(`${URL}/product/name/${name}`)
   return data;
 }
@@ -136,7 +157,7 @@ export const deleteFavoritesRequest = async () => {
 
 //user______________________________
 
-export const getUserByEmail = async (email) => {
+export const getUserByEmailRequest = async (email) => {
   const { data } = await axios.get(`http://localhost:3001/user/?email=${email}`);
   return data;
 };

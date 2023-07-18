@@ -1,4 +1,6 @@
-import { useState } from "react"
+
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import styles from "./PagoSubscripcion.module.css"
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
@@ -14,6 +16,8 @@ function PagoSubscripcion () {
     const [MostrarPagos, setMostrarPagos] = useState(false);
     const [compra, setCompra] = useState({});
 
+
+    const navigate = useNavigate()
 
     //functions:
     const handleAddSubscripcion = (selectedSubscripcion) => {
@@ -33,6 +37,11 @@ function PagoSubscripcion () {
         setMostrarPagos(true)
 
     }
+
+     useEffect(() => {
+        const token = sessionStorage.getItem("accessToken")
+        if (!token) navigate("/IniciaSession")
+    },[])
 
 
     //component:

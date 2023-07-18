@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import s from "./App.module.css";
 import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage from "./components/views/LandingPage/LandingPage";
+import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
 import NavBar from "./components/bars/navBar/navBar";
 import Profile from "./components/views/Profile/Profile";

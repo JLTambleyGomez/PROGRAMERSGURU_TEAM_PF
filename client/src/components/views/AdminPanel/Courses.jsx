@@ -34,11 +34,36 @@ function Courses() {
     categories: [],
   });
 
+
+  //PARA PODER MODIFICAR EL CURSO
+  const [modified, setModified] = useState(false)
+
+  const [modifCourse, setModifCourse] = useState({
+    title: "",
+    description: "",
+    imageURL: "",
+    courseUrl: "",
+    rating: 0,
+    released: "",
+    isFree: false,
+    language: "",
+    categories: []
+  })
+
   // functions:
   const theme = (base) => {
     const suffix = dark ? "dark" : "light";
     return `${base}-${suffix}`;
   };
+
+//DESPACHA LA ACTION PARA HACER EL PUT
+  const handleCoursePut = (event) => {
+    event.preventDefault();
+    dispatch(put_course(modifCourse))
+    dispatch(get_courses_all());
+
+  }
+
 
   const handleCourseChange = (event) => {
     const { name, value } = event.target;
@@ -114,6 +139,8 @@ function Courses() {
               <div className={`${styles.h1}`}>
                 <label>Título:</label>
                 <input type="text" name="title" value={newCourse.title} onChange={handleCourseChange} />
+                {/* {modified ? (<div></div> : (<div></div>)} */}
+                
               </div>
 
               <div className={`${styles.h1}`}>
@@ -169,12 +196,10 @@ function Courses() {
               <h1>Courses</h1>
               <div className={`${styles.coursesBox}`}>
                 {courses.map((course) => (
-                  <div>
                     <div className={`${styles.course}`} key={course.id}>
                       <p>ID: {course.id}</p> {course.title}
                       <p>Fecha De Lanzamiento {course.released} </p>
                       <button onClick={() => handleDeleteCourse(course.id)}>X</button>
-                    </div>
                   </div>
                 ))}
               </div>
