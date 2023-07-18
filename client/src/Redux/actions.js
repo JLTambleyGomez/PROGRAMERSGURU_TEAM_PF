@@ -69,20 +69,20 @@ import {
     export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
     export const POST_PRODUCTS = "POST_PRODUCTS";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
+    export const FILTER_PRODUCTS_BY_CATEGORY= "FILTER_PRODUCTS_BY_CATEGORY";
+    export const FILTER_PRODUCTS_BY_PRICING = "FILTER_PRODUCTS_BY_PRICING";
+    export const SORT_PRODUCTS = "SORT_PRODUCTS";
 
 //CART:
     export const SET_CART= "SET_CART";
     export const CLEAR_CART = "CLEAR_CART";
 
 //SHOPBAG:
-export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
+    export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
 
 //METAMASK:
-export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
-//PRODUCTS FILTERS:
-export const FILTER_PRODUCTS_BY_CATEGORY= "FILTER_PRODUCTS_BY_CATEGORY";
+    export const METAMASK_ADDRESS ="METAMASK_ADDRESS"
 
-    
 //__________________________________________________
 //ACTION CREATORS:
 
@@ -238,7 +238,7 @@ export const get_categories = () => { // request
     return async function (dispatch) {
         try {
             const data = await getCategoriesAllRequest(); 
-            // console.log(data)
+            console.log(data)
             return dispatch({
                 type: GET_CATEGORIES_ALL,
                 payload: data,
@@ -412,6 +412,14 @@ export const delete_Products = (id) => { // request
         }
     };
 }
+
+export const sort_products = (sort) => {
+    return {
+        type: SORT_PRODUCTS,
+        payload: sort
+    }
+}
+
 ///////////////////// PUT PRODUCT //////////////////////////
 export const put_Products = (id, product) => {
     return async function (dispatch) {
@@ -516,9 +524,15 @@ export const set_metamask_address = (address) => {
 
 
 //SHOP FILTERS_________________________________________//
-export const filter_product_by_gategory = (category) => {
+export const filter_product_by_category = (category) => {
     return {
         type: FILTER_PRODUCTS_BY_CATEGORY,
         payload: category
+    }
+}
+export const filter_product_by_price = (price) => {
+    return {
+        type: FILTER_PRODUCTS_BY_PRICING,
+        payload: price
     }
 }
