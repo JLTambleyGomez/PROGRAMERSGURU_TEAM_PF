@@ -8,7 +8,7 @@ import {
     get_courses_all,
     clearMessage,
     get_Favorites_Request,
-    get_User_By_Email,
+    // get_User_By_Email,
 } from "../../../Redux/actions";
 
 import s from "./HomePage.module.css";
@@ -42,7 +42,7 @@ function HomePage () {
 
     //life-cycles:
     useEffect(() => {
-        dispatch(get_User_By_Email(email))
+        // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
         sendEmail();

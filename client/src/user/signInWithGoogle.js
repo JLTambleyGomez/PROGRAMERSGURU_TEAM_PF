@@ -1,4 +1,3 @@
-import axios from "axios";
 import "../config/firebase-config";
 import {
     GoogleAuthProvider,
@@ -7,21 +6,8 @@ import {
     setPersistence,
     inMemoryPersistence
 } from "firebase/auth";
+import { postUserRequest } from "../axiosRequests/axiosRequests";
 
-
-//_________________________module_________________________
-const postUserRequest = async (userData) => {
-    try {
-        const { data } = await axios.post(
-            "http://localhost:3001/user/signup",
-            userData
-        );
-        return data.message;
-    } catch (error) {
-        console.log(error);
-        return console.log(error.message);
-    }
-};
 
 export default function signInwithGoogle() {
     const provider = new GoogleAuthProvider();

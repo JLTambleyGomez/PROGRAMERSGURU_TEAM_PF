@@ -27,6 +27,9 @@ import SubscripcionesFlotante from "./components/datos/Subscripciones/Subscripci
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
 
+import axios from "axios";
+// axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
+axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
 const App = () =>{
 

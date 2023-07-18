@@ -18,6 +18,8 @@ function NavBar ( { logoutUser } ) {
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
+
+    //states:
     const user = useSelector((state) => state.user);
     
     //const:
