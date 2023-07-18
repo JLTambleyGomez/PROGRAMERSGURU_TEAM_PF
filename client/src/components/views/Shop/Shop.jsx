@@ -146,7 +146,7 @@ function Shop () {
     const productsPerPage = 6
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
+    const currentAllProducts = Array.isArray(productsCopy) ? productsCopy.slice(indexOfFirstProduct, indexOfLastProduct) : [];
 
     // indice:
     const pageNumbers = [];
