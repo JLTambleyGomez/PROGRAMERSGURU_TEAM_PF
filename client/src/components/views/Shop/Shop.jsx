@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
-import FilterBarShop from "./FilterBarShop"
+import FilterBarShop from "./filterBarShop"
 import Modal from "../ventanaemergente/ventana";
 
 
