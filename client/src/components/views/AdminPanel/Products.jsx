@@ -107,7 +107,17 @@ function Products() {
                 errorProduct.released ||
                 errorProduct.rating
             )
-                return setMessagePost("Faltan datos para ingresar");
+                return setMessagePost("Revise los datos");
+
+            if (
+                !newProduct.name ||
+                !newProduct.description ||
+                !newProduct.genre ||
+                !newProduct.platforms ||
+                !newProduct.released ||
+                !newProduct.rating
+            )
+                setMessagePost("Debe ingresar los datos");
             if (change) {
                 if (postProduct) {
                     dispatch(post_Product(newProduct));

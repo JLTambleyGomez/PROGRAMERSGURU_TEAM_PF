@@ -10,7 +10,11 @@
     position:absolute;
     top: 0;
     left:0;
-  }
+    background-color:rgba(0, 0, 0, 0.233);
+    animation:scale-up-top-left 0.4s; } 
+    @keyframes scale-up-top-left{0%{transform:scale(.5);
+      transform-origin:top left}100%{transform:scale(1);
+        transform-origin:top left}}
   .video {
     position: absolute;
     width: 100px;

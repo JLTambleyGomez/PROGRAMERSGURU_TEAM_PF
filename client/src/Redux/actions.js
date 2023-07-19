@@ -12,8 +12,6 @@ import {
     deleteCategoriesRequest, 
 //FAVORITES
     getFavoritesRequest,
-    postFavoriteRequest,
-    deleteFavoriteRequest,
 //Products
     getProductsRequest,
     getProductsByNameRequest,
@@ -329,46 +327,12 @@ export const clear_cart = () => {
 
 //FAVOURITES_____________________________________________//
 
-export const get_Favorites_Request = (userId) => {
+export const get_Favorites_Request = (id) => { //hace un req por cursos por nombre
     return async (dispatch) => {
         try {
-            const data = await getFavoritesRequest(userId); 
+            const data = await getFavoritesRequest(id); // request
             return dispatch({
                 type: GET_FAVORITES,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.message,
-            });
-        }
-    };
-}
-
-export const post_Favorite_Request = (ids) => { 
-    return async (dispatch) => {
-        try {
-            const data = await postFavoriteRequest(ids);
-            return dispatch({
-                type: POST_FAVORITE,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.message,
-            });
-        }
-    };
-}
-
-export const delete_Favorite_Request = (ids) => { 
-    return async (dispatch) => {
-        try {
-            const data = await deleteFavoriteRequest(ids); 
-            return dispatch({
-                type: DELETE_FAVORITE,
                 payload: data,
             });
         } catch (error) {
