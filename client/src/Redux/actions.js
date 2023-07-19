@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
     //COURSES:
     getCoursesAllRequest,
@@ -70,6 +71,7 @@ export const EDIT_USER_DATA = "EDIT_USER_DATA";
 export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const SET_USER_EMAIL = "SET_USER_EMAIL";
 export const SET_TOKEN = "SET_TOKEN";
+export const POST_USER = "POST_USER";
 
 //COMMENTS:
 export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER";
@@ -453,13 +455,14 @@ export const sort_products = (sort) => {
 export const put_Products = (id, product) => {
     return async function (dispatch) {
         try {
-            const data = await putProducts(id, product);
+            const data = await putProductsRequest(id, product);
             console.log(data);
             return dispatch({
-                type: PUT_PRODUCT,
+                type: PUT_PRODUCTS,
                 payload: data.message,
             });
         } catch (error) {
+            console.log(error);
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -629,5 +632,22 @@ export const filter_product_by_price = (price) => {
     return {
         type: FILTER_PRODUCTS_BY_PRICING,
         payload: price,
+    };
+};
+
+export const post_user = (user) => {
+    return async function (dispatch) {
+        try {
+            const data = await postUserRequest(user);
+            return dispatch({
+                type: POST_USER,
+                payload: data,
+            });
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
     };
 };

@@ -1,16 +1,17 @@
-const { User } = require('../../db');
+const { User } = require("../../db");
 const { get_user_by_email } = require("../../handlers/userHandlers");
 
 const getUserByEmail = async (req, res) => {
-    const {email} = req.query;
+    const { email } = req.query;
     try {
-      const user = await User.findOne({where:{email}});
-      return res.status(200).json(user);
+        const user = await User.findOne({ where: { email } });
+        return res.status(200).json(user);
     } catch (error) {
-      console.error(error);
-      return res.status(500).json({ message: 'Error al obtener el usuario' + error.message });
+        console.error(error);
+        return res
+            .status(500)
+            .json({ message: "Error al obtener el usuario" + error.message });
     }
-  };
-  
-  module.exports = { getUserByEmail };
-  
+};
+
+module.exports = { getUserByEmail };

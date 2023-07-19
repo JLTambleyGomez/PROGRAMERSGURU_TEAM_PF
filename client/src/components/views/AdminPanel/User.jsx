@@ -6,17 +6,41 @@ import {
     adminUserRequest,
 } from "../../../axiosRequests/axiosRequests";
 
+import { post_user } from "../../../Redux/actions";
+
+import { validateUser } from "./validate";
+
 import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
 const User = () => {
     //estados locales
     const [allUsers, setAllUsers] = useState([]);
+    const [modificarUser, setModificarUser] = useState(false);
+    const [newUser, setNewUser] = useState(false);
+    const [user, setUser] = useState({
+        name: "",
+        email: "",
+        picture: "",
+        nickName: "",
+        admin: "",
+        banned: "",
+        address: "",
+    });
+
+    const [userError, setUserError] = useState({
+        name: "",
+        email: "",
+        picture: "",
+        nickName: "",
+        admin: "",
+        banned: "",
+        address: "",
+    });
 
     //trae a todos los usuarios con una axion request
     const getUsers = async () => {
         const usersDB = await getAllUsersRequest();
-        console.log(usersDB);
         setAllUsers(usersDB);
     };
 
@@ -42,6 +66,7 @@ const User = () => {
     const handleModificar = (event) => {
         const idUser = event.target.value;
         const modificar = event.target.name;
+        setModificarUser(true);
 
         if (modificar === "datos") {
             console.log(modificar);
@@ -59,6 +84,29 @@ const User = () => {
         }
     };
 
+    //abre el formulario
+    const handlePostUser = () => {
+        setNewUser(true);
+    };
+
+    //Cierra el formulario
+    const handleCloseForm = () => {
+        setNewUser(false);
+    };
+
+    const handleInputChange = (event) => {
+        const nameInput = event.target.name;
+        const valueInput = event.target.value;
+
+        setUser({ ...user, [nameInput]: valueInput });
+        setUserError(validateUser({ ...user, [nameInput]: valueInput }));
+    };
+
+    const handlePostUserForm = (event) => {
+        event.preventDefault();
+        setNewUser(false);
+    };
+
     //lice-cycle
     useEffect(() => {
         getUsers();
@@ -67,10 +115,83 @@ const User = () => {
     return (
         <div className={styles.contain}>
             <h1>Users:</h1>
+            {newUser ? (
+                <div>
+                    <button onClick={handleCloseForm}>X</button>
+                    <form>
+                        <div>
+                            <label htmlFor="name">Nombre:</label>
+                            <input
+                                name="name"
+                                onChange={handleInputChange}
+                                value={user.name}
+                            />
+                            {userError.name && <p>{userError.name}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="picture">Imagen:</label>
+                            <input
+                                name="picture"
+                                onChange={handleInputChange}
+                                value={user.picture}
+                            />
+                            {userError.picture && <p>{userError.picture}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                name="email"
+                                onChange={handleInputChange}
+                                value={user.email}
+                            />
+                            {userError.email && <p>{userError.email}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="nickName">NickName:</label>
+                            <input
+                                name="nickName"
+                                onChange={handleInputChange}
+                                value={user.nickName}
+                            />
+                            {userError.nickName && <p>{userError.nickName}</p>}
+                        </div>
+                        <div>
+                            <label htmlFor="admin">Administrador:</label>
+                            <input
+                                type="checkbox"
+                                name="admin"
+                                onChange={handleInputChange}
+                                value={user.admin}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="address">Address:</label>
+                            <input
+                                name="address"
+                                onChange={handleInputChange}
+                                value={user.address}
+                            />
+                            {userError.address && <p>{userError.address}</p>}
+                        </div>
+                        <button onClick={handlePostUserForm}>Crear</button>
+                    </form>
+                </div>
+            ) : (
+                <button onClick={handlePostUser}>Agregar nuevo usuario</button>
+            )}
+            {modificarUser && (
+                <>
+                    <div>
+                        <form>
+                            <label></label>
+                        </form>
+                    </div>
+                </>
+            )}
             {allUsers.length &&
                 allUsers.map((user, index) => {
                     return (
-                        <span>
+                        <span key={index}>
                             <button
                                 onClick={handleModificar}
                                 value={user.id}

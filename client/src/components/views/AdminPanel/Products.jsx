@@ -20,10 +20,13 @@ function Products() {
     //const:
     const dispatch = useDispatch();
 
+    //estados locales
     const [postProduct, setPostProduct] = useState(false);
     const [modificarProduct, setModificarProduct] = useState(false);
     const [idProduct, setIdProduct] = useState(null);
-    const [messagePost, setMessagePost] = useState(false);
+    const [messagePost, setMessagePost] = useState("");
+    const [change, setChange] = useState(false);
+    const [product, setProduct] = useState({});
     const [newProduct, setNewProduct] = useState({
         name: "",
         price: "",
@@ -57,7 +60,18 @@ function Products() {
 
         setNewProduct({ ...newProduct, [name]: value });
         if (postProduct)
-            setErrorProduct(validateProduct({ ...newProduct, [name]: value })); // <--- valida los errores solo cuando lo posteas
+            setErrorProduct(validateProduct({ ...newProduct, [name]: value }));
+        // <--- valida los errores solo cuando lo posteas
+        else
+            setErrorProduct({
+                name: "",
+                price: "",
+                description: "",
+                image: "",
+                category: "",
+                stock: "",
+            });
+        setChange(true);
     };
 
     //cambia el estado para desplegar el formulario y postearlo
@@ -68,28 +82,71 @@ function Products() {
 
     //cambia el estado para desplegar el formulario y modificarlo
     const handleModificarProducto = (event) => {
-        const value = event.target.value;
+        const id = event.target.value;
+
+        const productModificar = products.find((p) => p.id === +id);
+
+        setProduct(productModificar);
+
         setModificarProduct(true);
+
         setPostProduct(false);
-        setIdProduct(value);
+        setIdProduct(id);
     };
 
     //Postea el producto en la db
     const handleProductSubmit = (event) => {
         event.preventDefault();
         try {
-            if (postProduct) {
-                dispatch(post_Product(newProduct));
-                setPostProduct(false);
-                setMessagePost(true);
+            if (
+                errorProduct.name ||
+                errorProduct.description ||
+                errorProduct.genre ||
+                errorProduct.platforms ||
+                errorProduct.released ||
+                errorProduct.rating
+            )
+                return setMessagePost("Revise los datos");
+
+            if (
+                !newProduct.name ||
+                !newProduct.description ||
+                !newProduct.genre ||
+                !newProduct.platforms ||
+                !newProduct.released ||
+                !newProduct.rating
+            )
+                setMessagePost("Debe ingresar los datos");
+            if (change) {
+                if (postProduct) {
+                    dispatch(post_Product(newProduct));
+                    setPostProduct(false);
+                    setMessagePost(true);
+                    dispatch(get_products_all());
+                }
+                if (modificarProduct) {
+                    dispatch(put_Products(idProduct, newProduct));
+                    setModificarProduct(false);
+                    dispatch(get_products_all());
+                }
                 dispatch(get_products_all());
+                setProduct({
+                    name: "",
+                    price: "",
+                    description: "",
+                    image: "",
+                    category: "",
+                    stock: "",
+                });
+                setNewProduct({
+                    name: "",
+                    price: "",
+                    description: "",
+                    image: "",
+                    category: "",
+                    stock: "",
+                });
             }
-            if (modificarProduct) {
-                dispatch(put_Products(idProduct, newProduct));
-                setModificarProduct(false);
-                dispatch(get_products_all());
-            }
-            dispatch(get_products_all());
         } catch (error) {
             console.log(error);
         }
@@ -98,6 +155,24 @@ function Products() {
     const handleCloseForm = () => {
         setModificarProduct(false);
         setPostProduct(false);
+        setChange(false);
+        setMessagePost("");
+        setErrorProduct({
+            name: "",
+            price: "",
+            description: "",
+            image: "",
+            category: "",
+            stock: "",
+        });
+        setNewProduct({
+            name: "",
+            price: "",
+            description: "",
+            image: "",
+            category: "",
+            stock: "",
+        });
     };
 
     //life-cycles:
@@ -122,13 +197,28 @@ function Products() {
                     {postProduct || modificarProduct ? (
                         <>
                             <button onClick={handleCloseForm}>X</button>
+                            <h2>
+                                {postProduct
+                                    ? "Añadir un nuevo producto"
+                                    : "Editar producto"}
+                            </h2>
+                            {messagePost && <p>{messagePost}</p>}
                             <form>
                                 <div>
+                                    {modificarProduct && (
+                                        <p>
+                                            Debe ingresar al menos un dato a
+                                            cambiar
+                                        </p>
+                                    )}
                                     <label htmlFor="name">Nombre: </label>
                                     <input
                                         name="name"
                                         value={newProduct.name}
                                         onChange={handleChangeProductForm}
+                                        placeholder={
+                                            modificarProduct ? product.name : ""
+                                        }
                                     />
                                     {errorProduct.name && (
                                         <span>{errorProduct.name}</span>
@@ -143,6 +233,11 @@ function Products() {
                                         name="description"
                                         value={newProduct.description}
                                         onChange={handleChangeProductForm}
+                                        placeholder={
+                                            modificarProduct
+                                                ? product.description
+                                                : ""
+                                        }
                                     />
                                     {errorProduct.description && (
                                         <span>{errorProduct.description}</span>
@@ -156,6 +251,11 @@ function Products() {
                                         value={newProduct.price}
                                         onChange={handleChangeProductForm}
                                         type="number"
+                                        placeholder={
+                                            modificarProduct
+                                                ? product.price
+                                                : ""
+                                        }
                                     />
                                     {errorProduct.price && (
                                         <span>{errorProduct.price}</span>
@@ -168,6 +268,11 @@ function Products() {
                                         name="image"
                                         value={newProduct.image}
                                         onChange={handleChangeProductForm}
+                                        placeholder={
+                                            modificarProduct
+                                                ? product.image
+                                                : ""
+                                        }
                                     />
                                     {errorProduct.image && (
                                         <span>{errorProduct.image}</span>
@@ -182,6 +287,11 @@ function Products() {
                                         name="category"
                                         value={newProduct.category}
                                         onChange={handleChangeProductForm}
+                                        placeholder={
+                                            modificarProduct
+                                                ? product.category
+                                                : ""
+                                        }
                                     />
                                     {errorProduct.category && (
                                         <span>{errorProduct.category}</span>
@@ -195,6 +305,11 @@ function Products() {
                                         value={newProduct.stock}
                                         onChange={handleChangeProductForm}
                                         type="number"
+                                        placeholder={
+                                            modificarProduct
+                                                ? product.stock
+                                                : ""
+                                        }
                                     />
                                     {errorProduct.stock && (
                                         <span>{errorProduct.stock}</span>
@@ -223,7 +338,7 @@ function Products() {
                         {postProduct ||
                             (!modificarProduct &&
                                 products.length &&
-                                products?.map((product, index) => {
+                                products.map((product, index) => {
                                     return (
                                         <span
                                             className={`${styles.category}`}

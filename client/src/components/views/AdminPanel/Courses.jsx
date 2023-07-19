@@ -10,6 +10,7 @@ import {
     put_course,
 } from "../../../Redux/actions";
 import styles from "./AdminPanel.module.css";
+import { validateCourse } from "./validate";
 
 function Courses() {
     // global state:
@@ -22,6 +23,8 @@ function Courses() {
     const dispatch = useDispatch();
 
     // states:
+    const [change, setChange] = useState(false);
+    const [messagePost, setMessagePost] = useState("");
     const [newCourse, setNewCourse] = useState({
         title: "",
         description: "",
@@ -36,6 +39,17 @@ function Courses() {
     const [modificarCourse, setModificarCourse] = useState(false);
     const [postCourse, setPostCourse] = useState(false);
     const [courseId, setCourseId] = useState(null);
+    const [errorCourse, setErrorCourse] = useState({
+        title: "",
+        description: "",
+        imageURL: "",
+        courseUrl: "",
+        rating: 0,
+        released: "",
+        isFree: false,
+        language: "",
+        categories: [],
+    });
 
     const [modifCourse, setModifCourse] = useState({
         title: "",
@@ -71,10 +85,14 @@ function Courses() {
 
     const handleCourseChange = (event) => {
         const { name, value } = event.target;
+        setChange(true);
         setNewCourse((prevCourse) => ({
             ...prevCourse,
             [name]: value,
         }));
+
+        if (postCourse)
+            setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
     };
 
     const handleCategorySelection = (event) => {
@@ -99,15 +117,56 @@ function Courses() {
         }
     };
 
+    //boton para cerrar el formulario
     const handleClosingModification = (event) => {
-        console.log(event.target);
         setModificarCourse(false);
         setPostCourse(false);
+        setMessagePost("");
+        setErrorCourse({
+            title: "",
+            description: "",
+            imageURL: "",
+            courseUrl: "",
+            rating: 0,
+            released: "",
+            isFree: false,
+            language: "",
+            categories: [],
+        });
+        setNewCourse({
+            title: "",
+            description: "",
+            imageURL: "",
+            courseUrl: "",
+            rating: 0,
+            released: "",
+            isFree: false,
+            language: "",
+            categories: [],
+        });
     };
-    console.log(modificarCourse);
-    console.log(postCourse);
+
     const handleCoursePost = (event) => {
         event.preventDefault();
+        if (
+            errorCourse.name ||
+            errorCourse.description ||
+            errorCourse.genre ||
+            errorCourse.platforms ||
+            errorCourse.released ||
+            errorCourse.rating
+        )
+            return setMessagePost("Revise los datos");
+
+        if (
+            !newCourse.name ||
+            !newCourse.description ||
+            !newCourse.genre ||
+            !newCourse.platforms ||
+            !newCourse.released ||
+            !newCourse.rating
+        )
+            return setMessagePost("Debe ingresar los datos");
 
         if (modificarCourse) {
             dispatch(put_course(courseId, newCourse))
@@ -176,123 +235,140 @@ function Courses() {
 
                 <section className={`${styles.Panel}`}>
                     {postCourse || modificarCourse ? (
-                        <form className={`${styles.coursesForm}`}>
-                            {modificarCourse ? (
-                                <h2>Modificar Curso</h2>
-                            ) : (
-                                <h2>Nuevo Curso</h2>
-                            )}
-                            {postCourse && (
-                                <button onClick={handleClosingModification}>
-                                    X
+                        <>
+                            <form className={`${styles.coursesForm}`}>
+                                {postCourse && (
+                                    <button onClick={handleClosingModification}>
+                                        X
+                                    </button>
+                                )}
+                                {modificarCourse && (
+                                    <button onClick={handleClosingModification}>
+                                        X
+                                    </button>
+                                )}
+                                {modificarCourse ? (
+                                    <h2>Modificar Curso</h2>
+                                ) : (
+                                    <h2>Nuevo Curso</h2>
+                                )}
+                                {messagePost && <p>{messagePost}</p>}
+                                <div className={`${styles.h1}`}>
+                                    <label>Título:</label>
+                                    <input
+                                        type="text"
+                                        name="title"
+                                        value={newCourse.title}
+                                        onChange={handleCourseChange}
+                                    />
+                                    {errorCourse && <p>{errorCourse.title}</p>}
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Descripción:</label>
+                                    <textarea
+                                        name="description"
+                                        value={newCourse.description}
+                                        onChange={handleCourseChange}
+                                    />
+                                    {errorCourse && (
+                                        <p>{errorCourse.description}</p>
+                                    )}
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>URL de la imagen:</label>
+                                    <input
+                                        type="text"
+                                        name="imageURL"
+                                        value={newCourse.imageURL}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.imageURL}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>URL del curso:</label>
+                                    <input
+                                        type="text"
+                                        name="courseUrl"
+                                        value={newCourse.courseUrl}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.courseUrl}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Rating:</label>
+                                    <input
+                                        type="number"
+                                        name="rating"
+                                        value={newCourse.rating}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.rating}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Fecha de lanzamiento:</label>
+                                    <input
+                                        type="date"
+                                        name="released"
+                                        value={newCourse.released}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.released}</p>
+                                    <p>{errorCourse.released}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Es gratuito:</label>
+                                    <input
+                                        type="checkbox"
+                                        name="isFree"
+                                        checked={newCourse.isFree}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.isFree}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Idioma:</label>
+                                    <input
+                                        type="text"
+                                        name="language"
+                                        value={newCourse.language}
+                                        onChange={handleCourseChange}
+                                    />
+                                    <p>{errorCourse.language}</p>
+                                </div>
+
+                                <div className={`${styles.h1}`}>
+                                    <label>Categorías:</label>
+                                    <select
+                                        multiple
+                                        name="categories"
+                                        onChange={handleCategorySelection}
+                                    >
+                                        {categories.map((category) => (
+                                            <option
+                                                key={category.id}
+                                                value={category.id}
+                                            >
+                                                {category.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <p>{errorCourse.categories}</p>
+                                </div>
+
+                                <button onClick={handleCoursePost}>
+                                    {modificarCourse
+                                        ? "Editar"
+                                        : "Postear curso"}
                                 </button>
-                            )}
-                            {modificarCourse && (
-                                <button onClick={handleClosingModification}>
-                                    X
-                                </button>
-                            )}
-                            <div className={`${styles.h1}`}>
-                                <label>Título:</label>
-                                <input
-                                    type="text"
-                                    name="title"
-                                    value={newCourse.title}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Descripción:</label>
-                                <textarea
-                                    name="description"
-                                    value={newCourse.description}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>URL de la imagen:</label>
-                                <input
-                                    type="text"
-                                    name="imageURL"
-                                    value={newCourse.imageURL}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>URL del curso:</label>
-                                <input
-                                    type="text"
-                                    name="courseUrl"
-                                    value={newCourse.courseUrl}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Rating:</label>
-                                <input
-                                    type="number"
-                                    name="rating"
-                                    value={newCourse.rating}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Fecha de lanzamiento:</label>
-                                <input
-                                    type="date"
-                                    name="released"
-                                    value={newCourse.released}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Es gratuito:</label>
-                                <input
-                                    type="checkbox"
-                                    name="isFree"
-                                    checked={newCourse.isFree}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Idioma:</label>
-                                <input
-                                    type="text"
-                                    name="language"
-                                    value={newCourse.language}
-                                    onChange={handleCourseChange}
-                                />
-                            </div>
-
-                            <div className={`${styles.h1}`}>
-                                <label>Categorías:</label>
-                                <select
-                                    multiple
-                                    name="categories"
-                                    onChange={handleCategorySelection}
-                                >
-                                    {categories.map((category) => (
-                                        <option
-                                            key={category.id}
-                                            value={category.id}
-                                        >
-                                            {category.name}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-
-                            <button onClick={handleCoursePost}>
-                                {modificarCourse ? "Editar" : "Postear curso"}
-                            </button>
-                        </form>
+                            </form>
+                        </>
                     ) : (
                         <>
                             <h2>Crear un curso nuevo</h2>
