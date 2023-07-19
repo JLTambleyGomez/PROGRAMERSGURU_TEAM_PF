@@ -76,7 +76,7 @@
     filter:contrast(0.6);
     opacity: 0.6;
 }
-button {
+.profileContainer button {
     border: none;
     border-radius: 8px;
     padding: 8px;
@@ -85,7 +85,7 @@ button {
     height: 30px;
 }
 
-button:disabled {
+.profileContainer button:disabled {
     box-shadow: none;
 }
 
