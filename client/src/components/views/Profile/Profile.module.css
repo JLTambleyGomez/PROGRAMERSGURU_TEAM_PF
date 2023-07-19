@@ -11,7 +11,6 @@
 }
 
 .infoProfile {
-    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -24,13 +23,6 @@
     border-radius: 15px;
     padding: 1%;
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
-}
-
-.infoProfile img {
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    object-fit: cover;
 }
 
 .profileContainer h2 {
@@ -99,10 +91,9 @@
 
 .desactivar {
     color: black;
-    border: 1px solid rgb(207, 0, 0);
 }
 .desactivar:hover {
-    background-color: rgb(206, 0, 0);
+    background-color: rgba(206, 0, 0, 0.555);
     color: white;
 }
 
@@ -122,10 +113,30 @@
     cursor: pointer;
 }
 
+.profileImage {
+    position: relative;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+}
+
+.picture img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.editPicture img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .config {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top:  5px;
+    right: -25px;
 }
 
 .config img {
@@ -135,6 +146,21 @@
 }
 
 .config:hover img {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+.camera {
+    position: absolute;
+    left: 75px;
+    bottom: -10px;
+}
+
+.camera img {
+    height: 30px;
+    width: 30px;
+}
+
+.camera:hover img {
     cursor: pointer;
     transform: scale(1.1)
 }
@@ -153,12 +179,3 @@
 .refresh:hover img{
     cursor: pointer;
 }
-/* .infoProfile h5 img {
-    height: 20px;
-    width: 20px;
-    margin: 5px;
-    margin-bottom: 0;
-}
-.infoProfile h5 img:hover {
-    cursor: pointer;
-} */

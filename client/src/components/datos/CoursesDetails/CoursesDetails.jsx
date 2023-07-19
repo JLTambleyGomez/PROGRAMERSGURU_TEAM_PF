@@ -1,22 +1,40 @@
-import { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
-import { get_courses_by_id, clearCourses, clearMessage, get_courses_all} from "../../../Redux/actions";
+import { useState, useEffect } from "react";
+import { useLocation, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+    get_courses_by_id,
+    clearCourses,
+    clearMessage,
+    get_courses_all,
+    get_Favorites_Request,
+} from "../../../Redux/actions";
+import {
+    deleteFavoriteRequest,
+    postFavoriteRequest,
+} from "../../../axiosRequests/axiosRequests";
 
 import axios from "axios"; //remover axios => axiosRequests.js
 import styles from "./CoursesDetails.module.css";
 
 //_________________________module_________________________
-function CourseDetails () {
+function CourseDetails() {
+    const location = useLocation();
+    const array = location.pathname.split("/");
+    const courseId = array[array.length - 1];
 
     //global states:
     const course = useSelector((state) => state.allCourses);
     const favorites = useSelector((state) => state.favorites);
-    const user= useSelector((state)=> state.user)
-    const dark = useSelector((state)=> state.darkMode);
+    const dark = useSelector((state) => state.darkMode);
+    const user = useSelector((state) => state.user);
+    const userId = user?.id;
 
     //states:
-    const [isFav, setFav] = useState(false);
+    const [fav, setFav] = useState(false);
+    const [ids, setIds] = useState({
+        userId: "",
+        courseId: "",
+    });
 
     //const:
     const dispatch = useDispatch();
@@ -25,42 +43,38 @@ function CourseDetails () {
 
     //functions:
     const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
+        const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
 
     const getDetails = async () => {
-        await dispatch(get_courses_by_id(id))
-    }
+        await dispatch(get_courses_by_id(id));
+    };
 
-    //esto es para renderizar y dar funcion a un boton que agrege un favorito
-    const postFavoritesRequest = async () => {
-        const ids={idCourse:id, idUser:user.id}
-        const {data} = await axios.post("http://localhost:3001/favorite", ids)
-        setFav(true)
-    }
+    const handleFavorite = () => {
+        setIds({ ...ids, userId, courseId });
+        console.log(favorites);
+        if (!fav) {
+            console.log(ids);
+            postFavoriteRequest(ids);
+        } else {
+            deleteFavoriteRequest({courseId: 2, userId:8 });
+        }
+        setFav(!fav);
+    };
 
-    const deleteFavoritesRequest = async () => {
-        const {data}= await axios.delete(`http://localhost:3001/favorite/${id}`);
-        setFav(false)
-    }
-    console.log(favorites)
-    console.log(isFav)
-
-    // optimize el código eliminando la función getDetails
-    // y llamando directamente a 
-    // dispatch(get_courses_by_id(id)) dentro del useEffect. 
     //life-cycles:
     useEffect(() => {
+        dispatch(get_Favorites_Request(8));
         getDetails();
         favorites?.forEach((fav) => {
             console.log(fav);
-            if (fav.id == id) setFav(true); 
-        })
+            if (fav.id == id) setFav(true);
+        });
         return async () => {
             await dispatch(clearMessage());
-            await dispatch (clearCourses())
-            await dispatch(get_courses_all())
+            await dispatch(clearCourses());
+            await dispatch(get_courses_all());
         };
     }, [dispatch]);
 
@@ -107,7 +121,7 @@ function CourseDetails () {
                 }
             </div> */}
         </div>
-    )
+    );
 }
 
 export default CourseDetails;
