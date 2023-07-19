@@ -16,7 +16,7 @@ import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
-import axios from "axios"
+//import axios from "axios";
 //_________________________module_________________________
 function HomePage () {
 
@@ -41,6 +41,7 @@ function HomePage () {
     //     const carta = {email: "calderon", message:"enviado"}
     //     await axios.post(`http://localhost:3001/user/sendEmail`, carta );
     // };
+
 
     //life-cycles:
     useEffect(() => {

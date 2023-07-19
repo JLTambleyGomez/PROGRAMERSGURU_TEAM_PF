@@ -66,7 +66,7 @@ const LandingPage2 = () => {
           <div className={styles.container}>
             {!buttonClicked && (
             <div>
-            <button onClick={handleShowForm} className={styles.boton}>
+            <button onClick={handleShowForm} className={styles.boton1}>
               Comenzar
             </button>
             </div>)}

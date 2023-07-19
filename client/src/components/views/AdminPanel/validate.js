@@ -1,4 +1,4 @@
-export default function validate ( { category } ) {
+export const validate = ( { category } ) => {
 
     const error = {}
 
@@ -8,26 +8,26 @@ export default function validate ( { category } ) {
     return error
 }
     //validacion del formulario
-// export function validateProduct (form) {
-//         const error = {}
+export const validateProduct  = (form) => {
+        const error = {}
 
-//         if(!form.name.length) error.name = 'Debe agregar un nombre válido'
-//         else if(form.name.length) error.name = ''
+        if(!form.name.length) error.name = 'Debe agregar un nombre válido'
+        else if(form.name.length) error.name = ''
 
-//         if(!form.description.length) error.description = 'Debe agregar una descripción válida'
-//         else if(form.description.length) error.description = ''
+        if(!form.description.length) error.description = 'Debe agregar una descripción válida'
+        else if(form.description.length) error.description = ''
 
-//         if(form.price < 0) error.price = 'Debe ingresar un precio válido'
-//         else if(form.price.length) error.price = ''
+        if(form.price < 0) error.price = 'Debe ingresar un precio válido'
+        else if(form.price.length) error.price = ''
         
-//         if(!form.image.length) error.image = 'Debe ingresar una imagen'
-//         else if(form.image.length) error.image = ''
+        if(!form.image.length) error.image = 'Debe ingresar una imagen'
+        else if(form.image.length) error.image = ''
         
-//         if(!form.category.length) error.category = 'Debe ingresar una categoria'
-//         else if(form.category.length) error.category = ''
+        if(!form.category.length) error.category = 'Debe ingresar una categoria'
+        else if(form.category.length) error.category = ''
         
-//         if(form.stock < 0) error.stock = 'Debe ingresar el stock'
-//         else if(form.stock.length) error.stock = ''
+        if(form.stock < 0) error.stock = 'Debe ingresar el stock'
+        else if(form.stock.length) error.stock = ''
         
-//         return error
-//     }
+        return error
+    }
