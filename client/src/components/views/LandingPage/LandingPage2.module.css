@@ -86,7 +86,8 @@
     cursor: pointer;
     margin: 5px;
     text-decoration: none;
-  }
+    animation:shadow-drop-center 0.4s linear both} 
+    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 rgb(60, 247, 206)}}
   
   .boton:hover {
     background-color: #0023944f;
@@ -122,3 +123,4 @@
       height:150px;
       border-radius: 50%;
     }
+

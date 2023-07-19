@@ -16,7 +16,6 @@ import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
-//import axios from "axios";
 //_________________________module_________________________
 function HomePage () {
 
@@ -48,9 +47,9 @@ function HomePage () {
         // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-        (async () => {
+        /*(async () => {
             await sendEmail();
-        })()
+        })()*/
 
         //--desmontado
         return () => {

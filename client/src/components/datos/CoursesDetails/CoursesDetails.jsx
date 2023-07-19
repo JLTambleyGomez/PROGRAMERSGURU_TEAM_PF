@@ -81,63 +81,45 @@ function CourseDetails() {
     //component:
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`}>
-            <h1 className={`${styles.title} ${styles[theme("title")]}`}>
-                {course.title}
-            </h1>
 
-            <div className={styles.container1}>
-                <img className={styles.img} src={course.imageURL} />
-                <h2
-                    className={`${styles.description} ${
-                        styles[theme("description")]
-                    }`}
-                >
-                    {course.description}
-                </h2>
+            {/* <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1> */}
+            <div className={`${styles.container1}`}>
+                <div className={`${styles.containerImage}`}>
+                    <img className={styles.img} src={course.imageURL}/>
+                </div>
             </div>
-
             <div className={styles.container2}>
-                <h2 className={`${styles.p} ${styles[theme("p")]}`}>
-                    Ratings: {course.rating}
-                </h2>
-                <h3 className={`${styles.p} ${styles[theme("p")]}`}>
-                    Release date: {course.released}
-                </h3>
-                <h2 className={`${styles.p} ${styles[theme("p")]}`}>
-                    Categories:
-                </h2>
-                <h4 className={`${styles.p} ${styles[theme("p")]}`}>
-                    Language: {course.language}
-                </h4>
-                {course.isFree === true ? (
-                    <h3>This course is free</h3>
-                ) : (
-                    <h3>This course requires payment</h3>
-                )}
-                <a
-                    className={`${styles.link} ${styles[theme("link")]}`}
-                    href={course.courseUrl}
-                    target="_blank"
-                >
-                    Entrar aquí
-                </a>
+                <div styles={styles.basicInfo}>
+                    <h2 className={`${styles.description} ${styles[theme("description")]}`}>{course.description}</h2>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
+                </div>
+                <div className={styles.extraInfo}>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Release date: {course.released}</h2>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Categories:</h2>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Language: {course.language}</h2>
+                </div>
             </div>
 
-            {fav ? (
-                <button
-                    className={`${styles.button} ${styles[theme("button")]}`}
-                    onClick={handleFavorite}
-                >
-                    Quitar de favoritos ❤️
-                </button>
-            ) : (
-                <button
-                    className={`${styles.button} ${styles[theme("button")]}`}
-                    onClick={handleFavorite}
-                >
-                    Añadir a favoritos 🤍
-                </button>
-            )}
+            {/* <div>
+                {
+                    course.isFree === true ? (
+                        <h3>ESTE CURSO ES GRATUITO</h3>
+                    ) : (
+                        <h3>ESTE CURSO REQUIERE UN PAGO </h3>
+                    )
+                }
+                <a className={`${styles.link} ${styles[theme("link")]}`} href={course.courseUrl} target="_blank">Entrar aquí</a>
+            </div>
+
+            <div>
+                {
+                    isFav ? (
+                        <button className={`${styles.button} ${styles[theme("button")]}`} onClick={deleteFavoritesRequest}>❤️</button>
+                    ) : (
+                        <button className={`${styles.button} ${styles[theme("button")]}`} onClick={postFavoritesRequest}>🤍</button>
+                    )
+                }
+            </div> */}
         </div>
     );
 }

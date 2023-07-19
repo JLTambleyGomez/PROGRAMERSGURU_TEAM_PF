@@ -34,7 +34,7 @@ export const getProductsRequest = async () => {
   return data;
 };
 
-export const postProductsRequest = async (product) => {
+export const postProductRequest = async (product) => {
   const { data } = await axios.get("/product", product);
   return data;
 };
@@ -131,6 +131,12 @@ export const getProductsByNameRequest = async (name) => {
   const { data } = await axios(`${URL}/product/name/${name}`)
   return data;
 }
+export const post_Product = async (productData) => {
+  
+    const { data } = await axios.post('/product', productData);
+    return data;
+  
+};
 
 //FAVORITES______________________________
 
@@ -200,6 +206,7 @@ export const getCommentsByUser = async (userId) => {
   const { data } = await axios.get(`/comment/${userId}`);
   return data;
 };
+
 
 export const getCommentsByCourse = async (courseId) => {
   const { data } = await axios.get(`/comment/${courseId}`);

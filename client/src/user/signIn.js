@@ -7,12 +7,14 @@ import {
     signInWithEmailAndPassword
 } from "firebase/auth";
 
-//import { send_email } from "../Redux/actions";
-//import { useDispatch } from "react-redux";
+import axios from "axios";
 //_________________________module_________________________
 export default function signIn(email, password) {
-    //const dispatch = useDispatch(); 
-    
+    const notificacion=async (carta) => {
+        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+    };
+
+
     const auth = getAuth();
     setPersistence(auth, inMemoryPersistence)
     .then(() => {
@@ -21,8 +23,7 @@ export default function signIn(email, password) {
             const user = userCredential.user;
             if (user) {
                 const token = user.accessToken
-                //dispatch(send_email({email, message:"Te has registrado"}));
-                //dispacth del nodemailer a este email
+                notificacion({email, message:"te has registrado"})
                 localStorage.setItem("accessToken", token);
                 localStorage.setItem("email", email)
                 window.location.replace('/HomePage')

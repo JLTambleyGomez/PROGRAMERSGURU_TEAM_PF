@@ -61,9 +61,17 @@ const Categories = () => {
     };
   }, [dispatch]);
 
+
+  const handleshowitem = () => {
+    setShowitem(false)
+  }
+
   return (
-    <div className={styles.container}>
+    <div >
+    
       {showitem && (
+        <div className={styles.container}>
+          <button className={styles.button} onClick={handleshowitem}>X</button>
         <section className={styles.item}>
           <form>
             <span>
@@ -98,6 +106,7 @@ const Categories = () => {
             </div>
           </div>
         </section>
+        </div>
       )}
     </div>
   );

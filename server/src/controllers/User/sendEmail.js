@@ -5,7 +5,7 @@ const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
 const SendEmail= (req, res) =>{
 
-    //const {email,message}= req.body;
+    const {email,message}= req.body;
 
     let transporte = nodemailer.createTransport({//crea un "transporte", se usa para indicar quien lo envia
         host:"smtp.gmail.com",
@@ -20,7 +20,7 @@ const SendEmail= (req, res) =>{
     const destino={//la info y el destinatario
         from:"Pogrammers Guru",
         to: "caldesanche@gmail.com",
-        subject:"email",
+        subject: message,
         text:"Visite nuestra pagina en URL"
     }
 

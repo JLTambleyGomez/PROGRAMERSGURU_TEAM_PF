@@ -12,6 +12,7 @@ const postProduct = async (req,res) => {
                 description,
                 image,
                 category,
+                
             }
         })
 
@@ -21,6 +22,7 @@ const postProduct = async (req,res) => {
                 image: "",
                 description: "",
                 price: "",
+                
             },
             successResponse: created
             ? "El producto fue creado exitosamente"

@@ -10,36 +10,38 @@ function FilterBarShop () {
    
 
     //global states:
-    const productsCopy = useSelector((state) => state.productsCopy);
     const products = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
   
-    console.log(productsCopy)    
     console.log(products)
 
     //states:
-    const [priceRange, setPriceRange] = useState([0, 500]);
+    const [priceRange, setPriceRange] = useState([0, 1000]);
+    const [initalPriceRange, setInitialPriceRange] = useState(false);
+    const [currentPriceRange, setCurrentPriceRange] = useState([0, 1000])
     const [isVisiblePrice, setIsVisiblePrice] = useState(false);
+    const [minSliderValue, setMinSliderValue] = useState(0);
+    const [maxSliderValue, setMaxSliderValue] = useState(1000);
+
     const [isVisibleCategory, setIsVisibleCategory] = useState(false);
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
-    const [order, setOrder] = useState("")
-    const [category, setCategory ]=useState("")
-    
+
+    const [order, setOrder] = useState("");
+    const [category, setCategory ] = useState("");
+    const [price, setPrice] = useState([]);
+
     //const:
     const dispatch = useDispatch();
-    
-    // const price = productsCopy.length && productsCopy.filter(product => product.price)
 
-    const mayor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
+    const mayor = products.length && products.reduce((productoMayor, productoActual) => {
         return +productoActual.price > +productoMayor.price ? productoActual : productoMayor;
     });
-
-    const menor = productsCopy.length && productsCopy.reduce((productoMayor, productoActual) => {
+    const menor = products.length && products.reduce((productoMayor, productoActual) => {
         return +productoActual.price < +productoMayor.price ? productoActual : productoMayor;
     });
 
-    const mayorPrice = +mayor.price
-    const menorPrice = +menor.price
+    const mayorPrice = typeof(mayor) === "object" ? +mayor.price : 1000;
+    const menorPrice = typeof(menor) === "object" ? +menor.price : 0;
 
 
     //functions:
@@ -50,34 +52,36 @@ function FilterBarShop () {
     const toggleVisibilityCategory = () => {
         setIsVisibleCategory(!isVisibleCategory);
     }
-1
+
     const toggleVisibilitySortByName = () => {
         setIsVisibleSortByName(!isVisibleSortByName);
     }
 
-    const handlePriceChange = (values) => { 
-        setPriceRange(values);
+    const debounce = (func, delay) => {
+        let timer;
+        return (...args) => {
+          clearTimeout(timer);
+          timer = setTimeout(() => func(...args), delay);
+        };
     };
+    // const handlePriceChange = (values) => { 
+    //     setPriceRange(values);
+    // };
 
     //______________________________________
-    const handleSortChange = async (event) => {
-        const value = event.target.value;
-        await setOrder(value);
-    };
-    //_______________________________________
+    // const handleSortChange = async (event) => {
+    //     const value = event.target.value;
+    //     await setOrder(value);
+    // };
+    // //_______________________________________
 
-    const handle = async () => {
-        await dispatch(get_products_all());
-        order !== "" ? await dispatch(sort_products(order)):"";
-        category !== "" ? await dispatch(filter_product_by_category(category)): "";
-        await dispatch(filter_product_by_price(priceRange))
-    }
-    //_______________________________________
-
-    const handleCategory = async (event) => {
-        const value= event.target.value
-        setCategory(value);
-    }
+    // const handle = async () => {
+    //     await dispatch(get_products_all());
+    //     order !== "" ? await dispatch(sort_products(order)):"";
+    //     category !== "" ? await dispatch(filter_product_by_category(category)): "";
+    //     await dispatch(filter_product_by_price(priceRange))
+    // }
+    // //_______________________________________
 
     //_______________________________________
 
@@ -86,71 +90,155 @@ function FilterBarShop () {
     //     dispatch(filter_product_by_price(priceRange));
     // }
 
-    // const sortProducts = (event) => {
-    //     const value = event.target.value
-    //     dispatch(sort_products(value));
-    // }
+    //_________________________
+    const sortProducts = async (event) => {
+        const { value } = event.target;
+        await setOrder(value);
+      
+        await dispatch(get_products_all());
+        if (category !== "") {
+            await dispatch(filter_product_by_category(category));
+        }
+        if (price.length !== 0) {
+            await dispatch(filter_product_by_price(price));
+        }
+        await dispatch(sort_products(value));
+    };
+
+    const filterCategory = async (event) => {
+        const { value } = event.target;
+      
+        if (value === "") {
+            await setCategory("");
+            await dispatch(get_products_all());
+            if (price.length !== 0) {
+                await dispatch(filter_product_by_price(price));
+            }
+            if (order !== "") {
+                await dispatch(sort_products(order));
+            }
+        } else {
+            await setCategory(value);
+            await dispatch(get_products_all());
+            await dispatch(filter_product_by_category(value));
+            if (price.length !== 0) {
+                await dispatch(filter_product_by_price(price));
+            }
+            if (order !== "") {
+                await dispatch(sort_products(order));
+            }
+        }
+    };
+
+    const handlePriceChange = debounce (async (values) => {
+        await setCurrentPriceRange(values);
+
+        const [minPrice, maxPrice] = values;
+        const newPrice = minPrice !== menorPrice || maxPrice !== mayorPrice ? values : [];
+      
+        await dispatch(get_products_all());
+        if (category !== "") {
+          await dispatch(filter_product_by_category(category));
+        }
+        if (newPrice.length !== 0) {
+            await dispatch(filter_product_by_price(newPrice));
+        }
+        if (order !== "") {
+            await dispatch(sort_products(order));
+        }
+        await setPrice(newPrice);
+    }, 300);
+    //_________________________
+
+    const resetFilters = (event) => {
+        event.preventDefault();
+        dispatch(get_products_all());
+        setOrder("");
+        setCategory("");
+        setPrice([minSliderValue, maxSliderValue]);
+        setCurrentPriceRange([minSliderValue, maxSliderValue])
+    }
+      
 
     //life-cycles:
     useEffect(() => {
         console.log(priceRange)
-    }, [priceRange])
+        console.log(initalPriceRange)
+    }, [priceRange, initalPriceRange])
+
+    useEffect(() => {
+        console.log({price: price, order: order, category: category})
+    }, [price, order, category])
 
     useEffect(() => {
         dispatch(get_categories())
-    }, [dispatch])
+    }, [])
+
+    useEffect(() => {
+        dispatch(get_products_all());
+    }, []);
+
+    useEffect(() => {
+        if (!initalPriceRange && products.length > 0) {
+            setPriceRange([menorPrice, mayorPrice]);
+            setCurrentPriceRange([menorPrice, mayorPrice]);
+            setMaxSliderValue(mayorPrice);
+            setMinSliderValue(menorPrice);
+            setInitialPriceRange(true);
+        }
+    }, [initalPriceRange, menorPrice, mayorPrice, products]);
 
 
     //component:
     return (
         <aside className={`${s.sidebar}`}>  
-            <h2>FILTROS</h2>
-            <div>
+            <div className={s.option}>
                 <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                { isVisibleSortByName && (
+                { true && (
                     // value = {order}
-                    <select onChange={handleSortChange}>
+                    <select value={order} onChange={sortProducts}>
                         <option value="">Destacados</option>
                         <option value="ascendente">Ascendente</option>
                         <option value="descendente">Descendente</option>
                     </select>
                 )}
             </div> 
-            <div> 
+            <div className={s.option}>
                 <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
                 {
-                    isVisiblePrice && (
+                    true && (
                         <div className={`${s.filterPrice}`}>
                             <Slider
                                 className={`${s["filterPriceSlider"]}`}
                                 range
-                                min={menorPrice}
-                                max={mayorPrice}
+                                min={minSliderValue}
+                                max={maxSliderValue}
                                 defaultValue={priceRange}
                                 onChange={handlePriceChange}
+                                value={currentPriceRange}
                             />
-                            <div>Rango de Precio: ${priceRange[0]} - ${priceRange[1]}</div>
-                        </div>  
-                    ) 
+                            <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
+                        </div>
+                    )
                 }
             </div>
-            <div className={`${s.filterOption}`}>
+            <div className={s.option}>
                 <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                    <select onChange={handleCategory}>
-                        { categories.length &&
-                            categories.map((category, index) => {
-                                return <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
-                            })
-                        }
+                    <select value={category} onChange={filterCategory}>
+                        { categories.length && (
+                            <>
+                                <option value="">Categorías</option>
+                                    {
+                                        categories.map((category, index) => (
+                                            <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
+                                        ))
+                                    }
+                            </>
+                        )}
                     </select>
-                    { 
-                        isVisibleCategory && (
-                            <div className={`${s.filterCategory}`}></div>
-                        )
-                    }
             </div>
-            <button onClick={handle}>FILTRAR</button>
-            <button onClick={() => {dispatch(get_products_all())}}>Mostrar todos</button>
+            <button>FILTRAR</button>
+            <button onClick={resetFilters}>Mostrar todos</button>
         </aside>
     )
 }

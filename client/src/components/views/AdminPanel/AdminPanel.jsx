@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
+import { get_products_all,get_categories, clearCourses, clearMessage, get_courses_all } from "../../../Redux/actions";
 import Categories from "./Categories";
 import Courses from "./Courses"
 import Products from "./Products"
@@ -98,7 +98,7 @@ const  AdminPanel =() =>{
             <div className={styles.message}>Respuesta desde Servidor: {message}</div>
 
             <div>
-                <button onClick={handleShowCategories} >
+                <button className={styles.buton} onClick={handleShowCategories} >
                     <h1 className={styles.h1} >ADMINISTRAR CATEGORIAS</h1>
                 </button>
                 {showcategories&&(<Categories></Categories>)}
@@ -107,7 +107,7 @@ const  AdminPanel =() =>{
 
             <div>   
         
-          <button onClick={handleShowCursos}>
+          <button className={styles.buton} onClick={handleShowCursos}>
                     <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
                 </button>
                 {showcursos && (
@@ -116,7 +116,7 @@ const  AdminPanel =() =>{
             
 
               <div>
-                <button onClick={handleShowProducts}>
+                <button className={styles.buton} onClick={handleShowProducts}>
                     <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
                 </button>
                  {showproducts&& ( 
@@ -125,14 +125,14 @@ const  AdminPanel =() =>{
               </div>
 
               <div>
-                <button  onClick={handleShowUsers}>
+                <button  className={styles.buton} onClick={handleShowUsers}>
                     <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
                 </button>
                 {showUsers && (<User></User>)}
               </div>
 
               <div>
-                <button  onClick={handleShowSubscription}>
+                <button className={styles.buton} onClick={handleShowSubscription}>
                     <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
                 </button>
                 {showSubscriptions && (<Subscriptions></Subscriptions>)}

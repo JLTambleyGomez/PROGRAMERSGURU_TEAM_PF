@@ -10,3 +10,8 @@
 body {
   margin: 0
 }
+
+button{
+  color: white;
+  background-color: rgba(10, 61, 102, 0.712);
+}

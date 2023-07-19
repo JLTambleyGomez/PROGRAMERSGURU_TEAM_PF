@@ -31,7 +31,8 @@ import {
     FILTER_PRODUCTS_BY_CATEGORY,
     SORT_PRODUCTS,
     PUT_PRODUCTS,
-//CART
+    POST_PRODUCT,
+//CART,
     SET_CART,
     CLEAR_CART,
 //SHOPBAG
@@ -80,7 +81,7 @@ const globalStorage = {
 export default function rootReducer ( state = globalStorage, { type, payload } ) {
 
     switch (type) {
-
+        //courses
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };
 
@@ -112,7 +113,13 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 allCourses: todos_cursosOrdenados, 
                 courses: cursosOrdenados
             }
-
+            case POST_COURSE:
+                return {
+                    ...state,
+                    message: payload.message,
+                };
+                
+        //categories
         case GET_CATEGORIES_ALL:
             return {
                 ...state,
@@ -124,13 +131,10 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 message: payload.message,
             };
-
-        case POST_COURSE:
-            return {
-                ...state,
-                message: payload.message,
-            };
             
+        case DELETE_CATEGORIES:
+            return { ...state, message: payload};
+        
         case ERROR:
             return {
                 ...state,
@@ -163,9 +167,7 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case  DELETE_COURSE:
             return { ...state, message: payload};
 
-        case DELETE_CATEGORIES:
-            return { ...state, message: payload};
-
+            //productos
         case GET_PRODUCTS:
             return { ...state, products: payload, productsCopy: payload};
         
@@ -174,24 +176,33 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
 
         case DELETE_PRODUCT:
             return { ...state, message: payload};
+            
+        case POST_PRODUCT:
+            return {
+                ...state,
+                message: payload.message,
+            };
+
+        case PUT_PRODUCTS:
+            return {
+                ...state,
+                message: payload.message,
+            }
 
         case FILTER_PRODUCTS_BY_CATEGORY:
             return { ...state, products: state.products.filter((product) => product.category === payload)};
 
-        case FILTER_PRODUCTS_BY_PRICING:
-            return { ...state, products: state.products.filter((product) => product.price > payload[0] && product.price < payload[1] )}
-
-        case SORT_PRODUCTS:
-            const todos_productosOrdenados = [...state.products];
-            const productosOrdenados = [...state.productsCopy];
-
-            if (payload === "ascendente") {
-                todos_productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-                productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-            } else if (payload === "descendente") {
-                todos_productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-                productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-            }
+            case FILTER_PRODUCTS_BY_PRICING:
+                return { ...state, products: state.products.filter((product) => product.price >= payload[0] && product.price <= payload[1] )}
+    
+            case SORT_PRODUCTS:
+                const productosOrdenados = [...state.products];
+    
+                if (payload === "ascendente") {
+                    productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
+                } else if (payload === "descendente") {
+                    productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
+                }
 
             return { 
                 ...state, 
@@ -265,8 +276,8 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case POST_SUSCRIPTION:
             return {
                 ...state,
-                subscriptions: payload
-            }
+                message: payload.message,
+            };
 //////////////////////////////////////////////////////////////////////////////////////////
         default: return {...state}; 
     }

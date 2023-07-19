@@ -34,9 +34,7 @@ function Courses() {
     categories: [],
   });
   const [modificarCourse, setModificarCourse] = useState(false)
-
-  //PARA PODER MODIFICAR EL CURSO
-  const [modified, setModified] = useState(false)
+  const [courseId, setCourseId] = useState(null)
 
   const [modifCourse, setModifCourse] = useState({
     title: "",
@@ -66,7 +64,9 @@ function Courses() {
 
   //modificar curso
   const handleModificarCurso  = (event) => {
+    const id = event.target.value
     setModificarCourse(true)
+    setCourseId(id)
 
   }
 
@@ -100,7 +100,30 @@ function Courses() {
 
   const handleCoursePost = (event) => {
     event.preventDefault();
-    dispatch(post_course(newCourse))
+    
+    if(modificarCourse) {
+      dispatch(put_course(courseId,newCourse))
+      .then(() =>{
+        setNewCourse({
+          title: "",
+          description: "",
+          imageURL: "",
+          courseUrl: "",
+          rating: 0,
+          released: "",
+          isFree: false,
+          language: "",
+          categories: [],
+        });
+        dispatch(get_courses_all());
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    }else {
+
+      dispatch(post_course(newCourse))
       .then(() => {
         setNewCourse({
           title: "",
@@ -118,7 +141,8 @@ function Courses() {
       .catch((error) => {
         console.log(error);
       });
-  };
+    };
+  }
 
   // life-cycles:
   useEffect(() => {
@@ -141,12 +165,10 @@ function Courses() {
       
           <section className={`${styles.Panel}`}>
             <form className={`${styles.coursesForm}`}>
-              <h2>Nuevo Curso</h2>
+             {modificarCourse ? (<h2>Modificar Curso</h2>) : (<h2>Nuevo Curso</h2>)} 
               <div className={`${styles.h1}`}>
                 <label>Título:</label>
                 <input type="text" name="title" value={newCourse.title} onChange={handleCourseChange} />
-                {/* {modified ? (<div></div> : (<div></div>)} */}
-                
               </div>
 
               <div className={`${styles.h1}`}>
@@ -197,20 +219,22 @@ function Courses() {
 
               <button onClick={handleCoursePost}>Postear curso</button>
             </form>
-
-            <div className={`${styles.coursesContainer}`}>
-              <h1>Courses</h1>
-              <div className={`${styles.coursesBox}`}>
-                {courses.map((course) => (
-                    <div className={`${styles.course}`} key={course.id}>
-                      <button onClick={handleModificarCurso}>Modificar Curso</button>
-                      <p>ID: {course.id}</p> {course.title}
-                      <p>Fecha De Lanzamiento {course.released} </p>
-                      <button onClick={() => handleDeleteCourse(course.id)}>X</button>
+            {modificarCourse ?
+             (<></>) 
+             : (<div className={`${styles.coursesContainer}`}>
+                  <h1>Courses</h1>
+                  <div className={`${styles.coursesBox}`}>
+                    {courses.map((course) => (
+                        <div className={`${styles.course}`} key={course.id}>
+                          <button onClick={handleModificarCurso} value={course.id}>Modificar Curso</button>
+                          <p>ID: {course.id}</p> {course.title}
+                          <p>Fecha De Lanzamiento {course.released} </p>
+                          <button onClick={() => handleDeleteCourse(course.id)}>X</button>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>)}
+            
           </section>
 
         <div></div>
