@@ -5,7 +5,7 @@ import { get_products_all, get_products_by_name, set_cart, sort_products, filter
 
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
-import FilterBarShop from "./FilterBarShop";
+import FilterBarShop from "./FilterBarShop"
 import Modal from "../ventanaemergente/ventana";
 
 
@@ -17,7 +17,7 @@ function Shop () {
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
     
-    const productsCopy = useSelector((state) => state.productsCopy);
+    // const productsCopy = useSelector((state) => state.productsCopy);
     const cart = useSelector((state)=> state.cart)
 
 
@@ -25,7 +25,8 @@ function Shop () {
     const [input, setInput] = useState("");
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
-    const [orden, setOrden] = useState("");
+    const [loading, setLoading] = useState(false)
+
 
     //const:
     const dispatch = useDispatch();
@@ -139,11 +140,18 @@ function Shop () {
         dispatch(set_cart())
     }, [])
 
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+        }, 500);
+    }, [products])
+
 
 
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 6
+    const productsPerPage = 10
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
@@ -151,7 +159,7 @@ function Shop () {
     // indice:
     const pageNumbers = [];
     (() => {
-        for (let i = 1; i <= Math.ceil(productsCopy.length / productsPerPage); i++) {
+        for (let i = 1; i <= Math.ceil(products.length / productsPerPage); i++) {
             pageNumbers.push(i);
         }
     })()
@@ -163,7 +171,6 @@ function Shop () {
 
         {/* BANNER */}
             <section className={`${s.sectionBanner}`}>
-                
                 <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
@@ -172,13 +179,13 @@ function Shop () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                      TIENDA DE PROGRAMMER'S GURU 
                 </h1>
-                
+
             </section>
         {/* SIDEBAR */}
             <FilterBarShop/>
 
         {/* PAGINADO */}
-            <div className={s.paginado}>
+            <div className={`${s.paginado}`} >
                 {
                     pageNumbers?.map((number, index) => {
                         return (
@@ -195,54 +202,61 @@ function Shop () {
             <section className={`${s.section3}`}>
 
             {/* PRODUCTS */}
-                <div className={`${s['productBox']}`}>
-                    { 
-                        currentAllProducts? currentAllProducts?.map((product, index) => {
-                            if (product?.stock > 0) { return (
-                                <div className={`${s['item']}`} key={index}>
-                                    <div style={{display: "flex", flexDirection: "column"}}>
-                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                            <img className={s["itemImage"]} src={product?.image}></img>
+
+            {
+                loading ? (
+                    <h1>Loading...</h1>
+                ) : (
+                    <div className={`${s['productBox']}`}>
+                        { 
+                            currentAllProducts? currentAllProducts?.map((product, index) => {
+                                if (product?.stock > 0) { return (
+                                    <div className={`${s['item']}`} key={index}>
+                                        <div style={{display: "flex", flexDirection: "column"}}>
+                                            <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                                <img className={s["itemImage"]} src={product?.image}></img>
+                                            </div>
+                                            <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                                <h1 className={s["name"]} >{product?.name}</h1>
+                                            </div>
                                         </div>
-                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                            <h1 className={s["name"]} >{product?.name}</h1>
+                                        <div className={s.priceAndCart}>
+                                            <h1 className={s["price"]}>${product?.price}</h1>
+                                            <button
+                                                onMouseEnter={() => handleMouseEnter(index)}
+                                                onMouseLeave={() => handleMouseLeave(index)}
+                                                onClick={() => addToCart(product)}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
+                                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+                                            </button>
+                                        </div>
+                                        {
+                                            cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
+                                        }
+                                    </div>
+                                )} else return (
+                                    <div className={`${s['item']}`} key={index}>
+                                        <div style={{display: "flex", flexDirection: "column"}}>
+                                            <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
+                                                <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
+                                            </div>
+                                            <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
+                                                <h1 className={s["name"]} >{product?.name}</h1>
+                                            </div>
+                                        </div>
+                                        <div className={s.priceAndCart}>
+                                            <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
+                                            <p>No quendan existencias</p>
                                         </div>
                                     </div>
-                                    <div className={s.priceAndCart}>
-                                        <h1 className={s["price"]}>${product?.price}</h1>
-                                        <button
-                                            onMouseEnter={() => handleMouseEnter(index)}
-                                            onMouseLeave={() => handleMouseLeave(index)}
-                                            onClick={() => addToCart(product)}>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
-                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-                                        </button>
-                                    </div>
-                                    {
-                                        cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
-                                    }
-                                </div>
-                            )} else return (
-                                <div className={`${s['item']}`} key={index}>
-                                    <div style={{display: "flex", flexDirection: "column"}}>
-                                        <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                            <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
-                                        </div>
-                                        <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                            <h1 className={s["name"]} >{product?.name}</h1>
-                                        </div>
-                                    </div>
-                                    <div className={s.priceAndCart}>
-                                        <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
-                                        <p>No quendan existencias</p>
-                                    </div>
-                                </div>
+                                )
+                            }) : (
+                                <Modal/>
                             )
-                        }) : (
-                            <Modal/>
-                        )
-                    }
-                </div>
+                        }
+                    </div>
+                )
+            }
             </section>
 
         {/* RESUMEN */}

@@ -192,20 +192,17 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case FILTER_PRODUCTS_BY_CATEGORY:
             return { ...state, products: state.products.filter((product) => product.category === payload)};
 
-        case FILTER_PRODUCTS_BY_PRICING:
-            return { ...state, products: state.products.filter((product) => product.price > payload[0] && product.price < payload[1] )}
-
-        case SORT_PRODUCTS:
-            const todos_productosOrdenados = [...state.products];
-            const productosOrdenados = [...state.productsCopy];
-
-            if (payload === "ascendente") {
-                todos_productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-                productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-            } else if (payload === "descendente") {
-                todos_productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-                productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-            }
+            case FILTER_PRODUCTS_BY_PRICING:
+                return { ...state, products: state.products.filter((product) => product.price >= payload[0] && product.price <= payload[1] )}
+    
+            case SORT_PRODUCTS:
+                const productosOrdenados = [...state.products];
+    
+                if (payload === "ascendente") {
+                    productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
+                } else if (payload === "descendente") {
+                    productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
+                }
 
             return { 
                 ...state, 

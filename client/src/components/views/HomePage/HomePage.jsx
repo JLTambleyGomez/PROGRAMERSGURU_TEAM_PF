@@ -38,15 +38,20 @@ function HomePage () {
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
     const sendEmail = async () => {
-        const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, {email: "calderon", message:"enviado"});
-      };
+        const carta = {email: "calderon", message:"enviado"}
+        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+    };
+
 
     //life-cycles:
     useEffect(() => {
         // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-        sendEmail();
+        /*(async () => {
+            await sendEmail();
+        })()*/
+
         //--desmontado
         return () => {
             dispatch(clearMessage());
