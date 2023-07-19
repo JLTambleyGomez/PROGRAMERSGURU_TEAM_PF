@@ -51,6 +51,7 @@ function Products() {
         }
     };
 
+    console.log(products);
     ///valida los cambios en los inputs
     const handleChangeProductForm = (event) => {
         const name = event.target.name;
@@ -108,6 +109,22 @@ function Products() {
                 dispatch(get_products_all());
             }
             dispatch(get_products_all());
+            setProduct({
+                name: "",
+                price: "",
+                description: "",
+                image: "",
+                category: "",
+                stock: "",
+            });
+            setNewProduct({
+                name: "",
+                price: "",
+                description: "",
+                image: "",
+                category: "",
+                stock: "",
+            });
         } catch (error) {
             console.log(error);
         }
@@ -116,6 +133,14 @@ function Products() {
     const handleCloseForm = () => {
         setModificarProduct(false);
         setPostProduct(false);
+        setNewProduct({
+            name: "",
+            price: "",
+            description: "",
+            image: "",
+            category: "",
+            stock: "",
+        });
     };
 
     //life-cycles:
@@ -260,7 +285,7 @@ function Products() {
                         {postProduct ||
                             (!modificarProduct &&
                                 products.length &&
-                                products?.map((product, index) => {
+                                products.map((product, index) => {
                                     return (
                                         <span
                                             className={`${styles.category}`}
