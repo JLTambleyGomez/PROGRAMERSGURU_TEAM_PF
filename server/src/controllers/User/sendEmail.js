@@ -30,7 +30,7 @@ const SendEmail= (req, res) =>{
         if(error){
             res.status(500).send({message:"esta fallando"});
         } else{
-            res.status(200).send("enviado");
+            res.status(200).json({message:"enviado"});
       }});
 }
 

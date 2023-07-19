@@ -11,7 +11,8 @@ import axios from "axios";
 //_________________________module_________________________
 export default function signIn(email, password) {
     const notificacion=async (carta) => {
-        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+       const {data} = await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+       console.log(data.message)
     };
 
 

@@ -1,23 +1,63 @@
 .container {
     position: fixed;
-    top: 20px; /* Ajusta la posición vertical según tus necesidades */
-    left: 20px; /* Ajusta la posición horizontal según tus necesidades */
-    width: 100%;
+    width: 2%;
     max-width: 500px;
     padding: 20px;
     z-index: 9999;
   }
   
-  .video {
-    position: fixed;
+  .component{
+    position:absolute;
     top: 0;
-    left: 0;
-    width: 500px;
-    height: 100px;
+    left:0;
   }
-  
+  .video {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    left: 0;
+
+    transition: all 0.5s;
+  }
+  .video:hover{
+    width: 500px;
+    height: 150px;
+  }
   .video iframe {
     width: 100%;
     height: 100%;
   }
   
+  .p{
+    position: absolute;
+    display: flex;
+    background-color: black;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 9999;
+
+  }
+  .p:hover{
+    cursor: pointer;
+  }
+
+  .p2{
+    background-color: black;
+    color: white;
+    top: 10%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 100%;
+  }
+    .p2:hover{
+      cursor: pointer;
+    }

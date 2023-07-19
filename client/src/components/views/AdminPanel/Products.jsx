@@ -23,7 +23,8 @@ function Products() {
     const [postProduct, setPostProduct] = useState(false);
     const [modificarProduct, setModificarProduct] = useState(false);
     const [idProduct, setIdProduct] = useState(null);
-    const [messagePost, setMessagePost] = useState(false);
+    const [messagePost, setMessagePost] = useState("");
+    const [change, setChange] = useState(false);
     const [product, setProduct] = useState({});
     const [newProduct, setNewProduct] = useState({
         name: "",
@@ -70,6 +71,7 @@ function Products() {
                 category: "",
                 stock: "",
             });
+        setChange(true);
     };
 
     //cambia el estado para desplegar el formulario y postearlo
@@ -97,34 +99,45 @@ function Products() {
     const handleProductSubmit = (event) => {
         event.preventDefault();
         try {
-            if (postProduct) {
-                dispatch(post_Product(newProduct));
-                setPostProduct(false);
-                setMessagePost(true);
+            if (
+                errorProduct.name ||
+                errorProduct.description ||
+                errorProduct.genre ||
+                errorProduct.platforms ||
+                errorProduct.released ||
+                errorProduct.rating
+            )
+                return setMessagePost("Faltan datos para ingresar");
+            if (change) {
+                if (postProduct) {
+                    dispatch(post_Product(newProduct));
+                    setPostProduct(false);
+                    setMessagePost(true);
+                    dispatch(get_products_all());
+                }
+                if (modificarProduct) {
+                    dispatch(put_Products(idProduct, newProduct));
+                    setModificarProduct(false);
+                    dispatch(get_products_all());
+                }
                 dispatch(get_products_all());
+                setProduct({
+                    name: "",
+                    price: "",
+                    description: "",
+                    image: "",
+                    category: "",
+                    stock: "",
+                });
+                setNewProduct({
+                    name: "",
+                    price: "",
+                    description: "",
+                    image: "",
+                    category: "",
+                    stock: "",
+                });
             }
-            if (modificarProduct) {
-                dispatch(put_Products(idProduct, newProduct));
-                setModificarProduct(false);
-                dispatch(get_products_all());
-            }
-            dispatch(get_products_all());
-            setProduct({
-                name: "",
-                price: "",
-                description: "",
-                image: "",
-                category: "",
-                stock: "",
-            });
-            setNewProduct({
-                name: "",
-                price: "",
-                description: "",
-                image: "",
-                category: "",
-                stock: "",
-            });
         } catch (error) {
             console.log(error);
         }
@@ -133,6 +146,16 @@ function Products() {
     const handleCloseForm = () => {
         setModificarProduct(false);
         setPostProduct(false);
+        setChange(false);
+        setMessagePost("");
+        setErrorProduct({
+            name: "",
+            price: "",
+            description: "",
+            image: "",
+            category: "",
+            stock: "",
+        });
         setNewProduct({
             name: "",
             price: "",
@@ -165,15 +188,27 @@ function Products() {
                     {postProduct || modificarProduct ? (
                         <>
                             <button onClick={handleCloseForm}>X</button>
+                            <h2>
+                                {postProduct
+                                    ? "Añadir un nuevo producto"
+                                    : "Editar producto"}
+                            </h2>
+                            {messagePost && <p>{messagePost}</p>}
                             <form>
                                 <div>
+                                    {modificarProduct && (
+                                        <p>
+                                            Debe ingresar al menos un dato a
+                                            cambiar
+                                        </p>
+                                    )}
                                     <label htmlFor="name">Nombre: </label>
                                     <input
                                         name="name"
                                         value={newProduct.name}
                                         onChange={handleChangeProductForm}
                                         placeholder={
-                                            modificarProduct && product.name
+                                            modificarProduct ? product.name : ""
                                         }
                                     />
                                     {errorProduct.name && (
@@ -190,8 +225,9 @@ function Products() {
                                         value={newProduct.description}
                                         onChange={handleChangeProductForm}
                                         placeholder={
-                                            modificarProduct &&
-                                            product.description
+                                            modificarProduct
+                                                ? product.description
+                                                : ""
                                         }
                                     />
                                     {errorProduct.description && (
@@ -207,7 +243,9 @@ function Products() {
                                         onChange={handleChangeProductForm}
                                         type="number"
                                         placeholder={
-                                            modificarProduct && product.price
+                                            modificarProduct
+                                                ? product.price
+                                                : ""
                                         }
                                     />
                                     {errorProduct.price && (
@@ -222,7 +260,9 @@ function Products() {
                                         value={newProduct.image}
                                         onChange={handleChangeProductForm}
                                         placeholder={
-                                            modificarProduct && product.image
+                                            modificarProduct
+                                                ? product.image
+                                                : ""
                                         }
                                     />
                                     {errorProduct.image && (
@@ -239,7 +279,9 @@ function Products() {
                                         value={newProduct.category}
                                         onChange={handleChangeProductForm}
                                         placeholder={
-                                            modificarProduct && product.category
+                                            modificarProduct
+                                                ? product.category
+                                                : ""
                                         }
                                     />
                                     {errorProduct.category && (
@@ -255,7 +297,9 @@ function Products() {
                                         onChange={handleChangeProductForm}
                                         type="number"
                                         placeholder={
-                                            modificarProduct && product.stock
+                                            modificarProduct
+                                                ? product.stock
+                                                : ""
                                         }
                                     />
                                     {errorProduct.stock && (

@@ -35,7 +35,7 @@ export const getProductsRequest = async () => {
 };
 
 export const postProductRequest = async (product) => {
-  const { data } = await axios.get("/product", product);
+  const { data } = await axios.put("http://localhost:3001/product", product);
   return data;
 };
 
