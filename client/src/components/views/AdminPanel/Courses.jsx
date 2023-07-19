@@ -148,6 +148,8 @@ function Courses() {
                     console.log(error);
                 });
         }
+        setModificarCourse(false);
+        setPostCourse(false);
     };
 
     const handlePostCourse = () => {

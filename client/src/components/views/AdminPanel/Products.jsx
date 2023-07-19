@@ -204,7 +204,9 @@ function Products() {
                                     className={styles.button}
                                     onClick={handleProductSubmit}
                                 >
-                                    Postear Producto
+                                    {postProduct
+                                        ? "Postear Producto"
+                                        : "Editar producto"}
                                 </button>
                             </form>
                         </>
