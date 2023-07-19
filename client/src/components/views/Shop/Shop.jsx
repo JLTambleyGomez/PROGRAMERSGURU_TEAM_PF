@@ -210,7 +210,7 @@ function Shop () {
                     <div className={`${s['productBox']}`}>
                         { 
                             currentAllProducts? currentAllProducts?.map((product, index) => {
-                                if (product?.stock > 0) { return (
+                                if (product?.stock >= 0) { return (
                                     <div className={`${s['item']}`} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
                                             <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>

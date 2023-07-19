@@ -62,7 +62,7 @@ function HomePage () {
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
-            <section className={`${s.sectionBanner}`}>
+            {/* <section className={`${s.sectionBanner}`}>
                 <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
@@ -71,7 +71,7 @@ function HomePage () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                     PROGRAMMER'S GURU
                 </h1>
-            </section>
+            </section> */}
             <SubscripcionesFlotante/>
         {/* LAST COURSES */}
             <section className={`${s.sectionCourses}`}>

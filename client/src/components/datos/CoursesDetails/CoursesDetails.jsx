@@ -61,41 +61,45 @@ function CourseDetails () {
             await dispatch(clearMessage());
             await dispatch (clearCourses())
             await dispatch(get_courses_all())
-        };
+        };  
     }, [dispatch]);
 
     //component:
     return(
         <div className={`${styles.component} ${styles[theme("component")]}`}>
-            <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1>
-
-            <div className={styles.container1}>
-                <img className={styles.img} src={course.imageURL}/>
-                <h2 className={`${styles.description} ${styles[theme("description")]}`}>{course.description}</h2>
+            <div className={styles.mainTitle}>
+                <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1>
             </div>
 
-            <div className={styles.container2}>
-                <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
-                <h3 className={`${styles.p} ${styles[theme("p")]}`}>Release date: {course.released}</h3>
-                <h2 className={`${styles.p} ${styles[theme("p")]}`}>Categories:</h2>
-                <h4 className={`${styles.p} ${styles[theme("p")]}`}>Language: {course.language}</h4>
-                {
-                    course.isFree === true ? (
-                        <h3>This course is free</h3>
-                    ) : (
-                        <h3>This course requires payment</h3>
-                    )
-                }
-                <a className={`${styles.link} ${styles[theme("link")]}`} href={course.courseUrl} target="_blank">Entrar aquí</a>
+            <div className={styles.wrapper}>
+                <div className={styles.container1}>
+                    <img className={styles.img} src={course.imageURL}/>
+                </div>
+
+                <div className={styles.container2}>
+                    <h2 className={`${styles.description} ${styles[theme("description")]}`}>{course.description}</h2>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
+                    <h3 className={`${styles.p} ${styles[theme("p")]}`}>Release date: {course.released}</h3>
+                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Categories:</h2>
+                    <h4 className={`${styles.p} ${styles[theme("p")]}`}>Language: {course.language}</h4>
+                    {/* {
+                        course.isFree === true ? (
+                            <h3>This course is free</h3>
+                        ) : (
+                            <h3>This course requires payment</h3>
+                        )
+                    }
+                    <a className={`${styles.link} ${styles[theme("link")]}`} href={course.courseUrl} target="_blank">Entrar aquí</a> */}
+                </div>
             </div>
 
-            {
+            {/* {
                 isFav ? (
                     <button className={`${styles.button} ${styles[theme("button")]}`} onClick={deleteFavoritesRequest}>Quitar de favoritos ❤️</button>
                 ) : (
                     <button className={`${styles.button} ${styles[theme("button")]}`} onClick={postFavoritesRequest}>Añadir a favoritos 🤍</button>
                 )
-            }
+            } */}
         </div>
     )
 }

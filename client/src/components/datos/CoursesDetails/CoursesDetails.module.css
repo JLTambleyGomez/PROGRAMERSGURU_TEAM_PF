@@ -1,25 +1,27 @@
 .component {
-  height: 100vh;
-  scale: 0.8;
-  padding-bottom: 40%;
-  
+    margin-top: var(--navBarHeight);
+    display: flex;
+    flex-direction: column;
+    /* height: 100vh; */
+    /* scale: 0.8; */
+    /* padding-bottom: 40%; */
 }
 .component-dark {
   background-color: #000000;
   color: #ffffff;
 }
 
-.title {
-  background-color: #005f6b98;
-  font-size: 50px;
-  padding-left: 2%;
-  color: #ffffff;
-  position: relative;
-  animation: slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  
+.mainTitle {
+    background-color: #005f6b98;
 }
 
-
+.title {
+  font-size: 50px;
+  /* padding-left: 2%; */
+  color: #ffffff;
+  /* position: relative; */
+  /* animation: slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; */
+}
 @keyframes slide-in-right {
   0% {
     transform: translateX(-100%);
@@ -34,11 +36,19 @@
   color: rgb(255, 255, 255);
 }
 
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    /* gap: 10%; */
+}
+
 .container1{
   display: flex;
   align-items: center;
   justify-content: space-around;
-  padding-top: 12%;
+  min-width: 50%;
+  max-width: 50%;
+  /* padding-top: 12%; */
   }
   .img {
     width: 400px;
@@ -47,19 +57,19 @@
   }
   .description {
     font-size: 18px;
-    width: 60%;  
+    /* width: 60%;   */
   }
 
   .container2 {
-    padding: 2%;
+    /* padding: 2%; */
     font-size: 18px;
     border: 6px solid aquamarine;
-    width: 50%;
+    min-width: 40%;
+    max-width: 40%;
   }
   
   .container2:hover {
-   
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
   }
 
   .p {

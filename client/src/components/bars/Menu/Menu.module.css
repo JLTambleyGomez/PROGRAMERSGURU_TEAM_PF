@@ -1,6 +1,6 @@
 .component {
-  position: absolute;
-  right:0.5%
+  /* position: absolute; */
+  /* right:0.5% */
 }
 .component:hover {
   background-color: #588b8b00;
@@ -15,8 +15,8 @@
   .image {
     border: 2px solid #112;
     border-radius: 100%;
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     object-fit: cover;
   }
   .image:hover{

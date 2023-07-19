@@ -69,6 +69,7 @@ function Products () {
     //cambia el estado para desplegar el formulario
     const handlePostProducts = () => {
         setPostProduct(true)
+        dispatch(post_Products(newProduct))
     }
 
 
