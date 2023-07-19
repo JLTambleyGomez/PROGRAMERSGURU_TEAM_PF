@@ -91,7 +91,7 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
             return { ...state, allCourses: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
-            return { ...state, courses: state.courses.filter((course) => course.language== payload)};
+            return { ...state, courses: state.courses.filter((course) => course.language == payload)};
 
         case FILTER_COURSES_BY_PRICING:
             return { ...state, courses: state.courses.filter((course) => course.isFree === payload)}
@@ -179,24 +179,20 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
             return { ...state, products: state.products.filter((product) => product.category === payload)};
 
         case FILTER_PRODUCTS_BY_PRICING:
-            return { ...state, products: state.products.filter((product) => product.price > payload[0] && product.price < payload[1] )}
+            return { ...state, products: state.products.filter((product) => product.price >= payload[0] && product.price <= payload[1] )}
 
         case SORT_PRODUCTS:
-            const todos_productosOrdenados = [...state.products];
-            const productosOrdenados = [...state.productsCopy];
+            const productosOrdenados = [...state.products];
 
             if (payload === "ascendente") {
-                todos_productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
                 productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
             } else if (payload === "descendente") {
-                todos_productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
                 productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
             }
 
             return { 
                 ...state, 
-                products: productosOrdenados, 
-                productsCopy: todos_productosOrdenados
+                products: productosOrdenados
             }
 
 
