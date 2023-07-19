@@ -7,9 +7,15 @@ import {
     inMemoryPersistence
 } from "firebase/auth";
 import { postUserRequest } from "../axiosRequests/axiosRequests";
+import axios from "axios";
 
 
 export default function signInwithGoogle() {
+
+    const notificacion=async (carta) => {
+        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+    };
+
     const provider = new GoogleAuthProvider();
     provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
     const auth = getAuth();
@@ -28,6 +34,7 @@ export default function signInwithGoogle() {
                 user.getIdToken()
                 .then((tkn) => {
                     // set access token in local storage
+                    notificacion({email, message:"te has registrado"})
                     localStorage.setItem("accessToken", tkn);
                     localStorage.setItem("email", email)                    
                     postUserRequest(userData)

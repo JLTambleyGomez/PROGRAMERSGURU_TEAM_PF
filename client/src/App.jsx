@@ -4,7 +4,6 @@ import { useSelector } from "react-redux";
 
 import s from "./App.module.css";
 import HomePage from "./components/views/HomePage/HomePage";
-import LandingPage from "./components/views/LandingPage/LandingPage";
 import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
 import NavBar from "./components/bars/navBar/navBar";
@@ -23,9 +22,9 @@ import MercadoPagoFailure from "./components/views/MercadopagoFeedback/fracaso"
 import MercadoPagoPendiente from "./components/views/MercadopagoFeedback/pendiente";
 import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
-import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import MusicBar from "./components/bars/musicBar/MusicBar";
 
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
@@ -90,6 +89,7 @@ const App = () =>{
     return (
         <div className={`${s[theme("component")]}`}>
             {location !== "/" && <NavBar />}
+            {location !== "/" && <MusicBar/>}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
                 <Route path="/" element={<LandingPage2/>}/>

@@ -66,26 +66,30 @@ function CourseDetails () {
 
     //component:
     return (
+        <div>
         <div className={`${styles.component} ${styles[theme("component")]}`}>
 
-            {/* <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1> */}
+            <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1>
+
             <div className={`${styles.container1}`}>
                 <div className={`${styles.containerImage}`}>
                     <img className={styles.img} src={course.imageURL}/>
                 </div>
-            </div>
+
             <div className={styles.container2}>
                 <div styles={styles.basicInfo}>
                     <h2 className={`${styles.description} ${styles[theme("description")]}`}>{course.description}</h2>
-                    <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
                 </div>
+                
+                <h2 className={`${styles.p} ${styles[theme("p")]}`}>Ratings: {course.rating}</h2>
+
                 <div className={styles.extraInfo}>
                     <h2 className={`${styles.p} ${styles[theme("p")]}`}>Release date: {course.released}</h2>
                     <h2 className={`${styles.p} ${styles[theme("p")]}`}>Categories:</h2>
                     <h2 className={`${styles.p} ${styles[theme("p")]}`}>Language: {course.language}</h2>
                 </div>
             </div>
-
+            </div>
             {/* <div>
                 {
                     course.isFree === true ? (
@@ -106,6 +110,7 @@ function CourseDetails () {
                     )
                 }
             </div> */}
+        </div>
         </div>
     )
 }

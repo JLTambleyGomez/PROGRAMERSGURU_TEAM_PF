@@ -46,10 +46,12 @@ export const deleteProductsRequest = async (id) => {
 
 //////////////   PUT PRODUCTS   ////////////
 export const putProductsRequest = async (id, product) => {
-  const {data} = await axios.put(`http://localhost:3001/product/${id}`, product)
+  const { data } = await axios.put(
+      `http://localhost:3001/product/${id}`,
+      product
+  );
   return data;
-
-}
+};
 
 export const postCourseRequest = async (datos) => {
   const { data } = await axios.post("http://localhost:3001/course", datos);

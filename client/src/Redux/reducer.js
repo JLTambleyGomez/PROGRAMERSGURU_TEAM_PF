@@ -183,11 +183,8 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 message: payload.message,
             };
 
-        case PUT_PRODUCTS:
-            return {
-                ...state,
-                message: payload.message,
-            }
+            case PUT_PRODUCTS:
+                return { ...state, message: payload };
 
         case FILTER_PRODUCTS_BY_CATEGORY:
             return { ...state, products: state.products.filter((product) => product.category === payload)};
@@ -209,12 +206,6 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 products: productosOrdenados, 
                 productsCopy: todos_productosOrdenados
             }
-
-
-//////////////////         MODIFICADO              //////////////////////////////
-        case PUT_PRODUCTS: 
-            return {...state,products: payload}
-//////////////////////////////////////////////////////////////////////////////////////////
         case GET_USER_BY_EMAIL:
             return {
                 ...state,

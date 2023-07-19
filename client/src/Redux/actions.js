@@ -407,12 +407,13 @@ export const post_Product = (datos) => {
     return async (dispatch) => {
         try {
             const data = await postProductRequest(datos) // request
-            console.log(data)
+           
             return dispatch({
                 type: POST_PRODUCT,
                 payload: data
             })
         } catch (error) {
+            console.log(error)
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -449,22 +450,21 @@ export const sort_products = (sort) => {
 export const put_Products = (id, product) => {
     return async function (dispatch) {
         try {
-            const data = await putProducts(id,product)
-            console.log(data)
+            const data = await putProductsRequest(id, product);
+            console.log(data);
             return dispatch({
-                type: PUT_PRODUCT,
-                payload: data.message
-            })
+                type: PUT_PRODUCTS,
+                payload: data.message,
+            });
         } catch (error) {
+            console.log(error);
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message
-            })
-            
+                payload: error.response.data.message,
+            });
         }
-    }
-
-}
+    };
+};
 
 //USER___________________________________________________________________//
 
