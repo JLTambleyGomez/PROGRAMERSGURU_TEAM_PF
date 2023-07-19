@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_categories, post_categories, delete_categories, clearMessage } from "../../../Redux/actions";
-import validate from "./validate";
+import {validate} from "./validate";
 import styles from "./Categories.module.css";
 
 const Categories = () => {

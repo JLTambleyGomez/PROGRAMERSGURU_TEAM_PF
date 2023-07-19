@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_suscriptions, put_suscription, delete_suscription, post_suscription} from "../../../Redux/actions";
-
+import { validateProduct } from "./validate";
 
 //_________________________module_________________________
 const Subscriptions = () =>{
@@ -15,6 +15,7 @@ const Subscriptions = () =>{
     //estados locales
     const [newSubscription, setNewSubscription] = useState({title:'', description:'', image: '', type: ''})
     const [errorSubscription, setErrorSubscription] = useState({title:'', description:'', image: '', type: ''})
+    // const [subscription, setSubscription] = useState({title:'', description:'', image: '', type: ''})
 
     //handlers
     const handleSuscription = (event) => {
@@ -41,24 +42,6 @@ const Subscriptions = () =>{
 
         setNewSubscription({...newSubscription,[nameInput]: valor})
         setErrorSubscription(validateSuscription({...newSubscription,[nameInput]: valor}))
-    }
-
-    const validateSuscription = (form) => {
-        const error = {}
-
-        if(!form.title.length) error.title = 'Debe ingresar un titulo válido';
-        else if(form.title.length) error.title = '';
-
-        if(!form.description.length) error.description = 'Debe ingresar una descripción'
-        else if(form.description.length) error.description = ''
-
-        if(!form.image.length) error.image=  'Debe ingresar una imagen'
-        else if(form.image.length) error.image=  ''
-        
-        if(!form.type.length) error.type=  'Debe ingresar un tipo de suscripción'
-        else if(form.type.length) error.type=  ''
-
-        return error
     }
 
     const handleSuscriptionFormSubmit = (event) => {
@@ -102,7 +85,7 @@ const Subscriptions = () =>{
                                 {errorSubscription.type && (<span>{errorSubscription.type}</span>)}
                             </div>
 
-                            <button onClick={handleSuscriptionFormSubmit}>Añadir categoria</button>
+                            <button onClick={handleSuscriptionFormSubmit}>Añadir Suscripción</button>
                         </form>
                     </div>
                 )
