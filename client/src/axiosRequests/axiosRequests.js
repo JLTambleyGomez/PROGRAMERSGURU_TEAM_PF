@@ -140,14 +140,25 @@ export const getFavoritesRequest = async (id) => {
   return cursos;
 };
 
-export const postFavoritesRequest = async (ids) => {
-  const {data} = await axios.post("http://localhost:3001/favorite", ids);
-
+export const postFavoritesRequest = async () => {
+  const ids = { idCourse: id, idUser: 1 };
+  await axios.post("/favorite", ids);
+  setFav(true);
 };
 
 export const deleteFavoritesRequest = async () => {
-  const {data} = await axios.delete(`http://localhost:3001/favorite/${id}`);
-};
+  await axios.delete(`/favorite/${id}`);
+  setFav(false);
+}
+
+// export const postFavoritesRequest = async (ids) => {
+//   const {data} = await axios.post("http://localhost:3001/favorite", ids);
+// };
+
+// export const deleteFavoritesRequest = async () => {
+//   const {data} = await axios.delete(`http://localhost:3001/favorite/${id}`)
+// };
+
 
 //user______________________________
 
@@ -171,10 +182,10 @@ export const putUserRequest = async ( user) => {
   return data 
 }
 
-export const postUserRequest = async (user) => {
-  const {data} = await axios.post(`http://localhost:3001/user/signup`, user)
-  return data
-}
+// export const postUserRequest = async (user) => {
+//   const {data} = await axios.post(`http://localhost:3001/user/signup`, user)
+//   return data
+// }
 
 export const hideUserProfileRequest = async (user) => {
   const {data} = await axios.put(`http://localhost:3001/user/hide`, user)
