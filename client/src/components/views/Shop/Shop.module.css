@@ -27,6 +27,7 @@
 .sectionBanner {
     display: flex;
     align-items: center;
+    height: 25vh;
     background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
   }
 
@@ -149,17 +150,18 @@
       justify-content: space-around;
       align-items: center;
       height: 4rem;
-      background-color: #a1f7be7c;
+      /* background-color: #a1f7be7c; */
+      background-color: rgba(0, 0, 0, 0.672);
       animation:scale-up-horizontal-left 0.4s } @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
       .paginado a {
           text-decoration: none;
-          color: black;
+          color: white;
       }
       .numberBox {
           display: flex;
           justify-content: center;
           align-items: center;
-          border: 3px solid black;
+          border: 3px solid white;
           width: 10%;
           padding: 7px 100%;
           border-radius: 4px;

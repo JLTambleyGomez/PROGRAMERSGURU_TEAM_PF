@@ -15,7 +15,7 @@ const Subscriptions = () =>{
     //estados locales
     const [newSubscription, setNewSubscription] = useState({title:'', description:'', image: '', type: ''})
     const [errorSubscription, setErrorSubscription] = useState({title:'', description:'', image: '', type: ''})
-    // const [subscription, setSubscription] = useState({title:'', description:'', image: '', type: ''})
+    const [modificarSuscription, setModificarSuscription] = useState(false)
 
     //handlers
     const handleSuscription = (event) => {
@@ -23,15 +23,15 @@ const Subscriptions = () =>{
         const idSuscription = event.target.value
 
         if(nombre === 'eliminar') {
-            console.log('eliminado')
+            console.log('eliminando....')
             dispatch(delete_suscription(idSuscription))
             dispatch(get_suscriptions())    
         }
 
         if(nombre === 'editar') {
-            console.log('eliminado')
-            const subscription = subscriptions.find(sub => sub.idSuscription)
-            dispatch(put_suscription(idSuscription, subscription))
+            console.log('editando...')
+            
+            dispatch(put_suscription(idSuscription, newSubscription))
             dispatch(get_suscriptions())    
         }
     }
@@ -60,7 +60,7 @@ const Subscriptions = () =>{
         <div>
             <h1>Suscripciones</h1>
             {
-                !subscriptions.length < 3 && 
+                (!subscriptions.length < 3) || modificarSuscription && 
                 ( 
                     <div>
                         <form>
@@ -85,12 +85,13 @@ const Subscriptions = () =>{
                                 {errorSubscription.type && (<span>{errorSubscription.type}</span>)}
                             </div>
 
-                            <button onClick={handleSuscriptionFormSubmit}>Añadir Suscripción</button>
+                            <button onClick={handleSuscriptionFormSubmit}>{modificarSuscription ? 'Editar Suscripción' : 'Añadir Suscripción'}</button>
                         </form>
                     </div>
                 )
             }
-            {subscriptions.length && subscriptions.map(sub => {
+  
+            { !modificarSuscription && subscriptions.length && subscriptions.map(sub => {
                 return (
                     <span>
                         <div onClick={handleSuscription} name='eliminar' value={sub.id} >Eliminar Suscripción</div>

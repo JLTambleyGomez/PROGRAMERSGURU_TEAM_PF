@@ -107,7 +107,7 @@ const FilterBarShop =() =>{
     //component:
     return (
         <div className={`${s.sidebar}`}>
-                <div>
+                <div className={s.option}>
                     <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
                     { isVisibleSortByName && (
                         // value = {order}
@@ -118,7 +118,7 @@ const FilterBarShop =() =>{
                         </select>
                     )}
                 </div> 
-                <div> 
+                <div className={s.option}> 
                     <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
                     {
                         isVisiblePrice && (
@@ -136,7 +136,7 @@ const FilterBarShop =() =>{
                         ) 
                     }
                 </div>
-                <div className={`${s.filterOption}`}>
+                <div className={s.option}>
                     <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
                         <select onChange={handleCategory}>
                             { categories.length &&

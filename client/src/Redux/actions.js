@@ -15,7 +15,7 @@ import {
 //Products
     getProductsRequest,
     getProductsByNameRequest,
-    postProductsRequest,
+    postProductRequest,
     deleteProductsRequest,
     putProductsRequest,
 //user
@@ -79,7 +79,7 @@ import {
 //PRODUCTS:
     export const GET_PRODUCTS = "GET_PRODUCTS";
     export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
-    export const POST_PRODUCTS = "POST_PRODUCTS";
+    export const POST_PRODUCT = "POST_PRODUCT";
     export const DELETE_PRODUCT = "DELETE_PRODUCT";
     export const FILTER_PRODUCTS_BY_CATEGORY= "FILTER_PRODUCTS_BY_CATEGORY";
     export const FILTER_PRODUCTS_BY_PRICING = "FILTER_PRODUCTS_BY_PRICING";
@@ -403,13 +403,13 @@ export const get_products_by_name = (name) => {
     }
 }
 
-export const post_Products = (datos) => {
+export const post_Product = (datos) => {
     return async (dispatch) => {
         try {
-            const data = await postProductsRequest(datos) // request
+            const data = await postProductRequest(datos) // request
             console.log(data)
             return dispatch({
-                type: POST_PRODUCTS,
+                type: POST_PRODUCT,
                 payload: data
             })
         } catch (error) {

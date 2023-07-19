@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { get_products_all, post_Products, delete_Products, clearMessage, put_Products } from "../../../Redux/actions";
-
-import styles from "./AdminPanel.module.css";
+import { get_products_all, post_Product, delete_Products, clearMessage, put_Products } from "../../../Redux/actions";
+import { validateProduct } from "./validate";
+import styles from "./Products.module.css";
 
 //_________________________module_________________________
 function Products () {
@@ -12,10 +12,13 @@ function Products () {
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
     
+    
     //const:
     const dispatch = useDispatch();
 
     const[postProduct, setPostProduct] = useState(false)
+    const[modificarProduct, setModificarProduct] = useState(false)
+    const[idProduct, setIdProduct] = useState(null)
     const[messagePost, setMessagePost] = useState(false)
     const[newProduct, setNewProduct] = useState({name:'', price:'', description:'', image:'', category:'',stock:''})
     const[errorProduct, setErrorProduct] = useState({name:'', price:'', description:'', image:'', category:'',stock:''})
@@ -34,53 +37,43 @@ function Products () {
         const name = event.target.name;
         const value = event.target.value
 
-        console.log(name)
-        console.log(value)
-
         setNewProduct({...newProduct, [name]: value})
-        setErrorProduct(validateProduct({...newProduct, [name]: value}))
-    }
-
-    //validacion del formulario
-    const validateProduct = (form) => {
-        const error = {}
-
-        if(!form.name.length) error.name = 'Debe agregar un nombre válido'
-        else if(form.name.length) error.name = ''
-
-        if(!form.description.length) error.description = 'Debe agregar una descripción válida'
-        else if(form.description.length) error.description = ''
-
-        if(form.price < 0) error.price = 'Debe ingresar un precio válido'
-        else if(form.price.length) error.price = ''
+        if(postProduct) setErrorProduct(validateProduct({...newProduct, [name]: value})) // <--- valida los errores solo cuando lo posteas
         
-        if(!form.image.length) error.image = 'Debe ingresar una imagen'
-        else if(form.image.length) error.image = ''
-        
-        if(!form.category.length) error.category = 'Debe ingresar una categoria'
-        else if(form.category.length) error.category = ''
-        
-        if(form.stock < 0) error.stock = 'Debe ingresar el stock'
-        else if(form.stock.length) error.stock = ''
-        
-        return error
     }
         
-    //cambia el estado para desplegar el formulario
+    //cambia el estado para desplegar el formulario y postearlo
     const handlePostProducts = () => {
         setPostProduct(true)
+    }
+    
+    //cambia el estado para desplegar el formulario y modificarlo
+    const handleModificarProducto = (event) => {
+        const value = event.target.value
+        setModificarProduct(true)
+        setIdProduct(value)
+
     }
 
 
     //Postea el producto en la db
     const handleProductSubmit = (event) => {
         event.preventDefault()
-        
-        dispatch(post_Products(newProduct))
-        dispatch(get_products_all());
-        setMessagePost(true)
-        setPostProduct(false)
-        
+        try {
+            if(postProduct) {
+                dispatch(post_Product(newProduct))
+                setPostProduct(false)
+                setMessagePost(true)
+            }
+            if(modificarProduct) {
+                dispatch(put_Products(idProduct,newProduct))
+                setModificarProduct(false)
+            }
+            dispatch(get_products_all());
+
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     //life-cycles:
@@ -93,8 +86,6 @@ function Products () {
         }
     }, [dispatch]);
 
-
-
     //component:
     return (
 
@@ -102,12 +93,10 @@ function Products () {
             <div>
                  </div>
                 <section >
-                  
-
                     <div >
                         <h2>Productos</h2>
                         {
-                            postProduct 
+                            postProduct || modificarProduct
                             ? 
                                 (<>
                                     <form>
@@ -146,17 +135,18 @@ function Products () {
                                             <input name='stock' value={newProduct.stock} onChange={handleChangeProductForm} type="number" />
                                             {errorProduct.stock && (<span>{errorProduct.stock}</span>)}
                                         </div>
-                                        <button onClick={handleProductSubmit}>Postear Producto</button>
+                                        <button className={styles.button}onClick={handleProductSubmit}>Postear Producto</button>
                                     </form>
                                 
                                 </>) 
-                            : (<button onClick={handlePostProducts}>Agregar productos</button>) }
-                        {messagePost && (<span>Se posteo con éxito, creo...</span>)}
+                            : (<button className={styles.button} onClick={handlePostProducts}>Agregar productos</button>) }
+                        {message.length && (<span>{message}</span>)}
                         <div >
                             {
                                 products?.map((product, index) => {
                                     return (
                                         <span className={`${styles.category}`}>
+                                            <button className={styles.button} onClick={handleModificarProducto} value={product.id}>Modificar producto</button>
                                             <label key={index}>
                                               <p>{product.name}</p>
                                                <p>{product.id}</p> 
@@ -164,7 +154,7 @@ function Products () {
                                                <p>{product.category}</p> 
                                                
                                                </label>
-                                            <button  onClick={() => handleProductDelete(product.id)}>X</button>
+                                            <button className={styles.button} onClick={() => handleProductDelete(product.id)}>X</button>
                                         </span>
                                     )
                                 })
