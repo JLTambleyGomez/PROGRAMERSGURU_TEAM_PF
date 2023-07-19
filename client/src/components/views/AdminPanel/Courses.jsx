@@ -1,222 +1,344 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  get_categories,
-  clearCourses,
-  clearMessage,
-  get_courses_all,
-  post_course,
-  delete_course,
-  put_course
+    get_categories,
+    clearCourses,
+    clearMessage,
+    get_courses_all,
+    post_course,
+    delete_course,
+    put_course,
 } from "../../../Redux/actions";
 import styles from "./AdminPanel.module.css";
 
 function Courses() {
-  // global state:
-  const categories = useSelector((state) => state.categories);
-  const message = useSelector((state) => state.message);
-  const dark = useSelector((state) => state.darkMode);
-  const courses = useSelector((state) => state.allCourses);
+    // global state:
+    const categories = useSelector((state) => state.categories);
+    const message = useSelector((state) => state.message);
+    const dark = useSelector((state) => state.darkMode);
+    const courses = useSelector((state) => state.allCourses);
 
-  // const:
-  const dispatch = useDispatch();
+    // const:
+    const dispatch = useDispatch();
 
-  // states:
-  const [newCourse, setNewCourse] = useState({
-    title: "",
-    description: "",
-    imageURL: "",
-    courseUrl: "",
-    rating: 0,
-    released: "",
-    isFree: false,
-    language: "",
-    categories: [],
-  });
-  const [modificarCourse, setModificarCourse] = useState(false)
+    // states:
+    const [newCourse, setNewCourse] = useState({
+        title: "",
+        description: "",
+        imageURL: "",
+        courseUrl: "",
+        rating: 0,
+        released: "",
+        isFree: false,
+        language: "",
+        categories: [],
+    });
+    const [modificarCourse, setModificarCourse] = useState(false);
+    const [postCourse, setPostCourse] = useState(false);
+    const [courseId, setCourseId] = useState(null);
 
-  //PARA PODER MODIFICAR EL CURSO
-  const [modified, setModified] = useState(false)
+    const [modifCourse, setModifCourse] = useState({
+        title: "",
+        description: "",
+        imageURL: "",
+        courseUrl: "",
+        rating: 0,
+        released: "",
+        isFree: false,
+        language: "",
+        categories: [],
+    });
 
-  const [modifCourse, setModifCourse] = useState({
-    title: "",
-    description: "",
-    imageURL: "",
-    courseUrl: "",
-    rating: 0,
-    released: "",
-    isFree: false,
-    language: "",
-    categories: []
-  })
-
-  // functions:
-  const theme = (base) => {
-    const suffix = dark ? "dark" : "light";
-    return `${base}-${suffix}`;
-  };
-
-//DESPACHA LA ACTION PARA HACER EL PUT
-  const handleCoursePut = (event) => {
-    event.preventDefault();
-    dispatch(put_course(modifCourse))
-    dispatch(get_courses_all());
-
-  }
-
-  //modificar curso
-  const handleModificarCurso  = (event) => {
-    setModificarCourse(true)
-
-  }
-
-
-  const handleCourseChange = (event) => {
-    const { name, value } = event.target;
-    setNewCourse((prevCourse) => ({
-      ...prevCourse,
-      [name]: value,
-    }));
-  };
-
-  const handleCategorySelection = (event) => {
-    const selectedCategories = Array.from(event.target.selectedOptions, (option) => ({
-      id: option.value,
-    }));
-    setNewCourse((prevCourse) => ({
-      ...prevCourse,
-      categories: selectedCategories,
-    }));
-  };
-
-  const handleDeleteCourse = async (id) => {
-    try {
-      await dispatch(delete_course(id));
-      await dispatch(get_courses_all());
-    } catch (error) {
-      console.log("error");
-    }
-  };
-
-  const handleCoursePost = (event) => {
-    event.preventDefault();
-    dispatch(post_course(newCourse))
-      .then(() => {
-        setNewCourse({
-          title: "",
-          description: "",
-          imageURL: "",
-          courseUrl: "",
-          rating: 0,
-          released: "",
-          isFree: false,
-          language: "",
-          categories: [],
-        });
-        dispatch(get_courses_all());
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  // life-cycles:
-  useEffect(() => {
-    dispatch(clearMessage());
-    dispatch(get_categories());
-    dispatch(get_courses_all());
-
-    return () => {
-      dispatch(clearMessage());
-      dispatch(clearCourses());
+    // functions:
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
     };
-  }, [dispatch]);
 
-  // component:
-  return (
-    <div className={`${styles.component} ${styles[theme("component")]}`}>
-      <div className={styles.contain}>
-        <div>
-        </div>
-      
-          <section className={`${styles.Panel}`}>
-            <form className={`${styles.coursesForm}`}>
-              <h2>Nuevo Curso</h2>
-              <div className={`${styles.h1}`}>
-                <label>Título:</label>
-                <input type="text" name="title" value={newCourse.title} onChange={handleCourseChange} />
-                {/* {modified ? (<div></div> : (<div></div>)} */}
-                
-              </div>
+    //DESPACHA LA ACTION PARA HACER EL PUT
+    const handleCoursePut = (event) => {
+        event.preventDefault();
+        dispatch(put_course(modifCourse));
+        dispatch(get_courses_all());
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>Descripción:</label>
-                <textarea name="description" value={newCourse.description} onChange={handleCourseChange} />
-              </div>
+    //modificar curso
+    const handleModificarCurso = (event) => {
+        const id = event.target.value;
+        setModificarCourse(true);
+        setCourseId(id);
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>URL de la imagen:</label>
-                <input type="text" name="imageURL" value={newCourse.imageURL} onChange={handleCourseChange} />
-              </div>
+    const handleCourseChange = (event) => {
+        const { name, value } = event.target;
+        setNewCourse((prevCourse) => ({
+            ...prevCourse,
+            [name]: value,
+        }));
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>URL del curso:</label>
-                <input type="text" name="courseUrl" value={newCourse.courseUrl} onChange={handleCourseChange} />
-              </div>
+    const handleCategorySelection = (event) => {
+        const selectedCategories = Array.from(
+            event.target.selectedOptions,
+            (option) => ({
+                id: option.value,
+            })
+        );
+        setNewCourse((prevCourse) => ({
+            ...prevCourse,
+            categories: selectedCategories,
+        }));
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>Rating:</label>
-                <input type="number" name="rating" value={newCourse.rating} onChange={handleCourseChange} />
-              </div>
+    const handleDeleteCourse = async (id) => {
+        try {
+            await dispatch(delete_course(id));
+            await dispatch(get_courses_all());
+        } catch (error) {
+            console.log("error");
+        }
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>Fecha de lanzamiento:</label>
-                <input type="date" name="released" value={newCourse.released} onChange={handleCourseChange} />
-              </div>
+    const handleClosingModification = (event) => {
+        console.log(event.target);
+        setModificarCourse(false);
+        setPostCourse(false);
+    };
+    console.log(modificarCourse);
+    console.log(postCourse);
+    const handleCoursePost = (event) => {
+        event.preventDefault();
 
-              <div className={`${styles.h1}`}>
-                <label>Es gratuito:</label>
-                <input type="checkbox" name="isFree" checked={newCourse.isFree} onChange={handleCourseChange} />
-              </div>
+        if (modificarCourse) {
+            dispatch(put_course(courseId, newCourse))
+                .then(() => {
+                    setNewCourse({
+                        title: "",
+                        description: "",
+                        imageURL: "",
+                        courseUrl: "",
+                        rating: 0,
+                        released: "",
+                        isFree: false,
+                        language: "",
+                        categories: [],
+                    });
+                    dispatch(get_courses_all());
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
+            dispatch(post_course(newCourse))
+                .then(() => {
+                    setNewCourse({
+                        title: "",
+                        description: "",
+                        imageURL: "",
+                        courseUrl: "",
+                        rating: 0,
+                        released: "",
+                        isFree: false,
+                        language: "",
+                        categories: [],
+                    });
+                    dispatch(get_courses_all());
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>Idioma:</label>
-                <input type="text" name="language" value={newCourse.language} onChange={handleCourseChange} />
-              </div>
+    const handlePostCourse = () => {
+        setPostCourse(true);
+    };
 
-              <div className={`${styles.h1}`}>
-                <label>Categorías:</label>
-                <select multiple name="categories" onChange={handleCategorySelection}>
-                  {categories.map((category) => (
-                    <option key={category.id} value={category.id}>
-                      {category.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+    // life-cycles:
+    useEffect(() => {
+        dispatch(clearMessage());
+        dispatch(get_categories());
+        dispatch(get_courses_all());
 
-              <button onClick={handleCoursePost}>Postear curso</button>
-            </form>
+        return () => {
+            dispatch(clearMessage());
+            dispatch(clearCourses());
+        };
+    }, [dispatch]);
 
-            <div className={`${styles.coursesContainer}`}>
-              <h1>Courses</h1>
-              <div className={`${styles.coursesBox}`}>
-                {courses.map((course) => (
-                    <div className={`${styles.course}`} key={course.id}>
-                      <button onClick={handleModificarCurso}>Modificar Curso</button>
-                      <p>ID: {course.id}</p> {course.title}
-                      <p>Fecha De Lanzamiento {course.released} </p>
-                      <button onClick={() => handleDeleteCourse(course.id)}>X</button>
-                  </div>
-                ))}
-              </div>
+    // component:
+    return (
+        <div className={`${styles.component} ${styles[theme("component")]}`}>
+            <div className={styles.contain}>
+                <div></div>
+
+                <section className={`${styles.Panel}`}>
+                    {postCourse || modificarCourse ? (
+                        <form className={`${styles.coursesForm}`}>
+                            {modificarCourse ? (
+                                <h2>Modificar Curso</h2>
+                            ) : (
+                                <h2>Nuevo Curso</h2>
+                            )}
+                            {postCourse && (
+                                <button onClick={handleClosingModification}>
+                                    X
+                                </button>
+                            )}
+                            {modificarCourse && (
+                                <button onClick={handleClosingModification}>
+                                    X
+                                </button>
+                            )}
+                            <div className={`${styles.h1}`}>
+                                <label>Título:</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={newCourse.title}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Descripción:</label>
+                                <textarea
+                                    name="description"
+                                    value={newCourse.description}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>URL de la imagen:</label>
+                                <input
+                                    type="text"
+                                    name="imageURL"
+                                    value={newCourse.imageURL}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>URL del curso:</label>
+                                <input
+                                    type="text"
+                                    name="courseUrl"
+                                    value={newCourse.courseUrl}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Rating:</label>
+                                <input
+                                    type="number"
+                                    name="rating"
+                                    value={newCourse.rating}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Fecha de lanzamiento:</label>
+                                <input
+                                    type="date"
+                                    name="released"
+                                    value={newCourse.released}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Es gratuito:</label>
+                                <input
+                                    type="checkbox"
+                                    name="isFree"
+                                    checked={newCourse.isFree}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Idioma:</label>
+                                <input
+                                    type="text"
+                                    name="language"
+                                    value={newCourse.language}
+                                    onChange={handleCourseChange}
+                                />
+                            </div>
+
+                            <div className={`${styles.h1}`}>
+                                <label>Categorías:</label>
+                                <select
+                                    multiple
+                                    name="categories"
+                                    onChange={handleCategorySelection}
+                                >
+                                    {categories.map((category) => (
+                                        <option
+                                            key={category.id}
+                                            value={category.id}
+                                        >
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+
+                            <button onClick={handleCoursePost}>
+                                {modificarCourse ? "Editar" : "Postear curso"}
+                            </button>
+                        </form>
+                    ) : (
+                        <>
+                            <h2>Crear un curso nuevo</h2>
+                            <button onClickCapture={handlePostCourse}>
+                                Crear curso
+                            </button>
+                        </>
+                    )}
+                    {modificarCourse ? (
+                        <></>
+                    ) : (
+                        <div className={`${styles.coursesContainer}`}>
+                            <h1>Courses</h1>
+                            <div className={`${styles.coursesBox}`}>
+                                {courses.map((course) => (
+                                    <div
+                                        className={`${styles.course}`}
+                                        key={course.id}
+                                    >
+                                        <button
+                                            onClick={handleModificarCurso}
+                                            value={course.id}
+                                        >
+                                            Modificar Curso
+                                        </button>
+                                        <p>ID: {course.id}</p> {course.title}
+                                        <p>
+                                            Fecha De Lanzamiento{" "}
+                                            {course.released}{" "}
+                                        </p>
+                                        <button
+                                            onClick={() =>
+                                                handleDeleteCourse(course.id)
+                                            }
+                                        >
+                                            X
+                                        </button>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                </section>
+
+                <div></div>
             </div>
-          </section>
-
-        <div></div>
-      </div>
-    </div>
-  );
+        </div>
+    );
 }
 
 export default Courses;
