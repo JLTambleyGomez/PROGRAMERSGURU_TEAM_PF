@@ -98,10 +98,6 @@ export const validateUser = (form) => {
     if (!form.name.length) error.name = "Debe ingresar un nombre";
     else if (form.name.length) error.name = "";
 
-    //picture
-    if (!form.picture.length) error.picture = "Debe ingresar una imagen";
-    else if (form.picture.length) error.picture = "";
-
     //email
     if (!form.email.length) error.email = "Debe ingresar un email";
     else if (!emailRegex.test(form.email))
@@ -115,6 +111,29 @@ export const validateUser = (form) => {
     //address
     if (!form.address.length) error.address = "Debe ingresar una dirección";
     else if (form.address.length) error.address = "";
+
+    return error;
+};
+
+export const validateSuscription = (form) => {
+    const error = {};
+
+    //valida titulo
+    if (!form.title.length) error.title = "Debe ingresar un titulo";
+    else if (form.title.length) error.title = "";
+
+    //valida descripción
+    if (!form.description.length)
+        error.description = "Debe agregar una descripción";
+    else if (form.description.length) error.description = "";
+
+    //valida imagen
+    if (!form.image.length) error.image = "Debe agregar una imagen";
+    else if (form.image.length) error.image = "";
+
+    //valida tipo
+    if (!form.type.length) error.type = "Debe ingresar un tipo";
+    else if (form.type.length) error.type = "";
 
     return error;
 };

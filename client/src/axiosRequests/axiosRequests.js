@@ -254,3 +254,8 @@ export const editUserData = async (userData) => {
     const { data } = await axios.put("/user/profile", userData);
     return data;
 };
+
+export const makeAdminUser = async (user) => {
+    const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    return data;
+};

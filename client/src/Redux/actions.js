@@ -22,6 +22,7 @@ import {
     //user
     getUserByEmailRequest,
     postUserRequest,
+    makeAdminUser,
     //comments
     getCommentsByCourse,
     getCommentsByUser,
@@ -72,6 +73,7 @@ export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const SET_USER_EMAIL = "SET_USER_EMAIL";
 export const SET_TOKEN = "SET_TOKEN";
 export const POST_USER = "POST_USER";
+export const MAKE_ADMIN = "MAKE_ADMIN";
 
 //COMMENTS:
 export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER";
@@ -557,6 +559,7 @@ export const get_suscriptions = () => {
     return async function (dispatch) {
         try {
             const data = await getSubscriptionsRequest();
+            console.log(data);
             return dispatch({
                 type: GET_SUSCRIPTIONS,
                 payload: data,
@@ -591,11 +594,13 @@ export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
             const data = await deleteSuscriptionRequest(id);
+            console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
                 payload: data,
             });
         } catch (error) {
+            console.log(error);
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -604,18 +609,19 @@ export const delete_suscription = (id) => {
     };
 };
 
-export const post_suscription = (id, suscription) => {
+export const post_suscription = (suscription) => {
     return async function (dispatch) {
         try {
-            const data = await postSuscriptionRequest(id, suscription);
+            const data = await postSuscriptionRequest(suscription);
             return dispatch({
                 type: POST_SUSCRIPTION,
                 payload: data,
             });
         } catch (error) {
+            console.log(error);
             return dispatch({
                 type: ERROR,
-                payload: error.response.data.message,
+                payload: error.response.data,
             });
         }
     };
@@ -639,8 +645,26 @@ export const post_user = (user) => {
     return async function (dispatch) {
         try {
             const data = await postUserRequest(user);
+            console.log(data);
             return dispatch({
                 type: POST_USER,
+                payload: data,
+            });
+        } catch (error) {
+            console.log(error);
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+};
+export const make_admin_user = (user) => {
+    return async function (dispatch) {
+        try {
+            const data = await makeAdminUser(user);
+            return dispatch({
+                type: MAKE_ADMIN,
                 payload: data,
             });
         } catch (error) {

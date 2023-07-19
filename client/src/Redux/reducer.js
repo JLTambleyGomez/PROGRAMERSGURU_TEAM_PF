@@ -74,6 +74,7 @@ const globalStorage = {
     metamaskaddress: null,
     productsCopy: [],
     subscriptions: [], ////   <---------- MODIFICADO
+    allUsers: [],
 };
 
 //REDUCER:
@@ -315,7 +316,7 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case POST_SUSCRIPTION:
             return {
                 ...state,
-                subscriptions: payload,
+                message: payload.message,
             };
         case POST_USER:
             return {

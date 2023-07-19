@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
     getAllUsersRequest,
     putUserRequest,
     hideUserProfileRequest,
     adminUserRequest,
 } from "../../../axiosRequests/axiosRequests";
+import { useSelector, useDispatch } from "react-redux";
 
-import { post_user } from "../../../Redux/actions";
+import { make_admin_user, post_user } from "../../../Redux/actions";
 
 import { validateUser } from "./validate";
 
@@ -14,8 +15,13 @@ import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
 const User = () => {
+    //estafos globales
+
+    //hooks
+    const dispatch = useDispatch();
     //estados locales
     const [allUsers, setAllUsers] = useState([]);
+    const [messagePost, setMessagePost] = useState("");
     const [modificarUser, setModificarUser] = useState(false);
     const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
@@ -47,25 +53,26 @@ const User = () => {
     //modifica los datos del usuario haciendo una axion request
     const putUser = async (id) => {
         const userModified = await putUserRequest(id);
-        getUsers();
+        return getUsers();
     };
 
     //modifica la propiedad banned del usuario haciendo un axion request
     const hideUserProfileRequest = async (id) => {
         const userBanned = hideUserProfileRequest(id);
-        getUsers();
+        return getUsers();
     };
 
     //cambia el estado del usuario a administrador
     const changeAdminUser = async (id) => {
-        const isUserAdmin = adminUserRequest(id);
-        getUsers();
+        const isUserAdmin = make_admin_user(id);
+        return getUsers();
     };
 
     //boton para modificar
     const handleModificar = (event) => {
         const idUser = event.target.value;
         const modificar = event.target.name;
+        setNewUser(true);
         setModificarUser(true);
 
         if (modificar === "datos") {
@@ -92,6 +99,25 @@ const User = () => {
     //Cierra el formulario
     const handleCloseForm = () => {
         setNewUser(false);
+        setMessagePost("");
+        setUser({
+            name: "",
+            email: "",
+            picture: "",
+            nickName: "",
+            admin: "",
+            banned: "",
+            address: "",
+        });
+        setUserError({
+            name: "",
+            email: "",
+            picture: "",
+            nickName: "",
+            admin: "",
+            banned: "",
+            address: "",
+        });
     };
 
     const handleInputChange = (event) => {
@@ -104,12 +130,15 @@ const User = () => {
 
     const handlePostUserForm = (event) => {
         event.preventDefault();
+        if (!user.name || !user.email || !user.nickName || !user.address)
+            return setMessagePost("Debe ingresar los datos");
+        dispatch(post_user(user));
         setNewUser(false);
     };
 
     //lice-cycle
     useEffect(() => {
-        getUsers();
+        if (!allUsers.length) getUsers();
     }, []);
 
     return (
@@ -119,6 +148,7 @@ const User = () => {
                 <div>
                     <button onClick={handleCloseForm}>X</button>
                     <form>
+                        {messagePost && <p>{messagePost}</p>}
                         <div>
                             <label htmlFor="name">Nombre:</label>
                             <input
