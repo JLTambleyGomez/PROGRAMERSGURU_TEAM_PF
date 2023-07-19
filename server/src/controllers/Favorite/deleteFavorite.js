@@ -1,9 +1,15 @@
-const { Favorite, Course } = require("../../db");
+const { Favorite } = require("../../db");
 
 const deleteFavorite = async (req, res) => {
     try {
-        const {idCourse} = req.params;
-        const favorite = await Favorite.findOne({where: {CourseId: idCourse}});
+        const {courseId, userId} = req.body;
+        console.log(courseId, userId);
+        const favorite = await Favorite.findOne({
+            where: {
+                CourseId: courseId,
+                UserId: userId
+            }
+        });
         await favorite.destroy();
         return res
             .status(201)

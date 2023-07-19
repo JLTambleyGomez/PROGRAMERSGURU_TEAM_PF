@@ -2,10 +2,10 @@ const { Course, User } = require('../../db.js')
 
 const getFavorite = async (req, res) => {
     try {
-        const {idUser} = req.params;
+        const {userId} = req.body;
         const allFavorites = await User.findAll({
             where: {
-                id : idUser
+                id : userId
             },
             include: {
                 model: Course,
