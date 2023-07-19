@@ -7,6 +7,7 @@ import {
 import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
+import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
 import { editUserData } from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
@@ -18,6 +19,7 @@ import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 function ProfileV2() {
     //global states:
     const user = useSelector((state) => state.user);
+    const userId = user.id;
     const userComments = useSelector((state) => state.userComments);
 
     //local states
@@ -33,6 +35,7 @@ function ProfileV2() {
     const [tab, setTab] = useState("favorites");
 
     //const:
+    const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg"
     const expirationDate = new Date(user.expirationDate);
     const actualDate = new Date();
     const dispatch = useDispatch();
@@ -53,7 +56,12 @@ function ProfileV2() {
     const saveChanges = (event) => {
         event.preventDefault();
         setEmail(localStorage.getItem("email"));
-        if (newUserData.name || newUserData.picture || newUserData.nickName || newUserData.address) {
+        if (
+            newUserData.name ||
+            newUserData.picture ||
+            newUserData.nickName ||
+            newUserData.address
+        ) {
             editUserData({ ...newUserData, email });
         }
         setCollapse(!collapse);
@@ -93,29 +101,38 @@ function ProfileV2() {
     return (
         <div className={s.profileContainer}>
             <div className={s.infoProfile}>
-                <div className={s.config} onClick={openConfig}>
-                    <img
-                        src="https://www.svgrepo.com/show/491415/gear.svg"
-                        alt=""
-                    />
+                <div className={s.profileImage}>
+                    <div className={s.config} onClick={openConfig}>
+                        <img
+                            src={gearConfig}
+                            alt="config"
+                        />
+                    </div>
+                    {collapse ? (
+                    <div className={s.camera}>
+                        <EditProfilePicture 
+                            userId={userId}
+                            setNewUserData={setNewUserData}
+                            newUserData={newUserData}/>
+                    </div>
+                    ) : null }
+                    <div className={!collapse ? s.picture : s.editPicture}>
+                        <img className={s.image} src={user.picture} />
+                    </div>
                 </div>
-                <img className={s.image} src={user.picture} />
-                {/* <div className={s.refresh} onClick={() => setRefresh(!refresh)}> */}
-                    <h2>{user.name}</h2>
-                {/* </div> */}
-                <h5>
-                    {user.nickName}</h5>
+                <h2>{user.name}</h2>
+                <h5>{user.nickName}</h5>
                 <div className={s.profileButton}>
                     {!collapse ? (
                         <div className={s.refresh}>
-                        <button className={s.save} onClick={toggleCollapse}>
-                            Editar perfil
-                        </button>
-                        <img
-                        onClick={() => setRefresh(!refresh)}
-                        src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
-                        alt="actualizar"
-                        />
+                            <button className={s.save} onClick={toggleCollapse}>
+                                Editar perfil
+                            </button>
+                            <img
+                                onClick={() => setRefresh(!refresh)}
+                                src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
+                                alt="actualizar"
+                            />
                         </div>
                     ) : (
                         <button className={s.save} onClick={saveChanges}>
