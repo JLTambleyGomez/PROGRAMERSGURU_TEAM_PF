@@ -25,6 +25,7 @@ import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure
 import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
 
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 

@@ -13,7 +13,7 @@ import {
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
 
-import styles from "./DetalleCurso.module.css";
+import styles from "./CourseDetails.module.css";
 
 //_________________________module_________________________
 function CourseDetails() {
