@@ -12,6 +12,9 @@ const LandingPage2 = () => {
   const indexRef = useRef(0); // Utiliza un useRef para mantener el valor del índice
 
   useEffect(() => {
+
+    localStorage.setItem("sendedEmail", "0");
+
     const words = [
       'Bienvenido a',
       "PROGRAMMER'S GURU",
@@ -48,6 +51,8 @@ const LandingPage2 = () => {
     setShowButton(true);
 
   };
+
+ 
 
   return (
     <div  className={styles.pagecontainer}>

@@ -1,8 +1,9 @@
 const { User } = require('../../db');
 const { get_user_by_email } = require("../../handlers/userHandlers");
+const {mailSender}= require("../../utils/sendMails")
 
 const getUserByEmail = async (req, res) => {
-    const {email} = req.query;
+  const {email} = req.query;
     try {
       const user = await User.findOne({where:{email}});
       return res.status(200).json(user);

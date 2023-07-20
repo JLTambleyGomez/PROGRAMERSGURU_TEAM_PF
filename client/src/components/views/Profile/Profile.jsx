@@ -8,13 +8,12 @@ import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
-import { editUserData } from "../../../axiosRequests/axiosRequests";
+import { editUserData, sendEmail} from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
 import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
-import axios from "axios"
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -42,9 +41,6 @@ function ProfileV2() {
     const dispatch = useDispatch();
 
     //handlers
-    const notificacion=async (carta) => {
-        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
-    };
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -68,7 +64,7 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
-            notificacion({email , message:"Tu usuario ha sido modificado"});
+           sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({

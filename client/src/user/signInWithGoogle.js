@@ -36,7 +36,7 @@ export default function signInwithGoogle() {
                     // set access token in local storage
                     notificacion({email, message:"te has registrado"})
                     localStorage.setItem("accessToken", tkn);
-                    localStorage.setItem("email", email)                    
+                    localStorage.setItem("email", email);                  
                     postUserRequest(userData)
                     window.location.replace('/HomePage')
                 });

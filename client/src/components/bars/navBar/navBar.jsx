@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import MensajeBienvenidaHTML from "../../datos/MensajesDePagina/MensajeBienvenidaHTML.js"
 import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+import { sendEmail } from '../../../axiosRequests/axiosRequests';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -28,6 +29,7 @@ function NavBar ( { logoutUser } ) {
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
     const token = sessionStorage.getItem("accessToken")
+    const emailenviado = localStorage.getItem("sendedEmail");
 
     //functions:
     const theme = (base) => {
@@ -42,12 +44,14 @@ function NavBar ( { logoutUser } ) {
 
     //life-cycles:
     useEffect(() => {
-        if (email) {
-            if (!user?.email) dispatch(get_User_By_Email(email));
-        }
+        if (!user?.email) dispatch(get_User_By_Email(email));
     }, [user]) //testear con array vacio.
 
     useEffect(()=>{
+        if(emailenviado === "0"){
+            sendEmail({email: email, message: MensajeBienvenidaHTML})
+            localStorage.setItem("sendedEmail", "1")
+        }
         if (token){
             dispatch (get_products_all())
         }

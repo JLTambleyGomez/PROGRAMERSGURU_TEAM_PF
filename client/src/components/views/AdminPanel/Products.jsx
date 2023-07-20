@@ -20,6 +20,7 @@ function Products() {
     //const:
     const dispatch = useDispatch();
 
+    //estados locales
     const [postProduct, setPostProduct] = useState(false);
     const [modificarProduct, setModificarProduct] = useState(false);
     const [idProduct, setIdProduct] = useState(null);

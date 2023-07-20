@@ -1,10 +1,9 @@
+import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-
 import { set_cart } from '../../../Redux/actions';
-
 import styles from './MetamaskFeedback.module.css';
 
 
@@ -24,15 +23,6 @@ const MetaMaskSucces = () => {
     const email = localStorage.getItem("email");
     const token = localStorage.getItem("accessToken");
 
-    //functions:
-    const calculateTotal = () => {
-        let total = 0;
-        cart?.forEach((product) => {
-            const productTotal = product.price * product.quantity;
-            total += productTotal;
-        });
-        return total;
-    };
 
     //life-cycle:
     useEffect(() => {
@@ -49,6 +39,25 @@ const MetaMaskSucces = () => {
         console.log("este es el carrito:" + " " + cart);
         console.log("este es el email:" + " " + email)
     }, [])
+
+
+    useEffect(() => {
+        (async () => {
+          try {
+            const compraString = localStorage.getItem("cart"); // Obtener el contenido del carrito del almacenamiento local como una cadena de texto
+            const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
+            const email = localStorage.getItem("email");
+            console.log(cart);
+            
+            
+            await axios.post(
+              `http://localhost:3001/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`,
+                {compra});
+                
+          } catch (error) {
+          }
+        })();
+      }, []);
 
 
     //component:

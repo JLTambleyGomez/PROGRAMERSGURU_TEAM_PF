@@ -4,6 +4,7 @@ import styles from "./LoginForm.module.css";
 import signInwithGoogle from "../../../user/signInWithGoogle";
 import signIn from "../../../user/signIn"
 
+
 //_________________________module_________________________
 function LoginForm() {
   // const dispatch = useDispatch()
@@ -43,7 +44,7 @@ function LoginForm() {
     setPasswordVisible(!passwordVisible)
   }
 
-  const handleLogIn = (event) => {
+  const handleLogIn = async (event) => {
     event.preventDefault();
     signIn(userData.email, userData.password)
   }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
 import signIn from "../../../user/signIn";
@@ -45,10 +45,12 @@ function SignFreeForm() {
     setPasswordVisible(!passwordVisible)
   } 
 
-  const handleLogIn = (event) => {
+  const handleLogIn = async (event) => {
     event.preventDefault();
     get_User_By_Email(userData.email)
-    signIn(userData.email, userData.password)
+    await signIn(userData.email, userData.password);
+   
+
   }
   const handleSignUp = (event) => {
     event.preventDefault();
@@ -60,6 +62,11 @@ function SignFreeForm() {
     event.preventDefault();
     signInwithGoogle()
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    console.log("signInFree" + token);
+  }, [])
 
   //component:
   return (

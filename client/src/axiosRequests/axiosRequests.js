@@ -1,6 +1,6 @@
 import axios from "axios";
 //HOST:
-const URL = ""
+const URL = "http://localhost:3001/"
 
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
@@ -214,14 +214,15 @@ export const getCommentsByCourse = async (courseId) => {
   const { data } = await axios.get(`/comment/${courseId}`);
   return data;
 }
-//Post email_______________________//
 
-export const sendEmail = async (carta) => {
-  const { data } = await axios.post(`/user/sendEmail`, carta);
-  return data;
-};
 // // // 
 export const editUserData = async (userData) => {
   const { data } = await axios.put('/user/profile', userData);
   return data;
 };
+
+
+export const sendEmail = async (carta) => {
+      const { data } = await axios.get("/user/sendemail", {params: carta});
+};
+

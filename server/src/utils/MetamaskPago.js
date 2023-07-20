@@ -1,48 +1,15 @@
-const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
-mercadoPago.configure({
-  access_token: "TEST-7366931760156988-071417-9f721ac6bad881e7546f0df180920193-1423375235",
-});
 
-const PagoconMercadopago = async (req, res) => {
-  let preference = {
-    items: [
-      {
-        title: req.body.description,
-        unit_price: Number(req.body.price),
-        quantity: Number(req.body.quantity),
-      },
-    ],
-    back_urls: {
-      success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: "http://localhost:5173/HomePage",
-      pending: "http://localhost:5173/HomePage",
-    },
-    auto_return: "approved",
-  };
-
-  const result = mercadoPago.preferences
-    .create(preference)
-    .then(function (response) {
-      res.json({
-        id: response.body.id,
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-};
-
-const FeedbackMercadoPago = async (req, res) => {
-  const { email, merchant_order_id, payment_id } = req.query;
+const FeedbackMetamask = async (req, res) => {
+  const { email, payment_id } = req.query;
   const { compra } = req.body; 
   
-  console.log(email,merchant_order_id,payment_id,compra)
+  console.log(email,payment_id,compra)
 
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
@@ -50,12 +17,7 @@ const FeedbackMercadoPago = async (req, res) => {
     (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
   );
 
-  const compraHTML = compra
-    ? compra.map(
-        (product) =>
-          ` <li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
-      )
-    : "No hay productos en el carrito prueba HTML";
+
 
   const stringListOfProducts = listadeproductos?.join("\n");
   const listOfProducts = stringListOfProducts
@@ -107,8 +69,8 @@ const FeedbackMercadoPago = async (req, res) => {
           <h1 style="text-align: center;">Tu Compra está completa</h1>
           <p>¡Gracias por comprar en nuestro sitio web! Espero que disfrutes de tu selección.</p>
           <h2> Aqui tienes información de tu compra </h2>
-          <h3>Método de pago : MercadoPago</h3>
-          <p>tu id de compra: ${payment_id}</p>
+          <h3>Método de pago : Metamask</h3>
+          <p>tu id de transacción: ${payment_id}</p>
           <hr/>
           <div>
           </div>
@@ -131,14 +93,9 @@ const FeedbackMercadoPago = async (req, res) => {
     }
   });
 
-  res.json({
-    Payment: req.query.payment_id,
-    Status: req.query.status,
-    MerchantOrder: req.query.merchant_order_id,
-  });
+ 
 };
 
 module.exports = {
-  PagoconMercadopago,
-  FeedbackMercadoPago,
+  FeedbackMetamask,
 };
