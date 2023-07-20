@@ -88,6 +88,7 @@
 .barsButton {
     display: none;
     height: 25%;
+    transition: transform 0.5s;
 }
 
 .barsMenu {
@@ -97,6 +98,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding: 1rem 0;
 }
 .barsMenu-light {
     background-color: rgba(251, 251, 252, 0.623);
@@ -105,6 +107,16 @@
 
 /* ------------ RESPONSIVE PROPERTIES -------------*/
 
+.buttonProfile-responsive {
+    display: none;
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ;
+    padding: 0;
+}
+.buttonProfile-responsive:hover {
+    transform: scale(1.04);
+}
 
 @media screen and (max-width: 1000px) {
     .barsButton {
@@ -113,14 +125,17 @@
     .inicio {
         display: none;
     }
-    .button {
-        
-    }
     .searchBar-responsive {
         display: none;
     }
     .subscription-responsive {
         display: none;
+    }
+    .barsButton:hover {
+        transform:scale(1.4);
+    }
+    .bolsita:hover{
+        transform:scale(1.4);
     }
 }
 
@@ -157,5 +172,28 @@
     }
     .barsButton {
         order: 5;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .bolsita {
+        display: none;
+    }
+    .metamask {
+        position: absolute;
+        left: 1rem;
+    }
+    .sectionBanner {
+        position: absolute;
+    }
+    .menu {
+        display: none;
+    }
+    .barsButton {
+        right: 1rem;
+        position: absolute;
+    }
+    .buttonProfile-responsive {
+        display: block;
     }
 }

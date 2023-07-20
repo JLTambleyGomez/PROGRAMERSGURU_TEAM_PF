@@ -102,7 +102,7 @@ function Cart () {
                 {/* PRODUCTOS DEL CARRO */}
                     <h1 className={styles.title}>TU CARRITO DE COMPRAS</h1>
                     <div className={styles.flex}>
-                        <ul className={styles.productscontainer}>
+                        <div className={styles.productscontainer}>
                         {
                             cart?.map((P, index) => (
                                 <li className={styles.product} key={index}>
@@ -141,7 +141,7 @@ function Cart () {
                                 </li>
                             ))
                         }
-                        </ul>
+                        </div>
                     {/* RESUMEN */}
                         <div className={styles.total}>
                             <h1>LO QUE LLEVAS:</h1>

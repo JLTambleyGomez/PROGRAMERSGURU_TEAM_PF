@@ -171,21 +171,21 @@ function Shop () {
 
         {/* BANNER */}
             <section className={`${s.sectionBanner}`}>
-                <img
+                {/* <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
                     alt="mainBanner"
-                />
+                /> */}
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                      TIENDA DE PROGRAMMER'S GURU 
                 </h1>
 
             </section>
         {/* SIDEBAR */}
-            <FilterBarShop/>
+            {/* <FilterBarShop/> */}
 
         {/* PAGINADO */}
-            <div className={`${s.paginado}`} >
+            {/* <div className={`${s.paginado}`} >
                 {
                     pageNumbers?.map((number, index) => {
                         return (
@@ -197,11 +197,11 @@ function Shop () {
                         )
                     })
                 }
-            </div>
+            </div> */}
 
-            <section className={`${s.section3}`}>
+            {/* <section className={`${s.section3}`}>
 
-            {/* PRODUCTS */}
+            PRODUCTS
 
             {
                 loading ? (
@@ -257,10 +257,10 @@ function Shop () {
                     </div>
                 )
             }
-            </section>
+            </section> */}
 
         {/* RESUMEN */}
-            <section className={s.Resumen}>
+            {/* <section className={s.Resumen}>
                 <h2>Resumen de compras</h2>
                 {
                     cart?.length > 0 ? (
@@ -283,7 +283,7 @@ function Shop () {
                         <p>Tu carrito de compras está vacío</p>
                     )
                 }
-            </section> 
+            </section>  */}
         </main>
     )
 }

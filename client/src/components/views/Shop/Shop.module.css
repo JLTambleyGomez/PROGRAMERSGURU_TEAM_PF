@@ -1,10 +1,12 @@
 .component {
-  padding: 2px ;
-  padding-bottom: 10%;
+  /* padding: 2px ; */
+  /* padding-bottom: 10%; */
   margin-top: var(--navBarHeight);
   min-height: calc(100vh - var(--navBarHeight));
   display: flex;
+  position: absolute;
   flex-direction: column;
+  box-sizing: border-box;
   animation: blur-in 0.8s ease;
 }   @keyframes blur-in {
   0% {
@@ -32,6 +34,8 @@
   }
 
 .bannerImg {
+    max-height: 100%;
+    max-width: 100%;
     width: 150px;
     height: 150px;
     margin: 0 2%;

@@ -93,7 +93,7 @@ const  AdminPanel =() =>{
 
     //component:
     return (
-        <div className={`${styles.component} ${styles[theme("component")]}`} >
+        <main className={`${styles.component} ${styles[theme("component")]}`} >
 
             <div className={styles.message}>Respuesta desde Servidor: {message}</div>
 
@@ -138,7 +138,7 @@ const  AdminPanel =() =>{
                 {showSubscriptions && (<Subscriptions></Subscriptions>)}
               </div>
               </div>
-        </div>
+        </main>
     );
 };
 
