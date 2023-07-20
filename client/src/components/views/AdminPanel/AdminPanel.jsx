@@ -6,6 +6,7 @@ import {
     clearCourses,
     clearMessage,
     get_courses_all,
+    get_suscriptions,
 } from "../../../Redux/actions";
 import Categories from "./Categories";
 import Courses from "./Courses";
@@ -13,6 +14,8 @@ import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
+import Suscription2 from "./Suscription2";
+import Borrar from "./borrar";
 
 //_________________________module_________________________
 const AdminPanel = () => {
@@ -82,7 +85,7 @@ const AdminPanel = () => {
         dispatch(get_categories());
         dispatch(get_courses_all());
         dispatch(get_products_all());
-
+        dispatch(get_suscriptions());
         return () => {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
@@ -137,7 +140,17 @@ const AdminPanel = () => {
                         <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
                     </button>
                     {showSubscriptions && <Subscriptions></Subscriptions>}
+                    {/* <Borrar></Borrar> */}
                 </div>
+                {/* <div>
+                    <button
+                        className={styles.buton}
+                        onClick={handleShowSubscription}
+                    >
+                        <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
+                    </button>
+                    {showSubscriptions && <Suscription2></Suscription2>}
+                </div> */}
             </div>
         </div>
     );

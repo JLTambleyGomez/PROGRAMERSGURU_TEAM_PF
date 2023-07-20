@@ -60,7 +60,7 @@ export const validateCourse = (form) => {
 
     //validar courseURL
     if (!form.courseUrl.length) error.courseUrl = "Debe ingresar una URL";
-    else if (urlRegex.test(form.courseUrl))
+    else if (!urlRegex.test(form.courseUrl))
         error.courseUrl = "Debe agregar una dirección válida";
     else if (form.courseUrl.length) error.courseUrl = "";
 
@@ -76,17 +76,19 @@ export const validateCourse = (form) => {
     console.log(form.isFree);
 
     //validar language
+    console.log(form.language);
     if (!form.language.length) error.language = "Debe ingresar un idioma";
-    else if (form.language !== "Español" || form.language !== "Ingles")
+    else if (form.language !== "Español" && form.language !== "Ingles")
         error.language = "Debe ingresar un idioma, ingles o español";
-    else if (form.language.language) error.language = "";
+    else error.language = "";
 
     //validar categorias
 
+    console.log(form.categories);
     if (!form.categories.length)
         error.categories = "Debe seleccionar las categorias";
     else if (form.categories.length) error.categories = "";
-
+    console.log(error);
     return error;
 };
 

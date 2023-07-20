@@ -9,7 +9,7 @@ import {
     delete_course,
     put_course,
 } from "../../../Redux/actions";
-import styles from "./AdminPanel.module.css";
+import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
 
 function Courses() {
@@ -106,6 +106,10 @@ function Courses() {
             ...prevCourse,
             categories: selectedCategories,
         }));
+        if (postCourse)
+            setErrorCourse(
+                validateCourse({ ...newCourse, categories: selectedCategories })
+            );
     };
 
     const handleDeleteCourse = async (id) => {
@@ -158,16 +162,6 @@ function Courses() {
         )
             return setMessagePost("Revise los datos");
 
-        if (
-            !newCourse.name ||
-            !newCourse.description ||
-            !newCourse.genre ||
-            !newCourse.platforms ||
-            !newCourse.released ||
-            !newCourse.rating
-        )
-            return setMessagePost("Debe ingresar los datos");
-
         if (modificarCourse) {
             dispatch(put_course(courseId, newCourse))
                 .then(() => {
@@ -188,6 +182,22 @@ function Courses() {
                     console.log(error);
                 });
         } else {
+            console.log(newCourse);
+
+            if (
+                !newCourse.title ||
+                !newCourse.description ||
+                !newCourse.imageURL ||
+                !newCourse.courseUrl ||
+                !newCourse.rating ||
+                !newCourse.released ||
+                !newCourse.isFree ||
+                !newCourse.language ||
+                !newCourse.categories
+            )
+                return setMessagePost("Debe ingresar los datos");
+
+            setMessagePost("");
             dispatch(post_course(newCourse))
                 .then(() => {
                     setNewCourse({
@@ -372,7 +382,7 @@ function Courses() {
                     ) : (
                         <>
                             <h2>Crear un curso nuevo</h2>
-                            <button onClickCapture={handlePostCourse}>
+                            <button onClick={handlePostCourse}>
                                 Crear curso
                             </button>
                         </>
@@ -382,23 +392,15 @@ function Courses() {
                     ) : (
                         <div className={`${styles.coursesContainer}`}>
                             <h1>Courses</h1>
-                            <div className={`${styles.coursesBox}`}>
+                            <div className={styles.conteiner}>
                                 {courses.map((course) => (
-                                    <div
-                                        className={`${styles.course}`}
-                                        key={course.id}
-                                    >
+                                    <div key={course.id}>
                                         <button
                                             onClick={handleModificarCurso}
                                             value={course.id}
                                         >
                                             Modificar Curso
                                         </button>
-                                        <p>ID: {course.id}</p> {course.title}
-                                        <p>
-                                            Fecha De Lanzamiento{" "}
-                                            {course.released}{" "}
-                                        </p>
                                         <button
                                             onClick={() =>
                                                 handleDeleteCourse(course.id)
@@ -406,6 +408,12 @@ function Courses() {
                                         >
                                             X
                                         </button>
+                                        <p>ID: {course.id}</p>
+                                        <p>Titulo: {course.title}</p>
+                                        <p>
+                                            Fecha De Lanzamiento:{" "}
+                                            {course.released}
+                                        </p>
                                     </div>
                                 ))}
                             </div>

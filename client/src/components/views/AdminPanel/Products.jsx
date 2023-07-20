@@ -8,7 +8,7 @@ import {
     put_Products,
 } from "../../../Redux/actions";
 import { validateProduct } from "./validate";
-import styles from "./AdminPanel.module.css";
+import styles from "./Courses.module.css";
 
 //_________________________module_________________________
 function Products() {
@@ -119,17 +119,19 @@ function Products() {
                 setMessagePost("Debe ingresar los datos");
             if (change) {
                 if (postProduct) {
-                    dispatch(post_Product(newProduct));
+                    dispatch(post_Product(newProduct)).then(() =>
+                        dispatch(get_products_all())
+                    );
                     setPostProduct(false);
                     setMessagePost(true);
-                    dispatch(get_products_all());
                 }
                 if (modificarProduct) {
-                    dispatch(put_Products(idProduct, newProduct));
+                    dispatch(put_Products(idProduct, newProduct)).then(() =>
+                        dispatch(get_products_all())
+                    );
                     setModificarProduct(false);
-                    dispatch(get_products_all());
                 }
-                dispatch(get_products_all());
+
                 setProduct({
                     name: "",
                     price: "",
@@ -185,7 +187,7 @@ function Products() {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
         };
-    }, [dispatch]);
+    }, [dispatch, products]);
 
     //component:
     return (
@@ -340,10 +342,7 @@ function Products() {
                                 products.length &&
                                 products.map((product, index) => {
                                     return (
-                                        <span
-                                            className={`${styles.category}`}
-                                            key={index}
-                                        >
+                                        <span key={index}>
                                             <button
                                                 className={styles.button}
                                                 onClick={
