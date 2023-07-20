@@ -1,6 +1,7 @@
 .component {
   margin-top: var(--navBarHeight);
   min-height: calc(100vh - var(--navBarHeight));
+  position: absolute;
   display: flex;
   flex-direction: column; 
   padding-bottom: 20%;

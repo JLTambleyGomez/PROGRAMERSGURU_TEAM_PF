@@ -20,6 +20,7 @@
     align-items: center;
     justify-content: center;
     animation: scale-up-center 4.4s infinite; 
+    margin: 0;
   }
   
   @keyframes scale-up-center {

@@ -1,6 +1,6 @@
 .component {
-  /* position: absolute; */
-  /* right:0.5% */
+  /* position: absolute;
+   right:0.5%  */
 }
 .component:hover {
   background-color: #588b8b00;
