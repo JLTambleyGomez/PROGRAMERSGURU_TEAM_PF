@@ -7,3 +7,10 @@ export async function uploadProfilePicture(file, userId) {
     const url = getDownloadURL(pictureRef)
     return url
   }
+export async function uploadProductPicture(file, name) {
+    const pictureRef = ref(storage, `products/${name}/${file.name}`)
+    await uploadBytes(pictureRef, file)
+    const url = getDownloadURL(pictureRef)
+    return url
+  }
+

@@ -149,7 +149,7 @@ export const postFavoriteRequest = async (ids) => {
 };
 
 export const deleteFavoriteRequest = async (ids) => {
-  const {data} = await axios.delete(`/favorite/`, ids);
+  const {data} = await axios.post("/favorite/delete", ids);
   return data
 };
 

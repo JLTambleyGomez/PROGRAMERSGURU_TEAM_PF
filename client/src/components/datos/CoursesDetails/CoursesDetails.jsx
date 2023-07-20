@@ -19,6 +19,7 @@ import styles from "./CoursesDetails.module.css";
 function CourseDetails() {
     //global states:
     const course = useSelector((state) => state.allCourses);
+    console.log(course[0]);
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
@@ -42,7 +43,9 @@ function CourseDetails() {
     };
 
     const getDetails = () => {
-        dispatch(get_course_by_id(id));
+        console.log(typeof(courseId));
+        dispatch(get_course_by_id(courseId));
+        console.log(course);
     };
 
     const handleFavorite = () => {
@@ -57,7 +60,6 @@ function CourseDetails() {
 
     //life-cycles:
     useEffect(() => {
-        dispatch(get_Favorites_Request(8));
         getDetails();
         return () => {
             dispatch(clearMessage());
@@ -73,7 +75,7 @@ function CourseDetails() {
             {/* <h1 className={`${styles.title} ${styles[theme("title")]}`}>{course.title}</h1> */}
             <div className={`${styles.container1}`}>
                 <div className={`${styles.containerImage}`}>
-                    <img className={styles.img} src={course.imageURL}/>
+                    <img className={styles.img} src={course[0]?.imageURL}/>
                 </div>
             </div>
             <div className={styles.container2}>
