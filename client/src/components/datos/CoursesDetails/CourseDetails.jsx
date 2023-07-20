@@ -42,23 +42,24 @@ function CourseDetails() {
         return `${base}-${suffix}`;
     };
 
-    const handleFavorite = async (event) => {
+    const handleRemoveFavorite = async (event) => {
         event.preventDefault();
         setFav(!fav);
         setIds({ ...ids, userId: user?.id, courseId: Number(id) });
         console.log(ids);
-        if (fav) {
-            console.log(ids);
-            await deleteFavoriteRequest(ids);
-            const favs = favorites?.Courses?.map((fav) => fav.id);
-            if (favs?.includes(Number(course[0]?.id))) {
-                console.log("holis");
-                setFav(true);
-            }
+        await deleteFavoriteRequest(ids);
+        const favs = favorites?.Courses?.map((fav) => fav.id);
+        if (favs?.includes(Number(course[0]?.id))) {
+            console.log("holis");
+            setFav(true);
         }
-        if (!fav) {
-            await postFavoriteRequest(ids);
-        }
+    };
+    const handleAddFavorite = async (event) => {
+        event.preventDefault();
+        setFav(!fav);
+        setIds({ ...ids, userId: user?.id, courseId: Number(id) });
+        console.log(ids);
+        await postFavoriteRequest(ids);
     };
 
     //life-cycles:
@@ -87,20 +88,28 @@ function CourseDetails() {
             </div>
             <div className={styles.content}>
                 <div className={styles.containerImage}>
-                    <img className={styles.imageURL} src={course[0]?.imageURL} alt="" />
+                    <img
+                        className={styles.imageURL}
+                        src={course[0]?.imageURL}
+                        alt=""
+                    />
                     <div className={`${styles.data} ${styles[theme("data")]}`}>
                         <span>
                             {!fav ? (
                                 <img
-                                    className={`${styles.favorite} ${styles[theme("favorite")]}`}
-                                    onClick={handleFavorite}
+                                    className={`${styles.favorite} ${
+                                        styles[theme("favorite")]
+                                    }`}
+                                    onClick={handleAddFavorite}
                                     src={emptyHeart}
                                     alt=""
                                 />
                             ) : (
                                 <img
-                                    className={`${styles.favorite} ${styles[theme("favorite")]}`}
-                                    onClick={handleFavorite}
+                                    className={`${styles.favorite} ${
+                                        styles[theme("favorite")]
+                                    }`}
+                                    onClick={handleRemoveFavorite}
                                     src={fullHeart}
                                     alt=""
                                 />
@@ -119,7 +128,11 @@ function CourseDetails() {
                     </div>
                 </div>
                 <div className={styles.containerDescription}>
-                    <div className={`${styles.description} ${styles[theme("description")]}`}>
+                    <div
+                        className={`${styles.description} ${
+                            styles[theme("description")]
+                        }`}
+                    >
                         <h3>Descripción del curso</h3>
                         <div className={styles.scroll}>
                             <h4>{course[0]?.description}</h4>
