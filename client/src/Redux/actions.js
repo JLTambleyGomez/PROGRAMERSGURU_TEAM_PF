@@ -40,7 +40,7 @@ import {
 //COURSES:
     export const CLEAR_COURSES = "CLEAR_COURSES";
     export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
-    export const GET_COURSES_BY_ID = "GET_COURSES_BY_ID";
+    export const GET_COURSE_BY_ID = "GET_COURSE_BY_ID";
     export const POST_COURSE = "POST_COURSE"
     export const GET_COURSES_ALL = "GET_COURSES_ALL";
     export const GET_COURSES_BY_NAME = "GET_COURSES_BY_NAME";
@@ -142,12 +142,12 @@ export const get_courses_by_name = (name) => { //hace un req por cursos por nomb
     };
 }
 
-export const get_courses_by_id = (id) => { //hace un req por cursos por nombre
+export const get_course_by_id = (id) => {
     return async (dispatch) => {
         try {
             const data = await getCoursesByIdRequest(id); // request
             return dispatch({
-                type: GET_COURSES_BY_ID,
+                type: GET_COURSE_BY_ID,
                 payload: data,
             });
         } catch (error) {

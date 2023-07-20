@@ -27,6 +27,8 @@ import SubscripcionesFlotante from "./components/datos/Subscripciones/Subscripci
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
 
+import DetalleCurso from "./components/datos/CoursesDetails/DetalleCurso";
+
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
 axios.defaults.baseURL = 'http://localhost:3001/'  
@@ -100,6 +102,9 @@ const App = () =>{
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
                 <Route path="/CourseDetails/:id" element={<CourseDetails />} />
+
+                <Route path="/DetalleCurso/:id" element={<DetalleCurso />} />
+
                 <Route path="/Commingsoon" element={<Commingsoon />} />
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />

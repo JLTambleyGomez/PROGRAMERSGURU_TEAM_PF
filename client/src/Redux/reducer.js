@@ -7,7 +7,7 @@ import {
     FILTER_COURSES_BY_LANGUAGE, 
     FILTER_COURSES_BY_PRICING, 
     ORDER_COURSES, 
-    GET_COURSES_BY_ID,
+    GET_COURSE_BY_ID,
     PUT_COURSE,
 //CATEGORIES:
     GET_CATEGORIES_ALL, 
@@ -74,7 +74,8 @@ const globalStorage = {
     courseComments: [],
     metamaskaddress:null,
     productsCopy: [],
-    subscriptions:[] ////   <---------- MODIFICADO              
+    subscriptions:[], ////   <---------- MODIFICADO  
+    course: {}
 }
 
 //REDUCER:
@@ -88,8 +89,8 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case GET_COURSES_BY_NAME:
             return { ...state, allCourses: payload,courses: payload  };
 
-        case GET_COURSES_BY_ID:
-            return { ...state, allCourses: payload};
+        case GET_COURSE_BY_ID:
+            return { ...state, course: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
             return { ...state, courses: state.courses.filter((course) => course.language== payload)};

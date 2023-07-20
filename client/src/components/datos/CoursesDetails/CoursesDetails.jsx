@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
-    get_courses_by_id,
+    get_course_by_id,
     clearCourses,
     clearMessage,
     get_courses_all,
@@ -13,18 +13,12 @@ import {
     postFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
 
-import axios from "axios"; //remover axios => axiosRequests.js
 import styles from "./CoursesDetails.module.css";
 
 //_________________________module_________________________
 function CourseDetails() {
-    const location = useLocation();
-    const array = location.pathname.split("/");
-    const courseId = array[array.length - 1];
-
     //global states:
     const course = useSelector((state) => state.allCourses);
-    const favorites = useSelector((state) => state.favorites);
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
@@ -39,7 +33,7 @@ function CourseDetails() {
     //const:
     const dispatch = useDispatch();
     let { id } = useParams();
-    id = parseInt(id);
+    const courseId = parseInt(id);
 
     //functions:
     const theme = (base) => {
@@ -47,15 +41,13 @@ function CourseDetails() {
         return `${base}-${suffix}`;
     };
 
-    const getDetails = async () => {
-        await dispatch(get_courses_by_id(id));
+    const getDetails = () => {
+        dispatch(get_course_by_id(id));
     };
 
     const handleFavorite = () => {
         setIds({ ...ids, userId, courseId });
-        console.log(favorites);
         if (!fav) {
-            console.log(ids);
             postFavoriteRequest(ids);
         } else {
             deleteFavoriteRequest({courseId: 2, userId:8 });
@@ -67,14 +59,10 @@ function CourseDetails() {
     useEffect(() => {
         dispatch(get_Favorites_Request(8));
         getDetails();
-        favorites?.forEach((fav) => {
-            console.log(fav);
-            if (fav.id == id) setFav(true);
-        });
-        return async () => {
-            await dispatch(clearMessage());
-            await dispatch(clearCourses());
-            await dispatch(get_courses_all());
+        return () => {
+            dispatch(clearMessage());
+            dispatch(clearCourses());
+            dispatch(get_courses_all());
         };
     }, [dispatch]);
 

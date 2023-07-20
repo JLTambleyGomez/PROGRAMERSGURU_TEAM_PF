@@ -1,0 +1,149 @@
+.component{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-bottom:10%;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.title {
+    background: linear-gradient(93deg, rgba(0,89,101,1) 17%, rgba(0,140,158,1) 58%, rgba(255,255,255,1) 100%);
+    margin-top: 7%;
+    color: #ffffff;
+    text-align: center;
+    animation: slide-in-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.title h1 {
+    margin: 5px;
+}
+  
+h3 {
+    padding: 5px;
+    margin: 2% 0 2% 0;
+    background-color: rgb(0, 140, 158, 0.85);
+    color: whitesmoke;
+}
+
+  @keyframes slide-in-right {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+.content {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10%;
+    padding: 2%;
+    gap: 4%;
+    margin-top: 2%;
+    flex-wrap: wrap;
+}
+
+.containerImage {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 10px;
+    width: 300px;
+    position: relative;
+    animation: blur-in-expand 0.9s linear both;
+}
+@keyframes blur-in-expand {
+    0% {
+      transform: scale(0);
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+
+.containerImage img {
+    height: 300px;
+    border-radius: 5%;
+    object-fit: cover;
+    animation: rotate-vertical-center 2s;
+}
+
+@keyframes rotate-vertical-center {
+    0% {
+      transform: rotateY(0);
+    }
+    100% {
+      transform: rotateY(360deg);
+    }
+  }
+
+.data {
+    text-align: left;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+}
+.subData {
+    margin: 2%;
+}
+
+.containerDescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 65%;
+    min-width: 300px;
+    max-width: 1000px;
+    /* border: 2px solid rgb(0, 26, 255); */
+}
+
+.containerDescription h4 {
+    margin: 0 3% 0 3%;
+}
+
+.description {
+    background-color: whitesmoke;
+    margin: 2%;
+    margin-top: 0;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+}
+
+.scroll {
+    margin: 3%;
+    overflow-y: scroll;
+    max-height: 180px;
+}
+
+.technologies {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 2%;
+    gap: 6px;
+}
+.technology {
+    font-size: 12px;
+    background-color: gray;
+    color: white;
+    padding: 1%;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px black;
+}
+
+.comments {
+    border: 2px solid rgb(155, 29, 7);
+    height: 300px;
+}
+
+.favorite {
+    position: absolute;
+    scale: 0.12;
+    top: -120px;
+    right: -120px;
+    z-index: 10;
+    cursor: pointer
+}
