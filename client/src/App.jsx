@@ -101,9 +101,9 @@ const App = () =>{
                 <Route path="/Store" element={<Shop />} />
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
-                <Route path="/CourseDetails/:id" element={<CourseDetails />} />
+                {/* <Route path="/CourseDetails/:id" element={<CourseDetails />} /> */}
 
-                <Route path="/DetalleCurso/:id" element={<DetalleCurso />} />
+                <Route path="/CourseDetails/:id" element={<DetalleCurso />} />
 
                 <Route path="/Commingsoon" element={<Commingsoon />} />
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />

@@ -90,7 +90,6 @@ function DetalleCurso() {
                     <img className={styles.imageURL} src={course[0]?.imageURL} alt="" />
                     <div className={styles.data}>
                         <span>
-                            {/* {course[0]?.title} */}
                             {!fav ? (
                                 <img
                                     className={styles.favorite}
