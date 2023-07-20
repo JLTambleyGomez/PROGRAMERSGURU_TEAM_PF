@@ -88,18 +88,18 @@ function DetalleCurso() {
             <div className={styles.content}>
                 <div className={styles.containerImage}>
                     <img className={styles.imageURL} src={course[0]?.imageURL} alt="" />
-                    <div className={styles.data}>
+                    <div className={`${styles.data} ${styles[theme("data")]}`}>
                         <span>
                             {!fav ? (
                                 <img
-                                    className={styles.favorite}
+                                    className={`${styles.favorite} ${styles[theme("favorite")]}`}
                                     onClick={handleFavorite}
                                     src={emptyHeart}
                                     alt=""
                                 />
                             ) : (
                                 <img
-                                    className={styles.favorite}
+                                    className={`${styles.favorite} ${styles[theme("favorite")]}`}
                                     onClick={handleFavorite}
                                     src={fullHeart}
                                     alt=""
@@ -117,24 +117,9 @@ function DetalleCurso() {
                             )}
                         </div>
                     </div>
-                    {/* {!fav ? (
-                        <img
-                            className={styles.favorite}
-                            onClick={handleFavorite}
-                            src={emptyHeart}
-                            alt=""
-                        />
-                    ) : (
-                        <img
-                            className={styles.favorite}
-                            onClick={handleFavorite}
-                            src={fullHeart}
-                            alt=""
-                        />
-                    )} */}
                 </div>
                 <div className={styles.containerDescription}>
-                    <div className={styles.description}>
+                    <div className={`${styles.description} ${styles[theme("description")]}`}>
                         <h3>Descripción del curso</h3>
                         <div className={styles.scroll}>
                             <h4>{course[0]?.description}</h4>

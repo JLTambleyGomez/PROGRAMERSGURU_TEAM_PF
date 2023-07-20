@@ -43,10 +43,10 @@ h4 {
 
 .content {
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     margin: 10%;
     padding: 2%;
-    gap: 4%;
+    gap: 2%;
     margin-top: 2%;
     flex-wrap: wrap;
 }
@@ -60,19 +60,6 @@ h4 {
     animation: blur-in-expand 1.2s linear both;
 } 
 
-.data span {
-  display: flex;
-  background-color: rgb(0, 140, 158, 0.85);
-}
-.favorite {
-  width: 25px;
-  height: 25px;
-  margin: 3px;
-  cursor: pointer;
-  border-radius: 15px;
-  margin-top: 10px;
-  filter: invert();
-}
 @keyframes blur-in-expand {
     0% {
       transform: scale(0);
@@ -106,7 +93,30 @@ h4 {
     display: flex;
     text-align: left;
     background-color: whitesmoke;
+    border-radius: 10px;
+    margin-bottom: 15px;
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
+}
+.data span {
+  display: flex;
+  margin-left: 10px;
+  background-color: rgb(0, 140, 158, 0.85);
+}
+.favorite {
+  width: 25px;
+  height: 25px;
+  margin: 3px;
+  cursor: pointer;
+  border-radius: 15px;
+  margin-top: 10px;
+  filter: invert();
+}
+.favorite-dark{
+  filter: none;
+}
+.data-dark {
+  background-color: rgb(83, 83, 83);
+  box-shadow: inset 1px 1px 5px rgb(255, 255, 255);
 }
 .subData {
     margin: 2%;
@@ -129,8 +139,13 @@ h4 {
     background-color: whitesmoke;
     margin: 2%;
     margin-top: 0;
+    border-radius: 10px;
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
     animation: slide-in-left 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.description-dark {
+  background-color: rgb(83, 83, 83);
+  box-shadow: inset 1px 1px 5px rgb(255, 255, 255);
 }
 @keyframes slide-in-left {
   0% {
