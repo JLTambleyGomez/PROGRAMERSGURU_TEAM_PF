@@ -565,6 +565,16 @@ export const get_suscriptions = () => {
                 payload: data,
             });
         } catch (error) {
+            if (error.message) {
+                // Verificar si el error es un 404 para limpiar el estado
+                if (error.response && error.response.status === 404) {
+                    return dispatch({
+                        type: GET_SUSCRIPTIONS,
+                        payload: [], // Estado limpiado con un array vacío
+                    });
+                }
+            }
+
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -601,6 +611,7 @@ export const delete_suscription = (id) => {
             });
         } catch (error) {
             console.log(error);
+            console.log(error);
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -615,7 +626,7 @@ export const post_suscription = (suscription) => {
             const data = await postSuscriptionRequest(suscription);
             return dispatch({
                 type: POST_SUSCRIPTION,
-                payload: data,
+                payload: data.message,
             });
         } catch (error) {
             console.log(error);

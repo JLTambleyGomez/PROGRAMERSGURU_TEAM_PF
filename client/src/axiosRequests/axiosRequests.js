@@ -41,7 +41,7 @@ export const getProductsRequest = async () => {
 };
 
 export const postProductRequest = async (product) => {
-    const { data } = await axios.put("http://localhost:3001/product", product);
+    const { data } = await axios.post("http://localhost:3001/product", product);
     return data;
 };
 
@@ -125,12 +125,15 @@ export const getSubscriptionsRequest = async () => {
 };
 
 export const deleteSuscriptionRequest = async (id) => {
-    const { data } = axios.delete(`http://localhost:3001/subscription/${id}`);
-    return data;
+    const { data } = await axios.delete(
+        `http://localhost:3001/subscription/${id}`
+    );
+    console.log(data);
+    return data.message;
 };
 
 export const putSuscriptionRequest = async (id, suscription) => {
-    const { data } = axios.put(
+    const { data } = await axios.put(
         `http://localhost:3001/subscription/${id}`,
         suscription
     );
@@ -138,7 +141,7 @@ export const putSuscriptionRequest = async (id, suscription) => {
 };
 
 export const postSuscriptionRequest = async (suscription) => {
-    const { data } = axios.post(
+    const { data } = await axios.post(
         "http://localhost:3001/subscription",
         suscription
     );
