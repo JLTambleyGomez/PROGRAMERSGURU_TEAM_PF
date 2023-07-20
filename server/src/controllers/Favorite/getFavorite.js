@@ -2,7 +2,12 @@ const { Course, User } = require('../../db.js')
 
 const getFavorite = async (req, res) => {
     try {
-        const {userId} = req.body;
+        const {userId} = req.params;
+
+        if (userId === 0) {
+            const allFavorites = await Favorite.findAll()
+            return res.status(200).json(allFavorites)
+        }
         const allFavorites = await User.findAll({
             where: {
                 id : userId

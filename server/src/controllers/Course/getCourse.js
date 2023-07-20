@@ -3,7 +3,6 @@ const { Course } = require("../../db");
 
 const getCourse = async (req, res) => {
     try {
-        console.log(8)
         const allCourses = await Course.findAll();
 
         if (!allCourses.length) {

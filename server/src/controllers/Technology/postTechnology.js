@@ -18,7 +18,7 @@ const postTechnology = async (req, res) => {
         res.status(200).json(response);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "Algo salió mal" });
+        res.status(500).json({ message: "Algo salió mal " + error.message });
     }
 };
 
