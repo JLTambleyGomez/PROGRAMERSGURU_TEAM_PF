@@ -37,13 +37,6 @@ function HomePage () {
     // obtener el email
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
-<<<<<<< HEAD
-=======
-    // const sendEmail = async () => {
-    //     const carta = {email: "calderon", message:"enviado"}
-    //     await axios.post(`http://localhost:3001/user/sendEmail`, carta );
-    // };
->>>>>>> 393ee38ac56adaa7d5b0fc41bd4a1f8237fdd97f
 
 
     //life-cycles:
@@ -51,16 +44,10 @@ function HomePage () {
         // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-<<<<<<< HEAD
         /*(async () => {
             await sendEmail({email:email, message: "ss"});
         })()*/
 
-=======
-        // (async () => {
-        //     await sendEmail();
-        // })()
->>>>>>> 393ee38ac56adaa7d5b0fc41bd4a1f8237fdd97f
         //--desmontado
         return () => {
             dispatch(clearMessage());
@@ -72,7 +59,7 @@ function HomePage () {
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
-            {/* <section className={`${s.sectionBanner}`}>
+            <section className={`${s.sectionBanner}`}>
                 <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
@@ -81,20 +68,19 @@ function HomePage () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                     PROGRAMMER'S GURU
                 </h1>
-            </section> */}
+            </section>
             <SubscripcionesFlotante/>
         {/* LAST COURSES */}
             <section className={`${s.sectionCourses}`}>
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>
                     ÚLTIMOS CURSOS DEL MERCADO
                 </h1>
-                <div style={{display: "flex", alignItems: "center"}} className={s.coursesPreviewContainer}>
-                    {latestCourses.length > 0 ? (
-                        <CoursesPreview courses={latestCourses} />
-                        // <p>2</p>
-                    ) : (
-                        <p className={s.cargando}>Cargando</p>
-                    )}
+                <div>
+                {latestCourses.length > 0 ? (
+                    <CoursesPreview courses={latestCourses} />
+                ) : (
+                    <p className={s.cargando}>Cargando</p>
+                )}
                 </div>
             </section>
 
