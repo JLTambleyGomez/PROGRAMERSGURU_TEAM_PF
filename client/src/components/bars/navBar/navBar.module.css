@@ -17,17 +17,48 @@
     background-color: #010003;
   }
 
+  .sectionBanner {
+    display: flex;
+    align-items: center;
+    float: left;
+    }
+    .mainLogo {
+        margin: 0 2px;
+        font-size: 1.1rem;
+        cursor: default;
+      }
+      .mainLogoGuru {
+        margin: 0;
+        font-size: 1.1rem;
+        cursor: default;
+        position: absolute;
+        transform: translateX(10%);
+      }
+      .mainLogo-light {
+        text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
+      }
+      .mainLogo-dark {
+        text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
+      }
+    .bannerImg {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+
   .button {
     background-color: transparent;
     border: none;
     transition: transform 0.3s ;
+    padding: 0;
     }
     .button:hover{
       transform: scale(1.04);
     }
 
     .link {
-      font-size: 100%;
+      /* font-size: 100%; */
       text-transform: uppercase;
       text-decoration: none;
       letter-spacing: 0.2em;
@@ -45,12 +76,124 @@
     }
 
 .bolsita{
-  transition: transform 0.5s;
-    /*  */
-  z-index: 9998;
-    /*  */
+    height: 25%;
+    transition: transform 0.5s;
+    z-index: 9998;
 }
 .bolsita:hover{
-  transform:scale(2);
+  transform:scale(1.7);
   cursor: pointer;
+}
+
+.barsButton {
+    display: none;
+    height: 25%;
+    transition: transform 0.5s;
+}
+
+.barsMenu {
+    position: absolute;
+    top: var(--navBarHeight);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+}
+.barsMenu-light {
+    background-color: rgba(251, 251, 252, 0.623);
+}
+
+
+/* ------------ RESPONSIVE PROPERTIES -------------*/
+
+.buttonProfile-responsive {
+    display: none;
+    background-color: transparent;
+    border: none;
+    transition: transform 0.3s ;
+    padding: 0;
+}
+.buttonProfile-responsive:hover {
+    transform: scale(1.04);
+}
+
+@media screen and (max-width: 1000px) {
+    .barsButton {
+        display: block;
+    }
+    .inicio {
+        display: none;
+    }
+    .searchBar-responsive {
+        display: none;
+    }
+    .subscription-responsive {
+        display: none;
+    }
+    .barsButton:hover {
+        transform:scale(1.4);
+    }
+    .bolsita:hover{
+        transform:scale(1.4);
+    }
+}
+
+@media screen and (width > 1000px) {
+    .barsMenu {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .searchBar {
+        display: none;
+    }
+    .searchBar-responsive {
+        display: block;
+    }
+    .subscription {
+        display: none;
+    }
+    .subscription-responsive {
+        display: block;
+    }
+    .bolsita {
+        order: 1;
+    }
+    .metamask {
+        order: 2;
+    }
+    .sectionBanner {
+        order: 3;
+    }
+    .menu {
+        order: 4;
+    }
+    .barsButton {
+        order: 5;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .bolsita {
+        display: none;
+    }
+    .metamask {
+        position: absolute;
+        left: 1rem;
+    }
+    .sectionBanner {
+        position: absolute;
+    }
+    .menu {
+        display: none;
+    }
+    .barsButton {
+        right: 1rem;
+        position: absolute;
+    }
+    .buttonProfile-responsive {
+        display: block;
+    }
 }

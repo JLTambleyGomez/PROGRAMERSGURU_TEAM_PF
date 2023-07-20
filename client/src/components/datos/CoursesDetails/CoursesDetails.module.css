@@ -1,9 +1,8 @@
 .component {
-  display: flex;
-  flex-direction: column;
-  
   height: 100vh;
-  padding-bottom: 25%;
+  scale: 0.8;
+  padding-bottom: 40%;
+  
 }
 
 .component-dark {
@@ -11,17 +10,18 @@
   color: #ffffff;
 }
 
-.title {
-  background-color: #005f6b98;
-  font-size: 50px;
-  padding-left: 2%; 
-  margin-top: 7%;
-  color: #ffffff;
-  position: relative;
-  animation: slide-in-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;  
+.mainTitle {
+    background-color: #005f6b98;
 }
 
-
+.title {
+  font-size: 50px;
+  padding-left: 2%;
+  color: #ffffff;
+  position: relative;
+  animation: slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  
+}
 @keyframes slide-in-right {
   0% {
     transform: translateX(-100%);
@@ -32,30 +32,16 @@
     opacity: 1;
   }
 }
+.title-dark {
+  color: rgb(255, 255, 255);
+}
 
 .container1{
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  /* padding-top:2%; */
-  }
-  .containerImage {
-    /* flex: 0 0 40%; */
-    animation: blur-in-expand 0.7s linear both;
-  }
-  
-  @keyframes blur-in-expand {
-    0% {
-      transform: scale(0);
-      filter: blur(12px);
-      opacity: 0;
-    }
-    100% {
-      transform: scale(1);
-      filter: blur(0);
-      opacity: 1;
-    }
+  padding-top: 12%;
   }
   
 
@@ -94,27 +80,20 @@
   border-radius: 2%;
 }
   .description {
-    overflow:auto;
-    /* margin-top:-20%;
-    padding: 2%; */
-    animation: slide-in-left 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-    font-size: 20px;
+    font-size: 18px;
+    width: 60%;  
+  }
+
+  .container2 {
+    padding: 2%;
+    font-size: 18px;
     border: 6px solid aquamarine;
     width: 50%;
-    border-radius: 2%;
-    height: 150px;
   }
   
-  
-  @keyframes slide-in-left {
-    0% {
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    100% {
-      transform: translateX(0);
-      opacity: 1;
-    }
+  .container2:hover {
+   
+    transform: scale(1.1);
   }
 
   .extraInfo {

@@ -41,30 +41,74 @@
                 margin-bottom: 5px;
               }
 
+                @keyframes boxShadowAnimation {
+                    0% {
+                        box-shadow: inset 0 0 1px 1px #ff00ff
+                    }
+                    20% {
+                    box-shadow: inset 0 0 1px 1px #ff0000;
+                    }
+                    40% {
+                    box-shadow: inset 0 0 1px 1px #800080;
+                    }
+                    60% {
+                    box-shadow: inset 0 0 1px 1px #0000ff;
+                    }
+                    80% {
+                    box-shadow: inset 0 0 1px 1px #00ffff;
+                    }
+                    100% {
+                    box-shadow: inset 0 0 1px 1px #ff00ff;
+                    }
+                }
+
+                @keyframes background-image {
+                    0% {
+                        background-image: inset 0 0 1px 1px #ff00ff
+                    }
+                    20% {
+                    background-image: inset 0 0 1px 1px #ff0000;
+                    }
+                    40% {
+                    background-image: inset 0 0 1px 1px #800080;
+                    }
+                    60% {
+                    background-image: inset 0 0 1px 1px #0000ff;
+                    }
+                    80% {
+                    background-image: inset 0 0 1px 1px #00ffff;
+                    }
+                    100% {
+                    background-image: inset 0 0 1px 1px #ff00ff;
+                    }
+                }
+                
+              
               .input {
                 padding: 3%;
                 width: 70%;
                 border-radius: 8px;
-                border: 1px solid #ccc;
+                /* border: 1px solid #ccc; */
+                border: none;
+                outline: none;
                 margin-top: 5px;
                 margin-bottom: 3%;
+                box-shadow: 2px 0 2px 2px #ccc inset; /* Establece el sombreado inicial */
+                animation: boxShadowAnimation 2.5s infinite; /* Aplica la animación a la sombra */
               }
 
               .loginFormContainer button{
-                
                 padding: 7px 20px;
-                background-color: #ffffffb5;
-                color: #010101;
+                background-image: linear-gradient(to right, #ff00ff5b, #e712125d);
+                color: #000000;
                 border: 2px solid;
-                border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+                /* border-image: linear-gradient(to right, #ff00ff, #ff0000); */
                 background-clip: padding-box;
                 animation: borderGradientAnimation1 infinite 2.5s;
-                font-size: 16px;
+                font-size: 16px;    
                 cursor: pointer;
                 transition: background-color 0.3s ease;
-                
               }
-              
               .loginFormContainer button:hover {
                 background-color: #000000;
                 color: white;
@@ -90,7 +134,6 @@
                 100% {
                   border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
                 }
-              
               }
 
               .closeButton{

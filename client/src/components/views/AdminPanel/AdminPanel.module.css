@@ -2,7 +2,9 @@
   width: 100%;
   margin-top: var(--navBarHeight);
   display: flex;
-  flex-direction: row;}
+  flex-direction: row;
+  padding: 4% 0;
+}
 
 .message{
   position: absolute;
