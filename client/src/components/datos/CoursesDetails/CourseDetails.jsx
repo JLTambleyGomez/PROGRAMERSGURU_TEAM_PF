@@ -16,7 +16,7 @@ import {
 import styles from "./DetalleCurso.module.css";
 
 //_________________________module_________________________
-function DetalleCurso() {
+function CourseDetails() {
     //global states:
     const course = useSelector((state) => state.course);
     const favorites = useSelector((state) => state.favorites);
@@ -144,4 +144,4 @@ function DetalleCurso() {
     );
 }
 
-export default DetalleCurso;
+export default CourseDetails;

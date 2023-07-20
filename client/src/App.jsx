@@ -13,7 +13,6 @@ import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
-import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
@@ -26,8 +25,6 @@ import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure
 import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
-
-import DetalleCurso from "./components/datos/CoursesDetails/DetalleCurso";
 
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
@@ -101,10 +98,7 @@ const App = () =>{
                 <Route path="/Store" element={<Shop />} />
                 <Route path="/Cart" element={<Cart />} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
-                {/* <Route path="/CourseDetails/:id" element={<CourseDetails />} /> */}
-
-                <Route path="/CourseDetails/:id" element={<DetalleCurso />} />
-
+                <Route path="/CourseDetails/:id" element={<CourseDetails />} />
                 <Route path="/Commingsoon" element={<Commingsoon />} />
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />
