@@ -12,7 +12,7 @@ import {
     postFavoriteRequest,
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
-import PublishComment from "../Comments/subComponents/publishComment";
+import PublishComment from "../Comments/subComponents/PublishComment";
 
 import styles from "./CourseDetails.module.css";
 
