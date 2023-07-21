@@ -9,7 +9,7 @@ function FilterBar() {
 
     //global states:
     const allCourses = useSelector((state) => state.allCourses);
-    const darkMode = useSelector((state) => state.darkMode);
+    const dark = useSelector((state) => state.darkMode);
 
     //states:
     const [orden, setOrden] = useState("");
@@ -147,6 +147,10 @@ function FilterBar() {
     useEffect(() => {
         console.log(allCourses)
     }, [allCourses]);
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
     //component:
     return (

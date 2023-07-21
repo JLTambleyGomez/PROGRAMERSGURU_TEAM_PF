@@ -12,7 +12,6 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
     //global states:
     const dark = useSelector((state) => state.darkMode);
     
-    
     //states:
     const [isFlipped, setIsFlipped] = useState(false);
     
@@ -33,6 +32,10 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
     const handleMouseLeave = () => {
         setIsFlipped(false);
     };
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
     //component:
     return (

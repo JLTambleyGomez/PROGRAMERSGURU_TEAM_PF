@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
+import { Dark_Mode } from "./Redux/actions";
 import theme from "./theme/theme";
 
 import s from "./App.module.css";
@@ -38,6 +39,7 @@ const App = () => {
 
     //global states:
     const shopbag = useSelector((state) => state.shopbag);
+    const dark = useSelector((state) => state.darkMode)
 
 
     //states:
@@ -46,6 +48,7 @@ const App = () => {
  
     //const:
     const location = useLocation().pathname;
+    const dispatch = useDispatch();
 
     //life-cycles:
     useEffect(() => {
@@ -85,6 +88,10 @@ const App = () => {
             localStorage.setItem("darkMode", "false")
         }
     }, [])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
     //component:

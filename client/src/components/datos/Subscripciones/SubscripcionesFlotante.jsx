@@ -9,6 +9,7 @@ import s from "./SubscripcionesFlotante.module.css"
 function SubscripcionFlotante () {
 
     //states:
+    const dark = useSelector((state) => state.darkMode)
     const [mostrarboton, setMostrarboton] = useState(true);
     const [navigateAux, setNavigateAux] = useState(false);
 
@@ -28,6 +29,10 @@ function SubscripcionFlotante () {
     useEffect(() => {
         navigateAux && navigate("/pagosubscripcion");
     }, [navigateAux])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
     //copmonent:

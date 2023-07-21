@@ -127,6 +127,11 @@ function Courses() {
     };
   }, [dispatch]);
 
+  useEffect(() => {
+      dispatch(Dark_Mode())
+  }, [dark])
+
+
   // component:
   return (
     <div className={`${styles.component} ${styles[theme("component")]}`}>

@@ -6,11 +6,12 @@ import {validate} from "./validate";
 import styles from "./Categories.module.css";
 
 const Categories = () => {
-
+    
     // Global state:
+    const dark = useSelector((state) => state.darkMode)
     const categories = useSelector((state) => state.categories);
     const dispatch = useDispatch();
-
+    
     // States:
     const [inputCategory, setInputCategory] = useState({ category: "" });
     const [error, setError] = useState({});
@@ -60,6 +61,10 @@ const Categories = () => {
             dispatch(clearMessage());
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
     //component:
     return (

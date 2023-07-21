@@ -9,12 +9,13 @@ import styles from "./CoursesDetails.module.css";
 
 //_________________________module_________________________
 function CourseDetails () {
-
+    
     //global states:
+    const dark = useSelector((state) => state.darkMode)
     const course = useSelector((state) => state.allCourses);
     const favorites = useSelector((state) => state.favorites);
     const user= useSelector((state)=> state.user)
-
+    
     //states:
     const [isFav, setFav] = useState(false);
 
@@ -58,6 +59,10 @@ function CourseDetails () {
             await dispatch(get_courses_all())
         };  
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
     //component:
     return(

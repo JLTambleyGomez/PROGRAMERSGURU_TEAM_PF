@@ -15,17 +15,18 @@ const  AdminPanel =() =>{
 
     //global state: 
     const message = useSelector((state) => state.message);
+    const dark = useSelector((state) => state.darkMode)
     
-    //const:
-    const dispatch = useDispatch();
-
+    //states:
     const [showcategories,setshowcategories]= useState(false)
     const [showcursos,setshowcursos]= useState(false)
     const [showproducts, setshowproducts]=useState(false)
     const [showUsers,setShowUsers] = useState(false)
     const [showSubscriptions,setShowSubscriptions] = useState(false)
-
-
+        
+    //const:
+    const dispatch = useDispatch();
+    
     //functions:
     const handleShowCategories = (event) => {
         event.preventDefault();
@@ -85,6 +86,9 @@ const  AdminPanel =() =>{
     }, [dispatch]);
 
 
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
       
 
     //component:

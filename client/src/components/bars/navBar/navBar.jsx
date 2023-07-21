@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+import { toggle_shopbag, Dark_Mode, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,6 +19,7 @@ import Menu from '../Menu/Menu';
 function NavBar ( { logoutUser } ) {
 
     //global states:
+    const dark = useSelector((state) => state.darkMode)
     const shopbag = useSelector((state) => state.shopbag);
     const user = useSelector((state) => state.user);
 
@@ -62,6 +63,10 @@ function NavBar ( { logoutUser } ) {
         }
         dispatch(get_Favorites_Request(user.id))
     },[])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
     //component:

@@ -24,6 +24,7 @@ import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlo
 function HomePage () {
 
     //global state:
+    const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
     //const:
     const dispatch = useDispatch();
@@ -50,13 +51,17 @@ function HomePage () {
         //     await sendEmail();
         // })()
         //--desmontado
-        // dispatch(Dark_Mode())
+        dispatch(Dark_Mode())
         return () => {
             dispatch(clearMessage());
         };
     }, [dispatch]);
 
-    
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
+
+
     //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>

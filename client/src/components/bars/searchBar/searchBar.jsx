@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { get_courses_by_name, get_products_by_name } from "../../../Redux/actions";
+import { get_courses_by_name, get_products_by_name, Dark_Mode } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import s from "./searchBar.module.css";
 
 //_________________________module_________________________
 function SearchBar () {
+
+    //global states:
+    const dark = useSelector((state) => state.darkMode)
 
     //states:
     const [searchStore, setSearchStore] = useState(false);
@@ -48,6 +51,11 @@ function SearchBar () {
             setToggleVisibility(true);
         }, 400);
     };
+
+    //life-cycles:
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
    //component:

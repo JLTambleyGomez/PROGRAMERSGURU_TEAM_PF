@@ -13,7 +13,7 @@ import s from "./Menu.module.css";
 function Menu () {
 
     //global state:
-    // const dark = useSelector((state) => state.darkMode);
+    const dark = useSelector((state) => state.darkMode);
     const logo= useSelector((state)=>state.user?.picture)
 
     //states:
@@ -39,6 +39,10 @@ function Menu () {
           setIsDarkMode(localDark ? JSON.parse(localDark) : false);
         }
     }, [isDarkMode]);
+
+    // useEffect(() => {
+    //     dispatch(Dark_Mode())
+    // }, [dark])
 
 
     // component:

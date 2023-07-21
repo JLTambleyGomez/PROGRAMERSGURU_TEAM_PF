@@ -143,6 +143,9 @@ function Shop () {
         }, 500);
     }, [products])
 
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
     // PAGINATION:
