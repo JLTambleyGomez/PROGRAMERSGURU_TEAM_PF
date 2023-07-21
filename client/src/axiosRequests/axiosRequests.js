@@ -211,12 +211,12 @@ export const getCommentsByUser = async (userId) => {
   return data;
 };
 
-export const postComment = async (courseId) => {
+export const postComment = async (courseId, commentData) => {
   const { data } = await axios.post(`/comment/course/${courseId}`, commentData);
   return data;
 }
 
-export const putComment = async (id) => {
+export const putComment = async (id, commentData) => {
   const { data } = await axios.put(`/comment/${id}`, commentData);
   return data;
 }
