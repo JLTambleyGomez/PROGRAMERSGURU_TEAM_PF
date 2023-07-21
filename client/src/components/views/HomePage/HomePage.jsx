@@ -99,21 +99,22 @@ function HomePage () {
                     </section>
 
                     <section className={`${s.sectionFAQ}`}/> */}
-
         {/* NEWS */}
             <section className={`${s.sectionNews}`}>
                 <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>
-                <span className={`${s.newsBanner}`}>
-                <h2 className={`${s[theme("text")]}`}>
-                    Programación web desde casa: el nuevo curso gratis online basado en
-                    inteligencia artificial
-                </h2>
-                <img
-                    className={`${s.newsImg}`}
-                    src="https://www.cronista.com/files/image/525/525496/6446a76145585.jpg"
-                    alt="newsBanner"
-                />
-                </span>
+                <div className={`${s.newsBanner}`}>
+                    <h2 className={`${s[theme("text")]}`}>
+                        Programación web desde casa: el nuevo curso gratis online basado en
+                        inteligencia artificial
+                    </h2>
+                    {/* <div className={s.imgContainer}> */}
+                        <img
+                            className={`${s.newsImg}`}
+                            src="https://www.cronista.com/files/image/525/525496/6446a76145585.jpg"
+                            alt="newsBanner"
+                        />
+                    {/* </div> */}
+                </div>
                 <p className={`${s.newsDate} ${s[theme("text")]}`}>
                     Actualizado al 10 de mayo de 2023
                 </p>

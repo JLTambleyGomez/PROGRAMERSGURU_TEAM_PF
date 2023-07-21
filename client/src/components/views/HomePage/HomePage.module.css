@@ -6,8 +6,10 @@
       min-height: calc(100vh - var(--navBarHeight));
       /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
       /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
-      padding: 4% 7% var(--paddingBottom);
+      padding: 4% 10% var(--paddingBottom);
       display: flex;
+      /* 100% - (padding) */
+      width: 80%;
       flex-direction: column;
       justify-content: center;
       position: absolute;
@@ -24,7 +26,6 @@
 
    .sectionCourses {
       max-width: 100vw;
-      /* margin-top: 4%; */
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -52,12 +53,20 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      gap: 3%;
+      width: 97%;
    }
+      .imgContainer {
+         display: flex;
+         align-items: center;
+         width: 15%;
+      }
       .newsImg {
-         margin-left:4%;
+         border: none;
          width: 150px;
          height: 150px;
          border-radius: 50%;
+         box-sizing: border-box;
          border: 2px solid white;
       }
    .newsText {
@@ -77,23 +86,20 @@
 
 
    /* MAIN TITLE */
-   /* .mainTitle {
-      font-size: 2rem;
-      cursor: default;
-   } */
-   .mainTitle-light {
+   /* .mainTitle-light {
       text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
    }
    .mainTitle-dark {
       text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
-   }
+   } */
 
    /* COURSES TITLE */
    .coursesTitle {
       display: flex;
       justify-content: center;
-      align-items: center;
+      /* align-items: center; */
       letter-spacing: 10px;
+      text-align: start;
       font-size: 3rem;
       transition: transform 0.3s, filter 0.3s;
    }
@@ -107,8 +113,6 @@
       animation:bounce-top 2s linear both infinite} @keyframes bounce-top{0%{transform:translateY(-35px);animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{transform:translateY(-24px);animation-timing-function:ease-in}65%{transform:translateY(-12px);animation-timing-function:ease-in}82%{transform:translateY(-6px);animation-timing-function:ease-in}93%{transform:translateY(-4px);animation-timing-function:ease-in}25%,55%,75%,87%{transform:translateY(0);animation-timing-function:ease-out}100%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}}
 
 
-
-
    .coursesTitle-light{
       color: rgb(0, 140, 158);
       text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
@@ -116,6 +120,7 @@
    .coursesTitle-dark {
       color:  rgba(0, 221, 250, 0.672);
       text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+      /* text-shadow: 2px 3.5px 2px rgb(39, 126, 197); */
    }
 
    /* NEWS TITLE */
