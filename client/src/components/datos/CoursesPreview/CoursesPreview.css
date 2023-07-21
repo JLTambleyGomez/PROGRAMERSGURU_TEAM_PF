@@ -1,17 +1,4 @@
-.coursesPreviewContainer {
-   display: flex;
-   justify-content: center;
-   /* transform: scale(0.8); */
-   margin: 0;
-   position: relative;
-}
-
-.courseCardContainer {
-   display: flex;
-   justify-content: center; /* Add this to center the content horizontally within each slide */
-}
-
-.courses-container {
+.coursesSwiperComponent {
    width: 80%;
    transition: ease 2s;
    /* margin: 0 4rem; */
@@ -24,24 +11,50 @@
     transition: ease 2s;
 }
 
-.navigation-container {
-   /* position: absolute;
-   top: 30%;
-   left: -15%;
-   width: 130%;
+.coursesPreviewContainer {
    display: flex;
-   justify-content: space-between; */
+   justify-content: center;
+   /* transform: scale(0.8); */
+   margin: 0;
+   position: relative;
+}
+
+.courseCardContainer {
+   display: flex;
+   justify-content: center; /* Add this to center the content horizontally within each slide */
+    z-index: 1000;
+}
+
+
+.navigation-container {
+       /* position: relative !important; */
+   top: -30vh;
+   left: -15%;
+   width: 100%;
+   z-index: 9999;
+   display: flex;
+   justify-content: space-between;
+}
+.navigation-container2 {
+    position: absolute !important;
+    top: 4rem;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
+    all: initial;
    background-color: rgba(255, 254, 254, 0);
    color: #fff;
+   
    /* padding:3rem; */
    border: none;
    font-size: 1.5rem;
    cursor: pointer;
 }
+/* .swiper-button-prev {
+    left: -1rem;
+    z-index: 9999;
+} */
 
    .swiper-pagination  {
       display: flex;

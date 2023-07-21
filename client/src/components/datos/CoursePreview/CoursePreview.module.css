@@ -8,8 +8,10 @@
       height: 30rem;
       gap: 2%;
       padding: 0 4%;
+      /* left: 100rem; */
+      /* margin-left: 1px !important; */
       overflow: hidden;
-      box-sizing: border-box;
+      box-sizing: border-box !important;
       /* padding: 10px; */
       transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
    }
@@ -17,13 +19,14 @@
       transform: scale(1.02);
    }
    .component-light {
-      border: 2px solid rgb(12, 1, 1);
+    outline: none;
+      border: 3px solid;
       background-color: #ffffff;
       color: #030000;
       animation: borderGradientAnimation1 infinite 2.5s;
    }
    .component-dark {
-      border: 2px solid rgb(255, 253, 253);
+      border: 3px solid;
       background-color: #000000;
       color: #ffffff;
       animation: borderGradientAnimation2 infinite 2.5s;
