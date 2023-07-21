@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
