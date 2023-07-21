@@ -215,8 +215,10 @@ export const postUserRequest = async (user) => {
     return data;
 };
 
-export const hideUserProfileRequest = async (user) => {
-    const { data } = await axios.put(`http://localhost:3001/user/hide`, user);
+export const hideUserProfileRequest = async (email) => {
+    console.log(email);
+    const { data } = await axios.put(`http://localhost:3001/user/hide`, email);
+    console.log(data);
     return data;
 };
 
@@ -260,5 +262,14 @@ export const editUserData = async (userData) => {
 
 export const makeAdminUser = async (user) => {
     const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    console.log(data);
     return data;
 };
+
+// export const hideUserProfile = async (email, isBanned) => {
+//     const { data } = await axios.put("http://localhost:3001/user/hide", {
+//         email: email,
+//         isBanned: isBanned,
+//     });
+//     return data;
+// };

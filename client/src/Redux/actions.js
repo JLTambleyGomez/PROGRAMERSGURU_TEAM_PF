@@ -479,6 +479,7 @@ export const get_User_By_Email = (email) => {
     return async function (dispatch) {
         try {
             const data = await getUserByEmailRequest(email);
+
             return dispatch({
                 type: GET_USER_BY_EMAIL,
                 payload: data,
@@ -670,19 +671,19 @@ export const post_user = (user) => {
         }
     };
 };
-export const make_admin_user = (user) => {
-    return async function (dispatch) {
-        try {
-            const data = await makeAdminUser(user);
-            return dispatch({
-                type: MAKE_ADMIN,
-                payload: data,
-            });
-        } catch (error) {
-            return dispatch({
-                type: ERROR,
-                payload: error.response.data.message,
-            });
-        }
-    };
-};
+// export const make_admin_user = (user) => {
+//     return async function (dispatch) {
+//         try {
+//             const data = await makeAdminUser(user);
+//             return dispatch({
+//                 type: MAKE_ADMIN,
+//                 payload: data,
+//             });
+//         } catch (error) {
+//             return dispatch({
+//                 type: ERROR,
+//                 payload: error.response.data.message,
+//             });
+//         }
+//     };
+// };

@@ -14,8 +14,6 @@ import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
-import Suscription2 from "./Suscription2";
-import Borrar from "./borrar";
 
 //_________________________module_________________________
 const AdminPanel = () => {
@@ -142,15 +140,6 @@ const AdminPanel = () => {
                     {showSubscriptions && <Subscriptions></Subscriptions>}
                     {/* <Borrar></Borrar> */}
                 </div>
-                {/* <div>
-                    <button
-                        className={styles.buton}
-                        onClick={handleShowSubscription}
-                    >
-                        <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
-                    </button>
-                    {showSubscriptions && <Suscription2></Suscription2>}
-                </div> */}
             </div>
         </div>
     );

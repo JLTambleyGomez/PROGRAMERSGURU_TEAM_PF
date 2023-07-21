@@ -136,6 +136,6 @@ export const validateSuscription = (form) => {
     //valida tipo
     if (!form.type.length) error.type = "Debe ingresar un tipo";
     else if (form.type.length) error.type = "";
-
+    console.log(error);
     return error;
 };

@@ -3,11 +3,11 @@ import {
     getAllUsersRequest,
     putUserRequest,
     hideUserProfileRequest,
-    adminUserRequest,
+    makeAdminUser,
 } from "../../../axiosRequests/axiosRequests";
 import { useSelector, useDispatch } from "react-redux";
 
-import { make_admin_user, post_user } from "../../../Redux/actions";
+import { post_user } from "../../../Redux/actions";
 
 import { validateUser } from "./validate";
 
@@ -15,7 +15,7 @@ import styles from "./AdminPanel.module.css";
 
 //_________________________module_________________________
 const User = () => {
-    //estafos globales
+    //estados globales
 
     //hooks
     const dispatch = useDispatch();
@@ -50,45 +50,19 @@ const User = () => {
         setAllUsers(usersDB);
     };
 
-    //modifica los datos del usuario haciendo una axion request
-    const putUser = async (id) => {
-        const userModified = await putUserRequest(id);
-        return getUsers();
-    };
-
     //modifica la propiedad banned del usuario haciendo un axion request
-    const hideUserProfileRequest = async (id) => {
-        const userBanned = hideUserProfileRequest(id);
+    const hide_user = async (email) => {
+        console.log(email);
+        const userBanned = await hideUserProfileRequest(email);
+        console.log(userBanned.message);
         return getUsers();
     };
 
     //cambia el estado del usuario a administrador
-    const changeAdminUser = async (id) => {
-        const isUserAdmin = make_admin_user(id);
+    const changeAdminUser = async (user) => {
+        const isUserAdmin = makeAdminUser(user);
+        console.log(isUserAdmin);
         return getUsers();
-    };
-
-    //boton para modificar
-    const handleModificar = (event) => {
-        const idUser = event.target.value;
-        const modificar = event.target.name;
-        setNewUser(true);
-        setModificarUser(true);
-
-        if (modificar === "datos") {
-            console.log(modificar);
-            putUser(idUser);
-        }
-
-        if (modificar === "administrador") {
-            console.log(modificar);
-            hideUserProfileRequest(idUser);
-        }
-
-        if (modificar === "banear") {
-            console.log(modificar);
-            changeAdminUser(id);
-        }
     };
 
     //abre el formulario
@@ -135,7 +109,7 @@ const User = () => {
         dispatch(post_user(user));
         setNewUser(false);
     };
-
+    console.log(allUsers);
     //lice-cycle
     useEffect(() => {
         if (!allUsers.length) getUsers();
@@ -207,48 +181,42 @@ const User = () => {
                     </form>
                 </div>
             ) : (
-                <button onClick={handlePostUser}>Agregar nuevo usuario</button>
-            )}
-            {modificarUser && (
                 <>
-                    <div>
-                        <form>
-                            <label></label>
-                        </form>
-                    </div>
+                    <button onClick={handlePostUser}>
+                        Agregar nuevo usuario
+                    </button>
+                    <br />
                 </>
             )}
             {allUsers.length &&
                 allUsers.map((user, index) => {
                     return (
                         <span key={index}>
-                            <button
-                                onClick={handleModificar}
-                                value={user.id}
-                                name="datos"
-                            >
-                                Modificar datos
-                            </button>
-                            <button
-                                onClick={handleModificar}
-                                value={user.id}
-                                name="administrador"
-                            >
-                                Hacer Adminitrador
-                            </button>
-                            <button
-                                onClick={handleModificar}
-                                value={user.id}
-                                name="banear"
-                            >
-                                Banear
-                            </button>
+                            {!user.admin && (
+                                <div>
+                                    <button
+                                        onClick={() => hide_user(user)}
+                                        name="banned"
+                                    >
+                                        {user.banned ? "Desbanear" : "Banear"}
+                                    </button>
+                                    <button
+                                        onClick={() => changeAdminUser(user)}
+                                        name="admin"
+                                    >
+                                        Hacer Adminitrador
+                                    </button>
+                                </div>
+                            )}
+                            {user.admin && <p>Es un administrador!</p>}
+
                             <label key={index}>
                                 <p>Nombre: {user.name}</p>
                                 <p>Email: {user.email}</p>
                                 <p>Imagen: {user.picture}</p>
-                                <p>Admin: {user.admin}</p>
-                                <p>Baneado: {user.banned}</p>
+                                <p>Admin: {user.admin ? "true" : "false"}</p>
+                                <p>Baneado: {user.banned ? "true" : "false"}</p>
+                                {user.banned && <p>Usuario desactivado</p>}
                                 <p>
                                     Suscripción:{" "}
                                     {user.expirationDate
@@ -257,6 +225,7 @@ const User = () => {
                                 </p>
                                 <p>Nickname: {user.nickName}</p>
                             </label>
+                            <br />
                         </span>
                     );
                 })}

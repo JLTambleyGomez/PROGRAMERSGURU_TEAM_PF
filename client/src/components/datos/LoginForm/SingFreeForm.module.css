@@ -18,8 +18,7 @@
     background-color: rgba(0, 0, 0, 0.672);
     display: flex;
     position: fixed;
-    left: 35.7%;
-    top: -260%; /*  */
+
     justify-content: center;
     justify-items: center;
     align-items: center;
