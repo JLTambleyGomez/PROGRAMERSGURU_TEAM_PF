@@ -8,7 +8,18 @@
   color: aliceblue;
   animation:blur-in 1s linear both}
     @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
- 
+/*{  
+    ESTO ES PARA HACER EL FONDO PARALELO (FOND PARALLAX)
+     .parallax 
+    background-size:contain;
+    background-image: url('https://media.istockphoto.com/id/1200559298/es/vector/hombres-y-mujeres-colegas-sentados-en-el-escritorio-dando-highfive-a-los-dem%C3%A1s-despu%C3%A9s-de-la.jpg?s=1024x1024&w=is&k=20&c=r-KKAhWrNMSs6KI4eTTeKy8yfC5mL5tlbsCbdjGK7OM=');
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    INCLUYE EN JSX UN <div className={styles.parallax}>  QUE ENVUELVA TODO, ES DECIR EL DIV DEBE ESTAR DEBAJO DEL <MAIN> 
+   }*/
 .img{
     
     width:80px;

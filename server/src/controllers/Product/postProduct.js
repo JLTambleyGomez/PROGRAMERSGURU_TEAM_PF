@@ -1,21 +1,31 @@
-const {Product} = require("../../db.js")
+const {Product, Category} = require("../../db.js")
 
 const postProduct = async (req,res) => {
     try {
-        const {price, name, description, image, category} = req.body;
+        const { name, price, description, image, stock, categoryId} = req.body;
+
+        if(!price && !name && !description && !image && !categoryId && !stock) return res.status(400).json({message: "Debe ingresar los datos"})
+
+        const categoryDB = await Category.findByPk(categoryId)
+
+        if(!categoryDB) return res.status(404).json({message: "No existe la categoria con ese id"})
+        
         const [newProduct, created] = await Product.findOrCreate({
             where:{
-                name
+                name,
             },
             defaults: {
                 price,
                 description,
                 image,
-                category,
+                stock,
+                categoryId: categoryDB.id
                 
             }
         })
+        if(!newProduct) return res.status(400).json({message: "Surgió un error a la hora de crear el producto"})
 
+        
         const response = {
             product: {
                 name: "",
@@ -32,7 +42,7 @@ const postProduct = async (req,res) => {
 
         return res.status(200).json(response)
     } catch (error) {
-        return res.status(500).json({message: "Algo salió mal. Comprobar tipos de datos ingresados"})
+        return res.status(500).json({message: error.message})
     }
 }
 

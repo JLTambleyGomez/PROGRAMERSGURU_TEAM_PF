@@ -41,7 +41,7 @@ export const getProductsRequest = async () => {
 };
 
 export const postProductRequest = async (product) => {
-  const { data } = await axios.put("http://localhost:3001/product", product);
+  const { data } = await axios.post("http://localhost:3001/product", product);
   return data;
 };
 
@@ -50,6 +50,10 @@ export const deleteProductsRequest = async (id) => {
   return data;
 };
 
+export const getProductsByNameRequest = async (name) => {
+  const { data } = await axios(`${URL}/product/name/${name}`);
+  return data;
+};
 //////////////   PUT PRODUCTS   ////////////
 export const putProductsRequest = async (id, product) => {
   const { data } = await axios.put(
@@ -77,6 +81,7 @@ export const getCoursesByNameRequest = async (name) => {
 };
 
 export const getCoursesByIdRequest = async (id) => {
+  console.log(id);
   const { data } = await axios.get(`/course/${id}`);
 
     return data;
@@ -120,24 +125,24 @@ export const getSubscriptionsRequest = async () => {
 
 export const deleteSuscriptionRequest = async (id) => {
   const {data} = axios.delete(`/subscription/${id}`)
+  console.log(data);
   return data;
 }
 
 export const putSuscriptionRequest = async (id, suscription) => {
-  const {data} = axios.put(`/subscription/${id}`, suscription)
+  const {data} = await axios.put(`/subscription/${id}`, suscription)
   return data;
 }
 
 export const postSuscriptionRequest = async (suscription) => {
-  const {data} = axios.post("/subscription",suscription)
+  const { data } = await axios.post(
+      "http://localhost:3001/subscription",
+      suscription
+  );
   return data;
-}
-//PRODUCTS_______________________________
-
-export const getProductsByNameRequest = async (name) => {
-    const { data } = await axios(`${URL}/product/name/${name}`);
-    return data;
 };
+
+
 
 //FAVORITES______________________________
 
@@ -156,7 +161,6 @@ export const deleteFavoriteRequest = async (ids) => {
   const {data} = await axios.post("/favorite/delete", ids);
   return data
 };
-
 
 //user______________________________
 

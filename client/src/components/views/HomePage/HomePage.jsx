@@ -1,18 +1,15 @@
-import axios from "axios";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import {
     get_categories,
     get_courses_all,
     clearMessage,
-    get_Favorites_Request,
+    clearCourses,
     // get_User_By_Email,
 } from "../../../Redux/actions";
 
-import { sendEmail } from '../../../axiosRequests/axiosRequests';
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
@@ -41,16 +38,13 @@ function HomePage () {
 
     //life-cycles:
     useEffect(() => {
-        // dispatch(get_User_By_Email(email))
         dispatch(get_categories());
         dispatch(get_courses_all());
-        /*(async () => {
-            await sendEmail({email:email, message: "ss"});
-        })()*/
-
+    
         //--desmontado
         return () => {
             dispatch(clearMessage());
+            dispatch (clearCourses())
         };
     }, [dispatch]);
 

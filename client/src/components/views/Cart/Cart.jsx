@@ -21,6 +21,7 @@ function Cart() {
     const [MostrarPagos, setMostrarPagos] = useState(false);
     const [adressForm, setAdressForm] = useState(false);
     const [message, setMessage] = useState("");
+    
 
     //const:
     const navigate = useNavigate();
@@ -102,6 +103,7 @@ function Cart() {
         // dispatch(get_User_By_Email());
     }, [user]);
 
+    
     //component:
     return (
         <main>
@@ -121,7 +123,7 @@ function Cart() {
                                             onClick={() =>
                                                 handleDetailButtons(P.id)
                                             }
-                                            className={styles.name}
+                                            className={styles.name2}
                                         >
                                             {P.name}
                                         </h3>
@@ -161,12 +163,13 @@ function Cart() {
                                             >
                                                 +
                                             </button>
-                                        </div>
-                                        <button
+                                            <button
                                             onClick={() => removeFromCart(P.id)}
                                         >
-                                            X
+                                            x
                                         </button>
+                                        </div>
+                                   
                                     </div>
                                 </li>
                             ))
@@ -174,7 +177,7 @@ function Cart() {
                         </div>
                     {/* RESUMEN */}
                         <div className={styles.total}>
-                            <h1>LO QUE LLEVAS:</h1>
+                            <h1 className={styles.h1}>LO QUE LLEVAS:</h1>
                             <div className={styles.totalcontainer}>
                                 {message ? (
                                     <Link to="/profile">
@@ -192,7 +195,7 @@ function Cart() {
                                                 key={index}
                                             >
                                                 <h4>
-                                                    {product.name} X{" "}
+                                                    {product.name} x{" "}
                                                     {product.quantity}
                                                 </h4>
                                             </li>
@@ -206,10 +209,9 @@ function Cart() {
                                                 Valor Total: ${" "}
                                                 {calculateTotal()}
                                             </h1>
-                                            <p onClick={handlePagarButton}>
-                                                ir a Pagar
-                                            </p>
-                                            {/* MEDIOS DE PAGO */}
+                                            <p className={styles.boton} onClick={handlePagarButton}>
+                                          <p className={styles.name}>ir a Pagar</p> 
+                                             </p>
                                         </div>
                                     )}
 

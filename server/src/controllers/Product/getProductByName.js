@@ -10,7 +10,7 @@ const getProductByName = async (req, res) => {
     try {
         const productsFound = await get_products_by_name(name)
 
-        if (productsFound.length === 0) return res.status(404).json({ message: "No se encontraron coincidencias" });
+        if (productsFound.length === 0) res.status(404).json({ message: "No se encontraron coincidencias" });
 
         else return res.json(productsFound);
 

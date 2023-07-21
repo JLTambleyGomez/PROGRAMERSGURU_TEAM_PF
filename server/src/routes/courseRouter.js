@@ -4,12 +4,15 @@ const courseRouter = require("express").Router();
 //controllers
 const { getCourse } = require("../controllers/Course/getCourse");
 const { postCourse } = require("../controllers/Course/postCourse");
+const {postCourses} = require("../controllers/Course/postCourses")
 const { deleteCourse } = require("../controllers/Course/deleteCourse");
 const { putCourse } = require("../controllers/Course/putCourse");
 const { getCourseByName } = require("../controllers/Course/getCourseByName");
 const { getCourseById } = require("../controllers/Course/getCourseById")
 const { addTechnology } = require("../controllers/Course/addTechnology");
 const { removeTechnology } = require("../controllers/Course/removeTechnology");
+
+courseRouter.get("/all",postCourses)
 
 courseRouter.get("/", getCourse);
 

@@ -73,13 +73,11 @@ export const validateCourse = (form) => {
     else if (form.rating.length) error.rating = "";
 
     //validar isFree
-    console.log(form.isFree);
 
     //validar language
-    console.log(form.language);
     if (!form.language.length) error.language = "Debe ingresar un idioma";
     else if (form.language !== "Español" && form.language !== "Ingles")
-        error.language = "Debe ingresar un idioma, ingles o español";
+        error.language = "Debe ingresar un idioma, Ingles o Español";
     else error.language = "";
 
     //validar categorias

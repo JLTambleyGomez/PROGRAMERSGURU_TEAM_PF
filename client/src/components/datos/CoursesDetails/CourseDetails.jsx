@@ -25,6 +25,7 @@ function CourseDetails() {
     const user = useSelector((state) => state.user);
     const dark = useSelector((state) => state.darkMode);
     //states:
+    const [loading, setLoading] = useState(true)
     const [fav, setFav] = useState(null);
     const [ids, setIds] = useState({
         userId: 0,
@@ -77,15 +78,23 @@ function CourseDetails() {
             console.log("Este curso no esta en favs");
             setFav(false);
         }
+        
+        setTimeout(() => {
+            setLoading(false)
+        }, 500);
         return () => {
-            dispatch(clearMessage());
             dispatch(clearCourses());
+
+            dispatch(clearMessage());
         };
-    }, [dispatch]);
+    }, []);
+
+
+
 
     //component:
-    return (
-        <div className={styles.component}>
+    return (<>
+        { !loading ? (<div className={styles.component}>
             <div className={styles.title}>
                 <h1>{course[0]?.title}</h1>
                 <Rating
@@ -167,6 +176,8 @@ function CourseDetails() {
                 </div>
             </div>
         </div>
+        ): (<h1 className={styles.carga}>Cargando...</h1>)}
+        </>
     );
 }
 

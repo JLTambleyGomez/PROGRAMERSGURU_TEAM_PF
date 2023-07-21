@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
-import { editUserData, sendEmail} from "../../../axiosRequests/axiosRequests";
+import { editUserData} from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
@@ -69,7 +69,7 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
-           sendEmail({ email , message:"Tu usuario ha sido modificado"});
+        //    sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({

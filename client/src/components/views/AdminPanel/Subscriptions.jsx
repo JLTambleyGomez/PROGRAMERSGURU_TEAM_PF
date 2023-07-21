@@ -116,7 +116,7 @@ const Subscriptions = () => {
         });
     };
 
-    const handleSubmitForm = (event) => {
+    const handleSubmitForm =async (event) => {
         event.preventDefault();
 
         if (
@@ -124,8 +124,11 @@ const Subscriptions = () => {
             erroSuscription.description ||
             erroSuscription.image ||
             erroSuscription.type
-        )
-            return setMessagePost("Revise los datos");
+        ){
+            await setMessagePost("Revise los datos");
+            return dispatch(adminPanelMensajesLocales(messagePost))
+        }
+
 
         if (putSuscription) {
             dispatch(put_suscription(suscriptionId, formData)).then(() =>
@@ -137,8 +140,11 @@ const Subscriptions = () => {
                 !formData.title ||
                 !formData.description ||
                 !formData.type
-            )
-                return setMessagePost("Debe ingresar los datos");
+            ){
+              await setMessagePost("Debe ingresar los datos")
+              return dispatch(adminPanelMensajesLocales(messagePost))
+            }
+
             dispatch(post_suscription(formData)).then(() =>
                 dispatch(get_suscriptions())
             );
@@ -164,7 +170,7 @@ const Subscriptions = () => {
     };
 
     useEffect(() => {
-        if (!subscriptions.length) dispatch(get_suscriptions());
+        dispatch(get_suscriptions());
     }, [dispatch]);
 
     return (
@@ -183,6 +189,7 @@ const Subscriptions = () => {
                         <button onClick={hanldeCloseFormSuscription}>X</button>
                         <h2>{postSuscription && "Añadir suscripción"}</h2>
                         <h2>{putSuscription && "Editar suscripción"}</h2>
+                        {message && <h1>{message}</h1>}
                         <form>
                             <div>
                                 {postSuscription || putSuscription ? (

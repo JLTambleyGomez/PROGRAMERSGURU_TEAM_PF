@@ -31,8 +31,7 @@ import {
     deleteSuscriptionRequest,
     putSuscriptionRequest,
     postSuscriptionRequest,
-    //sendEmails
-    sendEmail,
+    
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -88,6 +87,9 @@ export const FILTER_PRODUCTS_BY_CATEGORY = "FILTER_PRODUCTS_BY_CATEGORY";
 export const FILTER_PRODUCTS_BY_PRICING = "FILTER_PRODUCTS_BY_PRICING";
 export const SORT_PRODUCTS = "SORT_PRODUCTS";
 export const PUT_PRODUCTS = "PUT_PRODUCTS";
+
+    //admin
+    export const ADMIN_MESSAGE = 'ADMIN_MESSAGE'
 
 //CART:
 export const SET_CART = "SET_CART";
@@ -572,7 +574,6 @@ export const get_suscriptions = () => {
     return async function (dispatch) {
         try {
             const data = await getSubscriptionsRequest();
-            console.log(data);
             return dispatch({
                 type: GET_SUSCRIPTIONS,
                 payload: data,
@@ -617,13 +618,13 @@ export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
             const data = await deleteSuscriptionRequest(id);
+           
             console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
                 payload: data,
             });
         } catch (error) {
-            console.log(error);
             console.log(error);
             return dispatch({
                 type: ERROR,
@@ -637,9 +638,10 @@ export const post_suscription = (suscription) => {
     return async function (dispatch) {
         try {
             const data = await postSuscriptionRequest(suscription);
+            console.log(data);
             return dispatch({
                 type: POST_SUSCRIPTION,
-                payload: data.message,
+                payload: data
             });
         } catch (error) {
             console.log(error);
@@ -650,6 +652,7 @@ export const post_suscription = (suscription) => {
         }
     };
 };
+
 
 //SHOP FILTERS_________________________________________//
 export const filter_product_by_category = (category) => {
@@ -699,3 +702,12 @@ export const post_user = (user) => {
 //         }
 //     };
 // };
+
+ export const adminPanelMensajesLocales = (message) =>{
+    console.log(message)    
+    return  {
+                type: ADMIN_MESSAGE,
+                payload:message
+            }
+
+ }
