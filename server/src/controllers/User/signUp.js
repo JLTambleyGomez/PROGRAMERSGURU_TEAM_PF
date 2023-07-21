@@ -1,30 +1,39 @@
-const { User } = require('../../db');
+const { User } = require("../../db");
 //__________________________________________________
-const signUp = async (req,res) => {
+const signUp = async (req, res) => {
     console.log("controler signup");
-    const defaultPicture = "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-24.jpg"
+    const defaultPicture =
+        "https://icon-library.com/images/no-profile-pic-icon/no-profile-pic-icon-24.jpg";
     try {
-        const { email, name, picture } = req.body
+        const { email, name, picture } = req.body;
         console.log("este es el signup");
+        if (!email && !name)
+            return res
+                .status(404)
+                .json({ message: "Debe ingresar los datos a modificar" });
 
         const [newUser, created] = await User.findOrCreate({
             where: {
-                email: email
+                email: email,
             },
             defaults: {
                 picture: !picture ? defaultPicture : picture,
                 name: !name ? email : name,
-                nickName: !name ? email : name
-            }
-        })
+                nickName: !name ? email : name,
+            },
+        });
         if (!created) {
-            return res.json({message: "El usuario ya está en la base de datos"})
+            return res.json({
+                message: "El usuario ya está en la base de datos",
+            });
         }
-        console.log(newUser)
-        return res.status(201).json({message: "El usuario fue creado correctamente"})
+        console.log(newUser);
+        return res
+            .status(201)
+            .json({ message: "El usuario fue creado correctamente" });
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }
-}
+};
 
-module.exports = { signUp }
+module.exports = { signUp };

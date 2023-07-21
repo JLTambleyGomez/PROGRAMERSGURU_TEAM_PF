@@ -4,17 +4,19 @@ const deleteSuscription = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const suscription = await Subscription.findByPk(id);
+        const deleted = await Subscription.destroy({ where: { id } });
 
-        if (!suscription)
+        if (deleted) {
+            return res.json({
+                message: "La suscripción fue borrada correctamente",
+            });
+        } else {
             return res
                 .status(404)
-                .json({ message: `La suscripción con el id ${id} no existe` });
-
-        suscription.destroy();
-        return res.status(200).json(suscription);
+                .json({ message: "No se encontró ninguna suscripción" });
+        }
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        return res.status(500).json({ message: "Algo salió mal" });
     }
 };
 

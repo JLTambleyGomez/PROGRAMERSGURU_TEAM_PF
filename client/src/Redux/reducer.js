@@ -1,7 +1,7 @@
-import { 
-//COURSES:
-    GET_COURSES_ALL, 
-    GET_COURSES_BY_NAME, 
+import {
+    //COURSES:
+    GET_COURSES_ALL,
+    GET_COURSES_BY_NAME,
     DELETE_COURSE,
     POST_COURSE, 
     FILTER_COURSES_BY_LANGUAGE, 
@@ -9,21 +9,22 @@ import {
     ORDER_COURSES, 
     GET_COURSE_BY_ID,
     PUT_COURSE,
-//CATEGORIES:
-    GET_CATEGORIES_ALL, 
-    POST_CATEGORIES, 
+    //CATEGORIES:
+    GET_CATEGORIES_ALL,
+    POST_CATEGORIES,
     DELETE_CATEGORIES,
-// ERRORS: 
+    // ERRORS:
     ERROR,
     CLEAR_COURSES,
     CLEAN_MESSAGE,
-// DARK MODE:
+    // DARK MODE:
     DARK_MODE,
-//FAVORITES:
+    //FAVORITES:
     GET_FAVORITES,
-//USERS:
+    //USERS:
     GET_USER_BY_EMAIL,
-//PRODUCTS
+    POST_USER,
+    //PRODUCTS
     GET_PRODUCTS,
     GET_PRODUCTS_BY_NAME,
     DELETE_PRODUCT,
@@ -35,20 +36,19 @@ import {
 //CART,
     SET_CART,
     CLEAR_CART,
-//SHOPBAG
+    //SHOPBAG
     TOGGLE_SHOPBAG,
-//METAMASK
-METAMASK_ADDRESS,
-//COMMENTS
+    //METAMASK
+    METAMASK_ADDRESS,
+    //COMMENTS
     GET_COMMENTS_BY_USER,
     GET_COMMENTS_BY_COURSE,
-//SUBSCRIPTIONS
-GET_SUSCRIPTIONS,
-DELETE_SUSCRIPTION,
-PUT_SUSCRIPTION,
-POST_SUSCRIPTION
+    //SUBSCRIPTIONS
+    GET_SUSCRIPTIONS,
+    DELETE_SUSCRIPTION,
+    PUT_SUSCRIPTION,
+    POST_SUSCRIPTION,
 } from "./actions";
-
 
 // PRUEBA CURSOS
 //import jsonData from './cursos.json';
@@ -57,70 +57,90 @@ POST_SUSCRIPTION
 
 //GLOBAL STORAGE:
 const globalStorage = {
-    allCourses:[],              //NO TOCAR SIN AVISAR ANTES
-    courses:[],
-    categories:[],
-    error:"",
-    message:"",
-    darkMode:false,
-    favorites:[],
-    access:false,
-    products:[],
-    user:{},
-    cart:[],
+    allCourses: [], //NO TOCAR SIN AVISAR ANTES
+    courses: [],
+    categories: [],
+    error: "",
+    message: "",
+    darkMode: false,
+    favorites: {},
+    access: false,
+    products: [],
+    user: {},
+    cart: [],
     shopbag: false,
-    metamask:false,
+    metamask: false,
     userComments: [],
     courseComments: [],
-    metamaskaddress:null,
+    metamaskaddress: null,
     productsCopy: [],
-    subscriptions:[], ////   <---------- MODIFICADO  
+    subscriptions: [], ////   <---------- MODIFICADO
+    allUsers: [],
     course: {}
-}
+};
 
 //REDUCER:
-export default function rootReducer ( state = globalStorage, { type, payload } ) {
-
+export default function rootReducer(state = globalStorage, { type, payload }) {
     switch (type) {
-        //courses
+
         case GET_COURSES_ALL:
             return { ...state, allCourses: payload, courses: payload };
 
         case GET_COURSES_BY_NAME:
-            return { ...state, allCourses: payload,courses: payload  };
+            return { ...state, allCourses: payload, courses: payload };
 
         case GET_COURSE_BY_ID:
             return { ...state, course: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
-            return { ...state, courses: state.courses.filter((course) => course.language== payload)};
+            return {
+                ...state,
+                courses: state.courses.filter(
+                    (course) => course.language == payload
+                ),
+            };
 
         case FILTER_COURSES_BY_PRICING:
-            return { ...state, courses: state.courses.filter((course) => course.isFree === payload)}
+            return {
+                ...state,
+                courses: state.courses.filter(
+                    (course) => course.isFree === payload
+                ),
+            };
 
         case ORDER_COURSES:
             const todos_cursosOrdenados = [...state.allCourses];
-            const cursosOrdenados = [...state.courses]
+            const cursosOrdenados = [...state.courses];
 
             if (payload === "Ascendente") {
-                todos_cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
-                cursosOrdenados.sort((a, b) =>  a.title.toLowerCase().charCodeAt(0)- b.title.toLowerCase().charCodeAt(0));
+                todos_cursosOrdenados.sort(
+                    (a, b) =>
+                        a.title.toLowerCase().charCodeAt(0) -
+                        b.title.toLowerCase().charCodeAt(0)
+                );
+                cursosOrdenados.sort(
+                    (a, b) =>
+                        a.title.toLowerCase().charCodeAt(0) -
+                        b.title.toLowerCase().charCodeAt(0)
+                );
             } else if (payload === "Desendente") {
-                todos_cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
-                cursosOrdenados.sort((a, b) =>  b.title.toLowerCase().charCodeAt(0)- a.title.toLowerCase().charCodeAt(0));
+                todos_cursosOrdenados.sort(
+                    (a, b) =>
+                        b.title.toLowerCase().charCodeAt(0) -
+                        a.title.toLowerCase().charCodeAt(0)
+                );
+                cursosOrdenados.sort(
+                    (a, b) =>
+                        b.title.toLowerCase().charCodeAt(0) -
+                        a.title.toLowerCase().charCodeAt(0)
+                );
             }
-            return { 
-                ...state, 
-                allCourses: todos_cursosOrdenados, 
-                courses: cursosOrdenados
-            }
-            case POST_COURSE:
-                return {
-                    ...state,
-                    message: payload.message,
-                };
-                
-        //categories
+            return {
+                ...state,
+                allCourses: todos_cursosOrdenados,
+                courses: cursosOrdenados,
+            };
+
         case GET_CATEGORIES_ALL:
             return {
                 ...state,
@@ -132,6 +152,13 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 ...state,
                 message: payload.message,
             };
+
+        case POST_COURSE:
+            return {
+                ...state,
+                message: payload.message,
+            };
+
             
         case DELETE_CATEGORIES:
             return { ...state, message: payload};
@@ -146,7 +173,7 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
             return {
                 ...state,
                 error: "",
-                message:"",
+                message: "",
             };
 
         case CLEAR_COURSES:
@@ -159,19 +186,19 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case DARK_MODE:
             return {
                 ...state,
-                darkMode: payload
-            }; 
+                darkMode: payload,
+            };
 
         case GET_FAVORITES:
-            return { ...state, favorites: payload};
+            return { ...state, favorites: payload };
 
-        case  DELETE_COURSE:
-            return { ...state, message: payload};
+        case DELETE_COURSE:
+            return { ...state, message: payload };
 
             //productos
         case GET_PRODUCTS:
-            return { ...state, products: payload, productsCopy: payload};
-        
+            return { ...state, products: payload, productsCopy: payload };
+
         case GET_PRODUCTS_BY_NAME:
             return { ...state, products: payload };
 
@@ -184,38 +211,48 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
                 message: payload.message,
             };
 
-        case PUT_PRODUCTS:
-            return {
-                ...state,
-                message: payload.message,
-            }
+            case PUT_PRODUCTS:
+                return { ...state, message: payload };
 
         case FILTER_PRODUCTS_BY_CATEGORY:
-            return { ...state, products: state.products.filter((product) => product.category === payload)};
+            return {
+                ...state,
+                products: state.products.filter(
+                    (product) => product.category === payload
+                ),
+            };
 
-            case FILTER_PRODUCTS_BY_PRICING:
-                return { ...state, products: state.products.filter((product) => product.price >= payload[0] && product.price <= payload[1] )}
-    
-            case SORT_PRODUCTS:
-                const productosOrdenados = [...state.products];
-    
-                if (payload === "ascendente") {
-                    productosOrdenados.sort((a, b) =>  a.name.toLowerCase().charCodeAt(0)- b.name.toLowerCase().charCodeAt(0));
-                } else if (payload === "descendente") {
-                    productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
-                }
+        case FILTER_PRODUCTS_BY_PRICING:
+            return { ...state, products: state.products.filter((product) => product.price >= payload[0] && product.price <= payload[1] )}
 
-            return { 
-                ...state, 
-                products: productosOrdenados, 
-                productsCopy: todos_productosOrdenados
+        case SORT_PRODUCTS:
+            const productosOrdenados = [...state.products];
+
+            if (payload === "ascendente") {
+                todos_productosOrdenados.sort(
+                    (a, b) =>
+                        a.name.toLowerCase().charCodeAt(0) -
+                        b.name.toLowerCase().charCodeAt(0)
+                );
+                productosOrdenados.sort(
+                    (a, b) =>
+                        a.name.toLowerCase().charCodeAt(0) -
+                        b.name.toLowerCase().charCodeAt(0)
+                );
+            } else if (payload === "descendente") {
+                productosOrdenados.sort((a, b) =>  b.name.toLowerCase().charCodeAt(0)- a.name.toLowerCase().charCodeAt(0));
             }
 
+            return {
+                ...state,
+                products: productosOrdenados,
+                productsCopy: todos_productosOrdenados,
+            };
 
-//////////////////         MODIFICADO              //////////////////////////////
-        case PUT_PRODUCTS: 
-            return {...state,products: payload}
-//////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////         MODIFICADO              //////////////////////////////
+        case PUT_PRODUCTS:
+            return { ...state, message: payload };
+        //////////////////////////////////////////////////////////////////////////////////////////
         case GET_USER_BY_EMAIL:
             return {
                 ...state,
@@ -225,61 +262,67 @@ export default function rootReducer ( state = globalStorage, { type, payload } )
         case SET_CART:
             return {
                 ...state,
-                cart: payload
+                cart: payload,
             };
-        
+
         case CLEAR_CART:
             return {
                 ...state,
-                cart: payload
-            }
+                cart: payload,
+            };
 
         case TOGGLE_SHOPBAG:
             return {
                 ...state,
-                shopbag: payload
-            }
-            
+                shopbag: payload,
+            };
+
         case GET_COMMENTS_BY_USER:
-            return{
+            return {
                 ...state,
-                userComments: payload
-        }
+                userComments: payload,
+            };
         case GET_COMMENTS_BY_COURSE:
-            return{
+            return {
                 ...state,
-                courseComments: payload
-        }
+                courseComments: payload,
+            };
         case METAMASK_ADDRESS:
-            return{
+            return {
                 ...state,
-                metamaskaddress: payload
-            }
-        
-//////////////////         MODIFICADO              //////////////////////////////
+                metamaskaddress: payload,
+            };
+
+        //////////////////         MODIFICADO              //////////////////////////////
 
         case GET_SUSCRIPTIONS:
             return {
                 ...state,
-                subscriptions: payload
-            }
+                subscriptions: payload,
+            };
         case DELETE_SUSCRIPTION:
             return {
                 ...state,
-                message: payload
-            }
+                message: payload,
+            };
         case PUT_SUSCRIPTION:
             return {
                 ...state,
-                subscriptions: payload
-            }
+                subscriptions: payload,
+            };
 
         case POST_SUSCRIPTION:
             return {
                 ...state,
                 message: payload.message,
             };
-//////////////////////////////////////////////////////////////////////////////////////////
-        default: return {...state}; 
+        case POST_USER:
+            return {
+                ...state,
+                message: payload.message,
+            };
+        ////////////////////////////////////////////////////////////////////////////////////
+        default:
+            return { ...state };
     }
 }

@@ -19,8 +19,12 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
             },
             type: {
-                type: DataTypes.ENUM("mensual", "trimestral", "anual"), // tipo de suscripcion: mensual, anual, etc
+                type: DataTypes.ENUM("mensual", "trimestral", "anual"), //
             },
+            price: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+            }, 
         },
         { timestamps: false, freezeTableName: true }
     );

@@ -1,22 +1,27 @@
 .component {
   margin-top: var(--navBarHeight);
   min-height: calc(100vh - var(--navBarHeight));
+  position: absolute;
   display: flex;
   flex-direction: column; 
+  align-items: center;
   padding-bottom: 20%;
-  animation:blur-in 0.4s linear both
+  width: 100%;
+  animation:blur-in 0.4s linear both;
   } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
 
 .mainBanner {
     background-image: linear-gradient(to right,  #000000, #434343);
-    height: 26%;
-    /* padding: 2%; */
+    height: 38%;
+    width: 100%;
   }
   .mainBanner h1 {
+    font-size: 100%;
     color: white;
   }
 
 .filterOrder {
+    width: 100%;
   display: flex;
   justify-content: space-evenly;
 }

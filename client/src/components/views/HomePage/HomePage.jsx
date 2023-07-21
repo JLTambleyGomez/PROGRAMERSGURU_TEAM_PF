@@ -12,6 +12,7 @@ import {
     // get_User_By_Email,
 } from "../../../Redux/actions";
 
+import { sendEmail } from '../../../axiosRequests/axiosRequests';
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
@@ -36,10 +37,6 @@ function HomePage () {
     // obtener el email
     const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
-    const sendEmail = async () => {
-        const carta = {email: "calderon", message:"enviado"}
-        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
-    };
 
 
     //life-cycles:
@@ -48,7 +45,7 @@ function HomePage () {
         dispatch(get_categories());
         dispatch(get_courses_all());
         /*(async () => {
-            await sendEmail();
+            await sendEmail({email:email, message: "ss"});
         })()*/
 
         //--desmontado

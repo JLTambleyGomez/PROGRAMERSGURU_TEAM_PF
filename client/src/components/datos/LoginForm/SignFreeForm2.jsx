@@ -1,17 +1,19 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import validate from "./validate";
-import styles from "./LoginForm.module.css";
+import styles from "./SingFreeForm.module.css";
+import signIn from "../../../user/signIn";
+import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
-import signIn from "../../../user/signIn"
-
+import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
-function LoginForm() {
+function SignFreeForm2() {
     // const dispatch = useDispatch()
     //states:
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showButton, setShowButton] = useState(true);
+    const [accessButton, setAccessButton] = useState(true);
 
     const [userData, setUserData] = useState({
         email: "",
@@ -30,7 +32,7 @@ function LoginForm() {
     };
 
     const handleToggleForm = () => {
-        setShowForm(true);
+        setShowForm(!showForm);
         setShowButton(false);
     };
 
@@ -44,10 +46,16 @@ function LoginForm() {
         setPasswordVisible(!passwordVisible);
     };
 
-  const handleLogIn = async (event) => {
-    event.preventDefault();
-    signIn(userData.email, userData.password)
-  }
+    const handleLogIn = (event) => {
+        event.preventDefault();
+        get_User_By_Email(userData.email);
+        signIn(userData.email, userData.password);
+    };
+    const handleSignUp = (event) => {
+        event.preventDefault();
+        get_User_By_Email(userData.email);
+        createUser(userData.email, userData.password);
+    };
 
     const handleLoginWithGoogle = (event) => {
         event.preventDefault();
@@ -55,23 +63,22 @@ function LoginForm() {
     };
 
     useEffect(() => {
-        console.log(showForm);
-    }, [showForm]);
+        const errorLength = Object.keys(errors).length;
+        if (!errorLength) setAccessButton(false);
+        console.log(errors);
+        console.log(accessButton);
+    }, [errors]);
 
     //component:
     return (
         <div className={styles.loginFormContainer}>
             {showButton && (
-                <button
-                    onClick={handleToggleForm}
-                    className={styles.openButton}
-                >
+                <p onClick={handleToggleForm} className={styles.boton}>
                     Ingresar
-                </button>
+                </p>
             )}
             {showForm && (
                 <div className={styles.container}>
-                    <h1>HOLAAAAAAAAA</h1>
                     <div className={styles.form}>
                         {/* CLOSE FORM */}
                         <button
@@ -135,11 +142,23 @@ function LoginForm() {
 
                             {/* SUBMIT */}
                             <button
-                                className={styles.button}
+                                // disabled={accessButton}
+                                className={`${styles.button} ${
+                                    accessButton ? styles.buttonDisabled : ""
+                                }`}
                                 type="submit"
                                 onClick={handleLogIn}
                             >
                                 Acceder
+                            </button>
+                            <button
+                                className={`${styles.button} ${
+                                    !accessButton ? styles.buttonDisabled : ""
+                                }`}
+                                type="submit"
+                                onClick={handleSignUp}
+                            >
+                                Registrarme
                             </button>
                             <hr />
                         </form>
@@ -151,6 +170,7 @@ function LoginForm() {
                         >
                             Acceder con Google
                         </button>
+                        {/* <GoogleButton onClick={signInwithGoogle}/> */}
                     </div>
                 </div>
             )}
@@ -158,4 +178,4 @@ function LoginForm() {
     );
 }
 
-export default LoginForm;
+export default SignFreeForm2;

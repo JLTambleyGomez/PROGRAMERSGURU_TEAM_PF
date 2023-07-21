@@ -32,38 +32,43 @@ function Success  () {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
-    const email = localStorage.getItem("email");
 
     //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
+        // const postPaymentInfo = axios.post("http://localhost:3001/feedbackmp/:email", cart)
+        // (async () => {
+        //     await postPaymentInfo()
+        // })()
     },[])
-
-
-    useEffect(() => {
-        dispatch(get_User_By_Email(email));
-        console.log(cart);
-        console.log("este es el email:" + " " + email)
-    }, [])
+    
 
     useEffect(() => {
         (async () => {
-            try {
-                const searchParams = new URLSearchParams(location.search);
-                const paymentId = searchParams.get("payment_id");
-                const status = searchParams.get("status");
-                const merchantOrderId = searchParams.get("merchant_order_id");
-                const { data } = await axios.get(
-                    `http://localhost:3001/Mp/feedbackmp?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}`, {email});
-                console.log(data)
-                setPaymentInfo(data);
-            } catch (error) {
-                console.error("Error al obtener el recibo de Mercado Pago:", error);
-            }
-        })()
-    }, []);
-
+          try {
+            const compraString = localStorage.getItem("cart"); // Obtener el contenido del carrito del almacenamiento local como una cadena de texto
+            const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
+            const email = localStorage.getItem("email");
+            await dispatch(get_User_By_Email(email));
+            console.log(cart);
+            console.log("este es el email:" + " " + email);
+            const searchParams = new URLSearchParams(location.search);
+            const paymentId = searchParams.get("payment_id");
+            const status = searchParams.get("status");
+            const merchantOrderId = searchParams.get("merchant_order_id");
+      
+            const { data } = await axios.post(
+              `http://localhost:3001/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`,
+                {compra});
+      
+            console.log(data);
+            setPaymentInfo(data);
+          } catch (error) {
+            console.error("Error al obtener el recibo de Mercado Pago:", error);
+          }
+        })();
+      }, []);
 
     //component:
     return (

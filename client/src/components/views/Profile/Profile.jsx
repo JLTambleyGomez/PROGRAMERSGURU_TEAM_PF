@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
-import { editUserData } from "../../../axiosRequests/axiosRequests";
+import { editUserData, sendEmail} from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
@@ -18,6 +18,7 @@ import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 //_________________________module_________________________
 function ProfileV2() {
     //global states:
+    const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
     const userComments = useSelector((state) => state.userComments);
@@ -40,7 +41,12 @@ function ProfileV2() {
     const actualDate = new Date();
     const dispatch = useDispatch();
 
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
     //handlers
+
     const handleChange = (event) => {
         event.preventDefault();
         setNewUserData({
@@ -63,6 +69,7 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
+           sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({
@@ -100,7 +107,7 @@ function ProfileV2() {
     //component:
     return (
         <div className={s.profileContainer}>
-            <div className={s.infoProfile}>
+            <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
                     <div className={s.config} onClick={openConfig}>
                         <img
@@ -170,11 +177,11 @@ function ProfileV2() {
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} />
-                {tab === "favorites" && <Favorites userId={userId}/>}
-                {tab === "reseñas" && <Reviews />}
-                {tab === "compras" && <Compras />}
-                {tab === "carrito" && <Carrito />}
+                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark}/>
+                {tab === "favorites" && <Favorites userId={userId} dark={dark}/>}
+                {tab === "reseñas" && <Reviews dark={dark}/>}
+                {tab === "compras" && <Compras dark={dark}/>}
+                {tab === "carrito" && <Carrito dark={dark}/>}
             </div>
         </div>
     );

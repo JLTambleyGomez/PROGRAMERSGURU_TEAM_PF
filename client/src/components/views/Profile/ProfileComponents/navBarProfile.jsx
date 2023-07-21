@@ -1,8 +1,13 @@
 import s from "../Profile.module.css";
 
-export function NavBarProfile({tab, changeTab}) {
+export function NavBarProfile({tab, changeTab, dark}) {
+    console.log(dark);
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
     return (
-        <nav className={s.navBarProfile}>
+        <nav className={`${s.navBarProfile} ${s[theme("navBarProfile")]}`}>
             <button
                 className={tab === "favorites" ? s.save : s.discard}
                 name="favorites"

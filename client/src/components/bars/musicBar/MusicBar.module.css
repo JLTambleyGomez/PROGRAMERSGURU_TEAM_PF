@@ -1,0 +1,69 @@
+.container {
+    position: fixed;
+    width: 2%;
+    max-width: 500px;
+    padding: 20px;
+    z-index: 9999;
+
+  }
+  
+  .component{
+    position:absolute;
+    top: 0;
+    left:0;
+    background-color:rgba(0, 0, 0, 0.233);
+    animation:scale-up-top-left 0.4s; } 
+    @keyframes scale-up-top-left{0%{transform:scale(.5);
+      transform-origin:top left}100%{transform:scale(1);
+        transform-origin:top left}}
+  .video {
+    position: absolute;
+    width: 50px;
+    height: 25px;
+    left: 0;
+
+    transition: all 0.5s;
+  }
+  .video:hover{
+    width: 500px;
+    height: 150px;
+  }
+  .video iframe {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .p{
+    position: absolute;
+    display: flex;
+    background-color: black;
+    border-radius: 100%;
+    height: 40px;
+    width: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    z-index: 9999;
+
+  }
+  .p:hover{
+    cursor: pointer;
+
+  }
+
+  .p2{
+    background-color: black;
+    color: white;
+    top: 10%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 100%;
+  }
+    .p2:hover{
+      cursor: pointer;
+    }

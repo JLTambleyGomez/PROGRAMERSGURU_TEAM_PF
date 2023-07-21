@@ -7,7 +7,7 @@ const { putPerfilUser } = require("../controllers/User/putPerfilUser");
 const { hideProfile } = require("../controllers/User/hideProfile");
 const { makeAdmin } = require("../controllers/User/makeAdmin");
 const { loginWithGoogle } = require("../controllers/User/loginWithGoogle");
-const { SendEmail } = require("../controllers/User/sendEmail");
+const { SendEmail } = require("../utils/sendEmail");
 const {signUp} = require("../controllers/User/signUp");
 
 //routes 
@@ -18,6 +18,6 @@ userRouter.put("/hide", hideProfile)
 userRouter.put("/admin", makeAdmin)
 userRouter.get("/loginWithGoogle", loginWithGoogle);
 userRouter.post("/signup", signUp);
-userRouter.post("/sendEmail", SendEmail); 
+userRouter.get("/sendEmail", SendEmail); 
 
 module.exports = userRouter;

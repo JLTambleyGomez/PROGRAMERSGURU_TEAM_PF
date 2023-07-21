@@ -237,7 +237,6 @@ function FilterBarShop () {
                         )}
                     </select>
             </div>
-            <button>FILTRAR</button>
             <button onClick={resetFilters}>Mostrar todos</button>
         </aside>
     )

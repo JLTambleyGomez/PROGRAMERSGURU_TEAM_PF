@@ -1,41 +1,47 @@
 import axios from "axios";
 //HOST:
-const URL = ""
+const URL = "http://localhost:3001";
 
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
 
 // Intercepta todas las solicitudes salientes
 axios.interceptors.request.use(function (config) {
-  if (config.url === "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT") return config;
-  if (config.method === "get" && config.url.startsWith(`${URL}/course`)) return config;
+    if (
+        config.url ===
+        "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT"
+    )
+        return config;
+    if (config.method === "get" && config.url.startsWith(`${URL}/course`))
+        return config;
 
-  config.headers.Authorization = `Bearer ${token}`;
-  return config;
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
 });
-
 
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
-  const { data } = await axios.get("/course");
-  return data;
+    const { data } = await axios.get("http://localhost:3001/course");
+    return data;
 };
 
-export const getEthvalue = async () =>{
-  const response = await axios.get('https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT');
+export const getEthvalue = async () => {
+    const response = await axios.get(
+        "https://api.binance.com/api/v3/ticker/price?symbol=ETHUSDT"
+    );
 
-  const ethUSDTPrice = parseFloat(response.data.price);
+    const ethUSDTPrice = parseFloat(response.data.price);
 
-  return ethUSDTPrice;
-}
+    return ethUSDTPrice;
+};
 
 export const getProductsRequest = async () => {
-  const { data } = await axios.get("/product");
-  return data;
+    const { data } = await axios.get("http://localhost:3001/product");
+    return data;
 };
 
 export const postProductRequest = async (product) => {
-  const { data } = await axios.get("/product", product);
+  const { data } = await axios.put("http://localhost:3001/product", product);
   return data;
 };
 
@@ -46,10 +52,12 @@ export const deleteProductsRequest = async (id) => {
 
 //////////////   PUT PRODUCTS   ////////////
 export const putProductsRequest = async (id, product) => {
-  const {data} = await axios.put(`/product/${id}`, product)
+  const { data } = await axios.put(
+      `http://localhost:3001/product/${id}`,
+      product
+  );
   return data;
-
-}
+};
 
 export const postCourseRequest = async (datos) => {
   const { data } = await axios.post("/course", datos);
@@ -70,7 +78,8 @@ export const getCoursesByNameRequest = async (name) => {
 
 export const getCoursesByIdRequest = async (id) => {
   const { data } = await axios.get(`/course/${id}`);
-  return data;
+
+    return data;
 };
 
 ///////////// PUT COURSE ////////////
@@ -126,20 +135,15 @@ export const postSuscriptionRequest = async (suscription) => {
 //PRODUCTS_______________________________
 
 export const getProductsByNameRequest = async (name) => {
-  const { data } = await axios(`${URL}/product/name/${name}`)
-  return data;
-}
-export const post_Product = async (productData) => {
-  
-    const { data } = await axios.post('/product', productData);
+    const { data } = await axios(`${URL}/product/name/${name}`);
     return data;
-  
 };
 
 //FAVORITES______________________________
 
 export const getFavoritesRequest = async (userId) => {
   const { data } = await axios.get(`/favorite/${userId}`);
+  console.log(data);
   return data;
 };
 
@@ -150,11 +154,6 @@ export const postFavoriteRequest = async (ids) => {
 
 export const deleteFavoriteRequest = async (ids) => {
   const {data} = await axios.post("/favorite/delete", ids);
-  return data
-};
-
-export const isFavorite = async (ids) => {
-  const {data} = await axios.delete(`/favorite/`, ids);
   return data
 };
 
@@ -181,16 +180,17 @@ export const postUserRequest = async (user) => {
   return data
 }
 
-export const hideUserProfileRequest = async (user) => {
-  const {data} = await axios.put(`/user/hide`, user)
-  return data
-}
+export const hideUserProfileRequest = async (email) => {
+    console.log(email);
+    const { data } = await axios.put(`http://localhost:3001/user/hide`, email);
+    console.log(data);
+    return data;
+};
 
 export const adminUserRequest = async (user) => {
-  const {data} =  await axios.put(`/user/admin`, user)
-  return data
-}
-
+    const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    return data;
+};
 
 //MERCADOPAGO______________________________
 
@@ -211,14 +211,32 @@ export const getCommentsByCourse = async (courseId) => {
   const { data } = await axios.get(`/comment/${courseId}`);
   return data;
 }
-//Post email_______________________//
 
 export const sendEmail = async (carta) => {
-  const { data } = await axios.post(`/user/sendEmail`, carta);
+  console.log(carta)
+  const { data } = await axios.post(`user/sendEmail`, carta);
   return data;
 };
 // // // 
 export const editUserData = async (userData) => {
-  const { data } = await axios.put('/user/profile', userData);
-  return data;
+    const { data } = await axios.put("/user/profile", userData);
+    return data;
 };
+
+export const makeAdminUser = async (user) => {
+    const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    console.log(data);
+    return data;
+};
+
+// export const hideUserProfile = async (email, isBanned) => {
+//     const { data } = await axios.put("http://localhost:3001/user/hide", {
+//         email: email,
+//         isBanned: isBanned,
+//     });
+//     return data;
+// };
+
+
+
+

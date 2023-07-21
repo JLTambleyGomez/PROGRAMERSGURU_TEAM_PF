@@ -4,10 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import CourseCard from "../../../datos/CourseCard/CourseCard";
 
-export function Favorites({ userId }) {
+export function Favorites({ userId, dark }) {
     const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
-    console.log(favorites.Courses[0]);
+
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
 
     useEffect(() => {
         dispatch(get_Favorites_Request(userId));
@@ -15,26 +19,26 @@ export function Favorites({ userId }) {
     return (
         <>
             {!favorites.length ? (
-                <div className={s.favorites}>
-                    {favorites.Courses.map((fav) => {
+                <div className={`${s.favorites} ${s[theme("favorites")]}`}>
+                    {favorites?.Courses?.map((fav) => {
                         return (
                             <CourseCard
-                            className={s.coursecard}
-                                id={fav.id}
-                                title={fav.title}
-                                meanRating={fav.meanRating}
-                                isFree={fav.isFree}
-                                language={fav.language}
-                                courseUrl={fav.courseUrl}
-                                released={fav.released}
-                                description={fav.description}
-                                imageURL={fav.imageURL}
+                                key={fav?.id}
+                                id={fav?.id}
+                                title={fav?.title}
+                                meanRating={fav?.meanRating}
+                                isFree={fav?.isFree}
+                                language={fav?.language}
+                                courseUrl={fav?.courseUrl}
+                                released={fav?.released}
+                                description={fav?.description}
+                                imageURL={fav?.imageURL}
                             />
                         );
                     })}
                 </div>
             ) : (
-                <div className={s.emptyTab}>
+                <div className={`${s.emptyTab} ${s[theme("emptyTab")]}`}>
                     <img
                         src="https://www.svgrepo.com/show/461398/file-favorite-7.svg"
                         alt="favoritos"
