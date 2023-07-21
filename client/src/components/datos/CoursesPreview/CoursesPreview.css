@@ -3,29 +3,32 @@
    justify-content: center;
    transform: scale(0.8);
    margin: 0;
+   width: 100%;
 }
 
 .courseCardContainer {
    display: flex;
+   justify-content: center; /* Add this to center the content horizontally within each slide */
+
 }
 
 .courses-container {
    display: flex;
    align-items: center;
    justify-items: center;
-   width: 50%;
+   width: 90%;
    transition: ease 2s;
-   margin: 0 4rem;
-   position:absolute;
+   /* margin: 0 4rem; */
+   /* position:absolute; */
 }
 
 .navigation-container {
-   position: absolute;
+   /* position: absolute;
    top: 30%;
    left: -15%;
    width: 130%;
    display: flex;
-   justify-content: space-between;
+   justify-content: space-between; */
 }
 
 .swiper-button-prev,

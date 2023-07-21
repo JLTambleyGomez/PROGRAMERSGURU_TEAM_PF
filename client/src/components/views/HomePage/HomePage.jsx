@@ -82,7 +82,7 @@ function HomePage () {
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>
                     ÚLTIMOS CURSOS DEL MERCADO
                 </h1>
-                <div style={{display: "flex", alignItems: "center"}} className={s.coursesPreviewContainer}>
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%"}} className={s.coursesPreviewContainer}>
                     {latestCourses.length > 0 ? (
                         <CoursesPreview courses={latestCourses} />
                         // <p>2</p>
