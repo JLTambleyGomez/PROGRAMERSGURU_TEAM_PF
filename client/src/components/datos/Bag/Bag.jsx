@@ -1,4 +1,4 @@
-import { useEffect, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggle_shopbag, set_cart, Dark_Mode } from "../../../Redux/actions";

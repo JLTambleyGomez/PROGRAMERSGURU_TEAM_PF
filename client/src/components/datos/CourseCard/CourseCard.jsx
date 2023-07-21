@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, } from "react-router-dom";
 
 import { Dark_Mode } from "../../../Redux/actions";
 
@@ -16,11 +16,10 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
     
     //states:
     const [isFlipped, setIsFlipped] = useState(false);
-    
 
     //const:
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
 
     //functions:
     const handleclickcardtodetail = ()=>{
