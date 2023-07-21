@@ -229,7 +229,6 @@ function FilterBar() {
                 <button onClick={() => {setSortModal(true)}}>
                     ORDENAR
                 </button>
-                <div>
                     {
                         filterModal && (
                             <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
@@ -266,7 +265,6 @@ function FilterBar() {
                     }
                 </div>
             </div>
-        </div>
         </>
     );
 }

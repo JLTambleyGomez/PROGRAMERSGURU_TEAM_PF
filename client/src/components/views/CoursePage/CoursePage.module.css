@@ -26,11 +26,11 @@
 
    .filterOrder {
         top: var(--navBarHeight);
+        /* display: flex; */
         position: sticky;
         width: 100%;
-        display: flex;
-        justify-content: space-evenly;
         z-index: 9000;
+        /* justify-content: space-evenly; */
     }
 
 .cargando {
