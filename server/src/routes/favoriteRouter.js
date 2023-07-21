@@ -5,14 +5,11 @@ const favoriteRouter = require("express").Router();
 const { getFavorite } = require("../controllers/Favorite/getFavorite");
 const { postFavorite } = require("../controllers/Favorite/postFavorite");
 const { deleteFavorite } = require("../controllers/Favorite/deleteFavorite");
-const { isFavorite } = require("../controllers/Favorite/isFavorite");
 
 favoriteRouter.get("/:userId", getFavorite);
 
-favoriteRouter.get("/", isFavorite);
-
 favoriteRouter.post("/", postFavorite);
 
-favoriteRouter.delete("/", deleteFavorite);
+favoriteRouter.post("/delete", deleteFavorite);
 
 module.exports = favoriteRouter;

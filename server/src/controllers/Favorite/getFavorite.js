@@ -8,7 +8,8 @@ const getFavorite = async (req, res) => {
             const allFavorites = await Favorite.findAll()
             return res.status(200).json(allFavorites)
         }
-        const allFavorites = await User.findAll({
+        console.log(userId);
+        const allFavorites = await User.findOne({
             where: {
                 id : userId
             },
