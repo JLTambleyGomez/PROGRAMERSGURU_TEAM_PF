@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
@@ -44,7 +46,7 @@ function CoursePage () {
 
     //component:
     return (
-        <main className = {styles.component}>
+        <main className = {`${styles.component} ${styles[theme("component")]}`}>
         {/* BANNER */}
             <div className={styles.mainBanner}>
                 <h1>Explora todos nuestros cursos</h1>

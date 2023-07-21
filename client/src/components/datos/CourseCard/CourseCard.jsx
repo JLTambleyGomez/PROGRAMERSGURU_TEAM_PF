@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 
 import { Dark_Mode } from "../../../Redux/actions";
 
@@ -34,13 +34,14 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
         setIsFlipped(false);
     };
 
+    //life-cycles:
     useEffect(() => {
-        dispatch(Dark_Mode())
+        dispatch(Dark_Mode());
     }, [dark])
 
     //component:
     return (
-        <div className={styles.cardContainer}>
+        <div className={`${styles.component}`}>
             <Card
                 className={styles.card}
                 onMouseEnter={handleMouseEnter}

@@ -8,9 +8,11 @@
    padding-bottom: 20%;
    width: 100%;
    animation:blur-in 0.4s linear both;
-
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
 
+.component-dark {
+    background-color: #000000;
+}
 
 
 .mainBanner {
