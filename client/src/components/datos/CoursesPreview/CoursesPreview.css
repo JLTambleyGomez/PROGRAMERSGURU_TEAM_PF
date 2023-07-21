@@ -1,43 +1,44 @@
-.container {
-  scale: 0.8;
-  
-  display: flex;
-  justify-content: center;
+.coursesPreviewContainer {
+   display: flex;
+   justify-content: center;
+   transform: scale(0.8);
+   margin: 0;
+}
+
+.courseCardContainer {
+   display: flex;
 }
 
 .courses-container {
-  align-items: center;
-  justify-items: center;
-  min-width: 60rem;
-  min-height: 35rem;
-  max-width: 60rem;
-  /* max-height: 35rem; */
-  /* width: 120%; */
-    transition: ease 2s;
-  margin: 0 4rem;
-  position: relative; /* Agregado para posicionar los botones relativos a este contenedor */
+   display: flex;
+   align-items: center;
+   justify-items: center;
+   width: 50%;
+   transition: ease 2s;
+   margin: 0 4rem;
+   position:absolute;
 }
 
 .navigation-container {
-  position: absolute;
-  top: 30%;
-  left: -15%;
-  width: 130%;
-  display: flex;
-  justify-content: space-between;
+   position: absolute;
+   top: 30%;
+   left: -15%;
+   width: 130%;
+   display: flex;
+   justify-content: space-between;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
-  background-color: rgba(255, 254, 254, 0);
-  color: #fff;
-  /* padding:3rem; */
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+   background-color: rgba(255, 254, 254, 0);
+   color: #fff;
+   /* padding:3rem; */
+   border: none;
+   font-size: 1.5rem;
+   cursor: pointer;
 }
 
-    .swiper-pagination  {
+   .swiper-pagination  {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -45,16 +46,16 @@
       padding-bottom: 13%;
 
       transition: opacity ease 250ms;
-    }
+   }
       .swiper-pagination:hover {
-        opacity: 1;
+         opacity: 1;
          cursor: pointer;
 
-    }
+   }
 
- .swiper-pagination-bullet{
-  scale: 1.8;
-  border: 1px solid  rgb(255, 255, 255);
- }
+.swiper-pagination-bullet{
+   scale: 1.8;
+   border: 1px solid  rgb(255, 255, 255);
+}
     
     

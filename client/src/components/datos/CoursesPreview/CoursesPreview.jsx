@@ -14,7 +14,6 @@ function CoursesPreview ( { courses } ) {
 
     //component:
     return (
-        <div className = "coursesPreviewContainer"> 
             <div className = "courses-container"> 
                 <Swiper
                     enabled={true}
@@ -51,33 +50,32 @@ function CoursesPreview ( { courses } ) {
                     {
                         courses.map((course) => (
                             <SwiperSlide key={course.id} style={{ margin: 0 }}>
-                            <CoursePreview
-                                id={course.id}
-                                title={course.title}
-                                description={course.description}
-                                rating={course.rating}
-                                free={course.free}
-                                language={course.language}
-                                imageURL={course.imageURL}
-                                className="courseCardContainer"
-                            />
+                                <CoursePreview
+                                    id={course.id}
+                                    title={course.title}
+                                    description={course.description}
+                                    rating={course.rating}
+                                    free={course.free}
+                                    language={course.language}
+                                    imageURL={course.imageURL}
+                                    className="courseCardContainer"
+                                />
                             </SwiperSlide>
                         ))
                     }
                 </Swiper>
-                <div className="swiper-pagination">
+                {/* <div className="swiper-pagination">
                     {
                         courses.map((course, index) => (
                             <span key={index} className="swiper-pagination-bullet"></span>
                         ))
                     }
-                </div>
-                <div className="navigation-container">
+                </div> */}
+                {/* <div className="navigation-container">
                     <button className="swiper-button-prev" />
                     <button className="swiper-button-next" />
-                </div>
+                </div> */}
             </div>
-        </div>
     )
 }
 
