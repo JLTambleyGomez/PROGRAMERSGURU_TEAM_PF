@@ -8,6 +8,7 @@ import {
     post_course,
     delete_course,
     put_course,
+    adminPanelMensajesLocales
 } from "../../../Redux/actions";
 import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
@@ -90,6 +91,8 @@ function Courses() {
             ...prevCourse,
             [name]: value,
         }));
+        dispatch(clearMessage());
+        setMessagePost('')
 
         if (postCourse)
             setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
@@ -150,19 +153,23 @@ function Courses() {
         });
     };
 
-    const handleCoursePost = (event) => {
+    const handleCoursePost = async (event) => {
         event.preventDefault();
-        if (
-            errorCourse.name ||
-            errorCourse.description ||
-            errorCourse.genre ||
-            errorCourse.platforms ||
-            errorCourse.released ||
-            errorCourse.rating
-        )
-            return setMessagePost("Revise los datos");
+     
 
         if (modificarCourse) {
+            if (
+                errorCourse.name ||
+                errorCourse.description ||
+                errorCourse.genre ||
+                errorCourse.platforms ||
+                errorCourse.released ||
+                errorCourse.rating
+            ){
+                await setMessagePost("Revise los datos");
+                return dispatch(adminPanelMensajesLocales(messagePost))
+            }
+
             dispatch(put_course(courseId, newCourse))
                 .then(() => {
                     setNewCourse({
@@ -194,9 +201,26 @@ function Courses() {
                 !newCourse.isFree ||
                 !newCourse.language ||
                 !newCourse.categories
-            )
-                return setMessagePost("Debe ingresar los datos");
+            ){
+                await setMessagePost('Debe completar los datos')
+                return  dispatch(adminPanelMensajesLocales(messagePost))
 
+            }
+
+               
+                if (
+                    errorCourse.name ||
+                    errorCourse.description ||
+                    errorCourse.genre ||
+                    errorCourse.platforms ||
+                    errorCourse.released ||
+                    errorCourse.rating
+                ){
+                    await setMessagePost("Revise los datos")
+                    return dispatch(adminPanelMensajesLocales(messagePost))
+                    
+                }
+                
             setMessagePost("");
             dispatch(post_course(newCourse))
                 .then(() => {

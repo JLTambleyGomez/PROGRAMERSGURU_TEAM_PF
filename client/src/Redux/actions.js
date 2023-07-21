@@ -89,6 +89,9 @@ export const FILTER_PRODUCTS_BY_PRICING = "FILTER_PRODUCTS_BY_PRICING";
 export const SORT_PRODUCTS = "SORT_PRODUCTS";
 export const PUT_PRODUCTS = "PUT_PRODUCTS";
 
+    //admin
+    export const ADMIN_MESSAGE = 'ADMIN_MESSAGE'
+
 //CART:
 export const SET_CART = "SET_CART";
 export const CLEAR_CART = "CLEAR_CART";
@@ -629,7 +632,7 @@ export const post_suscription = (suscription) => {
             const data = await postSuscriptionRequest(suscription);
             return dispatch({
                 type: POST_SUSCRIPTION,
-                payload: data.message,
+                payload: data
             });
         } catch (error) {
             console.log(error);
@@ -689,3 +692,12 @@ export const post_user = (user) => {
 //         }
 //     };
 // };
+
+ export const adminPanelMensajesLocales = (message) =>{
+    console.log(message)    
+    return  {
+                type: ADMIN_MESSAGE,
+                payload:message
+            }
+
+ }

@@ -48,6 +48,8 @@ import {
     DELETE_SUSCRIPTION,
     PUT_SUSCRIPTION,
     POST_SUSCRIPTION,
+  //ADMIN PANEL
+   ADMIN_MESSAGE
 } from "./actions";
 
 // PRUEBA CURSOS
@@ -321,6 +323,11 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 message: payload.message,
             };
         ////////////////////////////////////////////////////////////////////////////////////
+
+        case ADMIN_MESSAGE: 
+        return{
+            ...state, message: payload
+        }
         default:
             return { ...state };
     }

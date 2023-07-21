@@ -93,11 +93,13 @@ const AdminPanel = () => {
 
     //component:
     return (
-        <div className={`${styles.component} ${styles[theme("component")]}`}>
-            <div className={styles.message}>
+        <div>
+             <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
 
+        <div className={`${styles.component} ${styles[theme("component")]}`}>
+           
             <div>
                 <button className={styles.buton} onClick={handleShowCategories}>
                     <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
@@ -141,7 +143,7 @@ const AdminPanel = () => {
                     {/* <Borrar></Borrar> */}
                 </div>
             </div>
-        </div>
+        </div></div>
     );
 };
 
