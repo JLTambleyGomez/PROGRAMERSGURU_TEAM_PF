@@ -27,6 +27,7 @@ const Subscriptions = () => {
         description: "",
         image: "",
         type: "",
+        price: "",
     });
     const [erroSuscription, setErrorSuscription] = useState({
         id: "",
@@ -34,6 +35,7 @@ const Subscriptions = () => {
         description: "",
         image: "",
         type: "",
+        price: "",
     });
 
     //setea el estado local con los cambios que se producen en el input
@@ -81,6 +83,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
         setErrorSuscription({
             id: "",
@@ -88,6 +91,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
     };
     const handleDeleteSubscription = (id) => {
@@ -100,6 +104,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
         setErrorSuscription({
             id: "",
@@ -107,6 +112,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
     };
 
@@ -145,6 +151,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
         setErrorSuscription({
             id: "",
@@ -152,6 +159,7 @@ const Subscriptions = () => {
             description: "",
             image: "",
             type: "",
+            price: "",
         });
     };
 
@@ -255,6 +263,23 @@ const Subscriptions = () => {
                                     <p>{erroSuscription.type}</p>
                                 )}
                             </div>
+                            <div>
+                                <label>Precio:</label>
+                                <input
+                                    type="number"
+                                    name="price"
+                                    value={formData.price}
+                                    onChange={handleInputChange}
+                                    placeholder={
+                                        putSuscription
+                                            ? suscription.price
+                                            : "Precio"
+                                    }
+                                />
+                                {erroSuscription.price && (
+                                    <p>{erroSuscription.price}</p>
+                                )}
+                            </div>
                             <button onClick={handleSubmitForm}>
                                 {postSuscription ? "Añadir" : "Editar"}
                             </button>
@@ -266,9 +291,10 @@ const Subscriptions = () => {
                 {!!subscriptions.length &&
                     subscriptions?.map((subscription) => (
                         <li key={subscription.id}>
-                            <h2>{subscription.title}</h2>
-                            <p>{subscription.description}</p>
-                            <p>{subscription.type}</p>
+                            <h2>Titulo: {subscription.title}</h2>
+                            <p>Descripción: {subscription.description}</p>
+                            <p>Tipo: {subscription.type}</p>
+                            <p>Precio: {subscription.price}</p>
                             <button
                                 onClick={() =>
                                     handleDeleteSubscription(subscription.id)

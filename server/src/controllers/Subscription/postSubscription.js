@@ -2,9 +2,9 @@ const { Subscription } = require("../../db");
 
 const postSubscription = async (req, res) => {
     try {
-        const { title, description, image, type } = req.body;
+        const { title, description, image, type, price } = req.body;
 
-        if (!title && !description && !image && !type)
+        if ((!title && !description && !image && !type) || !price)
             return res.status(500).json({
                 message: `Debe ingresar todos los datos para poder crear la suscripción`,
             });
@@ -13,7 +13,7 @@ const postSubscription = async (req, res) => {
             where: {
                 title,
             },
-            defaults: { description, image, type },
+            defaults: { description, image, type, price },
         });
 
         if (!suscription)

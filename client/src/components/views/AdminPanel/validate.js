@@ -136,6 +136,13 @@ export const validateSuscription = (form) => {
     //valida tipo
     if (!form.type.length) error.type = "Debe ingresar un tipo";
     else if (form.type.length) error.type = "";
+
+    console.log(form);
+    //valida precio
+    if (!form.price.length) error.price = "Debe ingresar un precio";
+    else if (form.price < 1) error.price = "Debe ingresar un precio válido";
+    else if (form.price && form.price > 0) error.price = "";
+
     console.log(error);
     return error;
 };
