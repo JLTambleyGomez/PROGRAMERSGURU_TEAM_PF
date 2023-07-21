@@ -51,13 +51,13 @@ function CoursePage () {
             </div>
 
         {/* FILTROS */}
-            <div className={styles.filterOrder}>
+            {/* <div className={styles.filterOrder}>
                 <FilterBar/>
-            </div>
+            </div> */}
 
         {/* CURSOS */}
 
-            {
+            {/* {
                 
                 (<div className = {styles.cardComponent}>
                     {
@@ -67,7 +67,7 @@ function CoursePage () {
                     }
                 </div>)
 
-            }
+            } */}
         </main>
     )
 }

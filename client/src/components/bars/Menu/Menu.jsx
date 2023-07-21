@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
 import { FaSun, FaMoon } from "react-icons/fa";
+import theme from "../../../theme/theme";
 
 import logoutUser from "../../../user/logOut"
 
@@ -12,9 +13,14 @@ import s from "./Menu.module.css";
 function Menu () {
 
     //global state:
-    const dark = useSelector((state) => state.darkMode);
+    // const dark = useSelector((state) => state.darkMode);
     const logo= useSelector((state)=>state.user?.picture)
 
+    //states:
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const localDark = localStorage.getItem("darkMode");
+        return localDark === "true" ? "true" : "false";
+    });
 
     //const:
     const navigate = useNavigate()
@@ -22,17 +28,24 @@ function Menu () {
 
     const userImage = "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
 
-
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
+    const localDark = localStorage.getItem("darkMode")
 
     const handleDarkMode = () => {
-        dispatch(Dark_Mode(!dark));
+        const localDark = localStorage.getItem("darkMode")
+        setIsDarkMode(!isDarkMode)
+        localStorage.setItem("darkMode", !isDarkMode)
+        // if (localDark !== null) {
+        //     localStorage.setItem("darkMode", !isDarkMode)
+        // } else localStorage.setItem("darkMode", "true")
     };
 
+    useEffect(() => {
+        console.log(isDarkMode)
+    }, [isDarkMode])
+
+    useEffect(() => {
+        setIsDarkMode(localStorage.getItem("darkMode"))
+    }, [])
 
     // component:
     return  (
@@ -45,7 +58,7 @@ function Menu () {
             <ul className={`${s.options}`}>
                 <li onClick = {() => {navigate('/profile')}}>Perfil</li>
                 <button className={`${s.themeButton} ${s[theme("themeButton")]}`} onClick={handleDarkMode}>
-                    {dark ? <FaSun className={s.sun}/> : <FaMoon className={s.moon}/>}
+                    {isDarkMode ? <FaSun className={s.sun}/> : <FaMoon className={s.moon}/>}
                 </button>
                 <li onClick = {logoutUser}>Salir</li>
             </ul>

@@ -31,9 +31,9 @@ import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
 axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
-const App = () =>{
+const App = () => {
 
-  
+
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
@@ -42,18 +42,17 @@ const App = () =>{
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
 
-    
+ 
     //const:
     const location = useLocation().pathname;
 
-    
     //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
 
-    
+
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
@@ -84,6 +83,13 @@ const App = () =>{
             window.removeEventListener("scroll", handleScroll);
             };
     }, []);
+
+    useEffect(() => {
+        const darkModeLocal = localStorage.getItem("darkMode")
+        if (!darkModeLocal) {
+            localStorage.setItem("darkMode", "false")
+        }
+    }, [])
 
 
     //component:
