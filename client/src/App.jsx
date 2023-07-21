@@ -50,36 +50,48 @@ const App = () => {
     const location = useLocation().pathname;
     const dispatch = useDispatch();
 
+    function throttle(func, delay) {
+        let timeoutId;
+        return function (...args) {
+          if (!timeoutId) {
+            timeoutId = setTimeout(() => {
+              func(...args);
+              timeoutId = null;
+            }, delay);
+          }
+        };
+      }
+
     //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
-            const windowHeight =
-                "innerHeight" in window
-                ? window.innerHeight
-                : document.documentElement.offsetHeight;
-            const body = document.body;
-            const html = document.documentElement;
-            const docHeight = Math.max(
-                body.scrollHeight,
-                body.offsetHeight,
-                html.clientHeight,
-                html.scrollHeight,
-                html.offsetHeight
-            );
-            const windowBottom = windowHeight + window.pageYOffset;
-
-            if (windowBottom >= docHeight) {
-                setIsAtBottom(true);
-            } else {
-                setIsAtBottom(false);
-            }
+          const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+          const docHeight = Math.max(
+            document.body.scrollHeight,
+            document.body.offsetHeight,
+            document.documentElement.clientHeight,
+            document.documentElement.scrollHeight,
+            document.documentElement.offsetHeight
+          );
+          const windowBottom = windowHeight + window.pageYOffset;
+    
+          if (windowBottom >= docHeight) {
+            setIsAtBottom(true);
+          } else {
+            setIsAtBottom(false);
+          }
         };
-        window.addEventListener("scroll", handleScroll);
-        //--desmontado
+    
+        // Throttle the handleScroll function to limit event frequency
+        const throttledScrollHandler = throttle(handleScroll, 200);
+    
+        window.addEventListener('scroll', throttledScrollHandler);
+    
+        // Cleanup
         return () => {
-            window.removeEventListener("scroll", handleScroll);
-            };
-    }, []);
+          window.removeEventListener('scroll', throttledScrollHandler);
+        };
+      }, []);
 
     useEffect(() => {
         //default darkMode theme: false

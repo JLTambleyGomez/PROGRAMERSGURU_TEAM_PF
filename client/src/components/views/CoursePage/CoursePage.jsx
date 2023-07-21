@@ -27,8 +27,7 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-        if (!allCourses.length) dispatch(get_courses_all());
-
+        // if (!allCourses.length) dispatch(get_courses_all());
         //--desmontado
         return () => { 
             dispatch(clearMessage());
@@ -37,10 +36,13 @@ function CoursePage () {
     }, [dispatch]);
 
     useEffect(() => {
-        setIsloading(true);
-        const timer = setTimeout(() => {
+        (async () => {
+            setIsloading(true);
+            if (!allCourses.length) await dispatch(get_courses_all());
             setIsloading(false);
-        }, 500);
+        })()
+        // const timer = setTimeout(() => {
+        // }, 500);
     }, [allCourses])
 
 
@@ -53,22 +55,19 @@ function CoursePage () {
             </div>
 
         {/* FILTROS */}
-            {/* <div className={styles.filterOrder}>
+            <div className={styles.filterOrder}>
                 <FilterBar/>
-            </div> */}
+            </div>
 
         {/* CURSOS */}
-
             {
-                
-                (<div className = {styles.cardComponent}>
+                <div className = {styles.cardComponent}>
                     {
                         isloading 
                         ? <h1 className={styles.cargando}>CARGANDO...</h1>
                         : <CoursesCard/>
                     }
-                </div>)
-
+                </div>
             }
         </main>
     )
