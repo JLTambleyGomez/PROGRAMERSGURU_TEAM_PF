@@ -12,7 +12,6 @@ import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
-import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
@@ -24,6 +23,7 @@ import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
 import MusicBar from "./components/bars/musicBar/MusicBar";
 
 import axios from "axios";

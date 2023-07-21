@@ -1,4 +1,4 @@
-const { Course } = require("../../db");
+const { Course, Technology } = require("../../db");
 
 const getCourseById = async (req, res) => {
     try {
@@ -9,7 +9,18 @@ const getCourseById = async (req, res) => {
                 .status(400)
                 .json({ message: "No se reconoce la busqueda" });
 
-        const courseDB = await Course.findByPk(id);
+        // const courseDB = await Course.findByPk(id);
+        const courseDB = await Course.findAll({
+            where: {
+                id
+            },
+            include: {
+                model: Technology,
+                through: {
+                    attributes: []
+                }
+            }
+        });
 
         if (!courseDB)
             return res

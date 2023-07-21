@@ -3,11 +3,11 @@ import {
     GET_COURSES_ALL,
     GET_COURSES_BY_NAME,
     DELETE_COURSE,
-    POST_COURSE,
-    FILTER_COURSES_BY_LANGUAGE,
-    FILTER_COURSES_BY_PRICING,
-    ORDER_COURSES,
-    GET_COURSES_BY_ID,
+    POST_COURSE, 
+    FILTER_COURSES_BY_LANGUAGE, 
+    FILTER_COURSES_BY_PRICING, 
+    ORDER_COURSES, 
+    GET_COURSE_BY_ID,
     PUT_COURSE,
     //CATEGORIES:
     GET_CATEGORIES_ALL,
@@ -65,7 +65,7 @@ const globalStorage = {
     error: "",
     message: "",
     darkMode: false,
-    favorites: [],
+    favorites: {},
     access: false,
     products: [],
     user: {},
@@ -78,6 +78,7 @@ const globalStorage = {
     productsCopy: [],
     subscriptions: [], ////   <---------- MODIFICADO
     allUsers: [],
+    course: {}
 };
 
 //REDUCER:
@@ -90,8 +91,8 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case GET_COURSES_BY_NAME:
             return { ...state, allCourses: payload, courses: payload };
 
-        case GET_COURSES_BY_ID:
-            return { ...state, allCourses: payload };
+        case GET_COURSE_BY_ID:
+            return { ...state, course: payload};
 
         case FILTER_COURSES_BY_LANGUAGE:
             return {

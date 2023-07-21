@@ -77,7 +77,6 @@ export const getCoursesByNameRequest = async (name) => {
 };
 
 export const getCoursesByIdRequest = async (id) => {
-  console.log(id);
   const { data } = await axios.get(`/course/${id}`);
 
     return data;
@@ -142,22 +141,22 @@ export const getProductsByNameRequest = async (name) => {
 
 //FAVORITES______________________________
 
-export const getFavoritesRequest = async (id) => {
-    const { data } = await axios.get(`http://localhost:3001/favorite/${id}`);
-    const cursos = data[0].Courses;
-    return cursos;
+export const getFavoritesRequest = async (userId) => {
+  const { data } = await axios.get(`/favorite/${userId}`);
+  console.log(data);
+  return data;
 };
 
-export const postFavoritesRequest = async () => {
-    const ids = { idCourse: id, idUser: 1 };
-    await axios.post("/favorite", ids);
-    setFav(true);
+export const postFavoriteRequest = async (ids) => {
+  const {data} = await axios.post("/favorite", ids);
+  return data
 };
 
 export const deleteFavoriteRequest = async (ids) => {
-  const {data} = await axios.delete(`/favorite/`, ids);
+  const {data} = await axios.post("/favorite/delete", ids);
   return data
 };
+
 
 //user______________________________
 
@@ -170,11 +169,6 @@ export const getAllUsersRequest = async () => {
   const {data} = await axios.get(`/user/all`)
   return data
 }
-
-
-//   const {data} = await axios.delete(`/user/${id}`)
-//   return data
-// }
 
 export const putUserRequest = async ( user) => {
   const {data} = await axios.put(`/user/profile`, user )

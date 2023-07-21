@@ -8,6 +8,8 @@ const { deleteCourse } = require("../controllers/Course/deleteCourse");
 const { putCourse } = require("../controllers/Course/putCourse");
 const { getCourseByName } = require("../controllers/Course/getCourseByName");
 const { getCourseById } = require("../controllers/Course/getCourseById")
+const { addTechnology } = require("../controllers/Course/addTechnology");
+const { removeTechnology } = require("../controllers/Course/removeTechnology");
 
 courseRouter.get("/", getCourse);
 
@@ -21,5 +23,8 @@ courseRouter.delete("/:id", deleteCourse);
 
 courseRouter.put("/:id", putCourse);
 
+courseRouter.put("/tech/:id", addTechnology);
+
+courseRouter.delete("/tech/:id", removeTechnology);
 
 module.exports = courseRouter;
