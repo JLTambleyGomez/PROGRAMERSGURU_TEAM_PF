@@ -168,9 +168,14 @@ function Shop () {
 
     //component:
     return (
+    
+       
+        
         <main className={`${s.component}`}>
 
+
         {/* BANNER */}
+        
             <section className={`${s.sectionBanner}`}>
                 <img
                     className={`${s.bannerImg}`}
@@ -184,7 +189,7 @@ function Shop () {
 
             </section>
         {/* SIDEBAR */}
-            {/* <FilterBarShop/> */}
+            <FilterBarShop/>
 
         {/* PAGINADO */}
             <div className={`${s.paginado}`} >
@@ -287,6 +292,7 @@ function Shop () {
                 }
             </section>  */}
         </main>
+            
     )
 }
 

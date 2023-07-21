@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
 import styles from "./PagoSubscripcion.module.css";
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
@@ -34,6 +33,9 @@ function PagoSubscripcion() {
         setMostrarPagos(true);
     };
 
+    useEffect(() => {
+        if (!token) navigate("/IniciaSession");
+    }, []);
     useEffect(() => {
         if (!token) navigate("/IniciaSession");
     }, []);
@@ -105,7 +107,7 @@ function PagoSubscripcion() {
                 )}
                 {/* MEDIOS DE PAGO */}
                 { subscripcion  && <p className={styles.boton} onClick={handlePagarButton}>
-                    ir a Pagar
+                   <p className={styles.name}>ir a Pagar</p> 
                 </p>}
                 {MostrarPagos && (
                     <div>

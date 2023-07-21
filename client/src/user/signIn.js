@@ -1,4 +1,3 @@
-import { sendEmail } from "../axiosRequests/axiosRequests";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -8,31 +7,33 @@ import {
 } from "firebase/auth";
 
 export default function signIn(email, password) {
-  const auth = getAuth();
-  setPersistence(auth, inMemoryPersistence)
-    .then(() => {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          if (user) {
-            const token = user.accessToken;
-            localStorage.setItem("accessToken", token);
-            localStorage.setItem("email", email)
-              .then((response) => {
-                console.log(response.data); // If needed, handle the server's response
-              })
-              .catch((error) => {
-                console.error("Error sending email:", error);
-              });
+    //const dispatch = useDispatch();
 
-            window.location.replace("/HomePage");
-          }
+    const auth = getAuth();
+    setPersistence(auth, inMemoryPersistence)
+        .then(() => {
+            signInWithEmailAndPassword(auth, email, password).then(
+                (userCredential) => {
+                    console.log("hola");
+                    const user = userCredential.user;
+                    if (user) {
+                        const token = user.accessToken;
+                       
+                        localStorage.setItem("accessToken", token);
+                        localStorage.setItem("email", email);
+                        window.location.replace("/HomePage");
+                    }
+                }
+            );
         })
         .catch((error) => {
-          // Handle errors...
+            // Handle Errors here.
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            // The email of the user's account used.
+            const email = error.customData.email;
+            // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            return [errorCode, errorMessage, email, credential];
         });
-    })
-    .catch((error) => {
-      // Handle errors...
-    });
 }

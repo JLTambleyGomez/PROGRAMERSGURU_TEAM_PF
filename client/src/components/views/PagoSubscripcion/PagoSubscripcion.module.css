@@ -181,7 +181,8 @@ width: 300px;
   text-align: center;
   font-size: 28px;
   padding: 20px;
-  width: 200px;
+  height: 60px;
+  width: 300px;
   transition: all 0.5s;
   cursor: pointer;
   margin: 5px;
@@ -199,5 +200,10 @@ width: 300px;
 .boton:hover {
   background-color: #0023944f;
   opacity: 1;
-  padding-right: 325px;
 }
+
+.name{
+    margin-left: 10%;
+    font-size: 20px;
+    margin-top: 0%;
+    width: 200px;}

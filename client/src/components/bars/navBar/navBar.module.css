@@ -21,16 +21,18 @@
     display: flex;
     align-items: center;
     float: left;
+    cursor: pointer;
     }
     .mainLogo {
         margin: 0 2px;
         font-size: 1.1rem;
-        cursor: default;
+        cursor: pointer;
+
       }
       .mainLogoGuru {
         margin: 0;
         font-size: 1.1rem;
-        cursor: default;
+        cursor: pointer;
         position: absolute;
         transform: translateX(10%);
       }

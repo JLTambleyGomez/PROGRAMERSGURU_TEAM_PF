@@ -41,7 +41,6 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  padding-top: 12%;
   }
   
 
@@ -80,8 +79,10 @@
   border-radius: 2%;
 }
   .description {
+    overflow: scroll;
     font-size: 18px;
-    width: 60%;  
+    height: 200px;
+    width: 100%;  
   }
 
   .container2 {

@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ventana.module.css";
-// import SignFreeForm from "../../datos/LoginForm/SignFreeForm";
-// import LoginForm from "../../datos/LoginForm/LoginForm";
-import SubscriptionForm from "../../datos/SubscriptionForm/SubscriptionForm";
 import SignFreeForm2 from "../../datos/LoginForm/SignFreeForm2";
 
 //_________________________module_________________________

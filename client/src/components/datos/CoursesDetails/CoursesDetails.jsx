@@ -10,7 +10,7 @@ import {
 } from "../../../Redux/actions";
 import {
     deleteFavoriteRequest,
-    postFavoriteRequest,
+    // postFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
 
 import axios from "axios"; //remover axios => axiosRequests.js
