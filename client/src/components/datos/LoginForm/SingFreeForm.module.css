@@ -1,0 +1,138 @@
+.form {
+    justify-content: center;
+    height: fit-content;
+    width: 340px;
+    padding: 20px;
+    background-image: linear-gradient(
+        to right,
+        rgba(27, 149, 155, 0.822),
+        rgba(102, 51, 153, 0.658)
+    );
+    border-radius: 4px;
+    animation: scale-up-vertical-top 0.4s linear;
+    position: fixed;
+}
+
+.container {
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.672);
+    display: flex;
+    position: fixed;
+    top:50%;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    animation: blur-in 0.4s linear both;
+}
+@keyframes blur-in {
+    0% {
+        filter: blur(12px);
+        opacity: 0;
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
+}
+
+@keyframes scale-up-vertical-top {
+    0% {
+        transform: scaleY(0.4);
+        transform-origin: center top;
+    }
+    100% {
+        transform: scaleY(1);
+        transform-origin: center top;
+    }
+}
+
+.label {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.input {
+    padding: 3%;
+    width: 70%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+    margin-bottom: 3%;
+}
+
+.loginFormContainer button {
+    padding: 7px 20px;
+    background-color: #ffffffb5;
+    color: #010101;
+    border: 2px solid;
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    background-clip: padding-box;
+    animation: borderGradientAnimation1 infinite 2.5s;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.loginFormContainer button:hover {
+    background-color: #000000;
+    color: white;
+}
+
+@keyframes borderGradientAnimation1 {
+    0% {
+        border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    }
+    20% {
+        border-image: linear-gradient(to right, #ff0000, #800080) 1;
+    }
+    40% {
+        border-image: linear-gradient(to right, #800080, #0000ff) 1;
+    }
+    60% {
+        border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+    }
+    80% {
+        border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+    }
+    100% {
+        border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+    }
+}
+
+.closeButton {
+    display: flex;
+    position: absolute;
+    right: 4px;
+    scale: 0.8;
+}
+
+.boton {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #28b0b4;
+    border: none;
+    color: #ffffff;
+    text-align: center;
+    font-size: 28px;
+    padding: 20px;
+    width: 200px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+}
+
+.buttonDisabled {
+    background-color: white;
+    border: none;
+    color: white;
+}
+.buttonDisabled:hover {
+    cursor: default;
+}
+
+.boton:hover {
+    background-color: #0023944f;
+    opacity: 1;
+    padding-right: 325px;
+}

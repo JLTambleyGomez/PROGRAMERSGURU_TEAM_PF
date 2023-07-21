@@ -38,3 +38,12 @@
   margin: 2%;
 
 }
+.boton{
+  background-color: black;
+  color:white;
+  border:2px solid rgb(241, 241, 241)
+}
+.boton:hover{
+  background-color: aliceblue;
+  color:black;
+}

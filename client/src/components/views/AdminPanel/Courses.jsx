@@ -9,7 +9,7 @@ import {
     delete_course,
     put_course,
 } from "../../../Redux/actions";
-// import styles from "./Courses.module.css";
+import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
 
 function Courses() {

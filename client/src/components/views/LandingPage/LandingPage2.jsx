@@ -78,8 +78,8 @@ const LandingPage2 = () => {
             {showForm && (
               <>
                 <SignFreeForm className={styles.boton} />
-                <NavLink className={styles.boton} to="/HomePage">
-                  Entrar sin Registrarme
+                <NavLink className={styles.boton1} to="/HomePage">
+                 <p className={styles.name}>Entrar sin Registrarme</p> 
                 </NavLink>
               </>
             )}

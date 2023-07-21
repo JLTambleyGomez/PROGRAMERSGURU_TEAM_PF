@@ -140,6 +140,13 @@ export const post_Product = async (productData) => {
   
 };
 
+export const makeAdminUser = async (user) => {
+  const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+  console.log(data);
+  return data;
+};
+
+
 //FAVORITES______________________________
 
 export const getFavoritesRequest = async (userId) => {

@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 import validate from "./validate";
-import styles from "./LoginForm.module.css";
+import styles from "./SingFreeForm.module.css";
 import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
 import { get_User_By_Email } from "../../../Redux/actions";
 
 //_________________________module_________________________
-function SignFreeForm() {
+function SignFreeForm2() {
     // const dispatch = useDispatch()
     //states:
     const [passwordVisible, setPasswordVisible] = useState(false);
@@ -178,4 +178,4 @@ function SignFreeForm() {
     );
 }
 
-export default SignFreeForm;
+export default SignFreeForm2;

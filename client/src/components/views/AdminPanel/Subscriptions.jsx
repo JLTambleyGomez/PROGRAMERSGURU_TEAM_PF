@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
     get_suscriptions,
@@ -6,159 +6,301 @@ import {
     delete_suscription,
     post_suscription,
 } from "../../../Redux/actions";
-import { validateProduct } from "./validate";
+import { validateSuscription } from "./validate";
 
-//_________________________module_________________________
 const Subscriptions = () => {
     //estados globales
     const subscriptions = useSelector((state) => state.subscriptions);
-
-    //hoohks
+    const message = useSelector((state) => state.message);
+    const error = useSelector((state) => state.error);
     const dispatch = useDispatch();
 
     //estados locales
-    const [newSubscription, setNewSubscription] = useState({
+    const [messagePost, setMessagePost] = useState("");
+    const [putSuscription, setPutSuscription] = useState(false);
+    const [postSuscription, setPostSuscription] = useState(false);
+    const [suscription, setSuscription] = useState({});
+    const [suscriptionId, setSuscriptionId] = useState(null);
+    const [formData, setFormData] = useState({
+        id: "",
         title: "",
         description: "",
         image: "",
         type: "",
     });
-    const [errorSubscription, setErrorSubscription] = useState({
+    const [erroSuscription, setErrorSuscription] = useState({
+        id: "",
         title: "",
         description: "",
         image: "",
         type: "",
     });
-    const [modificarSuscription, setModificarSuscription] = useState(false);
 
-    //handlers
-    const handleSuscription = (event) => {
-        const nombre = event.target.name;
-        const idSuscription = event.target.value;
-
-        if (nombre === "eliminar") {
-            console.log("eliminando....");
-            dispatch(delete_suscription(idSuscription));
-            dispatch(get_suscriptions());
-        }
-
-        if (nombre === "editar") {
-            console.log("editando...");
-
-            dispatch(put_suscription(idSuscription, newSubscription));
-            dispatch(get_suscriptions());
-        }
+    //setea el estado local con los cambios que se producen en el input
+    const handleInputChange = (event) => {
+        setFormData({
+            ...formData,
+            [event.target.name]: event.target.value,
+        });
+        if (postSuscription)
+            setErrorSuscription(
+                validateSuscription({
+                    ...formData,
+                    [event.target.name]: event.target.value,
+                })
+            );
+        setMessagePost("");
     };
 
-    const handleSuscriptionFormChange = (event) => {
-        const nameInput = event.target.name;
-        const valor = event.target.value;
+    //setea el estado local con el id y abre el form
+    const handleEditSubscription = (event) => {
+        const id = event.target.value;
 
-        setNewSubscription({ ...newSubscription, [nameInput]: valor });
-        setErrorSubscription(
-            validateSuscription({ ...newSubscription, [nameInput]: valor })
+        const suscripcionesModificar = subscriptions.find(
+            (sub) => sub.id === +id
         );
+
+        setSuscription(suscripcionesModificar);
+        setSuscriptionId(id);
+        setPostSuscription(false);
+        setPutSuscription(true);
     };
 
-    const handleSuscriptionFormSubmit = (event) => {
+    //abre el formulario
+    const handleFormSuscription = () => {
+        setPostSuscription(true);
+    };
+
+    //cierra el formulario y setea todos los estados de nuevo
+    const hanldeCloseFormSuscription = () => {
+        setPutSuscription(false);
+        setPostSuscription(false);
+        setFormData({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
+        setErrorSuscription({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
+    };
+    const handleDeleteSubscription = (id) => {
+        dispatch(delete_suscription(id)).then(() =>
+            dispatch(get_suscriptions())
+        );
+        setFormData({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
+        setErrorSuscription({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
+    };
+
+    const handleSubmitForm = (event) => {
         event.preventDefault();
-        dispatch(post_suscription(newSubscription));
-        dispatch(get_suscriptions());
+
+        if (
+            erroSuscription.title ||
+            erroSuscription.description ||
+            erroSuscription.image ||
+            erroSuscription.type
+        )
+            return setMessagePost("Revise los datos");
+
+        if (putSuscription) {
+            dispatch(put_suscription(suscriptionId, formData)).then(() =>
+                dispatch(get_suscriptions())
+            );
+        } else {
+            if (
+                !formData.image ||
+                !formData.title ||
+                !formData.description ||
+                !formData.type
+            )
+                return setMessagePost("Debe ingresar los datos");
+            dispatch(post_suscription(formData)).then(() =>
+                dispatch(get_suscriptions())
+            );
+        }
+        setPostSuscription(false);
+        setPutSuscription(false);
+        setFormData({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
+        setErrorSuscription({
+            id: "",
+            title: "",
+            description: "",
+            image: "",
+            type: "",
+        });
     };
 
     useEffect(() => {
-        dispatch(get_suscriptions());
-    }, []);
+        if (!subscriptions.length) dispatch(get_suscriptions());
+    }, [dispatch]);
 
-    //component:
     return (
         <div>
+            {/* Renderizar la lista de suscripciones */}
             <h1>Suscripciones</h1>
-            {!subscriptions.length < 3 && (
-                <div>
-                    <form>
-                        <div>
-                            <label htmlFor="title">Titulo: </label>
-                            <input
-                                name="title"
-                                value={newSubscription.title}
-                                onChange={handleSuscriptionFormChange}
-                            />
-                            {errorSubscription.title && (
-                                <span>{errorSubscription.title}</span>
-                            )}
-                        </div>
-                        <div>
-                            <label htmlFor="description">Descripción: </label>
-                            <input
-                                name="description"
-                                value={newSubscription.description}
-                                onChange={handleSuscriptionFormChange}
-                            />
-                            {errorSubscription.description && (
-                                <span>{errorSubscription.description}</span>
-                            )}
-                        </div>
-                        <div>
-                            <label htmlFor="image">Imagen: </label>
-                            <input
-                                name="image"
-                                value={newSubscription.image}
-                                onChange={handleSuscriptionFormChange}
-                            />
-                            {errorSubscription.image && (
-                                <span>{errorSubscription.image}</span>
-                            )}
-                        </div>
-                        <div>
-                            <label htmlFor="type">Tipo: </label>
-                            <input
-                                name="type"
-                                value={newSubscription.type}
-                                onChange={handleSuscriptionFormChange}
-                            />
-                            {errorSubscription.type && (
-                                <span>{errorSubscription.type}</span>
-                            )}
-                        </div>
+            <ul>
+                {!putSuscription && !postSuscription && (
+                    <button onClick={handleFormSuscription}>
+                        Añadir Suscripción
+                    </button>
+                )}
 
-                        <button onClick={handleSuscriptionFormSubmit}>
-                            {modificarSuscription
-                                ? "Editar Suscripción"
-                                : "Añadir Suscripción"}
-                        </button>
-                    </form>
-                </div>
+                {postSuscription || putSuscription ? (
+                    <>
+                        <button onClick={hanldeCloseFormSuscription}>X</button>
+                        <h2>{postSuscription && "Añadir suscripción"}</h2>
+                        <h2>{putSuscription && "Editar suscripción"}</h2>
+                        <form>
+                            <div>
+                                {postSuscription || putSuscription ? (
+                                    <></>
+                                ) : (
+                                    <></>
+                                )}
+                                {messagePost && <p>{messagePost}</p>}
+                                <label>Titulo:</label>
+                                <input
+                                    type="text"
+                                    name="title"
+                                    value={formData.title}
+                                    onChange={handleInputChange}
+                                    placeholder={
+                                        putSuscription
+                                            ? suscription.title
+                                            : "Titulo"
+                                    }
+                                />
+                                {erroSuscription.title && (
+                                    <p>{erroSuscription.title}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label>Descripción:</label>
+                                <input
+                                    type="text"
+                                    name="description"
+                                    value={formData.description}
+                                    onChange={handleInputChange}
+                                    placeholder={
+                                        putSuscription
+                                            ? suscription.description
+                                            : "Descripción"
+                                    }
+                                />
+                                {erroSuscription.description && (
+                                    <p>{erroSuscription.description}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label>Imagen:</label>
+                                <input
+                                    type="text"
+                                    name="image"
+                                    value={formData.image}
+                                    onChange={handleInputChange}
+                                    placeholder={
+                                        putSuscription
+                                            ? suscription.image
+                                            : "Imagen"
+                                    }
+                                />
+                                {erroSuscription.image && (
+                                    <p>{erroSuscription.image}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label>Tipo:</label>
+                                <select
+                                    name="type"
+                                    value={formData.type}
+                                    onChange={handleInputChange}
+                                    placeholder={
+                                        putSuscription
+                                            ? suscription.type
+                                            : "Tipo"
+                                    }
+                                >
+                                    <option value="mensual">mensual</option>
+                                    <option value="trimestral">
+                                        trimestral
+                                    </option>
+                                    <option value="anual">anual</option>
+                                </select>
+                                {erroSuscription.type && (
+                                    <p>{erroSuscription.type}</p>
+                                )}
+                            </div>
+                            <button onClick={handleSubmitForm}>
+                                {postSuscription ? "Añadir" : "Editar"}
+                            </button>
+                        </form>
+                    </>
+                ) : (
+                    <></>
+                )}
+                {!!subscriptions.length &&
+                    subscriptions?.map((subscription) => (
+                        <li key={subscription.id}>
+                            <h2>{subscription.title}</h2>
+                            <p>{subscription.description}</p>
+                            <p>{subscription.type}</p>
+                            <button
+                                onClick={() =>
+                                    handleDeleteSubscription(subscription.id)
+                                }
+                            >
+                                Eliminar
+                            </button>
+                            <button
+                                onClick={handleEditSubscription}
+                                value={subscription.id}
+                            >
+                                Editar
+                            </button>
+                        </li>
+                    ))}
+            </ul>
+
+            {/* <h2>
+                {putSuscription ? "Editar suscripción" : "Añadir suscripción"}
+            </h2>
+
+            {formData.id ? (
+                <button onClick={handleEditSubscription}>
+                    Guardar Cambios
+                </button>
+            ) : (
+                <button onClick={handleAddSubscription}>
+                    {putSuscription ? "Editar" : "Agregar Suscripción"}
+                </button>
             )}
-
-            {!modificarSuscription &&
-                subscriptions.length &&
-                subscriptions.map((sub) => {
-                    return (
-                        <span>
-                            <div
-                                onClick={handleSuscription}
-                                name="eliminar"
-                                value={sub.id}
-                            >
-                                Eliminar Suscripción
-                            </div>
-                            <div
-                                onClick={handleSuscription}
-                                name="editar"
-                                value={sub.id}
-                            >
-                                Editar Suscripción
-                            </div>
-                            <label>
-                                <p>{sub.title}</p>
-                                <p>{sub.description}</p>
-                                <p>{sub.image}</p>
-                                <p>{sub.type}</p>
-                            </label>
-                        </span>
-                    );
-                })}
+            {error && <p>Error: {error}</p>}
+            {message && <p>{message.message}</p>} */}
         </div>
     );
 };

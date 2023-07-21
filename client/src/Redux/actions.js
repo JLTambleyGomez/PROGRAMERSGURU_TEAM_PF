@@ -67,11 +67,12 @@ import {
     export const POST_FAVORITE = "POST_FAVORITE" 
 
 //USER:
-    export const EDIT_USER_DATA = "EDIT_USER_DATA"
-    export const GET_USER_BY_EMAIL= "GET_USER_BY_EMAIL";
-    export const SET_USER_EMAIL = "SET_USER_EMAIL";
-    export const SET_TOKEN = "SET_TOKEN";
-
+export const EDIT_USER_DATA = "EDIT_USER_DATA";
+export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
+export const SET_USER_EMAIL = "SET_USER_EMAIL";
+export const SET_TOKEN = "SET_TOKEN";
+export const POST_USER = "POST_USER";
+export const MAKE_ADMIN = "MAKE_ADMIN";
 //COMMENTS:
     export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER"
     export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE"
@@ -484,6 +485,24 @@ export const get_User_By_Email = (email) => {
         }
     };
 }
+export const post_user = (user) => {
+    return async function (dispatch) {
+        try {
+            const data = await postUserRequest(user);
+            console.log(data);
+            return dispatch({
+                type: POST_USER,
+                payload: data,
+            });
+        } catch (error) {
+            console.log(error);
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+};
 
 //CART_____________________________________________//
 
