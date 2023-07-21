@@ -105,7 +105,7 @@ function CourseDetails() {
                             ) : (
                                 <img
                                     className={`${styles.favorite} ${
-                                        styles[theme("favorite")]
+                                        styles[theme("addfavorite")]
                                     }`}
                                     onClick={handleRemoveFavorite}
                                     src={fullHeart}

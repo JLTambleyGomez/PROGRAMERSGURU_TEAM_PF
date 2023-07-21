@@ -115,6 +115,34 @@ h4 {
 .favorite-dark{
   filter: none;
 }
+.addfavorite-dark{
+  filter: none;
+  animation: pop-favorite 1s;
+}
+.addfavorite-light{
+  animation: pop-favorite 1s;
+}
+
+@keyframes pop-favorite {
+  0% {
+    transform: scale(1);filter: invert(14%) sepia(100%) saturate(5408%) 
+    hue-rotate(359deg) brightness(91%) contrast(124%);
+  }
+  50% {
+    transform: scale(1.5) rotateY(180deg);
+    filter: invert(14%) sepia(100%) saturate(5408%) 
+    hue-rotate(359deg) brightness(91%) contrast(124%); 
+  }
+  75% {
+    filter: invert(11%) sepia(59%) saturate(4544%) 
+    hue-rotate(5deg) brightness(102%) contrast(128%);
+  }
+  100% {
+    transform: scale(1) ;
+  }
+}
+
+
 .data-dark {
   background-color: rgb(83, 83, 83);
   box-shadow: inset 1px 1px 5px rgb(255, 255, 255);
