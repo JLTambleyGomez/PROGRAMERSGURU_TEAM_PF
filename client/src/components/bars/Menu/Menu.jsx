@@ -17,10 +17,7 @@ function Menu () {
     const logo= useSelector((state)=>state.user?.picture)
 
     //states:
-    const [isDarkMode, setIsDarkMode] = useState(() => {
-        const localDark = localStorage.getItem("darkMode");
-        return localDark === "true" ? "true" : "false";
-    });
+    const [isDarkMode, setIsDarkMode] = useState(null)
 
     //const:
     const navigate = useNavigate()
@@ -28,24 +25,21 @@ function Menu () {
 
     const userImage = "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
 
-    const localDark = localStorage.getItem("darkMode")
-
+    //functions:
     const handleDarkMode = () => {
-        const localDark = localStorage.getItem("darkMode")
-        setIsDarkMode(!isDarkMode)
-        localStorage.setItem("darkMode", !isDarkMode)
-        // if (localDark !== null) {
-        //     localStorage.setItem("darkMode", !isDarkMode)
-        // } else localStorage.setItem("darkMode", "true")
+        setIsDarkMode(!isDarkMode) //para controlar el icono de sol y luna.
+        localStorage.setItem("darkMode", !isDarkMode);
+        dispatch(Dark_Mode())
     };
 
+    //life-cycles:
     useEffect(() => {
-        console.log(isDarkMode)
-    }, [isDarkMode])
+        if (isDarkMode === null) {
+          const localDark = localStorage.getItem("darkMode");
+          setIsDarkMode(localDark ? JSON.parse(localDark) : false);
+        }
+    }, [isDarkMode]);
 
-    useEffect(() => {
-        setIsDarkMode(localStorage.getItem("darkMode"))
-    }, [])
 
     // component:
     return  (

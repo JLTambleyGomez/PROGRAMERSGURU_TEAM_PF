@@ -9,6 +9,8 @@ import {
   delete_course,
   put_course
 } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
 import styles from "./AdminPanel.module.css";
 
 function Courses() {
@@ -51,23 +53,16 @@ function Courses() {
   })
 
   // functions:
-  const theme = (base) => {
-    const suffix = dark ? "dark" : "light";
-    return `${base}-${suffix}`;
-  };
-
-//DESPACHA LA ACTION PARA HACER EL PUT
+ //DESPACHA LA ACTION PARA HACER EL PUT
   const handleCoursePut = (event) => {
     event.preventDefault();
     dispatch(put_course(modifCourse))
     dispatch(get_courses_all());
-
   }
 
   //modificar curso
   const handleModificarCurso  = (event) => {
     setModificarCourse(true)
-
   }
 
 

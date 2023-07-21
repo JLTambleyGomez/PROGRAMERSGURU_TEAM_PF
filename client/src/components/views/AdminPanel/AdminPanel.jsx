@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { get_products_all, post_Products, delete_Products,get_categories, post_categories, clearCourses, clearMessage, delete_categories, get_courses_all, post_course, delete_course } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
 import Categories from "./Categories";
 import Courses from "./Courses"
 import Products from "./Products"
@@ -13,7 +15,6 @@ const  AdminPanel =() =>{
 
     //global state: 
     const message = useSelector((state) => state.message);
-    const dark = useSelector((state) => state.darkMode);
     
     //const:
     const dispatch = useDispatch();
@@ -26,11 +27,6 @@ const  AdminPanel =() =>{
 
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
-
     const handleShowCategories = (event) => {
         event.preventDefault();
         setshowcategories(!showcategories);

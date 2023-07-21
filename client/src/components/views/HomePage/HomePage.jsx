@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
+import { Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
 import {
     get_categories,
     get_courses_all,
@@ -21,17 +24,12 @@ import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlo
 function HomePage () {
 
     //global state:
-    const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
 
     //-------------------------------------------------------------------------
     // obtener el email
@@ -52,12 +50,13 @@ function HomePage () {
         //     await sendEmail();
         // })()
         //--desmontado
+        // dispatch(Dark_Mode())
         return () => {
             dispatch(clearMessage());
         };
     }, [dispatch]);
 
-
+    
     //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>

@@ -19,12 +19,6 @@ function FilterBar() {
     //const:
     const dispatch = useDispatch();
 
-    //functions:
-    const theme = (base) => {
-        const suffix = darkMode ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const resetFilters = () => {
         setOrden("");
         setIdioma("");

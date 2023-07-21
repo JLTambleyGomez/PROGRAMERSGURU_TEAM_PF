@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { get_courses_by_id, clearCourses, clearMessage, get_courses_all} from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import axios from "axios"; //remover axios => axiosRequests.js
 import styles from "./CoursesDetails.module.css";
@@ -13,7 +14,6 @@ function CourseDetails () {
     const course = useSelector((state) => state.allCourses);
     const favorites = useSelector((state) => state.favorites);
     const user= useSelector((state)=> state.user)
-    const dark = useSelector((state)=> state.darkMode);
 
     //states:
     const [isFav, setFav] = useState(false);
@@ -24,11 +24,6 @@ function CourseDetails () {
     id = parseInt(id);
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
-
     const getDetails = async () => {
         await dispatch(get_courses_by_id(id))
     }

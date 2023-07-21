@@ -57,7 +57,7 @@ function CoursePage () {
 
         {/* CURSOS */}
 
-            {/* {
+            {
                 
                 (<div className = {styles.cardComponent}>
                     {
@@ -67,7 +67,7 @@ function CoursePage () {
                     }
                 </div>)
 
-            } */}
+            }
         </main>
     )
 }

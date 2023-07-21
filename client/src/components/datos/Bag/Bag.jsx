@@ -11,17 +11,11 @@ function Bag () {
     //global state:
     const shopbag = useSelector((state) => state.shopbag)
     const cart = useSelector((state) => state.cart);
-    const dark = useSelector((state) => state.darkMode);
 
     //const:
     const dispatch = useDispatch();
 
-    //function:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`
-    }
-
+    //functions:
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag))
     }

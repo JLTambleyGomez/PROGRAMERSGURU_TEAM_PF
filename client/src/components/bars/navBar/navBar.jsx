@@ -3,6 +3,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -18,34 +19,21 @@ import Menu from '../Menu/Menu';
 function NavBar ( { logoutUser } ) {
 
     //global states:
-    const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
     const user = useSelector((state) => state.user);
 
     //states:
-    const [isResponsive, setIsResponsive] = useState(false);
     const [isBarsOpen, setIsBarsOpen] = useState(false);
-
-    const toggleBars = () => {
-        setIsBarsOpen(!isBarsOpen);
-    };
 
     //const:
     const dispatch = useDispatch();
-    const location = useLocation();
-    const navigate = useNavigate();
     const email = localStorage.getItem("email");
     const token = sessionStorage.getItem("accessToken")
 
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
 
-    const responsive = (base) => {
-        const option = isResponsive ? "responsive" : "";
-        return `${base}-${option}`;
+    //functions:
+    const toggleBars = () => {
+        setIsBarsOpen(!isBarsOpen);
     };
 
     const toggleShopbag = () => {
@@ -54,22 +42,27 @@ function NavBar ( { logoutUser } ) {
 
 
     //life-cycles:
-    useEffect(() => {
-        if (email) {
-            if (!user?.email) dispatch(get_User_By_Email(email));
-        }
-    }, [user]) //testear con array vacio.
 
-    useEffect(()=>{
-        if (token){
+    //funciona bien con una cuenta registrada en la DB, pero no con cuentas de google.
+    //no funciona xd
+    // useEffect(() => {
+    //     if (email) {
+    //         if (!user?.email) dispatch(get_User_By_Email(email));
+    //     }
+    // }, [user]) //testear con array vacio.
+
+    //funciona con cuentas de google.
+    useEffect(() => {
+        if (!user?.email) dispatch(get_User_By_Email(email));
+    }, [])
+
+    useEffect(() => {
+        if (token) {
             dispatch (get_products_all())
         }
         dispatch(get_Favorites_Request(user.id))
     },[])
 
-    useEffect(() => {
-        console.log(isResponsive)
-    }, [isResponsive])
 
     //component:
     return (

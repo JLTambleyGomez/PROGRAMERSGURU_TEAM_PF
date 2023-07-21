@@ -34,12 +34,6 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
         setIsFlipped(false);
     };
 
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
-
-
     //component:
     return (
         <div className={styles.cardContainer}>

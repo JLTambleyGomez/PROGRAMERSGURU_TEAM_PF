@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+import theme from "./theme/theme";
+
 import s from "./App.module.css";
 import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage from "./components/views/LandingPage/LandingPage";
@@ -35,7 +37,6 @@ const App = () => {
 
 
     //global states:
-    const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
 
 
@@ -45,13 +46,6 @@ const App = () => {
  
     //const:
     const location = useLocation().pathname;
-
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
 
     //life-cycles:
     useEffect(() => {
@@ -85,6 +79,7 @@ const App = () => {
     }, []);
 
     useEffect(() => {
+        //default darkMode theme: false
         const darkModeLocal = localStorage.getItem("darkMode")
         if (!darkModeLocal) {
             localStorage.setItem("darkMode", "false")

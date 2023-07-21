@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
@@ -33,11 +34,6 @@ function Shop () {
     const navigate = useNavigate();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const syncInput = (event) => {
         const { value } = event.target;
         setInput(value);
