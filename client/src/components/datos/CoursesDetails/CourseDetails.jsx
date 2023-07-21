@@ -8,7 +8,7 @@ import {
     get_course_by_id,
 } from "../../../Redux/actions";
 import {
-    postFavoriteRequest,
+    postFavoritesRequest,
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
 

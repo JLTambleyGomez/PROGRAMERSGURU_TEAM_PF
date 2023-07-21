@@ -31,8 +31,7 @@ import {
     deleteSuscriptionRequest,
     putSuscriptionRequest,
     postSuscriptionRequest,
-    //sendEmails
-    sendEmail,
+    
 } from "../axiosRequests/axiosRequests";
 //_________________________________ _________________
 
@@ -575,7 +574,6 @@ export const get_suscriptions = () => {
     return async function (dispatch) {
         try {
             const data = await getSubscriptionsRequest();
-            console.log(data);
             return dispatch({
                 type: GET_SUSCRIPTIONS,
                 payload: data,
@@ -620,13 +618,13 @@ export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
             const data = await deleteSuscriptionRequest(id);
+           
             console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
                 payload: data,
             });
         } catch (error) {
-            console.log(error);
             console.log(error);
             return dispatch({
                 type: ERROR,
@@ -640,6 +638,7 @@ export const post_suscription = (suscription) => {
     return async function (dispatch) {
         try {
             const data = await postSuscriptionRequest(suscription);
+            console.log(data);
             return dispatch({
                 type: POST_SUSCRIPTION,
                 payload: data
@@ -653,6 +652,7 @@ export const post_suscription = (suscription) => {
         }
     };
 };
+
 
 //SHOP FILTERS_________________________________________//
 export const filter_product_by_category = (category) => {

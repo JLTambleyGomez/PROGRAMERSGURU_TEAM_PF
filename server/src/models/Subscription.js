@@ -23,7 +23,8 @@ module.exports = (sequelize) => {
             },
             price: {
                 type: DataTypes.INTEGER,
-                allowNull: false,
+                allowNull:false
+             
             }, 
         },
         { timestamps: false, freezeTableName: true }

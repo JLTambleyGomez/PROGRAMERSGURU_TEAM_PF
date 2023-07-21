@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import MensajeBienvenidaHTML from "../../datos/MensajesDePagina/MensajeBienvenidaHTML.js"
 import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
-import { sendEmail } from '../../../axiosRequests/axiosRequests';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -56,13 +54,10 @@ function NavBar({ logoutUser }) {
     //life-cycles:
     useEffect(() => {
             if (!user?.email) dispatch(get_User_By_Email(email));
+           
     }, []) //testear con array vacio.
 
     useEffect(()=>{
-        if(emailenviado === "0"){
-            sendEmail({email: email, message: MensajeBienvenidaHTML})
-            localStorage.setItem("sendedEmail", "1")
-        }
         if (token){
             dispatch (get_products_all())
         }
@@ -78,6 +73,7 @@ function NavBar({ logoutUser }) {
     }
     //component:
     return (
+        // {user.banned}
         <nav className={`${s.component} ${s[theme("component")]}`}>
             <div onClick={handlegohome} className={s.sectionBanner}>
                 <h1 className={`${s.mainLogo} ${s[theme("mainLogo")]}`}>

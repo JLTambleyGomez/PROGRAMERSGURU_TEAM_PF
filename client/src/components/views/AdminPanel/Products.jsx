@@ -101,24 +101,26 @@ function Products() {
             if (
                 errorProduct.name ||
                 errorProduct.description ||
-                errorProduct.genre ||
-                errorProduct.platforms ||
-                errorProduct.released ||
-                errorProduct.rating
+                errorProduct.price ||
+                errorProduct.image ||
+                errorProduct.category ||
+                errorProduct.stock
             )
                 return setMessagePost("Revise los datos");
 
-            if (
-                !newProduct.name ||
-                !newProduct.description ||
-                !newProduct.genre ||
-                !newProduct.platforms ||
-                !newProduct.released ||
-                !newProduct.rating
-            )
-                setMessagePost("Debe ingresar los datos");
+        
             if (change) {
                 if (postProduct) {
+                    if (
+                        !newProduct.name ||
+                        !newProduct.description ||
+                        !newProduct.price ||
+                        !newProduct.image ||
+                        !newProduct.category ||
+                        !newProduct.stock
+                    )
+                        return setMessagePost("Debe ingresar los datos");
+                        
                     dispatch(post_Product(newProduct)).then(() =>
                         dispatch(get_products_all())
                     );
@@ -180,14 +182,13 @@ function Products() {
     //life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
-
-        if (!products.length) dispatch(get_products_all());
+        dispatch(get_products_all());
 
         return () => {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
         };
-    }, [dispatch, products]);
+    }, [dispatch]);
 
     //component:
     return (

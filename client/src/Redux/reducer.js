@@ -305,12 +305,12 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case DELETE_SUSCRIPTION:
             return {
                 ...state,
-                message: payload,
+                message: payload.message,
             };
         case PUT_SUSCRIPTION:
             return {
                 ...state,
-                subscriptions: payload,
+                message: payload.message
             };
 
         case POST_SUSCRIPTION:

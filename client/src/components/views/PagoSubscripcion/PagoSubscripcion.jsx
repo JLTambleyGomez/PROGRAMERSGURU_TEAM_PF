@@ -43,6 +43,7 @@ function PagoSubscripcion() {
     //component:
     return (
         <main className={styles.container}>
+             
             <h1 className={styles.title}>
                 Subscríbete ya! y disfruta sin limitaciones
             </h1>
@@ -119,6 +120,7 @@ function PagoSubscripcion() {
                     </div>
                 )}
             </div>
+           
         </main>
     );
 }

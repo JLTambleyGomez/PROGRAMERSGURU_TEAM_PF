@@ -345,7 +345,7 @@ function Courses() {
                                         onChange={handleCourseChange}
                                         placeholder={modifCourse && course.rating}
                                         />
-                                   {errorCourse.rating && <p>{errorCourse.rating}</p>}
+                                   {errorCourse.rating &&  <p>{errorCourse.rating}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>

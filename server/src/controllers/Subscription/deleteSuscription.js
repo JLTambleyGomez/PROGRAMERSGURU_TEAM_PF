@@ -7,9 +7,11 @@ const deleteSuscription = async (req, res) => {
         const deleted = await Subscription.destroy({ where: { id } });
 
         if (deleted) {
-            return res.json({
-                message: "La suscripción fue borrada correctamente",
-            });
+            return res
+            .status(200)
+            .json({ message: "la suscripción fue borrada con éxito" });
+
+            
         } else {
             return res
                 .status(404)
