@@ -1,5 +1,5 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Pagination, Navigation } from "swiper/modules";
+import { EffectCoverflow, Pagination, Navigation, Autoplay } from "swiper/modules";
 
 import "./CoursesPreview.css";
 import "swiper/css";
@@ -17,8 +17,13 @@ function CoursesPreview ( { courses } ) {
             <div className = "coursesSwiperComponent"> 
                 <div className="navigation-container">
                     <Swiper
+                        // autoplay={{
+                        //     delay: 2500,
+                        //     pauseOnMouseEnter: true,
+                        //     disableOnInteraction: false,
+                        // }}                 
                         enabled={true}
-                        modules={[EffectCoverflow, Pagination, Navigation]}
+                        modules={[EffectCoverflow, Pagination, Navigation, Autoplay]}
                         effect={"coverflow"}
                         spaceBetween={100}
                         grabCursor={true}

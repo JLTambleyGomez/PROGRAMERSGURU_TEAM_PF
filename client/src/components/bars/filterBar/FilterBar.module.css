@@ -1,65 +1,111 @@
 .component {
-  display:flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 100%;
-  height: 4%;
-  z-index: 1;
-  color: aliceblue;
-  background-color: rgba(0, 0, 0, 0.672);
-  animation:blur-in 1s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
-.item {
-  font-size: 70%;
-  margin-bottom:-1%;
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center; 
-}
-.options{
-  scale:0.7;
-  margin-top: 4%;
-  font-size:80%;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-}
+      display:flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 4%;
+      z-index: 1;
+      color: aliceblue;
+      background-color: rgba(0, 0, 0, 0.672);
+      animation:blur-in 1s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
+   .item {
+      font-size: 70%;
+      margin-bottom:-1%;
+      display: flex;
+      justify-content: center;
+      justify-items: center;
+      align-items: center; 
+   }
+   .options{
+      scale:0.7;
+      margin-top: 4%;
+      font-size:80%;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-items: center;
+   }
 
 
-.buttonContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 400px;
-}
+   .buttonContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 400px;
+   }
 
-.mainButton {
-  display: flex;
-  padding: 4% 37%;
-  background-color: black;
-  color: white;
-  border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
-  background-clip: padding-box;
-  animation: borderGradientAnimation1 infinite 2.5s;
-}
+   .mainButton {
+      display: flex;
+      padding: 4% 37%;
+      background-color: black;
+      color: white;
+      border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+      background-clip: padding-box;
+      animation: borderGradientAnimation1 infinite 2.5s;
+   }
 
 @keyframes borderGradientAnimation1 {
-  0% {
-    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
-  }
-  20% {
-    border-image: linear-gradient(to right, #ff0000, #800080) 1;
-  }
-  40% {
-    border-image: linear-gradient(to right, #800080, #0000ff) 1;
-  }
-  60% {
-    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
-  }
-  80% {
-    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
-  }
-  100% {
-    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
-  }
+   0% {
+      border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+   }
+   20% {
+      border-image: linear-gradient(to right, #ff0000, #800080) 1;
+   }
+   40% {
+      border-image: linear-gradient(to right, #800080, #0000ff) 1;
+   }
+   60% {
+      border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+   }
+   80% {
+      border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+   }
+   100% {
+      border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+   }
+}
+
+.filterOverlay {
+   position: fixed;
+   top: 0;
+   bottom: 0;
+   z-index: 9998;
+   width: 100%;
+   background-color: rgba(0, 0, 0, 0.5);
+   height: 100%;
+}
+
+.filterModal {
+   background-color: white;
+}
+
+
+/* ----------- RESPONSIVE ------------ */
+
+@media screen and (width > 700px) {
+   .responsive-component {
+      display: none;
+   }
+}
+
+@media screen and (max-width: 700px) {
+   .responsive-component{
+      display: block;
+      display:flex;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      height: 4%;
+      padding: 1rem;
+      color: aliceblue;
+      box-sizing: border-box;
+      background-color: rgba(0, 0, 0, 0.672);
+   }
+   .responsive-component button {
+      width: 40%;
+      height: 2.5rem;
+   }
+   .component {
+      display: none;
+   }
 }

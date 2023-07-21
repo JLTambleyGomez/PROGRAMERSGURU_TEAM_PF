@@ -8,7 +8,6 @@ function Footer () {
             <p>Politica de la Web</p>
             <p>Sobre nosotros</p>
             <p>Contacto</p>
-            <p>Trabaja con nosotros</p>
             <p>Donación</p>
         </div>
     )

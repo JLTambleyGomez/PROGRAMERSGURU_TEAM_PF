@@ -82,4 +82,13 @@
    border: 1px solid  rgb(255, 255, 255);
 }
     
+@media screen and (max-width: 1200px) {
+    .coursesSwiperComponent {
+        width: 110%;
+    }
+}
+
     
+@media screen and (max-width: 700px) {
+    
+}

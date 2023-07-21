@@ -36,11 +36,11 @@
 .container1 {
    display: flex;
    flex-direction: column;
-   width: 64%;
+   width: 60%;
    box-sizing: border-box;
    }
    .title {
-      font-size: 4rem;
+      font-size: 100%;
       margin-bottom: 1rem;
       align-self: start;
       letter-spacing:10px;
@@ -56,7 +56,7 @@
    }
 
    .description {
-      font-size: 24px;
+      font-size: 150%;
       /* width: 600px; */
       margin: 0;
       /* margin-left: 10%; */
@@ -79,13 +79,10 @@
 .container2 {
    display: flex;
    flex-direction: column;
-   width: 34%;
+   width: 40%;
    }
    .container2 img{
-      height: auto;
-      width: 100%;
-      /* padding-left: 30%; */
-      /* object-fit: cover; */
+      object-fit: cover;
    }  
    .container2 h2 {
       font-size: 12px;
@@ -123,22 +120,40 @@
       }
       @keyframes borderGradientAnimation2 {
          0% {
-         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
+            border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
          }
          20% {
-         border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
+            border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
          }
          40% {
-         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
+            border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
          }
          60% {
-         border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+            border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
          }
          80% {
-         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
+            border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
          }
          100% {
-         border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
+            border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
          }
       
+      }
+
+      @media screen and (max-width: 700px) {
+        .description {
+            display: none;
+            margin: 0;
+        }
+        .component {
+            flex-direction: column;
+            justify-content: center;
+            height: 20rem;
+            gap: 5%;
+            /* width: 130%; */
+        }
+        .title {
+            text-align: center;
+            align-self: center;
+        }
       }

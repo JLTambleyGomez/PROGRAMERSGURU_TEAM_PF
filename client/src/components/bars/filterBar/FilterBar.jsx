@@ -15,6 +15,8 @@ function FilterBar() {
     const [orden, setOrden] = useState("");
     const [idioma, setIdioma] = useState("");
     const [price, setPrice] = useState("");
+    const [filterModal, setFilterModal] = useState(false);
+    const [sortModal, setSortModal] = useState(false);
 
     //const:
     const dispatch = useDispatch();
@@ -152,31 +154,53 @@ function FilterBar() {
         dispatch(Dark_Mode())
     }, [dark])
 
+
     //component:
     return (
-        <div className={`${s.component}`}>
-          <p>Orden</p>
-          <select value={orden} onChange={handleSortChange}>
-            <option value="">Ordenar</option>
-            <option value="Ascendente">Nombre Descendente</option>
-            <option value="Desendente">Nombre Ascendente</option>
-          </select>
-          <p>Filtros</p>
-          <select value={idioma} onChange={handleLanguageChange}>
-            <option value="">Idioma</option>
-            <option value="Inglés">Cursos en Inglés</option>
-            <option value="Español">Cursos en Español</option>
-          </select>
-          <p>Acceso</p>
-          <select value={price} onChange={handlePriceChange}>
-            <option value="">Precio</option>
-            <option value="true">Gratis</option>
-            <option value="false">De Pago</option>
-          </select>
+        <>
+            <div className={`${s.component}`}>
+                <p>Orden</p>
+                <select value={orden} onChange={handleSortChange}>
+                    <option value="">Ordenar</option>
+                    <option value="Ascendente">Nombre Descendente</option>
+                    <option value="Desendente">Nombre Ascendente</option>
+                </select>
+                <p>Filtros</p>
+                <select value={idioma} onChange={handleLanguageChange}>
+                    <option value="">Idioma</option>
+                    <option value="Inglés">Cursos en Inglés</option>
+                    <option value="Español">Cursos en Español</option>
+                </select>
+                <p>Acceso</p>
+                <select value={price} onChange={handlePriceChange}>
+                    <option value="">Precio</option>
+                    <option value="true">Gratis</option>
+                    <option value="false">De Pago</option>
+                </select>
 
-          <button onClick={handleFilterReset}>Mostrar Todos</button>
-        </div>
-      );
-    }
+                <button onClick={handleFilterReset}>Mostrar Todos</button>
+            </div>
+
+        {/* RESPONSIVE */}
+            <div className={`${s["responsive-component"]}`}>
+                <button onClick={() => {setFilterModal(true)}}>
+                    FILTRAR
+                </button>
+                <button>
+                    ORDENAR
+                </button>
+            </div>
+            {
+                filterModal && (
+                    <div className={s.filterOverlay} onClick={() => {setFilterModal(false)}}>
+                        <div className={s.filterModal} onClick={(event) => {event.stopPropagation()}}>
+                            
+                        </div>                        
+                    </div>
+                )
+            }
+        </>
+    );
+}
 
 export default FilterBar;
