@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { get_courses_by_id, clearCourses, clearMessage, get_courses_all} from "../../../Redux/actions";
+import { get_courses_by_id, clearCourses, clearMessage, get_courses_all, DARK_MODE} from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import axios from "axios"; //remover axios => axiosRequests.js

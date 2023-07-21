@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggle_shopbag, Dark_Mode, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+import { toggle_shopbag, Dark_Mode, get_User_By_Email, get_Favorites_Request,get_products_all } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

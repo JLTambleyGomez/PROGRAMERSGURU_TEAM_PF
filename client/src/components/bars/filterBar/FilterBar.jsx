@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all } from "../../../Redux/actions";
+import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all, Dark_Mode } from "../../../Redux/actions";
 
 import s from "./FilterBar.module.css";
 

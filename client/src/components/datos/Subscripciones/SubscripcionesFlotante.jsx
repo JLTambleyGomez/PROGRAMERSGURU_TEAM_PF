@@ -1,9 +1,11 @@
 import { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
+import { Dark_Mode } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
-import s from "./SubscripcionesFlotante.module.css"
+import s from "./SubscripcionesFlotante.module.css";
 
 //_________________________module_________________________
 function SubscripcionFlotante () {
@@ -15,6 +17,7 @@ function SubscripcionFlotante () {
 
     //const:
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //functions:
     const handleclosebutton = () => {
