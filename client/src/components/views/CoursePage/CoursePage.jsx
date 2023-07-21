@@ -60,7 +60,7 @@ function CoursePage () {
             </div>
 
         {/* CURSOS */}
-            {/* {
+            {
                 <div className = {styles.cardComponent}>
                     {
                         isloading 
@@ -68,7 +68,7 @@ function CoursePage () {
                         : <CoursesCard/>
                     }
                 </div>
-            } */}
+            }
         </main>
     )
 }

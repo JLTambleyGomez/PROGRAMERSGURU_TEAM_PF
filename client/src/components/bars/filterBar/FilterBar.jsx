@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all, Dark_Mode } from "../../../Redux/actions";
 
@@ -141,6 +141,34 @@ function FilterBar() {
         resetFilters();
     };
     
+    const modalRef = useRef(null);
+
+    // Update the position of the filterModal on scroll
+    useEffect(() => {
+      const handleScroll = () => {
+        if (sortModal && modalRef.current) {
+          const { top } = modalRef.current.getBoundingClientRect();
+          const offset = 20; // Adjust this value as needed to add some space between the modal and the top of the screen
+  
+          if (top <= offset) {
+            // If the modal is at or above the offset, set its position to fixed
+            modalRef.current.style.position = 'fixed';
+            modalRef.current.style.top = `${offset}px`;
+          } else {
+            // Otherwise, set its position to relative to allow normal document flow
+            modalRef.current.style.position = 'relative';
+            modalRef.current.style.top = 'auto';
+          }
+        }
+      };
+  
+      window.addEventListener('scroll', handleScroll);
+      return () => {
+        window.removeEventListener('scroll', handleScroll);
+      };
+    }, [sortModal]);
+  
+
     //life-cycles:
     useEffect(() => {
         console.log({ orden: orden, idioma: idioma, precio: price });
@@ -154,6 +182,17 @@ function FilterBar() {
         dispatch(Dark_Mode())
     }, [dark])
 
+    useEffect(() => {
+        const disableScroll = () => {
+            document.body.style.overflow = 'hidden';
+        };
+        const enableScroll = () => {
+            document.body.style.overflow = 'auto';
+        };
+        (filterModal || sortModal) ? disableScroll()
+        : enableScroll()
+    }, [filterModal, sortModal])
+
 
     //component:
     return (
@@ -161,7 +200,7 @@ function FilterBar() {
             <div className={`${s.component}`}>
                 <p>Orden</p>
                 <select value={orden} onChange={handleSortChange}>
-                    <option value="">Ordenar</option>
+                    <option value="">Destacados</option>
                     <option value="Ascendente">Nombre Descendente</option>
                     <option value="Desendente">Nombre Ascendente</option>
                 </select>
@@ -182,23 +221,52 @@ function FilterBar() {
             </div>
 
         {/* RESPONSIVE */}
+        <div className={s.reponsiveFilter}>
             <div className={`${s["responsive-component"]}`}>
                 <button onClick={() => {setFilterModal(true)}}>
                     FILTRAR
                 </button>
-                <button>
+                <button onClick={() => {setSortModal(true)}}>
                     ORDENAR
                 </button>
+                <div>
+                {/* {
+                    filterModal && (
+                        <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
+                            <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
+                                <p>Filtros</p>
+                                <select value={idioma} onChange={handleLanguageChange}>
+                                    <option value="">Idioma</option>
+                                    <option value="Inglés">Cursos en Inglés</option>
+                                    <option value="Español">Cursos en Español</option>
+                                </select>
+                                <p>Acceso</p>
+                                <select value={price} onChange={handlePriceChange}>
+                                    <option value="">Acceso</option>
+                                    <option value="true">Gratuito</option>
+                                    <option value="false">Exclusivo</option>
+                                </select>
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    sortModal && (
+                        <div className={s.overlay} onClick={() => {setSortModal(false)}}>
+                            <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
+                                <p>Orden</p>
+                                <select value={orden} onChange={handleSortChange}>
+                                    <option value="">Destacados</option>
+                                    <option value="Ascendente">Nombre Descendente</option>
+                                    <option value="Desendente">Nombre Ascendente</option>
+                                </select>
+                            </div>                        
+                        </div>
+                    )
+                } */}
+                </div>
             </div>
-            {
-                filterModal && (
-                    <div className={s.filterOverlay} onClick={() => {setFilterModal(false)}}>
-                        <div className={s.filterModal} onClick={(event) => {event.stopPropagation()}}>
-                            
-                        </div>                        
-                    </div>
-                )
-            }
+        </div>
         </>
     );
 }
