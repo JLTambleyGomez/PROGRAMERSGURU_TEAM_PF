@@ -18,8 +18,9 @@ import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 //_________________________module_________________________
 function ProfileV2() {
     //global states:
+    const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
-    const userId = user.id;
+    const userId = user?.id;
     const userComments = useSelector((state) => state.userComments);
 
     //local states
@@ -40,6 +41,10 @@ function ProfileV2() {
     const actualDate = new Date();
     const dispatch = useDispatch();
 
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
     //handlers
 
     const handleChange = (event) => {
@@ -102,7 +107,7 @@ function ProfileV2() {
     //component:
     return (
         <div className={s.profileContainer}>
-            <div className={s.infoProfile}>
+            <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
                     <div className={s.config} onClick={openConfig}>
                         <img
@@ -154,11 +159,11 @@ function ProfileV2() {
                                 handleChange={handleChange}
                                 newUserData={newUserData}
                             />
-                            <div>
+                            {/* <div>
                                 <button className={s.desactivar}>
                                     Desactivar mi cuenta
                                 </button>
-                            </div>
+                            </div> */}
                         </>
                     ) : null}
                 </div>
@@ -172,11 +177,11 @@ function ProfileV2() {
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} />
-                {tab === "favorites" && <Favorites />}
-                {tab === "reseñas" && <Reviews />}
-                {tab === "compras" && <Compras />}
-                {tab === "carrito" && <Carrito />}
+                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark}/>
+                {tab === "favorites" && <Favorites userId={userId} dark={dark}/>}
+                {tab === "reseñas" && <Reviews dark={dark}/>}
+                {tab === "compras" && <Compras dark={dark}/>}
+                {tab === "carrito" && <Carrito dark={dark}/>}
             </div>
         </div>
     );

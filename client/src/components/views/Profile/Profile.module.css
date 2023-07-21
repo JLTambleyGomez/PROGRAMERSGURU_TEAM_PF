@@ -24,6 +24,10 @@
     padding: 1%;
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
 }
+.infoProfile-dark {
+    background-color: rgb(83,83,83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
 
 .profileContainer h2 {
     font-weight: bold;
@@ -57,6 +61,10 @@
     height: 45px;
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
 }
+.navBarProfile-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
 
 .emptyTab {
     display: flex;
@@ -70,7 +78,10 @@
     height: 400px;
     color: gray;
 }
-
+.emptyTab-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
 .emptyTab img {
     width: 150px;
     filter:contrast(0.6);
@@ -84,7 +95,6 @@
     color: whitesmoke;
     height: 30px;
 }
-
 .profileContainer button:disabled {
     box-shadow: none;
 }
@@ -98,7 +108,7 @@
 }
 
 .save {
-    background-color: rgb(0,140, 158);
+    background-color: #008c9e;
 }
 .save:hover:enabled {
     box-shadow: 2px 2px 5px rgba(6, 103, 116, 0.774);
@@ -178,4 +188,21 @@
 }
 .refresh:hover img{
     cursor: pointer;
+}
+
+
+
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    overflow-y: scroll;
+}
+.favorites-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }

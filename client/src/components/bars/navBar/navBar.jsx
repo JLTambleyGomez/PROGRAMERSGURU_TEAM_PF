@@ -66,7 +66,6 @@ function NavBar({ logoutUser }) {
         if (token){
             dispatch (get_products_all())
         }
-        dispatch(get_Favorites_Request(user.id))
     },[])
 
     useEffect(() => {
