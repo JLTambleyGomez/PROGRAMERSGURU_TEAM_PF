@@ -230,40 +230,40 @@ function FilterBar() {
                     ORDENAR
                 </button>
                 <div>
-                {/* {
-                    filterModal && (
-                        <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
-                            <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
-                                <p>Filtros</p>
-                                <select value={idioma} onChange={handleLanguageChange}>
-                                    <option value="">Idioma</option>
-                                    <option value="Inglés">Cursos en Inglés</option>
-                                    <option value="Español">Cursos en Español</option>
-                                </select>
-                                <p>Acceso</p>
-                                <select value={price} onChange={handlePriceChange}>
-                                    <option value="">Acceso</option>
-                                    <option value="true">Gratuito</option>
-                                    <option value="false">Exclusivo</option>
-                                </select>
+                    {
+                        filterModal && (
+                            <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
+                                <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
+                                    <p>Filtros</p>
+                                    <select value={idioma} onChange={handleLanguageChange}>
+                                        <option value="">Idioma</option>
+                                        <option value="Inglés">Cursos en Inglés</option>
+                                        <option value="Español">Cursos en Español</option>
+                                    </select>
+                                    <p>Acceso</p>
+                                    <select value={price} onChange={handlePriceChange}>
+                                        <option value="">Acceso</option>
+                                        <option value="true">Gratuito</option>
+                                        <option value="false">Exclusivo</option>
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                    )
-                }
-                {
-                    sortModal && (
-                        <div className={s.overlay} onClick={() => {setSortModal(false)}}>
-                            <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
-                                <p>Orden</p>
-                                <select value={orden} onChange={handleSortChange}>
-                                    <option value="">Destacados</option>
-                                    <option value="Ascendente">Nombre Descendente</option>
-                                    <option value="Desendente">Nombre Ascendente</option>
-                                </select>
-                            </div>                        
-                        </div>
-                    )
-                } */}
+                        )
+                    }
+                    {
+                        sortModal && (
+                            <div className={s.overlay} onClick={() => {setSortModal(false)}}>
+                                <div className={s.modal} onClick={(event) => {event.stopPropagation()}}>
+                                    <p>Orden</p>
+                                    <select value={orden} onChange={handleSortChange}>
+                                        <option value="">Destacados</option>
+                                        <option value="Ascendente">Nombre Descendente</option>
+                                        <option value="Desendente">Nombre Ascendente</option>
+                                    </select>
+                                </div>                        
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>
