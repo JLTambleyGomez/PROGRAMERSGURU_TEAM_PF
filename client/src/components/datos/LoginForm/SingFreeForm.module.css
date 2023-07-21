@@ -2,6 +2,7 @@
     justify-content: center;
     height: fit-content;
     width: 340px;
+    
     padding: 20px;
     background-image: linear-gradient(
         to right,
@@ -11,6 +12,7 @@
     border-radius: 4px;
     animation: scale-up-vertical-top 0.4s linear;
     position: fixed;
+    scale: 0.8;
 }
 
 .container {

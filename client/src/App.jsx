@@ -111,7 +111,7 @@ const App = () =>{
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
                 <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
             </Routes>
-            {location !== "/" && isAtBottom && <Footer />}
+            {location === "/HomePage" && isAtBottom && <Footer />}
         </div>
     );
 }

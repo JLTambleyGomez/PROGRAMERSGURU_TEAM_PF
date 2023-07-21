@@ -219,7 +219,8 @@ export const getCommentsByCourse = async (courseId) => {
 }
 
 export const sendEmail = async (carta) => {
-  const { data } = await axios.post(`http://localhost:3001/user/sendEmail`, carta);
+  console.log(carta)
+  const { data } = await axios.post(`user/sendEmail`, carta);
   return data;
 };
 // // // 

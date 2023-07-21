@@ -1,6 +1,7 @@
 .form {
   justify-content: center;
   height: fit-content;
+  scale: 0.8;
   width: 340px;
   padding: 20px;
   background-image: linear-gradient(
@@ -10,7 +11,8 @@
   );
   border-radius: 4px;
   animation: scale-up-vertical-top 0.4s linear;
-  position: fixed;
+  position: absolute;
+  
 }
 
 .container {
@@ -19,7 +21,7 @@
   display: flex;
   position: fixed;
   left: 31.9%;
-  top: -260%; /*  */
+  top: -250%; /*  */
   justify-content: center;
   justify-items: center;
   align-items: center;
