@@ -1,20 +1,15 @@
-.footerContainer {
-    position: fixed; /* Position the footer at the bottom of the viewport */
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    animation: blur-in 0.2s linear both} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}
-  }
-  
-  /* Show the footer when .visible class is added */
-  .footerContainer.visible {
-    opacity: 1;
-  }
+.component {
+  display: flex;
+  align-items: center;
+  justify-content:space-around;
+  justify-items: center;
+  position: fixed;
+  /* bottom => 0 */
+  bottom: 0;
+  left: 0;
+  /* padding-bottom: 20%; */
+  width: 100%;
+  height: var(--footerHeight);
+  border-radius:100%;
+  animation: blur-in 0.2s linear both;
+} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}

@@ -1,6 +1,7 @@
 :root {
     --navBarHeight: 12vh;
-    --footerHeight: 10vh;
+    --footerHeight: 14vh;
+    --paddingBottom: 16vh;
 }
 
 html {

@@ -6,7 +6,7 @@
       min-height: calc(100vh - var(--navBarHeight));
       /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
       /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
-      padding: 4vh 7% 20vh;
+      padding: 4% 7% var(--paddingBottom);
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -21,21 +21,6 @@
    .component-dark {
       background-color: #010003;
    }
-
-   .sectionBanner {
-      /* display: flex;
-      position: absolute;
-      left: 0;
-      flex-direction: row;
-      align-items: center;
-      scale: 0.5;
-      transition: transform 0.3s, filter 0.3s; */
-   }
-   /* .bannerImg {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-   } */
 
    .sectionCourses {
       margin-top: 4%;
