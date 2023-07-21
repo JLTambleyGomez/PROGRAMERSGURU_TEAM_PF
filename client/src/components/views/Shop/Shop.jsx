@@ -146,9 +146,11 @@ function Shop () {
         setTimeout(() => {
             setLoading(false);
         }, 500);
-    }, [products])
+    }, [])
 
+   
 
+   
 
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);

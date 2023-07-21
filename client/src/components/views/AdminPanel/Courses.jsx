@@ -16,7 +16,6 @@ import { validateCourse } from "./validate";
 function Courses() {
     // global state:
     const categories = useSelector((state) => state.categories);
-    const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
     const courses = useSelector((state) => state.allCourses);
 
@@ -51,6 +50,7 @@ function Courses() {
         language: "",
         categories: [],
     });
+    const [course, setCourse] = useState({})
 
     const [modifCourse, setModifCourse] = useState({
         title: "",
@@ -80,8 +80,11 @@ function Courses() {
     //modificar curso
     const handleModificarCurso = (event) => {
         const id = event.target.value;
-        setModificarCourse(true);
+
+        const courseModificar = courses.find((course) => course.id === +id )
+        setCourse(courseModificar)
         setCourseId(id);
+        setModificarCourse(true);
     };
 
     const handleCourseChange = (event) => {
@@ -156,7 +159,6 @@ function Courses() {
     const handleCoursePost = async (event) => {
         event.preventDefault();
      
-
         if (modificarCourse) {
             if (
                 errorCourse.name ||
@@ -165,10 +167,8 @@ function Courses() {
                 errorCourse.platforms ||
                 errorCourse.released ||
                 errorCourse.rating
-            ){
-                await setMessagePost("Revise los datos");
-                return dispatch(adminPanelMensajesLocales(messagePost))
-            }
+            )return setMessagePost("Revise los datos");
+            
 
             dispatch(put_course(courseId, newCourse))
                 .then(() => {
@@ -189,8 +189,7 @@ function Courses() {
                     console.log(error);
                 });
         } else {
-            console.log(newCourse);
-
+          
             if (
                 !newCourse.title ||
                 !newCourse.description ||
@@ -201,26 +200,20 @@ function Courses() {
                 !newCourse.isFree ||
                 !newCourse.language ||
                 !newCourse.categories
-            ){
-                await setMessagePost('Debe completar los datos')
-                return  dispatch(adminPanelMensajesLocales(messagePost))
+            ) return setMessagePost('Debe completar los datos')
+        
+            if (
+                errorCourse.title ||
+                errorCourse.description ||
+                errorCourse.imageURL ||
+                errorCourse.courseUrl ||
+                errorCourse.released ||
+                errorCourse.isFree ||
+                errorCourse.language ||
+                errorCourse.categories
 
-            }
-
-               
-                if (
-                    errorCourse.name ||
-                    errorCourse.description ||
-                    errorCourse.genre ||
-                    errorCourse.platforms ||
-                    errorCourse.released ||
-                    errorCourse.rating
-                ){
-                    await setMessagePost("Revise los datos")
-                    return dispatch(adminPanelMensajesLocales(messagePost))
-                    
-                }
-                
+            )return setMessagePost("Revise los datos")
+            
             setMessagePost("");
             dispatch(post_course(newCourse))
                 .then(() => {
@@ -248,6 +241,13 @@ function Courses() {
     const handlePostCourse = () => {
         setPostCourse(true);
     };
+    
+    useEffect(() => {
+        if (messagePost !== "") {
+            dispatch(adminPanelMensajesLocales(messagePost));
+        }
+    }, [messagePost]);
+
 
     // life-cycles:
     useEffect(() => {
@@ -294,7 +294,8 @@ function Courses() {
                                         name="title"
                                         value={newCourse.title}
                                         onChange={handleCourseChange}
-                                    />
+                                        placeholder={modifCourse && course.title}
+                                        />
                                     {errorCourse && <p>{errorCourse.title}</p>}
                                 </div>
 
@@ -304,10 +305,11 @@ function Courses() {
                                         name="description"
                                         value={newCourse.description}
                                         onChange={handleCourseChange}
-                                    />
+                                        placeholder={modifCourse && course.description}
+                                        />
                                     {errorCourse && (
                                         <p>{errorCourse.description}</p>
-                                    )}
+                                        )}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -317,8 +319,9 @@ function Courses() {
                                         name="imageURL"
                                         value={newCourse.imageURL}
                                         onChange={handleCourseChange}
-                                    />
-                                    <p>{errorCourse.imageURL}</p>
+                                        placeholder={modifCourse && course.imageURL}
+                                        />
+                                    {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -328,8 +331,9 @@ function Courses() {
                                         name="courseUrl"
                                         value={newCourse.courseUrl}
                                         onChange={handleCourseChange}
-                                    />
-                                    <p>{errorCourse.courseUrl}</p>
+                                        placeholder={modifCourse && course.courseUrl}
+                                        />
+                                    {errorCourse.courseUrl && <p>{errorCourse.courseUrl}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -339,8 +343,9 @@ function Courses() {
                                         name="rating"
                                         value={newCourse.rating}
                                         onChange={handleCourseChange}
-                                    />
-                                    <p>{errorCourse.rating}</p>
+                                        placeholder={modifCourse && course.rating}
+                                        />
+                                   {errorCourse.rating && <p>{errorCourse.rating}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -350,9 +355,10 @@ function Courses() {
                                         name="released"
                                         value={newCourse.released}
                                         onChange={handleCourseChange}
-                                    />
-                                    <p>{errorCourse.released}</p>
-                                    <p>{errorCourse.released}</p>
+                                        placeholder={modifCourse && course.released}
+                                        />
+                                   {errorCourse.released && <p>{errorCourse.released}</p>}
+                                 
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -362,8 +368,9 @@ function Courses() {
                                         name="isFree"
                                         checked={newCourse.isFree}
                                         onChange={handleCourseChange}
-                                    />
+                                        />
                                     <p>{errorCourse.isFree}</p>
+                                        {errorCourse.isFree && <p>{errorCourse.isFree}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -373,8 +380,10 @@ function Courses() {
                                         name="language"
                                         value={newCourse.language}
                                         onChange={handleCourseChange}
-                                    />
-                                    <p>{errorCourse.language}</p>
+                                        placeholder={modifCourse && course.language}
+                                        />
+                                    
+                                        {errorCourse.language && <p>{errorCourse.language}</p>}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -383,17 +392,18 @@ function Courses() {
                                         multiple
                                         name="categories"
                                         onChange={handleCategorySelection}
-                                    >
+                                        >
                                         {categories.map((category) => (
                                             <option
-                                                key={category.id}
-                                                value={category.id}
+                                            key={category.id}
+                                            value={category.id}
                                             >
                                                 {category.name}
                                             </option>
                                         ))}
                                     </select>
-                                    <p>{errorCourse.categories}</p>
+                                        {errorCourse.categories && <p>{errorCourse.categories}</p>}
+                                    
                                 </div>
 
                                 <button onClick={handleCoursePost}>

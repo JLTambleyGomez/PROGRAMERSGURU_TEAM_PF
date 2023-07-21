@@ -329,6 +329,10 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         return{
             ...state, message: payload
         }
+        case PUT_COURSE:
+            return{
+                ...state, message: payload
+            }
         default:
             return { ...state };
     }

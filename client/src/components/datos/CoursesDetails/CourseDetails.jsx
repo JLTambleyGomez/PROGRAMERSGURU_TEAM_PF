@@ -73,10 +73,11 @@ function CourseDetails() {
             setFav(false);
         }
         return () => {
-            dispatch(clearMessage());
             dispatch(clearCourses());
+
+            dispatch(clearMessage());
         };
-    }, [dispatch]);
+    }, []);
 
     //component:
     return (

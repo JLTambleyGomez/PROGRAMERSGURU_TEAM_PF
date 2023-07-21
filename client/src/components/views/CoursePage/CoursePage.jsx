@@ -6,8 +6,7 @@ import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/acti
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
 import FilterBar from "../../bars/filterBar/FilterBar";
-import OrderBar from "../../bars/orderBar/OrderBar";
-import Modal from "../ventanaemergente/ventana";
+
 
 //_________________________module_________________________
 function CoursePage () {
@@ -15,6 +14,7 @@ function CoursePage () {
 
     //global states:
     const allCourses = useSelector((state) => state.courses)
+    const Courses = useSelector((state)=>state.allCourses)
 
     //states:
     const [isloading, setIsloading] = useState(true);
@@ -25,14 +25,14 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-        if (!allCourses.length) dispatch(get_courses_all());
+        if (!allCourses.length||!Courses.length) dispatch(get_courses_all());
 
         //--desmontado
         return () => { 
             dispatch(clearMessage());
             dispatch(clearCourses());
         };
-    }, [dispatch]);
+    }, []);
 
     useEffect(() => {
         setIsloading(true);

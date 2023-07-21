@@ -1,21 +1,12 @@
 import s from "./CoursesCard.module.css";
 import CourseCard from "../CourseCard/CourseCard";
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
+
 
 //_________________________module_________________________
 function CoursesCard () {
-
-    //scroll automatico
-    // const scrollRef = useRef(null);
-
-    // useEffect(() => {
-    //   const scrollElement = scrollRef.current;
-    //   scrollElement.scrollTop += 5;
-    // }, []);
-  
-// ______________
-
+ 
     //global state:
     const allCourses = useSelector((state) => state.courses) ? useSelector((state) => state.courses) : [];
 
@@ -38,6 +29,8 @@ function CoursesCard () {
     useEffect(() => {
         //retorna a la pagina 1 cada vez que se actualiza el array.
         if (allCourses.length < coursesPerPage) setCurrentPage(1);
+
+
     }, [allCourses])
 
 // ____________________
