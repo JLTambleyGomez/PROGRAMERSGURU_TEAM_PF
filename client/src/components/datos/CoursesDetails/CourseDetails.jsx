@@ -12,6 +12,7 @@ import {
     postFavoriteRequest,
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
+import PublishComment from "../Comments/subComponents/publishComment";
 
 import styles from "./CourseDetails.module.css";
 
@@ -148,7 +149,9 @@ function CourseDetails() {
                             })}
                         </div>
                     </div>
-                    <div className={styles.comments}></div>
+                    <div className={styles.comments}>
+                        <PublishComment/>
+                    </div>
                 </div>
             </div>
         </div>

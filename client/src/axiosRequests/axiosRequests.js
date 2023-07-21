@@ -201,20 +201,41 @@ export const createOrder = async () => {
 
 //Comments
 
-export const getCommentsByUser = async (userId) => {
-  const { data } = await axios.get(`/comment/${userId}`);
+export const getCommentsByCourse = async (courseId) => {
+  const { data } = await axios.get(`/comment/course/${courseId}`);
   return data;
 };
 
+export const getCommentsByUser = async (userId) => {
+  const { data } = await axios.get(`/comment/user/${userId}`);
+  return data;
+};
 
-export const getCommentsByCourse = async (courseId) => {
-  const { data } = await axios.get(`/comment/${courseId}`);
+export const postComment = async (courseId) => {
+  const { data } = await axios.post(`/comment/course/${courseId}`, commentData);
   return data;
 }
 
+export const putComment = async (id) => {
+  const { data } = await axios.put(`/comment/${id}`, commentData);
+  return data;
+}
+
+export const deleteComment = async (id) => {
+  const { data } = await axios.delete(`/comment/${id}`);
+  return data;
+}
+
+export const computeCourseRating = async (courseId) => {
+  const { data } = await axios.put(`/comment/course/${courseId}`);
+  return data;
+}
+
+
+
 export const sendEmail = async (carta) => {
   console.log(carta)
-  const { data } = await axios.post(`user/sendEmail`, carta);
+  const { data } = await axios.post(`/user/sendEmail`, carta);
   return data;
 };
 // // // 

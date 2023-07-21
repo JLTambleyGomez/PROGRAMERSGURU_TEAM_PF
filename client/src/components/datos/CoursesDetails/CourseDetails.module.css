@@ -112,6 +112,10 @@ h4 {
   margin-top: 10px;
   filter: invert();
 }
+.favorite:hover {
+  filter: invert(14%) sepia(100%) saturate(5408%) 
+  hue-rotate(359deg) brightness(91%) contrast(124%); 
+}
 .favorite-dark{
   filter: none;
 }
@@ -210,7 +214,6 @@ h4 {
 }
 
 .comments {
-    border: 2px solid rgb(155, 29, 7);
     height: 300px;
 }
 
