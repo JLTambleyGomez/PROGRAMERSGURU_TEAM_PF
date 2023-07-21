@@ -11,7 +11,7 @@
       /* 100% - (padding) */
       width: 80%;
       flex-direction: column;
-      justify-content: center;
+      justify-content: flex-start;
       position: absolute;
       animation:blur-in 0.4s linear both
    } @keyframes blur-in {

@@ -18,8 +18,8 @@ function CoursesPreview ( { courses } ) {
                 <Swiper
                     enabled={true}
                     modules={[EffectCoverflow, Pagination, Navigation]}
-                    effect={"coverflow"}
-                    spaceBetween={100}
+                    // effect={"coverflow"}
+                    // spaceBetween={100}
                     grabCursor={true}
                     centeredSlides={true}
                     loop={true}
@@ -64,13 +64,13 @@ function CoursesPreview ( { courses } ) {
                         ))
                     }
                 </Swiper>
-                {/* <div className="swiper-pagination">
+                <div className="swiper-pagination">
                     {
                         courses.map((course, index) => (
                             <span key={index} className="swiper-pagination-bullet"></span>
                         ))
                     }
-                </div> */}
+                </div>
                 {/* <div className="navigation-container">
                     <button className="swiper-button-prev" />
                     <button className="swiper-button-next" />
