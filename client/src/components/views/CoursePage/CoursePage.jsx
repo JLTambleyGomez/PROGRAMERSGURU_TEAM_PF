@@ -25,9 +25,7 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-        if (!allCourses.length||!Courses.length) dispatch(get_courses_all());
 
-        //--desmontado
         return () => { 
             dispatch(clearMessage());
             dispatch(clearCourses());
@@ -36,9 +34,14 @@ function CoursePage () {
 
     useEffect(() => {
         setIsloading(true);
+        if (!allCourses.length) dispatch(get_courses_all());
+
+   
+        
         const timer = setTimeout(() => {
             setIsloading(false);
-        }, 500);
+        }, 1000);
+       
     }, [allCourses])
 
 
