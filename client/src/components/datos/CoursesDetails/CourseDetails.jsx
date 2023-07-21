@@ -36,6 +36,7 @@ function CourseDetails() {
     const fullStar = "https://www.svgrepo.com/show/371873/favorite.svg";
     const dispatch = useDispatch();
     const { id } = useParams();
+
     //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
@@ -45,34 +46,31 @@ function CourseDetails() {
     const handleRemoveFavorite = async (event) => {
         event.preventDefault();
         setFav(!fav);
-        setIds({ ...ids, userId: user?.id, courseId: Number(id) });
         console.log(ids);
-        await deleteFavoriteRequest(ids);
-        const favs = favorites?.Courses?.map((fav) => fav.id);
-        if (favs?.includes(Number(course[0]?.id))) {
-            console.log("holis");
-            setFav(true);
-        }
+        const data = await deleteFavoriteRequest(ids);
+        console.log(data.message);
+
     };
     const handleAddFavorite = async (event) => {
         event.preventDefault();
         setFav(!fav);
-        setIds({ ...ids, userId: user?.id, courseId: Number(id) });
-        console.log(ids);
-        await postFavoriteRequest(ids);
+        const data = await postFavoriteRequest(ids);
+        console.log(data.message);
     };
 
     //life-cycles:
     useEffect(() => {
         dispatch(get_course_by_id(id));
-        console.log(course);
-        console.log(user?.id);
         dispatch(get_Favorites_Request(user?.id));
-        console.log(favorites);
+        setIds({...ids, courseId: course[0]?.id || id, userId: Number(user?.id)})
         const favs = favorites?.Courses?.map((fav) => fav.id);
-        console.log(favs);
         if (favs?.includes(Number(id))) {
+            console.log("Este curso esta en favs")
             setFav(true);
+        }
+        if (!favs?.includes(Number(id))) {
+            console.log("Este curso no esta en favs")
+            setFav(false);
         }
         return () => {
             dispatch(clearMessage());

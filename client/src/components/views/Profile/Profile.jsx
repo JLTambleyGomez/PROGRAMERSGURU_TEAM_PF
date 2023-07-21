@@ -19,7 +19,7 @@ import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 function ProfileV2() {
     //global states:
     const user = useSelector((state) => state.user);
-    const userId = user.id;
+    const userId = user?.id;
     const userComments = useSelector((state) => state.userComments);
 
     //local states
@@ -152,11 +152,11 @@ function ProfileV2() {
                                 handleChange={handleChange}
                                 newUserData={newUserData}
                             />
-                            <div>
+                            {/* <div>
                                 <button className={s.desactivar}>
                                     Desactivar mi cuenta
                                 </button>
-                            </div>
+                            </div> */}
                         </>
                     ) : null}
                 </div>
@@ -171,7 +171,7 @@ function ProfileV2() {
             </div>
             <div className={s.content}>
                 <NavBarProfile tab={tab} changeTab={changeTab} />
-                {tab === "favorites" && <Favorites />}
+                {tab === "favorites" && <Favorites userId={userId}/>}
                 {tab === "reseñas" && <Reviews />}
                 {tab === "compras" && <Compras />}
                 {tab === "carrito" && <Carrito />}

@@ -179,3 +179,19 @@
 .refresh:hover img{
     cursor: pointer;
 }
+
+
+
+.favorites {
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    color: gray;
+    overflow: scroll;
+}
