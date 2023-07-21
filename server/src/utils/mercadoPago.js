@@ -6,7 +6,7 @@ const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
 mercadoPago.configure({
-  access_token: "TEST-7366931760156988-071417-9f721ac6bad881e7546f0df180920193-1423375235",
+  access_token: "TEST-6017613403493713-072110-6dcf755ef51edd4970b6ed14ed9133c3-1429901448",
 });
 
 const PagoconMercadopago = async (req, res) => {
