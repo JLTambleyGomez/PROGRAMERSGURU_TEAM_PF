@@ -15,8 +15,8 @@ module.exports = (sequelize) => {
                 allowNull: false,
                 validate: {
                     len: {
-                        args: [1, 50],
-                        msg: "Debe ingresar un mensaje que contenga hasta 50 caracteres",
+                        args: [1, 280],
+                        msg: "Debe ingresar un mensaje que contenga hasta 280 caracteres",
                     },
                 },
             },
@@ -30,10 +30,10 @@ module.exports = (sequelize) => {
                 },
             },
             rating: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.FLOAT,
                 validate: {
                     max: 5,
-                    min: 1,
+                    min: 0,
                 }
             }
         },

@@ -8,7 +8,7 @@ const getProduct = async (req, res) => {
 
         return res.status(404).json({message: "No se encontró ningún producto"})
     } catch (error) {
-        return res.status(500).json({message: "Algo salió mal"})
+        return res.status(500).json({message: "Algo salió mal " + error})
     }
 }
 

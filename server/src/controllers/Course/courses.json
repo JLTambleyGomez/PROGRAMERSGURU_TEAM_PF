@@ -1,255 +1,191 @@
-{"courses": [
 {
-    "id": 0,
-    "title": "",
-    "description": "",
-    "imageURL": "",
-    "courseUrl": "",
-    "rating": 0,
-    "released": "",
-    "language": "",
-    "isFree": false
-}, 
-{
- 
-    "title": "Certificación en Diseño Web Responsivo ",
-    "description": "El curso de Diseño Web Responsivo ofrecido por Free Code Camp es un programa integral diseñado para enseñar a los estudiantes las habilidades y principios esenciales para crear sitios web receptivos y amigables para el usuario. En este curso, profundizarás en los fundamentos de HTML5 y CSS, dominando técnicas para construir páginas web que se adapten sin problemas a diferentes tamaños de pantalla y dispositivos.\n\nEl curso comienza presentando los conceptos básicos del diseño web responsivo, enseñándote cómo estructurar y dar estilo al contenido web utilizando elementos HTML y selectores CSS. A medida que avances, explorarás el concepto de las consultas de medios (media queries) y aprenderás a implementarlas para crear diseños que se ajusten dinámicamente según las dimensiones de la pantalla.\n\nA lo largo del curso, adquirirás experiencia práctica trabajando en proyectos concretos, donde aplicarás tus nuevos conocimientos para crear páginas web y aplicaciones web completamente responsivas. También aprenderás las mejores prácticas para optimizar imágenes e incorporar tipografía responsiva para mejorar la experiencia general del usuario.\n\nAl finalizar el curso de Diseño Web Responsivo, contarás con una sólida base para crear sitios web visualmente atractivos y funcionales en diversos dispositivos. Ya seas un principiante o un desarrollador experimentado que busca ampliar tus habilidades, este curso te proporcionará las herramientas y el conocimiento necesarios para construir sitios web receptivos que satisfagan las demandas del panorama digital actual.",
-    "imageURL": "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/2022/responsive-web-design/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Español",
-    "isFree": true,
-    "categories": [
-        
-      ]
-},
-{
- 
-    "title": "Algoritmos de JavaScript y Estructuras de Datos",
-    "description": "El curso 'Algoritmos de JavaScript y Estructuras de Datos' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos de los algoritmos y las estructuras de datos en JavaScript. En este curso, explorarás cómo resolver problemas y optimizar el rendimiento de tus aplicaciones web mediante el uso de algoritmos eficientes y estructuras de datos adecuadas.\n\nEl curso comienza cubriendo los conceptos básicos de los algoritmos, como la manipulación de arrays, la búsqueda y ordenación de elementos, y la recursión. A medida que avanzas, profundizarás en estructuras de datos esenciales, como listas enlazadas, pilas, colas, árboles y grafos. Aprenderás cómo implementar estas estructuras y utilizarlas para resolver problemas comunes.\n\nAdemás, el curso te enseñará técnicas para analizar la complejidad de los algoritmos y evaluar su eficiencia en términos de tiempo y espacio. También abordarás conceptos clave como la programación dinámica y la búsqueda en profundidad (DFS) y en amplitud (BFS).\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos resolviendo desafiantes ejercicios y proyectos prácticos. Esto te ayudará a fortalecer tu comprensión de los algoritmos y las estructuras de datos, y te brindará la confianza necesaria para enfrentar problemas de programación de manera efectiva.\n\nAl finalizar el curso 'Algoritmos de JavaScript y Estructuras de Datos', contarás con una sólida base en algoritmos y estructuras de datos en JavaScript. Estarás preparado para abordar desafíos de programación más complejos y construir aplicaciones web más eficientes y escalables. Ya seas un principiante o un desarrollador experimentado que busca mejorar sus habilidades, este curso te proporcionará los conocimientos y las herramientas necesarias para llevar tu programación al siguiente nivel.",
-    "imageURL": "https://facialix.com/wp-content/uploads/2023/07/algoritmos-javascript-facialix.jpg",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/javascript-algorithms-and-data-structures/",
-    "rating": 0,
-    "released": "2021",
-    "language": "Español",
-    "isFree": true,
-    "categories": [
-        
+    "courses": [
+        {
+            "id": 1,
+            "title": "Certificación en Diseño Web Responsivo ",
+            "description": "El curso de Diseño Web Responsivo ofrecido por Free Code Camp es un programa integral diseñado para enseñar a los estudiantes las habilidades y principios esenciales para crear sitios web receptivos y amigables para el usuario. En este curso, profundizarás en los fundamentos de HTML5 y CSS, dominando técnicas para construir páginas web que se adapten sin problemas a diferentes tamaños de pantalla y dispositivos.\n\nEl curso comienza presentando los conceptos básicos del diseño web responsivo, enseñándote cómo estructurar y dar estilo al contenido web utilizando elementos HTML y selectores CSS. A medida que avances, explorarás el concepto de las consultas de medios (media queries) y aprenderás a implementarlas para crear diseños que se ajusten dinámicamente según las dimensiones de la pantalla.\n\nA lo largo del curso, adquirirás experiencia práctica trabajando en proyectos concretos, donde aplicarás tus nuevos conocimientos para crear páginas web y aplicaciones web completamente responsivas. También aprenderás las mejores prácticas para optimizar imágenes e incorporar tipografía responsiva para mejorar la experiencia general del usuario.\n\nAl finalizar el curso de Diseño Web Responsivo, contarás con una sólida base para crear sitios web visualmente atractivos y funcionales en diversos dispositivos. Ya seas un principiante o un desarrollador experimentado que busca ampliar tus habilidades, este curso te proporcionará las herramientas y el conocimiento necesarios para construir sitios web receptivos que satisfagan las demandas del panorama digital actual.",
+            "imageURL": "https://cdn.freecodecamp.org/platform/universal/fcc_meta_1920X1080-indigo.png",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/2022/responsive-web-design/",
+            "meanRating": null,
+            "released": "2022-09-17",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 2,
+            "title": "Algoritmos de JavaScript y Estructuras de Datos",
+            "description": "El curso 'Algoritmos de JavaScript y Estructuras de Datos' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos de los algoritmos y las estructuras de datos en JavaScript. En este curso, explorarás cómo resolver problemas y optimizar el rendimiento de tus aplicaciones web mediante el uso de algoritmos eficientes y estructuras de datos adecuadas.\n\nEl curso comienza cubriendo los conceptos básicos de los algoritmos, como la manipulación de arrays, la búsqueda y ordenación de elementos, y la recursión. A medida que avanzas, profundizarás en estructuras de datos esenciales, como listas enlazadas, pilas, colas, árboles y grafos. Aprenderás cómo implementar estas estructuras y utilizarlas para resolver problemas comunes.\n\nAdemás, el curso te enseñará técnicas para analizar la complejidad de los algoritmos y evaluar su eficiencia en términos de tiempo y espacio. También abordarás conceptos clave como la programación dinámica y la búsqueda en profundidad (DFS) y en amplitud (BFS).\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos resolviendo desafiantes ejercicios y proyectos prácticos. Esto te ayudará a fortalecer tu comprensión de los algoritmos y las estructuras de datos, y te brindará la confianza necesaria para enfrentar problemas de programación de manera efectiva.\n\nAl finalizar el curso 'Algoritmos de JavaScript y Estructuras de Datos', contarás con una sólida base en algoritmos y estructuras de datos en JavaScript. Estarás preparado para abordar desafíos de programación más complejos y construir aplicaciones web más eficientes y escalables. Ya seas un principiante o un desarrollador experimentado que busca mejorar sus habilidades, este curso te proporcionará los conocimientos y las herramientas necesarias para llevar tu programación al siguiente nivel.",
+            "imageURL": "https://facialix.com/wp-content/uploads/2023/07/algoritmos-javascript-facialix.jpg",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/javascript-algorithms-and-data-structures/",
+            "meanRating": null,
+            "released": "2021-08-20",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 3,
+            "title": "Librerías de desarrollo de la interfaz",
+            "description": "El curso 'Librerías de desarrollo de la interfaz' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes a utilizar librerías populares para el desarrollo de interfaces de usuario. En este curso, explorarás librerías como React, Vue.js o Angular, aprendiendo a construir aplicaciones web interactivas y dinámicas.\n\nEl curso comienza con una introducción a las librerías de desarrollo de la interfaz y su importancia en la creación de aplicaciones modernas. A medida que avanzas, aprenderás los conceptos fundamentales de cada librería, como componentes, enlaces de datos y enrutamiento. También descubrirás cómo trabajar con herramientas de desarrollo como Webpack o Babel.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde construirás aplicaciones web funcionales utilizando las librerías aprendidas. Esto te permitirá adquirir experiencia práctica y fortalecer tus habilidades de desarrollo de interfaces de usuario.\n\nAl finalizar el curso de 'Librerías de desarrollo de la interfaz', estarás preparado para utilizar librerías populares y modernas en tus proyectos web. Ya sea que estés comenzando como desarrollador web o que desees ampliar tus habilidades, este curso te proporcionará las bases necesarias para construir interfaces de usuario interactivas y eficientes utilizando librerías de desarrollo de la interfaz.",
+            "imageURL": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*paPkmhDhXifPg-64om52og.jpeg",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/front-end-development-libraries/",
+            "meanRating": null,
+            "released": "2022-03-15",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 4,
+            "title": "Visualización de Datos",
+            "description": "El curso 'Visualización de Datos' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes las habilidades necesarias para visualizar y presentar datos de manera efectiva. En este curso, explorarás técnicas y herramientas para transformar datos complejos en gráficos y visualizaciones claras y comprensibles.\n\nEl curso comienza introduciendo los fundamentos de la visualización de datos y su importancia en el análisis y comunicación de información. A medida que avanzas, aprenderás a utilizar librerías populares como D3.js y Chart.js para crear visualizaciones interactivas y atractivas.\n\nAdemás, aprenderás sobre conceptos clave como la representación gráfica de datos, la selección y manipulación de elementos, la animación y la interacción con los usuarios. También explorarás diferentes tipos de gráficos, como gráficos de barras, gráficos circulares, diagramas de dispersión y mapas.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde trabajarás con conjuntos de datos reales y crearás visualizaciones efectivas. Esto te permitirá desarrollar habilidades prácticas y mejorar tu capacidad para presentar datos de manera impactante.\n\nAl finalizar el curso de 'Visualización de Datos', estarás preparado para crear visualizaciones atractivas y comprensibles, que ayuden a transmitir información de manera efectiva. Tanto si eres un principiante en el campo de la visualización de datos como si deseas ampliar tus habilidades, este curso te proporcionará los conocimientos y las herramientas necesarias para destacar en el mundo de la visualización de datos.",
+            "imageURL": "https://rockcontent.com/es/wp-content/uploads/sites/3/2020/09/Qu%C3%A9-es-la-visualizaci%C3%B3n-de-datos.png.webp",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/data-visualization/",
+            "meanRating": null,
+            "released": "2021-10-06",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 16,
+            "title": "Codecademy",
+            "description": "Codecademy es una plataforma interactiva en línea que ofrece cursos de programación en diferentes lenguajes y tecnologías.",
+            "imageURL": "https://i.pcmag.com/imagery/reviews/05XBKmNFYeHCMIn726Nohqb-10.fit_scale.size_1028x578.v1627594235.png",
+            "courseUrl": "https://www.codecademy.com/",
+            "meanRating": null,
+            "released": "2021-05-06",
+            "isFree": true,
+            "language": ""
+        },
+        {
+            "id": 17,
+            "title": "SoyHenry",
+            "description": "Al revés de las academias de tecnología tradicionales en las cuales los estudiantes invierten en ellas, nosotros invertimos en ti. Solo nos pagas cuando consigues un trabajo.",
+            "imageURL": "https://i.ytimg.com/vi/iclPAx8jMOA/maxresdefault.jpg",
+            "courseUrl": "https://www.soyhenry.com/",
+            "meanRating": null,
+            "released": "2022-06-01",
+            "isFree": false,
+            "language": "Español"
+        },
+        {
+            "id": 5,
+            "title": "Datos de Bases Relacionales",
+            "description": "El curso 'Bases de Datos Relacionales' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los conceptos fundamentales de las bases de datos y cómo trabajar con ellas. En este curso, explorarás cómo diseñar y gestionar bases de datos relacionales utilizando SQL (Structured Query Language).\n\nEl curso comienza introduciendo los conceptos básicos de las bases de datos relacionales y su importancia en el almacenamiento y recuperación eficiente de datos estructurados. A medida que avanzas, aprenderás a utilizar SQL para crear y manipular tablas, definir relaciones entre ellas y realizar consultas avanzadas.\n\nAdemás, te familiarizarás con los diferentes tipos de datos en SQL, las cláusulas de filtrado, la ordenación de resultados y la normalización de bases de datos. También aprenderás técnicas para optimizar el rendimiento de las consultas y asegurar la integridad de los datos.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde diseñarás y gestionarás bases de datos reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión de las bases de datos relacionales.\n\nAl finalizar el curso de 'Bases de Datos Relacionales', estarás preparado para trabajar con bases de datos relacionales y utilizar SQL de manera efectiva para gestionar y consultar datos. Ya sea que estés comenzando en el mundo de las bases de datos o desees mejorar tus habilidades existentes, este curso te brindará las bases necesarias para destacar en el campo de las bases de datos relacionales.",
+            "imageURL": "https://codespaceacademy.com/wp-content/uploads/2022/01/Azil-Marron-Transporte-Foto-Negocio-Blog-Banner-1.svg",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/relational-database/",
+            "meanRating": null,
+            "released": "2022-06-10",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 6,
+            "title": "Desarrollo Back End y APIs",
+            "description": "En la Certificación de API y desarrollo de back-end, aprenderá a escribir aplicaciones de back-end con Node.js y npm. También creará aplicaciones web con el marco Express y creará un microservicio People Finder con MongoDB y la biblioteca Mongoose.",
+            "imageURL": "https://rockcontent.com/es/wp-content/uploads/sites/3/2020/08/qu%C3%A9-es-REST-API.jpg.webp",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/back-end-development-and-apis/",
+            "meanRating": null,
+            "released": "2022-07-09",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 7,
+            "title": "Control de Calidad",
+            "description": "El curso 'Control de Calidad' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos del control de calidad en el desarrollo de software. En este curso, aprenderás sobre las prácticas y herramientas utilizadas para garantizar que los productos y servicios cumplan con los estándares de calidad establecidos.\n\nEl curso comienza introduciendo los conceptos básicos del control de calidad, incluyendo la importancia de la verificación y validación en el proceso de desarrollo de software. A medida que avanzas, explorarás técnicas de prueba, incluyendo pruebas unitarias, pruebas de integración y pruebas funcionales.\n\nAdemás, aprenderás sobre metodologías ágiles y cómo incorporar el control de calidad en un entorno de desarrollo ágil. También te familiarizarás con herramientas populares utilizadas en el control de calidad, como frameworks de pruebas y sistemas de gestión de errores.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde realizarás pruebas de calidad en aplicaciones reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del control de calidad en el desarrollo de software.\n\nAl finalizar el curso de 'Control de Calidad', estarás preparado para implementar prácticas de control de calidad efectivas y asegurar la entrega de productos y servicios de alta calidad. Tanto si eres un desarrollador de software en busca de mejorar tus habilidades de control de calidad, como si estás interesado en ingresar al campo del control de calidad, este curso te proporcionará los conocimientos y las herramientas necesarias para tener éxito en este ámbito.",
+            "imageURL": "https://images.griddo.universitatcarlemany.com/c/contain/q/65/w/754/h/452/f/avif/control-calidad-1",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/quality-assurance/",
+            "meanRating": null,
+            "released": "2021-02-28",
+            "isFree": true,
+            "language": "Español"
+        },
+        {
+            "id": 8,
+            "title": "Cálculo Científico con Python",
+            "description": "El curso 'Cálculo Científico con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes cómo utilizar Python como una herramienta poderosa en el campo del cálculo científico. En este curso, explorarás cómo utilizar bibliotecas populares como NumPy, SciPy y Matplotlib para realizar cálculos numéricos, análisis de datos y visualización.\n\nEl curso comienza introduciendo los fundamentos del cálculo científico y su importancia en la resolución de problemas del mundo real. A medida que avanzas, aprenderás a utilizar NumPy para manipular matrices y realizar operaciones matemáticas avanzadas. También explorarás las capacidades de SciPy para realizar tareas como optimización, interpolación y procesamiento de señales.\n\nAdemás, aprenderás a visualizar datos y resultados utilizando la biblioteca Matplotlib. Descubrirás cómo crear gráficos, diagramas de dispersión, histogramas y más para comunicar efectivamente tus resultados.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde utilizarás Python y las bibliotecas mencionadas para resolver problemas de cálculo científico reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del cálculo científico con Python.\n\nAl finalizar el curso de 'Cálculo Científico con Python', estarás preparado para utilizar Python como una herramienta eficaz en el campo del cálculo científico. Ya sea que estés comenzando en el campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las herramientas necesarias para realizar cálculos numéricos, análisis de datos y visualizaciones utilizando Python.",
+            "imageURL": "https://www.freecodecamp.org/espanol/news/content/images/size/w2000/2023/03/Mathematics-Scipy.jpg",
+            "courseUrl": "https://www.freecodecamp.org/espanol/learn/scientific-computing-with-python/",
+            "meanRating": null,
+            "released": "2022-06-13",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 9,
+            "title": "Seguridad de la Información",
+            "description": "El curso 'Seguridad de la Información' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos de la seguridad de la información y cómo proteger los sistemas y datos en entornos digitales. En este curso, explorarás conceptos y prácticas clave relacionadas con la seguridad informática.\n\nEl curso comienza introduciendo los fundamentos de la seguridad de la información, incluyendo la confidencialidad, integridad y disponibilidad de los datos. A medida que avanzas, aprenderás sobre criptografía, autenticación, control de acceso y técnicas de prevención y detección de amenazas.\n\nAdemás, explorarás conceptos como seguridad en redes, seguridad en aplicaciones y seguridad en la nube. También aprenderás sobre mejores prácticas de seguridad, legislación y ética en el ámbito de la seguridad de la información.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde evaluarás y fortalecerás la seguridad de sistemas y datos reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión de la seguridad de la información.\n\nAl finalizar el curso de 'Seguridad de la Información', estarás preparado para comprender y aplicar principios y técnicas de seguridad de la información en entornos digitales. Ya sea que desees iniciar una carrera en seguridad informática o mejorar tus habilidades existentes, este curso te proporcionará los conocimientos y las herramientas necesarias para proteger sistemas y datos de manera efectiva.",
+            "imageURL": "https://media.istockphoto.com/id/1350595566/es/foto/concepto-de-protecci%C3%B3n-de-la-interfaz-de-firewall-de-seguridad-cibern%C3%A9tica-empresaria.jpg?s=612x612&w=0&k=20&c=bughrIbQKI-fI_GvUW6dVpJlnH0zvfjrecJKk9pQgh8=",
+            "courseUrl": "https://www.freecodecamp.org/learn/information-security/",
+            "meanRating": null,
+            "released": "2022-02-06",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 10,
+            "title": "Aprendizaje Automático con Python",
+            "description": "El curso 'Aprendizaje Automático con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos y técnicas del aprendizaje automático utilizando Python. En este curso, explorarás cómo utilizar bibliotecas populares como Scikit-learn y TensorFlow para entrenar modelos de aprendizaje automático y realizar análisis predictivos.\n\nEl curso comienza introduciendo los conceptos básicos del aprendizaje automático y su importancia en la resolución de problemas complejos. A medida que avanzas, aprenderás a utilizar Scikit-learn para realizar tareas como clasificación, regresión y agrupamiento. También explorarás TensorFlow para construir y entrenar redes neuronales.\n\nAdemás, aprenderás sobre técnicas de preprocesamiento de datos, evaluación de modelos y optimización de parámetros. También te familiarizarás con conceptos clave como validación cruzada, regularización y aprendizaje profundo.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde utilizarás Python y las bibliotecas mencionadas para resolver problemas reales de aprendizaje automático. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del aprendizaje automático con Python.\n\nAl finalizar el curso de 'Aprendizaje Automático con Python', estarás preparado para utilizar Python como una herramienta poderosa en el campo del aprendizaje automático. Ya sea que estés comenzando en este campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las habilidades necesarias para construir y entrenar modelos de aprendizaje automático utilizando Python.",
+            "imageURL": "https://prod-discovery.edx-cdn.org/media/course/image/fa82aec4-f617-4efc-b64e-2855f1567df4-3c78499bb9f8.small.png",
+            "courseUrl": "https://www.freecodecamp.org/learn/machine-learning-with-python/",
+            "meanRating": null,
+            "released": "2022-06-06",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 11,
+            "title": "Álgebra Universitaria con Python",
+            "description": "El curso 'Álgebra Universitaria con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los conceptos fundamentales del álgebra y cómo aplicarlos utilizando Python. En este curso, explorarás cómo utilizar Python como una herramienta poderosa para resolver problemas de álgebra y realizar cálculos matemáticos.\n\nEl curso comienza introduciendo los conceptos básicos del álgebra universitaria, incluyendo ecuaciones, funciones, polinomios y sistemas de ecuaciones. A medida que avanzas, aprenderás a utilizar Python para realizar operaciones algebraicas, resolver ecuaciones y gráficar funciones.\n\nAdemás, explorarás conceptos más avanzados como matrices, determinantes y vectores. También descubrirás cómo utilizar bibliotecas matemáticas en Python, como NumPy y SymPy, para realizar cálculos y manipulaciones algebraicas.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en ejercicios prácticos, donde utilizarás Python y las técnicas aprendidas para resolver problemas de álgebra universitaria. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del álgebra con Python.\n\nAl finalizar el curso de 'Álgebra Universitaria con Python', estarás preparado para utilizar Python como una herramienta eficaz en el campo del álgebra universitaria. Ya sea que estés comenzando en el campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las habilidades necesarias para realizar cálculos matemáticos y resolver problemas de álgebra utilizando Python.",
+            "imageURL": "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2023/04/raspberry-lanza-editor-codigo-aprender-python-lenguaje-ia-3008158.jpg?tf=3840x",
+            "courseUrl": "https://www.freecodecamp.org/learn/college-algebra-with-python/",
+            "meanRating": null,
+            "released": "2022-06-06",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 12,
+            "title": "Intro to HTML and CSS",
+            "description": "A lo largo de este curso, aprenderás sobre la estructura subyacente de la web: HTML. Aprenderás cómo utilizar esta estructura en forma de árbol para crear sitios web. También aprenderás a aplicar estilos a un sitio web a través de CSS. Conocerás la sintaxis de CSS, los selectores y las unidades. En el camino, también aprenderás sobre editores de código y las herramientas de desarrollo del navegador.",
+            "imageURL": "https://www.imaginanet.com/thumb.php?n=blog%2F10herramientas.jpg&w=640&h=250&x=0&y=0",
+            "courseUrl": "https://www.udacity.com/course/intro-to-html-and-css--ud001",
+            "meanRating": null,
+            "released": "2020-01-01",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 13,
+            "title": "Responsive Web Design Fundamentals",
+            "description": "En este curso aprenderás los fundamentos del diseño web responsivo con Pete LePage de Google. Crearás tu propia página web responsiva que se adapte perfectamente a cualquier dispositivo, ya sea un teléfono, una tablet, un escritorio o cualquier otro dispositivo intermedio.\n\nComenzarás explorando qué hace que un sitio web sea responsivo y cómo funcionan algunos patrones comunes de diseño responsivo en diferentes dispositivos. A partir de ahí, aprenderás cómo crear tu propio diseño responsivo utilizando la etiqueta de la ventana gráfica (viewport tag) y las consultas de medios en CSS. A medida que avances, experimentarás con puntos de quiebre mayores y menores, y optimizarás el texto para una mejor legibilidad.",
+            "imageURL": "https://kinsta.com/wp-content/uploads/2020/08/responsive-web-design.jpg",
+            "courseUrl": "https://www.udacity.com/course/responsive-web-design-fundamentals--ud893",
+            "meanRating": null,
+            "released": "2021-06-30",
+            "isFree": true,
+            "language": "Inglés"
+        },
+        {
+            "id": 14,
+            "title": "Udemy",
+            "description": "Udemy es una plataforma de aprendizaje en línea con una amplia variedad de cursos de programación y desarrollo web.",
+            "imageURL": "https://i0.wp.com/muyfinanciero.com/wp-content/uploads/2021/10/Udemy-y-su-programa-de-afiliados.png?w=1280&ssl=1",
+            "courseUrl": "https://www.udemy.com/",
+            "meanRating": null,
+            "released": "2020-12-06",
+            "isFree": false,
+            "language": "Inglés"
+        },
+        {
+            "id": 15,
+            "title": "CodeWars",
+            "description": "CodeWars es una plataforma en línea que ofrece desafíos de codificación para mejorar tus habilidades de programación.",
+            "imageURL": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0pLbHKAulWnsx4U2MQyn2w.png",
+            "courseUrl": "https://www.codewars.com/",
+            "meanRating": null,
+            "released": "2021-07-26",
+            "isFree": false,
+            "language": "Inglés"
+        }
     ]
-},
-{
-    "title": "Librerías de desarrollo de la interfaz",
-    "description": "El curso 'Librerías de desarrollo de la interfaz' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes a utilizar librerías populares para el desarrollo de interfaces de usuario. En este curso, explorarás librerías como React, Vue.js o Angular, aprendiendo a construir aplicaciones web interactivas y dinámicas.\n\nEl curso comienza con una introducción a las librerías de desarrollo de la interfaz y su importancia en la creación de aplicaciones modernas. A medida que avanzas, aprenderás los conceptos fundamentales de cada librería, como componentes, enlaces de datos y enrutamiento. También descubrirás cómo trabajar con herramientas de desarrollo como Webpack o Babel.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde construirás aplicaciones web funcionales utilizando las librerías aprendidas. Esto te permitirá adquirir experiencia práctica y fortalecer tus habilidades de desarrollo de interfaces de usuario.\n\nAl finalizar el curso de 'Librerías de desarrollo de la interfaz', estarás preparado para utilizar librerías populares y modernas en tus proyectos web. Ya sea que estés comenzando como desarrollador web o que desees ampliar tus habilidades, este curso te proporcionará las bases necesarias para construir interfaces de usuario interactivas y eficientes utilizando librerías de desarrollo de la interfaz.",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/front-end-development-libraries/",
-    "imageURL": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*paPkmhDhXifPg-64om52og.jpeg",
-    "rating": 0,
-    "released": "2022",
-    "language": "Español",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Visualización de Datos",
-    "description": "El curso 'Visualización de Datos' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes las habilidades necesarias para visualizar y presentar datos de manera efectiva. En este curso, explorarás técnicas y herramientas para transformar datos complejos en gráficos y visualizaciones claras y comprensibles.\n\nEl curso comienza introduciendo los fundamentos de la visualización de datos y su importancia en el análisis y comunicación de información. A medida que avanzas, aprenderás a utilizar librerías populares como D3.js y Chart.js para crear visualizaciones interactivas y atractivas.\n\nAdemás, aprenderás sobre conceptos clave como la representación gráfica de datos, la selección y manipulación de elementos, la animación y la interacción con los usuarios. También explorarás diferentes tipos de gráficos, como gráficos de barras, gráficos circulares, diagramas de dispersión y mapas.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde trabajarás con conjuntos de datos reales y crearás visualizaciones efectivas. Esto te permitirá desarrollar habilidades prácticas y mejorar tu capacidad para presentar datos de manera impactante.\n\nAl finalizar el curso de 'Visualización de Datos', estarás preparado para crear visualizaciones atractivas y comprensibles, que ayuden a transmitir información de manera efectiva. Tanto si eres un principiante en el campo de la visualización de datos como si deseas ampliar tus habilidades, este curso te proporcionará los conocimientos y las herramientas necesarias para destacar en el mundo de la visualización de datos.",
-    "imageURL": "https://rockcontent.com/es/wp-content/uploads/sites/3/2020/09/Qu%C3%A9-es-la-visualizaci%C3%B3n-de-datos.png.webp",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/data-visualization/",
-    "rating": 0,
-    "released": "2021",
-    "language": "Español",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Datos de Bases Relacionales",
-    "description": "El curso 'Bases de Datos Relacionales' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los conceptos fundamentales de las bases de datos y cómo trabajar con ellas. En este curso, explorarás cómo diseñar y gestionar bases de datos relacionales utilizando SQL (Structured Query Language).\n\nEl curso comienza introduciendo los conceptos básicos de las bases de datos relacionales y su importancia en el almacenamiento y recuperación eficiente de datos estructurados. A medida que avanzas, aprenderás a utilizar SQL para crear y manipular tablas, definir relaciones entre ellas y realizar consultas avanzadas.\n\nAdemás, te familiarizarás con los diferentes tipos de datos en SQL, las cláusulas de filtrado, la ordenación de resultados y la normalización de bases de datos. También aprenderás técnicas para optimizar el rendimiento de las consultas y asegurar la integridad de los datos.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde diseñarás y gestionarás bases de datos reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión de las bases de datos relacionales.\n\nAl finalizar el curso de 'Bases de Datos Relacionales', estarás preparado para trabajar con bases de datos relacionales y utilizar SQL de manera efectiva para gestionar y consultar datos. Ya sea que estés comenzando en el mundo de las bases de datos o desees mejorar tus habilidades existentes, este curso te brindará las bases necesarias para destacar en el campo de las bases de datos relacionales.",
-    "imageURL": "https://codespaceacademy.com/wp-content/uploads/2022/01/Azil-Marron-Transporte-Foto-Negocio-Blog-Banner-1.svg",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/relational-database/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Español",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-
-    "title": "Desarrollo Back End y APIs",
-    "description": "En la Certificación de API y desarrollo de back-end, aprenderá a escribir aplicaciones de back-end con Node.js y npm. También creará aplicaciones web con el marco Express y creará un microservicio People Finder con MongoDB y la biblioteca Mongoose.",
-    "imageURL": "https://rockcontent.com/es/wp-content/uploads/sites/3/2020/08/qu%C3%A9-es-REST-API.jpg.webp",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/back-end-development-and-apis/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Español",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Control de Calidad",
-    "description": "El curso 'Control de Calidad' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos del control de calidad en el desarrollo de software. En este curso, aprenderás sobre las prácticas y herramientas utilizadas para garantizar que los productos y servicios cumplan con los estándares de calidad establecidos.\n\nEl curso comienza introduciendo los conceptos básicos del control de calidad, incluyendo la importancia de la verificación y validación en el proceso de desarrollo de software. A medida que avanzas, explorarás técnicas de prueba, incluyendo pruebas unitarias, pruebas de integración y pruebas funcionales.\n\nAdemás, aprenderás sobre metodologías ágiles y cómo incorporar el control de calidad en un entorno de desarrollo ágil. También te familiarizarás con herramientas populares utilizadas en el control de calidad, como frameworks de pruebas y sistemas de gestión de errores.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde realizarás pruebas de calidad en aplicaciones reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del control de calidad en el desarrollo de software.\n\nAl finalizar el curso de 'Control de Calidad', estarás preparado para implementar prácticas de control de calidad efectivas y asegurar la entrega de productos y servicios de alta calidad. Tanto si eres un desarrollador de software en busca de mejorar tus habilidades de control de calidad, como si estás interesado en ingresar al campo del control de calidad, este curso te proporcionará los conocimientos y las herramientas necesarias para tener éxito en este ámbito.",
-    "imageURL": "https://images.griddo.universitatcarlemany.com/c/contain/q/65/w/754/h/452/f/avif/control-calidad-1",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/quality-assurance/",
-    "rating": 0,
-    "released": "2021",
-    "language": "Español",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Cálculo Científico con Python",
-    "description": "El curso 'Cálculo Científico con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes cómo utilizar Python como una herramienta poderosa en el campo del cálculo científico. En este curso, explorarás cómo utilizar bibliotecas populares como NumPy, SciPy y Matplotlib para realizar cálculos numéricos, análisis de datos y visualización.\n\nEl curso comienza introduciendo los fundamentos del cálculo científico y su importancia en la resolución de problemas del mundo real. A medida que avanzas, aprenderás a utilizar NumPy para manipular matrices y realizar operaciones matemáticas avanzadas. También explorarás las capacidades de SciPy para realizar tareas como optimización, interpolación y procesamiento de señales.\n\nAdemás, aprenderás a visualizar datos y resultados utilizando la biblioteca Matplotlib. Descubrirás cómo crear gráficos, diagramas de dispersión, histogramas y más para comunicar efectivamente tus resultados.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde utilizarás Python y las bibliotecas mencionadas para resolver problemas de cálculo científico reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del cálculo científico con Python.\n\nAl finalizar el curso de 'Cálculo Científico con Python', estarás preparado para utilizar Python como una herramienta eficaz en el campo del cálculo científico. Ya sea que estés comenzando en el campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las herramientas necesarias para realizar cálculos numéricos, análisis de datos y visualizaciones utilizando Python.",
-    "imageURL": "https://www.freecodecamp.org/espanol/news/content/images/size/w2000/2023/03/Mathematics-Scipy.jpg",
-    "courseUrl": "https://www.freecodecamp.org/espanol/learn/scientific-computing-with-python/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Inglés",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Seguridad de la Información",
-    "description": "El curso 'Seguridad de la Información' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos de la seguridad de la información y cómo proteger los sistemas y datos en entornos digitales. En este curso, explorarás conceptos y prácticas clave relacionadas con la seguridad informática.\n\nEl curso comienza introduciendo los fundamentos de la seguridad de la información, incluyendo la confidencialidad, integridad y disponibilidad de los datos. A medida que avanzas, aprenderás sobre criptografía, autenticación, control de acceso y técnicas de prevención y detección de amenazas.\n\nAdemás, explorarás conceptos como seguridad en redes, seguridad en aplicaciones y seguridad en la nube. También aprenderás sobre mejores prácticas de seguridad, legislación y ética en el ámbito de la seguridad de la información.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde evaluarás y fortalecerás la seguridad de sistemas y datos reales. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión de la seguridad de la información.\n\nAl finalizar el curso de 'Seguridad de la Información', estarás preparado para comprender y aplicar principios y técnicas de seguridad de la información en entornos digitales. Ya sea que desees iniciar una carrera en seguridad informática o mejorar tus habilidades existentes, este curso te proporcionará los conocimientos y las herramientas necesarias para proteger sistemas y datos de manera efectiva.",
-    "imageURL": "https://media.istockphoto.com/id/1350595566/es/foto/concepto-de-protecci%C3%B3n-de-la-interfaz-de-firewall-de-seguridad-cibern%C3%A9tica-empresaria.jpg?s=612x612&w=0&k=20&c=bughrIbQKI-fI_GvUW6dVpJlnH0zvfjrecJKk9pQgh8=",
-    "courseUrl": "https://www.freecodecamp.org/learn/information-security/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Inglés",
-    "isFree": true
-    ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Aprendizaje Automático con Python",
-    "description": "El curso 'Aprendizaje Automático con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los fundamentos y técnicas del aprendizaje automático utilizando Python. En este curso, explorarás cómo utilizar bibliotecas populares como Scikit-learn y TensorFlow para entrenar modelos de aprendizaje automático y realizar análisis predictivos.\n\nEl curso comienza introduciendo los conceptos básicos del aprendizaje automático y su importancia en la resolución de problemas complejos. A medida que avanzas, aprenderás a utilizar Scikit-learn para realizar tareas como clasificación, regresión y agrupamiento. También explorarás TensorFlow para construir y entrenar redes neuronales.\n\nAdemás, aprenderás sobre técnicas de preprocesamiento de datos, evaluación de modelos y optimización de parámetros. También te familiarizarás con conceptos clave como validación cruzada, regularización y aprendizaje profundo.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en proyectos prácticos, donde utilizarás Python y las bibliotecas mencionadas para resolver problemas reales de aprendizaje automático. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del aprendizaje automático con Python.\n\nAl finalizar el curso de 'Aprendizaje Automático con Python', estarás preparado para utilizar Python como una herramienta poderosa en el campo del aprendizaje automático. Ya sea que estés comenzando en este campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las habilidades necesarias para construir y entrenar modelos de aprendizaje automático utilizando Python.",
-    "imageURL": "https://prod-discovery.edx-cdn.org/media/course/image/fa82aec4-f617-4efc-b64e-2855f1567df4-3c78499bb9f8.small.png",
-    "courseUrl": "https://www.freecodecamp.org/learn/machine-learning-with-python/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Inglés",
-    "isFree": true ,
-    "categories": [
-        
-    ]
-},
-{
-    "title": "Álgebra Universitaria con Python",
-    "description": "El curso 'Álgebra Universitaria con Python' ofrecido por Free Code Camp es un programa completo diseñado para enseñar a los estudiantes los conceptos fundamentales del álgebra y cómo aplicarlos utilizando Python. En este curso, explorarás cómo utilizar Python como una herramienta poderosa para resolver problemas de álgebra y realizar cálculos matemáticos.\n\nEl curso comienza introduciendo los conceptos básicos del álgebra universitaria, incluyendo ecuaciones, funciones, polinomios y sistemas de ecuaciones. A medida que avanzas, aprenderás a utilizar Python para realizar operaciones algebraicas, resolver ecuaciones y gráficar funciones.\n\nAdemás, explorarás conceptos más avanzados como matrices, determinantes y vectores. También descubrirás cómo utilizar bibliotecas matemáticas en Python, como NumPy y SymPy, para realizar cálculos y manipulaciones algebraicas.\n\nA lo largo del curso, tendrás la oportunidad de aplicar tus conocimientos en ejercicios prácticos, donde utilizarás Python y las técnicas aprendidas para resolver problemas de álgebra universitaria. Esto te permitirá desarrollar habilidades prácticas y fortalecer tu comprensión del álgebra con Python.\n\nAl finalizar el curso de 'Álgebra Universitaria con Python', estarás preparado para utilizar Python como una herramienta eficaz en el campo del álgebra universitaria. Ya sea que estés comenzando en el campo o desees mejorar tus habilidades existentes, este curso te brindará los conocimientos y las habilidades necesarias para realizar cálculos matemáticos y resolver problemas de álgebra utilizando Python.",
-    "imageURL": "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/media/image/2023/04/raspberry-lanza-editor-codigo-aprender-python-lenguaje-ia-3008158.jpg?tf=3840x",
-    "courseUrl": "https://www.freecodecamp.org/learn/college-algebra-with-python/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Inglés",
-    "isFree": true,
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "Intro to HTML and CSS",
-    "description": "A lo largo de este curso, aprenderás sobre la estructura subyacente de la web: HTML. Aprenderás cómo utilizar esta estructura en forma de árbol para crear sitios web. También aprenderás a aplicar estilos a un sitio web a través de CSS. Conocerás la sintaxis de CSS, los selectores y las unidades. En el camino, también aprenderás sobre editores de código y las herramientas de desarrollo del navegador.",
-    "imageURL": "https://www.imaginanet.com/thumb.php?n=blog%2F10herramientas.jpg&w=640&h=250&x=0&y=0",
-    "courseUrl": "https://www.udacity.com/course/intro-to-html-and-css--ud001",
-    "rating": 0,
-    "released": "2020",
-    "language": "Inglés",
-    "isFree": true,
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "Responsive Web Design Fundamentals",
-    "description": "En este curso aprenderás los fundamentos del diseño web responsivo con Pete LePage de Google. Crearás tu propia página web responsiva que se adapte perfectamente a cualquier dispositivo, ya sea un teléfono, una tablet, un escritorio o cualquier otro dispositivo intermedio.\n\nComenzarás explorando qué hace que un sitio web sea responsivo y cómo funcionan algunos patrones comunes de diseño responsivo en diferentes dispositivos. A partir de ahí, aprenderás cómo crear tu propio diseño responsivo utilizando la etiqueta de la ventana gráfica (viewport tag) y las consultas de medios en CSS. A medida que avances, experimentarás con puntos de quiebre mayores y menores, y optimizarás el texto para una mejor legibilidad.",
-    "imageURL": "https://kinsta.com/wp-content/uploads/2020/08/responsive-web-design.jpg",
-    "courseUrl": "https://www.udacity.com/course/responsive-web-design-fundamentals--ud893",
-    "rating": 0,
-    "released": "2021",
-    "language": "Inglés",
-    "isFree": true,
-    
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "Udemy",
-    "description": "Udemy es una plataforma de aprendizaje en línea con una amplia variedad de cursos de programación y desarrollo web.",
-    "imageURL": "https://i0.wp.com/muyfinanciero.com/wp-content/uploads/2021/10/Udemy-y-su-programa-de-afiliados.png?w=1280&ssl=1",
-    "courseUrl": "https://www.udemy.com/",
-    "rating": 0,
-    "released": "2020",
-    "language": "Inglés",
-    "isFree": false,
-    
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "CodeWars",
-    "description": "CodeWars es una plataforma en línea que ofrece desafíos de codificación para mejorar tus habilidades de programación.",
-    "imageURL": "https://miro.medium.com/v2/resize:fit:1400/format:webp/1*0pLbHKAulWnsx4U2MQyn2w.png",
-    "courseUrl": "https://www.codewars.com/",
-    "rating": 0,
-    "released": "2021",
-    "language": "Inglés",
-    "isFree": false,
-    
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "Codecademy",
-    "description": "Codecademy es una plataforma interactiva en línea que ofrece cursos de programación en diferentes lenguajes y tecnologías.",
-    "imageURL": "https://i.pcmag.com/imagery/reviews/05XBKmNFYeHCMIn726Nohqb-10.fit_scale.size_1028x578.v1627594235.png",
-    "courseUrl": "https://www.codecademy.com/",
-    "rating": 0,
-    "released": "2021",
-    "language": "",
-    "isFree": true,
-    
-    "categories": [
-        
-    ]
-
-},
-{
-    "title": "SoyHenry",
-    "description": "SoyHenry es una escuela de desarrollo web que ofrece un bootcamp completo de desarrollo full stack.",
-    "imageURL": "https://neurona-ba.com/wp-content/uploads/2021/07/HenryLogo.jpg",
-    "courseUrl": "https://www.soyhenry.com/",
-    "rating": 0,
-    "released": "2022",
-    "language": "Español",
-    "isFree": false
-    ,
-    
-    "categories": [
-        
-    ]
-}]}
+}

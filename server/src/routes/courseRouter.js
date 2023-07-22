@@ -12,7 +12,7 @@ const { getCourseById } = require("../controllers/Course/getCourseById")
 const { addTechnology } = require("../controllers/Course/addTechnology");
 const { removeTechnology } = require("../controllers/Course/removeTechnology");
 
-courseRouter.get("/all",postCourses)
+courseRouter.post("/all",postCourses)
 
 courseRouter.get("/", getCourse);
 

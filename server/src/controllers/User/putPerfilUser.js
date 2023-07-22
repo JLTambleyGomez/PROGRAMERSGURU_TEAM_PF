@@ -28,7 +28,7 @@ const putPerfilUser = async (req, res) => {
         await profile.save();
         const response = {
             profile,
-            message: `Los datos del usuario ${name} fueron modificados con éxito`,
+            message: `Los datos del usuario ${profile.name} fueron modificados con éxito`,
         };
 
         return res.status(200).json(response);

@@ -81,9 +81,7 @@ export const getCoursesByNameRequest = async (name) => {
 };
 
 export const getCoursesByIdRequest = async (id) => {
-  console.log(id);
-  const { data } = await axios.get(`/course/${id}`);
-
+    const { data } = await axios.get(`/course/${id}`);
     return data;
 };
 
@@ -148,7 +146,6 @@ export const postSuscriptionRequest = async (suscription) => {
 
 export const getFavoritesRequest = async (userId) => {
   const { data } = await axios.get(`/favorite/${userId}`);
-  console.log(data);
   return data;
 };
 
@@ -165,7 +162,7 @@ export const deleteFavoriteRequest = async (ids) => {
 //user______________________________
 
 export const getUserByEmailRequest = async (email) => {
-  const { data } = await axios.get(`/user/?email=${email}`);
+  const { data } = await axios.get(`/user?email=${email}`);
   return data;
 };
 
@@ -216,8 +213,8 @@ export const getCommentsByUser = async (userId) => {
 };
 
 export const postComment = async (courseId, commentData) => {
-  const { data } = await axios.post(`/comment/course/${courseId}`, commentData);
-  return data;
+  const { response } = await axios.post(`/comment/${courseId}`, commentData);
+  return response;
 }
 
 export const putComment = async (id, commentData) => {

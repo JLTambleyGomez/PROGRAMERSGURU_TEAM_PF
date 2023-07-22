@@ -40,9 +40,6 @@ import {
     TOGGLE_SHOPBAG,
     //METAMASK
     METAMASK_ADDRESS,
-    //COMMENTS
-    GET_COMMENTS_BY_USER,
-    GET_COMMENTS_BY_COURSE,
     //SUBSCRIPTIONS
     GET_SUSCRIPTIONS,
     DELETE_SUSCRIPTION,
@@ -65,20 +62,16 @@ const globalStorage = {
     error: "",
     message: "",
     darkMode: false,
-    favorites: {},
     access: false,
     products: [],
     user: {},
     cart: [],
     shopbag: false,
     metamask: false,
-    userComments: [],
-    courseComments: [],
     metamaskaddress: null,
     productsCopy: [],
     subscriptions: [], ////   <---------- MODIFICADO
-    allUsers: [],
-    course: {}
+    allUsers: []
 };
 
 //REDUCER:
@@ -277,17 +270,6 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
             return {
                 ...state,
                 shopbag: payload,
-            };
-
-        case GET_COMMENTS_BY_USER:
-            return {
-                ...state,
-                userComments: payload,
-            };
-        case GET_COMMENTS_BY_COURSE:
-            return {
-                ...state,
-                courseComments: payload,
             };
         case METAMASK_ADDRESS:
             return {

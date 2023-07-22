@@ -8,19 +8,18 @@ import {
 } from "../../../../axiosRequests/axiosRequests";
 import Rating from "@mui/material/Rating";
 
-export default function PublishComment() {
+export default function PublishComment({userId, picture, name, comments}) {
     const dark = useSelector((state) => state.darkMode);
-    const user = useSelector((state) => state.user);
-
-    const date = new Date();
-    const formattedDate = date.toISOString();
-
-    const {id} = useParams()
-    
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
+    
+    const disabled = !!comments?.find(comment => Number(comment?.userId) === Number(userId)) || false
+
+    const date = new Date();
+    const formattedDate = date.toISOString();
+    const {id} = useParams()
 
     const [value, setValue] = useState(0);
     const [commentData, setCommentData] = useState({
@@ -37,24 +36,23 @@ export default function PublishComment() {
         event.preventDefault()
         if (!value) return window.alert("Por favor introduzca la valoración")
 
-        setCommentData({...commentData, rating: value, date: formattedDate})
+        setCommentData({...commentData, rating: value})
 
-        const data = await postComment(id, commentData)
-        window.alert(data.message)
-        await computeCourseRating(id)
+        await postComment(id, {...commentData, rating: value})
+        // await computeCourseRating(id)
     }
 
     useState(() => {
-        setCommentData({...commentData, userId: user?.id})
+        setCommentData({...commentData, userId: userId, date: formattedDate})
     }, [])
     return (
         <form className={`${styles.newComment} ${styles[theme("newComment")]}`}>
             <div className={styles.profilePicture}>
-                <img src={user?.picture} alt="" />
+                <img src={picture} alt="" />
             </div>
             <div className={styles.commentInfo}>
                 <div className={styles.header}>
-                    <span>{user?.name}</span>
+                    <span>{name}</span>
                     <Rating
                         name="simple-controlled"
                         value={value}
@@ -68,11 +66,12 @@ export default function PublishComment() {
                         value={commentData.message}
                         name="textarea"
                         rows="3"
+                        disabled={disabled}
                         placeholder="Escribe un comentario y deja tu puntuación a este curso solo si ya lo realizaste o estas cursando."
                     ></textarea>
                 </div>
                 <div className={styles.publish}>
-                    <button onClick={handleClick}>Publicar</button>
+                    <button onClick={handleClick} disabled={disabled}>Publicar</button>
                 </div>
             </div>
         </form>

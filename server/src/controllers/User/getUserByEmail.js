@@ -1,9 +1,21 @@
-const { User } = require("../../db");
+const { User, Course, Comment } = require("../../db");
 
 const getUserByEmail = async (req, res) => {
     const { email } = req.query;
     try {
-        const user = await User.findOne({ where: { email } });
+        const user = await User.findOne({
+            where: {
+                email
+            },
+            include: [
+                {
+                    model: Course,
+                },
+                {
+                    model: Comment,
+                }
+            ]
+        })
         // console.log(user);
         if (!user)
             return res.status(404).json({

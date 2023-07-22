@@ -2,12 +2,12 @@ const { Comment } = require("../../db");
 
 const postComment = async (req, res) => {
     try {
-        const { courseId } = req.params; //2
+        const { courseId } = req.params;
 
         const { message, date, rating, userId } = req.body;
 
-        if (!message && !date && !rating && !userId)
-            return res.status(404).json({ message: "Faltan datos" });
+        if (!message || !date || !rating || !userId)
+            return res.status(400).json({ message: "Faltan datos" });
 
         const existingComment = await Comment.findOne({
             where: { userId, courseId },
