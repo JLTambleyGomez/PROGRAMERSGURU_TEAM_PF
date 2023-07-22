@@ -5,7 +5,6 @@ import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
 import PublishComment from "./subComponents/PublishComment";
 
-
 //_________________________module_________________________
 function Comments({ disabled, comments, setDisabled }) {
     const user = useSelector((state) => state.user);
@@ -14,13 +13,13 @@ function Comments({ disabled, comments, setDisabled }) {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
-    
+
     const [commentData, setCommentData] = useState({
         userId: 0,
         message: "",
         date: "",
-        rating: 0
-    })
+        rating: 0,
+    });
 
     const tieneComentario = (comments) => {
         for (let i = 0; i < comments?.length; i++) {
@@ -32,12 +31,20 @@ function Comments({ disabled, comments, setDisabled }) {
     };
 
     useEffect(() => {
-        tieneComentario(comments)
+        tieneComentario(comments);
     }, [comments, disabled, commentData, setCommentData]);
     return (
         <div>
             <h3>Comentarios</h3>
-            {disabled ? "" : <PublishComment setDisabled={setDisabled} commentData={commentData} setCommentData={setCommentData}/>}
+            {disabled ? (
+                ""
+            ) : (
+                <PublishComment
+                    setDisabled={setDisabled}
+                    commentData={commentData}
+                    setCommentData={setCommentData}
+                />
+            )}
             <div className={s.allComments}>
                 {comments?.map((comment) => {
                     return (
@@ -52,11 +59,11 @@ function Comments({ disabled, comments, setDisabled }) {
                             </div>
                             <div className={styles.commentInfo}>
                                 <div className={styles.header}>
-                                    <h4>{comment.User?.name}</h4>
+                                    <h4>{comment?.User?.name}</h4>
                                     <div className={styles.rating}>
                                         <Rating
                                             name="read-only"
-                                            value={comment.rating}
+                                            value={comment?.rating}
                                             size="small"
                                             precision={0.1}
                                             readOnly
@@ -68,10 +75,10 @@ function Comments({ disabled, comments, setDisabled }) {
                                         s[theme("message")]
                                     }`}
                                 >
-                                    {comment.message}
+                                    {comment?.message}
                                 </div>
                                 <div className={s.date}>
-                                    {comment.date
+                                    {comment?.date
                                         .slice(0, 10)
                                         .split("-")
                                         .toReversed()

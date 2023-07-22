@@ -191,6 +191,7 @@
 }
 
 
+/* ///////////////////////////FAVORITES//////////////////////////////// */
 
 .favorites {
     display: flex;
@@ -198,7 +199,7 @@
     width: 100%;
     border-radius: 8px;
     background-color: whitesmoke;
-    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
     height: 400px;
     overflow-y: scroll;
 }
@@ -206,3 +207,79 @@
     background-color: rgb(83, 83, 83);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
+
+
+/* ///////////////////////////REVIEWS//////////////////////////////// */
+.reviews {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    overflow-y: scroll;
+    gap: 10px;
+}
+.reviews-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
+
+.oldComment {
+    display: flex;
+    gap: 5px;
+    width: 95%;
+    margin: 10px;
+}
+
+.courseImage {
+    display: flex;
+    justify-content: center;
+}
+
+.courseImage img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.commentInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message {
+    width: 100%;
+    font-size: 15px;
+    padding: 0 5px 0 5px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.delete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: small;
+    color: gray;
+    padding: 0 5px 0 5px;
+}
+
+.delete img {
+    height: 25px;
+}
+
+.delete:hover img  {
+    cursor: pointer;
+    transform: scale(1.15);
+}
+

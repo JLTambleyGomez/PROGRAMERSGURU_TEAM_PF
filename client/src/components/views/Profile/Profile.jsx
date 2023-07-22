@@ -21,8 +21,10 @@ function ProfileV2() {
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
+    console.log(userId);
 
     //local states
+    const [removeComment, setRemoveComment] = useState(false)
     const [email, setEmail] = useState("");
     const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
@@ -100,7 +102,7 @@ function ProfileV2() {
 
     useEffect(() => {
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-    }, [dispatch, refresh]);
+    }, [dispatch, refresh, removeComment]);
 
     //component:
     return (
@@ -168,13 +170,11 @@ function ProfileV2() {
             <div className={s.content}>
                 <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
                 {tab === "favorites" && (
-                    <Favorites
-                        userId={userId}
-                        dark={dark}
-                        favorites={user.Courses}
-                    />
+                    <Favorites dark={dark} favorites={user?.Courses} />
                 )}
-                {tab === "reseñas" && <Reviews dark={dark} />}
+                {tab === "reseñas" && (
+                    <Reviews dark={dark} comments={user?.Comments} removeComment={removeComment} setRemoveComment={setRemoveComment}/>
+                )}
                 {tab === "compras" && <Compras dark={dark} />}
                 {tab === "carrito" && <Carrito dark={dark} />}
             </div>
