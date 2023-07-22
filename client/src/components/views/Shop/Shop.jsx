@@ -108,6 +108,7 @@ function Shop () {
         setCartTooltips(initialCartTooltips);
     }, []);
 
+
    
 
     //con lo de las rutas, el siguiente useEffect no tendria valor:
@@ -166,7 +167,7 @@ function Shop () {
 
     //component:
     return (
-        <main className={`${s.component}`}>
+        <main className={`${s.component} ${s[theme("component")]}`}>
 
         {/* BANNER */}
             <section className={`${s.sectionBanner}`}>
@@ -176,15 +177,17 @@ function Shop () {
                     alt="mainBanner"
                 /> */}
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
-                     TIENDA DE PROGRAMMER'S GURU 
+                    TIENDA DE PROGRAMMER'S GURU 
                 </h1>
 
             </section>
         {/* SIDEBAR */}
-            {/* <FilterBarShop/> */}
+            <div className={s.filterOrder}>
+                <FilterBarShop/>                
+            </div>
 
         {/* PAGINADO */}
-            {/* <div className={`${s.paginado}`} >
+            <div className={`${s.paginado}`} >
                 {
                     pageNumbers?.map((number, index) => {
                         return (
@@ -196,11 +199,11 @@ function Shop () {
                         )
                     })
                 }
-            </div> */}
+            </div>
 
-            {/* <section className={`${s.section3}`}>
+            <section className={`${s.section3}`}>
 
-            PRODUCTS
+            {/* PRODUCTS */}
 
             {
                 loading ? (
@@ -256,10 +259,10 @@ function Shop () {
                     </div>
                 )
             }
-            </section> */}
+            </section>
 
         {/* RESUMEN */}
-            {/* <section className={s.Resumen}>
+            <section className={s.Resumen}>
                 <h2>Resumen de compras</h2>
                 {
                     cart?.length > 0 ? (
@@ -282,7 +285,7 @@ function Shop () {
                         <p>Tu carrito de compras está vacío</p>
                     )
                 }
-            </section>  */}
+            </section> 
         </main>
     )
 }

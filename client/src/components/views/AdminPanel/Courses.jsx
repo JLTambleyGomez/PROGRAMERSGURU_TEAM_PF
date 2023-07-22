@@ -7,7 +7,8 @@ import {
   get_courses_all,
   post_course,
   delete_course,
-  put_course
+  put_course,
+  Dark_Mode
 } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 

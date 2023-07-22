@@ -65,16 +65,16 @@
 }
 
 .overlay {
-   position: absolute;
-   top: 0;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   z-index: 9998;
-   width: 100vw;
-   height: 100vh;
-   background-color: rgba(0, 0, 0, 0.5);
-}
+    position: fixed;
+    top: var(--navBarHeight);
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+ }
 
 .modal {
    margin:15% 0 0 10%;
@@ -89,18 +89,29 @@
    position:absolute;
    height: 50%;
    width: 80%;
-}
+   border-radius: 10px;
+   }
+   .modal-light {
+      background-color: whitesmoke;
+      box-shadow: 5px 5px 1rem 2rem floralwhite inset;
+   }
+   .modal-dark {
+      background-color: #212121;
+      box-shadow: 5px 5px 1rem 1rem #34333350 inset;
+   }
+
 .modal select {
    width: 50%;
    height: 10%;
+   border: 1px solid;
 }
 
 /* ----------- RESPONSIVE ------------ */
 
 @media screen and (width > 700px) {
-   .responsive-component {
-      display: none;
-   }
+    .responsive-component {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 700px) {
@@ -118,11 +129,11 @@
       background-color: rgba(0, 0, 0, 0.672);
       overflow: hidden;
    }
-   .reponsiveFilter {
-      /* position: absolute; */
+   /* .reponsiveFilter {
+      position: absolute;
       width: 100%;
       height: 4%;
-  }
+  } */
    .responsive-component button {
       width: 40%;
       height: 2.5rem;

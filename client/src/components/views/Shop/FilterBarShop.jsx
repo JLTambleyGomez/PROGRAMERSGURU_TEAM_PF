@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import Slider from 'rc-slider';
-import { get_products_all, get_products_by_name, get_categories, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
 
+import { get_products_all, get_products_by_name, get_categories, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
+import Slider from 'rc-slider';
 import s from "./FilterBarShop.module.css";
 
 //_________________________module_________________________
@@ -29,6 +31,8 @@ function FilterBarShop () {
     const [order, setOrder] = useState("");
     const [category, setCategory ] = useState("");
     const [price, setPrice] = useState([]);
+    const [filterModal, setFilterModal] = useState(false);
+    const [sortModal, setSortModal] = useState(false);
 
     //const:
     const dispatch = useDispatch();
@@ -188,58 +192,146 @@ function FilterBarShop () {
         }
     }, [initalPriceRange, menorPrice, mayorPrice, products]);
 
+    useEffect(() => {
+        const handleResize = () => {
+          if (window.innerWidth >= 700) {
+            setFilterModal(false);
+            setSortModal(false);
+          }
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
+    useEffect(() => {
+        const disableScroll = () => {
+            document.body.style.overflow = 'hidden';
+        };
+        const enableScroll = () => {
+            document.body.style.overflow = 'auto';
+        };
+        (filterModal || sortModal) ? disableScroll()
+        : enableScroll()
+    }, [filterModal, sortModal])
+
 
     //component:
     return (
-        <aside className={`${s.sidebar}`}>  
-            <div className={s.option}>
-                <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                { true && (
-                    // value = {order}
-                    <select value={order} onChange={sortProducts}>
-                        <option value="">Destacados</option>
-                        <option value="ascendente">Ascendente</option>
-                        <option value="descendente">Descendente</option>
-                    </select>
-                )}
-            </div> 
-            <div className={s.option}>
-                <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
-                {
-                    true && (
-                        <div className={`${s.filterPrice}`}>
-                            <Slider
-                                className={`${s["filterPriceSlider"]}`}
-                                range
-                                min={minSliderValue}
-                                max={maxSliderValue}
-                                defaultValue={priceRange}
-                                onChange={handlePriceChange}
-                                value={currentPriceRange}
-                            />
-                            <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
-                        </div>
-                    )
-                }
-            </div>
-            <div className={s.option}>
-                <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                    <select value={category} onChange={filterCategory}>
-                        { categories.length && (
-                            <>
-                                <option value="">Categorías</option>
+        <>
+            <aside className={`${s.component}`}>
+                <div className={s.option}>
+                    <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
+                    { true && (
+                        <select value={order} onChange={sortProducts}>
+                            <option value="">Destacados</option>
+                            <option value="ascendente">Ascendente</option>
+                            <option value="descendente">Descendente</option>
+                        </select>
+                    )}
+                </div> 
+                <div className={s.option}>
+                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                    {
+                        true && (
+                            <div className={`${s.filterPrice}`}>
+                                <Slider
+                                    className={`${s["filterPriceSlider"]}`}
+                                    range
+                                    min={minSliderValue}
+                                    max={maxSliderValue}
+                                    defaultValue={priceRange}
+                                    onChange={handlePriceChange}
+                                    value={currentPriceRange}
+                                />
+                                <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
+                            </div>
+                        )
+                    }
+                </div>
+                <div className={s.option}>
+                    <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
+                        <select value={category} onChange={filterCategory}>
+                            <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
+                            { categories.length && (
+                                <>
                                     {
                                         categories.map((category, index) => (
                                             <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
                                         ))
                                     }
-                            </>
-                        )}
-                    </select>
+                                </>
+                            )}
+                        </select>
+                </div>
+                <button onClick={resetFilters}>Mostrar todos</button>
+            </aside>
+
+            <div className={s["responsive-component"]}>
+                <button onClick={() => {setFilterModal(true)}}>
+                    FILTRAR
+                </button>
+                <button onClick={() => {setSortModal(true)}}>
+                    ORDENAR
+                </button>
+                {
+                    filterModal && (
+                        <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
+                            {/* <div className={s.option}> */}
+                            <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
+                                <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                                {
+                                    <div className={`${s.filterPrice}`}>
+                                        <Slider
+                                            className={`${s["filterPriceSlider"]}`}
+                                            range
+                                            min={minSliderValue}
+                                            max={maxSliderValue}
+                                            defaultValue={priceRange}
+                                            onChange={handlePriceChange}
+                                            value={currentPriceRange}
+                                        />
+                                        <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
+                                    </div>
+                                }
+                            {/* <div className={s.option}> */}
+                                <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
+                                    <select value={category} onChange={filterCategory}>
+                                        <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
+                                        { categories.length && (
+                                            <>
+                                                {
+                                                    categories.map((category, index) => (
+                                                        <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
+                                                    ))
+                                                }
+                                            </>
+                                        )}
+                                    </select>
+                                    <button onClick={resetFilters}>Mostrar todos</button>
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    sortModal && (
+                        <div className={s.overlay} onClick={() => {setSortModal(false)}}>
+                            <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
+
+                                <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
+                                    <select value={order} onChange={sortProducts}>
+                                        <option value="">Destacados</option>
+                                        <option value="ascendente">Ascendente</option>
+                                        <option value="descendente">Descendente</option>
+                                    </select>
+                            </div>
+                        </div>
+                    )
+                }
             </div>
-            <button>FILTRAR</button>
-            <button onClick={resetFilters}>Mostrar todos</button>
-        </aside>
+        </>
     )
 }
 
