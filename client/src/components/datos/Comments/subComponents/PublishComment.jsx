@@ -1,5 +1,5 @@
-import { useSelector } from "react-redux";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./PublishComment.module.css";
 import {
@@ -8,26 +8,20 @@ import {
 } from "../../../../axiosRequests/axiosRequests";
 import Rating from "@mui/material/Rating";
 
-export default function PublishComment({userId, picture, name, comments}) {
+export default function PublishComment({setDisabled, commentData, setCommentData}) {
+
+    const user = useSelector(state => state.user)
     const dark = useSelector((state) => state.darkMode);
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
-    
-    const disabled = !!comments?.find(comment => Number(comment?.userId) === Number(userId)) || false
 
     const date = new Date();
     const formattedDate = date.toISOString();
     const {id} = useParams()
 
     const [value, setValue] = useState(0);
-    const [commentData, setCommentData] = useState({
-        userId: 0,
-        message: "",
-        date: "",
-        rating: 0
-    })
 
     const handleMessage = (event) => {
         setCommentData({...commentData, message: event.target.value})
@@ -36,23 +30,24 @@ export default function PublishComment({userId, picture, name, comments}) {
         event.preventDefault()
         if (!value) return window.alert("Por favor introduzca la valoración")
 
-        setCommentData({...commentData, rating: value})
-
-        await postComment(id, {...commentData, rating: value})
-        // await computeCourseRating(id)
+        const data = await postComment(id, {...commentData, rating: value, userId: user?.id})
+        if (data.message === "Se publicó tu comentario") {
+            setDisabled(true)
+        }
+        await computeCourseRating(id)
     }
 
-    useState(() => {
-        setCommentData({...commentData, userId: userId, date: formattedDate})
-    }, [])
+    useEffect(() => {
+        setCommentData({...commentData, userId: user?.id, date: formattedDate})
+    }, [commentData?.rating, setDisabled])
     return (
         <form className={`${styles.newComment} ${styles[theme("newComment")]}`}>
             <div className={styles.profilePicture}>
-                <img src={picture} alt="" />
+                <img src={user?.picture} alt="" />
             </div>
             <div className={styles.commentInfo}>
                 <div className={styles.header}>
-                    <span>{name}</span>
+                    <span>{user?.name}</span>
                     <Rating
                         name="simple-controlled"
                         value={value}
@@ -66,12 +61,11 @@ export default function PublishComment({userId, picture, name, comments}) {
                         value={commentData.message}
                         name="textarea"
                         rows="3"
-                        disabled={disabled}
                         placeholder="Escribe un comentario y deja tu puntuación a este curso solo si ya lo realizaste o estas cursando."
                     ></textarea>
                 </div>
                 <div className={styles.publish}>
-                    <button onClick={handleClick} disabled={disabled}>Publicar</button>
+                    <button onClick={handleClick}>Publicar</button>
                 </div>
             </div>
         </form>
