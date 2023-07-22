@@ -29,6 +29,10 @@ function PagoSubscripcion() {
             price: subscripcion.cost,
             quantity: 1,
         };
+
+    
+
+        localStorage.setItem("cart", JSON.stringify([{name: subscripcion.name, price: subscripcion.cost, quantity:1}]))
         setCompra(referencia);
         setMostrarPagos(true);
     };
