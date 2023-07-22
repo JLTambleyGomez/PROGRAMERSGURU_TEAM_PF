@@ -1,23 +1,23 @@
 import s from "../Profile.module.css";
 import { Rating } from "@mui/material";
 import { deleteComment } from "../../../../axiosRequests/axiosRequests";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { NavLink } from "react-router-dom";
 
 export function Reviews({ dark, comments, removeComment, setRemoveComment }) {
-    // const [removed, setRemoved] = useState(false)
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
+    console.log(comments);
 
     const handleDelete = async (event) => {
-        event.preventDefault()
-        const data = await deleteComment(event.target.id)
-        setRemoveComment(!removeComment)
-    }
+        event.preventDefault();
+        const data = await deleteComment(event.target.id);
+        setRemoveComment(!removeComment);
+    };
 
-    useEffect(() => {
-    }, [removeComment])
+    useEffect(() => {}, [removeComment]);
     if (!comments?.length) {
         return (
             <div className={`${s.emptyTab} ${s[theme("emptyTab")]}`}>
@@ -43,7 +43,9 @@ export function Reviews({ dark, comments, removeComment, setRemoveComment }) {
                         className={`${s.oldComment} ${s[theme("oldComment")]}`}
                     >
                         <div className={s.courseImage}>
-                            <img src={comment?.Course?.imageURL} alt="" />
+                            <NavLink to={`/CourseDetails/${comment?.courseId}`}>
+                                <img src={comment?.Course?.imageURL} alt="" />
+                            </NavLink>
                         </div>
                         <div className={s.commentInfo}>
                             <div className={s.header}>

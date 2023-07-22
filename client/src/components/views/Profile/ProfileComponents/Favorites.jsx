@@ -1,7 +1,10 @@
 import s from "../Profile.module.css";
+import { Rating } from "@mui/material";
 import CourseCard from "../../../datos/CourseCard/CourseCard";
+import { NavLink } from "react-router-dom";
 
 export function Favorites({ dark, favorites }) {
+    console.log(favorites);
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
@@ -21,25 +24,39 @@ export function Favorites({ dark, favorites }) {
     }
 
     return (
-        <>
-            <div className={`${s.favorites} ${s[theme("favorites")]}`}>
-                {favorites?.map((fav) => {
-                    return (
-                        <CourseCard
-                            key={fav?.id}
-                            id={fav?.id}
-                            title={fav?.title}
-                            meanRating={fav?.meanRating}
-                            isFree={fav?.isFree}
-                            language={fav?.language}
-                            courseUrl={fav?.courseUrl}
-                            released={fav?.released}
-                            description={fav?.description}
-                            imageURL={fav?.imageURL}
-                        />
-                    );
-                })}
-            </div>
-        </>
+        <div className={`${s.favorites} ${s[theme("favorites")]}`}>
+            {favorites?.map((fav) => {
+                return (
+                    <div className={s.favorite}>
+                        <div className={s.image}>
+                            <NavLink to={`/CourseDetails/${fav?.id}`}>
+                                <img src={fav?.imageURL} alt="" />
+                            </NavLink>
+                        </div>
+                        <div className={s.courseInfo}>
+                            <p>{fav?.title}</p>
+                            <Rating
+                                name="read-only"
+                                value={fav?.meanRating}
+                                size="small"
+                                precision={0.1}
+                                readOnly
+                            />
+                            <span>Idioma: {fav?.language}</span>
+                            <span>
+                                {fav?.isFree
+                                    ? "Este curso es gratuito"
+                                    : "Este curso es de pago"}
+                            </span>
+                            <span>
+                                <a href={fav?.courseUrl}>
+                                    Visitar página del curso
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
     );
 }
