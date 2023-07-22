@@ -9,20 +9,22 @@ const postProduct = async (req,res) => {
         const categoryDB = await Category.findByPk(categoryId)
 
         if(!categoryDB) return res.status(404).json({message: "No existe la categoria con ese id"})
+      
         
-        const [newProduct, created] = await Product.findOrCreate({
-            where:{
-                name,
-            },
-            defaults: {
-                price,
-                description,
-                image,
-                stock,
-                categoryId: categoryDB.id
+        const newProduct = await Product.create({name,price,description,image,stock,categoryId:categoryDB.id})
+        // const [newProduct, created] = await Product.findOrCreate({
+        //     where:{
+        //         name,
+        //     },
+        //     defaults: {
+        //         price,
+        //         description,
+        //         image,
+        //         stock,
+        //         categoryId: categoryDB.id
                 
-            }
-        })
+        //     }
+        // })
         if(!newProduct) return res.status(400).json({message: "Surgió un error a la hora de crear el producto"})
 
         

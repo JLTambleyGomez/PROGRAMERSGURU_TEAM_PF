@@ -7,6 +7,7 @@ import {
     clearMessage,
     get_courses_all,
     get_suscriptions,
+    get_User_By_Email
 } from "../../../Redux/actions";
 import Categories from "./Categories";
 import Courses from "./Courses";
@@ -14,12 +15,16 @@ import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
+import ModalAdminPanel from '../ModalAdminPanel/ModalAdminPanel'
 
 //_________________________module_________________________
 const AdminPanel = () => {
     //global state:
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
+    const user = useSelector((state)=>state.user)
+    const email = localStorage.getItem("email");
+    
 
     //const:
     const dispatch = useDispatch();
@@ -76,7 +81,9 @@ const AdminPanel = () => {
         setshowproducts(false);
         setShowUsers(false);
     };
-
+    useEffect(()=>{
+ if (!user?.email) dispatch(get_User_By_Email(email));
+   },[]);
     //life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
@@ -91,9 +98,12 @@ const AdminPanel = () => {
         };
     }, [dispatch]);
 
+    if (!user.admin) return (<ModalAdminPanel />);
+
     //component:
     return (
         <div>
+            
              <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>

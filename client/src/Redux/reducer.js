@@ -17,6 +17,7 @@ import {
     ERROR,
     CLEAR_COURSES,
     CLEAN_MESSAGE,
+    CLEAR_USER,
     // DARK MODE:
     DARK_MODE,
     //FAVORITES:
@@ -169,6 +170,12 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 error: "",
                 message: "",
+            };
+
+            case CLEAR_USER:
+            return {
+                ...state,
+                user:{},
             };
 
         case CLEAR_COURSES:

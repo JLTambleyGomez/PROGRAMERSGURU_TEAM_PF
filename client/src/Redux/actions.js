@@ -37,6 +37,7 @@ import {
 
 //ACTIONS:
 //COURSES:
+export const CLEAR_USER = "CLEAR_USER";
 export const CLEAR_COURSES = "CLEAR_COURSES";
 export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
 export const GET_COURSE_BY_ID = "GET_COURSE_BY_ID";
@@ -312,6 +313,14 @@ export const Dark_Mode = (payload) => {
 };
 
 ///////////////////ACTIONS CLEAR/////////////////////////////////////////////////////////////////////////////////////////
+
+export const clearUser = () => {
+    return function (dispatch) {
+        return dispatch({
+            type: CLEAR_USER,
+        });
+    };
+};
 
 export const clearMessage = () => {
     return function (dispatch) {

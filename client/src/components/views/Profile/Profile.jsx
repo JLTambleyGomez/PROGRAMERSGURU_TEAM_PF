@@ -102,6 +102,8 @@ function ProfileV2() {
         dispatch(get_User_By_Email(localStorage.getItem("email")));
     }, [dispatch, refresh]);
 
+    //if (!user.name) return <Modal />
+
     //component:
     return (
         <div className={s.profileContainer}>

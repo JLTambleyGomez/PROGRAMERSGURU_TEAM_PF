@@ -14,12 +14,15 @@ import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
+import ModalBannedUser from '../ModalBannedUser/ModalBannedUser'
 //_________________________module_________________________
 function HomePage () {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
+    const user = useSelector((state)=>state.user)
+
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
@@ -49,6 +52,8 @@ function HomePage () {
     }, [dispatch]);
 
 
+    if(user.banned) return <ModalBannedUser />
+    
     //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
