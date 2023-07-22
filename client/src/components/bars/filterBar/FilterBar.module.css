@@ -66,7 +66,10 @@
 
 .overlay {
     position: fixed;
-    top: var(--navBarHeight);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
     bottom: 0;
     left: 0;
     right: 0;
@@ -108,11 +111,11 @@
 
 /* ----------- RESPONSIVE ------------ */
 
-@media screen and (width > 700px) {
+/* @media screen and (width > 700px) {
     .responsive-component {
         display: none;
     }
-}
+} */
 
 @media screen and (max-width: 700px) {
    .responsive-component{

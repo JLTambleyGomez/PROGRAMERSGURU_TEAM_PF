@@ -20,7 +20,10 @@
 
 .overlay {
    position: fixed;
-   top: var(--navBarHeight);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   top: 0;
    bottom: 0;
    left: 0;
    right: 0;

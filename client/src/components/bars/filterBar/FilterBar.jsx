@@ -19,7 +19,6 @@ function FilterBar() {
     const [price, setPrice] = useState("");
     const [filterModal, setFilterModal] = useState(false);
     const [sortModal, setSortModal] = useState(false);
-    // const [overlayHeight, setOverlayHeight] = useState(window.innerHeight);
 
 
     //const:
@@ -185,15 +184,6 @@ function FilterBar() {
         : enableScroll()
     }, [filterModal, sortModal])
 
-    // useEffect(() => {
-    //     const handleResize = () => {
-    //         setOverlayHeight(window.innerHeight);
-    //     };
-    //     window.addEventListener('resize', handleResize);
-    //     return () => {
-    //         window.removeEventListener('resize', handleResize);
-    //     };
-    //   }, []);
     
 
 

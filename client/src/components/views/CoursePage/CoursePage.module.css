@@ -1,13 +1,13 @@
 .component {
-    padding-bottom: var(--footerHeight);
-    margin-top: var(--navBarHeight);
-    min-height: calc(100vh - var(--navBarHeight));    
-    width: 100%;
-    position: absolute;
-    display: flex;
-    flex-direction: column; 
-    align-items: center;
-    animation:blur-in 0.4s linear both;
+   padding-bottom: var(--footerHeight);
+   margin-top: var(--navBarHeight);
+   min-height: calc(100vh - var(--navBarHeight));    
+   width: 100%;
+   position: absolute;
+   display: flex;
+   flex-direction: column; 
+   box-sizing: border-box;
+   /* animation:blur-in 0.4s linear both; */
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
 
 .component-dark {
