@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
-import { editUserData} from "../../../axiosRequests/axiosRequests";
+import { editUserData } from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
@@ -21,7 +21,6 @@ function ProfileV2() {
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
-    const userComments = useSelector((state) => state.userComments);
 
     //local states
     const [email, setEmail] = useState("");
@@ -36,7 +35,7 @@ function ProfileV2() {
     const [tab, setTab] = useState("favorites");
 
     //const:
-    const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg"
+    const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg";
     const expirationDate = new Date(user.expirationDate);
     const actualDate = new Date();
     const dispatch = useDispatch();
@@ -69,7 +68,7 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
-        //    sendEmail({ email , message:"Tu usuario ha sido modificado"});
+            //    sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({
@@ -101,7 +100,6 @@ function ProfileV2() {
 
     useEffect(() => {
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-        dispatch(get_comments_by_user(user.id));
     }, [dispatch, refresh]);
 
     //component:
@@ -110,19 +108,17 @@ function ProfileV2() {
             <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
                     <div className={s.config} onClick={openConfig}>
-                        <img
-                            src={gearConfig}
-                            alt="config"
-                        />
+                        <img src={gearConfig} alt="config" />
                     </div>
                     {collapse ? (
-                    <div className={s.camera}>
-                        <EditProfilePicture 
-                            userId={userId}
-                            setNewUserData={setNewUserData}
-                            newUserData={newUserData}/>
-                    </div>
-                    ) : null }
+                        <div className={s.camera}>
+                            <EditProfilePicture
+                                userId={userId}
+                                setNewUserData={setNewUserData}
+                                newUserData={newUserData}
+                            />
+                        </div>
+                    ) : null}
                     <div className={!collapse ? s.picture : s.editPicture}>
                         <img className={s.image} src={user.picture} />
                     </div>
@@ -154,17 +150,10 @@ function ProfileV2() {
                 </div>
                 <div>
                     {collapse ? (
-                        <>
-                            <EditProfileForm
-                                handleChange={handleChange}
-                                newUserData={newUserData}
-                            />
-                            {/* <div>
-                                <button className={s.desactivar}>
-                                    Desactivar mi cuenta
-                                </button>
-                            </div> */}
-                        </>
+                        <EditProfileForm
+                            handleChange={handleChange}
+                            newUserData={newUserData}
+                        />
                     ) : null}
                 </div>
                 <h5>
@@ -177,11 +166,17 @@ function ProfileV2() {
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark}/>
-                {tab === "favorites" && <Favorites userId={userId} dark={dark}/>}
-                {tab === "reseñas" && <Reviews dark={dark}/>}
-                {tab === "compras" && <Compras dark={dark}/>}
-                {tab === "carrito" && <Carrito dark={dark}/>}
+                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
+                {tab === "favorites" && (
+                    <Favorites
+                        userId={userId}
+                        dark={dark}
+                        favorites={user.Courses}
+                    />
+                )}
+                {tab === "reseñas" && <Reviews dark={dark} />}
+                {tab === "compras" && <Compras dark={dark} />}
+                {tab === "carrito" && <Carrito dark={dark} />}
             </div>
         </div>
     );

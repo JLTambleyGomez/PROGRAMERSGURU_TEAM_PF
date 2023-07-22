@@ -1,33 +1,40 @@
-const { Course, Technology } = require("../../db");
+const { Course, Technology, Comment, User, Favorite } = require("../../db");
 
 const getCourseById = async (req, res) => {
     try {
         const { id } = req.params;
 
-        if (!id)
-            return res
-                .status(400)
-                .json({ message: "No se reconoce la busqueda" });
-
-        // const courseDB = await Course.findByPk(id);
-        const courseDB = await Course.findAll({
-            where: {
-                id
-            },
-            include: {
-                model: Technology,
-                through: {
-                    attributes: []
+        const course = await Course.findByPk(id, {
+            include: [
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+                            attributes: ["name", "picture"], 
+                        },
+                    ],
+                },
+                {
+                    model: Technology,
+                    through: {
+                        attributes: [],
+                    }
+                },
+                {
+                    model: User,
+                    attributes: ["id"],
+                    through: {
+                        attributes: [],
+                    }
                 }
-            }
+            ],
         });
 
-        if (!courseDB)
-            return res
-                .status(404)
-                .json({ message: "No existe ese curso" });
+        if (!course)
+            return res.status(404).json({ message: "No existe ese curso" });
 
-        return res.status(200).json(courseDB);
+        return res.status(200).json(course);
     } catch (error) {
         return res.status(500).json({ message: error.message });
     }

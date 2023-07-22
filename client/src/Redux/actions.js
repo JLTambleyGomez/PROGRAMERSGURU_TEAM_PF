@@ -335,7 +335,7 @@ export const clear_cart = () => {
 
 //FAVOURITES_____________________________________________//
 
-export const get_Favorites_Request = (id) => {
+export const get_Favorites_Request = (id) => {// deprecado
     return async (dispatch) => {
         try {
             const data = await getFavoritesRequest(id);

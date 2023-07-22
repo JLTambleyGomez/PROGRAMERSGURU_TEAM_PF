@@ -10,9 +10,9 @@ const { putComment } = require("../controllers/Comment/putComment");
 const { computeCourseRating } = require("../controllers/Comment/computeCourseRating");
 
 //routes
-commentRouter.get("/user/:userId", getCommentsByUser);
+commentRouter.get("/user/:userId", getCommentsByUser);//////////// no se usan mas
 
-commentRouter.get("/course/:courseId", getCommentsByCourse);
+commentRouter.get("/course/:courseId", getCommentsByCourse);//////////// no se usan mas
 
 commentRouter.post("/:courseId", postComment);
 

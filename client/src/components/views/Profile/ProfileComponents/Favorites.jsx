@@ -1,26 +1,18 @@
 import s from "../Profile.module.css";
-import { get_Favorites_Request } from "../../../../Redux/actions";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import CourseCard from "../../../datos/CourseCard/CourseCard";
 
-export function Favorites({ userId, dark }) {
-    const favorites = useSelector((state) => state.favorites);
-    const dispatch = useDispatch();
+export function Favorites({ dark, favorites }) {
 
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
     };
 
-    useEffect(() => {
-        dispatch(get_Favorites_Request(userId));
-    }, []);
     return (
         <>
-            {!favorites.length ? (
+            {favorites?.length ? (
                 <div className={`${s.favorites} ${s[theme("favorites")]}`}>
-                    {favorites?.Courses?.map((fav) => {
+                    {favorites?.map((fav) => {
                         return (
                             <CourseCard
                                 key={fav?.id}
