@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mercadopago/sdk-react": "^0.0.12",
+    "@mui/material": "^5.14.1",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "firebase": "^10.0.0",
@@ -20,6 +23,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
+    "react-google-button": "^0.7.2",
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.3.0",
@@ -36,5 +40,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
     "vite": "^4.3.9"
+  },
+  "prettier": {
+    "tabWidth": 4
   }
 }

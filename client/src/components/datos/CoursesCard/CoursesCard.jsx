@@ -1,23 +1,14 @@
 import s from "./CoursesCard.module.css";
 import CourseCard from "../CourseCard/CourseCard";
 import { useEffect, useState, useRef } from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch} from "react-redux";
+
 
 //_________________________module_________________________
 function CoursesCard () {
-
-    //scroll automatico
-    // const scrollRef = useRef(null);
-
-    // useEffect(() => {
-    //   const scrollElement = scrollRef.current;
-    //   scrollElement.scrollTop += 5;
-    // }, []);
-  
-// ______________
-
+ 
     //global state:
-    const allCourses = useSelector((state) => state.courses);
+    const allCourses = useSelector((state) => state.courses) ? useSelector((state) => state.courses) : [];
 
     //states:
     const [currentPage, setCurrentPage] = useState(1);
@@ -38,6 +29,8 @@ function CoursesCard () {
     useEffect(() => {
         //retorna a la pagina 1 cada vez que se actualiza el array.
         if (allCourses.length < coursesPerPage) setCurrentPage(1);
+
+
     }, [allCourses])
 
 // ____________________
@@ -113,7 +106,7 @@ function CoursesCard () {
     return (
         <div>
             <div className={s.paginado}>
-                {/* {
+                {
                     pageNumbers.map((number, index) => {
                         return (
                             <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
@@ -123,12 +116,14 @@ function CoursesCard () {
                             </a>
                         )
                     })
-                } */}
+                }
             <h2>Cursos encontrados : {allCourses.length}</h2>
 
             </div>
+
+            <div className={s.coursesBox}>
                 {
-                    allCourses.map((course, index) => {
+                    currentAllCourses ? currentAllCourses.map((course, index) => {
                         return (
                             <CourseCard
                                 key={index}
@@ -143,7 +138,9 @@ function CoursesCard () {
                                 imageURL={course?.imageURL}
                             />
                         )
-                    })
+                    }) : (
+                        <p>REGISTRATE</p>
+                    )
                 }
             {/* <InfiniteScroll 
                 dataLength={uniqueCourses.length}
@@ -177,6 +174,7 @@ function CoursesCard () {
                 }
 
                 </InfiniteScroll> */}
+            </div>
         </div>
     )
 }

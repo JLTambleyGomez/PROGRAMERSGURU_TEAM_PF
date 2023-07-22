@@ -7,11 +7,11 @@ const getProductById = async (req, res) => {
         if(!id) return res.status(400).json({ message: `No se ha encontrado el id ${id}`});
 
         const product = {
-          name: productId.name,
-          price: productId.price,
-          description: productId.description,
-          image: productId.image,
-          category: productId.category,
+            name: productId.name,
+            price: productId.price,
+            description: productId.description,
+            image: productId.image,
+            category: productId.category,
         }
         return res.status(200).json(product);
     } catch (error) {

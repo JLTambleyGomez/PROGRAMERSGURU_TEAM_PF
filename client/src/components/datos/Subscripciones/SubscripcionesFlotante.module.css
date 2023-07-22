@@ -7,24 +7,83 @@
     width: 20rem;
     height: 3rem;
     padding: 0 10px;
-    background-color: beige;
     align-self: center;
     animation: slide-up 1s ease-out;
     z-index: 9999;
-} @keyframes slide-up {
-    /* 0% {
-        transform: 0;
+    cursor: default;
+    background-repeat: no-repeat;
+    background-image:   linear-gradient(to right, #00ffff, #0381ff, #ff0000),
+                        linear-gradient(to bottom, #ff0000, #0381ff),
+                        linear-gradient(to right, #e78ae0, #81f16d, #0381ff),
+                        linear-gradient(to bottom, #00ffff, #e78ae0);
+    background-size:    100% 3px,
+                        3px 100%,
+                        100% 3px,
+                        3px 100%;
+    background-position:    0 0,
+                            100% 0,
+                            100% 100%,
+                            0 100%;
+    animation: bg 4s cubic-bezier(0.19, 1, 0.22, 1) 1;
+    animation-play-state:paused;
+    transition: transform 0.3s, filter 0.3s;
+} @keyframes bg {
+    0% {
+        background-size:    0 3px,
+                            3px 0,
+                            0 3px,
+                            3px 0;
     }
-    100% */
+    25% {
+        background-size:    100% 3px,
+                            3px 0,
+                            0 3px,
+                            3px 0;
+    }
+    50% {
+        background-size:    100% 3px,
+                            3px 100%,
+                            0 3px,
+                            3px 0;
+    }
+    75% {
+        background-size:    100% 3px,
+                            3px 100%,
+                            100% 3px,
+                            3px 0;
+    }
+    100% {
+        background-size:    100% 3px,
+                            3px 100%,
+                            100% 3px,
+                            3px 100%;
+    }
 }
+.component:hover {
+    animation-play-state: running;
+    transform: scale(1.1);
+}
+.component-light {
+    background-color: black;
+    color: white !important;
+}
+.component-dark {
+    background-color: white;
+    color: black;
+}
+
+
 .component p {
     margin: 0;
     font-size: 1.25rem;
-    color: black
 }
 
 .component button {
     background-color: transparent;
     border: none;
+    cursor: pointer;
+}
+
+.close {
     cursor: pointer;
 }

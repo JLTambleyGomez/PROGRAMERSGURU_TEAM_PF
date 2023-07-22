@@ -1,126 +1,36 @@
 .component {
+  width: 100%;
   margin-top: var(--navBarHeight);
-  min-height: calc(100vh - var(--navBarHeight));
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  padding: 4% 0;
+  color: black;
 }
-Se
-.Panel{
-  position: absolute;
-  padding: 4%;
-  top: 40%;
-  padding-bottom:20%;
-  background-color: rgba(0, 0, 0, 0.26);
- 
 
-}
-.contain{
-  display: flex;
-  justify-items: center;
-  padding: 2%;
-  margin:2%;
-  justify-content: space-evenly;
-}
 .message{
-  position: fixed;
-  top: 8%;
-  width:80%;
+  position:sticky;
+  top:12%;
+  width:100%;
   height: 4%;
-  z-index: 999999;
   background-color: black;
   color: white;
 }
-.mainButton {
-  background-color: white;
+
+.h1{
+  margin: 12%;
   color: black;
-  padding: 1%;
+  height: 20px;
+  font-size: 10px;
 
-  border: 2px solid black;
-  }
-  .mainButton h1 {
-    font-size: 1.3em;
-  }
-
-.categoriesPanel {
-  display: flex;
-  flex-direction: column;
-  width: 96vw;
-  margin: 2vw;
-  }
-  .categoriesForm {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    }
-    .categoriesPostBar {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      }
-      .categoriesInput {
-        height: 2rem;
-        width: 20rem;
-        padding: 1rem;
-        font-size: 1.25rem;
-      }
-      .categoriesPostButton {
-        height: 3rem;
-      }
-
-  .categoriesBox {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    }
-    .category {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-/* /////////////////////////////////////////////////////// */
-.coursesPanel {
-  display: flex;
-  flex-direction: column;
-  width: 96vw;
-  margin: 2vw;
-  }
-  .coursesForm {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background-color: white;
-    color: black;
-    padding: 20px;
-
-  }
-  .coursesBox {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background-color: white;
-    color: black;
-    padding: 20px;
-    }
-    .course {
-      display: grid;
-      grid-template-columns: repeat(3, 2fr);
-      justify-items: center;
-      margin:1%;
-      width: 80%;
-      border: 2px solid wheat;
-      height:100px;
-      justify-content: space-evenly;  
-      background-color: #fafafa;
-      color: rgb(0, 0, 0);
-      padding: 20px;  
-    }
-
-.h1 {
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; 
-  line-clamp: 4; 
-  text-overflow: ellipsis;
-  font-size: 12px;
-  color: rgb(0, 0, 0);
 }
+
+
+
+.buton{
+  width: 250px;
+  transition: all 0.5s;
+
+}
+.buton:hover{
+  width: 400px;
+  }

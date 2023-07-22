@@ -11,28 +11,27 @@
   min-width: 60rem;
   min-height: 35rem;
   max-width: 60rem;
-  max-height: 35rem;
-  width: 120%;
-
+  /* max-height: 35rem; */
+  /* width: 120%; */
+    transition: ease 2s;
   margin: 0 4rem;
   position: relative; /* Agregado para posicionar los botones relativos a este contenedor */
 }
 
 .navigation-container {
   position: absolute;
-  top: 32%;
+  top: 30%;
   left: -15%;
   width: 130%;
   display: flex;
   justify-content: space-between;
-
 }
 
 .swiper-button-prev,
 .swiper-button-next {
   background-color: rgba(255, 254, 254, 0);
   color: #fff;
-  padding:3rem;
+  /* padding:3rem; */
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
@@ -43,7 +42,7 @@
       align-items: center;
       justify-content: center;
       opacity: 0.7;
-      padding-bottom: 20%;
+      padding-bottom: 13%;
 
       transition: opacity ease 250ms;
     }

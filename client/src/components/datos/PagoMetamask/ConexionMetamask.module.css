@@ -4,30 +4,32 @@
     scale: 0.95;
     display: flex;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
-    z-index:99997;
-    right: 0.55%; 
-    width: 20px;
+    /* z-index:99997; */
+    z-index:9998;
+    /* right: 0.55%;  */
+    /* width: 20px; */
     height: 100px;
-    margin-top: 4%;
-    
+    /* margin-top: 4%; */
 }
 
 
 
 .img{
-    
     border: 2px solid rgb(255, 255, 255);
     width: 30px;
     height: 30px;
     border-radius: 100%;
     transition: transform 0.5s;
-    margin-bottom: -90%;
+    transform: translate(0%, -50%);
+
+    /* margin-bottom: -90%; */
 }
 
 .img:hover{
     cursor: pointer;
-    transform: scale(1.3);
+    transform: scale(2.1);
 
 }
 
@@ -36,15 +38,25 @@
 
     color: rgb(20, 255, 196);
     text-shadow: 1px 1px 1px  black;
-    margin-bottom:-16%;
+    position: absolute;
+    transform: translate(-50%, -150%);
+    /* margin-bottom:-16%; */
 }
 
 .desconectada{
+    position: absolute;
+    transform: translate(-50%, -150%);
+    /* color: rgba(255, 254, 254, 0.897); */
+    font-size: 80%;
+}
 
-    color: rgba(255, 254, 254, 0.897);
-
+.error {
+    position: absolute;
+    transform: translate(-50%, 10%);
 }
 
 .walletid{
     font-size: 10px;
+    position: absolute;
+    transform: translate(0%, 250%);
 }

@@ -2,7 +2,7 @@
 
 .container{
     width: 130px;
-    margin-left:-3%;
+    /* margin-left:-3%; */
     transition: transform 0.5s;
 }
 
@@ -13,13 +13,14 @@
 
 .botón {
     display: flex;
-    padding-left: 1%;
-    padding: 1%;
+    /* padding-left: 1%; */
+    /* padding: 1%; */
     letter-spacing: 2px;
     text-align: center;
     align-items: center;
     justify-content: center;
     animation: scale-up-center 4.4s infinite; 
+    margin: 0;
   }
   
   @keyframes scale-up-center {

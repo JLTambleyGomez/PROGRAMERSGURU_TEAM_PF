@@ -1,49 +1,208 @@
-.component {
-  margin-top: var(--navBarHeight);
-  /* min-height: calc(100vh - var(--navBarHeight)); */
-  display: flex;
-  border: 1px solid black;
-  height: 900px
+.profileContainer {
+    margin-top: var(--navBarHeight);
+    min-height: calc(100vh - var(--navBarHeight));
+    margin: 6%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 50px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.sidebar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.infoProfile {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    width: 300;
+    min-width: 250px;
+    height: fit-content;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    padding: 1%;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+}
+.infoProfile-dark {
+    background-color: rgb(83,83,83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
 
-  min-width: 30%;
-  border: 1px solid blue;
-  font-size: 2rem;
+.profileContainer h2 {
+    font-weight: bold;
+    margin: 1%;
+}
+.profileContainer p {
+    margin: 1%;
+}
+
+.infoProfile h5 {
+    color: gray;
+    margin: 1%;
 }
 
 .content {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid red;
-
-  min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 70%;
+    min-width: 300px;
+    gap: 33px;
 }
 
-.image{
+.navBarProfile {
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    width: 100%;
+    height: 45px;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+}
+.navBarProfile-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
 
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: solid 4px;
-  border-color:rgb(255, 255, 255) ;
+.emptyTab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    color: gray;
+}
+.emptyTab-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+}
+.emptyTab img {
+    width: 150px;
+    filter: contrast(0.7);
+    opacity: 0.6;
+}
+.profileContainer button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 5px;
+    color: whitesmoke;
+    height: 30px;
+}
+.profileContainer button:disabled {
+    box-shadow: none;
+}
+
+.desactivar {
+    color: black;
+}
+.desactivar:hover {
+    background-color: rgba(206, 0, 0, 0.555);
+    color: white;
+}
+
+.save {
+    background-color: #008c9e;
+}
+.save:hover:enabled {
+    box-shadow: 2px 2px 5px rgba(6, 103, 116, 0.774);
+    cursor: pointer;
+}
+
+.discard {
+    background-color: gray;
+}
+.discard:hover {
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.774);
+    cursor: pointer;
+}
+
+.profileImage {
+    position: relative;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+}
+
+.picture img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.editPicture img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.config {
+    position: absolute;
+    top:  5px;
+    right: -25px;
+}
+
+.config img {
+    height: 25px;
+    width: 25px;
+    opacity: 0.6;
+}
+
+.config:hover img {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+.camera {
+    position: absolute;
+    left: 75px;
+    bottom: -10px;
+}
+
+.camera img {
+    height: 30px;
+    width: 30px;
+}
+
+.camera:hover img {
+    cursor: pointer;
+    transform: scale(1.1)
+}
+
+.refresh {
+    position: relative;
+}
+.refresh img{
+    position: absolute;
+    top: 5px;
+    height: 20px;
+    width: 20px;
+    margin: 5px;
+    margin-bottom: 0;
+}
+.refresh:hover img{
+    cursor: pointer;
 }
 
 
-.profile{
-  margin-top: 4%;
-  padding: 4%;
-}
 
-.main{
-  display: flex;
+.favorites {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    overflow-y: scroll;
 }
-
-.name{
-  width: 100px ;
-  margin-left: 100px
+.favorites-dark {
+    background-color: rgb(83, 83, 83);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }

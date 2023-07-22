@@ -1,51 +1,60 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { get_User_By_Email } from "../../../Redux/actions"
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { get_User_By_Email } from "../../../Redux/actions"
 
 
 //_________________________module_________________________
 function MercadoPagoFailure () {
 
+
     //const:
+    const navigate = useNavigate();
+    const [error, setError] = useState('');
+    
+    //const:
+    const location = useLocation();
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
+    const email = localStorage.getItem("email");
+    const token = localStorage.getItem("accessToken")
 
     //life-cycles:
+    useEffect(() => {
+        if (!token) navigate("/IniciaSession")
+    },[])
+
     useEffect(() => {
         dispatch(get_User_By_Email(email))
     }, [])
 
-const location = useLocation();
-const [error, setError] = useState('');
+    useEffect(() => {
+        if (location.state && location.state.error) setError(location.state.error);
+    }, [location.state]);
 
-useEffect(() => {
-  if (location.state && location.state.error) {
-    setError(location.state.error);
-  }
-}, [location.state]);
 
-return (
-  <div className={styles.container}>
-    <div className={styles.container2}>
-      <div className={styles.imgcontainer}>
-        <img
-          className={styles.img}
-          src="https://seeklogo.com/images/M/mercado-pago-logo-52B7182205-seeklogo.com.png"
-          alt="mercadopago"
-        />
-        <p className={styles.x}>Error</p>
-      </div>
-    </div>
-    <div className={styles.detalles}>
-      <div className={styles.detalles2}>
-        <h1 className={styles.h1}>Pago Fallido!</h1>
-        <h3 className={styles.idtransaccion}>{error}</h3>
-        <NavLink className={styles.tohome} to="/HomePage">Ir a Home</NavLink>
-      </div>
-    </div>
-  </div>
-);
+    //component:
+    return (
+        <div className={styles.container}>
+            <div className={styles.container2}>
+                <div className={styles.imgcontainer}>
+                    <img
+                    className={styles.img}
+                    src="https://seeklogo.com/images/M/mercado-pago-logo-52B7182205-seeklogo.com.png"
+                    alt="mercadopago"
+                    />
+                    <p className={styles.x}>Error</p>
+                </div>
+            </div>
+            <div className={styles.detalles}>
+                <div className={styles.detalles2}>
+                    <h1 className={styles.h1}>Pago Fallido!</h1>
+                    <h3 className={styles.idtransaccion}>{error}</h3>
+                    <NavLink className={styles.tohome} to="/HomePage">Ir a Home</NavLink>
+                </div>
+            </div>
+        </div>
+    );
 };
 
 

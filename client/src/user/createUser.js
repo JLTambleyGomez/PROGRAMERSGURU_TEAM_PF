@@ -1,3 +1,4 @@
+import axios from "axios";
 import "../config/firebase-config";
 import {
     GoogleAuthProvider,
@@ -6,8 +7,9 @@ import {
     inMemoryPersistence,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-import axios from "axios";
 
+
+//_________________________module_________________________
 const postUserRequest = async (userData) => {
     try {
         const { data } = await axios.post(
@@ -35,8 +37,8 @@ export default function createUser(email, password) {
                             name: user.displayName,
                         };
                         const token = user.accessToken;
-                        sessionStorage.setItem("accessToken", token);
-                        sessionStorage.setItem("email", email)
+                        localStorage.setItem("accessToken", token);
+                        localStorage.setItem("email", email)
                         postUserRequest(userData)
                         window.location.replace("/HomePage");
                     }
@@ -54,5 +56,3 @@ export default function createUser(email, password) {
             return [errorCode, errorMessage, email, credential];
         });
 }
-
-

@@ -1,24 +1,26 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { get_courses_by_name } from "../../../Redux/actions";
+import { get_courses_by_name, get_products_by_name, get_courses_all,get_products_all} from "../../../Redux/actions";
 
 import s from "./searchBar.module.css";
 
 //_________________________module_________________________
-function SearchBar() {
+function SearchBar () {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
-        
+
     //states:
+    const [searchStore, setSearchStore] = useState(false);
     const [input, setInput] = useState("");
     const [toggleVisibility, setToggleVisibility] = useState(true);
-    const [mensajeBusqueda,setMensajeBusqueda] = useState(false)
+    const [mensajeBusqueda,setMensajeBusqueda] = useState(false);
 
     //const:
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { pathname } = useLocation();
 
     //functions:
     const theme = (base) => {
@@ -27,27 +29,38 @@ function SearchBar() {
     };
 
     const handleSearchInput = (event) => {
+       
         setInput(event.target.value);
     };
 
     const handleSearchButton = async () => {
-        await dispatch(get_courses_by_name(input));
+        
+        if (pathname === "/store") {
+            await dispatch(get_products_by_name(input));
+            navigate("/store");
+        } else { 
+            await dispatch(get_courses_all());
+            navigate("/CoursePage");
+            await new Promise(resolve => setTimeout(resolve, 200));
+            await dispatch(get_courses_by_name(input))
+        } 
         setInput("");
         setToggleVisibility(true);
         setMensajeBusqueda(true);
-        navigate("/CoursePage");
+
         const timer = setTimeout(() => {
           setMensajeBusqueda(false);
         }, 2000);
-      }
+    }
 
     const setDefault = (event) => {
         event.preventDefault();
         setTimeout(() => {
             setInput("");
             setToggleVisibility(true);
-        }, 300);
+        }, 400);
     };
+
 
    //component:
    return (
@@ -70,7 +83,7 @@ function SearchBar() {
                             autoFocus  
                             onChange={handleSearchInput}
                             value={input}
-                            placeholder='Intenta "Java"'
+                            placeholder={pathname === "/store" ? "Encuentra tu próximo equipo" : 'Intenta "Java"'}
                         />
                         <button
                             className={`${s.button}`}
@@ -87,7 +100,7 @@ function SearchBar() {
             { mensajeBusqueda && (
                 <div > 
                     <p className={s.mensaje}>Estos son los resultados de tu búsqueda</p>
-                </div>
+              </div>
             )}
         </div>
     );

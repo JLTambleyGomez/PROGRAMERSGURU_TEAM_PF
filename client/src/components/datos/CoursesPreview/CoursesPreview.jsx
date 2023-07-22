@@ -14,7 +14,7 @@ function CoursesPreview ( { courses } ) {
 
     //component:
     return (
-        <div className = "container"> 
+        <div className = "coursesPreviewContainer"> 
             <div className = "courses-container"> 
                 <Swiper
                     enabled={true}

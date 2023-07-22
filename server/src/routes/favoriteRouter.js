@@ -6,10 +6,10 @@ const { getFavorite } = require("../controllers/Favorite/getFavorite");
 const { postFavorite } = require("../controllers/Favorite/postFavorite");
 const { deleteFavorite } = require("../controllers/Favorite/deleteFavorite");
 
-favoriteRouter.get("/:idUser", getFavorite);
+favoriteRouter.get("/:userId", getFavorite);
 
 favoriteRouter.post("/", postFavorite);
 
-favoriteRouter.delete("/:idCourse", deleteFavorite);
+favoriteRouter.post("/delete", deleteFavorite);
 
 module.exports = favoriteRouter;

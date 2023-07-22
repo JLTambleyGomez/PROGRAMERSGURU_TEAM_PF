@@ -44,12 +44,12 @@ const ConexionMetamask = () => {
         {defaultAccount ? (
           <p className={styles.conectada}>Conectada</p>
         ) : (
-          <p>Desconectada</p>
+          <p className={styles.desconectada}>Desconectada</p>
         )}
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <p className={styles.error}>erro</p>}
         
       </div>
-      <p className={styles.walletid}>{defaultAccount}</p>
+        <p className={styles.walletid}>{defaultAccount}</p>
     </div>
   );
 };

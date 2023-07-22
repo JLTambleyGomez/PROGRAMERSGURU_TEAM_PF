@@ -9,7 +9,7 @@
 .label {
   margin: 0;
   font-size: 150%;
-  letter-spacing: 0.3em;
+  letter-spacing: 0.25vw;
   transition: transform 0.3s;
   }
   .label:hover {
@@ -33,7 +33,7 @@
 
   .input {
     height: 5vh;
-    width: 15rem;
+    width: 10rem;
     padding: 10px;
     outline: none;
     border: 3px solid;
@@ -64,6 +64,7 @@
   .button {
     background: none;
     border: none;
+    padding: 0;
     }
     .button:hover {
       cursor: pointer;
@@ -96,3 +97,9 @@
         transform: translate(-1000);
       }
     }
+
+    /* @media screen and (max-width: 700px) {
+        .component {
+            display: none;
+        }
+    } */

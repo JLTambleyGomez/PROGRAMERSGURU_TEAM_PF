@@ -17,9 +17,9 @@ const createOrder = async (req, res) => {
                 },
             ],
             back_urls: {
-                success: "http://localhost:3001/mercadoPago/success",
-                failure: "http://localhost:3001/mercadoPago/failure",
-                pending: "http://localhost:3001/mercadoPago/pending",
+                success: "https://programmers-guru-db5b4f75594d.herokuapp.com//mercadoPago/success",
+                failure: "https://programmers-guru-db5b4f75594d.herokuapp.com//mercadoPago/failure",
+                pending: "https://programmers-guru-db5b4f75594d.herokuapp.com//mercadoPago/pending",
             },
             notification_url: "7510-179-6-215-95.ngrok.io/webhook",
         }); //7510-179-6-215-95.ngrok.io

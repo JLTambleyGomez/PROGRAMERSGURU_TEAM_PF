@@ -1,8 +1,11 @@
+import axios from "axios";
 import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import { set_cart } from '../../../Redux/actions';
 import styles from './MetamaskFeedback.module.css';
+
 
 //_________________________module_________________________
 const MetaMaskSucces = () => {
@@ -16,32 +19,51 @@ const MetaMaskSucces = () => {
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
-    const email = sessionStorage.getItem("email");
-
-    //functions:
-    const calculateTotal = () => {
-        let total = 0;
-        cart?.forEach((product) => {
-            const productTotal = product.price * product.quantity;
-            total += productTotal;
-        });
-        return total;
-    };
-
+    const navigate = useNavigate();
+    const email = localStorage.getItem("email");
+    const token = localStorage.getItem("accessToken");
+    
+    
     //life-cycle:
+    useEffect(() => {
+        if (!token) navigate("/IniciaSession")
+    },[])
+    
     useEffect(() => {
         if (location.state) setTransaction(location.state.transaction);
     }, [location.state]);
-
+    
     useEffect(() => {
         dispatch(set_cart());
         console.log(cart);
         console.log("este es el carrito:" + " " + cart);
         console.log("este es el email:" + " " + email)
     }, [])
-
-    //component:
-    return (
+    
+    
+    useEffect(() => {
+        (async () => {
+            try {
+                const compraString = localStorage.getItem("cart"); // Obtener el contenido del carrito del almacenamiento local como una cadena de texto
+                const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
+                const email = localStorage.getItem("email");
+                console.log(cart);
+                
+                
+                await axios.post(
+                    `http://localhost:3001/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`,
+                    {compra});
+                    
+                    localStorage.setItem("cart", "[]");
+                } catch (error) {
+                }
+            })();
+            return ()=>{ localStorage.setItem("cart", "[]");}
+        }, []);
+        
+        
+        //component:
+        return (
         <div className={styles.container}>
             <div className={styles.container2}>
                 <div className={styles.imgcontainer}>

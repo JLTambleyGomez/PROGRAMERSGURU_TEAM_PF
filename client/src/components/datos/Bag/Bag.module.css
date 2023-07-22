@@ -3,21 +3,23 @@
   top:0;
   bottom: 0;
   z-index: 9998;
-  width: 100vw;
+  width: 100%;
   background-color: rgba(0, 0, 0, 0.5);
 }
   .shopbag {
     position: fixed;
     right: 0;
-    height: 90vh;
-    width: 25vw;
+    top: 0;
+    bottom: 0;
+    width: 30vw;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 5vh 0;
-    gap: 10px;
+    /* padding: 5vh 0; */
+    gap: 1%;
     z-index: 9999;
     overflow-y: auto;
+    transition: height 0.3s ease;
     animation: scale-up-horizontal-right 0.4s;
   } @keyframes scale-up-horizontal-right {
     0% {
@@ -40,7 +42,7 @@
     box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
   }
   .shopbagOpen {
-        animation: sdf 0.4 ;
+        /* animation: sdf 0.4 ; */
     } @keyframes sdf {
         0% {
             transform: scaleX(1);
@@ -64,10 +66,9 @@
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  width: 14rem;
+  width: 70%;
   height: 10rem;
   padding: 1rem;
-  /* background-color: black; */
   box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
   }
   .minusPlus {
@@ -98,7 +99,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 1vw;
     }
     .section1 img {
       width: 4rem;
@@ -108,3 +109,9 @@
       border: solid 2px;
       border-color: rgba(248, 248, 248, 0.658);
     }
+
+/* @media screen and (max-width: 1000px) {
+    .shopbag {
+        height: 100vh;
+    }
+} */
