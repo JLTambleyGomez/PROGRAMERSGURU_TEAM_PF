@@ -39,6 +39,7 @@ const PagoconMercadopago = async (req, res) => {
 };
 
 const FeedbackMercadoPago = async (req, res) => {
+try {
   const { email, merchant_order_id, payment_id } = req.query;
   const { compra } = req.body; 
   
@@ -136,9 +137,17 @@ const FeedbackMercadoPago = async (req, res) => {
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
   });
+} catch (error) {
+  
+}
+  
+  
 };
 
 module.exports = {
   PagoconMercadopago,
   FeedbackMercadoPago,
 };
+
+
+

@@ -63,11 +63,14 @@ function Success  () {
                 {compra});
       
             console.log(data);
+            localStorage.setItem("cart", "[]");
             setPaymentInfo(data);
           } catch (error) {
             console.error("Error al obtener el recibo de Mercado Pago:", error);
           }
         })();
+        return ()=>{localStorage.setItem("cart", "[]")};
+        
       }, []);
 
     //component:
