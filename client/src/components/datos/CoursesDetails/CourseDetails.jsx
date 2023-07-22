@@ -8,11 +8,14 @@ import {
     get_course_by_id,
 } from "../../../Redux/actions";
 import {
-    postFavoritesRequest,
+    postFavoriteRequest,
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
+import PublishComment from "../Comments/subComponents/PublishComment";
+import Rating from "@mui/material/Rating";
 
 import styles from "./CourseDetails.module.css";
+import Comments from "../Comments/Comments";
 
 //_________________________module_________________________
 function CourseDetails() {
@@ -49,7 +52,6 @@ function CourseDetails() {
         console.log(ids);
         const data = await deleteFavoriteRequest(ids);
         console.log(data.message);
-
     };
     const handleAddFavorite = async (event) => {
         event.preventDefault();
@@ -62,14 +64,18 @@ function CourseDetails() {
     useEffect(() => {
         dispatch(get_course_by_id(id));
         dispatch(get_Favorites_Request(user?.id));
-        setIds({...ids, courseId: course[0]?.id || id, userId: Number(user?.id)})
+        setIds({
+            ...ids,
+            courseId: course[0]?.id || id,
+            userId: Number(user?.id),
+        });
         const favs = favorites?.Courses?.map((fav) => fav.id);
         if (favs?.includes(Number(id))) {
-            console.log("Este curso esta en favs")
+            console.log("Este curso esta en favs");
             setFav(true);
         }
         if (!favs?.includes(Number(id))) {
-            console.log("Este curso no esta en favs")
+            console.log("Este curso no esta en favs");
             setFav(false);
         }
         
@@ -91,6 +97,13 @@ function CourseDetails() {
         { !loading ? (<div className={styles.component}>
             <div className={styles.title}>
                 <h1>{course[0]?.title}</h1>
+                <Rating
+                    value={3.5}
+                    precision={0.1}
+                    name="read-only"
+                    // value={course[0]?.meanRating}
+                    readOnly
+                />
             </div>
             <div className={styles.content}>
                 <div className={styles.containerImage}>
@@ -113,7 +126,7 @@ function CourseDetails() {
                             ) : (
                                 <img
                                     className={`${styles.favorite} ${
-                                        styles[theme("favorite")]
+                                        styles[theme("addfavorite")]
                                     }`}
                                     onClick={handleRemoveFavorite}
                                     src={fullHeart}
@@ -156,7 +169,10 @@ function CourseDetails() {
                             })}
                         </div>
                     </div>
-                    <div className={styles.comments}></div>
+                    <div className={styles.comments}>
+                        <PublishComment />
+                        <Comments />
+                    </div>
                 </div>
             </div>
         </div>
