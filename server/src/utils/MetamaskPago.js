@@ -6,6 +6,7 @@ const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
 
 const FeedbackMetamask = async (req, res) => {
+  try{
   const { email, payment_id } = req.query;
   const { compra } = req.body; 
   
@@ -93,7 +94,7 @@ const FeedbackMetamask = async (req, res) => {
     }
   });
 
- 
+}catch(error){}
 };
 
 module.exports = {
