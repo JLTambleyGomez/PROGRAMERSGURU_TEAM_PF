@@ -84,7 +84,7 @@
 }
 .emptyTab img {
     width: 150px;
-    filter:contrast(0.6);
+    filter: contrast(0.7);
     opacity: 0.6;
 }
 .profileContainer button {
