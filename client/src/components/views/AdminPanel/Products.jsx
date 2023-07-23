@@ -47,10 +47,10 @@ function Products() {
         stock: "",
     });
 
-    const handleProductDelete = (id) => {
+    const handleProductDelete = async (id) => {
         try {
-            dispatch(delete_Products(id));
-            dispatch(get_products_all());
+            await dispatch(delete_Products(id));
+            await dispatch(get_products_all());
         } catch (error) {
             console.log("error");
         }
