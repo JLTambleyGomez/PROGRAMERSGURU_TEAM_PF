@@ -1,12 +1,14 @@
 :root {
-    --navBarHeight: 12vh;
-    --footerHeight: 10vh;
+  --navBarHeight: 12vh;
+  --footerHeight: 14vh;
+  --paddingBottom: 16vh;
+  --navFilterHeight: 10vh;
 }
 
-html {
-    box-sizing: border-box;
-  }
-  *, *::before, *::after {
-    box-sizing: inherit;
-  }
-  
+/*html {
+   box-sizing: border-box;
+}
+*, *::before, *::after {
+  box-sizing: inherit; 
+}
+*/

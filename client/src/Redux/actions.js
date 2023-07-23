@@ -313,16 +313,23 @@ export const delete_tecnology = (id) => {
 };
 
 export const Dark_Mode = (payload) => {
-    if (payload === true) {
-        return {
-            type: DARK_MODE,
-            payload: true,
-        };
-    } else if (payload === false) {
-        return {
-            type: DARK_MODE,
-            payload: false,
-        };
+
+    const darkModeBoo = localStorage.getItem("darkMode")
+
+    // if (payload === true) {
+    //     return {
+    //         type: DARK_MODE,
+    //         payload: true
+    //     };
+    // } else if (payload === false) {
+    //     return {
+    //         type: DARK_MODE,
+    //         payload: false
+    //     };
+    // }
+    return {
+        type: DARK_MODE,
+        payload: darkModeBoo
     }
 };
 

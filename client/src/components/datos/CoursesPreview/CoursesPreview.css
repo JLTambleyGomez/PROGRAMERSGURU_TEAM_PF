@@ -1,60 +1,94 @@
-.container {
-  scale: 0.8;
-  
+.coursesSwiperComponent {
+  width: 80%;
+  transition: ease 2s;
+  /* margin: 0 4rem; */
+  /* bullets: */
+  /* position: relative; */
+}
+.swiper-container {
+   position: relative; /* Add relative positioning to create a stacking context */
+   width: 80%;
+   transition: ease 2s;
+}
+
+.coursesPreviewContainer {
   display: flex;
   justify-content: center;
+  /* transform: scale(0.8); */
+  margin: 0;
+  position: relative;
 }
 
-.courses-container {
-  align-items: center;
-  justify-items: center;
-  min-width: 60rem;
-  min-height: 35rem;
-  max-width: 60rem;
-  /* max-height: 35rem; */
-  /* width: 120%; */
-    transition: ease 2s;
-  margin: 0 4rem;
-  position: relative; /* Agregado para posicionar los botones relativos a este contenedor */
+.courseCardContainer {
+  display: flex;
+  justify-content: center; /* Add this to center the content horizontally within each slide */
+   z-index: 1000;
 }
+
 
 .navigation-container {
-  position: absolute;
-  top: 30%;
+      /* position: relative !important; */
+  top: -30vh;
   left: -15%;
-  width: 130%;
+  width: 100%;
+  z-index: 9999;
   display: flex;
   justify-content: space-between;
+}
+.navigation-container2 {
+   position: absolute !important;
+   top: 4rem;
 }
 
 .swiper-button-prev,
 .swiper-button-next {
+   all: initial;
   background-color: rgba(255, 254, 254, 0);
   color: #fff;
+  
   /* padding:3rem; */
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
 }
+/* .swiper-button-prev {
+   left: -1rem;
+   z-index: 9999;
+} */
 
-    .swiper-pagination  {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0.7;
-      padding-bottom: 13%;
+  .swiper-pagination  {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 2%;
+     margin-top: 1rem;
+     position:static !important;
+     /* opacity: 0.7; */
+     /* padding-bottom: 13%; */
+       /* padding-bottom: -5rem; */
+     /* transition: opacity ease 250ms; */
+     /* position: relative; */
+     /* top: 1rem; */
+     bottom: 10px !important;
+  }
+     .swiper-pagination:hover {
+        /* opacity: 1; */
+        cursor: pointer;
+  }
 
-      transition: opacity ease 250ms;
-    }
-      .swiper-pagination:hover {
-        opacity: 1;
-         cursor: pointer;
-
-    }
-
- .swiper-pagination-bullet{
+.swiper-pagination-bullet{
   scale: 1.8;
+  margin: 0.4%;
   border: 1px solid  rgb(255, 255, 255);
- }
-    
-    
+}
+   
+@media screen and (max-width: 1200px) {
+   .coursesSwiperComponent {
+       width: 110%;
+   }
+}
+
+   
+@media screen and (max-width: 700px) {
+   
+}
