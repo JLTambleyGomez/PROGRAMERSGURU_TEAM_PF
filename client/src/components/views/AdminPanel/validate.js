@@ -64,13 +64,6 @@ export const validateCourse = (form) => {
         error.courseUrl = "Debe agregar una dirección válida";
     else if (form.courseUrl.length) error.courseUrl = "";
 
-    //validar rating
-    if (!form.rating.length) error.rating = "Debe ingresar un rating";
-    else if (isNaN(form.rating))
-        error.rating = "Debe ingresar un número válido";
-    else if (form.rating < 1 || form.rating > 10)
-        error.rating = "Debe ingresar un rating válido, entre 1 y 10";
-    else if (form.rating.length) error.rating = "";
 
     //validar isFree
 

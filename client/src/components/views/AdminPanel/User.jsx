@@ -116,7 +116,7 @@ const User = () => {
         setNewUser(false);
     };
  
-    //lice-cycle
+    //life-cycle
     useEffect(() => {
         if (!allUsers.length) getUsers();
     }, []);

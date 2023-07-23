@@ -256,6 +256,12 @@ console.log(courses)
         };
     }, [dispatch]);
 
+
+    useEffect(() => {
+        console.log(newCourse)
+    }, [newCourse])
+
+
     // component:
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`}>

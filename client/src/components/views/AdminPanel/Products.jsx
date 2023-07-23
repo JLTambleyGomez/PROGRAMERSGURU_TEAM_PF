@@ -13,6 +13,7 @@ import styles from "./Courses.module.css";
 
 //_________________________module_________________________
 function Products() {
+    
     //global state:
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
