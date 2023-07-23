@@ -13,7 +13,7 @@
       flex-direction: column;
       justify-content: flex-start;
       position: absolute;
-      animation:blur-in 0.4s linear both
+      /* animation:blur-in 0.4s linear both */
    } @keyframes blur-in {
       0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
    }

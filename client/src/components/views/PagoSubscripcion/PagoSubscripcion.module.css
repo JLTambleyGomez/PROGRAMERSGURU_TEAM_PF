@@ -1,163 +1,192 @@
-.container{
-    margin-top: var(--navBarHeight);
-    padding-top: 4%;
-    padding-bottom: 25%;
-    width: 100%;
-    min-height: 90vh;
-    background-color: rgb(94, 121, 148);
-    color: aliceblue;
-    animation:blur-in 1s linear both}
-      @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
-   
-  .img{
-      
-      width:80px;
-      height: 80px;
-      margin-left: 5%;
-      margin-right: 4%;
-      border-radius: 100%;
-      border: solid 2px;
-      border-color: rgba(248, 248, 248, 0.658);
-      
-  }
-  .price{
-  font-size: 14px;
-  color: rgb(0, 0, 0);    
-  }
-  
-  .product {
-    
-      display: flex;
-      align-items: center;
-      width: 40%;
-      height:10%;
-      border-radius: 5px;
-      padding: 10px;
-      margin: 10px;
-        margin-left: 3%;
+.component {
+   /* padding-bottom: 25%;
+   padding-top: 4%; */
+   padding-bottom: var(--footerHeight);
+   margin-top: var(--navBarHeight);
+   min-height: calc(100vh - var(--navBarHeight));
+   position: absolute;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   box-sizing: border-box;
+   /* background-color: rgba(240, 248, 255, 0.26); */
+   color: aliceblue;
 
-      background-color: rgba(240, 248, 255, 0.26);
-    }
-    
-  
-  
-  .productscontainer{
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-around;
-      display: flex;
+   background-color: rgb(94, 121, 148);
+   /* color: aliceblue; */
+   /* animation:blur-in 1s linear both */
+} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
-      flex-direction: column;
-  }
-  .flex{
-      margin-left: 1%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      justify-content: space-around;
-      
-  }
-  
-  
-  .total{
-     position: fixed;
-     top:20%;
-    margin-left: 50%;
-      text-align: center;
-  
-  }
-  
-  
-  .name{
+.component-dark {
+   background-color: black;
+   color: aliceblue;
+}
+
+.content {
+   display: flex;
+   justify-content: space-evenly;
+
+   box-sizing: border-box;
+   width: 100%;
+   padding: 5%;
+}
+
+.options {
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+
+   gap: 4rem;
+   width: 100%;
+}
+
+.product {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   /* width: 40%; */
+   /* height:10%; */
+   /* margin-left: 3%; */
+   /* padding: 10px; */
+   /* margin: 10px; */
+   width: 25%;
+   height: 30vw;
+   border-radius: 15px;
+   color: aliceblue;
+   background-color: rgb(94, 121, 148);
+   /* background-color: rgba(240, 248, 255, 0.26); */
+   box-shadow: 0 0 1rem 0.5vw rgba(240, 248, 255, 0.26) inset;
+}
+
+.checkoutOverlay {
+   position: fixed;
+   top: var(--navBarHeight);
+   bottom: 0;
+   right: 0;
+   left: 0;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+   height: 100%;
+   background-color: #00000050;
+}
+
+.checkout {
+   position: relative;
+   display: flex;
+   flex-direction: column;
+   /* justify-content: center; */
+   align-items: center;
+   top: -10vh;
+   height: 70%;
+   width: 40rem;
+   color: black;
+   background-color: white;
+   border-radius: 3px;
+}
+
+
+
+/*
+.total {
+   position: fixed;
+   top:20%;
+   margin-left: 50%;
+   text-align: center;
+}
+
+.name {
    font-size: 20px;
-  width: 300px;
-  }
-  .name:hover{
-      cursor: pointer;
-  }
-  
-  .title{
-      font-size: 60px;
-      padding: 1%;
-      padding-left: 2%;
-      animation:scale-up-horizontal-left 0.4s }
-       @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
-  
-  
-  .cantidad{
-      display: flex;
-      height: 30px;
-      width: auto;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid white;
-      border-radius: 5px;
-      background-color:black;
-      color: white;
-    
-  }
-  
-  .cantidad_button{
-      background-color:black;
-      color: white;
-  
-      border: 2px solid black;
-      transition: transform 0.3s}
-  
-  .cantidad_button:hover{ 
-      transform: scale(1.06);
-      color:black;
-      border-radius: 100%;
-      background-color: rgb(248, 248, 248);
-      cursor: pointer;
-  }
-  
-  .totalcontainer{
-      display: flex;
-      flex-direction: column;
-      width: 400px;
-      justify-content: center;
-      background-color: rgba(2, 11, 19, 0.26)
-  
-  }
-  
-  .items{
-      font-size: 14px;
-      padding: 2%;
-      height: 25px;
-      width: max-content;
-      margin-bottom: 4%;
-  }
+   width: 300px;
+}
+
+.name:hover {
+   cursor: pointer;
+}
+
+.title {
+   font-size: 60px;
+   padding: 1%;
+   padding-left: 2%;
+   animation:scale-up-horizontal-left 0.4s
+} @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
 
 
-  .pagar{
-    font-size: 30px;
-    transition: transform 0.5s;
-  }
+.totalcontainer {
+   display: flex;
+   flex-direction: column;
+   width: 400px;
+   justify-content: center;
+   background-color: rgba(2, 11, 19, 0.26)
+}
 
+.items {
+   font-size: 14px;
+   padding: 2%;
+   height: 25px;
+   width: max-content;
+   margin-bottom: 4%;
+}
 
-  .pagar:hover{
-    transform: scale(1.4);
-    cursor: pointer;
-  }
+.pagar {
+   font-size: 30px;
+   transition: transform 0.5s;
+}
 
-  .p{
-    margin-left: 4%;
-    margin-right: 2%;
-  }
+.pagar:hover {
+   transform: scale(1.4);
+   cursor: pointer;
+}
 
-  .item{
-    font-size: 30px;
-  }
+.p {
+   margin-left: 4%;
+   margin-right: 2%;
+}
 
-  .buton{
-    border: 2px solid white;
-    background-color: black;
-    padding: 1%;
-    transition: transform 0.5s;
-  }
+.item {
+   font-size: 30px;
+}
+
+.buton {
+   border: 2px solid white;
+   background-color: black;
+   padding: 1%;
+   transition: transform 0.5s;
+}
   
-  .buton:hover{
-    transform: scale(1.2);
-    cursor: pointer;
+.buton:hover {
+   transform: scale(1.2);
+   cursor: pointer;
+} */
 
-  }
+
+@media screen and (max-width: 1200px) {
+   .product {
+      width: 30%;
+      height: 35vw;
+   }
+   .options {
+      gap: 2rem;
+   }
+}
+
+@media screen and (max-width: 765px) {
+
+   .product {
+      width: 40%;
+      height: 40vw;
+   }
+}
+
+@media screen and (max-width: 570px) {
+   .product {
+      width: 80%;
+      height: 80vw;
+   }   
+}
+
+@media screen and (max-width: 450px) {
+   
+}

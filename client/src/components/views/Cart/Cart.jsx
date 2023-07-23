@@ -98,7 +98,7 @@ function Cart () {
         <main>
             {ventana && <Modal />}
             {!ventana && (
-                <div className={styles.container}>
+                <div className={styles.component}>
                 {/* PRODUCTOS DEL CARRO */}
                     <h1 className={styles.title}>TU CARRITO DE COMPRAS</h1>
                     <div className={styles.flex}>

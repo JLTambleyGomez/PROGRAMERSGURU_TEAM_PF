@@ -2,8 +2,8 @@
    padding-bottom: var(--footerHeight);
    margin-top: var(--navBarHeight);
    min-height: calc(100vh - var(--navBarHeight));    
-   width: 100%;
    position: absolute;
+   width: 100%;
    display: flex;
    flex-direction: column; 
    box-sizing: border-box;
