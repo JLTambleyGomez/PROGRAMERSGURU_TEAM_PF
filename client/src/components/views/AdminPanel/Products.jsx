@@ -13,6 +13,7 @@ import styles from "./Courses.module.css";
 
 //_________________________module_________________________
 function Products() {
+    
     //global state:
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
@@ -46,10 +47,10 @@ function Products() {
         stock: "",
     });
 
-    const handleProductDelete = (id) => {
+    const handleProductDelete = async (id) => {
         try {
-            dispatch(delete_Products(id));
-            dispatch(get_products_all());
+            await dispatch(delete_Products(id));
+            await dispatch(get_products_all());
         } catch (error) {
             console.log("error");
         }
@@ -186,12 +187,20 @@ function Products() {
         dispatch(get_products_all());
         dispatch(get_categories())
     
-
+        //posibilidad para eliminar la funcion de desmontaje y reemplazarla con el useEffect:
         return () => {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
 
     //component:
     return (
@@ -292,8 +301,8 @@ function Products() {
                                     <select onChange={(event) => setNewProduct({...newProduct, categoryId: event.target.value})}>
                                         <option>Categoría</option>
                                         {
-                                            categories.allCategories.map((category) => (
-                                                <option value={category.id}>{category.name}</option>
+                                            categories.allCategories.map((category, index) => (
+                                                <option key={index} value={category.id}>{category.name}</option>
                                             ))
                                         }
                                     </select>

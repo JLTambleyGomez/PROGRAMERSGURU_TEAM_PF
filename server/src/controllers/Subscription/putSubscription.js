@@ -24,7 +24,7 @@ const putSubscription = async (req, res) => {
         await suscription.save();
         const response = {
             suscription,
-            message: "La suscripción fue creada con éxito",
+            message: "La suscripción fue modificada con éxito",
         };
 
         return res.status(200).json(response);

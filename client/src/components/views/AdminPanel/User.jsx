@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
     getAllUsersRequest,
-    putUserRequest,
     hideUserProfileRequest,
-    makeAdminUser,
-    postUserRequest
+    makeAdminUser,    
 } from "../../../axiosRequests/axiosRequests";
-import { useSelector, useDispatch } from "react-redux";
 
-import { post_user } from "../../../Redux/actions";
-
+import { post_user, put_user, delete_user, clearMessage } from "../../../Redux/actions";
 import { validateUser } from "./validate";
 
 import styles from "./AdminPanel.module.css";   
+
 
 //_________________________module_________________________
 const User = () => {
@@ -44,6 +42,24 @@ const User = () => {
         banned: "",
         address: "",
     });
+
+    //PUT:
+    const [putForm, setPutForm] = useState(null);
+
+    //put name:
+    const handlePutForm = (id) => {
+        setPutForm(id)
+    }
+
+    const syncInputName = (event, user) => {
+        user.name = event.target.value;
+    }
+
+    const updateUser = async (id) => {
+        await dispatch(put_user(id))
+        setPutForm(null);
+    }
+
 
     //trae a todos los usuarios con una axion request
     const getUsers = async () => {
@@ -105,21 +121,36 @@ const User = () => {
 
     const handlePostUserForm = async (event) => {
         event.preventDefault();
-        if (!user.name || !user.email || !user.nickName || !user.address)return setMessagePost("Debe ingresar los datos");
+        if (!user.name || !user.email || !user.nickName || !user.address) return setMessagePost("Debe ingresar los datos");
 
         console.log("click")
-        await postUserRequest(user)
+        await dispatch (post_user(user))
         console.log("click2")
         // await new Promise(resolve => setTimeout(resolve, 200));
-        getUsers()
+        await getUsers()
         console.log("click3")
         setNewUser(false);
     };
+
+//delete:
+    const handleDelete = async (user) => {
+        await dispatch(delete_user(user.id));
+        await getUsers();
+    }
+
  
-    //lice-cycle
+    //life-cycles:
     useEffect(() => {
         if (!allUsers.length) getUsers();
     }, []);
+    
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
 
     //component:
     return (
@@ -213,6 +244,14 @@ const User = () => {
                                     >
                                         Hacer Adminitrador
                                     </button>
+                                    <button onClick={() => handleDelete(user)} name="delete">
+                                         Borrar usuario
+                                            </button>
+                                    <button
+                                        onClick={() => handlePutForm(user.id)}
+                                    >
+                                        Editar nombre
+                                    </button>
                                 </div>
                             )}
                             {user.admin && <p>Es un administrador!</p>}
@@ -231,6 +270,20 @@ const User = () => {
                                         : false}
                                 </p>
                                 <p>Nickname: {user.nickName}</p>
+                                {
+                                    putForm === user.id && (
+                                        <span>
+                                            <input onChange={(event) => syncInputName(event, user)}/>
+                                            <button onClick={() => updateUser(user)}>
+                                                Actualizar usuario
+                                            </button>
+                                            <button onClick={() => setPutForm(null)}>
+                                                x
+                                            </button>
+                                        </span>
+                                        
+                                    )
+                                }
                             </label>
                             <br />
                         </span>

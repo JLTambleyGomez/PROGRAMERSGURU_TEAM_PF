@@ -24,9 +24,7 @@ const AdminPanel = () => {
     //global state:
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
-    const user = useSelector((state)=>state.user)
-    const email = localStorage.getItem("email");
-    
+    const user = useSelector((state)=>state.user)    
 
     //const:
     const dispatch = useDispatch();
@@ -99,11 +97,14 @@ const AdminPanel = () => {
         setShowUsers(false);
         setShowTecnology(false)
     };
-    useEffect(()=>{
-        if (!user?.email) dispatch(get_User_By_Email(email));
-    },[]);
+    
 
     //life-cycles:
+    useEffect(()=>{
+        const email = localStorage.getItem("email");
+        if (!user?.email) dispatch(get_User_By_Email(email));
+    }, []);
+
     useEffect(() => {
         get_tecnology,
         dispatch(clearMessage());
@@ -118,6 +119,17 @@ const AdminPanel = () => {
             dispatch(clearCourses());
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log(message)
+    }, [message])
 
     if (!user.admin) return (<ModalAdminPanel />);
 
