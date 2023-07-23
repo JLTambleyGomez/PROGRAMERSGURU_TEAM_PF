@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
 
 import {
-    get_categories,
+    get_tecnology,
     get_courses_all,
     clearMessage,
     clearCourses,
@@ -41,7 +41,7 @@ function HomePage () {
 
     //life-cycles:
     useEffect(() => {
-        dispatch(get_categories());
+        dispatch(get_tecnology());
         dispatch(get_courses_all());
     
         //--desmontado

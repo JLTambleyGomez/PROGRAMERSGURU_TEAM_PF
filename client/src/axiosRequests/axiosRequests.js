@@ -91,13 +91,13 @@ export const putCourseRequest = async (id,course)=>{
   return data;
 }
 
-//CATEGORIES______________________________
-export const getCategoriesAllRequest = async () => {
+//Tecnology______________________________
+export const getTecnologyAllRequest = async () => {
   const { data } = await axios("/technology");
   return data;
 };
 
-export const postCategoriesRequest = async (technology) => {
+export const postTecnologyRequest = async (technology) => {
   const { data } = await axios.post(
     "/technology",
     technology
@@ -105,7 +105,7 @@ export const postCategoriesRequest = async (technology) => {
   return data;
 };
 
-export const deleteCategoriesRequest = async (id) => {
+export const deleteTecnologyRequest = async (id) => {
   const { data } = await axios.delete(`/technology/${id}`);
   return data;
 };
@@ -259,6 +259,18 @@ export const makeAdminUser = async (user) => {
 //     return data;
 // };
 
+//Category
+export const getCategoryAllRequest = async () => {
+  const {data} = await axios.get(`/category`)
+  return data
+}
 
+export const postCategoryRequest = async (category) => {
+  const {data} = await axios.post(`/category`, category)
+  return data
+}
 
-
+export const deleteCategoryRequest = async (id) => {
+  const {data} = await axios.delete(`/category/${id}`)
+  return data
+}

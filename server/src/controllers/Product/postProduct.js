@@ -6,43 +6,20 @@ const postProduct = async (req,res) => {
 
         if(!price && !name && !description && !image && !categoryId && !stock) return res.status(400).json({message: "Debe ingresar los datos"})
 
+        console.log(categoryId)
+
         const categoryDB = await Category.findByPk(categoryId)
+
+        console.log(categoryDB.id)
 
         if(!categoryDB) return res.status(404).json({message: "No existe la categoria con ese id"})
       
         
         const newProduct = await Product.create({name,price,description,image,stock,categoryId:categoryDB.id})
-        // const [newProduct, created] = await Product.findOrCreate({
-        //     where:{
-        //         name,
-        //     },
-        //     defaults: {
-        //         price,
-        //         description,
-        //         image,
-        //         stock,
-        //         categoryId: categoryDB.id
-                
-        //     }
-        // })
-        if(!newProduct) return res.status(400).json({message: "Surgió un error a la hora de crear el producto"})
-
         
-        const response = {
-            product: {
-                name: "",
-                image: "",
-                description: "",
-                price: "",
-                
-            },
-            successResponse: created
-            ? "El producto fue creado exitosamente"
-            : `Ya existe un producto con el nombre ${newProduct.name}. Pruebe con un nombre diferente`,
-            created,
-        };
-
-        return res.status(200).json(response)
+        if(!newProduct) return res.status(400).json({message: "Surgió un error a la hora de crear el producto"})
+     
+        return res.status(200).json({message: "El producto fue creado con éxito"})
     } catch (error) {
         return res.status(500).json({message: error.message})
     }

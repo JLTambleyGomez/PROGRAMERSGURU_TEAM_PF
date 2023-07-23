@@ -4,6 +4,7 @@ import {
     putUserRequest,
     hideUserProfileRequest,
     makeAdminUser,
+    postUserRequest
 } from "../../../axiosRequests/axiosRequests";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,7 +12,7 @@ import { post_user } from "../../../Redux/actions";
 
 import { validateUser } from "./validate";
 
-import styles from "./AdminPanel.module.css";
+import styles from "./AdminPanel.module.css";   
 
 //_________________________module_________________________
 const User = () => {
@@ -102,19 +103,25 @@ const User = () => {
         setUserError(validateUser({ ...user, [nameInput]: valueInput }));
     };
 
-    const handlePostUserForm = (event) => {
+    const handlePostUserForm = async (event) => {
         event.preventDefault();
-        if (!user.name || !user.email || !user.nickName || !user.address)
-            return setMessagePost("Debe ingresar los datos");
-        dispatch(post_user(user));
+        if (!user.name || !user.email || !user.nickName || !user.address)return setMessagePost("Debe ingresar los datos");
+
+        console.log("click")
+        await postUserRequest(user)
+        console.log("click2")
+        // await new Promise(resolve => setTimeout(resolve, 200));
+        getUsers()
+        console.log("click3")
         setNewUser(false);
     };
-    console.log(allUsers);
+ 
     //lice-cycle
     useEffect(() => {
         if (!allUsers.length) getUsers();
     }, []);
 
+    //component:
     return (
         <div className={styles.contain}>
             <h1>Users:</h1>
