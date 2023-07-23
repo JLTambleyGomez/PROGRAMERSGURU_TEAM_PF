@@ -8,8 +8,7 @@ import theme from "../../../theme/theme";
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
 import FilterBar from "../../bars/filterBar/FilterBar";
-import OrderBar from "../../bars/orderBar/OrderBar";
-import Modal from "../ventanaemergente/ventana";
+
 
 //_________________________module_________________________
 function CoursePage () {

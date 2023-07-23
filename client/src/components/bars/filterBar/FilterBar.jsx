@@ -216,7 +216,7 @@ function FilterBar() {
         {/* RESPONSIVE */}
             <div className={`${s["responsive-component"]}`}>
                 <button onClick={() => {setFilterModal(true)}}>
-                    FILTRAR                    
+                    FILTRAR
                 </button>
                 <button onClick={() => {setSortModal(true)}}>
                     ORDENAR

@@ -25,6 +25,7 @@ function Menu () {
 
     const userImage = "https://www.prensalibre.com/wp-content/uploads/2019/05/1467646262_522853_1467646344_noticia_normal.jpg?quality=82&w=664"
 
+
     //functions:
     const handleDarkMode = () => {
         setIsDarkMode(!isDarkMode) //para controlar el icono de sol y luna.
