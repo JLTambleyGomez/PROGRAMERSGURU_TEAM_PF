@@ -15,7 +15,7 @@ import { validateCourse } from "./validate";
 
 function Courses() {
     // global state:
-    const categories = useSelector((state) => state.categories);
+    const tecnology = useSelector((state) => state.tecnology);
     const dark = useSelector((state) => state.darkMode);
     const courses = useSelector((state) => state.allCourses);
 
@@ -34,7 +34,7 @@ function Courses() {
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
     const [modificarCourse, setModificarCourse] = useState(false);
     const [postCourse, setPostCourse] = useState(false);
@@ -48,7 +48,7 @@ function Courses() {
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
     const [course, setCourse] = useState({})
 
@@ -61,7 +61,7 @@ function Courses() {
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
 
     // functions:
@@ -71,11 +71,6 @@ function Courses() {
     };
 
     //DESPACHA LA ACTION PARA HACER EL PUT
-    const handleCoursePut = (event) => {
-        event.preventDefault();
-        dispatch(put_course(modifCourse));
-        dispatch(get_courses_all());
-    };
 
     //modificar curso
     const handleModificarCurso = (event) => {
@@ -97,12 +92,12 @@ function Courses() {
         dispatch(clearMessage());
         setMessagePost('')
 
-        if (postCourse)
-            setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
+        // if (postCourse)
+        //     setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
     };
 
-    const handleCategorySelection = (event) => {
-        const selectedCategories = Array.from(
+    const handleTechnologySelection = (event) => {
+        const selectedTechnologies = Array.from(
             event.target.selectedOptions,
             (option) => ({
                 id: option.value,
@@ -110,12 +105,12 @@ function Courses() {
         );
         setNewCourse((prevCourse) => ({
             ...prevCourse,
-            categories: selectedCategories,
+            tecnology: selectedTechnologies,
         }));
-        if (postCourse)
-            setErrorCourse(
-                validateCourse({ ...newCourse, categories: selectedCategories })
-            );
+        // if (postCourse)
+        //     setErrorCourse(
+        //         validateCourse({ ...newCourse, tecnology: selectedTechnologies })
+        //     );
     };
 
     const handleDeleteCourse = async (id) => {
@@ -141,7 +136,7 @@ function Courses() {
             released: "",
             isFree: false,
             language: "",
-            categories: [],
+            tecnology: [],
         });
         setNewCourse({
             title: "",
@@ -152,7 +147,7 @@ function Courses() {
             released: "",
             isFree: false,
             language: "",
-            categories: [],
+            tecnology: [],
         });
     };
 
@@ -165,6 +160,7 @@ function Courses() {
                 errorCourse.description ||
                 errorCourse.genre ||
                 errorCourse.platforms ||
+// platforms?
                 errorCourse.released ) return setMessagePost("Revise los datos");
             
 
@@ -178,7 +174,7 @@ function Courses() {
                         released: "",
                         isFree: false,
                         language: "",
-                        categories: [],
+                        tecnology: [],
                     });
                     dispatch(get_courses_all());
                 })
@@ -194,8 +190,7 @@ function Courses() {
                 !newCourse.courseUrl ||
                 !newCourse.released ||
                 !newCourse.isFree ||
-                !newCourse.language ||
-                !newCourse.categories
+                !newCourse.language 
             ) return setMessagePost('Debe completar los datos')
         
             if (
@@ -205,8 +200,7 @@ function Courses() {
                 errorCourse.courseUrl ||
                 errorCourse.released ||
                 errorCourse.isFree ||
-                errorCourse.language ||
-                errorCourse.categories
+                errorCourse.language 
 
             )return setMessagePost("Revise los datos")
             
@@ -221,7 +215,7 @@ function Courses() {
                         released: "",
                         isFree: false,
                         language: "",
-                        categories: [],
+                        tecnology: [],
                     });
                     dispatch(get_courses_all());
                 })
@@ -237,13 +231,7 @@ function Courses() {
         setPostCourse(true);
     };
     
-    useEffect(() => {
-        if (messagePost !== "") {
-            dispatch(adminPanelMensajesLocales(messagePost));
-        }
-    }, [messagePost]);
 
-console.log(courses)
     // life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
@@ -256,6 +244,12 @@ console.log(courses)
             dispatch(clearCourses());
         };
     }, [dispatch]);
+    
+    useEffect(() => {
+        if (messagePost !== "") {
+            dispatch(adminPanelMensajesLocales(messagePost));
+        }
+    }, [messagePost]);
 
     useEffect(() => {
         (async () => {
@@ -264,7 +258,9 @@ console.log(courses)
         })()
     }, [dispatch])
 
- 
+    useEffect(() => {
+        console.log(newCourse)
+    }, [newCourse])
 
     // component:
     return (
@@ -386,23 +382,23 @@ console.log(courses)
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Categorías:</label>
+                                    <label>Tecnologías:</label>
                                     <select
                                         multiple
-                                        name="categories"
-                                        onChange={handleCategorySelection}
+                                        name="tecnology"
+                                        onChange={handleTechnologySelection}
                                         >
-                                        {categories.allCategories.map((category) => (
+                                        {tecnology.map((technology) => (
                                             <option
-                                            key={category.id}
-                                            value={category.id}
+                                                key={technology.id}
+                                                value={technology.id}
                                             >
-                                                {category.name}
+                                                {technology.name}
                                             </option>
                                         ))}
                                     </select>
-                                        {errorCourse.categories && <p>{errorCourse.categories}</p>}
-                                    
+                                        {/* {errorCourse.tecnology && <p>{errorCourse.tecnology}</p>} */}
+
                                 </div>
 
                                 <button onClick={handleCoursePost}>

@@ -43,7 +43,7 @@ const Tecnology = () => {
     useEffect(()=>{
         if(!tecnology.length) dispatch(get_tecnology())
 
-        //posibilidad de eliminar la funcion de Desmontaje y reemplazarla con el useEffect:
+        //posibilidad de eliminar la funcion de desmontaje y reemplazarla con el useEffect:
         return () => {
             dispatch(clearMessage());
         };

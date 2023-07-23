@@ -76,9 +76,9 @@ export const validateCourse = (form) => {
     //validar categorias
 
    
-    if (!form.categories.length)
-        error.categories = "Debe seleccionar las categorias";
-    else if (form.categories.length) error.categories = "";
+    if (!form.tecnology.length)
+        error.tecnology = "Debe seleccionar las categorias";
+    else if (form.tecnology.length) error.tecnology = "";
 
     return error;
 };
