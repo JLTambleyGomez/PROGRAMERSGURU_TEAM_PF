@@ -1,0 +1,252 @@
+{
+    "technologies": [
+        {
+            "id": 3,
+            "name": ".NET"
+        },
+        {
+            "id": 4,
+            "name": "AWS"
+        },
+        {
+            "id": 5,
+            "name": "Angular"
+        },
+        {
+            "id": 6,
+            "name": "Bootstrap"
+        },
+        {
+            "id": 7,
+            "name": "C#"
+        },
+        {
+            "id": 8,
+            "name": "C++"
+        },
+        {
+            "id": 9,
+            "name": "COBOL"
+        },
+        {
+            "id": 10,
+            "name": "Cloud SQL"
+        },
+        {
+            "id": 11,
+            "name": "Dart"
+        },
+        {
+            "id": 12,
+            "name": "Django"
+        },
+        {
+            "id": 13,
+            "name": "Firebase"
+        },
+        {
+            "id": 14,
+            "name": "Flask"
+        },
+        {
+            "id": 15,
+            "name": "Flexbox"
+        },
+        {
+            "id": 16,
+            "name": "Flutter"
+        },
+        {
+            "id": 17,
+            "name": "Fortran"
+        },
+        {
+            "id": 18,
+            "name": "Game development"
+        },
+        {
+            "id": 19,
+            "name": "Git"
+        },
+        {
+            "id": 20,
+            "name": "GitHub"
+        },
+        {
+            "id": 21,
+            "name": "GitLab"
+        },
+        {
+            "id": 22,
+            "name": "HTML & CSS"
+        },
+        {
+            "id": 23,
+            "name": "Java"
+        },
+        {
+            "id": 24,
+            "name": "JavaScript"
+        },
+        {
+            "id": 25,
+            "name": "LaTeX"
+        },
+        {
+            "id": 26,
+            "name": "Laravel"
+        },
+        {
+            "id": 27,
+            "name": "MATLAB"
+        },
+        {
+            "id": 28,
+            "name": "MariaDB"
+        },
+        {
+            "id": 29,
+            "name": "MatplotLib"
+        },
+        {
+            "id": 30,
+            "name": "Microservices"
+        },
+        {
+            "id": 31,
+            "name": "MongoDB"
+        },
+        {
+            "id": 32,
+            "name": "MySQL"
+        },
+        {
+            "id": 33,
+            "name": "NestJS"
+        },
+        {
+            "id": 34,
+            "name": "Next.js"
+        },
+        {
+            "id": 35,
+            "name": "Node.js"
+        },
+        {
+            "id": 36,
+            "name": "OAuth"
+        },
+        {
+            "id": 37,
+            "name": "Oracle"
+        },
+        {
+            "id": 38,
+            "name": "PHP"
+        },
+        {
+            "id": 39,
+            "name": "Perl"
+        },
+        {
+            "id": 40,
+            "name": "PostgreSQL"
+        },
+        {
+            "id": 41,
+            "name": "Pure CSS"
+        },
+        {
+            "id": 42,
+            "name": "Pycharm"
+        },
+        {
+            "id": 43,
+            "name": "Pygame"
+        },
+        {
+            "id": 44,
+            "name": "Python"
+        },
+        {
+            "id": 45,
+            "name": "React"
+        },
+        {
+            "id": 46,
+            "name": "React Native"
+        },
+        {
+            "id": 47,
+            "name": "React Router"
+        },
+        {
+            "id": 48,
+            "name": "Redux"
+        },
+        {
+            "id": 49,
+            "name": "Redux Toolkit"
+        },
+        {
+            "id": 50,
+            "name": "Ruby"
+        },
+        {
+            "id": 51,
+            "name": "Scrapy"
+        },
+        {
+            "id": 52,
+            "name": "Selenium"
+        },
+        {
+            "id": 53,
+            "name": "Socket.IO"
+        },
+        {
+            "id": 54,
+            "name": "Nodemailer"
+        },
+        {
+            "id": 55,
+            "name": "Svelte"
+        },
+        {
+            "id": 56,
+            "name": "Tailwind"
+        },
+        {
+            "id": 57,
+            "name": "TypeScript"
+        },
+        {
+            "id": 58,
+            "name": "Unity"
+        },
+        {
+            "id": 59,
+            "name": "Unit testing"
+        },
+        {
+            "id": 60,
+            "name": "Vim"
+        },
+        {
+            "id": 61,
+            "name": "Vue JS"
+        },
+        {
+            "id": 62,
+            "name": "Web design"
+        },
+        {
+            "id": 63,
+            "name": "WordPress"
+        },
+        {
+            "id": 64,
+            "name": "jQuery"
+        }
+    ]
+}

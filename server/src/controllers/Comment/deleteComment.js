@@ -12,7 +12,7 @@ const deleteComment = async (req, res) => {
 
         await comment.destroy();
         return res.status(200).json({
-            message: `El comentario con id: ${id} fue borrado con éxito `,
+            message: "El comentario fue borrado con éxito",
         });
     } catch (error) {
         return res.status(500).json({ message: error.message });

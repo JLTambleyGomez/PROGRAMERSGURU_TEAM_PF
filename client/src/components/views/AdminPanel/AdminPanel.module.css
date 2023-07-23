@@ -1,21 +1,36 @@
 .component {
-  /* width: 44%; */
+  width: 100%;
   margin-top: var(--navBarHeight);
   display: flex;
   flex-direction: row;
   padding: 4% 0;
+  color: black;
 }
 
 .message{
-  position: fixed;
-  top:var(--navBarHeight);
+  position:sticky;
+  top:12%;
   width:100%;
   height: 4%;
-  z-index: 999999;
   background-color: black;
   color: white;
 }
 
 .h1{
-  font-size: 15px;
+  margin: 12%;
+  color: black;
+  height: 20px;
+  font-size: 10px;
+
 }
+
+
+
+.buton{
+  width: 250px;
+  transition: all 0.5s;
+
+}
+.buton:hover{
+  width: 400px;
+  }

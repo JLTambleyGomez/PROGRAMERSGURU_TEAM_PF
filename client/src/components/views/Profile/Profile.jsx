@@ -1,26 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Profile.module.css";
-import {
-    get_comments_by_user,
-    get_User_By_Email,
-} from "../../../Redux/actions";
+import { get_User_By_Email } from "../../../Redux/actions";
 import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
+import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
 import { editUserData } from "../../../axiosRequests/axiosRequests";
 import { Favorites } from "./ProfileComponents/Favorites";
 import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
 import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
+import { NavLink } from "react-router-dom";
 
 //_________________________module_________________________
 function ProfileV2() {
     //global states:
+    const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
-    const userComments = useSelector((state) => state.userComments);
+    const userId = user?.id;
+    console.log(userId);
 
     //local states
+    const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
     const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
@@ -33,11 +35,17 @@ function ProfileV2() {
     const [tab, setTab] = useState("favorites");
 
     //const:
+    const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg";
     const expirationDate = new Date(user.expirationDate);
     const actualDate = new Date();
     const dispatch = useDispatch();
 
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
     //handlers
+
     const handleChange = (event) => {
         event.preventDefault();
         setNewUserData({
@@ -53,7 +61,12 @@ function ProfileV2() {
     const saveChanges = (event) => {
         event.preventDefault();
         setEmail(localStorage.getItem("email"));
-        if (newUserData.name || newUserData.picture || newUserData.nickName || newUserData.address) {
+        if (
+            newUserData.name ||
+            newUserData.picture ||
+            newUserData.nickName ||
+            newUserData.address
+        ) {
             editUserData({ ...newUserData, email });
         }
         setCollapse(!collapse);
@@ -86,36 +99,50 @@ function ProfileV2() {
 
     useEffect(() => {
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-        dispatch(get_comments_by_user(user.id));
-    }, [dispatch, refresh]);
+    }, [dispatch, refresh, removeComment]);
+
+    //if (!user.name) return <Modal />
 
     //component:
     return (
         <div className={s.profileContainer}>
-            <div className={s.infoProfile}>
-                <div className={s.config} onClick={openConfig}>
-                    <img
-                        src="https://www.svgrepo.com/show/491415/gear.svg"
-                        alt=""
-                    />
+            <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
+                <div className={s.profileImage}>
+                    {user?.admin ? (
+                        <div className={s.config} onClick={openConfig}>
+                            <NavLink to="/adminpanel">
+                                <img src={gearConfig} alt="config" />
+                            </NavLink>
+                        </div>
+                    ) : (
+                        null
+                    )}
+                    {collapse ? (
+                        <div className={s.camera}>
+                            <EditProfilePicture
+                                userId={userId}
+                                setNewUserData={setNewUserData}
+                                newUserData={newUserData}
+                            />
+                        </div>
+                    ) : null}
+                    <div className={!collapse ? s.picture : s.editPicture}>
+                        <img className={s.image} src={user.picture} />
+                    </div>
                 </div>
-                <img className={s.image} src={user.picture} />
-                {/* <div className={s.refresh} onClick={() => setRefresh(!refresh)}> */}
-                    <h2>{user.name}</h2>
-                {/* </div> */}
-                <h5>
-                    {user.nickName}</h5>
+                <h2>{user.name}</h2>
+                <h5>{user.nickName}</h5>
                 <div className={s.profileButton}>
                     {!collapse ? (
                         <div className={s.refresh}>
-                        <button className={s.save} onClick={toggleCollapse}>
-                            Editar perfil
-                        </button>
-                        <img
-                        onClick={() => setRefresh(!refresh)}
-                        src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
-                        alt="actualizar"
-                        />
+                            <button className={s.save} onClick={toggleCollapse}>
+                                Editar perfil
+                            </button>
+                            <img
+                                onClick={() => setRefresh(!refresh)}
+                                src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
+                                alt="actualizar"
+                            />
                         </div>
                     ) : (
                         <button className={s.save} onClick={saveChanges}>
@@ -130,17 +157,10 @@ function ProfileV2() {
                 </div>
                 <div>
                     {collapse ? (
-                        <>
-                            <EditProfileForm
-                                handleChange={handleChange}
-                                newUserData={newUserData}
-                            />
-                            <div>
-                                <button className={s.desactivar}>
-                                    Desactivar mi cuenta
-                                </button>
-                            </div>
-                        </>
+                        <EditProfileForm
+                            handleChange={handleChange}
+                            newUserData={newUserData}
+                        />
                     ) : null}
                 </div>
                 <h5>
@@ -153,11 +173,20 @@ function ProfileV2() {
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} />
-                {tab === "favorites" && <Favorites />}
-                {tab === "reseñas" && <Reviews />}
-                {tab === "compras" && <Compras />}
-                {tab === "carrito" && <Carrito />}
+                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
+                {tab === "favorites" && (
+                    <Favorites dark={dark} favorites={user?.Courses} />
+                )}
+                {tab === "reseñas" && (
+                    <Reviews
+                        dark={dark}
+                        comments={user?.Comments}
+                        removeComment={removeComment}
+                        setRemoveComment={setRemoveComment}
+                    />
+                )}
+                {tab === "compras" && <Compras dark={dark} />}
+                {tab === "carrito" && <Carrito dark={dark} />}
             </div>
         </div>
     );

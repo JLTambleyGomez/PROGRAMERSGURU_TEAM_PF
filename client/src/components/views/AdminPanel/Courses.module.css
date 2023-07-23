@@ -1,0 +1,12 @@
+.conteiner {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2px 2px;
+}
+
+.conteinerProducts {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

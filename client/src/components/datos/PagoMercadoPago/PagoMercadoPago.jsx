@@ -1,57 +1,59 @@
-import axios from "axios"
+import axios from "axios";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import styles from "./PagoMercadoPago.module.css"
 
+const PagoMercadopago = ({ reference }) => {
+    console.log(reference);
+    initMercadoPago('TEST-85c02450-7173-4d7c-8ff0-0b7663fd6b8b');
 
-//_________________________module_________________________
-
-
-const PagoMercadopago = ( { reference } ) => {
-
-
-    //states:
     const [preferenceId, setPreferenceId] = useState(null);
-
-
-    //const:    
-    const dispatch = useDispatch()
-
-
-    //functions:
-    console.log(reference)
-    initMercadoPago('TEST-74e77fab-e33b-4709-8aef-3cb739639cc5');
-
+    const [loading, setLoading] = useState(true); // Nuevo estado para el mensaje de carga
+    const dispatch = useDispatch();
 
     const createMercadopagoReference = async () => {
         try {
-            console.log(reference)
-            const { data } = await axios.post("/Mp/create_preference", reference)
-            const id = data.id
+            console.log(reference);
+            const { data } = await axios.post("/Pagos/create_preference", reference);
+            const id = data.id;
             return id;
         } catch (error) {
-            console.log(error)
+            // Si hay un error, terminamos la carga
+            setLoading(false);
         }
     };
 
     const handleBuy = async () => {
         const id = await createMercadopagoReference();
-        id && setPreferenceId(id)
-    }
+        if (id) {
+            setPreferenceId(id);
+        }
+    };
 
-    //life-cycles:
     useEffect(() => {
-        handleBuy()
-    }, [])
+        handleBuy();
+    }, []);
 
+    useEffect(() => {
+        // Verificar si se obtuvo el ID de referencia para ocultar el mensaje de carga
+        if (preferenceId) {
+            setLoading(false);
+        }
+    }, [preferenceId]);
 
-    //component:
-    return(
+    return (
         <div>
-            { preferenceId && <Wallet initialization={{ preferenceId }}/> }
+            {loading ? (
+                // Mostrar mensaje de carga mientras se espera la respuesta
+                <p className={styles.carga}>Cargando método de pago...</p>
+            ) : preferenceId ? (
+                <div className={styles.component}>
+                <Wallet initialization={{ preferenceId }} />
+                </div>
+            ) : null}
         </div>
-    )
-}
-
+    );
+};
 
 export default PagoMercadopago;

@@ -35,13 +35,17 @@ function CoursePage () {
     }, [dispatch]);
 
     useEffect(() => {
+        // (async () => {
+        //     setIsloading(true);
+        //     setIsloading(false);
+        // })()
         (async () => {
             setIsloading(true);
             if (!allCourses.length) await dispatch(get_courses_all());
+            await new Promise(resolve => setTimeout(resolve, 1000));
             setIsloading(false);
         })()
-        // const timer = setTimeout(() => {
-        // }, 500);
+
     }, [allCourses])
 
 

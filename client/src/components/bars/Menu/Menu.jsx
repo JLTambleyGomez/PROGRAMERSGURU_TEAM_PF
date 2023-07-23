@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Dark_Mode } from "../../../Redux/actions";
-import { FaSun, FaMoon } from "react-icons/fa";
-import theme from "../../../theme/theme";
 
+import { Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 import logoutUser from "../../../user/logOut"
 
+import { FaSun, FaMoon } from "react-icons/fa";
 import s from "./Menu.module.css";
 
 //_________________________module_________________________
@@ -40,10 +40,6 @@ function Menu () {
           setIsDarkMode(localDark ? JSON.parse(localDark) : false);
         }
     }, [isDarkMode]);
-
-    // useEffect(() => {
-    //     dispatch(Dark_Mode())
-    // }, [dark])
 
 
     // component:

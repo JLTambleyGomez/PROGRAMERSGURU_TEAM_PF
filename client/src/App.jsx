@@ -7,7 +7,6 @@ import theme from "./theme/theme";
 
 import s from "./App.module.css";
 import HomePage from "./components/views/HomePage/HomePage";
-import LandingPage from "./components/views/LandingPage/LandingPage";
 import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
 import NavBar from "./components/bars/navBar/navBar";
@@ -16,7 +15,6 @@ import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
-import CourseDetails from "./components/datos/CoursesDetails/CoursesDetails";
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
@@ -26,31 +24,71 @@ import MercadoPagoFailure from "./components/views/MercadopagoFeedback/fracaso"
 import MercadoPagoPendiente from "./components/views/MercadopagoFeedback/pendiente";
 import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
-import SubscripcionesFlotante from "./components/datos/Subscripciones/SubscripcionesFlotante"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import ModalBannedUser from "./components/views/ModalBannedUser/ModalBannedUser";
+import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
+import MusicBar from "./components/bars/musicBar/MusicBar";
+
+
+import { getAuth } from "firebase/auth";
+import "./config/firebase-config";
+
 
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
 axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
-const App = () => {
-
-
+const App = () =>{
+const dispatch = useDispatch()
+    const auth = getAuth()
+    auth.onIdTokenChanged(async (user) => {
+        if (user) {
+          try {
+            // Obtiene el token de autenticación actual
+            const token = await user.getIdToken();
+      
+            // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
+            const tokenExpirationTime = user.authTime + (60 * 60 * 1000) - (5 * 60 * 1000); // 1 hora - 5 minutos
+            const currentTime = Date.now();
+      
+            if (currentTime >= tokenExpirationTime) {
+              // Renueva el token
+              const refreshedToken = await user.getIdToken(true);
+              localStorage.setItem("accessToken", refreshedToken)
+              // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
+            }
+          } catch (error) {
+            // Manejo de errores
+            console.error("Error al renovar el token:", error);
+          }
+        }
+      });
+  
     //global states:
+    
+    const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
-    const dark = useSelector((state) => state.darkMode)
+    const user= useSelector((state)=>state.user);
 
 
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
-
- 
+    const [isBanned, setBan]= useState(false);
+    
     //const:
     const location = useLocation().pathname;
-    const dispatch = useDispatch();
 
+    
     //life-cycles:
+    useEffect(()=>{
+        if(user.name){
+            if(user.banned){ setBan(true)}
+        }
+        setBan(false)
+    },[user])
+
+    
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight =
@@ -93,11 +131,20 @@ const App = () => {
         dispatch(Dark_Mode())
     }, [dark])
 
+    //rule:
+    if(isBanned) return(
+        <Routes>
+            <Route path="/HomePage" elment={<ModalBannedUser/>}/>
+            <Route path="/" element={<LandingPage2/>}/>
+        </Routes>
+    )
+
 
     //component:
     return (
         <div className={`${s[theme("component")]}`}>
             {location !== "/" && <NavBar />}
+            {location !== "/" && <MusicBar/>}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
                 <Route path="/" element={<LandingPage2/>}/>
@@ -119,7 +166,7 @@ const App = () => {
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
                 <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
             </Routes>
-            {location !== "/" && isAtBottom && <Footer />}
+            {location === "/HomePage" && isAtBottom && <Footer />}
         </div>
     );
 }

@@ -3,9 +3,9 @@ const { Subscription } = require("../../db");
 const putSubscription = async (req, res) => {
     try {
         const { id } = req.params;
-        const { title, description, image, type } = req.body;
+        const { title, description, image, type, price } = req.body;
 
-        if (!title && !description && !image && !type)
+        if (!title && !description && !image && !type && !price)
             return res.status(500).json({
                 message: `Debe ingresar todos los datos para poder modificar la suscripción`,
             });
@@ -24,7 +24,7 @@ const putSubscription = async (req, res) => {
         await suscription.save();
         const response = {
             suscription,
-            message: "La suscripción fue creada con éxito",
+            message: "La suscripción fue modificada con éxito",
         };
 
         return res.status(200).json(response);

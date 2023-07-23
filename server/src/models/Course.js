@@ -26,7 +26,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         meanRating: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.FLOAT,
         },
         released: {
             type: DataTypes.DATEONLY,

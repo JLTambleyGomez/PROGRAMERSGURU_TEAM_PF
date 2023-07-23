@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Dark_Mode } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
-import s from "./SubscripcionesFlotante.module.css";
+import s from "./SubscripcionesFlotante.module.css"
 
 //_________________________module_________________________
 function SubscripcionFlotante () {
@@ -36,7 +36,6 @@ function SubscripcionFlotante () {
     useEffect(() => {
         dispatch(Dark_Mode())
     }, [dark])
-
 
     //copmonent:
     return (

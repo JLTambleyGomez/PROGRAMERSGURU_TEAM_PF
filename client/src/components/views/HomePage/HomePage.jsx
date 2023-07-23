@@ -1,58 +1,53 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 import { Dark_Mode } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import {
-    get_categories,
+    get_tecnology,
     get_courses_all,
     clearMessage,
-    get_Favorites_Request,
+    clearCourses,
     // get_User_By_Email,
 } from "../../../Redux/actions";
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
-import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
-//import axios from "axios";
+import ModalBannedUser from '../ModalBannedUser/ModalBannedUser'
 //_________________________module_________________________
 function HomePage () {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
+    const user = useSelector((state)=>state.user)
+
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
 
-    //functions:
-
     //-------------------------------------------------------------------------
     // obtener el email
-    const email = localStorage.getItem("email")
+    // const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
-    // const sendEmail = async () => {
-    //     const carta = {email: "calderon", message:"enviado"}
-    //     await axios.post(`http://localhost:3001/user/sendEmail`, carta );
-    // };
 
 
     //life-cycles:
     useEffect(() => {
-        // dispatch(get_User_By_Email(email))
-        dispatch(get_categories());
+        const email = localStorage.getItem("email")
+        dispatch(get_tecnology());
         dispatch(get_courses_all());
-        // (async () => {
-        //     await sendEmail();
-        // })()
+
+        dispatch(Dark_Mode())
+
         //--desmontado
         dispatch(Dark_Mode())
         return () => {
             dispatch(clearMessage());
+            dispatch (clearCourses())
         };
     }, [dispatch]);
 
@@ -61,6 +56,8 @@ function HomePage () {
     }, [dark])
 
 
+    if(user.banned) return <ModalBannedUser />
+    
     //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
@@ -84,7 +81,6 @@ function HomePage () {
                 <div style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%"}} className={s.coursesPreviewContainer}>
                     {latestCourses.length > 0 ? (
                         <CoursesPreview courses={latestCourses} />
-                        // <p>2</p>
                     ) : (
                         <p className={s.cargando}>Cargando</p>
                     )}
@@ -99,7 +95,7 @@ function HomePage () {
 
                     <section className={`${s.sectionFAQ}`}/> */}
         {/* NEWS */}
-            <section className={`${s.sectionNews}`}>
+        <section className={`${s.sectionNews}`}>
                 <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>
                 <div className={`${s.newsBanner}`}>
                     <h2 className={`${s[theme("text")]}`}>

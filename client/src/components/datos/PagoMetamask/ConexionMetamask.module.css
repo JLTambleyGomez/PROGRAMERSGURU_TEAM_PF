@@ -22,12 +22,14 @@
     height: 30px;
     border-radius: 100%;
     transition: transform 0.5s;
+    transform: translate(0%, -50%);
+
     /* margin-bottom: -90%; */
 }
 
 .img:hover{
     cursor: pointer;
-    transform: scale(1.3);
+    transform: scale(2.1);
 
 }
 
@@ -37,13 +39,13 @@
     color: rgb(20, 255, 196);
     text-shadow: 1px 1px 1px  black;
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -150%);
     /* margin-bottom:-16%; */
 }
 
 .desconectada{
     position: absolute;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -150%);
     /* color: rgba(255, 254, 254, 0.897); */
     font-size: 80%;
 }
@@ -54,9 +56,7 @@
 }
 
 .walletid{
-    color: black;
     font-size: 10px;
     position: absolute;
-    /* transform: translate(-50%, 50%); */
-    margin-top: -40px;
+    transform: translate(0%, 250%);
 }

@@ -11,9 +11,10 @@ const { getProductById } = require("../controllers/Product/getProductById");
 const { getProductsByName } = require("../controllers/Product/getProductsByName");
 
 
+productRouter.post("/all", postProducts);
+
 productRouter.get("/", getProduct);
 
-productRouter.get("/all", postProducts);
 
 productRouter.post("/", postProduct);
 

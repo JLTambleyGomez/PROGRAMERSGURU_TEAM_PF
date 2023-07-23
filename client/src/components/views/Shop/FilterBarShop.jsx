@@ -68,31 +68,7 @@ function FilterBarShop () {
           timer = setTimeout(() => func(...args), delay);
         };
     };
-    // const handlePriceChange = (values) => { 
-    //     setPriceRange(values);
-    // };
 
-    //______________________________________
-    // const handleSortChange = async (event) => {
-    //     const value = event.target.value;
-    //     await setOrder(value);
-    // };
-    // //_______________________________________
-
-    // const handle = async () => {
-    //     await dispatch(get_products_all());
-    //     order !== "" ? await dispatch(sort_products(order)):"";
-    //     category !== "" ? await dispatch(filter_product_by_category(category)): "";
-    //     await dispatch(filter_product_by_price(priceRange))
-    // }
-    // //_______________________________________
-
-    //_______________________________________
-
-    // const handleFilter = () => {
-    //     // dispatch(get_products_all());
-    //     dispatch(filter_product_by_price(priceRange));
-    // }
 
     //_________________________
     const sortProducts = async (event) => {

@@ -12,6 +12,9 @@ const LandingPage2 = () => {
   const indexRef = useRef(0); // Utiliza un useRef para mantener el valor del índice
 
   useEffect(() => {
+
+    localStorage.setItem("sendedEmail", "0");
+
     const words = [
       'Bienvenido a',
       "PROGRAMMER'S GURU",
@@ -49,6 +52,8 @@ const LandingPage2 = () => {
 
   };
 
+ 
+
   return (
     <div  className={styles.pagecontainer}>
       <div   onClick={handlecancelanimation}
@@ -73,8 +78,8 @@ const LandingPage2 = () => {
             {showForm && (
               <>
                 <SignFreeForm className={styles.boton} />
-                <NavLink className={styles.boton} to="/HomePage">
-                  Entrar sin Registrarme
+                <NavLink className={styles.boton1} to="/HomePage">
+                 <p className={styles.name}>Entrar sin Registrarme</p> 
                 </NavLink>
               </>
             )}
