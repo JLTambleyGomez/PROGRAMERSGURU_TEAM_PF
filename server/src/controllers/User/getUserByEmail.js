@@ -13,6 +13,12 @@ const getUserByEmail = async (req, res) => {
                 },
                 {
                     model: Comment,
+                    include: [
+                        {
+                            model: Course,
+                            attributes: ["imageURL", "title"]
+                        }                
+                    ]
                 }
             ]
         })

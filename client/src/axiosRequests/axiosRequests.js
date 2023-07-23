@@ -221,8 +221,8 @@ export const getCommentsByUser = async (userId) => {
 };
 
 export const postComment = async (courseId, commentData) => {
-  const { response } = await axios.post(`/comment/${courseId}`, commentData);
-  return response;
+  const { data } = await axios.post(`/comment/${courseId}`, commentData);
+  return data;
 }
 
 export const putComment = async (id, commentData) => {

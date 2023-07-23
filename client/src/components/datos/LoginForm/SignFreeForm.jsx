@@ -6,6 +6,7 @@ import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
 import { get_User_By_Email } from "../../../Redux/actions";
+import GoogleButton from 'react-google-button'
 import ModalBannedUser from "../../views/ModalBannedUser/ModalBannedUser";
 
 //_________________________module_________________________
@@ -176,14 +177,17 @@ function SignFreeForm() {
                             <hr />
                         </form>
                         {/* BOTON PARA INGRESAR CON GOOGLE */}
-                        <button
+                        <GoogleButton
+                            type="dark"
+                            onClick={handleLoginWithGoogle}
+                        />
+                        {/* <button
                             className={styles.button}
                             type="submit"
                             onClick={handleLoginWithGoogle}
                         >
                             Acceder con Google
-                        </button>
-                        {/* <GoogleButton onClick={signInwithGoogle}/> */}
+                        </button> */}
                     </div>
                     {
                         modal && <ModalBannedUser/>
