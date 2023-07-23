@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Profile.module.css";
-import {
-    get_comments_by_user,
-    get_User_By_Email,
-} from "../../../Redux/actions";
+import { get_User_By_Email } from "../../../Redux/actions";
 import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
@@ -14,6 +11,7 @@ import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
 import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
+import { NavLink } from "react-router-dom";
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -24,7 +22,7 @@ function ProfileV2() {
     console.log(userId);
 
     //local states
-    const [removeComment, setRemoveComment] = useState(false)
+    const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
     const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
@@ -109,9 +107,15 @@ function ProfileV2() {
         <div className={s.profileContainer}>
             <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
-                    <div className={s.config} onClick={openConfig}>
-                        <img src={gearConfig} alt="config" />
-                    </div>
+                    {user?.admin ? (
+                        <div className={s.config} onClick={openConfig}>
+                            <NavLink to="/adminpanel">
+                                <img src={gearConfig} alt="config" />
+                            </NavLink>
+                        </div>
+                    ) : (
+                        null
+                    )}
                     {collapse ? (
                         <div className={s.camera}>
                             <EditProfilePicture
@@ -173,7 +177,12 @@ function ProfileV2() {
                     <Favorites dark={dark} favorites={user?.Courses} />
                 )}
                 {tab === "reseñas" && (
-                    <Reviews dark={dark} comments={user?.Comments} removeComment={removeComment} setRemoveComment={setRemoveComment}/>
+                    <Reviews
+                        dark={dark}
+                        comments={user?.Comments}
+                        removeComment={removeComment}
+                        setRemoveComment={setRemoveComment}
+                    />
                 )}
                 {tab === "compras" && <Compras dark={dark} />}
                 {tab === "carrito" && <Carrito dark={dark} />}

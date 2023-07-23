@@ -26,12 +26,40 @@ import Modal from "./components/views/ventanaemergente/ventana";
 import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
 import MusicBar from "./components/bars/musicBar/MusicBar";
 
+
+import { getAuth } from "firebase/auth";
+import "./config/firebase-config";
+
+
 import axios from "axios";
 // axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
 axios.defaults.baseURL = 'http://localhost:3001/'  
 //_________________________module_________________________
 const App = () =>{
 
+    const auth = getAuth()
+    auth.onIdTokenChanged(async (user) => {
+        if (user) {
+          try {
+            // Obtiene el token de autenticación actual
+            const token = await user.getIdToken();
+      
+            // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
+            const tokenExpirationTime = user.authTime + (60 * 60 * 1000) - (5 * 60 * 1000); // 1 hora - 5 minutos
+            const currentTime = Date.now();
+      
+            if (currentTime >= tokenExpirationTime) {
+              // Renueva el token
+              const refreshedToken = await user.getIdToken(true);
+              localStorage.setItem("accessToken", refreshedToken)
+              // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
+            }
+          } catch (error) {
+            // Manejo de errores
+            console.error("Error al renovar el token:", error);
+          }
+        }
+      });
   
     //global states:
     const dark = useSelector((state) => state.darkMode);

@@ -1,10 +1,8 @@
 import s from "../Profile.module.css";
 import { Rating } from "@mui/material";
-import CourseCard from "../../../datos/CourseCard/CourseCard";
 import { NavLink } from "react-router-dom";
 
 export function Favorites({ dark, favorites }) {
-    console.log(favorites);
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
@@ -27,7 +25,7 @@ export function Favorites({ dark, favorites }) {
         <div className={`${s.favorites} ${s[theme("favorites")]}`}>
             {favorites?.map((fav) => {
                 return (
-                    <div className={s.favorite}>
+                    <div className={s.favorite} key={fav?.id}>
                         <div className={s.image}>
                             <NavLink to={`/CourseDetails/${fav?.id}`}>
                                 <img src={fav?.imageURL} alt="" />

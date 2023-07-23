@@ -12,7 +12,6 @@ import {
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
-import Comments from "../../datos/Comments/Comments";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
 //_________________________module_________________________
 function HomePage () {
