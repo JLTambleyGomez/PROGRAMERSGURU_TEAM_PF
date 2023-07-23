@@ -68,7 +68,6 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
-            //    sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({

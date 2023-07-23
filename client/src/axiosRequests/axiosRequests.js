@@ -172,6 +172,7 @@ export const getAllUsersRequest = async () => {
 }
 
 export const putUserRequest = async ( user) => {
+  console.log(user);
   const {data} = await axios.put(`/user/profile`, user )
   return data 
 }
@@ -192,6 +193,13 @@ export const adminUserRequest = async (user) => {
     const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
     return data;
 };
+
+
+export const deleteUserRequest = async (id) => {
+  console.log({id});
+  const { data } = await axios.delete(`http://localhost:3001/user`, { data: { id } });
+  return data;
+}
 
 //MERCADOPAGO______________________________
 

@@ -29,6 +29,8 @@ import {
     //USERS:
     GET_USER_BY_EMAIL,
     POST_USER,
+    PUT_USER,
+    DELETE_USER,
     //PRODUCTS
     GET_PRODUCTS,
     GET_PRODUCTS_BY_NAME,
@@ -315,14 +317,25 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 message: payload.message,
             };
+
+        case PUT_USER:
+            return {
+                ...state,
+                message: payload.message
+            }
+
+        case DELETE_USER:
+            return{
+                ...state, message:payload
+            }
         ////////////////////////////////////////////////////////////////////////////////////
 
         case ADMIN_MESSAGE: 
-        return{
-            ...state, message: payload
-        }
+            return {
+                ...state, message: payload
+            }
         case PUT_COURSE:
-            return{
+            return {
                 ...state, message: payload
             }
 

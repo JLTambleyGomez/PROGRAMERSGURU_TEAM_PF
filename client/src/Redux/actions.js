@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     //COURSES:
     getCoursesAllRequest,
@@ -28,7 +27,8 @@ import {
     //user
     getUserByEmailRequest,
     postUserRequest,
-    makeAdminUser,
+    putUserRequest,
+    deleteUserRequest,
     //comments
     getCommentsByCourse,
     getCommentsByUser,
@@ -84,7 +84,9 @@ export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const SET_USER_EMAIL = "SET_USER_EMAIL";
 export const SET_TOKEN = "SET_TOKEN";
 export const POST_USER = "POST_USER";
+export const PUT_USER = "PUT_USER"
 export const MAKE_ADMIN = "MAKE_ADMIN";
+export const DELETE_USER = "DELETE_USER";
 
 //COMMENTS:
 export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER";
@@ -527,6 +529,23 @@ export const get_User_By_Email = (email) => {
     };
 }
 
+export const delete_user = (id) => {
+    return async function (dispatch) {
+        try {
+            const data = await deleteUserRequest({ id });
+            return (dispatch({
+                type: DELETE_USER,
+                payload: data.message
+            }))
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
 
 //CART_____________________________________________//
 
@@ -708,6 +727,24 @@ export const post_user = (user) => {
     };
 };
 
+export const put_user = (user) => {
+    return async function (dispatch) {
+        try {
+            const data = await putUserRequest(user);
+            console.log(data);
+            return dispatch({
+                type: PUT_USER,
+                payload: data,
+            });
+        } catch (error) {
+            console.log(error);
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+};
 
 
 
