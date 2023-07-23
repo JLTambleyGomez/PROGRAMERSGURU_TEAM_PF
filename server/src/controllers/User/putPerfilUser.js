@@ -44,7 +44,7 @@ const putPerfilUser = async (req, res) => {
         const destino = {
             from: "yo",
             to: `${email}`,
-            subject: "Notificacion de ProgrammersGurú (Compra)",
+            subject: "Notificacion de ProgrammersGurú (Edicion de Perfil)",
             html: `
                 <!DOCTYPE html>
                 <html lang="en">

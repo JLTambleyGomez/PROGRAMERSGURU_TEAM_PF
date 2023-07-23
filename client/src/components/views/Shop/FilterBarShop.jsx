@@ -7,12 +7,12 @@ import s from "./FilterBarShop.module.css";
 
 //_________________________module_________________________
 function FilterBarShop () {
-   
+
 
     //global states:
     const products = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
-  
+
     console.log(products)
 
     //states:

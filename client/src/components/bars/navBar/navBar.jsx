@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+import { toggle_shopbag, get_User_By_Email,get_products_all} from "../../../Redux/actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -12,6 +12,7 @@ import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
 import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton";
 import SearchBar from "../searchBar/searchBar";
 import Menu from "../Menu/Menu";
+import ModalBannedUser from '../../views/ModalBannedUser/ModalBannedUser'
 
 //_________________________module_________________________
 function NavBar({ logoutUser }) {
@@ -34,7 +35,6 @@ function NavBar({ logoutUser }) {
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
     const token = sessionStorage.getItem("accessToken")
-    const emailenviado = localStorage.getItem("sendedEmail");
 
     //functions:
     const theme = (base) => {
@@ -54,6 +54,7 @@ function NavBar({ logoutUser }) {
     //life-cycles:
     useEffect(() => {
             if (!user?.email) dispatch(get_User_By_Email(email));
+
            
     }, []) //testear con array vacio.
 
@@ -71,6 +72,11 @@ function NavBar({ logoutUser }) {
     const handlegohome=()=>{
         navigate("/HomePage")
     }
+
+
+    //chequear usuario baneado
+    if(user.banned) return <ModalBannedUser />
+    
     //component:
     return (
         // {user.banned}
@@ -169,6 +175,12 @@ function NavBar({ logoutUser }) {
                 onClick={toggleShopbag}
                 icon={faBagShopping}
             />
+        
+        {user.admin ?  <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
+                    AdminPanel</NavLink>: null}
+
+
+
         {/* MENU */}
             <div className={s.menu}>
                 <Menu logoutUser={logoutUser}/>

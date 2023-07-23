@@ -1,9 +1,9 @@
-export const validate = ({ category }) => {
+export const validate = (form) => {
     const error = {};
 
-    if (category.length < 1) error.category = "Debe ingresar un nombre";
-    if (category.length < 1 || category.length > 20)
-        error.category = "Debe ingresar un nombre entre 2 y 10 caracteres";
+    if (form.name.length < 1) error.name = "Debe ingresar un nombre";
+    if (form.name.length < 1 || form.name.length > 20)
+        error.name = "Debe ingresar un nombre entre 2 y 10 caracteres";
 
     return error;
 };
@@ -25,7 +25,7 @@ export const validateProduct = (form) => {
     if (!form.image.length) error.image = "Debe ingresar una imagen";
     else if (form.image.length) error.image = "";
 
-    if (!form.category.length) error.category = "Debe ingresar una categoria";
+    if (!form.category) error.category = "Debe ingresar una categoria";
     else if (form.category.length) error.category = "";
 
     if (!form.stock.length) error.stock = "Debe ingresar un precio válido";
@@ -82,11 +82,11 @@ export const validateCourse = (form) => {
 
     //validar categorias
 
-    console.log(form.categories);
+   
     if (!form.categories.length)
         error.categories = "Debe seleccionar las categorias";
     else if (form.categories.length) error.categories = "";
-    console.log(error);
+
     return error;
 };
 
@@ -135,12 +135,21 @@ export const validateSuscription = (form) => {
     if (!form.type.length) error.type = "Debe ingresar un tipo";
     else if (form.type.length) error.type = "";
 
-    console.log(form);
+
     //valida precio
     if (!form.price.length) error.price = "Debe ingresar un precio";
     else if (form.price < 1) error.price = "Debe ingresar un precio válido";
     else if (form.price && form.price > 0) error.price = "";
 
-    console.log(error);
+  
     return error;
 };
+
+export const validateTecnology = (form) => {
+    const error ={}
+    if(!form.length) error.name = 'Debes ingresar un nombre'
+    else if(form.length) error.name = ''
+
+    return error
+
+}

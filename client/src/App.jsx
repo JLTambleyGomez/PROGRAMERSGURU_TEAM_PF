@@ -23,6 +23,7 @@ import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import ModalBannedUser from "./components/views/ModalBannedUser/ModalBannedUser";
 import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
 import MusicBar from "./components/bars/musicBar/MusicBar";
 
@@ -62,13 +63,15 @@ const App = () =>{
       });
   
     //global states:
+    
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
+    const user= useSelector((state)=>state.user);
 
 
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
-
+    const [isBanned, setBan]= useState(false);
     
     //const:
     const location = useLocation().pathname;
@@ -82,6 +85,14 @@ const App = () =>{
 
     
     //life-cycles:
+    useEffect(()=>{
+        if(user.name){
+            if(user.banned){ setBan(true)}
+        }
+        setBan(false)
+    },[user])
+
+    
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight =
@@ -111,6 +122,13 @@ const App = () =>{
             window.removeEventListener("scroll", handleScroll);
             };
     }, []);
+
+    if(isBanned) return(
+        <Routes>
+            <Route path="/HomePage" elment={<ModalBannedUser/>}/>
+            <Route path="/" element={<LandingPage2/>}/>
+        </Routes>
+    )
 
 
     //component:

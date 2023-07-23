@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
 
 import {
-    get_categories,
+    get_tecnology,
     get_courses_all,
     clearMessage,
     clearCourses,
@@ -13,12 +13,15 @@ import {
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
+import ModalBannedUser from '../ModalBannedUser/ModalBannedUser'
 //_________________________module_________________________
 function HomePage () {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const allCourses = useSelector((state) => state.allCourses);
+    const user = useSelector((state)=>state.user)
+
     //const:
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
@@ -37,7 +40,7 @@ function HomePage () {
 
     //life-cycles:
     useEffect(() => {
-        dispatch(get_categories());
+        dispatch(get_tecnology());
         dispatch(get_courses_all());
     
         //--desmontado
@@ -48,6 +51,8 @@ function HomePage () {
     }, [dispatch]);
 
 
+    if(user.banned) return <ModalBannedUser />
+    
     //component:
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>

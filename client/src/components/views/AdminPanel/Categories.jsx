@@ -1,25 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
-    get_categories,
-    post_categories,
-    delete_categories,
-    clearMessage,
+    get_categories, postCategory, deleteCategory, clearMessage
 } from "../../../Redux/actions";
 import { validate } from "./validate";
+
+
 import styles from "./AdminPanel.module.css";
 
+
 const Categories = () => {
+    
     // global state:
     const categories = useSelector((state) => state.categories);
     const dark = useSelector((state) => state.darkMode);
     const dispatch = useDispatch();
 
+    console.log(categories)
+
+    
     // states:
-    const [inputCategory, setInputCategory] = useState({ category: "" });
+    const [inputCategory, setInputCategory] = useState({ name: "" });
     const [error, setError] = useState({});
     const [backmessage, setbackmessage] = useState("");
 
+
+    //functions:
     const theme = (base) => {
         const suffix = dark ? "dark" : "light";
         return `${base}-${suffix}`;
@@ -28,7 +35,7 @@ const Categories = () => {
     const hadleInputChange = (event) => {
         setbackmessage("");
         const { value } = event.target;
-        setInputCategory({ category: value });
+        setInputCategory({ name: value });
     };
 
     const handlePostCategories = async (event) => {
@@ -36,37 +43,38 @@ const Categories = () => {
 
         try {
             await dispatch(
-                post_categories({ technology: inputCategory.category })
+                postCategory(inputCategory)
             );
-            setInputCategory({ category: "" });
+            setInputCategory({ name: "" });
             await dispatch(get_categories());
         } catch (error) {
             console.log(error);
         }
     };
 
-    const deleteCategory = async (id) => {
+    const deleteCategory1 = async (id) => {
         try {
-            await dispatch(delete_categories(id));
+            await dispatch(deleteCategory(id));
             await dispatch(get_categories());
         } catch (error) {
             console.log("error");
         }
     };
 
-    useEffect(() => {
-        setError(validate(inputCategory));
-    }, [inputCategory]);
+
+    //life-cycles:
 
     useEffect(() => {
+        if(!categories.length) dispatch(get_categories());
         dispatch(clearMessage());
-        dispatch(get_categories());
 
         return () => {
             dispatch(clearMessage());
         };
     }, [dispatch]);
 
+
+    //component:
     return (
         <div className={styles.contain}>
             <div></div>
@@ -76,7 +84,7 @@ const Categories = () => {
                         <input
                             className={`${styles.categoriesInput}`}
                             onChange={hadleInputChange}
-                            value={inputCategory.category}
+                            value={inputCategory.name}
                             name="name"
                             placeholder="Ingresa el nombre de la categoria"
                         />
@@ -94,8 +102,7 @@ const Categories = () => {
                 <div className={`${styles.categoriesContainer}`}>
                     <h2>Categories</h2>
                     <div className={`${styles.categoriesBox}`}>
-                        {categories &&
-                            categories?.map((category, index) => (
+                        {categories.allCategories.map((category, index) => (
                                 <span
                                     className={`${styles.category}`}
                                     key={index}
@@ -106,7 +113,7 @@ const Categories = () => {
                                     <button
                                         className={`${styles.deleteCategoryButton}`}
                                         onClick={() =>
-                                            deleteCategory(category.id)
+                                            deleteCategory1(category.id)
                                         }
                                     >
                                         X

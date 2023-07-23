@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    get_categories,
+    get_tecnology,
     clearCourses,
     clearMessage,
     get_courses_all,
@@ -30,7 +30,7 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+
         released: "",
         isFree: false,
         language: "",
@@ -44,7 +44,7 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+ 
         released: "",
         isFree: false,
         language: "",
@@ -57,7 +57,7 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+  
         released: "",
         isFree: false,
         language: "",
@@ -137,7 +137,7 @@ function Courses() {
             description: "",
             imageURL: "",
             courseUrl: "",
-            rating: 0,
+  
             released: "",
             isFree: false,
             language: "",
@@ -148,7 +148,7 @@ function Courses() {
             description: "",
             imageURL: "",
             courseUrl: "",
-            rating: 0,
+         
             released: "",
             isFree: false,
             language: "",
@@ -165,9 +165,7 @@ function Courses() {
                 errorCourse.description ||
                 errorCourse.genre ||
                 errorCourse.platforms ||
-                errorCourse.released ||
-                errorCourse.rating
-            )return setMessagePost("Revise los datos");
+                errorCourse.released ) return setMessagePost("Revise los datos");
             
 
             dispatch(put_course(courseId, newCourse))
@@ -177,7 +175,6 @@ function Courses() {
                         description: "",
                         imageURL: "",
                         courseUrl: "",
-                        rating: 0,
                         released: "",
                         isFree: false,
                         language: "",
@@ -195,7 +192,6 @@ function Courses() {
                 !newCourse.description ||
                 !newCourse.imageURL ||
                 !newCourse.courseUrl ||
-                !newCourse.rating ||
                 !newCourse.released ||
                 !newCourse.isFree ||
                 !newCourse.language ||
@@ -222,7 +218,6 @@ function Courses() {
                         description: "",
                         imageURL: "",
                         courseUrl: "",
-                        rating: 0,
                         released: "",
                         isFree: false,
                         language: "",
@@ -248,11 +243,11 @@ function Courses() {
         }
     }, [messagePost]);
 
-
+console.log(courses)
     // life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
-        dispatch(get_categories());
+        dispatch(get_tecnology());
         dispatch(get_courses_all());
 
         return () => {
@@ -337,18 +332,6 @@ function Courses() {
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Rating:</label>
-                                    <input
-                                        type="number"
-                                        name="rating"
-                                        value={newCourse.rating}
-                                        onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.rating}
-                                        />
-                                   {errorCourse.rating &&  <p>{errorCourse.rating}</p>}
-                                </div>
-
-                                <div className={`${styles.h1}`}>
                                     <label>Fecha de lanzamiento:</label>
                                     <input
                                         type="date"
@@ -362,12 +345,18 @@ function Courses() {
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Es gratuito:</label>
-                                    <input
-                                        type="checkbox"
-                                        name="isFree"
-                                        checked={newCourse.isFree}
-                                        onChange={handleCourseChange}
+                                    <label>Tipo</label>
+                                    <label>Gratuito</label>
+                                        <input
+                                            type="radio"
+                                            name="isFree"
+                                            checked={newCourse.isFree}
+                                            onChange={handleCourseChange}
+                                        />
+                                    <label>Exclusivo</label>
+                                        <input
+                                            type="radio"
+                                            name="isFree"
                                         />
                                     <p>{errorCourse.isFree}</p>
                                         {errorCourse.isFree && <p>{errorCourse.isFree}</p>}
@@ -393,7 +382,7 @@ function Courses() {
                                         name="categories"
                                         onChange={handleCategorySelection}
                                         >
-                                        {categories.map((category) => (
+                                        {categories.allCategories.map((category) => (
                                             <option
                                             key={category.id}
                                             value={category.id}
@@ -427,7 +416,7 @@ function Courses() {
                         <div className={`${styles.coursesContainer}`}>
                             <h1>Courses</h1>
                             <div className={styles.conteiner}>
-                                {courses.map((course) => (
+                                {!!courses.length && courses.map((course) => (
                                     <div key={course.id}>
                                         <button
                                             onClick={handleModificarCurso}
@@ -444,6 +433,7 @@ function Courses() {
                                         </button>
                                         <p>ID: {course.id}</p>
                                         <p>Titulo: {course.title}</p>
+                                        <p>Rating: {course.meanRating}</p>
                                         <p>
                                             Fecha De Lanzamiento:{" "}
                                             {course.released}

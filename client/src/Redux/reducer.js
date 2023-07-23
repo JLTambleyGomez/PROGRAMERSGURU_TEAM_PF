@@ -10,13 +10,18 @@ import {
     GET_COURSE_BY_ID,
     PUT_COURSE,
     //CATEGORIES:
-    GET_CATEGORIES_ALL,
-    POST_CATEGORIES,
-    DELETE_CATEGORIES,
+    GET_CATEGORY_ALL,
+    POST_CATEGORY,
+    DELETE_CATEGORY,
+    //TECHNOLOGIES
+    DELETE_TECNOLOGY,
+    POST_TECNOLOGY,
+    GET_TECNOLOGY_ALL,
     // ERRORS:
     ERROR,
     CLEAR_COURSES,
     CLEAN_MESSAGE,
+    CLEAR_USER,
     // DARK MODE:
     DARK_MODE,
     //FAVORITES:
@@ -71,7 +76,8 @@ const globalStorage = {
     metamaskaddress: null,
     productsCopy: [],
     subscriptions: [], ////   <---------- MODIFICADO
-    allUsers: []
+    allUsers: [],
+    tecnology: []
 };
 
 //REDUCER:
@@ -136,32 +142,30 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 courses: cursosOrdenados,
             };
 
-        case GET_CATEGORIES_ALL:
+        case GET_CATEGORY_ALL:
             return {
                 ...state,
                 categories: payload,
             };
 
-        case POST_CATEGORIES:
+        case POST_CATEGORY:
             return {
                 ...state,
                 message: payload.message,
             };
 
-        case POST_COURSE:
-            return {
-                ...state,
-                message: payload.message,
-            };
-
+        case DELETE_CATEGORY:
+            return { ...state, message: payload}
             
-        case DELETE_CATEGORIES:
-            return { ...state, message: payload};
-        
         case ERROR:
             return {
                 ...state,
                 error: payload.message,
+            };
+        case POST_COURSE:
+            return {
+                ...state,
+                message: payload.message,
             };
 
         case CLEAN_MESSAGE:
@@ -169,6 +173,12 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 error: "",
                 message: "",
+            };
+
+            case CLEAR_USER:
+            return {
+                ...state,
+                user:{},
             };
 
         case CLEAR_COURSES:
@@ -315,6 +325,17 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
             return{
                 ...state, message: payload
             }
+
+        //tecnology
+        case  DELETE_TECNOLOGY : 
+            return {...state, message: payload}
+
+        case POST_TECNOLOGY:
+                return {...state,message: payload}
+
+        case GET_TECNOLOGY_ALL:
+                return {...state,tecnology:payload}
+                
         default:
             return { ...state };
     }
