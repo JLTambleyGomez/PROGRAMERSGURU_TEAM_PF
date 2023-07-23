@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
+import { initMercadoPago } from "@mercadopago/sdk-react";
 import { Dark_Mode } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
@@ -60,6 +61,18 @@ function PagoSubscripcion () {
         dispatch(Dark_Mode());
     }, [dark])
 
+    useEffect(() => {
+        console.log({compra})
+    }, [compra])
+
+    useEffect(() => {
+        console.log("test");
+        (async () => {
+            await initMercadoPago('TEST-74e77fab-e33b-4709-8aef-3cb739639cc5');
+            console.log("it started")
+        })()
+    }, [])
+
 
     //component:
     return (
@@ -77,7 +90,7 @@ function PagoSubscripcion () {
 
                     <div className={styles.product}>
                         <h3 className={styles.item}>Subscripción 6 meses</h3>
-                        <p className={styles.description} >Por tan solo 12 dólares</p>
+                        <p className={styles.description}>Por tan solo 12 dólares</p>
                         <p  className={styles.buton} onClick={() => handleAddSubscripcion({ name: "Subscripción 6 meses", cost: 12 })}>Escoger</p>
                     </div>
 
@@ -97,19 +110,19 @@ function PagoSubscripcion () {
                                 {
                                     subscripcion && (
                                         <div className={styles.totalcontainer}>
-                                            <li className={styles.item}>{subscripcion.name}</li>
+                                            <p className={styles.item}>{subscripcion.name}</p>
                                             <h1>Valor Total: $ {total}</h1>
                                         </div>
                                     )
                                 }
                             {/* MEDIOS DE PAGO */}
-                                <p className={styles.pagar} onClick={handlePagarButton}>ir a Pagar</p>
+                                { !MostrarPagos && <p className={styles.pagar} onClick={handlePagarButton}>Mostrar opciones de pago</p> }
                                 {
                                     MostrarPagos && (
                                         <div>
                                             <p>Escoge tu medio de Pago</p>
                                             {
-                                                compra.description && <PagoMercadopago reference={compra} />
+                                                <PagoMercadopago reference={compra} />
                                             }
                                             <PagoMetamask total={subscripcion.cost} />
                                         </div>
