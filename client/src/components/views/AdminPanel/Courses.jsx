@@ -249,6 +249,7 @@ console.log(courses)
         dispatch(clearMessage());
         dispatch(get_tecnology());
         dispatch(get_courses_all());
+        
 
         return () => {
             dispatch(clearMessage());
@@ -256,11 +257,14 @@ console.log(courses)
         };
     }, [dispatch]);
 
-
     useEffect(() => {
-        console.log(newCourse)
-    }, [newCourse])
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
 
+ 
 
     // component:
     return (

@@ -662,7 +662,7 @@ export const delete_suscription = (id) => {
             console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
-                payload: data,
+                payload: data.message,
             });
         } catch (error) {
             console.log(error);

@@ -122,7 +122,7 @@ export const getSubscriptionsRequest = async () => {
 }
 
 export const deleteSuscriptionRequest = async (id) => {
-  const {data} = axios.delete(`/subscription/${id}`)
+  const {data} = await axios.delete(`/subscription/${id}`)
   console.log(data);
   return data;
 }

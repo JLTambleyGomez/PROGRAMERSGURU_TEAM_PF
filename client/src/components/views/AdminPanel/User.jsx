@@ -1,17 +1,16 @@
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
     getAllUsersRequest,
     hideUserProfileRequest,
-    makeAdminUser,
-    
+    makeAdminUser,    
 } from "../../../axiosRequests/axiosRequests";
-import { useSelector, useDispatch } from "react-redux";
 
-import { post_user, put_user, delete_user } from "../../../Redux/actions";
-
+import { post_user, put_user, delete_user, clearMessage } from "../../../Redux/actions";
 import { validateUser } from "./validate";
 
 import styles from "./AdminPanel.module.css";   
+
 
 //_________________________module_________________________
 const User = () => {
@@ -140,10 +139,17 @@ const User = () => {
     }
 
  
-    //life-cycle
+    //life-cycles:
     useEffect(() => {
         if (!allUsers.length) getUsers();
     }, []);
+    
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
 
 
     //component:

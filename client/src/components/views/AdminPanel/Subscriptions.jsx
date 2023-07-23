@@ -5,9 +5,13 @@ import {
     put_suscription,
     delete_suscription,
     post_suscription,
+    adminPanelMensajesLocales,
+    clearMessage
 } from "../../../Redux/actions";
 import { validateSuscription } from "./validate";
 
+
+//_________________________module_________________________
 const Subscriptions = () => {
     //estados globales
     const subscriptions = useSelector((state) => state.subscriptions);
@@ -94,10 +98,9 @@ const Subscriptions = () => {
             price: "",
         });
     };
-    const handleDeleteSubscription = (id) => {
-        dispatch(delete_suscription(id)).then(() =>
-            dispatch(get_suscriptions())
-        );
+    const handleDeleteSubscription = async (id) => {
+        await dispatch(delete_suscription(id));
+        await dispatch(get_suscriptions());
         setFormData({
             id: "",
             title: "",
@@ -169,10 +172,21 @@ const Subscriptions = () => {
         });
     };
 
+
+    //life-cycles:
     useEffect(() => {
         dispatch(get_suscriptions());
     }, [dispatch]);
 
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
+
+    //component:
     return (
         <div>
             {/* Renderizar la lista de suscripciones */}
@@ -189,7 +203,6 @@ const Subscriptions = () => {
                         <button onClick={hanldeCloseFormSuscription}>X</button>
                         <h2>{postSuscription && "Añadir suscripción"}</h2>
                         <h2>{putSuscription && "Editar suscripción"}</h2>
-                        {message && <h1>{message}</h1>}
                         <form>
                             <div>
                                 {postSuscription || putSuscription ? (
@@ -260,9 +273,9 @@ const Subscriptions = () => {
                                             : "Tipo"
                                     }
                                 >
-                                    <option value="mensual">mensual</option>
-                                    <option value="trimestral">
-                                        trimestral
+                                    <option value="trimestral">trimestral</option>
+                                    <option value="semestral">
+                                        semestral
                                     </option>
                                     <option value="anual">anual</option>
                                 </select>

@@ -10,6 +10,7 @@ import { validate } from "./validate";
 import styles from "./AdminPanel.module.css";
 
 
+//_________________________module_________________________
 const Categories = () => {
     
     // global state:
@@ -67,11 +68,20 @@ const Categories = () => {
     useEffect(() => {
         if(!categories.length) dispatch(get_categories());
         dispatch(clearMessage());
+        
 
+        //posibilidad para eliminar la funcion de desmontaje y reemplazarla con el useEffect:
         return () => {
             dispatch(clearMessage());
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
 
 
     //component:

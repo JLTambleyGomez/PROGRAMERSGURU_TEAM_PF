@@ -42,10 +42,19 @@ const Tecnology = () => {
     //life-cycles:
     useEffect(()=>{
         if(!tecnology.length) dispatch(get_tecnology())
+
+        //posibilidad de eliminar la funcion de desmontaje y reemplazarla con el useEffect:
         return () => {
             dispatch(clearMessage());
         };
     }, [])
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
 
 
     //component:
