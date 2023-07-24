@@ -4,15 +4,11 @@ import styles from "./subComponents/PublishComment.module.css";
 import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
 import PublishComment from "./subComponents/PublishComment";
+import theme from "../../../theme/theme";
 
 //_________________________module_________________________
 function Comments({ disabled, comments, setDisabled }) {
     const user = useSelector((state) => state.user);
-    const dark = useSelector((state) => state.darkMode);
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
 
     const [commentData, setCommentData] = useState({
         userId: 0,

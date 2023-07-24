@@ -7,15 +7,11 @@ import {
     computeCourseRating,
 } from "../../../../axiosRequests/axiosRequests";
 import Rating from "@mui/material/Rating";
+import theme from "../../../../theme/theme";
 
 export default function PublishComment({setDisabled, commentData, setCommentData}) {
 
     const user = useSelector(state => state.user)
-    const dark = useSelector((state) => state.darkMode);
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
 
     const date = new Date();
     const formattedDate = date.toISOString();

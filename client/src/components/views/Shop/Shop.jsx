@@ -48,7 +48,7 @@ function Shop () {
     };
 
     const found = (product) => {
-        return cart.find((item) => item.id === product.id)
+        return cart?.find((item) => item.id === product.id)
     }
 
     const addToCart = async (item) => {
@@ -211,7 +211,7 @@ function Shop () {
                         { 
                             currentAllProducts? currentAllProducts?.map((product, index) => {
                                 if (product?.stock >= 0) { return (
-                                    <div className={`${s['item']}`} onClick={() => handledetailproduct(product.id)} key={index}>
+                                    <div className={`${s.item} ${s[theme('item')]}`} onClick={() => handledetailproduct(product.id)} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
                                             <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
                                                 <img  className={s["itemImage"]} src={product?.image}></img>
