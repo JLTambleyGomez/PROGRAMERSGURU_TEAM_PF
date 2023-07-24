@@ -37,10 +37,7 @@ function Success  () {
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         if (!token) navigate("/IniciaSession")
-        // const postPaymentInfo = axios.post("http://localhost:3001/feedbackmp/:email", cart)
-        // (async () => {
-        //     await postPaymentInfo()
-        // })()
+     
     },[])
     
 

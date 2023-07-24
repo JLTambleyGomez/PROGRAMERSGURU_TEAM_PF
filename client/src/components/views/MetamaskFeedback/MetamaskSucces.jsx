@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { set_cart } from '../../../Redux/actions';
 import styles from './MetamaskFeedback.module.css';
+import {getMetamaskFeedback} from '../../../axiosRequests/axiosRequests'
 
 
 //_________________________module_________________________
@@ -47,16 +48,12 @@ const MetaMaskSucces = () => {
                 const compraString = localStorage.getItem("cart"); // Obtener el contenido del carrito del almacenamiento local como una cadena de texto
                 const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
                 const email = localStorage.getItem("email");
-                console.log(cart);
-                
-                
-                await axios.post(
-                    `http://localhost:3001/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`,
-                    {compra});
-                    
-                    localStorage.setItem("cart", "[]");
-                } catch (error) {
-                }
+                console.log(compra)
+
+                await getMetamaskFeedback({compra, transaction, email})
+            } catch (error) {
+
+            }
             })();
             return ()=>{ localStorage.setItem("cart", "[]");}
         }, []);
