@@ -23,13 +23,14 @@ function NavBar ( { logoutUser } ) {
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
     const user = useSelector((state) => state.user);
+    const cart = useSelector((state) => state.cart);
 
     //states:
     const [isBarsOpen, setIsBarsOpen] = useState(false);
 
     //const:
     const dispatch = useDispatch();
-    const location = useLocation();
+    const { pathname } = useLocation();
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
     const token = sessionStorage.getItem("accessToken")
@@ -159,11 +160,19 @@ function NavBar ( { logoutUser } ) {
                 <ConexionMetamask/>
             </div>
         {/* BOLSA */}
-            <FontAwesomeIcon
-                className={s.bolsita}
-                onClick={toggleShopbag}
-                icon={faBagShopping}
-            />
+        {
+                (pathname === "/store" || pathname.includes("/ProductDetail")) && (
+                    cart.length > 0  ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`${s.bolsita} ${s[theme("bolsita")]}`} viewBox="0 0 16 16" onClick={toggleShopbag}>
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                        </svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`${s.bolsita} ${s[theme("bolsita")]}`} viewBox="0 0 16 16" onClick={toggleShopbag}>
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                        </svg>
+                    )
+                )
+            }
         
             {
                 user.admin ?  

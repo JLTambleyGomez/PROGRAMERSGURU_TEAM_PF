@@ -19,7 +19,8 @@ const getCourseById = async (req, res) => {
                     model: Technology,
                     through: {
                         attributes: [],
-                    }
+                    },
+                    attributes:["id","name"],
                 },
                 {
                     model: User,

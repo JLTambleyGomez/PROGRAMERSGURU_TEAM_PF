@@ -4,15 +4,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 48px;
+    height: 10%;
     padding: 4%;
-    width: 100%;
+    width: 93%;
     background-color: rgb(248, 172, 7);
     border-radius: 6px;
     
 }
 .container:hover{
-    background-color: rgb(199, 142, 20);
+    background-color: rgb(20, 172, 199);
     cursor: pointer;
 
 }
@@ -22,7 +22,7 @@
 .img{
     padding-left: 8%;
 
-    width: 66px;
+    width: 40px;
     height: 40px;
     margin-right: 4%;
     border-radius: 100%;
@@ -38,5 +38,7 @@
 .paymentButton{
     width: 100%;
     font-size: 16px;
+    font-weight: bold;
+    color:white
 
 }
