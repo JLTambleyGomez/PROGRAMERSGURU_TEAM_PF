@@ -1,0 +1,141 @@
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .productscontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 5px;
+    width: 58%;
+    min-width: 280px;
+  }
+  .info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 275px;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 5px -2px black;
+  }
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    max-width: 240px;
+  }
+  .productName {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px -2px black;
+    object-fit: cover;
+  }
+
+  .masinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    min-height: fit-content;
+  }
+
+  .cantidad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+  }
+  .add{
+    width: 25px;
+    margin: 0 3px 0 3px;
+  }
+  .add:hover {
+    cursor: pointer
+  }
+
+  .trash {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 20px;
+  }
+  .trash:hover {
+    cursor: pointer;
+  }
+
+  /* //////////////////TOTAL////////////////////////////// */
+  .total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 280px;
+    padding: 15px 0 15px 0;
+    width: 40%;
+    height: fit-content;
+    margin: 6px;
+    background-color: white;
+    box-shadow: 1px 1px 5px -2px black;
+  }
+  .total ul {
+    margin: 15px;
+    color: gray;
+    border-bottom: 1px solid gray;
+    padding-bottom: 12px;
+  }
+
+  .finalizar {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .valorTotal {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px;
+  }
+  .pagar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.boton {
+    display: inline-block;
+    background-color: #28b0b4;
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    height: 40px;
+    width: 240px;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  

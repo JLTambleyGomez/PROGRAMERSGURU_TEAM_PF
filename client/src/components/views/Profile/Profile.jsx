@@ -19,12 +19,10 @@ function ProfileV2() {
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
-    console.log(userId);
 
     //local states
     const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
-    const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const [newUserData, setNewUserData] = useState({
         name: "",
@@ -36,7 +34,7 @@ function ProfileV2() {
 
     //const:
     const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg";
-    const expirationDate = new Date(user.expirationDate);
+    const expirationDate = new Date(user?.expirationDate);
     const actualDate = new Date();
     const dispatch = useDispatch();
 
@@ -49,6 +47,7 @@ function ProfileV2() {
     const handleChange = (event) => {
         event.preventDefault();
         setNewUserData({
+            ...newUserData,
             [event.target.id]: event.target.value,
         });
     };
@@ -91,6 +90,7 @@ function ProfileV2() {
     const changeTab = (event) => {
         event.preventDefault();
         setTab(event.target.name);
+        localStorage.setItem("tab", event.target.name)
     };
 
     const openConfig = (event) => {
@@ -98,8 +98,9 @@ function ProfileV2() {
     };
 
     useEffect(() => {
+        setTab(localStorage.getItem("tab") || "favorites")
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-    }, [dispatch, refresh, removeComment]);
+    }, [dispatch, removeComment, collapse]);
 
     //if (!user.name) return <Modal />
 
@@ -114,9 +115,7 @@ function ProfileV2() {
                                 <img src={gearConfig} alt="config" />
                             </NavLink>
                         </div>
-                    ) : (
-                        null
-                    )}
+                    ) : null}
                     {collapse ? (
                         <div className={s.camera}>
                             <EditProfilePicture
@@ -138,11 +137,6 @@ function ProfileV2() {
                             <button className={s.save} onClick={toggleCollapse}>
                                 Editar perfil
                             </button>
-                            <img
-                                onClick={() => setRefresh(!refresh)}
-                                src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
-                                alt="actualizar"
-                            />
                         </div>
                     ) : (
                         <button className={s.save} onClick={saveChanges}>

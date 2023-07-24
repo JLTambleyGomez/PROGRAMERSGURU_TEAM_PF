@@ -89,11 +89,10 @@
 }
 .profileContainer button {
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 8px;
     margin: 5px;
     color: whitesmoke;
-    height: 30px;
 }
 .profileContainer button:disabled {
     box-shadow: none;
@@ -330,3 +329,16 @@
     transform: scale(1.15);
 }
 
+/* ///////////////////////////CART//////////////////////////////////////// */
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    height: 400px;
+    overflow-y: scroll;
+    gap: 10px;
+}
