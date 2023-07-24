@@ -16,7 +16,6 @@ function Products() {
     
     //global state:
     const message = useSelector((state) => state.message);
-    const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
     const categories = useSelector((state) => state.categories);
 

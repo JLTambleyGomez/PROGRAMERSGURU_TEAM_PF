@@ -11,7 +11,7 @@ import s from "./searchBar.module.css";
 function SearchBar () {
 
     //global states:
-    const dark = useSelector((state) => state.darkMode);
+    const dark = useSelector((state) => state.darkMode)
 
     //states:
     const [searchStore, setSearchStore] = useState(false);

@@ -191,24 +191,30 @@ function FilterBar() {
     return (
         <>
             <div className={`${s.component}`}>
-                <p>Orden</p>
-                <select value={orden} onChange={handleSortChange}>
-                    <option value="">Destacados</option>
-                    <option value="Ascendente">Nombre Descendente</option>
-                    <option value="Desendente">Nombre Ascendente</option>
-                </select>
-                <p>Filtros</p>
-                <select value={idioma} onChange={handleLanguageChange}>
-                    <option value="">Idioma</option>
-                    <option value="Inglés">Cursos en Inglés</option>
-                    <option value="Español">Cursos en Español</option>
-                </select>
-                <p>Acceso</p>
-                <select value={price} onChange={handlePriceChange}>
-                    <option value="">Precio</option>
-                    <option value="true">Gratis</option>
-                    <option value="false">De Pago</option>
-                </select>
+                <div className={s.optionSort}>
+                    <label>Ordenar por:</label>
+                    <select value={orden} onChange={handleSortChange}>
+                        <option value="">Destacados</option>
+                        <option value="Ascendente">Nombre Descendente</option>
+                        <option value="Desendente">Nombre Ascendente</option>
+                    </select>
+                </div>
+                <div className={s.optionFilter}>
+                    <label>Filtros</label>
+                    <span>
+                        <select value={idioma} onChange={handleLanguageChange}>
+                            <option value="">Idioma</option>
+                            <option value="Inglés">Cursos en Inglés</option>
+                            <option value="Español">Cursos en Español</option>
+                        </select>
+                        <select value={price} onChange={handlePriceChange}>
+                            <option value="">Precio</option>
+                            <option value="true">Gratis</option>
+                            <option value="false">De Pago</option>
+                        </select>
+                    </span>
+
+                </div>
 
                 <button onClick={handleFilterReset}>Mostrar Todos</button>
             </div>
@@ -225,13 +231,13 @@ function FilterBar() {
                     filterModal && (
                         <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-                                <p>Filtros</p>
+                                <label>Filtros</label>
                                 <select value={idioma} onChange={handleLanguageChange}>
                                     <option value="">Idioma</option>
                                     <option value="Inglés">Cursos en Inglés</option>
                                     <option value="Español">Cursos en Español</option>
                                 </select>
-                                <p>Acceso</p>
+                                <label>Acceso</label>
                                 <select value={price} onChange={handlePriceChange}>
                                     <option value="">Acceso</option>
                                     <option value="true">Gratuito</option>
@@ -246,7 +252,7 @@ function FilterBar() {
                     sortModal && (
                         <div className={s.overlay} onClick={() => {setSortModal(false)}}>
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-                                <p>Orden</p>
+                                <label>Orden</label>
                                 <select value={orden} onChange={handleSortChange}>
                                     <option value="">Destacados 
                                     </option>

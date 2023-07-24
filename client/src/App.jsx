@@ -6,6 +6,7 @@ import { Dark_Mode } from "./Redux/actions";
 import theme from "./theme/theme";
 
 import s from "./App.module.css";
+import About from "./components/views/About/About";
 import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
@@ -35,9 +36,7 @@ import { getAuth } from "firebase/auth";
 import "./config/firebase-config";
 
 
-import axios from "axios";
-// axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
-axios.defaults.baseURL = 'http://localhost:3001/'  
+
 //_________________________module_________________________
 const App = () => {
 const dispatch = useDispatch()
@@ -172,7 +171,8 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
-                <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
+                <Route path ="/IniciaSession" element ={<Modal/>}/>
+                <Route path ="/about" element = {<About/>}/>
             </Routes>
             {location === "/HomePage" && isAtBottom && <Footer />}
         </div>

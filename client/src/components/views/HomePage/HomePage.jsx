@@ -44,6 +44,7 @@ function HomePage () {
         dispatch(Dark_Mode())
 
         //--desmontado
+        dispatch(Dark_Mode())
         return () => {
             dispatch(clearMessage());
             dispatch (clearCourses())
@@ -93,7 +94,6 @@ function HomePage () {
                     </section>
 
                     <section className={`${s.sectionFAQ}`}/> */}
-
         {/* NEWS */}
         <section className={`${s.sectionNews}`}>
                 <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>

@@ -6,7 +6,7 @@ import Modal from "../ventanaemergente/ventana";
 //_________________________module_________________________
 function Commingsoon () {
 
-    const darkMode = useSelector((state) => state.darkMode);
+    //states:
     const [elementClasses, setElementClasses] = useState({
         h1: "h1light",})
 
