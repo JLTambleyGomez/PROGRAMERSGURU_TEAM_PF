@@ -2,21 +2,41 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  height: 25%;
+  height: 7rem;
   background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
   transition: transform 0.3s, filter 0.3s,width 0.2s;
 }
 
 .component > div {
-  height: 4rem;
+  /* height: 4rem; */
 }
 
-.option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.optionSort {
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 5rem;
+    gap: 1rem;
 }
+
+.component select {
+    height: 3rem;
+}
+
+.optionFilter {
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 5rem;
+    gap: 1rem;
+}
+
 
 .overlay {
   position: fixed;

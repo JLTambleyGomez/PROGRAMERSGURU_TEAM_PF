@@ -27,6 +27,7 @@
  .section3 {
     display: flex;
     align-self: center;
+    margin-top: 4rem;
  }
  
  .sectionBanner {
@@ -35,6 +36,7 @@
     height: 25vh;
     left: 0;
     width: 100%;
+    /* padding-bottom: 25%; */
     background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
  }
  
@@ -59,10 +61,11 @@
  
  .productBox {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     flex-wrap: wrap;
-    margin: 4rem 0;
-    gap: 20px;
+    align-items: center;
+    /* margin: 4rem; */
+    gap: .5rem;
     width: 100%;
     height: 20%;
     }
@@ -71,8 +74,10 @@
           flex: 0 0 auto;
           flex-direction: column;
           justify-content: space-between;
-          width: 200px;
-          padding: 1%;
+          width: 13rem;
+          min-height: 18rem;
+          padding: 1.5%;
+          margin: 2vw;
           border-radius: 5%;
           background-color: #fff;
           border: 2px solid #000;
@@ -81,80 +86,91 @@
        .item:hover {
           transform: scale(1.1);
        }
+       .imgContainer {
+            display: flex; 
+            justify-content: center;
+            align-content: center
+       }
        .item img {
           width: 100px;
           height: 100px;
           object-fit: contain;
        }
+       .nameContainer {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            min-height: 20%;
+       }
        .name {
-          font-size: 14px;
-          color: #888;
-          margin-bottom: 18px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2; 
+            line-clamp: 2; 
+            text-overflow: ellipsis;
+            font-size: 150%;
+            color: #888;
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            margin-bottom: 18px;
+            cursor: pointer;
        }
        .price {
-          font-size: 100%;
+          font-size: 150%;
           margin: 2% 0;
           margin-left: 4%;
           color: #007bff;
           font-weight: bold;
        }
+       .item button {
+        z-index: 11;
+        padding: 0.5em;
+        border-radius: 14%;
+        border: 1px solid;
+        cursor: pointer;
+        transition: transform 0.3s, filter 0.3s;
+       }
        .addButton {
-          /* z-index: 9997; */
-          margin-left: 45%;
-          padding: 0.5em;
-          border-radius: 14%;
           background-color: #007bff;
           color: #fff;
-          cursor: pointer;
-          z-index: 9000;
-          transition: transform 0.3s, filter 0.3s;
        }
        .addButton:hover {
           background-color: rgb(161, 247, 190);
           color: #000000;
-          transform: scale(1.2);
+          transform: scale(1.3);
        }
        .checkButton {
-            margin-left: 45%;
-            padding: 0.5em;
-            border-radius: 14%;
             background-color: rgb(161, 247, 190);
             color: #000000;
-            cursor: pointer;
-            z-index: 9000;
-            transition: transform 0.3s, filter 0.3s;
-       }
+
+         }
        .checkButton:hover {
             background-color: rgb(161, 247, 190);
-            color: #000000;
-            transform: scale(1.1);
-       }
-
-       .cartIcon {
-          margin-right: 5%;
+            transform: scale(1.2);
        }
  
        .cartTooltip {
           position: absolute;
           padding: 1%;
           margin-left: 30%;
-          background-color: #007bff;
+          width: 55%;
+          background-color: #007bff80;
           color: #fff;
           border-radius: 4px;
           font-size: 16px;
           transition: transform 0.3s;
+          letter-spacing: 2px;
        }
        .item:hover .cartTooltip {
-          margin-top: 83%;
-          transform: translate(-50%, 10%);
+          z-index: 10;
           animation: slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
        }  @keyframes slide-in-right {
           0% {
-                transform: translateX(4px) translateY(-75%);
+                transform: translateX(-2px);
                 opacity: 0;
           }
           100% {
-                transform: translateX(-18px) translateY(-75%);
+                transform: translateX(-10px);
                 opacity: 1;
           }
        }
@@ -163,11 +179,11 @@
           align-items: center;
           justify-content: space-between;
        } 
-       .outOfStock {
+       /* .outOfStock {
           display: flex;
           align-items: center;
           justify-content: space-between;
-       }
+       } */
  
  
  .Resumen {
@@ -197,25 +213,43 @@
        width: 10%;
        padding: 7px 100%;
        border-radius: 4px;
-    }
-   
-   /* __________________________________________________ */
-   
- .comprasCover {
-    width: 100%;
-    height: 50%
- }
- .containerItems {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 20px;
-    justify-items: center;
-    padding: 5%;
- }
+    } 
  
  
  /* -------- RESPONSIVE --------- */
  
- @media screen and (max-width: 700px) {
-    
+ @media screen and (max-width: 500px) {
+    .productBox {
+        gap: 0
+    }
+    .item {
+        margin: 0;
+        padding: 3%;
+        width: 50vw;
+        box-sizing: border-box;
+        outline: 0.5px solid;
+        border: 0;
+        border-radius: 0;
+    }
+    .item:hover {
+        transform: none;
+    }
+    .cartTooltip {
+        margin-left: 15%;
+        width: 25%;
+        padding: 1%;
+        font-size: 13px;
+     }
+     .item:hover .cartTooltip {
+        animation: slide-in-right 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+     }  @keyframes slide-in-right {
+        0% {
+              transform: translateX(0px);
+              opacity: 0;
+        }
+        100% {
+              transform: translateX(-8px);
+              opacity: 1;
+        }
+     }
  }
