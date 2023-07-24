@@ -5,7 +5,7 @@ import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
 import { get_User_By_Email } from "../../../Redux/actions";
-
+import GoogleButton from "./GoogleButton";
 //_________________________module_________________________
 function SignFreeForm2() {
     // const dispatch = useDispatch()
@@ -162,15 +162,7 @@ function SignFreeForm2() {
                             </button>
                             <hr />
                         </form>
-                        {/* BOTON PARA INGRESAR CON GOOGLE */}
-                        <button
-                            className={styles.button}
-                            type="submit"
-                            onClick={handleLoginWithGoogle}
-                        >
-                            Acceder con Google
-                        </button>
-                        {/* <GoogleButton onClick={signInwithGoogle}/> */}
+                        <GoogleButton onClick={handleLoginWithGoogle}/>
                     </div>
                 </div>
             )}

@@ -62,17 +62,53 @@
       transform: scale(1.04);
     }
 
+  
     .link {
-      /* font-size: 100%; */
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: 0.2em;
-      font-weight: bold;
-    }
-    .link:hover {
-      text-shadow:  0px 3px 12px rgb(128, 255, 255);
-      cursor: pointer;
-    }
+        /* font-size: 100%; */
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 0.2em;
+        font-weight: bold;
+      }
+  
+      .hide{
+          display:none;
+      }
+      .hideTienda{
+          display:none;
+      }
+      .link:hover +.hideTienda{
+          display: block;
+          position: fixed;
+          margin-left: -40%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          width: 150px;
+          color: rgb(38, 12, 233);
+          animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }     
+          .hideCarrito{
+              display:none;
+          }
+          .link:hover+ .hideCarrito{
+              display: block;
+          position: fixed;
+          margin-left: -29%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          width: 150px;
+          color: rgb(38, 12, 233);
+          animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }       
+          
+      .link:hover +.hide {
+          display: block;
+          position: fixed;
+          width: 150px;
+          margin-left: -40%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          color: rgb(38, 12, 233);
+  animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} } 
+   
     .link-light {
       color: rgba(2, 14, 17, 0.932);
     }

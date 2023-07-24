@@ -144,54 +144,55 @@ const AdminPanel = () => {
         <div className={`${styles.component} ${styles[theme("component")]}`}>
            
             <div>
-                <button className={styles.buton} onClick={handleShowCategories}>
+                <p className={styles.buton} onClick={handleShowCategories}>
                     <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-                </button>
-                {showcategories && <Categories></Categories>}
+                </p>
+                {showcategories && 
+                <Categories></Categories>}
 
                 <div />
 
                 <div>
-                    <button className={styles.buton} onClick={handleShowCursos}>
+                    <p className={styles.buton} onClick={handleShowCursos}>
                         <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
-                    </button>
+                    </p>
                     {showcursos && <Courses></Courses>}
                 </div>
 
                 <div>
-                    <button
+                    <p
                         className={styles.buton}
                         onClick={handleShowProducts}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
-                    </button>
+                    </p>
                     {showproducts && <Products></Products>}
                 </div>
 
                 <div>
-                    <button className={styles.buton} onClick={handleShowUsers}>
+                    <p className={styles.buton} onClick={handleShowUsers}>
                         <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
-                    </button>
+                    </p>
                     {showUsers && <User></User>}
                 </div>
 
                 <div>
-                    <button
+                    <p
                         className={styles.buton}
                         onClick={handleShowSubscription}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
-                    </button>
+                    </p>
                     {showSubscriptions && <Subscriptions></Subscriptions>}
                    
                 </div>
                 <div>
-                    <button
+                    <p
                         className={styles.buton}
                         onClick={handleShowTecnology}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR TECNOLOGIAS</h1>
-                    </button>
+                    </p>
                     {showTecnology && <Tecnology />}
                 
                 </div>

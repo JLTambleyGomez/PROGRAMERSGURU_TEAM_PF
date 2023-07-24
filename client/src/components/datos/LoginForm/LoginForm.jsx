@@ -71,7 +71,6 @@ function LoginForm() {
             )}
             {showForm && (
                 <div className={styles.container}>
-                    <h1>HOLAAAAAAAAA</h1>
                     <div className={styles.form}>
                         {/* CLOSE FORM */}
                         <button

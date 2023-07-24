@@ -89,6 +89,10 @@ function CourseDetails() {
         };
     }, [disabled]);
 
+    useEffect(() => {
+        console.log(course)
+    }, [course])
+
     //component:
     return (
         <>

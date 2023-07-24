@@ -68,12 +68,7 @@
     background-color: rgb(94, 121, 148);
     /* background-color: rgba(240, 248, 255, 0.26); */
     box-shadow: 0 0 1rem 0.5vw rgba(240, 248, 255, 0.26) inset;
- }
-
- .product p {
-    font-size: 1.25vw ;
- }
- 
+    animation:scale-up-horizontal-center 0.4s} @keyframes scale-up-horizontal-center{0%{transform:scaleX(.2)}100%{transform:scaleX(1)}}
  .productImage{
    width: 100px;
    height: 100px;
@@ -165,8 +160,8 @@
  
  .item {
     font-size: 30px;
- }
- 
+ }*/
+
  .buton {
     border: 2px solid white;
     background-color: black;
@@ -177,7 +172,7 @@
  .buton:hover {
     transform: scale(1.2);
     cursor: pointer;
- } */
+ } 
  
  
  @media screen and (max-width: 1200px) {

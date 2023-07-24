@@ -41,11 +41,12 @@ function PagoSubscripcion () {
     const handlePagarButton = () => {
       if (subscripcion) {
         const referencia = {
-            description: subscripcion.title,
+            // en caso de ERROR: cambiar "name" por "description"
+            name: subscripcion.title,
             price: subscripcion.price,
             quantity: 1,
         }
-        // localStorage.setItem("cart", JSON.stringify([referencia]));
+        localStorage.setItem("cart", JSON.stringify([referencia]));
         setCompra(referencia);
         setMostrarPagos(true)
       }
@@ -63,14 +64,12 @@ function PagoSubscripcion () {
     }, [dark])
 
     useEffect(() => {
+       dispatch(get_suscriptions())
         console.log({compra})
     }, [compra])
 
+ 
 
-    useEffect(() => {
-        console.log("fafas")
-        console.log(subscripciones)
-    }, [])
 
     //component:
     return (
@@ -80,11 +79,10 @@ function PagoSubscripcion () {
             <div className={styles.content}>
                 <div className={styles.options}>
                     {
-                        subscripciones.map((subscripcion) => (
+                        subscripciones?.map((subscripcion) => (
                             <div key={subscripcion.id} className={styles.product}>
                                 <img src={subscripcion.image} alt={subscripcion.title} className={styles.productImage} />
                                 <h3 className={styles.item}>{subscripcion.title}</h3>
-                                <p>{subscripcion.type}</p>
                                 <p>{subscripcion.description}</p>
                                 <p className={styles.p}>Por tan solo {subscripcion.price} dólares</p>
                                 <p className={styles.buton} onClick={() => handleAddSubscripcion(subscripcion)}>
@@ -111,7 +109,7 @@ function PagoSubscripcion () {
                             {/* MEDIOS DE PAGO */}
                                 { !MostrarPagos && <p className={styles.pagar} onClick={handlePagarButton}>Mostrar opciones de pago</p> }
                                 {
-                                    true && (
+                                    MostrarPagos && (
                                         <div>
                                             <p>Escoge tu medio de Pago</p>
                                             {

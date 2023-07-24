@@ -1,0 +1,23 @@
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    height: 50px;
+    transition: background-color 0.2s;
+  }
+  .button:hover {
+    background-color: #f1f1f1;
+  }
+  .iconWrapper {
+    margin-right:8px;
+  }
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+  .btnText {
+    font-weight: bold;
+  }
+    

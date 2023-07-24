@@ -26,6 +26,8 @@ const PagoconMercadopago = async (req, res) => {
     auto_return: "approved",
   };
 
+  console.log(req.body)
+
   const result = mercadoPago.preferences
     .create(preference)
     .then(function (response) {
@@ -45,6 +47,7 @@ try {
   
   console.log(email,merchant_order_id,payment_id,compra)
 
+  
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const listadeproductos = compra?.map(
