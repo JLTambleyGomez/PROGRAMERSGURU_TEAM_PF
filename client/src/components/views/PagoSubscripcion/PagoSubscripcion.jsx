@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { initMercadoPago } from "@mercadopago/sdk-react";
 import { Dark_Mode, get_suscriptions } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
@@ -29,7 +28,6 @@ function PagoSubscripcion () {
     //const:
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const token = localStorage.getItem("accessToken");
 
     //functions:
     const handleAddSubscripcion = (selectedSubscripcion) => {
@@ -39,17 +37,17 @@ function PagoSubscripcion () {
     }
 
     const handlePagarButton = () => {
-      if (subscripcion) {
-        const referencia = {
-            // en caso de ERROR: cambiar "name" por "description"
-            name: subscripcion.title,
-            price: subscripcion.price,
-            quantity: 1,
+        if (subscripcion) {
+            const referencia = {
+                // en caso de ERROR: cambiar "name" por "description"
+                name: subscripcion.title,
+                price: subscripcion.price,
+                quantity: 1,
+            }
+            localStorage.setItem("cart", JSON.stringify([referencia]));
+            setCompra(referencia);
+            setMostrarPagos(true)
         }
-        localStorage.setItem("cart", JSON.stringify([referencia]));
-        setCompra(referencia);
-        setMostrarPagos(true)
-      }
     }
 
 
@@ -64,10 +62,9 @@ function PagoSubscripcion () {
     }, [dark])
 
     useEffect(() => {
-       dispatch(get_suscriptions())
+        dispatch(get_suscriptions())
         console.log({compra})
     }, [compra])
-
  
 
 
@@ -79,7 +76,7 @@ function PagoSubscripcion () {
             <div className={styles.content}>
                 <div className={styles.options}>
                     {
-                        Array.isArray(subscripciones) && subscripciones?.map((subscripcion) => (
+                        Array.isArray(subscripciones) && subscripciones.map((subscripcion) => (
                             <div key={subscripcion.id} className={styles.product}>
                                 <img src={subscripcion.image} alt={subscripcion.title} className={styles.productImage} />
                                 <h3 className={styles.item}>{subscripcion.title}</h3>
