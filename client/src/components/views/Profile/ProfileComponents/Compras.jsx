@@ -1,12 +1,8 @@
 import s from "../Profile.module.css";
+import theme from "../../../../theme/theme";
 
-export function Compras ({dark}) {
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
+export function Compras () {
     return (
-        // <div className={!payments.hasOwnProperty() ? s.emptyTab : s.payments}>
         <div className={`${s.emptyTab} ${s[theme("emptyTab")]}`}>
             <img src="https://www.svgrepo.com/show/462008/mobile-payment-dollar.svg" alt="compras" />
             <h2>TUS COMPRAS</h2>

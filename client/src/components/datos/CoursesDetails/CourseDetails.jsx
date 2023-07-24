@@ -8,6 +8,7 @@ import {
 } from "../../../axiosRequests/axiosRequests";
 import { getCoursesByIdRequest } from "../../../axiosRequests/axiosRequests";
 import Rating from "@mui/material/Rating";
+import theme from "../../../theme/theme";
 
 import styles from "./CourseDetails.module.css";
 import Comments from "../Comments/Comments";
@@ -34,10 +35,6 @@ function CourseDetails() {
     const { id } = useParams();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
 
     const [value, setValue] = useState(course?.meanRating)
     const [disabled, setDisabled] = useState(false)
@@ -94,7 +91,7 @@ function CourseDetails() {
         <>
             {!loading ? (
                 <div className={styles.component}>
-                    <div className={styles.title}>
+                    <div className={`${styles.title} ${styles[theme("title")]}`}>
                         <h1>{course?.title}</h1>
                         <Rating
                             value={course?.meanRating}

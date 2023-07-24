@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { set_cart, get_User_By_Email } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import styles from "./CartV2.module.css";
 import Modal from "../ventanaemergente/ventana";
@@ -29,11 +30,6 @@ function Cart() {
     const dispatch = useDispatch();
 
     //function:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const handleAddButton = (type, P) => {
         if (type === "suma" && P.quantity < P.stock) {
             P.quantity = P.quantity + 1;

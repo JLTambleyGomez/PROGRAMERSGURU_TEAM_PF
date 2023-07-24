@@ -12,6 +12,7 @@ import { Carrito } from "./ProfileComponents/Carrito";
 import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 import { NavLink } from "react-router-dom";
+import theme from "../../../theme/theme";
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -38,10 +39,6 @@ function ProfileV2() {
     const actualDate = new Date();
     const dispatch = useDispatch();
 
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
     //handlers
 
     const handleChange = (event) => {

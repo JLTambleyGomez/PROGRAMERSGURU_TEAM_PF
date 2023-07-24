@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    margin-bottom:10%;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
@@ -16,6 +15,9 @@
     flex-wrap: wrap;
     text-align: center;
     animation: slide-in-right 0.9s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+.title-dark {
+  background: linear-gradient(93deg, rgba(0,89,101,1) 17%, rgba(0,140,158,0.9612219887955182) 54%, rgba(17,17,17,1) 100%);
 }
 .title h1 {
     margin: 5px;

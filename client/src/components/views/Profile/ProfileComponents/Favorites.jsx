@@ -1,12 +1,9 @@
 import s from "../Profile.module.css";
 import { Rating } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import theme from "../../../../theme/theme";
 
-export function Favorites({ dark, favorites }) {
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
+export function Favorites({ favorites }) {
 
     if (!favorites?.length) {
         return (

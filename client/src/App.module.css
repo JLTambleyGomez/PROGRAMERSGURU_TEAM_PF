@@ -3,7 +3,8 @@
 }
 
 .component-dark {
- background-color: #010003;
+ /* background-color: #010003; */
+ background-color: #111111;
  color: #FFFFFF;
  /* position: absolute;
  top:0;

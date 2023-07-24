@@ -1,15 +1,17 @@
   .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     align-items: center;
-    width: 100%;
+    margin: 10px;
   }
 
   .flex {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     flex-wrap: wrap;
     width: 100%;
+    gap: 10px;
   }
 
   .productscontainer {
@@ -18,7 +20,7 @@
     align-items: center;
     gap: 15px;
     padding: 5px;
-    width: 58%;
+    width: 60%;
     min-width: 280px;
   }
   .info {
@@ -28,8 +30,6 @@
     min-width: 275px;
     flex-wrap: wrap;
     width: 100%;
-    position: relative;
-    padding: 10px;
     background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 5px -2px black;
   }
@@ -49,6 +49,15 @@
     font-weight: 600;
   }
 
+  .masinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    min-height: fit-content;
+  }
+
   .img {
     width: 80px;
     height: 80px;
@@ -57,13 +66,6 @@
     object-fit: cover;
   }
 
-  .masinfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    min-height: fit-content;
-  }
 
   .cantidad {
     display: flex;
@@ -103,9 +105,9 @@
     align-items: center;
     min-width: 280px;
     padding: 15px 0 15px 0;
-    width: 40%;
+    width: 35%;
     height: fit-content;
-    margin: 6px;
+    margin: 5px;
     background-color: white;
     box-shadow: 1px 1px 5px -2px black;
   }
