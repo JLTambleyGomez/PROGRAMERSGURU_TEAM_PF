@@ -9,7 +9,7 @@
     width: 100%;
     box-sizing: border-box;
     /* OPCION AGREGAR PADDING-BOTTOM: 2% */
-    padding: 2% 0% 2%;
+    /* padding: 2% 0% 2%; */
     animation:blur-in 0.4s linear both
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
@@ -80,15 +80,35 @@
       color: rgba(247, 249, 250, 0.932);
     }
 
-.bolsita{
+.bolsita {
     height: 25%;
     transition: transform 0.5s;
     z-index: 9998;
 }
 .bolsita:hover{
-  transform:scale(1.7);
+  transform:scale(1.5);
   cursor: pointer;
 }
+
+.bolsita-dark {
+    fill: white;
+}
+
+/* .bolsitaEmpty {
+    height: 90%;
+    transition: transform 0.5s;
+    z-index: 9998;
+}
+.bolsitaEmpty-light {
+    fill: black;
+}
+.bolsitaEmpty:hover {
+    transform:scale(1.7);
+    cursor: pointer;
+}
+.bolsitaEmpty-dark {
+    fill: white;
+} */
 
 .barsButton {
     display: none;

@@ -98,7 +98,7 @@
           color: #007bff;
           font-weight: bold;
        }
-       .item button {
+       .addButton {
           /* z-index: 9997; */
           margin-left: 45%;
           padding: 0.5em;
@@ -106,13 +106,30 @@
           background-color: #007bff;
           color: #fff;
           cursor: pointer;
+          z-index: 9000;
           transition: transform 0.3s, filter 0.3s;
        }
-       .item button:hover {
+       .addButton:hover {
           background-color: rgb(161, 247, 190);
           color: #000000;
           transform: scale(1.2);
        }
+       .checkButton {
+            margin-left: 45%;
+            padding: 0.5em;
+            border-radius: 14%;
+            background-color: rgb(161, 247, 190);
+            color: #000000;
+            cursor: pointer;
+            z-index: 9000;
+            transition: transform 0.3s, filter 0.3s;
+       }
+       .checkButton:hover {
+            background-color: rgb(161, 247, 190);
+            color: #000000;
+            transform: scale(1.1);
+       }
+
        .cartIcon {
           margin-right: 5%;
        }

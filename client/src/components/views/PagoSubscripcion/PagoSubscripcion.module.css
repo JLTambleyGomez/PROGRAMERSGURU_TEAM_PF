@@ -69,6 +69,10 @@
     /* background-color: rgba(240, 248, 255, 0.26); */
     box-shadow: 0 0 1rem 0.5vw rgba(240, 248, 255, 0.26) inset;
  }
+
+ .product p {
+    font-size: 1.25vw ;
+ }
  
  .productImage{
    width: 100px;
