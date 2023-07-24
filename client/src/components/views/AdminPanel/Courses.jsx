@@ -12,6 +12,8 @@ import {
 } from "../../../Redux/actions";
 import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
+import { SubirImagenCurso } from "./SubirImagenCurso";
+import theme from "../../../theme/theme"
 
 function Courses() {
     // global state:
@@ -65,10 +67,6 @@ function Courses() {
     });
 
     // functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
 
     //DESPACHA LA ACTION PARA HACER EL PUT
 
@@ -227,6 +225,7 @@ function Courses() {
         }
         setModificarCourse(false);
         setPostCourse(false);
+        localStorage.removeItem("urlNewCourseImage")
     };
 
     const handlePostCourse = () => {
@@ -326,6 +325,9 @@ function Courses() {
                                         />
                                     {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
+                                <div>
+                                    <SubirImagenCurso title={course?.title}/>
+                                </div>
 
                                 <div className={`${styles.h1}`}>
                                     <label>URL del curso:</label>
@@ -390,7 +392,7 @@ function Courses() {
                                         name="tecnology"
                                         onChange={handleTechnologySelection}
                                         >
-                                        {tecnology.map((technology) => (
+                                        {tecnology?.map((technology) => (
                                             <option
                                                 key={technology.id}
                                                 value={technology.id}

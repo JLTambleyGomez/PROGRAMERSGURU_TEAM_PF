@@ -3,16 +3,16 @@ import s from "./Comments.module.css";
 import styles from "./subComponents/PublishComment.module.css";
 import Rating from "@mui/material/Rating";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import PublishComment from "./subComponents/PublishComment";
+import theme from "../../../theme/theme";
 
 //_________________________module_________________________
 function Comments({ disabled, comments, setDisabled }) {
     const user = useSelector((state) => state.user);
-    const dark = useSelector((state) => state.darkMode);
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
+
+    const expirationDate = new Date(user?.expirationDate);
+    const actualDate = new Date();
 
     const [commentData, setCommentData] = useState({
         userId: 0,
@@ -36,8 +36,14 @@ function Comments({ disabled, comments, setDisabled }) {
     return (
         <div>
             <h3>Comentarios</h3>
-            {disabled ? (
-                ""
+            {disabled || expirationDate < actualDate ? (
+                <div className={s.subscription}>
+                    <a href="/pagosubscripcion" className={s.link}>
+                        Suscribite
+                    </a>{" "}
+                    para poder dejar tu comentario y acceder a todas las
+                    funcionalidades que ofrecemos!
+                </div>
             ) : (
                 <PublishComment
                     setDisabled={setDisabled}

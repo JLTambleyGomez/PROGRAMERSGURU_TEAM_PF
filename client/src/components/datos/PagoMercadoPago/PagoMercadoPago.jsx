@@ -16,7 +16,7 @@ const PagoMercadopago = ({ reference }) => {
         try {
             console.log(reference);
             const { data } = await axios.post("/Pagos/create_preference", reference);
-            const id = data.id;
+            const id = data?.id;
             return id;
         } catch (error) {
             // Si hay un error, terminamos la carga

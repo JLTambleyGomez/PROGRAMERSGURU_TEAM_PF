@@ -8,8 +8,11 @@ const { getCommentsByCourse } = require("../controllers/Comment/getCommentsByCou
 const { postComment } = require("../controllers/Comment/postComment");
 const { putComment } = require("../controllers/Comment/putComment");
 const { computeCourseRating } = require("../controllers/Comment/computeCourseRating");
+const { getComments } = require("../controllers/Comment/getComments");
 
 //routes
+commentRouter.get("/", getComments)
+
 commentRouter.get("/user/:userId", getCommentsByUser);//////////// no se usan mas
 
 commentRouter.get("/course/:courseId", getCommentsByCourse);//////////// no se usan mas

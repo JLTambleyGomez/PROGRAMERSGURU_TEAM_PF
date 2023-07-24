@@ -198,7 +198,7 @@ function Shop () {
                         { 
                             currentAllProducts? currentAllProducts?.map((product, index) => {
                                 if (product?.stock >= 0) { return (
-                                    <div className={`${s['item']}`} onClick={() => handledetailproduct(product.id)} key={index}>
+                                    <div className={`${s.item} ${s[theme('item')]}`} onClick={() => handledetailproduct(product.id)} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
                                             <div className={s.imgContainer}>
                                                 <img  className={s["itemImage"]} src={product?.image}></img>
