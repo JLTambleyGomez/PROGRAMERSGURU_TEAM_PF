@@ -5,6 +5,9 @@ import { BrowserRouter } from 'react-router-dom';
 // import "./config/firebase";
 import './index.css';
 import App from './App';
+import axios from "axios";
+axios.defaults.baseURL = 'https://pfserverdeploy-production.up.railway.app'  
+// axios.defaults.baseURL = 'http://localhost:3001/'  
 
 //__________________________________________________
 const rootElement = document.getElementById('root');

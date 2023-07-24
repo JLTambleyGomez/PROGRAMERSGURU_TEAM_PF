@@ -35,9 +35,7 @@ import { getAuth } from "firebase/auth";
 import "./config/firebase-config";
 
 
-import axios from "axios";
-// axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
-axios.defaults.baseURL = 'http://localhost:3001/'  
+
 //_________________________module_________________________
 const App = () => {
 const dispatch = useDispatch()
