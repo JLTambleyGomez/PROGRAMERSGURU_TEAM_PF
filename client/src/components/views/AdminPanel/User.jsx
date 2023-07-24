@@ -132,11 +132,6 @@ const User = () => {
         setNewUser(false);
     };
 
-//delete:
-    const handleDelete = async (user) => {
-        await dispatch(delete_user(user.id));
-        await getUsers();
-    }
 
  
     //life-cycles:
@@ -244,9 +239,7 @@ const User = () => {
                                     >
                                         Hacer Adminitrador
                                     </button>
-                                    <button onClick={() => handleDelete(user)} name="delete">
-                                         Borrar usuario
-                                            </button>
+                                 
                                     <button
                                         onClick={() => handlePutForm(user.id)}
                                     >
@@ -262,6 +255,7 @@ const User = () => {
                                 <p>Imagen: {user.picture}</p>
                                 <p>Admin: {user.admin ? "true" : "false"}</p>
                                 <p>Baneado: {user.banned ? "true" : "false"}</p>
+                                <p>Suscripción: user.expirationDate</p>
                                 {user.banned && <p>Usuario desactivado</p>}
                                 <p>
                                     Suscripción:{" "}

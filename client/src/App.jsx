@@ -40,37 +40,49 @@ import "./config/firebase-config";
 //_________________________module_________________________
 const App = () => {
 const dispatch = useDispatch()
- 
+
 const auth = getAuth();
 
-auth.onIdTokenChanged(async (user) => {
-  if (user) {
-    try {
-      // Obtiene el token de autenticación actual
-      const token = await user.getIdToken();
-      
-      // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
-      const tokenExpirationTime = user.authTime + (60 * 60 * 1000) - (5 * 60 * 1000); // 1 hora - 5 minutos
-      const currentTime = Date.now();
-      
-      console.log("Token actual:", token);
-      console.log("Tiempo actual:", new Date(currentTime).toLocaleString());
-      console.log("Tiempo de expiración del token:", new Date(tokenExpirationTime).toLocaleString());
 
-      if (currentTime >= tokenExpirationTime) {
-        // Renueva el token
-        console.log("Renovando el token...");
-        const refreshedToken = await user.getIdToken(true);
-        localStorage.setItem("accessToken", refreshedToken);
-        console.log("Token renovado:", refreshedToken);
-        // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
-      }
-    } catch (error) {
-      // Manejo de errores
-      console.error("Error al renovar el token:", error);
+auth.onIdTokenChanged(async (user) => {
+    if (user) {
+        try {
+        // Obtiene el token de autenticación actual
+        const token = await user.getIdToken();
+
+        // Verificar los valores antes del cálculo
+        console.log("user.authTime:", user.authTime);
+        console.log("Token actual:", token);
+        console.log("User object:", user);
+
+        const createdAt = user.metadata.createdAt;
+
+        // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
+        const tokenExpirationTime = createdAt * 1.0002 - (20 * (60 *60 *1000)) + 7 * (60 * 1000) + 25000; // 1 hora - 5 minutos
+        const currentTime = Date.now();
+        console.log(user.metadata);
+
+        // Verificar los valores después del cálculo
+        console.log("tokenExpirationTime:", tokenExpirationTime);
+        console.log("Tiempo actual:", new Date(currentTime).toLocaleString());
+        console.log("Tiempo de expiración del token:", new Date(tokenExpirationTime).toLocaleString());
+
+        if (currentTime >= tokenExpirationTime) {
+            // Renueva el token
+            console.log("Renovando el token...");
+            const refreshedToken = await user.getIdToken(true);
+            console.log("Renovado")
+            localStorage.setItem("accessToken", refreshedToken);
+            console.log("Token renovado:", refreshedToken);
+            // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
+        }
+        } catch (error) {
+        // Manejo de errores
+        console.error("Error al renovar el token:", error);
+        }
     }
-  }
 });
+
 
     //global states:
     
