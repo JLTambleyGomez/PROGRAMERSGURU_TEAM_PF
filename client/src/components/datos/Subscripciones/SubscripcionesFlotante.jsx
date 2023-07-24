@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,10 +10,8 @@ import s from "./SubscripcionesFlotante.module.css"
 //_________________________module_________________________
 function SubscripcionFlotante () {
 
-    //global state:
-    const dark = useSelector((state) => state.darkMode);
-
     //states:
+    const dark = useSelector((state) => state.darkMode)
     const [mostrarboton, setMostrarboton] = useState(true);
     const [navigateAux, setNavigateAux] = useState(false);
 
@@ -22,11 +20,6 @@ function SubscripcionFlotante () {
     const dispatch = useDispatch();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const handleclosebutton = () => {
         setMostrarboton(false)
     }
