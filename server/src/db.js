@@ -5,15 +5,27 @@ const fs = require("fs");
 const path = require("path");
 
 require("dotenv").config({ path: path.resolve(__dirname, "./.env") }); // para recibir las constantes de .env
-const { DB_USER, DB_PASSWORD, DB_HOST } = process.env;
+const { DB_USER, DB_PASSWORD, DB_DEPLOY } = process.env;
 
+// const sequelize = new Sequelize(
+//     `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/railway`,
+//     {
+//         logging: false,
+//         native: false,
+//     }
+// );
+// DEPLOYMENT:
 const sequelize = new Sequelize(
-    `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/railway`,
-    {
+         DB_DEPLOY,    {
         logging: false,
         native: false,
     }
 );
+
+
+
+
+
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
