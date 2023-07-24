@@ -1,7 +1,7 @@
 const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-
+const URL_FEEDBACKS = process.env.URL_FEEDBACKS
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
@@ -20,8 +20,8 @@ const PagoconMercadopago = async (req, res) => {
     ],
     back_urls: {
       success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: "http://localhost:5173/HomePage",
-      pending: "http://localhost:5173/HomePage",
+      failure: URL_FEEDBACKS,
+      pending: URL_FEEDBACKS,
     },
     auto_return: "approved",
   };

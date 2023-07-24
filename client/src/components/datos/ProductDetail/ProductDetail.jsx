@@ -6,18 +6,18 @@ import axios from 'axios';
 function ProductDetail() {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
+  
+    const fetchProductById = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/product/${id}`);
+        setProduct(response.data);
+      } catch (error) {
+      }
+    }
 
   useEffect(() => {
     fetchProductById();
   }, []);
-
-  const fetchProductById = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/product/${id}`);
-      setProduct(response.data);
-    } catch (error) {
-    }
-  }
   console.log(product)
 
   return (

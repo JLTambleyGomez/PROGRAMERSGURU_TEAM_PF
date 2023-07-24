@@ -40,11 +40,14 @@ import {
     SORT_PRODUCTS,
     PUT_PRODUCTS,
     POST_PRODUCT,
-//CART,
+    //CART,
     SET_CART,
     CLEAR_CART,
     //SHOPBAG
     TOGGLE_SHOPBAG,
+    //HIGHLIGHT
+    SET_HIGHLIGHT,
+    CLEAR_HIGHLIGHT,
     //METAMASK
     METAMASK_ADDRESS,
     //SUBSCRIPTIONS
@@ -74,6 +77,7 @@ const globalStorage = {
     user: {},
     cart: [],
     shopbag: false,
+    highlightedItem: null,
     metamask: false,
     metamaskaddress: null,
     productsCopy: [],
@@ -283,6 +287,18 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 shopbag: payload,
             };
+        case SET_HIGHLIGHT:
+            return {
+                ...state,
+                highlightedItem: payload
+            }
+
+        case CLEAR_HIGHLIGHT:
+            return {
+                ...state,
+                highlightedItem: null
+            }
+        
         case METAMASK_ADDRESS:
             return {
                 ...state,

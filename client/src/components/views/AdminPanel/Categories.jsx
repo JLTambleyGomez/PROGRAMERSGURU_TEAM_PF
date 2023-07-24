@@ -87,19 +87,18 @@ const Categories = () => {
     //component:
     return (
         <div className={styles.contain}>
-            <div></div>
-            <section className={`${styles.Panel}`}>
-                <form className={`${styles.categoriesForm}`}>
-                    <span className={`${styles.categoriesPostBar}`}>
+            <section >
+                <form >
+                    <span >
                         <input
-                            className={`${styles.categoriesInput}`}
+                            
                             onChange={hadleInputChange}
                             value={inputCategory.name}
                             name="name"
                             placeholder="Ingresa el nombre de la categoria"
                         />
                         <button
-                            className={`${styles.categoriesPostButton}`}
+                          
                             onClick={handlePostCategories}
                         >
                             Postear categorias
@@ -109,19 +108,17 @@ const Categories = () => {
                     <span>{error && <p>{error.category}</p>}</span>
                 </form>
 
-                <div className={`${styles.categoriesContainer}`}>
+                <div >
                     <h2>Categories</h2>
-                    <div className={`${styles.categoriesBox}`}>
+                    <div>
                         {categories.allCategories.map((category, index) => (
                                 <span
-                                    className={`${styles.category}`}
                                     key={index}
                                 >
                                     <label>
                                         {category.id} : {category.name}
                                     </label>
                                     <button
-                                        className={`${styles.deleteCategoryButton}`}
                                         onClick={() =>
                                             deleteCategory1(category.id)
                                         }

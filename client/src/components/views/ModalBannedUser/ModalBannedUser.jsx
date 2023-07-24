@@ -1,14 +1,17 @@
-import styles from "./Modal.module.css"
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import {clearUser} from "../../../Redux/actions";
 import { useDispatch } from "react-redux";
+import {clearUser} from "../../../Redux/actions";
+import styles from "./Modal.module.css"
 
 const ModalBannedUser = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const closeModal = async () => {
-        await dispatch(clearUser())
+        
+        await dispatch(clearUser());
+        localStorage.clear();
         navigate('/')
     }
 

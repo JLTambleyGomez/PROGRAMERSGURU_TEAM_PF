@@ -198,7 +198,7 @@ function FilterBarShop () {
     return (
         <>
             <aside className={`${s.component}`}>
-                <div className={s.option}>
+                <div className={s.optionSort}>
                     <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
                     { true && (
                         <select value={order} onChange={sortProducts}>
@@ -208,7 +208,7 @@ function FilterBarShop () {
                         </select>
                     )}
                 </div> 
-                <div className={s.option}>
+                <div className={s.optionFilter}>
                     <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
                     {
                         true && (

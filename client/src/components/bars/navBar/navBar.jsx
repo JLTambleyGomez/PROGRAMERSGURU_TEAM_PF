@@ -2,11 +2,12 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { toggle_shopbag, get_User_By_Email,get_products_all, Dark_Mode} from "../../../Redux/actions";
+import { toggle_shopbag, get_User_By_Email,get_products_all, Dark_Mode, set_cart} from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+// import { faShoppingBag as bagShoppingRegular } from '@fortawesome/free-regular-svg-icons';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import s from "./navBar.module.css";
@@ -32,8 +33,6 @@ function NavBar ( { logoutUser } ) {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const email = localStorage.getItem("email");
-    const token = sessionStorage.getItem("accessToken")
 
     //functions:
     const toggleBars = () => {
@@ -50,10 +49,12 @@ function NavBar ( { logoutUser } ) {
 
     //life-cycles:
     useEffect(() => {
+        const email = localStorage.getItem("email");
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []) //testear con array vacio.
 
-    useEffect(()=>{
+    useEffect(() => {
+        const token = sessionStorage.getItem("accessToken");
         if (token) dispatch (get_products_all())
     },[])
 
@@ -61,6 +62,10 @@ function NavBar ( { logoutUser } ) {
         dispatch(Dark_Mode())
     }, [dark])
 
+
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
 
     //rule:
 
@@ -152,17 +157,21 @@ function NavBar ( { logoutUser } ) {
                 <SearchBar/>
             </div>
         {/* SUSCRIPCION */}
-            <div className={s.subscription}>
-                <SubscripcionesButton/>
-            </div>
+            {
+                user.expirationDate && (
+                    <div className={s.subscription}>
+                        <SubscripcionesButton/>
+                    </div>
+                )
+            }
         {/* METAMASK */}
             <div className={s.metamask}>
                 <ConexionMetamask/>
             </div>
         {/* BOLSA */}
-        {
+            {
                 (pathname === "/store" || pathname.includes("/ProductDetail")) && (
-                    cart?.length > 0  ? (
+                    Array.isArray(cart) && cart?.length > 0  ? (
                         <svg xmlns="http://www.w3.org/2000/svg" className={`${s.bolsita} ${s[theme("bolsita")]}`} viewBox="0 0 16 16" onClick={toggleShopbag}>
                             <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
                         </svg>
@@ -173,10 +182,9 @@ function NavBar ( { logoutUser } ) {
                     )
                 )
             }
-        
             {
-                user.admin ?  
-                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
+                user.admin ?
+                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]} ${s.admin}`}>
                         AdminPanel
                     </NavLink>
                 : null
@@ -195,6 +203,14 @@ function NavBar ( { logoutUser } ) {
             {
                 isBarsOpen && (
                     <section className={`${s.barsMenu} ${s[theme("barsMenu")]}`}>
+                    {/* ADMIN */}
+                        {
+                            user.admin ?
+                                <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]} ${s["admin-responsive"]}`}>
+                                    AdminPanel
+                                </NavLink>
+                            : null
+                        }
                     {/* SEARCHBAR */}
                         <div className={s["searchBar-responsive"]}>
                             <SearchBar/>

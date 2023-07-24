@@ -2,8 +2,14 @@ import React, { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './LandingPage2.module.css';
 import SignFreeForm from '../../datos/LoginForm/SignFreeForm';
+import {clearUser} from "../../../Redux/actions";
+import { useDispatch } from 'react-redux';
 
 const LandingPage2 = () => {
+//redux
+const dispatch = useDispatch();
+//localstados
+
   const titleRef = useRef(null);
   const [showButton, setShowButton] = useState(false);
   const [buttonClicked, setButtonClicked] = useState(false);
@@ -13,8 +19,7 @@ const LandingPage2 = () => {
 
   useEffect(() => {
 
-    localStorage.setItem("sendedEmail", "0");
-
+    dispatch(clearUser())
     const words = [
       'Bienvenido a',
       "PROGRAMMER'S GURU",

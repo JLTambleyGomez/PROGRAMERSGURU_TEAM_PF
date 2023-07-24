@@ -1,117 +1,164 @@
 .shopbagOverlay {
-  position: fixed;
-  top:0;
-  bottom: 0;
-  z-index: 9998;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-  .shopbag {
     position: fixed;
-    right: 0;
-    top: 0;
+    top:0;
     bottom: 0;
-    width: 30vw;
+    z-index: 9998;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+    .shopbag {
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 30vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      /* padding: 5vh 0; */
+      gap: 1%;
+      z-index: 9999;
+      overflow-y: auto;
+      transition: height 0.3s ease;
+      animation: scale-up-horizontal-right 0.4s;
+    } @keyframes scale-up-horizontal-right {
+      0% {
+        transform: scaleX(0.4);
+        transform-origin: right center;
+        opacity: 0;
+      }
+      100% {
+        transform: scaleX(1);
+        transform-origin: right center;
+        opacity: 1;
+      }
+    }
+    .shopbag-light {
+      background-color: white;
+      box-shadow: -10px 0px 1rem #34333350
+    }
+    .shopbag-dark {
+      background-color: #212121;
+      box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
+    }
+    .shopbagOpen {
+          /* animation: sdf 0.4 ; */
+      } @keyframes sdf {
+          0% {
+              transform: scaleX(1);
+              transform-origin: left center;
+              opacity: 1;
+            }
+            100% {
+              transform: scaleX(0.4);
+              transform-origin: left center;
+              opacity: 0;
+            }
+    }
+  
+  .itemContainer {
+      display: flex;
+      align-items: center;
+  }
+  
+  .highlight {
+      /* border: 1px solid red; */
+      box-shadow: rgba(255, 0, 0, 0.551) 1.95px 1.95px 2.6px !important;
+  }
+  
+  
+  .item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 5vh 0; */
-    gap: 1%;
-    z-index: 9999;
-    overflow-y: auto;
-    transition: height 0.3s ease;
-    animation: scale-up-horizontal-right 0.4s;
-  } @keyframes scale-up-horizontal-right {
-    0% {
-      transform: scaleX(0.4);
-      transform-origin: right center;
-      opacity: 0;
+    gap: 1rem;
+    width: 70%;
+    height: 10rem;
+    padding: 1rem;
+    box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
     }
-    100% {
-      transform: scaleX(1);
-      transform-origin: right center;
-      opacity: 1;
+    .minusPlus {
+      width: 2rem;
+      height: 2rem;
+      font-weight: 900;
+      background-color: #0FFF50;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
     }
-  }
-  .shopbag-light {
-    background-color: white;
-    box-shadow: -10px 0px 1rem #34333350
-  }
-  .shopbag-dark {
-    background-color: #212121;
-    box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
-  }
-  .shopbagOpen {
-        /* animation: sdf 0.4 ; */
-    } @keyframes sdf {
-        0% {
-            transform: scaleX(1);
-            transform-origin: left center;
-            opacity: 1;
-          }
-          100% {
-            transform: scaleX(0.4);
-            transform-origin: left center;
-            opacity: 0;
-          }
-  }
-
-.itemContainer {
-    display: flex;
-    align-items: center;
-}
-
-.item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 70%;
-  height: 10rem;
-  padding: 1rem;
-  box-shadow: rgba(43, 43, 43, 0.15) 1.95px 1.95px 2.6px;
-  }
-  .minusPlus {
-    width: 2rem;
-    height: 2rem;
-    font-weight: 900;
-    background-color: #0FFF50;
-    border-radius: 10px;
-    border: none;
-    cursor: pointer;
-  }
-  .minusPlus-light:hover {
-    background-color: #3333FF;
-    color: white;
-  }
-  .minusPlus-dark:hover {
-    background-color: #FFFF33;
-    color: black;
-  }
-
-  .item p {
-    text-align: center;
-    margin: 0;
-    font-size: 1rem;
-  }
-
-  .section1 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1vw;
+    .minusPlus-light:hover {
+      background-color: #3333FF;
+      color: white;
     }
-    .section1 img {
-      width: 4rem;
-      height: 4rem;
-      object-fit: cover;
-      border-radius: 100%;
-      border: solid 2px;
-      border-color: rgba(248, 248, 248, 0.658);
+    .minusPlus-dark:hover {
+      background-color: #FFFF33;
+      color: black;
     }
-
-/* @media screen and (max-width: 1000px) {
+    .binBox {
+      width: 2rem;
+      height: 2rem;
+      background-color: transparent;
+      /* border: 1px solid red; */
+      border: none;
+      border-radius: 10px;
+      transition: transform 0.2s ease;
+      
+    }
+    .binBox:hover {
+      animation: shake 0.5s infinite;
+      cursor: pointer;
+    }
+    .bin {
+      height: 1.5rem;
+      width: 1.5rem;
+      fill: red;
+    }
+    @keyframes shake {
+      0%, 100% { transform: rotate(0deg); }
+      25% { transform: rotate(-10deg); }
+      50% { transform: rotate(10deg); }
+      75% { transform: rotate(-10deg); }
+    }
+  
+    .item p {
+      text-align: center;
+      margin: 0;
+      font-size: 1rem;
+    }
+  
+    .section1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1vw;
+      }
+      .section1 img {
+        width: 4rem;
+        height: 4rem;
+        object-fit: cover;
+        border-radius: 100%;
+        border: solid 2px;
+        border-color: rgba(248, 248, 248, 0.658);
+      }
+  
+  @media screen and (max-width: 700px) {
     .shopbag {
-        height: 100vh;
-    }
-} */
+        height: 70vh;
+        width: 100%;
+        bottom: 0;
+        top: unset;
+        transition: height 0.3s ease;
+        animation: scale-up-vertical-up 0.4s;
+      } @keyframes scale-up-vertical-up {
+        0% {
+          transform: scaleY(0);
+          transform-origin: center bottom;
+          opacity: 0;
+        }
+        100% {
+          transform: scaleY(1);
+          transform-origin: bottom center;
+          opacity: 1;
+        }
+      }
+}
