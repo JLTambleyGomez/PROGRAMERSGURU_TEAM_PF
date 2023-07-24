@@ -21,7 +21,7 @@ const PagoconMercadopago = async (req, res) => {
     ],
     back_urls: {
       success: "http://localhost:5173/feedbackmp",
-      failure: "http://localhost:5173/feedbackmp" 
+      failure: "http://localhost:5173/feedbackmp", 
       success: "http://localhost:5173/MercadoPagoFeedback",
       failure: URL_FEEDBACKS,
       pending: URL_FEEDBACKS,
