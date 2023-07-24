@@ -158,7 +158,7 @@ function NavBar ( { logoutUser } ) {
             </div>
         {/* SUSCRIPCION */}
             {
-                !user.expirationDate && (
+                user.expirationDate && (
                     <div className={s.subscription}>
                         <SubscripcionesButton/>
                     </div>
