@@ -118,10 +118,12 @@ function Shop () {
     }, [])
 
     useEffect(() => {
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 500);
+        if (Array.isArray(products) && products.length > 1) {
+            setLoading(true);
+            setTimeout(() => {
+                setLoading(false);
+            }, 500);
+        }
     }, [products])
 
     useEffect(() => {
