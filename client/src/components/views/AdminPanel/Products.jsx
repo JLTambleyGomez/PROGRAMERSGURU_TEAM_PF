@@ -10,6 +10,7 @@ import {
 } from "../../../Redux/actions";
 import { validateProduct } from "./validate";
 import styles from "./Courses.module.css";
+import { SubirImagenDeProducto } from "./SubirImagenDeProducto";
 
 //_________________________module_________________________
 function Products() {
@@ -292,6 +293,9 @@ function Products() {
                                     {errorProduct.image && (
                                         <span>{errorProduct.image}</span>
                                     )}
+                                </div>
+                                <div>
+                                    <SubirImagenDeProducto name={newProduct.name}/>
                                 </div>
 
                                 <div>

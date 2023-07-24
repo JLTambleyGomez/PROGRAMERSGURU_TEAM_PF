@@ -24,6 +24,7 @@
     min-width: 280px;
   }
   .info {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
