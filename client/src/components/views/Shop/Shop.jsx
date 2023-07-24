@@ -97,7 +97,11 @@ function Shop () {
         const token = localStorage.getItem("accessToken")
         if (token) {
             if (!products.length) {
-                dispatch(get_products_all())
+                (async () => {
+                    setLoading(true);
+                    await dispatch(get_products_all())
+                    setLoading(false);
+                })();
             }
         }
     }, [products])
@@ -118,7 +122,7 @@ function Shop () {
     }, [])
 
     useEffect(() => {
-        if (Array.isArray(products) && products.length > 1) {
+        if (Array.isArray(products) && products.length >= 1) {
             setLoading(true);
             setTimeout(() => {
                 setLoading(false);
