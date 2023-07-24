@@ -35,6 +35,7 @@ export const getEthvalue = async () => {
     return ethUSDTPrice;
 };
 
+
 export const getProductsRequest = async () => {
     const { data } = await axios.get("/product");
     return data;
@@ -259,13 +260,6 @@ export const makeAdminUser = async (user) => {
     return data;
 };
 
-// export const hideUserProfile = async (email, isBanned) => {
-//     const { data } = await axios.put("/user/hide", {
-//         email: email,
-//         isBanned: isBanned,
-//     });
-//     return data;
-// };
 
 //Category
 export const getCategoryAllRequest = async () => {
@@ -280,5 +274,10 @@ export const postCategoryRequest = async (category) => {
 
 export const deleteCategoryRequest = async (id) => {
   const {data} = await axios.delete(`/category/${id}`)
+  return data
+}
+
+export const getProductByIdRequest = async (id) => {
+  const {data} =  await axios.get(`/product/${id}`)
   return data
 }

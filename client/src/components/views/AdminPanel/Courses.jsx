@@ -156,12 +156,14 @@ function Courses() {
      
         if (modificarCourse) {
             if (
-                errorCourse.name ||
+                errorCourse.title ||
                 errorCourse.description ||
-                errorCourse.genre ||
-                errorCourse.platforms ||
-// platforms?
-                errorCourse.released ) return setMessagePost("Revise los datos");
+                errorCourse.imageURL ||
+                errorCourse.courseUrl ||
+                errorCourse.released ||
+                errorCourse.isFree ||
+                errorCourse.language
+                 ) return setMessagePost("Revise los datos");
             
 
             dispatch(put_course(courseId, newCourse))
