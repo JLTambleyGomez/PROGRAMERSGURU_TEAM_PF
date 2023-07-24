@@ -226,9 +226,10 @@ function Cart() {
                                                     reference={compra}
                                                 />
                                             )}
+                                            <p className={styles.metamask}>
                                             <PagoMetamask
                                                 total={calculateTotal()}
-                                            />
+                                            /></p>
                                         </div>
                                     )}
                                 </ul>

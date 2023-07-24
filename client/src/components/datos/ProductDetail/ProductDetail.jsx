@@ -16,9 +16,9 @@ function ProductDetail() {
       const response = await axios.get(`http://localhost:3001/product/${id}`);
       setProduct(response.data);
     } catch (error) {
-      window.alert("Algo falló");
     }
   }
+  console.log(product)
 
   return (
     <div className={`${styles.container}`}>
