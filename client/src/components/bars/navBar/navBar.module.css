@@ -186,6 +186,9 @@
     .inicio {
         display: none;
     }
+    .admin-responsive {
+        display: none;
+    }
     .searchBar-responsive {
         display: none;
     }
@@ -221,6 +224,12 @@
     }
     .bolsita {
         order: 1;
+    }
+    .admin {
+        display: none;
+    }
+    .admin-responsive {
+        display: block;
     }
     .metamask {
         order: 2;

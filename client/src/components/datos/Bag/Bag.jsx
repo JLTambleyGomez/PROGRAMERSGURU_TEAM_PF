@@ -15,9 +15,6 @@ function Bag () {
     const dark = useSelector((state) => state.darkMode);
     const highlightedItem = useSelector((state) => state.highlightedItem);
 
-    //state:
-    const [bin, setBin] = useState(null);
-
     //const:
     const dispatch = useDispatch();
 

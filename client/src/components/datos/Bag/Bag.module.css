@@ -141,8 +141,24 @@
         border-color: rgba(248, 248, 248, 0.658);
       }
   
-  /* @media screen and (max-width: 1000px) {
-      .shopbag {
-          height: 100vh;
+  @media screen and (max-width: 700px) {
+    .shopbag {
+        height: 70vh;
+        width: 100%;
+        bottom: 0;
+        top: unset;
+        transition: height 0.3s ease;
+        animation: scale-up-vertical-up 0.4s;
+      } @keyframes scale-up-vertical-up {
+        0% {
+          transform: scaleY(0);
+          transform-origin: center bottom;
+          opacity: 0;
+        }
+        100% {
+          transform: scaleY(1);
+          transform-origin: bottom center;
+          opacity: 1;
+        }
       }
-  } */
+}

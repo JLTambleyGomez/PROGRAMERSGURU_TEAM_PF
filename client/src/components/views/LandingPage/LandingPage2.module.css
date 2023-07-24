@@ -73,15 +73,16 @@
     text-decoration: none;
   }
   .boton1{
-    display: inline-block;
+    display: flex;
     border-radius: 4px;
     background-color: #28b0b4;
     border: none;
     color: #ffffff;
     font-size: 28px;
-    padding: 20px;
-    width: 320px;
-    height: 36px;
+    width: 400px;
+    height: 66px;
+    align-items: center;
+    padding-left: 2%;
     transition: all 0.5s;
     cursor: pointer;
     margin: 5px;
@@ -120,8 +121,6 @@
    }
 
    .name{
-    margin-top: 0%;
-    width: 400px;
    }
   
     .bannerImg {
