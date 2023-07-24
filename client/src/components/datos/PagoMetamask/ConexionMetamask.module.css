@@ -22,14 +22,14 @@
     height: 30px;
     border-radius: 100%;
     transition: transform 0.5s;
-    transform: translate(0%, -50%);
+    /* transform: translate(0%, -50%); */
 
     /* margin-bottom: -90%; */
 }
 
 .img:hover{
     cursor: pointer;
-    transform: scale(2.1);
+    transform: scale(1.5);
 
 }
 
@@ -39,24 +39,25 @@
     color: rgb(20, 255, 196);
     text-shadow: 1px 1px 1px  black;
     position: absolute;
-    transform: translate(-50%, -150%);
+    transform: translate(-50%, -120%);
     /* margin-bottom:-16%; */
 }
 
 .desconectada{
     position: absolute;
-    transform: translate(-50%, -150%);
+    transform: translate(-50%, -100%);
     /* color: rgba(255, 254, 254, 0.897); */
     font-size: 80%;
 }
 
 .error {
     position: absolute;
-    transform: translate(-50%, 10%);
+    transform: translate(-50%, 150%);
 }
 
 .walletid{
     font-size: 10px;
     position: absolute;
-    transform: translate(0%, 250%);
+    /* transform: translate(0%, 250%); */
+    /* margin-top: -70px; */
 }

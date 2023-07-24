@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+import { Dark_Mode } from "./Redux/actions";
+import theme from "./theme/theme";
 
 import s from "./App.module.css";
+import About from "./components/views/About/About";
 import HomePage from "./components/views/HomePage/HomePage";
 import LandingPage2 from "./components/views/LandingPage/LandingPage2"
 import CoursePage from "./components/views/CoursePage/CoursePage";
@@ -23,37 +27,75 @@ import MetaMaskSucces from "./components/views/MetamaskFeedback/MetamaskSucces"
 import MetaMaskFailure from "./components/views/MetamaskFeedback/MetamaskFailure"
 import PagoSubscripcion from "./components/views/PagoSubscripcion/PagoSubscripcion"
 import Modal from "./components/views/ventanaemergente/ventana";
+import ModalBannedUser from "./components/views/ModalBannedUser/ModalBannedUser";
 import CourseDetails from "./components/datos/CoursesDetails/CourseDetails";
 import MusicBar from "./components/bars/musicBar/MusicBar";
 
-import axios from "axios";
-// axios.defaults.baseURL = 'https://programmers-guru-db5b4f75594d.herokuapp.com/' 
-axios.defaults.baseURL = 'http://localhost:3001/'  
-//_________________________module_________________________
-const App = () =>{
 
-  
+import { getAuth } from "firebase/auth";
+import "./config/firebase-config";
+
+
+
+//_________________________module_________________________
+const App = () => {
+const dispatch = useDispatch()
+ 
+const auth = getAuth();
+
+auth.onIdTokenChanged(async (user) => {
+  if (user) {
+    try {
+      // Obtiene el token de autenticación actual
+      const token = await user.getIdToken();
+      
+      // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
+      const tokenExpirationTime = user.authTime + (60 * 60 * 1000) - (5 * 60 * 1000); // 1 hora - 5 minutos
+      const currentTime = Date.now();
+      
+      console.log("Token actual:", token);
+      console.log("Tiempo actual:", new Date(currentTime).toLocaleString());
+      console.log("Tiempo de expiración del token:", new Date(tokenExpirationTime).toLocaleString());
+
+      if (currentTime >= tokenExpirationTime) {
+        // Renueva el token
+        console.log("Renovando el token...");
+        const refreshedToken = await user.getIdToken(true);
+        localStorage.setItem("accessToken", refreshedToken);
+        console.log("Token renovado:", refreshedToken);
+        // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
+      }
+    } catch (error) {
+      // Manejo de errores
+      console.error("Error al renovar el token:", error);
+    }
+  }
+});
+
     //global states:
+    
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
+    const user= useSelector((state)=>state.user);
 
 
     //states:
     const [isAtBottom, setIsAtBottom] = useState(false);
-
+    const [isBanned, setBan]= useState(false);
     
     //const:
     const location = useLocation().pathname;
 
     
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
+    //life-cycles:
+    useEffect(()=>{
+        if(user.name){
+            if(user.banned){ setBan(true)}
+        }
+        setBan(false)
+    },[user])
 
     
-    //life-cycles:
     useEffect(() => {
         const handleScroll = () => {
             const windowHeight =
@@ -84,6 +126,26 @@ const App = () =>{
             };
     }, []);
 
+    useEffect(() => {
+        //default darkMode theme: false
+        const darkModeLocal = localStorage.getItem("darkMode")
+        if (!darkModeLocal) {
+            localStorage.setItem("darkMode", "false")
+        }
+    }, [])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
+
+    //rule:
+    if(isBanned) return(
+        <Routes>
+            <Route path="/HomePage" elment={<ModalBannedUser/>}/>
+            <Route path="/" element={<LandingPage2/>}/>
+        </Routes>
+    )
+
 
     //component:
     return (
@@ -109,7 +171,8 @@ const App = () =>{
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>
                 <Route path ="/PagoSubscripcion" element = {<PagoSubscripcion/>}/>
-                <Route path ="/IniciaSession" element ={<Modal></Modal>}/>
+                <Route path ="/IniciaSession" element ={<Modal/>}/>
+                <Route path ="/about" element = {<About/>}/>
             </Routes>
             {location === "/HomePage" && isAtBottom && <Footer />}
         </div>

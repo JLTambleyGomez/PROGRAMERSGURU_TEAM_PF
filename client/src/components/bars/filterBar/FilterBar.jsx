@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all } from "../../../Redux/actions";
+
+import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all, Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import s from "./FilterBar.module.css";
 
@@ -9,22 +11,20 @@ function FilterBar() {
 
     //global states:
     const allCourses = useSelector((state) => state.allCourses);
-    const darkMode = useSelector((state) => state.darkMode);
+    const dark = useSelector((state) => state.darkMode);
 
     //states:
     const [orden, setOrden] = useState("");
     const [idioma, setIdioma] = useState("");
     const [price, setPrice] = useState("");
+    const [filterModal, setFilterModal] = useState(false);
+    const [sortModal, setSortModal] = useState(false);
+
 
     //const:
     const dispatch = useDispatch();
 
     //functions:
-    const theme = (base) => {
-        const suffix = darkMode ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const resetFilters = () => {
         setOrden("");
         setIdioma("");
@@ -144,41 +144,128 @@ function FilterBar() {
         dispatch(get_courses_all());
         resetFilters();
     };
-    
+  
+
     //life-cycles:
     useEffect(() => {
-        console.log({ orden: orden, idioma: idioma, precio: price });
+        console.log({ orden, idioma, price});
     }, [orden, idioma, price]);
 
     useEffect(() => {
         console.log(allCourses)
     }, [allCourses]);
 
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
+
+    useEffect(() => {
+        const handleResize = () => {
+          if (window.innerWidth >= 700) {
+            setFilterModal(false);
+            setSortModal(false);
+          }
+        };
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+          window.removeEventListener('resize', handleResize);
+        };
+      }, []);
+
+    useEffect(() => {
+        const disableScroll = () => {
+            document.body.style.overflow = 'hidden';
+        };
+        const enableScroll = () => {
+            document.body.style.overflow = 'auto';
+        };
+        (filterModal || sortModal) ? disableScroll()
+        : enableScroll()
+    }, [filterModal, sortModal])
+
+    
+
+
     //component:
     return (
-        <div className={`${s.component}`}>
-          <p>Orden</p>
-          <select value={orden} onChange={handleSortChange}>
-            <option value="">Ordenar</option>
-            <option value="Ascendente">Nombre Descendente</option>
-            <option value="Desendente">Nombre Ascendente</option>
-          </select>
-          <p>Filtros</p>
-          <select value={idioma} onChange={handleLanguageChange}>
-            <option value="">Idioma</option>
-            <option value="Inglés">Cursos en Inglés</option>
-            <option value="Español">Cursos en Español</option>
-          </select>
-          <p>Acceso</p>
-          <select value={price} onChange={handlePriceChange}>
-            <option value="">Precio</option>
-            <option value="true">Gratis</option>
-            <option value="false">De Pago</option>
-          </select>
+        <>
+            <div className={`${s.component}`}>
+                <div className={s.optionSort}>
+                    <label>Ordenar por:</label>
+                    <select value={orden} onChange={handleSortChange}>
+                        <option value="">Destacados</option>
+                        <option value="Ascendente">Nombre Descendente</option>
+                        <option value="Desendente">Nombre Ascendente</option>
+                    </select>
+                </div>
+                <div className={s.optionFilter}>
+                    <label>Filtros</label>
+                    <span>
+                        <select value={idioma} onChange={handleLanguageChange}>
+                            <option value="">Idioma</option>
+                            <option value="Inglés">Cursos en Inglés</option>
+                            <option value="Español">Cursos en Español</option>
+                        </select>
+                        <select value={price} onChange={handlePriceChange}>
+                            <option value="">Precio</option>
+                            <option value="true">Gratis</option>
+                            <option value="false">De Pago</option>
+                        </select>
+                    </span>
 
-          <button onClick={handleFilterReset}>Mostrar Todos</button>
-        </div>
-      );
-    }
+                </div>
+
+                <button onClick={handleFilterReset}>Mostrar Todos</button>
+            </div>
+
+        {/* RESPONSIVE */}
+            <div className={`${s["responsive-component"]}`}>
+                <button onClick={() => {setFilterModal(true)}}>
+                    FILTRAR
+                </button>
+                <button onClick={() => {setSortModal(true)}}>
+                    ORDENAR
+                </button>
+                {
+                    filterModal && (
+                        <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
+                            <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
+                                <label>Filtros</label>
+                                <select value={idioma} onChange={handleLanguageChange}>
+                                    <option value="">Idioma</option>
+                                    <option value="Inglés">Cursos en Inglés</option>
+                                    <option value="Español">Cursos en Español</option>
+                                </select>
+                                <label>Acceso</label>
+                                <select value={price} onChange={handlePriceChange}>
+                                    <option value="">Acceso</option>
+                                    <option value="true">Gratuito</option>
+                                    <option value="false">Exclusivo</option>
+                                </select>
+                                <button onClick={handleFilterReset}>Mostrar Todos</button>
+                            </div>
+                        </div>
+                    )
+                }
+                {
+                    sortModal && (
+                        <div className={s.overlay} onClick={() => {setSortModal(false)}}>
+                            <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
+                                <label>Orden</label>
+                                <select value={orden} onChange={handleSortChange}>
+                                    <option value="">Destacados 
+                                    </option>
+                                    <option value="Ascendente">Nombre Descendente</option>
+                                    <option value="Desendente">Nombre Ascendente</option>
+                                </select>
+                            </div>
+                        </div>
+                    )
+                }
+            </div>
+        </>
+    );
+}
 
 export default FilterBar;

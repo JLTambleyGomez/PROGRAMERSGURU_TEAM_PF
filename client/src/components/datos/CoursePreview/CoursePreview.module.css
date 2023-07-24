@@ -1,263 +1,159 @@
-/* BOX */
-.mainContainer1 .mainContainer1dark{
+.component {
+  /* display: grid; */
+  /* grid-template-columns: repeat(2, 1fr); */
   display: flex;
-  flex-direction: column;
-  width: 70%;
+  align-items: center;
+  /* min-height: 30rem;
+  max-height: 30rem; */
+  height: 30rem;
+  gap: 2%;
+  padding: 0 4%;
+  /* left: 100rem; */
+  /* margin-left: 1px !important; */
+  overflow: hidden;
+  box-sizing: border-box !important;
+  /* padding: 10px; */
+  transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
+}
+.component:hover {
+  transform: scale(1.02);
+}
+.component-light {
+outline: none;
+  border: 3px solid;
+  background-color: #ffffff;
+  color: #030000;
+  animation: borderGradientAnimation1 infinite 2.5s;
+}
+.component-dark {
+  border: 3px solid;
+  background-color: #000000;
+  color: #ffffff;
+  animation: borderGradientAnimation2 infinite 2.5s;
 }
 
-.mainContainer2light .mainContainer2dark {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+
+.container1 {
+display: flex;
+flex-direction: column;
+width: 60%;
+box-sizing: border-box;
+}
+.title {
+  font-size: 100%;
+  margin-bottom: 1rem;
+  align-self: start;
+  letter-spacing:10px;
+  text-decoration: none; 
+}
+.title-light {
+  background-color: #f7f7f7;
+  color: black;  
+}
+.title-dark {
+  background-color: #000000;
+  color: rgb(255, 255, 255); 
 }
 
+.description {
+  font-size: 150%;
+  /* width: 600px; */
+  margin: 0;
+  /* margin-left: 10%; */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
+  line-clamp: 4; /* Muestra solo 4 líneas */
+  text-overflow: ellipsis; /* Agrega puntos suspensivos */
+}
+.description-light {
+  background-color: #f7f7f7;
+  color: rgb(0, 0, 0);
+}
+.description-dark {
+  background-color: #0a0101;
+  color: rgb(255, 255, 255);
+}
 
+.container2 {
+display: flex;
+flex-direction: column;
+width: 40%;
+}
+.container2 img{
+  object-fit: cover;
+}  
+.container2 h2 {
+  font-size: 12px;
+  /* padding-left: 40%; */
+  font-weight: bold;
+  text-align: center;
+  }
   .free {
-    color: rgb(71, 238, 71);
-    font-size: 12px;
-    padding-left: 40%;
-    font-weight: bold;
+     color: rgb(71, 238, 71);
   }
-  .img{
-    height: 200px;
-    width: 200px;
-    padding-left: 30%;
-    object-fit: cover;
-  }
-  
   .payment {
-    font-size: 12px;
-    padding-left: 40%;
-    color: rgb(187, 50, 50);
-    font-weight: bold;
+     color: rgb(187, 50, 50);
   }
 
-  .containerlight {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    min-height: 23rem;
-    max-height: 23rem;
-    overflow: hidden;
-    padding:10px;
-    border: 2px solid rgb(12, 1, 1);
-    background-color: #ffffff;
-    color: #030000;
-    animation: borderGradientAnimation1 infinite 2.5s;
-  }
-  .containerlight:hover {
-    transform: scale(1.02);
-  }
-
-  .containerdark {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-    min-height: 23rem;
-    max-height: 23rem;
-    overflow: hidden;
-    padding:10px;
-    border: 2px solid rgb(255, 253, 253);
-    background-color: #000000;
-    color: #ffffff;
-    animation: borderGradientAnimation2 infinite 2.5s;
-    transition: transform 0.7s, max-height 1s ease, width 1s ease;; 
-  }
-
-  .containerdark:hover {
-    transform: scale(1.02);
-  }
-  .h1light {
-    font-size: 12px;
-    color: rgb(255, 255, 255);
-  }
-  .h1dark {
-    font-size: 12px;
-    color: white;
-  }
-  .inputlight {
-    background-color: white;
-    color: black;
-  }
-  .inputdark {
-    background-color: #302f2c;
-    color: white;
-  }
-  .buttonlight {
-    background-color: white;
-    color: black;
-    border: 2px solid black;
-  }
-  .buttondark {
-    background-color: #302f2c;
-    color: white;
-    border: 2px solid white;
-  }
+  @keyframes borderGradientAnimation1 {
+     0% {
+     border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+     }
+     20% {
+     border-image: linear-gradient(to right, #ff0000, #800080) 1;
+     }
+     40% {
+     border-image: linear-gradient(to right, #800080, #0000ff) 1;
+     }
+     60% {
+     border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+     }
+     80% {
+     border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+     }
+     100% {
+     border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+     }
   
-
-  .labellight {
-    background-color: #f7f7f7;
-    color: black;
   }
-  
-  .labeldark {
-    background-color: #000000;
-    color: white;
-  }
-  .plight {
-    
-    background-color: #f7f7f7;
-    color: rgb(0, 0, 0);
-    font-size: 24px;
-    width: 600px;
-    margin-left: 10%;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-    line-clamp: 4; /* Muestra solo 4 líneas */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */  }
-  .pdark {
-    background-color: #0a0101;
-    color: rgb(255, 255, 255);
-    font-size: 24px;
-    width: 600px;
-    margin-left: 10%;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Muestra solo 4 líneas */
-    line-clamp: 4; /* Muestra solo 4 líneas */
-    text-overflow: ellipsis; /* Agrega puntos suspensivos */
-  }
-
-  .divlight {
-    background-color: #f7f7f7;
-    color: black;  }
-  .divdark {
-    background-color: #000000;
-    color: rgb(243, 242, 242);
-  }
-  
-  .spanlight {
-    background-color: #f7f7f7;
-    color: black;
-  }
-  .spandark {
-    background-color: #000000;
-    color: rgb(243, 242, 242);  }
-  
-  .formlight {
-    background-color: #f7f7f7;
-    color: black;
-  }
-  
-  .formdark {
-    background-color: #000000;
-    color: rgb(243, 242, 242);
-  }
-
-  .hrlight {
-    background-color: #f7f7f7;
-    color: black; }
-  .hrdark {
-    background-color: #000000;
-     color: rgb(255, 255, 255); }
-  
-  .errorlight {
-    background-color: #f7f7f7;
-    color: black; 
-  }
-
-  .errordark {
-    background-color: #000000;
-    color: rgb(255, 255, 255);   }
-
-
-  .successlight {
-    background-color: #f7f7f7;
-    color: black;   }
-
-  .successdark {
-    background-color: #000000;
-    color: rgb(255, 255, 255);   }
-  
-  .linklight {
-    background-color: #f7f7f7;
-    color: black;  
-    font-size: 70px;
-    align-self: start;
-     letter-spacing:10px;
-     text-decoration: none; }
-  
-    
-  .linkdark {
-    align-self: start;
-    background-color: #000000;
-    color: rgb(255, 255, 255); 
-    font-size: 70px;
-    letter-spacing:10px;
-    text-decoration: none; }
-
-  .ullight {
-    background-color: #f7f7f7;
-    color: black;   }
-    
-  .uldark {
-    background-color: #000000;
-    color: rgb(255, 255, 255);  }
-  
-  
-  .h2light {
-    background-color: #f7f7f7;
-    color: black;
-    margin-left: 10%;   }
-
-  .h2dark {
-    margin-left: 10%;
-    background-color: #000000;
-    color: rgb(255, 255, 255);   }  
-  
-  
-    @keyframes borderGradientAnimation1 {
-      0% {
-        border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
-      }
-      20% {
-        border-image: linear-gradient(to right, #ff0000, #800080) 1;
-      }
-      40% {
-        border-image: linear-gradient(to right, #800080, #0000ff) 1;
-      }
-      60% {
-        border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
-      }
-      80% {
-        border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
-      }
-      100% {
-        border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
-      }
-    
-    }
-    @keyframes borderGradientAnimation2 {
-      0% {
+  @keyframes borderGradientAnimation2 {
+     0% {
         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
-      }
-      20% {
+     }
+     20% {
         border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
-      }
-      40% {
+     }
+     40% {
         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
-      }
-      60% {
+     }
+     60% {
         border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
-      }
-      80% {
+     }
+     80% {
         border-image: linear-gradient(to right, #00ffff,#0000ff) 1;
-      }
-      100% {
+     }
+     100% {
         border-image: linear-gradient(to right,  #0000ff, #00ffff) 1;
-      }
-    
+     }
+  
+  }
+
+  @media screen and (max-width: 700px) {
+    .description {
+        display: none;
+        margin: 0;
     }
+    .component {
+        flex-direction: column;
+        justify-content: center;
+        height: 20rem;
+        gap: 5%;
+        /* width: 130%; */
+    }
+    .title {
+        text-align: center;
+        align-self: center;
+    }
+  }

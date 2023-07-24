@@ -43,7 +43,7 @@ const signUp = async (req, res) => {
         const destino = {
             from: "yo",
             to: `${email}`,
-            subject: "Notificacion de ProgrammersGurú (Compra)",
+            subject: "Notificacion de ProgrammersGurú (Registro)",
             html: `
                 <!DOCTYPE html>
                 <html lang="en">

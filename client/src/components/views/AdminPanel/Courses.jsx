@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    get_categories,
+    get_tecnology,
     clearCourses,
     clearMessage,
     get_courses_all,
@@ -15,7 +15,7 @@ import { validateCourse } from "./validate";
 
 function Courses() {
     // global state:
-    const categories = useSelector((state) => state.categories);
+    const tecnology = useSelector((state) => state.tecnology);
     const dark = useSelector((state) => state.darkMode);
     const courses = useSelector((state) => state.allCourses);
 
@@ -30,11 +30,11 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
     const [modificarCourse, setModificarCourse] = useState(false);
     const [postCourse, setPostCourse] = useState(false);
@@ -44,11 +44,11 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+ 
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
     const [course, setCourse] = useState({})
 
@@ -57,11 +57,11 @@ function Courses() {
         description: "",
         imageURL: "",
         courseUrl: "",
-        rating: 0,
+  
         released: "",
         isFree: false,
         language: "",
-        categories: [],
+        tecnology: [],
     });
 
     // functions:
@@ -71,11 +71,6 @@ function Courses() {
     };
 
     //DESPACHA LA ACTION PARA HACER EL PUT
-    const handleCoursePut = (event) => {
-        event.preventDefault();
-        dispatch(put_course(modifCourse));
-        dispatch(get_courses_all());
-    };
 
     //modificar curso
     const handleModificarCurso = (event) => {
@@ -97,12 +92,12 @@ function Courses() {
         dispatch(clearMessage());
         setMessagePost('')
 
-        if (postCourse)
-            setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
+        // if (postCourse)
+        //     setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
     };
 
-    const handleCategorySelection = (event) => {
-        const selectedCategories = Array.from(
+    const handleTechnologySelection = (event) => {
+        const selectedTechnologies = Array.from(
             event.target.selectedOptions,
             (option) => ({
                 id: option.value,
@@ -110,12 +105,12 @@ function Courses() {
         );
         setNewCourse((prevCourse) => ({
             ...prevCourse,
-            categories: selectedCategories,
+            tecnology: selectedTechnologies,
         }));
-        if (postCourse)
-            setErrorCourse(
-                validateCourse({ ...newCourse, categories: selectedCategories })
-            );
+        // if (postCourse)
+        //     setErrorCourse(
+        //         validateCourse({ ...newCourse, tecnology: selectedTechnologies })
+        //     );
     };
 
     const handleDeleteCourse = async (id) => {
@@ -137,22 +132,22 @@ function Courses() {
             description: "",
             imageURL: "",
             courseUrl: "",
-            rating: 0,
+  
             released: "",
             isFree: false,
             language: "",
-            categories: [],
+            tecnology: [],
         });
         setNewCourse({
             title: "",
             description: "",
             imageURL: "",
             courseUrl: "",
-            rating: 0,
+         
             released: "",
             isFree: false,
             language: "",
-            categories: [],
+            tecnology: [],
         });
     };
 
@@ -165,9 +160,8 @@ function Courses() {
                 errorCourse.description ||
                 errorCourse.genre ||
                 errorCourse.platforms ||
-                errorCourse.released ||
-                errorCourse.rating
-            )return setMessagePost("Revise los datos");
+// platforms?
+                errorCourse.released ) return setMessagePost("Revise los datos");
             
 
             dispatch(put_course(courseId, newCourse))
@@ -177,11 +171,10 @@ function Courses() {
                         description: "",
                         imageURL: "",
                         courseUrl: "",
-                        rating: 0,
                         released: "",
                         isFree: false,
                         language: "",
-                        categories: [],
+                        tecnology: [],
                     });
                     dispatch(get_courses_all());
                 })
@@ -195,11 +188,9 @@ function Courses() {
                 !newCourse.description ||
                 !newCourse.imageURL ||
                 !newCourse.courseUrl ||
-                !newCourse.rating ||
                 !newCourse.released ||
                 !newCourse.isFree ||
-                !newCourse.language ||
-                !newCourse.categories
+                !newCourse.language 
             ) return setMessagePost('Debe completar los datos')
         
             if (
@@ -209,8 +200,7 @@ function Courses() {
                 errorCourse.courseUrl ||
                 errorCourse.released ||
                 errorCourse.isFree ||
-                errorCourse.language ||
-                errorCourse.categories
+                errorCourse.language 
 
             )return setMessagePost("Revise los datos")
             
@@ -222,11 +212,10 @@ function Courses() {
                         description: "",
                         imageURL: "",
                         courseUrl: "",
-                        rating: 0,
                         released: "",
                         isFree: false,
                         language: "",
-                        categories: [],
+                        tecnology: [],
                     });
                     dispatch(get_courses_all());
                 })
@@ -242,24 +231,36 @@ function Courses() {
         setPostCourse(true);
     };
     
-    useEffect(() => {
-        if (messagePost !== "") {
-            dispatch(adminPanelMensajesLocales(messagePost));
-        }
-    }, [messagePost]);
-
 
     // life-cycles:
     useEffect(() => {
         dispatch(clearMessage());
-        dispatch(get_categories());
+        dispatch(get_tecnology());
         dispatch(get_courses_all());
+        
 
         return () => {
             dispatch(clearMessage());
             dispatch(clearCourses());
         };
     }, [dispatch]);
+    
+    useEffect(() => {
+        if (messagePost !== "") {
+            dispatch(adminPanelMensajesLocales(messagePost));
+        }
+    }, [messagePost]);
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
+    useEffect(() => {
+        console.log(newCourse)
+    }, [newCourse])
 
     // component:
     return (
@@ -337,18 +338,6 @@ function Courses() {
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Rating:</label>
-                                    <input
-                                        type="number"
-                                        name="rating"
-                                        value={newCourse.rating}
-                                        onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.rating}
-                                        />
-                                   {errorCourse.rating &&  <p>{errorCourse.rating}</p>}
-                                </div>
-
-                                <div className={`${styles.h1}`}>
                                     <label>Fecha de lanzamiento:</label>
                                     <input
                                         type="date"
@@ -362,12 +351,18 @@ function Courses() {
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Es gratuito:</label>
-                                    <input
-                                        type="checkbox"
-                                        name="isFree"
-                                        checked={newCourse.isFree}
-                                        onChange={handleCourseChange}
+                                    <label>Tipo</label>
+                                    <label>Gratuito</label>
+                                        <input
+                                            type="radio"
+                                            name="isFree"
+                                            checked={newCourse.isFree}
+                                            onChange={handleCourseChange}
+                                        />
+                                    <label>Exclusivo</label>
+                                        <input
+                                            type="radio"
+                                            name="isFree"
                                         />
                                     <p>{errorCourse.isFree}</p>
                                         {errorCourse.isFree && <p>{errorCourse.isFree}</p>}
@@ -387,23 +382,23 @@ function Courses() {
                                 </div>
 
                                 <div className={`${styles.h1}`}>
-                                    <label>Categorías:</label>
+                                    <label>Tecnologías:</label>
                                     <select
                                         multiple
-                                        name="categories"
-                                        onChange={handleCategorySelection}
+                                        name="tecnology"
+                                        onChange={handleTechnologySelection}
                                         >
-                                        {categories.map((category) => (
+                                        {tecnology.map((technology) => (
                                             <option
-                                            key={category.id}
-                                            value={category.id}
+                                                key={technology.id}
+                                                value={technology.id}
                                             >
-                                                {category.name}
+                                                {technology.name}
                                             </option>
                                         ))}
                                     </select>
-                                        {errorCourse.categories && <p>{errorCourse.categories}</p>}
-                                    
+                                        {/* {errorCourse.tecnology && <p>{errorCourse.tecnology}</p>} */}
+
                                 </div>
 
                                 <button onClick={handleCoursePost}>
@@ -427,7 +422,7 @@ function Courses() {
                         <div className={`${styles.coursesContainer}`}>
                             <h1>Courses</h1>
                             <div className={styles.conteiner}>
-                                {courses.map((course) => (
+                                {!!courses.length && courses.map((course) => (
                                     <div key={course.id}>
                                         <button
                                             onClick={handleModificarCurso}
@@ -444,6 +439,7 @@ function Courses() {
                                         </button>
                                         <p>ID: {course.id}</p>
                                         <p>Titulo: {course.title}</p>
+                                        <p>Rating: {course.meanRating}</p>
                                         <p>
                                             Fecha De Lanzamiento:{" "}
                                             {course.released}

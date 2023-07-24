@@ -1,19 +1,28 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import validate from "./validate";
 import styles from "./LoginForm.module.css";
 import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
 import { get_User_By_Email } from "../../../Redux/actions";
+import ModalBannedUser from "../../views/ModalBannedUser/ModalBannedUser";
+import GoogleButton from "./GoogleButton"
 
 //_________________________module_________________________
 function SignFreeForm() {
     // const dispatch = useDispatch()
+
+    //global states:
+    const user = useSelector((state) => state.user);
+
+
     //states:
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showButton, setShowButton] = useState(true);
     const [accessButton, setAccessButton] = useState(true);
+    const [modal, setModal] = useState(false)
 
     const [userData, setUserData] = useState({
         email: "",
@@ -46,11 +55,14 @@ function SignFreeForm() {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleLogIn = (event) => {
+    const handleLogIn = async (event) => {
         event.preventDefault();
-        get_User_By_Email(userData.email);
-        signIn(userData.email, userData.password);
+        await get_User_By_Email(userData.email);
+        if (user.banned) {
+            return setModal(true)
+        } else signIn(userData.email, userData.password);
     };
+
     const handleSignUp = (event) => {
         event.preventDefault();
         get_User_By_Email(userData.email);
@@ -58,6 +70,7 @@ function SignFreeForm() {
     };
 
     const handleLoginWithGoogle = (event) => {
+
         event.preventDefault();
         signInwithGoogle();
     };
@@ -69,6 +82,7 @@ function SignFreeForm() {
         console.log(accessButton);
     }, [errors]);
 
+   
     //component:
     return (
         <div className={styles.loginFormContainer}>
@@ -162,16 +176,11 @@ function SignFreeForm() {
                             </button>
                             <hr />
                         </form>
-                        {/* BOTON PARA INGRESAR CON GOOGLE */}
-                        <button
-                            className={styles.button}
-                            type="submit"
-                            onClick={handleLoginWithGoogle}
-                        >
-                            Acceder con Google
-                        </button>
-                        {/* <GoogleButton onClick={signInwithGoogle}/> */}
+                        <GoogleButton onClick={handleLoginWithGoogle}/>
                     </div>
+                    {
+                        modal && <ModalBannedUser/>
+                    }
                 </div>
             )}
         </div>

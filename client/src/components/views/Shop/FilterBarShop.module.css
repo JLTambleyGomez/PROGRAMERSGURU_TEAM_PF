@@ -1,19 +1,117 @@
-.sidebar {
+.component {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  height: 25%;
+  height: 7rem;
   background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
   transition: transform 0.3s, filter 0.3s,width 0.2s;
 }
 
-.sidebar > div {
-  height: 4rem;
+.component > div {
+  /* height: 4rem; */
 }
 
-.option {
+.optionSort {
+    border: 1px solid;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 15%;
+    height: 5rem;
+    gap: 1rem;
+}
+
+.component select {
+    height: 3rem;
+}
+
+.optionFilter {
+    border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 15%;
+    height: 5rem;
+    gap: 1rem;
+}
+
+
+.overlay {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal {
+  margin:15% 0 0 10%;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  background-color: white;
+  position:absolute;
+  height: 50%;
+  width: 80%;
+  border-radius: 10px;
+  }
+  .modal-light {
+     background-color: whitesmoke;
+     box-shadow: 5px 5px 1rem 2rem floralwhite inset;
+  }
+  .modal-dark {
+     background-color: #212121;
+     box-shadow: 5px 5px 1rem 1rem #34333350 inset;
+  }
+
+.modal select {
+  width: 50%;
+  height: 10%;
+  border: 1px solid;
+}
+
+/* -------- RESPONSIVE --------- */
+
+@media screen and (width > 700px) {
+  .responsive-component {
+     display: none;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .responsive-component{
+     top: var(--navFilterHeight);
+     display:flex;
+     align-items: center;
+     justify-content: center;
+     gap: 1rem;
+     width: 100%;
+     height: 4%;
+     padding: 1rem;
+     color: aliceblue;
+     box-sizing: border-box;
+     background-color: rgba(0, 0, 0, 0.672);
+     overflow: hidden;
+  }
+
+  .responsive-component button {
+     width: 40%;
+     height: 2.5rem;
+  }
+  .component {
+     display: none;
+  }
 }

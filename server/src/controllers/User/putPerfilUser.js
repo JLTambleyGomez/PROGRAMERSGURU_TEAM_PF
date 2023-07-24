@@ -5,6 +5,8 @@ const putPerfilUser = async (req, res) => {
     const { name, picture, nickName, email } = req.body;
 
     try {
+
+        // console.log()
         if (!email)
             return res.status(400).json({ message: "Debe mandar un email" });
         if ((!name, !picture, !nickName, !email))
@@ -29,7 +31,7 @@ const putPerfilUser = async (req, res) => {
         await profile.save();
         const response = {
             profile,
-            message: `Los datos del usuario ${profile.name} fueron modificados con éxito`,
+            message: `Nuevo Nombre de Usuario: ${profile.name} fue agregado  con éxito`,
         };
         var transtorpe = nodemailer.createTransport({
             host: "smtp.gmail.com",
@@ -44,7 +46,7 @@ const putPerfilUser = async (req, res) => {
         const destino = {
             from: "yo",
             to: `${email}`,
-            subject: "Notificacion de ProgrammersGurú (Compra)",
+            subject: "Notificacion de ProgrammersGurú (Edicion de Perfil)",
             html: `
                 <!DOCTYPE html>
                 <html lang="en">

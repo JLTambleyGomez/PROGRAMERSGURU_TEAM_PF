@@ -1,8 +1,8 @@
-const {Product} = require('../../db.js')
+const {Product, Category} = require("../../db.js")
 
 const getProduct = async (req, res) => {
     try {
-        const allProducts = await Product.findAll()
+        const allProducts = await Product.findAll({include:{model: Category, attributes: ['name']}})
 
         if (allProducts.length) return res.json(allProducts)
 

@@ -8,11 +8,10 @@ const postCourse = async (req, res) => {
             description,
             imageURL,
             courseUrl,
-            rating,
             released,
             isFree,
             language,
-            categories,
+            tecnology,
         } = req.body;
 
         // Crear el curso en la base de datos utilizando el modelo Course
@@ -24,7 +23,6 @@ const postCourse = async (req, res) => {
                 description,
                 imageURL,
                 courseUrl,
-                rating,
                 released,
                 isFree,
                 language,
@@ -37,7 +35,6 @@ const postCourse = async (req, res) => {
                 description: "",
                 imageURL: "",
                 courseUrl: "",
-                rating: "",
                 released: "",
                 isFree: "",
                 language: "",
@@ -50,9 +47,9 @@ const postCourse = async (req, res) => {
         
         // Establecer la relación entre el curso y las categorías utilizando una transacción
         if (created) {
-            for (let i = 0; i < categories.length; i++) {
+            for (let i = 0; i < tecnology.length; i++) {
                 const newCourseTechnology = await Technology.findByPk(
-                    categories[i].id
+                    tecnology[i].id
                 );
                 await course.addTechnology(newCourseTechnology);
             }

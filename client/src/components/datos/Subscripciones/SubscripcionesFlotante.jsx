@@ -1,29 +1,25 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-// import theme from "../../../theme/theme";
+import { Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
 import s from "./SubscripcionesFlotante.module.css"
 
 //_________________________module_________________________
 function SubscripcionFlotante () {
 
-    //global state:
-    const dark = useSelector((state) => state.darkMode);
-
     //states:
+    const dark = useSelector((state) => state.darkMode)
     const [mostrarboton, setMostrarboton] = useState(true);
     const [navigateAux, setNavigateAux] = useState(false);
 
     //const:
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const handleclosebutton = () => {
         setMostrarboton(false)
     }
@@ -36,6 +32,10 @@ function SubscripcionFlotante () {
     useEffect(() => {
         navigateAux && navigate("/pagosubscripcion");
     }, [navigateAux])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
     //copmonent:
     return (

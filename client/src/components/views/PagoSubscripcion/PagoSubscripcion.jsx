@@ -1,130 +1,129 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./PagoSubscripcion.module.css";
+import { useSelector, useDispatch } from "react-redux";
+
+import { initMercadoPago } from "@mercadopago/sdk-react";
+import { Dark_Mode, get_suscriptions } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
+import styles from "./PagoSubscripcion.module.css"
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 
+
 //_________________________module_________________________
-function PagoSubscripcion() {
+function PagoSubscripcion () {
+
+
+    //global states:
+    const dark = useSelector((state) => state.darkMode);
+    const subscripciones = useSelector((state) => state.subscriptions);
+
     //states:
     const [subscripcion, setSubscripcion] = useState(null);
-    const [total, setTotal] = useState(0);
     const [MostrarPagos, setMostrarPagos] = useState(false);
-    const [compra, setCompra] = useState({});
+    const [checkout, setCheckout] = useState(false);
+    const [compra, setCompra] = useState(null);
 
+
+    //const:
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const token = localStorage.getItem("accessToken");
 
     //functions:
     const handleAddSubscripcion = (selectedSubscripcion) => {
+        setCheckout(true);
         setMostrarPagos(false);
         setSubscripcion(selectedSubscripcion);
-        setTotal(selectedSubscripcion.cost);
-    };
+    }
 
     const handlePagarButton = () => {
-    
+      if (subscripcion) {
         const referencia = {
-            description: subscripcion.name,
-            price: subscripcion.cost,
+            // en caso de ERROR: cambiar "name" por "description"
+            name: subscripcion.title,
+            price: subscripcion.price,
             quantity: 1,
-        };
-
-    
-
-        localStorage.setItem("cart", JSON.stringify([{name: subscripcion.name, price: subscripcion.cost, quantity:1}]))
+        }
+        localStorage.setItem("cart", JSON.stringify([referencia]));
         setCompra(referencia);
-        setMostrarPagos(true);
-    };
+        setMostrarPagos(true)
+      }
+    }
+
+
+    //life-cycles:
+    useEffect(() => {
+        const token = localStorage.getItem("accessToken");
+        if (!token) navigate("/IniciaSession");
+    }, [])
 
     useEffect(() => {
-        if (!token) navigate("/IniciaSession");
-    }, []);
+        dispatch(Dark_Mode());
+    }, [dark])
+
     useEffect(() => {
-        if (!token) navigate("/IniciaSession");
-    }, []);
+       dispatch(get_suscriptions())
+        console.log({compra})
+    }, [compra])
+
+ 
+
 
     //component:
     return (
-        <main className={styles.container}>
-             
-            <h1 className={styles.title}>
-                Subscríbete ya! y disfruta sin limitaciones
-            </h1>
+        <main className={`${styles.component} ${styles[theme("component")]}`}>
+            <h1 className={styles.title}>Subscríbete ya! y disfruta sin limitaciones</h1>
 
-            {/* TIPOS DE SUSCRIPCION */}
-            <div className={styles.product}>
-                <h3 className={styles.item}>Subscripción 3 meses</h3>
-                <p className={styles.p}>Por tan solo 6 dólares</p>
-                <p
-                    className={styles.buton}
-                    onClick={() =>
-                        handleAddSubscripcion({
-                            name: "Subscripción 3 meses",
-                            cost: 6,
-                        })
+            <div className={styles.content}>
+                <div className={styles.options}>
+                    {
+                        subscripciones?.map((subscripcion) => (
+                            <div key={subscripcion.id} className={styles.product}>
+                                <img src={subscripcion.image} alt={subscripcion.title} className={styles.productImage} />
+                                <h3 className={styles.item}>{subscripcion.title}</h3>
+                                <p>{subscripcion.description}</p>
+                                <p className={styles.p}>Por tan solo {subscripcion.price} dólares</p>
+                                <p className={styles.buton} onClick={() => handleAddSubscripcion(subscripcion)}>
+                                    Escoger
+                                </p>
+                            </div>
+                        ))
                     }
-                >
-                    Escoger
-                </p>
+                </div>
+                {
+                    checkout && (
+                        <div className={styles.checkoutOverlay} onClick={() => setCheckout(false)}>
+                            <div className={styles.checkout} onClick={(e) => e.stopPropagation()}>
+                            {/* RESUMEN */}
+                                <h1>TU ELECCIÓN:</h1>
+                                {
+                                    subscripcion && (
+                                        <div className={styles.totalcontainer}>
+                                            <p className={styles.item}>{subscripcion.title}</p>
+                                            <h1>Valor Total: $ {subscripcion.price}</h1>
+                                        </div>
+                                    )
+                                }
+                            {/* MEDIOS DE PAGO */}
+                                { !MostrarPagos && <p className={styles.pagar} onClick={handlePagarButton}>Mostrar opciones de pago</p> }
+                                {
+                                    MostrarPagos && (
+                                        <div>
+                                            <p>Escoge tu medio de Pago</p>
+                                            {
+                                                <PagoMercadopago reference={compra} />
+                                            }
+                                            <PagoMetamask total={subscripcion.price} />
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    )
+                }
             </div>
-
-            <div className={styles.product}>
-                <h3 className={styles.item}>Subscripción 6 meses</h3>
-                <p className={styles.p}>Por tan solo 12 dólares</p>
-                <p
-                    className={styles.buton}
-                    onClick={() =>
-                        handleAddSubscripcion({
-                            name: "Subscripción 6 meses",
-                            cost: 12,
-                        })
-                    }
-                >
-                    Escoger
-                </p>
-            </div>
-
-            <div className={styles.product}>
-                <h3 className={styles.item}>Subscripción 1 Año!</h3>
-                <p className={styles.p}>Oferta: por tan solo 20 dólares</p>
-                <p
-                    className={styles.buton}
-                    onClick={() =>
-                        handleAddSubscripcion({
-                            name: "Subscripción 1 Año",
-                            cost: 20,
-                        })
-                    }
-                >
-                    Escoger
-                </p>
-            </div>
-
-            <div className={styles.total}>
-                {/* RESUMEN */}
-                <h1>TU ELECCIÓN:</h1>
-                {subscripcion && (
-                    <div className={styles.totalcontainer}>
-                        <li className={styles.item}>{subscripcion.name}</li>
-                        <h1>Valor Total: $ {total}</h1>
-                    </div>
-                )}
-                {/* MEDIOS DE PAGO */}
-                { subscripcion  && <p className={styles.boton} onClick={handlePagarButton}>
-                   <p className={styles.name}>ir a Pagar</p> 
-                </p>}
-                {MostrarPagos && (
-                    <div>
-                        <p>Escoge tu medio de Pago</p>
-                        {compra.description && (
-                            <PagoMercadopago reference={compra} />
-                        )}
-                        <PagoMetamask total={subscripcion.cost} />
-                    </div>
-                )}
-            </div>
-           
         </main>
     );
 }

@@ -10,13 +10,18 @@ import {
     GET_COURSE_BY_ID,
     PUT_COURSE,
     //CATEGORIES:
-    GET_CATEGORIES_ALL,
-    POST_CATEGORIES,
-    DELETE_CATEGORIES,
+    GET_CATEGORY_ALL,
+    POST_CATEGORY,
+    DELETE_CATEGORY,
+    //TECHNOLOGIES
+    DELETE_TECNOLOGY,
+    POST_TECNOLOGY,
+    GET_TECNOLOGY_ALL,
     // ERRORS:
     ERROR,
     CLEAR_COURSES,
     CLEAN_MESSAGE,
+    CLEAR_USER,
     // DARK MODE:
     DARK_MODE,
     //FAVORITES:
@@ -24,6 +29,8 @@ import {
     //USERS:
     GET_USER_BY_EMAIL,
     POST_USER,
+    PUT_USER,
+    DELETE_USER,
     //PRODUCTS
     GET_PRODUCTS,
     GET_PRODUCTS_BY_NAME,
@@ -33,11 +40,14 @@ import {
     SORT_PRODUCTS,
     PUT_PRODUCTS,
     POST_PRODUCT,
-//CART,
+    //CART,
     SET_CART,
     CLEAR_CART,
     //SHOPBAG
     TOGGLE_SHOPBAG,
+    //HIGHLIGHT
+    SET_HIGHLIGHT,
+    CLEAR_HIGHLIGHT,
     //METAMASK
     METAMASK_ADDRESS,
     //SUBSCRIPTIONS
@@ -67,11 +77,13 @@ const globalStorage = {
     user: {},
     cart: [],
     shopbag: false,
+    highlightedItem: null,
     metamask: false,
     metamaskaddress: null,
     productsCopy: [],
     subscriptions: [], ////   <---------- MODIFICADO
-    allUsers: []
+    allUsers: [],
+    tecnology: []
 };
 
 //REDUCER:
@@ -136,32 +148,30 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 courses: cursosOrdenados,
             };
 
-        case GET_CATEGORIES_ALL:
+        case GET_CATEGORY_ALL:
             return {
                 ...state,
                 categories: payload,
             };
 
-        case POST_CATEGORIES:
+        case POST_CATEGORY:
             return {
                 ...state,
                 message: payload.message,
             };
 
-        case POST_COURSE:
-            return {
-                ...state,
-                message: payload.message,
-            };
-
+        case DELETE_CATEGORY:
+            return { ...state, message: payload}
             
-        case DELETE_CATEGORIES:
-            return { ...state, message: payload};
-        
         case ERROR:
             return {
                 ...state,
                 error: payload.message,
+            };
+        case POST_COURSE:
+            return {
+                ...state,
+                message: payload.message,
             };
 
         case CLEAN_MESSAGE:
@@ -169,6 +179,12 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 error: "",
                 message: "",
+            };
+
+            case CLEAR_USER:
+            return {
+                ...state,
+                user:{},
             };
 
         case CLEAR_COURSES:
@@ -271,6 +287,18 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 shopbag: payload,
             };
+        case SET_HIGHLIGHT:
+            return {
+                ...state,
+                highlightedItem: payload
+            }
+
+        case CLEAR_HIGHLIGHT:
+            return {
+                ...state,
+                highlightedItem: null
+            }
+        
         case METAMASK_ADDRESS:
             return {
                 ...state,
@@ -287,7 +315,7 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case DELETE_SUSCRIPTION:
             return {
                 ...state,
-                message: payload.message,
+                message: payload,
             };
         case PUT_SUSCRIPTION:
             return {
@@ -305,16 +333,38 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 ...state,
                 message: payload.message,
             };
+
+        case PUT_USER:
+            return {
+                ...state,
+                message: payload.message
+            }
+
+        case DELETE_USER:
+            return{
+                ...state, message:payload
+            }
         ////////////////////////////////////////////////////////////////////////////////////
 
         case ADMIN_MESSAGE: 
-        return{
-            ...state, message: payload
-        }
-        case PUT_COURSE:
-            return{
+            return {
                 ...state, message: payload
             }
+        case PUT_COURSE:
+            return {
+                ...state, message: payload
+            }
+
+        //tecnology
+        case  DELETE_TECNOLOGY : 
+            return {...state, message: payload}
+
+        case POST_TECNOLOGY:
+                return {...state,message: payload}
+
+        case GET_TECNOLOGY_ALL:
+                return {...state,tecnology:payload}
+                
         default:
             return { ...state };
     }

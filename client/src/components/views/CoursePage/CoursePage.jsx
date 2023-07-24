@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
 import { get_courses_all, clearMessage, clearCourses } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
@@ -14,7 +16,6 @@ function CoursePage () {
 
     //global states:
     const allCourses = useSelector((state) => state.courses)
-    const Courses = useSelector((state)=>state.allCourses)
 
     //states:
     const [isloading, setIsloading] = useState(true);
@@ -25,29 +26,32 @@ function CoursePage () {
 
     //life-cycles:
     useEffect(() => {
-
+        // if (!allCourses.length) dispatch(get_courses_all());
+        //--desmontado
         return () => { 
             dispatch(clearMessage());
             dispatch(clearCourses());
         };
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
-        setIsloading(true);
-        if (!allCourses.length) dispatch(get_courses_all());
-
-   
-        
-        const timer = setTimeout(() => {
+        // (async () => {
+        //     setIsloading(true);
+        //     setIsloading(false);
+        // })()
+        (async () => {
+            setIsloading(true);
+            if (!allCourses.length) await dispatch(get_courses_all());
+            await new Promise(resolve => setTimeout(resolve, 1000));
             setIsloading(false);
-        }, 1000);
-       
+        })()
+
     }, [allCourses])
 
 
     //component:
     return (
-        <main className = {styles.component}>
+        <main className = {`${styles.component} ${styles[theme("component")]}`}>
         {/* BANNER */}
             <div className={styles.mainBanner}>
                 <h1>Explora todos nuestros cursos</h1>
@@ -59,17 +63,14 @@ function CoursePage () {
             </div>
 
         {/* CURSOS */}
-
             {
-                
-                (<div className = {styles.cardComponent}>
+                <div className = {styles.cardComponent}>
                     {
                         isloading 
                         ? <h1 className={styles.cargando}>CARGANDO...</h1>
                         : <CoursesCard/>
                     }
-                </div>)
-
+                </div>
             }
         </main>
     )

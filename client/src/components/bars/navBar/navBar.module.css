@@ -1,33 +1,36 @@
 .component {
-  height: var(--navBarHeight);
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  width: 100%;
-  animation:blur-in 0.4s linear both
-  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+    height: var(--navBarHeight);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    /* OPCION AGREGAR PADDING-BOTTOM: 2% */
+    /* padding: 2% 0% 2%; */
+    animation:blur-in 0.4s linear both
+} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
-  .component-light {
+.component-light {
     background-color: rgba(251, 251, 252, 0.623);
-  }
-  .component-dark {
+}
+.component-dark {
     background-color: #010003;
-  }
+}
 
   .sectionBanner {
     display: flex;
     align-items: center;
     float: left;
+    transform: translateY(-25%);
     cursor: pointer;
     }
     .mainLogo {
         margin: 0 2px;
         font-size: 1.1rem;
         cursor: pointer;
-
       }
       .mainLogoGuru {
         margin: 0;
@@ -59,17 +62,53 @@
       transform: scale(1.04);
     }
 
+  
     .link {
-      /* font-size: 100%; */
-      text-transform: uppercase;
-      text-decoration: none;
-      letter-spacing: 0.2em;
-      font-weight: bold;
-    }
-    .link:hover {
-      text-shadow:  0px 3px 12px rgb(128, 255, 255);
-      cursor: pointer;
-    }
+        /* font-size: 100%; */
+        text-transform: uppercase;
+        text-decoration: none;
+        letter-spacing: 0.2em;
+        font-weight: bold;
+      }
+  
+      .hide{
+          display:none;
+      }
+      .hideTienda{
+          display:none;
+      }
+      .link:hover +.hideTienda{
+          display: block;
+          position: fixed;
+          margin-left: -40%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          width: 150px;
+          color: rgb(38, 12, 233);
+          animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }     
+          .hideCarrito{
+              display:none;
+          }
+          .link:hover+ .hideCarrito{
+              display: block;
+          position: fixed;
+          margin-left: -29%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          width: 150px;
+          color: rgb(38, 12, 233);
+          animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }       
+          
+      .link:hover +.hide {
+          display: block;
+          position: fixed;
+          width: 150px;
+          margin-left: -40%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          color: rgb(38, 12, 233);
+  animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} } 
+   
     .link-light {
       color: rgba(2, 14, 17, 0.932);
     }
@@ -77,15 +116,35 @@
       color: rgba(247, 249, 250, 0.932);
     }
 
-.bolsita{
+.bolsita {
     height: 25%;
     transition: transform 0.5s;
     z-index: 9998;
 }
 .bolsita:hover{
-  transform:scale(1.7);
+  transform:scale(1.5);
   cursor: pointer;
 }
+
+.bolsita-dark {
+    fill: white;
+}
+
+/* .bolsitaEmpty {
+    height: 90%;
+    transition: transform 0.5s;
+    z-index: 9998;
+}
+.bolsitaEmpty-light {
+    fill: black;
+}
+.bolsitaEmpty:hover {
+    transform:scale(1.7);
+    cursor: pointer;
+}
+.bolsitaEmpty-dark {
+    fill: white;
+} */
 
 .barsButton {
     display: none;

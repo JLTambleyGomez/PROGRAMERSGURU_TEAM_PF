@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
     //COURSES:
     getCoursesAllRequest,
@@ -8,9 +7,15 @@ import {
     deleteCourseRequest,
     putCourseRequest,
     //CATEGORIES:
-    getCategoriesAllRequest,
-    postCategoriesRequest,
-    deleteCategoriesRequest,
+    getCategoryAllRequest,
+    postCategoryRequest,
+    deleteCategoryRequest,
+
+    //TECNOLOGY
+    getTecnologyAllRequest,
+    postTecnologyRequest,
+    deleteTecnologyRequest,
+
     //FAVORITES
     getFavoritesRequest,
     //Products
@@ -22,7 +27,8 @@ import {
     //user
     getUserByEmailRequest,
     postUserRequest,
-    makeAdminUser,
+    putUserRequest,
+    deleteUserRequest,
     //comments
     getCommentsByCourse,
     getCommentsByUser,
@@ -37,6 +43,7 @@ import {
 
 //ACTIONS:
 //COURSES:
+export const CLEAR_USER = "CLEAR_USER";
 export const CLEAR_COURSES = "CLEAR_COURSES";
 export const CLEAN_MESSAGE = "CLEAN_MESSAGE";
 export const GET_COURSE_BY_ID = "GET_COURSE_BY_ID";
@@ -49,10 +56,15 @@ export const FILTER_COURSES_BY_PRICING = "FILTER_COURSES_BY_PRICING";
 export const ORDER_COURSES = "ORDER_COURSES";
 export const PUT_COURSE = "PUT_COURSE";
 
+//TECNOLOGY
+export const GET_TECNOLOGY_ALL = "GET_TECNOLOGY_ALL";
+export const POST_TECNOLOGY = "POST_TECNOLOGY";
+export const DELETE_TECNOLOGY = "DELETE_TECNOLOGY";
+
 //CATEGORIES:
-export const GET_CATEGORIES_ALL = "GET_CATEGORIES_ALL";
-export const POST_CATEGORIES = "POST_CATEGORIES";
-export const DELETE_CATEGORIES = "DELETE_CATEGORIES";
+export const GET_CATEGORY_ALL = 'GET_CATEGORY_ALL'
+export const POST_CATEGORY = 'POST_CATEGORY'
+export const DELETE_CATEGORY = "DELETE_CATEGORY" 
 
 //ERRORS:
 export const ERROR = "ERROR";
@@ -72,7 +84,9 @@ export const GET_USER_BY_EMAIL = "GET_USER_BY_EMAIL";
 export const SET_USER_EMAIL = "SET_USER_EMAIL";
 export const SET_TOKEN = "SET_TOKEN";
 export const POST_USER = "POST_USER";
+export const PUT_USER = "PUT_USER"
 export const MAKE_ADMIN = "MAKE_ADMIN";
+export const DELETE_USER = "DELETE_USER";
 
 //COMMENTS:
 export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER";
@@ -88,8 +102,8 @@ export const FILTER_PRODUCTS_BY_PRICING = "FILTER_PRODUCTS_BY_PRICING";
 export const SORT_PRODUCTS = "SORT_PRODUCTS";
 export const PUT_PRODUCTS = "PUT_PRODUCTS";
 
-    //admin
-    export const ADMIN_MESSAGE = 'ADMIN_MESSAGE'
+//admin
+export const ADMIN_MESSAGE = 'ADMIN_MESSAGE'
 
 //CART:
 export const SET_CART = "SET_CART";
@@ -97,6 +111,10 @@ export const CLEAR_CART = "CLEAR_CART";
 
 //SHOPBAG:
 export const TOGGLE_SHOPBAG = "TOGGLE_SHOPBAG";
+
+//HIGHLIGHTED ITEM:
+export const SET_HIGHLIGHT = "SET_HIGHLIGHT";
+export const CLEAR_HIGHLIGHT = "CLEAR_HIGHLIGHT";
 
 //METAMASK:
 export const METAMASK_ADDRESS = "METAMASK_ADDRESS";
@@ -242,14 +260,14 @@ export const order_courses = (direccion) => {
     };
 };
 
-//CATEGORIES_____________________________________________//
-export const get_categories = () => {
+//tencology_____________________________________________//
+export const get_tecnology = () => {
     // request
     return async function (dispatch) {
         try {
-            const data = await getCategoriesAllRequest();
+            const data = await getTecnologyAllRequest();
             return dispatch({
-                type: GET_CATEGORIES_ALL,
+                type: GET_TECNOLOGY_ALL,
                 payload: data,
             });
         } catch (error) {
@@ -261,14 +279,15 @@ export const get_categories = () => {
     };
 };
 
-export const post_categories = (technology) => {
+export const post_tecnology = (technology) => {
     // request
     return async function (dispatch) {
         try {
-            const data = await postCategoriesRequest(technology);
+            console.log(technology)
+            const data = await postTecnologyRequest(technology);
             return dispatch({
-                type: POST_CATEGORIES,
-                payload: data,
+                type: POST_TECNOLOGY,
+                payload: data.message
             });
         } catch (error) {
             return dispatch({
@@ -279,13 +298,13 @@ export const post_categories = (technology) => {
     };
 };
 
-export const delete_categories = (id) => {
+export const delete_tecnology = (id) => {
     // request
     return async function (dispatch) {
         try {
-            const data = await deleteCategoriesRequest(id);
+            const data = await deleteTecnologyRequest(id);
             return dispatch({
-                type: DELETE_CATEGORIES,
+                type: DELETE_TECNOLOGY,
                 payload: data.message,
             });
         } catch (error) {
@@ -298,20 +317,35 @@ export const delete_categories = (id) => {
 };
 
 export const Dark_Mode = (payload) => {
-    if (payload === true) {
-        return {
-            type: DARK_MODE,
-            payload: true,
-        };
-    } else if (payload === false) {
-        return {
-            type: DARK_MODE,
-            payload: false,
-        };
+
+    const darkModeBoo = localStorage.getItem("darkMode")
+
+    // if (payload === true) {
+    //     return {
+    //         type: DARK_MODE,
+    //         payload: true
+    //     };
+    // } else if (payload === false) {
+    //     return {
+    //         type: DARK_MODE,
+    //         payload: false
+    //     };
+    // }
+    return {
+        type: DARK_MODE,
+        payload: darkModeBoo
     }
 };
 
 ///////////////////ACTIONS CLEAR/////////////////////////////////////////////////////////////////////////////////////////
+
+export const clearUser = () => {
+    return function (dispatch) {
+        return dispatch({
+            type: CLEAR_USER,
+        });
+    };
+};
 
 export const clearMessage = () => {
     return function (dispatch) {
@@ -506,6 +540,23 @@ export const get_User_By_Email = (email) => {
     };
 }
 
+export const delete_user = (id) => {
+    return async function (dispatch) {
+        try {
+            const data = await deleteUserRequest({ id });
+            return (dispatch({
+                type: DELETE_USER,
+                payload: data.message
+            }))
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    }
+}
+
 
 //CART_____________________________________________//
 
@@ -524,6 +575,21 @@ export const toggle_shopbag = (status) => {
         payload: status,
     };
 };
+
+//HIGHLIGHTED ITEM:
+
+export const set_highlight = (id) => {
+    return {
+        type: SET_HIGHLIGHT,
+        payload: id
+    }
+}
+
+export const clear_highlight = () => {
+    return {
+        type: CLEAR_HIGHLIGHT
+    }
+}
 
 //Comments
 
@@ -622,7 +688,7 @@ export const delete_suscription = (id) => {
             console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
-                payload: data,
+                payload: data.message,
             });
         } catch (error) {
             console.log(error);
@@ -686,22 +752,27 @@ export const post_user = (user) => {
         }
     };
 };
-// export const make_admin_user = (user) => {
-//     return async function (dispatch) {
-//         try {
-//             const data = await makeAdminUser(user);
-//             return dispatch({
-//                 type: MAKE_ADMIN,
-//                 payload: data,
-//             });
-//         } catch (error) {
-//             return dispatch({
-//                 type: ERROR,
-//                 payload: error.response.data.message,
-//             });
-//         }
-//     };
-// };
+
+export const put_user = (user) => {
+    return async function (dispatch) {
+        try {
+            const data = await putUserRequest(user);
+            console.log(data);
+            return dispatch({
+                type: PUT_USER,
+                payload: data,
+            });
+        } catch (error) {
+            console.log(error);
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message,
+            });
+        }
+    };
+};
+
+
 
  export const adminPanelMensajesLocales = (message) =>{
     console.log(message)    
@@ -711,3 +782,42 @@ export const post_user = (user) => {
             }
 
  }
+
+ //Category
+ export const get_categories = () => {
+    return async function (dispatch) {
+        try {
+            const data = await getCategoryAllRequest()
+            return dispatch({type: GET_CATEGORY_ALL, payload: data})
+            
+        } catch (error) {
+            return dispatch({
+                type: ERROR,
+                payload: error.response.data.message
+            })
+        }
+    }
+}
+
+ export const postCategory = (category) => {
+    return async function (dispatch) {
+        try {
+            console.log(category)
+            const data = await postCategoryRequest(category)
+            return dispatch({type: POST_CATEGORY, payload: data})
+        } catch (error) {
+            return dispatch({type: ERROR, payload: error.response.data.message})
+        }
+    }
+}
+
+ export const deleteCategory = (id) => {
+    return async function (dispatch) {
+        try {
+            const data =  await deleteCategoryRequest(id)
+            return dispatch({type:DELETE_CATEGORY, payload: data.message})
+        } catch (error) {
+            return dispatch ({type: ERROR, payload:error.response.data.message})
+        }
+    }
+}

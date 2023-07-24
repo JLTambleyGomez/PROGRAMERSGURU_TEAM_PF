@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Dark_Mode } from "../../../Redux/actions";
-import { FaSun, FaMoon } from "react-icons/fa";
 
+import { Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 import logoutUser from "../../../user/logOut"
 
+import { FaSun, FaMoon } from "react-icons/fa";
 import s from "./Menu.module.css";
 
 //_________________________module_________________________
@@ -15,6 +16,8 @@ function Menu () {
     const dark = useSelector((state) => state.darkMode);
     const logo= useSelector((state)=>state.user?.picture)
 
+    //states:
+    const [isDarkMode, setIsDarkMode] = useState(null)
 
     //const:
     const navigate = useNavigate()
@@ -24,14 +27,19 @@ function Menu () {
 
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
+    const handleDarkMode = () => {
+        setIsDarkMode(!isDarkMode) //para controlar el icono de sol y luna.
+        localStorage.setItem("darkMode", !isDarkMode);
+        dispatch(Dark_Mode())
     };
 
-    const handleDarkMode = () => {
-        dispatch(Dark_Mode(!dark));
-    };
+    //life-cycles:
+    useEffect(() => {
+        if (isDarkMode === null) {
+          const localDark = localStorage.getItem("darkMode");
+          setIsDarkMode(localDark ? JSON.parse(localDark) : false);
+        }
+    }, [isDarkMode]);
 
 
     // component:
@@ -45,7 +53,7 @@ function Menu () {
             <ul className={`${s.options}`}>
                 <li onClick = {() => {navigate('/profile')}}>Perfil</li>
                 <button className={`${s.themeButton} ${s[theme("themeButton")]}`} onClick={handleDarkMode}>
-                    {dark ? <FaSun className={s.sun}/> : <FaMoon className={s.moon}/>}
+                    {isDarkMode ? <FaSun className={s.sun}/> : <FaMoon className={s.moon}/>}
                 </button>
                 <li onClick = {logoutUser}>Salir</li>
             </ul>

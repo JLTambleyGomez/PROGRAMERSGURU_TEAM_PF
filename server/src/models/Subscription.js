@@ -19,10 +19,10 @@ module.exports = (sequelize) => {
                 type: DataTypes.STRING,
             },
             type: {
-                type: DataTypes.ENUM("mensual", "trimestral", "anual"), //
+                type: DataTypes.ENUM("trimestral", "semestral", "anual"), //
             },
             price: {
-                type: DataTypes.INTEGER,
+                type: DataTypes.DECIMAL,
                 // allowNull:false
              
             }, 

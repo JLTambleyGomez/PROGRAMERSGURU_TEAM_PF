@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+import { get_products_all, get_products_by_name, set_cart, sort_products, filter_product_by_category, filter_product_by_price, Dark_Mode, toggle_shopbag, set_highlight } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
@@ -16,67 +17,55 @@ function Shop () {
     //global state:
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
-    
-    // const productsCopy = useSelector((state) => state.productsCopy);
-    // const productsCopy = useSelector((state) => state.productsCopy);
-    const cart = useSelector((state)=> state.cart)
+    const cart = useSelector((state) => state.cart);
 
 
     //states:
-    const [input, setInput] = useState("");
     const [selectQuantity, setSelectQuantity] = useState([])
     const [cartTooltips, setCartTooltips] = useState([]);
-    const [loading, setLoading] = useState(false)
-
+    const [loading, setLoading] = useState(false);
+    const [tooltip, setToolip] = useState(null);
+    const [bin, setBin] = useState(false)
 
     //const:
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
-    const syncInput = (event) => {
-        const { value } = event.target;
-        setInput(value);
-    }
-//_________________
-    const handleSearch = () => {
-        dispatch(get_products_by_name(input))
+    const handledetailproduct = (id) => {
+        navigate(`/ProductDetail/${id}`)
     }
 
-    const handleMouseEnter = (index) => {
-        const newCartTooltips = [...cartTooltips];
-        newCartTooltips[index] = true;
-        setCartTooltips(newCartTooltips);
-    };
-
-    const handleMouseLeave = (index) => {
-        const newCartTooltips = [...cartTooltips];
-        newCartTooltips[index] = false;
-        setCartTooltips(newCartTooltips);
-    };
+    const found = (product) => {
+        if (Array.isArray(cart)) return cart.find((item) => item.id === product.id)
+    }
 
     const addToCart = async (item) => {
-        // setCartItems([...cartItems, item]);
-        // setSelectQuantity()
-        // si el producto existe en el array de cart, ya no entra al condicional a hacer el push, solo le modifica la propiedad cantidad +1
-        if (!cart?.filter((product)=> product.id === item.id).length) {
-            item.quantity = 1; // crea una nueva propiedad al producto.
-            const oldCart = JSON.parse(localStorage.getItem("cart")) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+        if (!found(item)) {
+            item.quantity = 1; //new property
+            const oldCart = JSON.parse(localStorage.getItem("cart")) 
             oldCart.push(item)
-            localStorage.setItem("cart", JSON.stringify(oldCart))
+            await localStorage.setItem("cart", JSON.stringify(oldCart))
             dispatch(set_cart())
-        } else if (item.quantity < item.stock) {
-            item.quantity = item.quantity + 1;
-            localStorage.setItem("cart", JSON.stringify(cart));
-            dispatch(set_cart())
+        } else {
+            await dispatch(set_highlight(item.id));
+            dispatch(toggle_shopbag(true))
         }
         console.log(cart);
     };
+
+    const popFromCart = async (product) => {
+        if (product.quantity === 1) {
+            setBin(true)
+            const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
+            await localStorage.setItem("cart", JSON.stringify(oldCart))
+            dispatch(set_cart())
+        } else if (product.quantity > 1) {
+            product.quantity = product.quantity - 1;
+            await localStorage.setItem("cart", JSON.stringify(cart));
+            dispatch(set_cart());
+        }
+    }
 
     const removeFromCart = async (id) => {
         const cart = await localStorage.getItem("cart")
@@ -84,11 +73,8 @@ function Shop () {
             await localStorage.setItem("cart", "[]")
         }
         const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
-        localStorage.setItem("cart", JSON.stringify(oldCart))
+        await localStorage.setItem("cart", JSON.stringify(oldCart))
         dispatch(set_cart())
-      /*  const newCartItems = [...cartItems];
-        newCartItems.splice(index, 1);
-        setCartItems(newCartItems);*/
     };
 
     const calculateTotal = () => {
@@ -104,22 +90,8 @@ function Shop () {
     //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
-        // if (!products.length) {
-        //     navigate("/IniciaSession");}
-
         if (!token) navigate("/IniciaSession");
-
-        const initialCartTooltips = new Array(4).fill(false);
-        setCartTooltips(initialCartTooltips);
     }, []);
-
-   
-
-    //con lo de las rutas, el siguiente useEffect no tendria valor:
-    // useEffect(() => {
-    //     if (!token) navigate("/IniciaSession");
-    //     if (!products.length) dispatch(get_products_all());   
-    // }, [dispatch])
 
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
@@ -133,12 +105,16 @@ function Shop () {
     // CART:
     useEffect(() => {
         (async () => {
-            const cart = await localStorage.getItem("cart")
+            const cart = await localStorage.getItem("cart");
             if (!cart) {
-                await localStorage.setItem("cart", "[]")
+                await localStorage.setItem("cart", "[]");
+                dispatch(set_cart());
             }
         })()
-        dispatch(set_cart())
+    }, [])
+
+    useEffect(() => {
+        dispatch(set_cart());
     }, [])
 
     useEffect(() => {
@@ -146,12 +122,13 @@ function Shop () {
         setTimeout(() => {
             setLoading(false);
         }, 500);
-    }, [])
+    }, [products])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
    
-
-   
-
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
     const productsPerPage = 10
@@ -167,31 +144,26 @@ function Shop () {
         }
     })()
 
-
     //component:
     return (
-    
-       
-        
-        <main className={`${s.component}`}>
+        <main className={`${s.component} ${s[theme("component")]}`}>
 
-
-        {/* BANNER */}
-        
-            <section className={`${s.sectionBanner}`}>
-                <img
+        {/* BANNER */}        
+            <section className={`${s.sectionBanner} ${s[theme("component")]}`}>
+                {/* <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
                     alt="mainBanner"
-                />
+                /> */}
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
-                     TIENDA DE PROGRAMMER'S GURU 
+                    TIENDA DE PROGRAMMER'S GURU 
                 </h1>
-
 
             </section>
         {/* SIDEBAR */}
-            <FilterBarShop/>
+            <div className={s.filterOrder}>
+                <FilterBarShop/>                
+            </div>
 
         {/* PAGINADO */}
             <div className={`${s.paginado}`} >
@@ -217,59 +189,78 @@ function Shop () {
                         <h1>Loading...</h1>
                     ) : (
                         <div className={`${s['productBox']}`}>
-                            { 
-                                currentAllProducts? currentAllProducts?.map((product, index) => {
-                                    if (product?.stock > 0) { return (
-                                        <div className={`${s['item']}`} key={index}>
-                                            <div style={{display: "flex", flexDirection: "column"}}>
-                                                <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                                    <img className={s["itemImage"]} src={product?.image}></img>
-                                                </div>
-                                                <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                                    <h1 className={s["name"]} >{product?.name}</h1>
-                                                </div>
+                        { 
+                            currentAllProducts? currentAllProducts?.map((product, index) => {
+                                if (product?.stock >= 0) { return (
+                                    <div className={`${s['item']}`} onClick={() => handledetailproduct(product.id)} key={index}>
+                                        <div style={{display: "flex", flexDirection: "column"}}>
+                                            <div className={s.imgContainer}>
+                                                <img  className={s["itemImage"]} src={product?.image}></img>
                                             </div>
-                                            <div className={s.priceAndCart}>
-                                                <h1 className={s["price"]}>${product?.price}</h1>
-                                                <button
-                                                    onMouseEnter={() => handleMouseEnter(index)}
-                                                    onMouseLeave={() => handleMouseLeave(index)}
-                                                    onClick={() => addToCart(product)}>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
-                                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-                                                </button>
+                                            <div className={s.nameContainer}>
+                                                <h1 className={s["name"]} >{product?.name}</h1>
                                             </div>
+                                        </div>
+                                        <div className={s.priceAndCart}>
+                                            <h1 className={s["price"]}>${product?.price}</h1>
+                                            <button
+                                                className={found(product) ? s.checkButton : s.addButton}
+                                                onMouseEnter={() => setToolip(product.id)}
+                                                onMouseLeave={() => setToolip(null)}
+                                                onClick={(event) => {addToCart(product); event.stopPropagation()}}
+                                            >
+                                                {
+                                                    found(product) ? (
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart-check-fill" viewBox="0 0 16 16">
+                                                            <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm-1.646-7.646-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L8 8.293l2.646-2.647a.5.5 0 0 1 .708.708z"/>
+                                                        </svg>
+                                                    ) : (
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-cart3" viewBox="0 0 16 16">
+                                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                                        </svg>
+                                                    )
+                                                }
+                                            </button>
                                             {
-                                                cartTooltips[index] && <span className={s["cartTooltip"]}>Añadir al carrito</span>
+                                                tooltip === product.id && (
+                                                    <span className={s["cartTooltip"]}>
+                                                        {
+                                                            found(product) 
+                                                            ? "Producto agregado"
+                                                            : "Añadir al carrito"
+                                                        }
+                                                    </span>
+                                                )
                                             }
                                         </div>
-                                    )} else return (
-                                        <div className={`${s['item']}`} key={index}>
-                                            <div style={{display: "flex", flexDirection: "column"}}>
-                                                <div style={{display: "flex", justifyContent: "center", alignContent: "center"}}>
-                                                    <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
-                                                </div>
-                                                <div style={{display: "flex", justifyContent: "flex-start", alignContent: "center"}}>
-                                                    <h1 className={s["name"]} >{product?.name}</h1>
-                                                </div>
+                                    </div>
+                                )} else return (
+                                    <div className={`${s['item']}`} key={index}>
+                                        <div style={{display: "flex", flexDirection: "column"}}>
+                                            <div className={s.imgContainer}>
+                                                <img className={s["itemImage"]} style={{filter: "grayscale(100%)"}} src={product?.image}></img>
                                             </div>
-                                            <div className={s.priceAndCart}>
-                                                <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
-                                                <p>No quendan existencias</p>
+                                            <div className={s.nameContainer}>
+                                                <h1 className={s["name"]} >{product?.name}</h1>
                                             </div>
                                         </div>
-                                    )
-                                }) : (
-                                    <Modal/>
+                                        <div className={s.priceAndCart}>
+                                            <h1 className={s["price"]} style={{textDecoration:"line-through"}}>${product?.price}</h1>
+                                            <p>No quendan existencias</p>
+                                        </div>
+                                    </div>
                                 )
-                            }
-                        </div>
-                    )
-                }
+                            }) : (
+                                <Modal/>
+                            )
+                        }
+                    </div>
+                )
+            }
             </section>
 
         {/* RESUMEN */}
-            {/* <section className={s.Resumen}>
+            <section className={s.Resumen}>
                 <h2>Resumen de compras</h2>
                 {
                     cart?.length > 0 ? (
@@ -279,9 +270,9 @@ function Shop () {
                                 <li key={index}>
                                     {item.name} - ${item.price}
                                     <button onClick={() => removeFromCart(item.id)}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
-                                    <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
-                                    </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash3" viewBox="0 0 16 16">
+                                            <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
+                                        </svg>
                                     </button>
                                 </li>
                             ))}
@@ -292,7 +283,7 @@ function Shop () {
                         <p>Tu carrito de compras está vacío</p>
                     )
                 }
-            </section>  */}
+            </section> 
         </main>
             
     )

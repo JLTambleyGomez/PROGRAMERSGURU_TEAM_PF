@@ -1,7 +1,7 @@
 const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-
+const URL_FEEDBACKS = process.env.URL_FEEDBACKS
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
@@ -22,9 +22,14 @@ const PagoconMercadopago = async (req, res) => {
     back_urls: {
       success: "http://localhost:5173/feedbackmp",
       failure: "http://localhost:5173/feedbackmp" 
+      success: "http://localhost:5173/MercadoPagoFeedback",
+      failure: URL_FEEDBACKS,
+      pending: URL_FEEDBACKS,
     },
     auto_return: "approved",
   };
+
+  console.log(req.body)
 
   const result = mercadoPago.preferences
     .create(preference)
@@ -46,6 +51,7 @@ try {
   
   console.log(email,merchant_order_id,payment_id,compra)
 
+  
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const listadeproductos = compra?.map(

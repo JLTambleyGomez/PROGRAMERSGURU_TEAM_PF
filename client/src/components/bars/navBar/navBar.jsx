@@ -1,10 +1,13 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle_shopbag, get_User_By_Email, get_Favorites_Request,get_products_all} from "../../../Redux/actions";
+
+import { toggle_shopbag, get_User_By_Email,get_products_all, Dark_Mode, set_cart} from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
+// import { faShoppingBag as bagShoppingRegular } from '@fortawesome/free-regular-svg-icons';
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import s from "./navBar.module.css";
@@ -12,65 +15,63 @@ import ConexionMetamask from "../../datos/PagoMetamask/ConexionMetamask";
 import SubscripcionesButton from "../../datos/Subscripciones/SubscripcionesButton";
 import SearchBar from "../searchBar/searchBar";
 import Menu from "../Menu/Menu";
+import ModalBannedUser from '../../views/ModalBannedUser/ModalBannedUser'
 
 //_________________________module_________________________
-function NavBar({ logoutUser }) {
+function NavBar ( { logoutUser } ) {
+
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
     const user = useSelector((state) => state.user);
+    const cart = useSelector((state) => state.cart);
 
     //states:
-    const [isResponsive, setIsResponsive] = useState(false);
     const [isBarsOpen, setIsBarsOpen] = useState(false);
-
-    const toggleBars = () => {
-        setIsBarsOpen(!isBarsOpen);
-    };
 
     //const:
     const dispatch = useDispatch();
-    const location = useLocation();
+    const { pathname } = useLocation();
     const navigate = useNavigate();
     const email = localStorage.getItem("email");
-    const token = sessionStorage.getItem("accessToken")
-    const emailenviado = localStorage.getItem("sendedEmail");
+    const token = sessionStorage.getItem("accessToken");
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
-    const responsive = (base) => {
-        const option = isResponsive ? "responsive" : "";
-        return `${base}-${option}`;
+    const toggleBars = () => {
+        setIsBarsOpen(!isBarsOpen);
     };
 
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag));
     };
 
+    const handlegohome = () => {
+        navigate("/HomePage")
+    }
+
     //life-cycles:
     useEffect(() => {
-            if (!user?.email) dispatch(get_User_By_Email(email));
-           
+        if (!user?.email) dispatch(get_User_By_Email(email));
     }, []) //testear con array vacio.
 
     useEffect(()=>{
-        if (token){
-            dispatch (get_products_all())
-        }
+        if (token) dispatch (get_products_all())
     },[])
 
     useEffect(() => {
-        console.log(isResponsive)
-    }, [isResponsive])
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
-    const handlegohome=()=>{
-        navigate("/HomePage")
-    }
+    useEffect(() => {
+        console.log(cart)
+    }, [cart])
+
+    //rule:
+
+    //chequear usuario baneado
+    if(user.banned) return <ModalBannedUser />
+    
     //component:
     return (
         // {user.banned}
@@ -156,19 +157,40 @@ function NavBar({ logoutUser }) {
                 <SearchBar/>
             </div>
         {/* SUSCRIPCION */}
-            <div className={s.subscription}>
-                <SubscripcionesButton/>
-            </div>
+            {
+                !user.expirationDate && (
+                    <div className={s.subscription}>
+                        <SubscripcionesButton/>
+                    </div>
+                )
+            }
         {/* METAMASK */}
             <div className={s.metamask}>
                 <ConexionMetamask/>
             </div>
         {/* BOLSA */}
-            <FontAwesomeIcon
-                className={s.bolsita}
-                onClick={toggleShopbag}
-                icon={faBagShopping}
-            />
+            {
+                (pathname === "/store" || pathname.includes("/ProductDetail")) && (
+                    Array.isArray(cart) && cart.length > 0  ? (
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`${s.bolsita} ${s[theme("bolsita")]}`} viewBox="0 0 16 16" onClick={toggleShopbag}>
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                        </svg>
+                    ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" className={`${s.bolsita} ${s[theme("bolsita")]}`} viewBox="0 0 16 16" onClick={toggleShopbag}>
+                            <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5z"/>
+                        </svg>
+                    )
+                )
+            }
+            {
+                user.admin ?
+                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
+                        AdminPanel
+                    </NavLink>
+                : null
+            }
+
+
         {/* MENU */}
             <div className={s.menu}>
                 <Menu logoutUser={logoutUser}/>

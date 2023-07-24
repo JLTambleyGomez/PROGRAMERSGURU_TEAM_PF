@@ -1,9 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Profile.module.css";
-import {
-    get_comments_by_user,
-    get_User_By_Email,
-} from "../../../Redux/actions";
+import { get_User_By_Email } from "../../../Redux/actions";
 import { useEffect, useState } from "react";
 
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
@@ -14,6 +11,7 @@ import { Reviews } from "./ProfileComponents/Reviews";
 import { Carrito } from "./ProfileComponents/Carrito";
 import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
+import { NavLink } from "react-router-dom";
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -21,8 +19,10 @@ function ProfileV2() {
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
+    console.log(userId);
 
     //local states
+    const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
     const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
@@ -68,7 +68,6 @@ function ProfileV2() {
             newUserData.address
         ) {
             editUserData({ ...newUserData, email });
-            //    sendEmail({ email , message:"Tu usuario ha sido modificado"});
         }
         setCollapse(!collapse);
         setNewUserData({
@@ -100,16 +99,24 @@ function ProfileV2() {
 
     useEffect(() => {
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-    }, [dispatch, refresh]);
+    }, [dispatch, refresh, removeComment]);
+
+    //if (!user.name) return <Modal />
 
     //component:
     return (
         <div className={s.profileContainer}>
             <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
-                    <div className={s.config} onClick={openConfig}>
-                        <img src={gearConfig} alt="config" />
-                    </div>
+                    {user?.admin ? (
+                        <div className={s.config} onClick={openConfig}>
+                            <NavLink to="/adminpanel">
+                                <img src={gearConfig} alt="config" />
+                            </NavLink>
+                        </div>
+                    ) : (
+                        null
+                    )}
                     {collapse ? (
                         <div className={s.camera}>
                             <EditProfilePicture
@@ -168,13 +175,16 @@ function ProfileV2() {
             <div className={s.content}>
                 <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
                 {tab === "favorites" && (
-                    <Favorites
-                        userId={userId}
+                    <Favorites dark={dark} favorites={user?.Courses} />
+                )}
+                {tab === "reseñas" && (
+                    <Reviews
                         dark={dark}
-                        favorites={user.Courses}
+                        comments={user?.Comments}
+                        removeComment={removeComment}
+                        setRemoveComment={setRemoveComment}
                     />
                 )}
-                {tab === "reseñas" && <Reviews dark={dark} />}
                 {tab === "compras" && <Compras dark={dark} />}
                 {tab === "carrito" && <Carrito dark={dark} />}
             </div>

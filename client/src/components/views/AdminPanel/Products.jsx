@@ -6,16 +6,18 @@ import {
     delete_Products,
     clearMessage,
     put_Products,
+    get_categories
 } from "../../../Redux/actions";
 import { validateProduct } from "./validate";
 import styles from "./Courses.module.css";
 
 //_________________________module_________________________
 function Products() {
+    
     //global state:
     const message = useSelector((state) => state.message);
-    const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
+    const categories = useSelector((state) => state.categories);
 
     //const:
     const dispatch = useDispatch();
@@ -32,7 +34,7 @@ function Products() {
         price: "",
         description: "",
         image: "",
-        category: "",
+        categoryId: "",
         stock: "",
     });
     const [errorProduct, setErrorProduct] = useState({
@@ -40,14 +42,14 @@ function Products() {
         price: "",
         description: "",
         image: "",
-        category: "",
+        categoryId: "",
         stock: "",
     });
 
-    const handleProductDelete = (id) => {
+    const handleProductDelete = async (id) => {
         try {
-            dispatch(delete_Products(id));
-            dispatch(get_products_all());
+            await dispatch(delete_Products(id));
+            await dispatch(get_products_all());
         } catch (error) {
             console.log("error");
         }
@@ -59,8 +61,7 @@ function Products() {
         const value = event.target.value;
 
         setNewProduct({ ...newProduct, [name]: value });
-        if (postProduct)
-            setErrorProduct(validateProduct({ ...newProduct, [name]: value }));
+        if (postProduct) setErrorProduct(validateProduct({ ...newProduct, [name]: value }));
         // <--- valida los errores solo cuando lo posteas
         else
             setErrorProduct({
@@ -68,7 +69,7 @@ function Products() {
                 price: "",
                 description: "",
                 image: "",
-                category: "",
+                categoryId: "",
                 stock: "",
             });
         setChange(true);
@@ -103,12 +104,12 @@ function Products() {
                 errorProduct.description ||
                 errorProduct.price ||
                 errorProduct.image ||
-                errorProduct.category ||
+                errorProduct.categoryId ||
                 errorProduct.stock
             )
                 return setMessagePost("Revise los datos");
 
-        
+
             if (change) {
                 if (postProduct) {
                     if (
@@ -116,7 +117,7 @@ function Products() {
                         !newProduct.description ||
                         !newProduct.price ||
                         !newProduct.image ||
-                        !newProduct.category ||
+                        !newProduct.categoryId ||
                         !newProduct.stock
                     )
                         return setMessagePost("Debe ingresar los datos");
@@ -139,7 +140,7 @@ function Products() {
                     price: "",
                     description: "",
                     image: "",
-                    category: "",
+                    categoryId: "",
                     stock: "",
                 });
                 setNewProduct({
@@ -147,7 +148,7 @@ function Products() {
                     price: "",
                     description: "",
                     image: "",
-                    category: "",
+                    categoryId: "",
                     stock: "",
                 });
             }
@@ -166,7 +167,7 @@ function Products() {
             price: "",
             description: "",
             image: "",
-            category: "",
+            categoryId: "",
             stock: "",
         });
         setNewProduct({
@@ -174,7 +175,7 @@ function Products() {
             price: "",
             description: "",
             image: "",
-            category: "",
+            categoryId: "",
             stock: "",
         });
     };
@@ -183,12 +184,22 @@ function Products() {
     useEffect(() => {
         dispatch(clearMessage());
         dispatch(get_products_all());
-
+        dispatch(get_categories())
+    
+        //posibilidad para eliminar la funcion de desmontaje y reemplazarla con el useEffect:
         return () => {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        (async () => {
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            dispatch(clearMessage());
+        })()
+    }, [dispatch])
+
 
     //component:
     return (
@@ -286,19 +297,18 @@ function Products() {
                                     <label htmlFor="category">
                                         Categoria:{" "}
                                     </label>
-                                    <input
-                                        name="category"
-                                        value={newProduct.category}
-                                        onChange={handleChangeProductForm}
-                                        placeholder={
-                                            modificarProduct
-                                                ? product.category
-                                                : ""
+                                    <select onChange={(event) => setNewProduct({...newProduct, categoryId: event.target.value})}>
+                                        <option>Categoría</option>
+                                        {
+                                            categories.allCategories.map((category, index) => (
+                                                <option key={index} value={category.id}>{category.name}</option>
+                                            ))
                                         }
-                                    />
+                                    </select>
                                     {errorProduct.category && (
                                         <span>{errorProduct.category}</span>
                                     )}
+                                    
                                 </div>
 
                                 <div>

@@ -7,7 +7,6 @@ import {
     deleteFavoriteRequest,
 } from "../../../axiosRequests/axiosRequests";
 import { getCoursesByIdRequest } from "../../../axiosRequests/axiosRequests";
-import PublishComment from "../Comments/subComponents/PublishComment";
 import Rating from "@mui/material/Rating";
 
 import styles from "./CourseDetails.module.css";
@@ -40,10 +39,21 @@ function CourseDetails() {
         return `${base}-${suffix}`;
     };
 
+    const [value, setValue] = useState(course?.meanRating)
+    const [disabled, setDisabled] = useState(false)
+    const [comments, setComments] = useState([]);
     const getCourse = async (id) => {
         const data = await getCoursesByIdRequest(id);
         setCourse(data);
         setFav(data?.Users?.find((fav) => fav?.id === user?.id) || false);
+        setValue(course?.meanRating)
+        setComments(data?.Comments.reverse());
+        for (let i = 0 ; i < comments?.length ; i++) {
+            if (comments[i]?.userId === user?.id) {
+                setDisabled(true)
+                return console.log("ya tiene un comentario")
+            }
+        }
     };
 
     const handleRemoveFavorite = async (event) => {
@@ -66,7 +76,7 @@ function CourseDetails() {
         getCourse(id);
         setIds({ ...ids, courseId: id, userId: user?.id });
         return () => {};
-    }, [ids.userId, ids.courseId, id]);
+    }, [disabled, value]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -74,10 +84,14 @@ function CourseDetails() {
         }, 500);
         return () => {
             dispatch(clearCourses());
-
+            clearTimeout()
             dispatch(clearMessage());
         };
-    }, []);
+    }, [disabled]);
+
+    useEffect(() => {
+        console.log(course)
+    }, [course])
 
     //component:
     return (
@@ -87,10 +101,10 @@ function CourseDetails() {
                     <div className={styles.title}>
                         <h1>{course?.title}</h1>
                         <Rating
-                            value={3.5}
+                            value={course?.meanRating}
                             precision={0.1}
                             name="read-only"
-                            // value={course?.meanRating}
+                            // value={value}
                             readOnly
                         />
                     </div>
@@ -165,13 +179,8 @@ function CourseDetails() {
                                 </div>
                             </div>
                             <div className={styles.comments}>
-                                <PublishComment
-                                    userId={user?.id}
-                                    picture={user?.picture}
-                                    name={user?.name}
-                                    comments={course?.Comments}
-                                />
-                                <Comments comments={course.Comments} />
+                                <Comments disabled={disabled} setDisabled={setDisabled} comments={comments}/>
+                                {/* <Comments/> */}
                             </div>
                         </div>
                     </div>

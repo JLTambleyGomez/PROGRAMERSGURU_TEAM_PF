@@ -49,7 +49,7 @@ const ConexionMetamask = () => {
         {errorMessage && <p className={styles.error}>erro</p>}
         
       </div>
-        <p className={styles.walletid}>{defaultAccount}</p>
+        {/* <p className={styles.walletid}>{defaultAccount}</p> */}
     </div>
   );
 };

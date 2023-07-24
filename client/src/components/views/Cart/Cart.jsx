@@ -6,6 +6,7 @@ import { set_cart, get_User_By_Email } from "../../../Redux/actions";
 
 import styles from "./Cart.module.css";
 import Modal from "../ventanaemergente/ventana";
+
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 
@@ -22,7 +23,7 @@ function Cart() {
     const [adressForm, setAdressForm] = useState(false);
     const [message, setMessage] = useState("");
     
-
+    
     //const:
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -48,15 +49,15 @@ function Cart() {
         }
         const oldCart = JSON.parse(localStorage.getItem("cart")).filter(
             (item) => item.id !== id
-        );
-        localStorage.setItem("cart", JSON.stringify(oldCart));
-        dispatch(set_cart());
-    };
-
-    const handleDetailButtons = (id) => {
-        navigate(`/ProductDetail/${id}`);
-    };
-
+            );
+            localStorage.setItem("cart", JSON.stringify(oldCart));
+            dispatch(set_cart());
+        };
+        
+        const handleDetailButtons = (id) => {
+            navigate(`/ProductDetail/${id}`);
+        };
+        
     const calculateTotal = () => {
         let total = 0;
         cart?.forEach((product) => {
@@ -65,16 +66,16 @@ function Cart() {
         });
         return total;
     };
-
+    
     const handlePagarButton = () => {
         dispatch(set_cart());
-
+        
         const arrayListOfProducts = cart?.map(
             (product) =>
-                `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
-        );
-        const stringListOfProducts = arrayListOfProducts?.join("\n");
-        const listOfProducts = stringListOfProducts
+            `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
+            );
+            const stringListOfProducts = arrayListOfProducts?.join("\n");
+            const listOfProducts = stringListOfProducts
             ? "Lista de productos comprados: \n" + stringListOfProducts
             : "No hay productos en el carrito";
         console.log(listOfProducts);
@@ -103,6 +104,8 @@ function Cart() {
         // dispatch(get_User_By_Email());
     }, [user]);
 
+    //Modal
+    // if (user.banned) return (<ModalBannedUser />);
     
     //component:
     return (
@@ -223,9 +226,10 @@ function Cart() {
                                                     reference={compra}
                                                 />
                                             )}
+                                            <p className={styles.metamask}>
                                             <PagoMetamask
                                                 total={calculateTotal()}
-                                            />
+                                            /></p>
                                         </div>
                                     )}
                                 </ul>

@@ -14,8 +14,10 @@ export default function signIn(email, password) {
         .then(() => {
             signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                    console.log("hola");
+                    console.log({userCredential})
                     const user = userCredential.user;
+                    
+
                     if (user) {
                         const token = user.accessToken;
                        
