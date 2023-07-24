@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { filter_courses_by_language, filter_courses_by_price, order_courses, get_courses_all, Dark_Mode } from "../../../Redux/actions";
+import { filter_courses_by_language, filter_courses_by_price, filter_courses_by_technology, order_courses, get_courses_all, Dark_Mode, get_tecnology } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import s from "./FilterBar.module.css";
@@ -12,11 +12,13 @@ function FilterBar() {
     //global states:
     const allCourses = useSelector((state) => state.allCourses);
     const dark = useSelector((state) => state.darkMode);
+    const technologies = useSelector((state) => state.tecnology);
 
     //states:
     const [orden, setOrden] = useState("");
     const [idioma, setIdioma] = useState("");
     const [price, setPrice] = useState("");
+    const [technology, setTechnology] = useState("");
     const [filterModal, setFilterModal] = useState(false);
     const [sortModal, setSortModal] = useState(false);
 
@@ -36,23 +38,46 @@ function FilterBar() {
         const value = event.target.value;
         await setOrden(value);
 
-        if (idioma === "" && price === "") {
-            await dispatch(order_courses(value));
-        }
-        if (idioma !== "" && price !== "") {
+        if (!idioma && !price && !technology && !value) await dispatch(get_courses_all());
+        if (!idioma && !price && !technology) await dispatch(order_courses(value));
+        if (idioma && price && technology) {
             await dispatch(get_courses_all());
             await dispatch(filter_courses_by_language(idioma));
             await dispatch(filter_courses_by_price(price));
+            await dispatch(filter_courses_by_technology(technology))
             await dispatch(order_courses(value));
         }
-        if (idioma === "" && price !== "") {
+        if (idioma && !price && !technology) {
+            await dispatch(get_courses_all());
+            await dispatch(filter_courses_by_language(idioma));
+            await dispatch(order_courses(value));
+        }
+        if (!idioma && price && !technology) {
             await dispatch(get_courses_all());
             await dispatch(filter_courses_by_price(price));
             await dispatch(order_courses(value));
         }
-        if (idioma !== "" && price === "") {
+        if (!idioma && !price && technology) {
+            await dispatch(get_courses_all());
+            await dispatch(filter_courses_by_technology(technology));
+            await dispatch(order_courses(value));
+        }
+        if (!idioma && price && technology) {
+            await dispatch(get_courses_all());
+            await dispatch(filter_courses_by_price(price));
+            await dispatch(filter_courses_by_technology(technology));
+            await dispatch(order_courses(value));
+        }
+        if (idioma && !price && technology) {
             await dispatch(get_courses_all());
             await dispatch(filter_courses_by_language(idioma));
+            await dispatch(filter_courses_by_technology(technology));
+            await dispatch(order_courses(value));
+        }
+        if (idioma && price && !technology) {
+            await dispatch(get_courses_all());
+            await dispatch(filter_courses_by_language(idioma));
+            await dispatch(filter_courses_by_price(price));
             await dispatch(order_courses(value));
         }
     };
@@ -60,84 +85,179 @@ function FilterBar() {
     const handleLanguageChange = async (event) => {
         const value = event.target.value;
       
-        try {
-            if (value === "") {
-                    await dispatch(get_courses_all());
-                    if (price) await dispatch(filter_courses_by_price(price))
-                    if (orden) await dispatch(order_courses(orden));
-                    await setIdioma(value);
-            } else {
-                if (value !== idioma) {
-                    await dispatch(get_courses_all());
-                    await setIdioma(value);
-                }
-                if (orden !== "" && value === "") {
-                    await dispatch(order_courses(orden));
-                }
-                if (value === "" && orden === "" && price === "") {
-                    await dispatch(get_courses_all());
-                } else if (orden === "" && price === "") {
-                    await dispatch(filter_courses_by_language(value));
-                } else if (orden !== "" && price !== "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_language(value));
-                    await dispatch(filter_courses_by_price(price));
-                    await dispatch(order_courses(orden));
-                } else if (orden === "" && price !== "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_language(value));
-                    await dispatch(filter_courses_by_price(price));
-                } else if (orden !== "" && price === "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_language(value));
-                    await dispatch(order_courses(orden));
-                }
+        if (!value) {
+            await dispatch(get_courses_all());
+            technology && await dispatch(filter_courses_by_technology(technology));
+            price && await dispatch(filter_courses_by_price(price));
+            orden && await dispatch(order_courses(orden));
+            await setIdioma(value);
+        } else {
+            if (value !== technology) {
+                await dispatch(get_courses_all());
+                await setIdioma(value);
             }
-        } catch (error) {
-          // Manejar el error de forma adecuada (por ejemplo, mostrar un mensaje de error)
+            if (orden && !value) await dispatch(order_courses(orden));
+            if (!value && !orden && !price && !technology) await dispatch(get_courses_all());
+            if (!orden && !technology && !price) await dispatch(filter_courses_by_language(idioma));
+            if (orden && technology && price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_technology(technology));
+                await dispatch(order_courses())
+
+            } else if (!orden && technology && price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_language(idioma))
+                await dispatch(filter_courses_by_technology(technology));
+                await dispatch(filter_courses_by_price(price));
+
+            } else if (orden && !technology && price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(order_courses(orden));
+
+            } else if (orden && technology && !price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(filter_courses_by_technology(technology));
+                await dispatch(order_courses(orden));
+
+            } else if (!orden && !technology && price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(filter_courses_by_price(price));
+
+            } else if (orden && !technology && !price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(order_courses(orden));
+
+            } else if (!orden && technology && !price) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_technology(technology));
+            }
         }
     };
     //_______________________________________
     const handlePriceChange = async (event) => {
         const value = event.target.value;
 
-        try {
-            if (value === "") {
-                    await dispatch(get_courses_all());
-                    if (idioma) await dispatch(filter_courses_by_language(idioma))
-                    if (orden) await dispatch(order_courses(orden));
-                    await setPrice(value);
-            } else {
-                if (value !== price) {
-                    await dispatch(get_courses_all());
-                    await setPrice(value);
-                }
-                if (orden !== "" && value === "") {
-                    await dispatch(order_courses(orden));
-                }
-                if (value === "" && orden === "" && price === "") {
-                    await dispatch(get_courses_all());
-                } else if (orden === "" && idioma === "") {
-                    await dispatch(filter_courses_by_price(value));
-                } else if (orden !== "" && idioma !== "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_price(value));
-                    await dispatch(filter_courses_by_language(idioma));
-                    await dispatch(order_courses(orden));
-                } else if (orden === "" && idioma !== "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_price(value));
-                    await dispatch(filter_courses_by_language(idioma));
-                } else if (orden !== "" && idioma === "") {
-                    await dispatch(get_courses_all());
-                    await dispatch(filter_courses_by_price(value));
-                    await dispatch(order_courses(orden));
-                }
+        if (!value) {
+                await dispatch(get_courses_all());
+                idioma && await dispatch(filter_courses_by_language(idioma));
+                technology && await dispatch(filter_courses_by_technology(technology));
+                orden && await dispatch(order_courses(orden));
+                await setPrice(value);
+        } else {
+            if (value !== price) {
+                await dispatch(get_courses_all());
+                await setPrice(value);
             }
-        } catch (error) {
-          // Manejar el error de forma adecuada (por ejemplo, mostrar un mensaje de error)
+            if (orden && !value) await dispatch(order_courses(orden));
+            if (!value && !orden && !price && !technology) await dispatch(get_courses_all());
+            if (!orden && !idioma && !technology) await dispatch(filter_courses_by_price(price));
+            if (orden && idioma && technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_technology(technology));
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(order_courses())
+
+            } else if (!orden && idioma && technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price))
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(filter_courses_by_technology(technology));
+
+            } else if (orden && !idioma && technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_technology(technology));
+                await dispatch(order_courses(orden));
+
+            } else if (orden && idioma && !technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_language(idioma));
+                await dispatch(order_courses(orden));
+
+            } else if (!orden && !idioma && technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_technology(technology));
+
+            } else if (orden && !idioma && !technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(order_courses(orden));
+
+            } else if (!orden && idioma && !technology) {
+                await dispatch(get_courses_all());
+                await dispatch(filter_courses_by_price(price));
+                await dispatch(filter_courses_by_language(idioma));
+            }
         }
     };
+
+    const handleTechnology = async (event) => {
+        const { value } = event.target;
+
+            if (!value) {
+                await dispatch(get_courses_all());
+                idioma && await dispatch(filter_courses_by_language(idioma));
+                price && await dispatch(filter_courses_by_price(price));
+                orden && await dispatch(order_courses(orden));
+                await setTechnology(value);
+            } else {
+                if (value !== technology) {
+                    await dispatch(get_courses_all());
+                    await setTechnology(value);
+                }
+                if (orden && !value) await dispatch(order_courses(orden));
+                if (!value && !orden && !price && !technology) await dispatch(get_courses_all());
+                if (!orden && !idioma && !price) await dispatch(filter_courses_by_technology(technology));
+                if (orden && idioma && price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_price(price));
+                    await dispatch(filter_courses_by_language(idioma));
+                    await dispatch(order_courses())
+
+                } else if (!orden && idioma && price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology))
+                    await dispatch(filter_courses_by_language(idioma));
+                    await dispatch(filter_courses_by_price(price));
+
+                } else if (orden && !idioma && price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology));
+                    await dispatch(filter_courses_by_price(price));
+                    await dispatch(order_courses(orden));
+
+                } else if (orden && idioma && !price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology));
+                    await dispatch(filter_courses_by_language(idioma));
+                    await dispatch(order_courses(orden));
+
+                } else if (!orden && !idioma && price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology));
+                    await dispatch(filter_courses_by_price(price));
+
+                } else if (orden && !idioma && !price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology));
+                    await dispatch(order_courses(orden));
+
+                } else if (!orden && idioma && !price) {
+                    await dispatch(get_courses_all());
+                    await dispatch(filter_courses_by_technology(technology));
+                    await dispatch(filter_courses_by_language(idioma));
+                }
+            }
+    }
 
     const handleFilterReset = (event) => {
         event.preventDefault();
@@ -148,12 +268,16 @@ function FilterBar() {
 
     //life-cycles:
     useEffect(() => {
-        console.log({ orden, idioma, price});
-    }, [orden, idioma, price]);
+        console.log({ orden, idioma, price, technology});
+    }, [orden, idioma, price, technology]);
 
     useEffect(() => {
         console.log(allCourses)
     }, [allCourses]);
+
+    useEffect(() => {
+        !technologies.length && dispatch(get_tecnology())
+    }, [technologies])
 
     useEffect(() => {
         dispatch(Dark_Mode())
@@ -202,6 +326,15 @@ function FilterBar() {
                     <option value="">Idioma</option>
                     <option value="Inglés">Cursos en Inglés</option>
                     <option value="Español">Cursos en Español</option>
+                </select>
+                <p>Tecnología</p>
+                <select value={technology} onChange={handleTechnology}>
+                    <option value="">Tecnología</option>
+                    {
+                        technologies?.length && technologies.map((tech, index) => (
+                            <option key={index} value={tech.name}>{tech.name}</option>
+                        ))
+                    }
                 </select>
                 <p>Acceso</p>
                 <select value={price} onChange={handlePriceChange}>
