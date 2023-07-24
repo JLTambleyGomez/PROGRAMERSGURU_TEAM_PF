@@ -151,7 +151,9 @@ function FilterBarShop () {
     }, [price, order, category])
 
     useEffect(() => {
-        dispatch(get_categories())
+        (async () => {
+            dispatch(get_categories())
+        })
     }, [])
 
     useEffect(() => {

@@ -33,8 +33,6 @@ function NavBar ( { logoutUser } ) {
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const navigate = useNavigate();
-    const email = localStorage.getItem("email");
-    const token = sessionStorage.getItem("accessToken");
 
     //functions:
     const toggleBars = () => {
@@ -51,10 +49,12 @@ function NavBar ( { logoutUser } ) {
 
     //life-cycles:
     useEffect(() => {
+        const email = localStorage.getItem("email");
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []) //testear con array vacio.
 
     useEffect(()=>{
+        const token = localStorage.getItem("accessToken");
         if (token) dispatch (get_products_all())
     },[])
 
@@ -184,7 +184,7 @@ function NavBar ( { logoutUser } ) {
             }
             {
                 user.admin ?
-                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
+                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]} ${s.admin}`}>
                         AdminPanel
                     </NavLink>
                 : null
@@ -203,6 +203,14 @@ function NavBar ( { logoutUser } ) {
             {
                 isBarsOpen && (
                     <section className={`${s.barsMenu} ${s[theme("barsMenu")]}`}>
+                    {/* ADMIN */}
+                        {
+                            user.admin ?
+                                <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]} ${s["admin-responsive"]}`}>
+                                    AdminPanel
+                                </NavLink>
+                            : null
+                        }
                     {/* SEARCHBAR */}
                         <div className={s["searchBar-responsive"]}>
                             <SearchBar/>

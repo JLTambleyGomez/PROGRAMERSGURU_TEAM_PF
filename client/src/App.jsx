@@ -65,6 +65,7 @@ auth.onIdTokenChanged(async (user) => {
         const refreshedToken = await user.getIdToken(true);
         localStorage.setItem("accessToken", refreshedToken);
         console.log("Token renovado:", refreshedToken);
+        window.alert("renovado")
         // Puedes guardar el nuevo token en local o en el estado de la aplicación para usarlo en las solicitudes posteriores
       }
     } catch (error) {
