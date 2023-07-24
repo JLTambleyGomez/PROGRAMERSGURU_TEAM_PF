@@ -13,6 +13,7 @@ import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 //_________________________module_________________________
 function Cart() {
     //global states:
+    const dark = useSelector(state => state.darkMode)
     const cart = useSelector((state) => state.cart);
     const user = useSelector((state) => state.user);
 
@@ -28,12 +29,17 @@ function Cart() {
     const dispatch = useDispatch();
 
     //function:
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
+
     const handleAddButton = (type, P) => {
         if (type === "suma" && P.quantity < P.stock) {
             P.quantity = P.quantity + 1;
             localStorage.setItem("cart", JSON.stringify(cart));
             dispatch(set_cart());
-        } else if (type === "resta" && P.quantity > 0) {
+        } else if (type === "resta" && P.quantity > 1) {
             P.quantity = P.quantity - 1;
             localStorage.setItem("cart", JSON.stringify(cart));
             dispatch(set_cart());
@@ -113,7 +119,7 @@ function Cart() {
                     <div className={styles.flex}>
                         <div className={styles.productscontainer}>
                             {cart?.map((P, index) => (
-                                <div className={styles.info}>
+                                <div className={`${styles.info} ${styles[theme("info")]}`}>
                                     <div className={styles.description}>
                                         {/* NOMBRE */}
                                         <span
@@ -142,7 +148,7 @@ function Cart() {
                                             <img
                                                 src="https://www.svgrepo.com/show/527587/add-square.svg"
                                                 alt=""
-                                                className={styles.add}
+                                                className={`${styles.add} ${styles[theme("add")]}`}
                                                 onClick={() =>
                                                     handleAddButton("suma", P)
                                                 }
@@ -151,7 +157,7 @@ function Cart() {
                                             <img
                                                 src="https://www.svgrepo.com/show/527816/minus-square.svg"
                                                 alt=""
-                                                className={styles.add}
+                                                className={`${styles.add} ${styles[theme("add")]}`}
                                                 onClick={() =>
                                                     handleAddButton("resta", P)
                                                 }
@@ -159,7 +165,7 @@ function Cart() {
                                             <img
                                                 src="https://www.svgrepo.com/show/525134/trash-bin-trash.svg"
                                                 alt=""
-                                                className={styles.trash}
+                                                className={`${styles.trash} ${styles[theme("trash")]}`}
                                                 onClick={() =>
                                                     removeFromCart(P.id)
                                                 }
@@ -170,7 +176,7 @@ function Cart() {
                             ))}
                         </div>
                         {/* RESUMEN */}
-                        <div className={styles.total}>
+                        <div className={`${styles.total} ${styles[theme("total")]}`}>
                             <span className={styles.finalizar}>
                                 Finaliza tu compra
                             </span>

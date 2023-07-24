@@ -25,7 +25,7 @@
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
 }
 .infoProfile-dark {
-    background-color: rgb(83,83,83);
+    background-color: rgb(43, 48, 49);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
 
@@ -62,7 +62,7 @@
     box-shadow: 1px 1px 5px rgba(128, 128, 128);
 }
 .navBarProfile-dark {
-    background-color: rgb(83, 83, 83);
+    background-color: rgb(43, 48, 49);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
 
@@ -79,7 +79,7 @@
     color: gray;
 }
 .emptyTab-dark {
-    background-color: rgb(83, 83, 83);
+    background-color: rgb(43, 48, 49);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
 .emptyTab img {
@@ -205,7 +205,7 @@
     overflow-y: scroll;
 }
 .favorites-dark {
-    background-color: rgb(83, 83, 83);
+    background-color: rgb(43, 48, 49);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
 
@@ -262,7 +262,7 @@
     gap: 10px;
 }
 .reviews-dark {
-    background-color: rgb(83, 83, 83);
+    background-color: rgb(43, 48, 49);
     box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }
 
@@ -341,4 +341,9 @@
     height: 400px;
     overflow-y: scroll;
     gap: 10px;
+    padding: 3px;
+}
+.cart-dark {
+    background-color: rgb(43, 48, 49);
+    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
 }

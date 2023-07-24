@@ -33,6 +33,10 @@
     background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 5px -2px black;
   }
+  .info-dark {
+    background-color: rgb(1, 80, 90);
+  }
+
   .description {
     display: flex;
     flex-direction: column;
@@ -72,6 +76,9 @@
     width: 25px;
     margin: 0 3px 0 3px;
   }
+  .add-dark {
+    filter: invert();
+  }
   .add:hover {
     cursor: pointer
   }
@@ -81,6 +88,9 @@
     top: 3px;
     right: 3px;
     width: 20px;
+  }
+  .trash-dark {
+    filter: invert();
   }
   .trash:hover {
     cursor: pointer;
@@ -98,6 +108,9 @@
     margin: 6px;
     background-color: white;
     box-shadow: 1px 1px 5px -2px black;
+  }
+  .total-dark {
+    background-color: rgb(1, 80, 90);
   }
   .total ul {
     margin: 15px;

@@ -24,7 +24,7 @@ export function Carrito({ dark }) {
     }
 
     return (
-        <div className={s.cart}>
+        <div className={`${s.cart} ${s[theme("cart")]}`}>
             <CartV2/>
         </div>
     );
