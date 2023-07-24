@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../../config/firebase-config";
 
+import { Dark_Mode } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
 import {
     get_tecnology,
     get_courses_all,
@@ -26,29 +29,30 @@ function HomePage () {
     const dispatch = useDispatch();
     const latestCourses = Array.isArray(allCourses) ? allCourses.slice(-4) : [];
 
-    //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     //-------------------------------------------------------------------------
     // obtener el email
-    const email = localStorage.getItem("email")
+    // const email = localStorage.getItem("email")
     //-------------------------------------------------------------------------
 
 
     //life-cycles:
     useEffect(() => {
+        const email = localStorage.getItem("email")
         dispatch(get_tecnology());
         dispatch(get_courses_all());
-    
+
+        dispatch(Dark_Mode())
+
         //--desmontado
         return () => {
             dispatch(clearMessage());
             dispatch (clearCourses())
         };
     }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
     if(user.banned) return <ModalBannedUser />
@@ -57,7 +61,7 @@ function HomePage () {
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
         {/* BANNER */}
-            <section className={`${s.sectionBanner}`}>
+            {/* <section className={`${s.sectionBanner}`}>
                 <img
                     className={`${s.bannerImg}`}
                     src="https://storage.googleapis.com/pai-images/7dd87a726d554d02a57f5e2267ae7393.jpeg"
@@ -66,19 +70,19 @@ function HomePage () {
                 <h1 className={`${s.mainTitle} ${s[theme("mainTitle")]}`}>
                     PROGRAMMER'S GURU
                 </h1>
-            </section>
+            </section> */}
             <SubscripcionesFlotante/>
         {/* LAST COURSES */}
             <section className={`${s.sectionCourses}`}>
                 <h1 className={`${s.coursesTitle} ${s[theme("coursesTitle")]}`}>
                     ÚLTIMOS CURSOS DEL MERCADO
                 </h1>
-                <div>
-                {latestCourses.length > 0 ? (
-                    <CoursesPreview courses={latestCourses} />
-                ) : (
-                    <p className={s.cargando}>Cargando</p>
-                )}
+                <div style={{display: "flex", alignItems: "center", justifyContent: "center", width: "100%"}} className={s.coursesPreviewContainer}>
+                    {latestCourses.length > 0 ? (
+                        <CoursesPreview courses={latestCourses} />
+                    ) : (
+                        <p className={s.cargando}>Cargando</p>
+                    )}
                 </div>
             </section>
 
@@ -91,19 +95,21 @@ function HomePage () {
                     <section className={`${s.sectionFAQ}`}/> */}
 
         {/* NEWS */}
-            <section className={`${s.sectionNews}`}>
+        <section className={`${s.sectionNews}`}>
                 <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>
-                <span className={`${s.newsBanner}`}>
-                <h2 className={`${s[theme("text")]}`}>
-                    Programación web desde casa: el nuevo curso gratis online basado en
-                    inteligencia artificial
-                </h2>
-                <img
-                    className={`${s.newsImg}`}
-                    src="https://www.cronista.com/files/image/525/525496/6446a76145585.jpg"
-                    alt="newsBanner"
-                />
-                </span>
+                <div className={`${s.newsBanner}`}>
+                    <h2 className={`${s[theme("text")]}`}>
+                        Programación web desde casa: el nuevo curso gratis online basado en
+                        inteligencia artificial
+                    </h2>
+                    {/* <div className={s.imgContainer}> */}
+                        <img
+                            className={`${s.newsImg}`}
+                            src="https://www.cronista.com/files/image/525/525496/6446a76145585.jpg"
+                            alt="newsBanner"
+                        />
+                    {/* </div> */}
+                </div>
                 <p className={`${s.newsDate} ${s[theme("text")]}`}>
                     Actualizado al 10 de mayo de 2023
                 </p>

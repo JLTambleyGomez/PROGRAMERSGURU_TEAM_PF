@@ -1,31 +1,38 @@
 .component {
+  padding-bottom: var(--footerHeight);
   margin-top: var(--navBarHeight);
-  min-height: calc(100vh - var(--navBarHeight));
+  min-height: calc(100vh - var(--navBarHeight));    
   position: absolute;
+  width: 100%;
   display: flex;
   flex-direction: column; 
-  align-items: center;
-  padding-bottom: 20%;
-  width: 100%;
-  animation:blur-in 0.4s linear both;
-  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
+  box-sizing: border-box;
+  /* animation:blur-in 0.4s linear both; */
+} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
 
-.mainBanner {
-    background-image: linear-gradient(to right,  #000000, #434343);
-    height: 38%;
-    width: 100%;
-  }
-  .mainBanner h1 {
-    font-size: 100%;
-    color: white;
-  }
-
-.filterOrder {
-    width: 100%;
-  display: flex;
-  justify-content: space-evenly;
+.component-dark {
+   background-color: #000000;
 }
 
-.cargando{
+.mainBanner {
+       background-image: linear-gradient(to right,  #000000, #434343);
+       height: 200%;
+       width: 100%;
+       left: 0;
+   }
+   .mainBanner h1 {
+       color: white;
+   }
 
-  animation:vibrate .5s linear both} @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
+  .filterOrder {
+       top: var(--navBarHeight);
+       /* display: flex; */
+       position: sticky;
+       width: 100%;
+       z-index: 9000;
+       /* justify-content: space-evenly; */
+   }
+
+.cargando {
+   animation:vibrate .5s linear both
+} @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}

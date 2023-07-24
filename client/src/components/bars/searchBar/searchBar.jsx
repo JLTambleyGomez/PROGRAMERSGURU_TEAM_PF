@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { get_courses_by_name, get_products_by_name, get_courses_all,get_products_all} from "../../../Redux/actions";
+
+import { get_courses_by_name, get_products_by_name, get_courses_all,get_products_all, Dark_Mode} from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import s from "./searchBar.module.css";
 
@@ -23,13 +25,7 @@ function SearchBar () {
     const { pathname } = useLocation();
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? 'dark' : 'light';
-        return `${base}-${suffix}`;
-    };
-
     const handleSearchInput = (event) => {
-       
         setInput(event.target.value);
     };
 
@@ -60,6 +56,11 @@ function SearchBar () {
             setToggleVisibility(true);
         }, 400);
     };
+
+    //life-cycles:
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
 
 
    //component:

@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle_shopbag, get_User_By_Email,get_products_all} from "../../../Redux/actions";
+
+import { toggle_shopbag, get_User_By_Email,get_products_all, Dark_Mode} from "../../../Redux/actions";
+import theme from "../../../theme/theme";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBagShopping } from "@fortawesome/free-solid-svg-icons";
@@ -15,19 +17,15 @@ import Menu from "../Menu/Menu";
 import ModalBannedUser from '../../views/ModalBannedUser/ModalBannedUser'
 
 //_________________________module_________________________
-function NavBar({ logoutUser }) {
+function NavBar ( { logoutUser } ) {
+
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const shopbag = useSelector((state) => state.shopbag);
     const user = useSelector((state) => state.user);
 
     //states:
-    const [isResponsive, setIsResponsive] = useState(false);
     const [isBarsOpen, setIsBarsOpen] = useState(false);
-
-    const toggleBars = () => {
-        setIsBarsOpen(!isBarsOpen);
-    };
 
     //const:
     const dispatch = useDispatch();
@@ -37,42 +35,33 @@ function NavBar({ logoutUser }) {
     const token = sessionStorage.getItem("accessToken")
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
-    const responsive = (base) => {
-        const option = isResponsive ? "responsive" : "";
-        return `${base}-${option}`;
+    const toggleBars = () => {
+        setIsBarsOpen(!isBarsOpen);
     };
 
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag));
     };
 
-    //life-cycles:
-    useEffect(() => {
-            if (!user?.email) dispatch(get_User_By_Email(email));
-
-           
-    }, []) //testear con array vacio.
-
-    useEffect(()=>{
-        if (token){
-            dispatch (get_products_all())
-        }
-    },[])
-
-    useEffect(() => {
-        console.log(isResponsive)
-    }, [isResponsive])
-
-
-    const handlegohome=()=>{
+    const handlegohome = () => {
         navigate("/HomePage")
     }
 
+    //life-cycles:
+    useEffect(() => {
+        if (!user?.email) dispatch(get_User_By_Email(email));
+    }, []) //testear con array vacio.
+
+    useEffect(()=>{
+        if (token) dispatch (get_products_all())
+    },[])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
+
+
+    //rule:
 
     //chequear usuario baneado
     if(user.banned) return <ModalBannedUser />
@@ -176,9 +165,13 @@ function NavBar({ logoutUser }) {
                 icon={faBagShopping}
             />
         
-        {user.admin ?  <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
-                    AdminPanel</NavLink>: null}
-
+            {
+                user.admin ?  
+                    <NavLink to="/AdminPanel" className={`${s.link} ${s[theme("link")]}`}>
+                        AdminPanel
+                    </NavLink>
+                : null
+            }
 
 
         {/* MENU */}

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggle_shopbag, set_cart } from "../../../Redux/actions";
+import { toggle_shopbag, set_cart, Dark_Mode } from "../../../Redux/actions";
+
 import theme from "../../../theme/theme";
 
 import s from "./Bag.module.css";
@@ -17,11 +18,6 @@ function Bag () {
     const dispatch = useDispatch();
 
     //function:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`
-    }
-
     const toggleShopbag = () => {
         dispatch(toggle_shopbag(!shopbag))
     }
@@ -51,6 +47,11 @@ function Bag () {
     useEffect(() => {
         dispatch(set_cart());
     }, [])
+
+    useEffect(() => {
+        dispatch(Dark_Mode())
+    }, [dark])
+
 
     //component:
     return (
