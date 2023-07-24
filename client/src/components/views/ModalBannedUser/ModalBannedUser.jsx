@@ -10,14 +10,10 @@ const ModalBannedUser = () => {
 
     const closeModal = async () => {
         
-        await dispatch(clearUser())
-        
+        await dispatch(clearUser());
+        localStorage.clear();
         navigate('/')
     }
-
-    useEffect(() => {
-
-    }, [])
 
     return(
         <div className={styles.container}>
