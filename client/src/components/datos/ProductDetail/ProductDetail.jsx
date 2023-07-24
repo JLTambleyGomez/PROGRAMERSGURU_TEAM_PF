@@ -1,33 +1,39 @@
 import styles from "./ProductDetail.module.css";
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import {getProductByIdRequest} from '../../../axiosRequests/axiosRequests'
+import { get_User_By_Email } from "../../../Redux/actions";
+import {getProductByIdRequest} from "../../../axiosRequests/axiosRequests"
+import { useDispatch,useSelector } from "react-redux";
 
 //_________________________module_________________________
 function ProductDetail() {
+
+  //REDUX
+  const user = useSelector((state)=>state.user);
   const [product, setProduct] = useState(null);
-  const { id } = useParams();
   
-  //hace la peticion con una axion request
-  const getProductById = async () => {
-    try {
-       const productDB = await getProductByIdRequest(id)
-       console.log(productDB)
-       setProduct(productDB)
-      
-    } catch (error) {
-      console.log(error)
-    }
-  } 
+  //hooks
+  const { id } = useParams(); 
+  const dispatch=useDispatch();
+  
+  //life-cycles:
+    useEffect(() => {  
+        const email = localStorage.getItem("email");
+        (async () => {
+            if (!user) await get_User_By_Email(email);
+            if (!product) {
+                const producto = await getProductByIdRequest(id)
+                console.log(producto);
+                setProduct(producto);
+            }
+        })()
+    }, [id]); 
 
-  useEffect(() => {
-    getProductById()
-  }, [id]); 
 
- 
+  //component:
   return (
     <div className={`${styles.container}`}>
-      {Object(product).keys.length > 0 ? (
+      { (product && product?.name) ? (
         <div>
           <h1 className={`${styles.title}`}>Detalles del Producto</h1>
           <div className={styles.productInfo}>

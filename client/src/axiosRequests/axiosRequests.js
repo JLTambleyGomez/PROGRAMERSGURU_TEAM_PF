@@ -1,7 +1,7 @@
 import axios from "axios";
 //HOST:
-// const URL = "http://localhost:3001";
-const URL = "https://pfserverdeploy-production.up.railway.app";
+const URL = "http://localhost:3001";
+// const URL = "https://pfserverdeploy-production.up.railway.app";
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
 
@@ -277,7 +277,8 @@ export const deleteCategoryRequest = async (id) => {
   return data
 }
 
-export const getProductByIdRequest = async (id) => {
-  const {data} =  await axios.get(`/product/${id}`)
-  return data
-}
+export const getProductByIdRequest = async (id) => {  
+  const { data } = await axios.get(`/product/${id}`);
+  return data;
+};
+

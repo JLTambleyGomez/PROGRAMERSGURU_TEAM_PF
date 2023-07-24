@@ -74,6 +74,7 @@ const globalStorage = {
     darkMode: false,
     access: false,
     products: [],
+    product: {},//
     user: {},
     cart: [],
     shopbag: false,
@@ -81,7 +82,7 @@ const globalStorage = {
     metamask: false,
     metamaskaddress: null,
     productsCopy: [],
-    subscriptions: [], ////   <---------- MODIFICADO
+    subscriptions: [], 
     allUsers: [],
     tecnology: []
 };
@@ -209,6 +210,8 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
             //productos
         case GET_PRODUCTS:
             return { ...state, products: payload, productsCopy: payload };
+
+   
 
         case GET_PRODUCTS_BY_NAME:
             return { ...state, products: payload };
