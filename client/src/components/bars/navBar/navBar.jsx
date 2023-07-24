@@ -29,7 +29,11 @@ function NavBar ( { logoutUser } ) {
     //states:
     const [isBarsOpen, setIsBarsOpen] = useState(false);
 
-    //const:
+    //const:    
+    const expirationDate = new Date(user?.expirationDate);
+    const actualDate = new Date();
+    console.log(expirationDate < actualDate);
+
     const dispatch = useDispatch();
     const { pathname } = useLocation();
     const navigate = useNavigate();
@@ -157,13 +161,19 @@ function NavBar ( { logoutUser } ) {
                 <SearchBar/>
             </div>
         {/* SUSCRIPCION */}
-            {
+            {expirationDate < actualDate 
+                ? <div className={s.subscription}>
+                    <SubscripcionesButton/>
+                </div>
+                : null
+            }
+            {/* {
                 user.expirationDate && (
                     <div className={s.subscription}>
                         <SubscripcionesButton/>
                     </div>
                 )
-            }
+            } */}
         {/* METAMASK */}
             <div className={s.metamask}>
                 <ConexionMetamask/>
@@ -260,9 +270,12 @@ function NavBar ( { logoutUser } ) {
                             </button>
                         </div>
                     {/* SUSCRIPCION */}
-                        <div className={s["subscription-responsive"]}>
-                            <SubscripcionesButton/>
-                        </div>
+                        {expirationDate < actualDate 
+                            ? <div className={s["subscription-responsive"]}>
+                                <SubscripcionesButton/>
+                            </div>
+                            : null
+                        }
                         <div>
                             <button className={`${s["buttonProfile-responsive"]} ${s[theme("button")]}`}>
                                 <NavLink to="/Cart" className={`${s.link} ${s[theme("link")]}`}>

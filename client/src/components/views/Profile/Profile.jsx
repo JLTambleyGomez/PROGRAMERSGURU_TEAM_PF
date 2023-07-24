@@ -156,10 +156,13 @@ function ProfileV2() {
                 </div>
                 <h5>
                     {actualDate > expirationDate
-                        ? "No posees suscripción activa"
+                        ? <div className={s.subscription}>
+                            <>No posees suscripción activa</> 
+                            <a href="/pagosubscripcion" className={s.link}>Suscribite aquí!</a>
+                        </div>
                         : `Su suscripción vence en ${
-                              (expirationDate - actualDate) /
-                              (1000 * 60 * 60 * 24)
+                              Math.round((expirationDate - actualDate) /
+                              (1000 * 60 * 60 * 24))
                           } días`}
                 </h5>
             </div>

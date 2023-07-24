@@ -13,11 +13,13 @@ import theme from "../../../theme/theme";
 import styles from "./CourseDetails.module.css";
 import Comments from "../Comments/Comments";
 
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Tooltip from 'react-bootstrap/Tooltip';
+
 //_________________________module_________________________
 function CourseDetails() {
     //global states:
     const user = useSelector((state) => state.user);
-    const dark = useSelector((state) => state.darkMode);
     //states:
 
     const [loading, setLoading] = useState(true);
@@ -27,8 +29,24 @@ function CourseDetails() {
         courseId: 0,
     });
     const [course, setCourse] = useState({});
-    console.log(course);
-    //const:
+    //const:      
+    const renderTooltip = (props) => (
+        <Tooltip id="button-tooltip" {...props} 
+                style={{
+                    position: 'absolute',
+                    backgroundColor: 'rgba(255, 100, 100, 0.85)',
+                    padding: '2px 10px',
+                    color: 'white',
+                    borderRadius: 3,
+                    ...props.style,
+                }}>
+          <a href="/pagosubscripcion" className={styles.link}>Funcionalidad solo para suscriptores</a>
+        </Tooltip>
+      );
+
+    const expirationDate = new Date(user?.expirationDate);
+    const actualDate = new Date();
+
     const emptyHeart = "https://www.svgrepo.com/show/340294/favorite.svg";
     const fullHeart = "https://www.svgrepo.com/show/340295/favorite-filled.svg";
     const dispatch = useDispatch();
@@ -45,6 +63,7 @@ function CourseDetails() {
         setFav(data?.Users?.find((fav) => fav?.id === user?.id) || false);
         setValue(course?.meanRating)
         setComments(data?.Comments.reverse());
+
         for (let i = 0 ; i < comments?.length ; i++) {
             if (comments[i]?.userId === user?.id) {
                 setDisabled(true)
@@ -101,7 +120,6 @@ function CourseDetails() {
                             value={course?.meanRating}
                             precision={0.1}
                             name="read-only"
-                            // value={value}
                             readOnly
                         />
                     </div>
@@ -118,25 +136,42 @@ function CourseDetails() {
                                 }`}
                             >
                                 <span>
-                                    {!fav ? (
-                                        <img
-                                            className={`${styles.favorite} ${
-                                                styles[theme("favorite")]
-                                            }`}
-                                            onClick={handleAddFavorite}
-                                            src={emptyHeart}
-                                            alt=""
-                                        />
-                                    ) : (
-                                        <img
-                                            className={`${styles.favorite} ${
-                                                styles[theme("addfavorite")]
-                                            }`}
-                                            onClick={handleRemoveFavorite}
-                                            src={fullHeart}
-                                            alt=""
-                                        />
-                                    )}
+                                    {expirationDate > actualDate ? 
+                                    <>
+                                        {!fav ? (
+                                            <img
+                                                className={`${styles.favorite} ${
+                                                    styles[theme("favorite")]
+                                                }`}
+                                                onClick={handleAddFavorite}
+                                                src={emptyHeart}
+                                                alt=""
+                                            />
+                                        ) : (
+                                            <img
+                                                className={`${styles.favorite} ${
+                                                    styles[theme("addfavorite")]
+                                                }`}
+                                                onClick={handleRemoveFavorite}
+                                                src={fullHeart}
+                                                alt=""
+                                            />
+                                        )}
+                                    </>
+                                    : <>
+                                        <OverlayTrigger
+                                            placement="right"
+                                            delay={{ show: 250, hide: 500 }}
+                                            overlay={renderTooltip}
+                                            >
+                                            <img
+                                                className={`${styles.favorite} ${styles[theme("favorite")]}`}
+                                                src={emptyHeart}
+                                                alt=""
+                                            /> 
+                                        </OverlayTrigger>
+                                    </>
+                                    }
                                 </span>
                                 <div className={styles.subData}>
                                     <h4>{course?.title}</h4>
