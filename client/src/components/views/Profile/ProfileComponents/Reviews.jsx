@@ -3,13 +3,9 @@ import { Rating } from "@mui/material";
 import { deleteComment } from "../../../../axiosRequests/axiosRequests";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import theme from "../../../../theme/theme";
 
 export function Reviews({ dark, comments, removeComment, setRemoveComment }) {
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-    console.log(comments);
 
     const handleDelete = async (event) => {
         event.preventDefault();

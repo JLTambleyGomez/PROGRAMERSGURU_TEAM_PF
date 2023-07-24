@@ -2,14 +2,14 @@ const { User } = require("../../db");
 const nodemailer = require("nodemailer");
 
 const putPerfilUser = async (req, res) => {
-    const { name, picture, nickName, email } = req.body;
+    const { name, picture, nickName, email, expirationDate } = req.body;
 
     try {
 
         // console.log()
         if (!email)
             return res.status(400).json({ message: "Debe mandar un email" });
-        if ((!name, !picture, !nickName, !email))
+        if ((!name && !picture && !nickName && !email))
             return res
                 .status(400)
                 .json({ message: "Debe ingresar datos al cambiar" });

@@ -86,4 +86,7 @@
 
 .close {
     cursor: pointer;
+    width: 20px;
+    background-color: whitesmoke;
+    border-radius: 50%;
 }
