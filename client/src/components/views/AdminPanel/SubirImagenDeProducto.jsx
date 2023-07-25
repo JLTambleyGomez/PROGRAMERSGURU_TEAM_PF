@@ -2,10 +2,6 @@ import { useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../config/firebase-config";
 
-// con esta funcion pueden subir imagenes de productos al storage de firebase
-// es un componente. en el admin dashboard donde corresponda ponen: <SubirImagenDeProducto name={name}/>
-// deben pasar por props el nombre "name" del producto
-// reemplazar name por lo que corresponda, debe ser algo distintivo de cada producto para que no se pisen las carpetas
 
 export function SubirImagenDeProducto({ name }) {
     const [selectedFile, setSelectedFile] = useState(null);

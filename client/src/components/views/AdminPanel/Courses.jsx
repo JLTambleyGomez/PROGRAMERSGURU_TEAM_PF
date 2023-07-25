@@ -85,7 +85,7 @@ function Courses() {
         setChange(true);
         setNewCourse((prevCourse) => ({
             ...prevCourse,
-            [name]: value,
+            [name]: (name==="imageURL" && localStorage.getItem("urlNewCourseImage")) || value,
         }));
         dispatch(clearMessage());
         setMessagePost('')
@@ -319,7 +319,7 @@ function Courses() {
                                     <input
                                         type="text"
                                         name="imageURL"
-                                        value={newCourse.imageURL}
+                                        value={localStorage.getItem("urlNewCourseImage") || newCourse.imageURL}
                                         onChange={handleCourseChange}
                                         placeholder={modifCourse && course.imageURL}
                                         />
