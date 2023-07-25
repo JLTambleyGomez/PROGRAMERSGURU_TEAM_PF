@@ -8,10 +8,11 @@ import 'rc-slider/assets/index.css';
 import s from "./Shop.module.css";
 import FilterBarShop from "./FilterBarShop"
 import Modal from "../ventanaemergente/ventana";
+import Footer from "../../bars/Footer/Footer";
 
 
 //_________________________module_________________________
-function Shop () {
+function Shop ( { isAtBottom, docWidth } ) {
 
 
     //global state:
@@ -22,11 +23,8 @@ function Shop () {
 
 
     //states:
-    const [selectQuantity, setSelectQuantity] = useState([])
-    const [cartTooltips, setCartTooltips] = useState([]);
     const [loading, setLoading] = useState(false);
     const [tooltip, setToolip] = useState(null);
-    const [bin, setBin] = useState(false)
 
     //const:
     const dispatch = useDispatch();
@@ -57,7 +55,6 @@ function Shop () {
 
     const popFromCart = async (product) => {
         if (product.quantity === 1) {
-            setBin(true)
             const oldCart = JSON.parse(localStorage.getItem("cart")).filter((item)=>item.id !== id) //convierte el JSON del carrito en un objeto js, en este caso, un array.
             await localStorage.setItem("cart", JSON.stringify(oldCart))
             dispatch(set_cart())
@@ -291,8 +288,14 @@ function Shop () {
                     )
                 }
             </section> 
+            {
+                docWidth < 750 ? (
+                    <Footer/>
+                ) : (
+                    isAtBottom ? <Footer /> : null
+                )
+            }
         </main>
-            
     )
 }
 
