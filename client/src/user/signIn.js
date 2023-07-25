@@ -17,13 +17,13 @@ export default function signIn(email, password) {
                     console.log({userCredential})
                     const user = userCredential.user;
                     
-
                     if (user) {
                         const token = user.accessToken;
+                        console.log(email)
                        
                         localStorage.setItem("accessToken", token);
                         localStorage.setItem("email", email);
-                        // window.location.replace("/HomePage");
+                        window.location.replace("/HomePage");   
                     }
                 }
             );
