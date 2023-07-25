@@ -16,6 +16,8 @@ const postUserRequest = async (userData) => {
             "/user/signup",
             userData
         );
+
+        window.alert({data})
         return data.message;
     } catch (error) {
         console.log(error);
