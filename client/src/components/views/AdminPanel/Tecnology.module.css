@@ -5,7 +5,7 @@
     border-collapse: separate;
   }
   
-  th, td {
+  .th .td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
@@ -13,7 +13,7 @@
 
   }
   
-  th {
+  .th {
     
     background-color:#1eced19d;
     font-weight: bold;
@@ -21,7 +21,7 @@
   }
   
   /* Estilos para los botones dentro de la tabla */
-   button {
+   .button {
     padding: 5px 10px;
     border: none;
     background-color:#005f6b;
@@ -30,7 +30,7 @@
     transition: background-color 0.2s;
   }
   
-  button:hover {
+  .button:hover {
     background-color: #c82333;
     }
   /* Estilo para los botones en las celdas de la última columna */

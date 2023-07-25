@@ -49,21 +49,22 @@
   .Table td button {
     margin-right: 5px;
     cursor: pointer;
-    background-color: #007bff;
+  
     border: none;
     color: white;
     padding: 5px 10px;
-    border-radius: 4px;
-  }
-  
+    
+  }  
   /* Estilos para los botones de eliminar */
   /* Personaliza el color según tus preferencias */
-  .Table td button.delete-button {
+.deleteButton { 
     background-color: #dc3545;
+    border-radius: 4px;
   }
-  
-  /* Estilos para los botones de modificar */
+
+  /* Estilos para los botones de modificar
   /* Personaliza el color según tus preferencias */
-  .Table td button.modify-button {
+ .Table td button.modify-button {
     background-color: #ffc107;
-  }
+  }  
+

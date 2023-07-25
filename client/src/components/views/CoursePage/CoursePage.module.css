@@ -1,13 +1,13 @@
 .component {
   padding-bottom: var(--footerHeight);
   margin-top: var(--navBarHeight);
-  min-height: calc(100vh - var(--navBarHeight));    
+  min-height: calc(100vh - var(--navBarHeight) + 1vh);    
   position: absolute;
   width: 100%;
   display: flex;
   flex-direction: column; 
   box-sizing: border-box;
-  /* animation:blur-in 0.4s linear both; */
+  animation:blur-in 0.4s ease;
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
 
 .component-dark {
@@ -37,3 +37,13 @@
    margin: 10px;
    animation:vibrate .5s linear both
 } @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
+
+
+
+/* --------- RESPONSIVE ----------- */
+
+@media screen and (max-width: 750px) {
+   .component {
+       padding-bottom: 0;
+   }
+}

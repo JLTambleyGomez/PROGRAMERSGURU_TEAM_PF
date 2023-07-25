@@ -15,10 +15,13 @@ import {
 
 import s from "./HomePage.module.css";
 import CoursesPreview from "../../datos/CoursesPreview/CoursesPreview";
+import CategorySection from "../../datos/CategorySection/CategorySection";
 import SubscripcionesFlotante from "../../datos/Subscripciones/SubscripcionesFlotante";
 import ModalBannedUser from '../ModalBannedUser/ModalBannedUser'
+import Footer from "../../bars/Footer/Footer";
+
 //_________________________module_________________________
-function HomePage () {
+function HomePage ( { storeRef, isAtBottom, docWidth } ) {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
@@ -94,6 +97,9 @@ function HomePage () {
                     </section>
 
                     <section className={`${s.sectionFAQ}`}/> */}
+            <section className={s.sectionCategories}>
+                <CategorySection storeRef={storeRef}/>
+            </section>
         {/* NEWS */}
         <section className={`${s.sectionNews}`}>
                 <h1 className={`${s.newsTitle} ${s[theme("newsTitle")]}`}>NOTICIAS</h1>
@@ -136,6 +142,13 @@ function HomePage () {
                     Link para visitar
                 </a>
             </section>
+            {
+                docWidth < 750 ? (
+                    <Footer/>
+                ) : (
+                    isAtBottom ? <Footer /> : null
+                )
+            }
         </main>
     );
 }

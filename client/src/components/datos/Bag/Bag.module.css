@@ -42,7 +42,7 @@
       box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
     }
     .shopbagOpen {
-          /* animation: sdf 0.4 ; */
+          animation: sdf 0.4 ;
       } @keyframes sdf {
           0% {
               transform: scaleX(1);

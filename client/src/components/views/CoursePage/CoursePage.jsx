@@ -8,10 +8,10 @@ import theme from "../../../theme/theme";
 import styles from "./CoursePage.module.css";
 import CoursesCard from "../../datos/CoursesCard/CoursesCard";
 import FilterBar from "../../bars/filterBar/FilterBar";
-
+import Footer from "../../bars/Footer/Footer";
 
 //_________________________module_________________________
-function CoursePage () {
+function CoursePage ( { isAtBottom, docWidth } ) {
 
 
     //global states:
@@ -45,7 +45,6 @@ function CoursePage () {
             await new Promise(resolve => setTimeout(resolve, 1000));
             setIsloading(false);
         })()
-
     }, [allCourses])
 
 
@@ -71,6 +70,13 @@ function CoursePage () {
                         : <CoursesCard/>
                     }
                 </div>
+            }
+            {
+                docWidth < 750 ? (
+                    <Footer/>
+                ) : (
+                    isAtBottom ? <Footer /> : null
+                )
             }
         </main>
     )

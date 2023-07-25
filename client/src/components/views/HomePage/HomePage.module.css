@@ -6,14 +6,14 @@
   min-height: calc(100vh - var(--navBarHeight));
     /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
   /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
-  padding: 4% 10% var(--paddingBottom);
+  padding: 4% 10% var(--footerHeight);
   display: flex;
   /* 100% - (padding) */
   width: 80%;
   flex-direction: column;
   justify-content: flex-start;
   position: absolute;
-  /* animation:blur-in 0.4s linear both */
+  animation:blur-in 1s ease
 }
   @keyframes blur-in {
     0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
@@ -42,21 +42,31 @@
        width: 100%;
     }
 
- .sectionNews {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, filter 0.3s;
- }
- .sectionNews:hover {
-    transform: scale(1.025);
- }
- .newsBanner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3%;
-    width: 97%;
- }
+   .sectionCategories {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      min-height: 20%;
+  }
+
+
+.sectionNews {
+   display: flex;
+   flex-direction: column;
+   transition: transform 0.3s, filter 0.3s;
+   margin: 0 0 30px;
+}
+.sectionNews:hover {
+   transform: scale(1.025);
+   }
+   .newsBanner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3%;
+      width: 97%;
+   }
     .imgContainer {
        display: flex;
        align-items: center;
@@ -142,8 +152,18 @@
     text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
  }
 
+
+
+/* ---------- RESPONSIVE ------------ */
+
+@media screen and (max-width: 750px) {
+   .component {
+      padding-bottom: unset;
+   }
+}
+
  @media screen and (max-width: 1000px) {
-    .coursesPreviewContainer {
-       width:min-content;
-    }
+   .coursesPreviewContainer {
+      width:min-content;
+   }
 }
