@@ -36,7 +36,7 @@ function Comments({ disabled, comments, setDisabled }) {
     return (
         <div>
             <h3>Comentarios</h3>
-            {disabled || expirationDate < actualDate ? (
+            {expirationDate < actualDate ? (
                 <div className={s.subscription}>
                     <a href="/pagosubscripcion" className={s.link}>
                         Suscribite
@@ -44,7 +44,7 @@ function Comments({ disabled, comments, setDisabled }) {
                     para poder dejar tu comentario y acceder a todas las
                     funcionalidades que ofrecemos!
                 </div>
-            ) : (
+            ) : disabled ? null : (
                 <PublishComment
                     setDisabled={setDisabled}
                     commentData={commentData}

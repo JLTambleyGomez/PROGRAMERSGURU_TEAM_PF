@@ -3,7 +3,10 @@ const { Payment, Product } = require("../../db");
 const getPayment = async (req, res) => {
     try {
         const { id } = req.params;
-
+        if (id==="0") {
+            const allPayments = await Payment.findAll({include: [{model: Product}]}) 
+            return res.json(allPayments)
+        }
         const payment = await Payment.findByPk(id, {include: [{model: Product}]});
         
         if (!payment)

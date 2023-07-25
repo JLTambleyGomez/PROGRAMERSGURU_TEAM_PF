@@ -14,6 +14,7 @@ import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
 import { SubirImagenCurso } from "./SubirImagenCurso";
 import theme from "../../../theme/theme"
+import SelectTechnologies from "./SelectTechnologies";
 
 function Courses() {
     // global state:
@@ -385,24 +386,13 @@ function Courses() {
                                         {errorCourse.language && <p>{errorCourse.language}</p>}
                                 </div>
 
-                                <div className={`${styles.h1}`}>
+                                <div >
                                     <label>Tecnologías:</label>
-                                    <select
-                                        multiple
-                                        name="tecnology"
-                                        onChange={handleTechnologySelection}
-                                        >
-                                        {tecnology?.map((technology) => (
-                                            <option
-                                                key={technology.id}
-                                                value={technology.id}
-                                            >
-                                                {technology.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                        {/* {errorCourse.tecnology && <p>{errorCourse.tecnology}</p>} */}
-
+                                    <SelectTechnologies tecnology={tecnology} 
+                                    selectedTechnologies={selectedTechnologies} 
+                                    setSelectedTechnologies={setSelectedTechnologies}
+                                    />
+                                    <button onClick={HandleSelectTechnologies}>Ok</button>
                                 </div>
 
                                 <button onClick={handleCoursePost}>

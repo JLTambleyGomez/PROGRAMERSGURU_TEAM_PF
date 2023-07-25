@@ -32,13 +32,13 @@ export default function signInwithGoogle() {
                 };
                 const email = user.email
                 console.log(userData);
+                postUserRequest(userData)
                 user.getIdToken()
                 .then((tkn) => {
                     // set access token in local storage
                     notificacion({email, message:"te has registrado"})
                     localStorage.setItem("accessToken", tkn);
                     localStorage.setItem("email", email);                  
-                    postUserRequest(userData)
                     window.location.replace('/HomePage')
                 });
             }
