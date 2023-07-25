@@ -15,6 +15,7 @@ import { validateCourse } from "./validate";
 import { SubirImagenCurso } from "./SubirImagenCurso";
 import theme from "../../../theme/theme"
 import { Table } from "react-bootstrap";
+import SelectTechnologies from "./SelectTechnologies";
 
 
 function Courses() {
@@ -28,90 +29,110 @@ function Courses() {
 
     // states:
     const [change, setChange] = useState(false);
+    const [selectedTechnologies, setSelectedTechnologies] = useState([]);
+    const [modificarCourse, setModificarCourse] = useState(false);
+    const [courseId, setCourseId] = useState(null);
     const [messagePost, setMessagePost] = useState("");
+    const [postCourse, setPostCourse] = useState(false);
+    const [course, setCourse] = useState({})
     const [newCourse, setNewCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
-
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
-    const [modificarCourse, setModificarCourse] = useState(false);
-    const [postCourse, setPostCourse] = useState(false);
-    const [courseId, setCourseId] = useState(null);
     const [errorCourse, setErrorCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
- 
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
-    const [course, setCourse] = useState({})
-
     const [modifCourse, setModifCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
-  
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
 
-    // functions:
-
-    //DESPACHA LA ACTION PARA HACER EL PUT
-
-    //modificar curso
 //modificar curso
-const handleModificarCurso = (id) => {
-    const courseModificar = courses.find((course) => course.id === +id )
-    setCourse(courseModificar)
-    setCourseId(id);
-    setModificarCourse(true);
-};
+    const handleModificarCurso = (id) => {
+        const courseModificar = courses.find((course) => course.id === +id )
+        setCourse(courseModificar)
+        setCourseId(id);
+        setModificarCourse(true);
+    };
 
-
+    //setea segun los cambios en los inputs
     const handleCourseChange = (event) => {
         const { name, value } = event.target;
         setChange(true);
+        
         setNewCourse((prevCourse) => ({
             ...prevCourse,
-            [name]: value,
+            [name]: (name==="imageURL" && localStorage.getItem("urlNewCourseImage")) || value,
         }));
         dispatch(clearMessage());
         setMessagePost('')
-
-        // if (postCourse)
-        //     setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
     };
+    
 
-    const handleTechnologySelection = (event) => {
-        const selectedTechnologies = Array.from(
-            event.target.selectedOptions,
-            (option) => ({
-                id: option.value,
-            })
-        );
+
+    const HandleSelectTechnologies = (e) => {
+        e.preventDefault()
         setNewCourse((prevCourse) => ({
             ...prevCourse,
             tecnology: selectedTechnologies,
         }));
-        // if (postCourse)
-        //     setErrorCourse(
-        //         validateCourse({ ...newCourse, tecnology: selectedTechnologies })
-        //     );
-    };
+    }
+
+
+    // const handleTechnologySelection = (event) => {
+    //     event.preventDefault()
+    //     const { value, checked } = event.target; 
+    //     const selectedTechnologies = Array.from(
+    //         event.target.selectedOptions,
+    //         (option) => ({
+    //             id: option.value,
+    //         })
+    //     );
+    //     setNewCourse((prevCourse) => ({
+    //         ...prevCourse,
+    //         tecnology: selectedTechnologies,
+    //     }));
+     
+    // };
+
+    //ve los cambios en el select
+    // const handleMultipleSelection = (e) => {
+    //     e.preventDefault();
+    //     const { value, checked } = e.target;
+    //     console.log(checked)
+    //     setNewCourse((prevCourse) => {
+    //         if(checked) {
+    //             return {
+    //                 ...prevCourse,
+    //                 tecnology: [...prevCourse.tecnology, value],
+    //             };
+    //         } else {
+    //             return {
+    //                 ...prevCourse,
+    //                 tecnology: prevCourse.tecnology.filter(tec => tec !== value)
+    //             }
+    //         }
+    //     })
+    // }
 
     const handleDeleteCourse = async (id) => {
         try {
@@ -121,11 +142,13 @@ const handleModificarCurso = (id) => {
             console.log("error");
         }
     };
-
+    
     //boton para cerrar el formulario
     const handleClosingModification = (event) => {
+        setLimpiar(true)
         setModificarCourse(false);
         setPostCourse(false);
+        setCourseId(0);
         setMessagePost("");
         setErrorCourse({
             title: "",
@@ -143,14 +166,26 @@ const handleModificarCurso = (id) => {
             description: "",
             imageURL: "",
             courseUrl: "",
-         
             released: "",
             isFree: false,
             language: "",
             tecnology: [],
         });
+        setModifCourse({
+            title: "",
+            description: "",
+            imageURL: "",
+            courseUrl: "",
+            released: "",
+            isFree: false,
+            language: "",
+            tecnology: [],
+        });
+        console.log("borra")
     };
 
+    
+    //envia el formulario
     const handleCoursePost = async (event) => {
         event.preventDefault();
      
@@ -191,7 +226,6 @@ const handleModificarCurso = (id) => {
                 !newCourse.imageURL ||
                 !newCourse.courseUrl ||
                 !newCourse.released ||
-                !newCourse.isFree ||
                 !newCourse.language 
             ) return setMessagePost('Debe completar los datos')
         
@@ -241,7 +275,6 @@ const handleModificarCurso = (id) => {
         dispatch(get_tecnology());
         dispatch(get_courses_all());
         
-
         return () => {
             dispatch(clearMessage());
             dispatch(clearCourses());
@@ -273,16 +306,11 @@ const handleModificarCurso = (id) => {
                 {postCourse || modificarCourse ? (
                     <>
                         <form className={`${styles.coursesForm}`}>
-                            {postCourse && (
+                            {postCourse || modificarCourse ? (
                                 <button onClick={handleClosingModification}>
                                     X
                                 </button>
-                            )}
-                            {modificarCourse && (
-                                <button onClick={handleClosingModification}>
-                                    X
-                                </button>
-                            )}
+                             ) : ''}
                             {modificarCourse ? (
                                 <h2>Modificar Curso</h2>
                             ) : (
@@ -296,7 +324,7 @@ const handleModificarCurso = (id) => {
                                         name="title"
                                         value={newCourse.title}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.title}
+                                        placeholder={modificarCourse ? course.title : 'Titulo'}
                                         />
                                     {errorCourse && <p>{errorCourse.title}</p>}
                                 </div>
@@ -307,7 +335,7 @@ const handleModificarCurso = (id) => {
                                         name="description"
                                         value={newCourse.description}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.description}
+                                        placeholder={modificarCourse ? course.description : 'Descripción'}
                                         />
                                     {errorCourse && (
                                         <p>{errorCourse.description}</p>
@@ -321,12 +349,12 @@ const handleModificarCurso = (id) => {
                                         name="imageURL"
                                         value={newCourse.imageURL}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.imageURL}
+                                        placeholder={modificarCourse ? course.imageURL : 'Url imagen'}
                                         />
                                     {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
-                                <div>
-                                    {/* <SubirImagenCurso title={course?.title}/> */}
+                                <div >
+                                    <SubirImagenCurso handleCourseChange={handleCourseChange} title={modificarCourse ? modifCourse?.title : newCourse?.title}/>
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -336,7 +364,7 @@ const handleModificarCurso = (id) => {
                                         name="courseUrl"
                                         value={newCourse.courseUrl}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.courseUrl}
+                                        placeholder={modificarCourse ? course.courseUrl : 'Url curso'}
                                         />
                                     {errorCourse.courseUrl && <p>{errorCourse.courseUrl}</p>}
                                 </div>
@@ -348,7 +376,7 @@ const handleModificarCurso = (id) => {
                                         name="released"
                                         value={newCourse.released}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.released}
+                                        placeholder={modificarCourse ? course.released : 'Fecha de lanzamiento'}
                                         />
                                    {errorCourse.released && <p>{errorCourse.released}</p>}
                                  
@@ -379,29 +407,36 @@ const handleModificarCurso = (id) => {
                                         name="language"
                                         value={newCourse.language}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.language}
+                                        placeholder={modificarCourse ? course.language : 'Idioma'}
                                         />
                                     
                                         {errorCourse.language && <p>{errorCourse.language}</p>}
-                                </div>
 
                                 <div className={`${styles.h1}`}>
+                                    
+                                <div>
                                     <label>Tecnologías:</label>
-                                    <select
-                                        multiple
-                                        name="tecnology"
-                                        onChange={handleTechnologySelection}
-                                        >
-                                        {tecnology?.map((technology) => (
-                                            <option
-                                                key={technology.id}
-                                                value={technology.id}
-                                            >
-                                                {technology.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                                </div>
+                                    <SelectTechnologies 
+                                    selectedTechnologies={selectedTechnologies} 
+                                    setSelectedTechnologies={setSelectedTechnologies} 
+                                    tecnology={tecnology} />
+                                    <button onClick={HandleSelectTechnologies}>Ok</button>
+                                </div>
+                        
+                                </div>
+                                {/* <label>Selecciona las tecnologías</label>
+                                {tecnology?.map((tecnologia,i) => (
+                                    <div key={i}>
+                                    <label>{tecnologia.name}    </label>
+                                    <input type="checkbox"
+                                    value= {tecnologia}
+                                    name = "tecnology"
+                                    onChange={handleMultipleSelection}
+                                    />
+                                    </div>
+                                ))} */}
+                                </div>
+                          
 
                             <button onClick={handleCoursePost}>
                                 {modificarCourse

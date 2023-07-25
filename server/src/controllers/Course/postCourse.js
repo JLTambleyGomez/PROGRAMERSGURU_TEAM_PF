@@ -49,7 +49,7 @@ const postCourse = async (req, res) => {
         if (created) {
             for (let i = 0; i < tecnology.length; i++) {
                 const newCourseTechnology = await Technology.findByPk(
-                    tecnology[i].id
+                    Number(tecnology[i])
                 );
                 await course.addTechnology(newCourseTechnology);
             }

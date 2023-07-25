@@ -2,7 +2,7 @@ import { useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../config/firebase-config";
 
-export function SubirImagenCurso({ title }) {
+export function SubirImagenCurso({ title, handleCourseChange }) {
     const [selectedFile, setSelectedFile] = useState(null);
 
     function reemplazarCaracteres(str, caracterAntiguo, caracterNuevo) {
@@ -28,6 +28,7 @@ export function SubirImagenCurso({ title }) {
 
     const handleUploadClick = async (e) => {
         e.preventDefault();
+
         if (selectedFile) {
             try {
                 const url = await uploadCoursePicture(selectedFile, titulo);
@@ -39,13 +40,14 @@ export function SubirImagenCurso({ title }) {
         } else {
             console.log("Ningún archivo seleccionado.");
         }
+        handleCourseChange(e)
     };
 
     return (
         <div>
             <label htmlFor="fileInput"></label>
             <input type="file" id="fileInput" onChange={handleFileChange} />
-            <button onClick={handleUploadClick}>Subir Imagen</button>
+            <button onClick={handleUploadClick} name="imageURL" value={localStorage.getItem("urlNewCourseImage") || " "}>Subir Imagen</button>
         </div>
     );
 }
