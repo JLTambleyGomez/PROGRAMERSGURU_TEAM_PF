@@ -8,7 +8,6 @@ const signUp = async (req, res) => {
     try {
         const { email, name, picture } = req.body;
         console.log("este es el signup");
-        console.log(req.body);
         if (!email && !name)
             return res
                 .status(404)
