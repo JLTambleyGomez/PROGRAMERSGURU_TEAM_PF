@@ -1,7 +1,7 @@
 import axios from "axios";
 //HOST:
-const URL = "http://localhost:3001";
-// const URL = "https://pfserverdeploy-production.up.railway.app";
+// const URL = "http://localhost:3001";
+const URL = "https://pfserverdeploy-production.up.railway.app";
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
 
@@ -282,3 +282,15 @@ export const getProductByIdRequest = async (id) => {
   return data;
 };
 
+//Metamask
+export const getMetamaskFeedback = async ({compra, transaction, email}) => {  
+ 
+  const { data } = await axios.post(`/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`, {compra});
+  return data;
+};
+
+export const getMercadopagoFeedback = async ({compra, email, paymentId, status, merchantOrderId}) => {  
+ 
+  const { data } = await axios.post(`/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`, {compra});;
+  return data;
+};

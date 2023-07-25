@@ -9,8 +9,6 @@ const FeedbackMetamask = async (req, res) => {
   try{
   const { email, payment_id } = req.query;
   const { compra } = req.body; 
-  
-  console.log(email,payment_id,compra)
 
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
