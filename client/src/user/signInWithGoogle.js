@@ -31,7 +31,6 @@ export default function signInwithGoogle() {
                 user.getIdToken()
                 .then(async(tkn) => {
                     // set access token in local storage
-                    notificacion({email, message:"te has registrado"})
                     localStorage.setItem("accessToken", tkn);
                     localStorage.setItem("email", email);            
                     console.log(userData)
@@ -39,7 +38,7 @@ export default function signInwithGoogle() {
                 
                     // window.location.replace('/HomePage')
                     window.alert(userData)
-                    
+
                     
                 });
             }
