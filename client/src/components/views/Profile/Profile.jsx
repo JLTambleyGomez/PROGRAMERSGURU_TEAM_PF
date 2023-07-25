@@ -129,6 +129,7 @@ function ProfileV2() {
                 </div>
                 <h2>{user.name}</h2>
                 <h5>{user.nickName}</h5>
+                <p>{user.address}</p>
                 <div className={s.profileButton}>
                     {!collapse ? (
                         <div className={s.refresh}>

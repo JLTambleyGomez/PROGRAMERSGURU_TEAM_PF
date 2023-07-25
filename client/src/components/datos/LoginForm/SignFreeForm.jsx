@@ -55,10 +55,10 @@ function SignFreeForm() {
         setPasswordVisible(!passwordVisible);
     };
 
-    const handleLogIn = async (event) => {
+    const handleLogIn = (event) => {
         event.preventDefault();
-        await get_User_By_Email(userData.email);
-        if (user.banned) {
+        get_User_By_Email(userData.email);
+        if (user?.banned) {
             return setModal(true)
         } else signIn(userData.email, userData.password);
     };

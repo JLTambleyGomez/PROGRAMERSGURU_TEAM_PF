@@ -1,4 +1,4 @@
-const { Course } = require("../../db");
+const { Course, Technology } = require("../../db");
 
 const putCourse = async (req, res) => {
     try {
@@ -11,6 +11,7 @@ const putCourse = async (req, res) => {
             released,
             isFree,
             language,
+            tecnology
         } = req.body;
 
         const { id } = req.params;
@@ -36,8 +37,18 @@ const putCourse = async (req, res) => {
                 .status(404)
                 .json({ message: "No existe un curso con ese id" });
 
+        if(tecnology.length) {
+            for (let i = 0; i < tecnology.length; i++) {
+                const newCourseTechnology = await Technology.findByPk(
+                    tecnology[i]
+                );
+                await courseDB.addTechnology(newCourseTechnology);
+            }
+        }
+
+
         for (let prop in req.body) {
-            if (req.body[prop]) courseDB[prop] = req.body[prop];
+            if (req.body[prop] && req.body[prop]!=="tecnology") courseDB[prop] = req.body[prop];
         }
 
         await courseDB.save();

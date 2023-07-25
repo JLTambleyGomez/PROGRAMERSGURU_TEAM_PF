@@ -7,14 +7,11 @@ import {
     inMemoryPersistence
 } from "firebase/auth";
 import { postUserRequest } from "../axiosRequests/axiosRequests";
-import axios from "axios";
 
 
 export default function signInwithGoogle() {
 
-    const notificacion=async (carta) => {
-        await axios.post(`/user/sendEmail`, carta );
-    };
+
 
     const provider = new GoogleAuthProvider();
     provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
@@ -31,14 +28,18 @@ export default function signInwithGoogle() {
                     name: user.displayName,
                 };
                 const email = user.email
+                console.log(userData);
+                postUserRequest(userData)
                 user.getIdToken()
-                .then((tkn) => {
+                .then(async(tkn) => {
                     // set access token in local storage
-                    notificacion({email, message:"te has registrado"})
                     localStorage.setItem("accessToken", tkn);
-                    localStorage.setItem("email", email);                  
-                    postUserRequest(userData)
+                    localStorage.setItem("email", email);            
+          
+                    await postUserRequest(userData)
+                
                     window.location.replace('/HomePage')
+                    
                 });
             }
         });
