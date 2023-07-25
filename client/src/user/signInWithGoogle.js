@@ -33,12 +33,10 @@ export default function signInwithGoogle() {
                     // set access token in local storage
                     localStorage.setItem("accessToken", tkn);
                     localStorage.setItem("email", email);            
-                    console.log(userData)
+          
                     await postUserRequest(userData)
                 
-                    // window.location.replace('/HomePage')
-                    window.alert(userData)
-
+                    window.location.replace('/HomePage')
                     
                 });
             }
