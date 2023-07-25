@@ -38,10 +38,12 @@ export default function createUser(email, password) {
                             picture: user.photoURL,
                             name: user.displayName,
                         };
+
                         const token = user.accessToken;
                         localStorage.setItem("accessToken", token);
                         localStorage.setItem("email", email)
                         postUserRequest(userData)
+                        
                         window.location.replace("/HomePage");
                     }
                 }

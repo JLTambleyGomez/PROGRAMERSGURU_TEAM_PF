@@ -23,7 +23,7 @@ export default function signIn(email, password) {
                        
                         localStorage.setItem("accessToken", token);
                         localStorage.setItem("email", email);
-                        window.location.replace("/HomePage");
+                        // window.location.replace("/HomePage");
                     }
                 }
             );

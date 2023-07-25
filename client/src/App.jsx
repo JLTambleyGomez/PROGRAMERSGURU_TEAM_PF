@@ -58,7 +58,7 @@ auth.onIdTokenChanged(async (user) => {
         const createdAt = user.metadata.createdAt;
 
         // Programe la renovación del token antes de que expire (por ejemplo, 5 minutos antes)
-        const tokenExpirationTime = createdAt * 1.0002 - (20 * (60 *60 *1000)) + 7 * (60 * 1000) + 25000; // 1 hora - 5 minutos
+        const tokenExpirationTime = createdAt * 1.0002 - (20 * (60 *60 *1000)) ; // 1 hora - 5 minutos
         const currentTime = Date.now();
         console.log(user.metadata);
 
