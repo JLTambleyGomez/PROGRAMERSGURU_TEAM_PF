@@ -1,13 +1,14 @@
-import s from "../Profile.module.css";
+import styles from "../../Profile.module.css";
+import s from "./Favorites.module.css";
 import { Rating } from "@mui/material";
 import { NavLink } from "react-router-dom";
-import theme from "../../../../theme/theme";
+import theme from "../../../../../theme/theme";
 
 export function Favorites({ favorites }) {
 
     if (!favorites?.length) {
         return (
-            <div className={`${s.emptyTab} ${s[theme("emptyTab")]}`}>
+            <div className={`${styles.emptyTab} ${styles[theme("emptyTab")]}`}>
                 <img
                     src="https://www.svgrepo.com/show/461398/file-favorite-7.svg"
                     alt="favoritos"

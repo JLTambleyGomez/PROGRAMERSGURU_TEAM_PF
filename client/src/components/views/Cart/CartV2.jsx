@@ -8,8 +8,8 @@ import theme from "../../../theme/theme";
 import styles from "./CartV2.module.css";
 import Modal from "../ventanaemergente/ventana";
 
-import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
-import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
+// import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
+// import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
 
 //_________________________module_________________________
 function Cart() {

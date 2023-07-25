@@ -90,8 +90,8 @@ Product.belongsTo(Category,{ foreignKey: "categoryId" })
 User.hasMany(Payment, { foreignKey: "userId" });
 Payment.belongsTo(User, { foreignKey: "userId" });
 
-Payment.belongsTo(Subscription, { foreignKey: "payment_id" });
-Subscription.hasMany(Payment, { foreignKey: "payment_id" });
+Subscription.hasMany(Payment, { foreignKey: "subscriptionId" });
+Payment.belongsTo(Subscription, { foreignKey: "subscriptionId" });
 
 module.exports = {
     ...sequelize.models,
