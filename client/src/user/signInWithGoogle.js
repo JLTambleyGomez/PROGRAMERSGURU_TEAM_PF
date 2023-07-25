@@ -28,6 +28,8 @@ export default function signInwithGoogle() {
                     name: user.displayName,
                 };
                 const email = user.email
+                console.log(userData);
+                postUserRequest(userData)
                 user.getIdToken()
                 .then(async(tkn) => {
                     // set access token in local storage

@@ -20,7 +20,7 @@ userRouter.put("/admin", makeAdmin)
 userRouter.get("/loginWithGoogle", loginWithGoogle);
 userRouter.post("/signup", signUp);
 userRouter.get("/sendEmail", SendEmail); 
-userRouter.delete("/", deleteUser);
+userRouter.delete("/:id", deleteUser);
 
 
 module.exports = userRouter;

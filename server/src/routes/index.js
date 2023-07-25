@@ -11,7 +11,7 @@ const suscriptionRouter = require("./suscriptionRouter");
 const middleware = require("../middleware/index");
 const categoryRouter = require("./categoryRouter");
 
-router.use(middleware.decodeToken)
+// router.use(middleware.decodeToken)
 
 router.use ("/Pagos", PagoRouter);
 

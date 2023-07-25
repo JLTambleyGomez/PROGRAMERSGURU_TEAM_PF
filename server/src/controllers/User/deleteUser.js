@@ -4,16 +4,16 @@ const { User } = require("../../db");
 const deleteUser = async (req, res) => {
 
     try {
-        const { id } = req.body;
+        const { id } = req.params;
 
         console.log("userdelete")
         console.log(id);
 
-        const deletedUser = await User.findByPk(id.id);
+        const deletedUser = await User.findByPk(id);
         if (!deletedUser)
             return res
                 .status(404)
-                .json({ message: `El usuario con el id '${id.id}' no existe` });
+                .json({ message: `El usuario con el id '${id}' no existe` });
 
         const name = deletedUser.name;
 
