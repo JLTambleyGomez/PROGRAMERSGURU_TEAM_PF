@@ -13,7 +13,7 @@ import axios from "axios";
 export default function signInwithGoogle() {
 
     const notificacion=async (carta) => {
-        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+        await axios.post(`/user/sendEmail`, carta );
     };
 
     const provider = new GoogleAuthProvider();

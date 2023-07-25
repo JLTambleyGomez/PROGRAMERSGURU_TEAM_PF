@@ -13,7 +13,7 @@ import {
 const postUserRequest = async (userData) => {
     try {
         const { data } = await axios.post(
-            "http://localhost:3001/user/signup",
+            "/user/signup",
             userData
         );
         return data.message;
