@@ -1,4 +1,4 @@
-const { User, Course, Comment } = require("../../db");
+const { User, Course, Comment, Payment, Product, shopping_cart, Category } = require("../../db");
 
 const getUserByEmail = async (req, res) => {
     const { email } = req.query;
@@ -19,6 +19,21 @@ const getUserByEmail = async (req, res) => {
                             attributes: ["imageURL", "title"]
                         }                
                     ]
+                },
+                {
+                    model: Payment,
+                    include: [
+                        {
+                            model: Product,
+                            attributes: ["id","price","name","image"],
+                            include: [
+                                {
+                                    model: Category,
+                                    attributes: ["name"]
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         })
@@ -33,7 +48,7 @@ const getUserByEmail = async (req, res) => {
         console.error(error);
         return res
             .status(500)
-            .json({ message: "Error al obtener el usuario" + error.message });
+            .json({ message: "Error al obtener el usuario " + error.message });
     }
 };
 

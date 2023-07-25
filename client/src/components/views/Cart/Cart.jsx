@@ -221,7 +221,7 @@ function Cart() {
                                     {MostrarPagos && (
                                         <div>
                                             <p>Escoge tu medio de Pago</p>
-                                            {compra.description && (
+                                            {compra?.description && (
                                                 <PagoMercadopago
                                                     reference={compra}
                                                 />

@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
 import { editUserData } from "../../../axiosRequests/axiosRequests";
-import { Favorites } from "./ProfileComponents/Favorites";
-import { Reviews } from "./ProfileComponents/Reviews";
-import { Carrito } from "./ProfileComponents/Carrito";
-import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 import { NavLink } from "react-router-dom";
 import theme from "../../../theme/theme";
+
+import { ShoppinngCart } from "./ProfileComponents/ShoppingCart/ShoppingCart";
+import { Reviews } from "./ProfileComponents/Reviews/Reviews";
+import { Favorites } from "./ProfileComponents/Favorites/Favorites";
+import { PaymentOrders } from "./ProfileComponents/PaymentOrders/PaymentOrders";
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -167,20 +168,19 @@ function ProfileV2() {
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
+                <NavBarProfile tab={tab} changeTab={changeTab} />
                 {tab === "favorites" && (
-                    <Favorites dark={dark} favorites={user?.Courses} />
+                    <Favorites  favorites={user?.Courses} />
                 )}
                 {tab === "reseñas" && (
-                    <Reviews
-                        dark={dark}
+                    <Reviews                        
                         comments={user?.Comments}
                         removeComment={removeComment}
                         setRemoveComment={setRemoveComment}
                     />
                 )}
-                {tab === "compras" && <Compras dark={dark} />}
-                {tab === "carrito" && <Carrito dark={dark} />}
+                {tab === "compras" && <PaymentOrders payments={user?.Payments}/>}
+                {tab === "carrito" && <ShoppinngCart />}
             </div>
         </div>
     );
