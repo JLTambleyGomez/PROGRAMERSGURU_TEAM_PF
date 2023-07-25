@@ -31,6 +31,8 @@
     min-width: 275px;
     flex-wrap: wrap;
     width: 100%;
+    padding: 5px;
+    border-radius: 5px;
     background-color: rgb(255, 255, 255);
     box-shadow: 1px 1px 5px -2px black;
   }
@@ -109,6 +111,7 @@
     width: 35%;
     height: fit-content;
     margin: 5px;
+    border-radius: 5px;
     background-color: white;
     box-shadow: 1px 1px 5px -2px black;
   }

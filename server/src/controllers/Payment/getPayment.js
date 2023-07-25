@@ -1,11 +1,11 @@
-const { Payment } = require("../../db");
+const { Payment, Product } = require("../../db");
 
 const getPayment = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const payment = await Payment.findByPk(id);
-
+        const payment = await Payment.findByPk(id, {include: [{model: Product}]});
+        
         if (!payment)
             return res
                 .status(404)

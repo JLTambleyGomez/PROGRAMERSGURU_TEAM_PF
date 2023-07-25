@@ -1,8 +1,8 @@
-import s from "../Profile.module.css";
-import CartV2 from "../../Cart/CartV2";
-import theme from "../../../../theme/theme";
+import s from "../../Profile.module.css"
+import CartV2 from "../../../Cart/CartV2";
+import theme from "../../../../../theme/theme";
 
-export function Carrito() {
+export function ShoppinngCart() {
 
     const shoppingCart = JSON.parse(localStorage.getItem("cart")) || []
     console.log(shoppingCart);

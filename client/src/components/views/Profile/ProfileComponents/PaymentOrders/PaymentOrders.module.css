@@ -1,0 +1,116 @@
+.payments {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    box-shadow: inset 1px 1px 5px -1px rgb(0, 0, 0);
+    max-height: 450px;
+    overflow-y: scroll;
+}
+.payments-dark {
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
+}
+
+.payment {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 5px;
+    width: 94%;
+    margin: 10px 0 10px 0;
+    min-width: 280px;
+    padding: 10px;
+    background-color: rgb(233, 233, 233);
+    box-shadow: 1px 1px 5px -2px black;
+}
+.payment-dark {
+    background-color: #111111;
+}
+
+.payHeader {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-bottom: 10px;
+}
+.payId {
+    font-size: large;
+}
+.date {
+    color: gray;
+}
+
+.payBody {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    background-color: white;
+    border-radius: 5px;
+}
+.payBody-dark {
+    background-color: rgb(1, 80, 90);
+}
+
+.productsInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 98%;
+    min-width: 280px;
+    padding: 5px;
+}
+
+.productInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid gray;
+    width: 98%;
+}
+.centrar {
+    display: flex;
+    align-items: center;
+}
+
+.image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 1px 1px 5px  black;
+    scale: 0.7;
+}
+
+.productData {
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    font-size: 16px;
+}
+.productName {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.productPrice {
+    font-size: 16px;
+    margin: 5px;
+    margin-bottom: 25px;
+}
+
+.totalPrice {
+    width: 97%;
+    text-align: end;
+    padding: 5px;
+    font-weight: 600;
+    font-size: 18px;
+}

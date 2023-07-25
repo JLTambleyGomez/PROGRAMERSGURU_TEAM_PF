@@ -4,7 +4,6 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const routes = require("./routes/index.js");
 const cors = require('cors')
-// const middleware = require('./middleware/index.js')
 
 require("./db.js");
 
@@ -13,7 +12,6 @@ const server = express();
 server.name = "PROGRAMERSGURU_TEAM_SERVER";
 
 server.use(cors())
-// server.use(middleware.decodeToken);
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
