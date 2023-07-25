@@ -73,7 +73,7 @@ function CategorySection ( { storeRef } ) {
     //component:
     return (
         <div className={s.component}>
-            <h1>Encuentra lo que necesitas para despegar xD</h1>
+            <h1>Encuentra lo que necesitas para programar a lo grande !</h1>
             <div className={s.categories}>
                 {
                     Array.isArray(categories) && categories.length && categories.map((category, index) => (

@@ -88,12 +88,8 @@ function Cart() {
 
         setCompra(referencia);
         //quitar esto y dejarlo a manos del mercadopago, que como carga de ultimo nada mas se deberia cargar antes
-        //setMostrarPagos(true);
-    };
-    const mostrar = ()=>{
         setMostrarPagos(true);
-        console.log("mostrar")
-    }
+    };
 
     //life-cycles:
     useEffect(() => {
@@ -229,7 +225,6 @@ function Cart() {
                                             {compra?.description && (
                                                 <PagoMercadopago
                                                     reference={compra}
-                                                    mostrar={mostrar}
                                                 />
                                             )}
                                             <p className={styles.metamask}>
