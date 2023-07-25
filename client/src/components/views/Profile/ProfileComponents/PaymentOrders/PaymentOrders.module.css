@@ -37,7 +37,7 @@
     padding-bottom: 10px;
 }
 .payId {
-    font-size: large;
+    font-size: 15px;
 }
 .date {
     color: gray;
@@ -94,15 +94,15 @@
     display: flex;
     flex-direction: column;
     margin: 5px;
-    font-size: 16px;
+    font-size: 13px;
 }
 .productName {
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 600;
 }
 
 .productPrice {
-    font-size: 16px;
+    font-size: 13px;
     margin: 5px;
     margin-bottom: 25px;
 }
@@ -112,5 +112,5 @@
     text-align: end;
     padding: 5px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 15px;
 }

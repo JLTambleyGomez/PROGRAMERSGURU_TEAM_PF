@@ -44,13 +44,14 @@ const postCourse = async (req, res) => {
                 : "Ya existe un curso con el mismo nombre. Pruebe con un nombre diferente",
             created,
         };
-        
+        console.log(tecnology);
         // Establecer la relación entre el curso y las categorías utilizando una transacción
         if (created) {
             for (let i = 0; i < tecnology.length; i++) {
                 const newCourseTechnology = await Technology.findByPk(
                     Number(tecnology[i])
                 );
+                console.log(newCourseTechnology);
                 await course.addTechnology(newCourseTechnology);
             }
             return res.status(201).json(response);

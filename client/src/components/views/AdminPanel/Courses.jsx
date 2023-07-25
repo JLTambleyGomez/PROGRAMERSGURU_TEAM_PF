@@ -98,42 +98,6 @@ function Courses() {
     }
 
 
-    // const handleTechnologySelection = (event) => {
-    //     event.preventDefault()
-    //     const { value, checked } = event.target; 
-    //     const selectedTechnologies = Array.from(
-    //         event.target.selectedOptions,
-    //         (option) => ({
-    //             id: option.value,
-    //         })
-    //     );
-    //     setNewCourse((prevCourse) => ({
-    //         ...prevCourse,
-    //         tecnology: selectedTechnologies,
-    //     }));
-     
-    // };
-
-    //ve los cambios en el select
-    // const handleMultipleSelection = (e) => {
-    //     e.preventDefault();
-    //     const { value, checked } = e.target;
-    //     console.log(checked)
-    //     setNewCourse((prevCourse) => {
-    //         if(checked) {
-    //             return {
-    //                 ...prevCourse,
-    //                 tecnology: [...prevCourse.tecnology, value],
-    //             };
-    //         } else {
-    //             return {
-    //                 ...prevCourse,
-    //                 tecnology: prevCourse.tecnology.filter(tec => tec !== value)
-    //             }
-    //         }
-    //     })
-    // }
-
     const handleDeleteCourse = async (id) => {
         try {
             await dispatch(delete_course(id));
@@ -347,7 +311,7 @@ function Courses() {
                                     <input
                                         type="text"
                                         name="imageURL"
-                                        value={newCourse.imageURL}
+                                        value={localStorage.getItem("urlNewCourseImage") || newCourse.imageURL}
                                         onChange={handleCourseChange}
                                         placeholder={modificarCourse ? course.imageURL : 'Url imagen'}
                                         />
@@ -424,17 +388,7 @@ function Courses() {
                                 </div>
                         
                                 </div>
-                                {/* <label>Selecciona las tecnologías</label>
-                                {tecnology?.map((tecnologia,i) => (
-                                    <div key={i}>
-                                    <label>{tecnologia.name}    </label>
-                                    <input type="checkbox"
-                                    value= {tecnologia}
-                                    name = "tecnology"
-                                    onChange={handleMultipleSelection}
-                                    />
-                                    </div>
-                                ))} */}
+
                                 </div>
                           
 

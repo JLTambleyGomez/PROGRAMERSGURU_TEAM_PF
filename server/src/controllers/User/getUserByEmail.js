@@ -3,6 +3,7 @@ const { User, Course, Comment, Payment, Product, shopping_cart, Category } = req
 const getUserByEmail = async (req, res) => {
     const { email } = req.query;
     try {
+        console.log(email);
         const user = await User.findOne({
             where: {
                 email
@@ -37,7 +38,7 @@ const getUserByEmail = async (req, res) => {
                 }
             ]
         })
-        // console.log(user);
+        console.log(user);
         if (!user)
             return res.status(404).json({
                 message: `No existe un usuario con el email ${email}`,
