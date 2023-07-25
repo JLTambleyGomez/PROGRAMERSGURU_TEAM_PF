@@ -13,9 +13,6 @@ import {postUserRequest} from '../axiosRequests/axiosRequests'
 const post_UserRequest = async (userData) => {
     try {
         const data = await postUserRequest(userData)
-
-        window.alert(data)
-        console.log(data)
         return data.message;
     } catch (error) {
         console.log(error);
@@ -43,7 +40,7 @@ export default function createUser(email, password) {
                         console.log(userData)
                         await post_UserRequest(userData)
                         
-                        // window.location.replace("/HomePage");
+                        window.location.replace("/HomePage");
                     }
                 }
             );
