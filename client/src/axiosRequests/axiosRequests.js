@@ -34,7 +34,6 @@ export const getEthvalue = async () => {
     return ethUSDTPrice;
 };
 
-
 export const getProductsRequest = async () => {
     const { data } = await axios.get("/product");
     return data;
@@ -293,3 +292,4 @@ export const getMercadopagoFeedback = async ({compra, email, paymentId, status, 
   const { data } = await axios.post(`/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`, {compra});;
   return data;
 };
+

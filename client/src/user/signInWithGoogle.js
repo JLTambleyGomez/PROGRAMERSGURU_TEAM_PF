@@ -38,7 +38,7 @@ export default function signInwithGoogle() {
                     localStorage.setItem("accessToken", tkn);
                     localStorage.setItem("email", email);                  
                     postUserRequest(userData)
-                    window.location.replace('/HomePage')
+                    // window.location.replace('/HomePage')
                 });
             }
         });
