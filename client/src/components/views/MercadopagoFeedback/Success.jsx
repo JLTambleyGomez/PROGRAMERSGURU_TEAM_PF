@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import {getMercadopagoFeedback} from '../../../axiosRequests/axiosRequests'
 import {get_User_By_Email} from "../../../Redux/actions";
 
 import styles from "./Success.module.css";
@@ -55,10 +55,11 @@ function Success  () {
             const status = searchParams.get("status");
             const merchantOrderId = searchParams.get("merchant_order_id");
       
-            const { data } = await axios.post(
-              `http://localhost:3001/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`,
-                {compra});
-      
+            const data = await getMercadopagoFeedback({email,paymentId,status,merchantOrderId,compra})
+          
+            
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
             console.log(data);
             localStorage.setItem("cart", "[]");
             setPaymentInfo(data);

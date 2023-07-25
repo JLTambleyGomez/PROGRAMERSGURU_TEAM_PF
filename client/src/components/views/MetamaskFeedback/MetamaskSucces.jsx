@@ -14,9 +14,7 @@ const MetaMaskSucces = () => {
     //global state:
     const cart = useSelector((state) => state.cart);
 
-    //state:
-    const [transaction, setTransaction] = useState('');
-
+    
     //const:
     const location = useLocation();
     const dispatch = useDispatch();
@@ -24,33 +22,31 @@ const MetaMaskSucces = () => {
     const email = localStorage.getItem("email");
     const token = localStorage.getItem("accessToken");
     
-    
+    //state:
+    const [transaction, setTransaction] = useState(location.state.transaction);
+
     //life-cycle:
     useEffect(() => {
         if (!token) navigate("/IniciaSession")
     },[])
     
-    useEffect(() => {
+    /useEffect(() => {
         if (location.state) setTransaction(location.state.transaction);
     }, [location.state]);
     
     useEffect(() => {
-        dispatch(set_cart());
-        console.log(cart);
-        console.log("este es el carrito:" + " " + cart);
-        console.log("este es el email:" + " " + email)
-    }, [])
-    
-    
-    useEffect(() => {
         (async () => {
             try {
+                dispatch(set_cart());
+                console.log(cart);
                 const compraString = localStorage.getItem("cart"); // Obtener el contenido del carrito del almacenamiento local como una cadena de texto
                 const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
                 const email = localStorage.getItem("email");
-                console.log(compra)
+             
+              await new Promise(resolve => setTimeout(resolve, 1000));
+               if (transaction){
+                await getMetamaskFeedback({compra, transaction, email})}
 
-                await getMetamaskFeedback({compra, transaction, email})
             } catch (error) {
 
             }

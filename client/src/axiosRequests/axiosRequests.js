@@ -284,9 +284,13 @@ export const getProductByIdRequest = async (id) => {
 
 //Metamask
 export const getMetamaskFeedback = async ({compra, transaction, email}) => {  
-  console.log(compra)
-  window.alert(transaction);
-  console.log(email)
+ 
   const { data } = await axios.post(`/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`, {compra});
+  return data;
+};
+
+export const getMercadopagoFeedback = async ({compra, email, paymentId, status, merchantOrderId}) => {  
+ 
+  const { data } = await axios.post(`/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`, {compra});;
   return data;
 };
