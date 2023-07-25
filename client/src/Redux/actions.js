@@ -726,6 +726,7 @@ export const post_suscription = (suscription) => {
 
 //SHOP FILTERS_________________________________________//
 export const filter_product_by_category = (category) => {
+    console.log(category)
     return {
         type: FILTER_PRODUCTS_BY_CATEGORY,
         payload: category,

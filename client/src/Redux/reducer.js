@@ -231,9 +231,7 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case FILTER_PRODUCTS_BY_CATEGORY:
             return {
                 ...state,
-                products: state.products.filter(
-                    (product) => product.category === payload
-                ),
+                products: state.products.filter((product) => product?.Category?.name === payload)
             };
 
         case FILTER_PRODUCTS_BY_PRICING:
@@ -241,9 +239,10 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
 
         case SORT_PRODUCTS:
             const productosOrdenados = [...state.products];
-
+            const  todos_productosOrdenados= [...state.productsCopy]
+            
             if (payload === "ascendente") {
-                todos_productosOrdenados.sort(
+                productosOrdenados.sort(
                     (a, b) =>
                         a.name.toLowerCase().charCodeAt(0) -
                         b.name.toLowerCase().charCodeAt(0)
