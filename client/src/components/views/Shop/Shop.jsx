@@ -18,6 +18,7 @@ function Shop () {
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
     const cart = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.user);
 
 
     //states:
