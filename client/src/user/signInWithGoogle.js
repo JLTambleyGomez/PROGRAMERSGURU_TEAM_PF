@@ -13,7 +13,7 @@ import axios from "axios";
 export default function signInwithGoogle() {
 
     const notificacion=async (carta) => {
-        await axios.post(`http://localhost:3001/user/sendEmail`, carta );
+        await axios.post(`/user/sendEmail`, carta );
     };
 
     const provider = new GoogleAuthProvider();
@@ -31,6 +31,7 @@ export default function signInwithGoogle() {
                     name: user.displayName,
                 };
                 const email = user.email
+                console.log(userData);
                 user.getIdToken()
                 .then((tkn) => {
                     // set access token in local storage

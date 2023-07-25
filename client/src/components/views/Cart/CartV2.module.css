@@ -48,10 +48,13 @@
     max-width: 240px;
   }
   .productName {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 600;
   }
 
+  .price {
+    font-size: 13px;
+  }
   .masinfo {
     display: flex;
     justify-content: center;
@@ -126,7 +129,7 @@
   }
 
   .finalizar {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bold;
     text-align: center;
   }
