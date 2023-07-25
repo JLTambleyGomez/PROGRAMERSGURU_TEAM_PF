@@ -30,7 +30,7 @@ export default function createUser(email, password) {
     setPersistence(auth, inMemoryPersistence)
         .then(() => {
             createUserWithEmailAndPassword(auth, email, password).then(
-                (userCredential) => {
+                async (userCredential) => {
                     const user = userCredential.user;
                     if (user) {
                         let userData = {
@@ -42,9 +42,10 @@ export default function createUser(email, password) {
                         const token = user.accessToken;
                         localStorage.setItem("accessToken", token);
                         localStorage.setItem("email", email)
-                        postUserRequest(userData)
+                        console.log(userData)
+                        await postUserRequest(userData)
                         
-                        window.location.replace("/HomePage");
+                        // window.location.replace("/HomePage");
                     }
                 }
             );
