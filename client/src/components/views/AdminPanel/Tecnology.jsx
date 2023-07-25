@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Table } from "react-bootstrap";
+import styles from "./Tecnology.module.css"
 import {get_tecnology, post_tecnology, delete_tecnology, clearMessage} from "../../../Redux/actions";
 import {validateTecnology} from './validate'
 
@@ -59,7 +60,7 @@ const Tecnology = () => {
 
     //component:
     return (
-        <div>
+        <div  className={styles.tableContainer}>
             <h1> tecnologias</h1>
             <form>
                 <div>
@@ -69,12 +70,39 @@ const Tecnology = () => {
                 <button onClick={handleSubmitTecnology}>Añadir</button>
             </form>
 
-            {!!tecnology.length && tecnology.map((tec, i) => {
-                return(<div key={i}>
-                    <button onClick={() => handleDelete(tec.id)}>X</button>
-                    <p>{tec.name}</p>
-                </div>)
-            })}
+         <div >
+
+            <Table striped bordered hover >
+                
+ 
+  <tbody >
+  <thead >
+    <tr>
+      <th>#</th>
+      <th>Nombre</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  
+    {tecnology.length && tecnology.map((tec, i) => (
+        
+      <tr key={tec.id}>
+        <td>{tec.id}</td>
+        <td>{tec.name}</td>
+        <td>
+          <button onClick={() => handleDelete(tec.id)}>X</button>
+        </td>
+      </tr>
+    ))}
+  </tbody>
+</Table>
+</div>
+
+
+
+
+
+
         </div>
     )
 }

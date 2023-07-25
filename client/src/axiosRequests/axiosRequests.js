@@ -1,7 +1,6 @@
 import axios from "axios";
+import URL from "../../URL.JS";
 //HOST:
-const URL = "http://localhost:3001";
-// const URL = "https://pfserverdeploy-production.up.railway.app";
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
 
@@ -34,7 +33,6 @@ export const getEthvalue = async () => {
 
     return ethUSDTPrice;
 };
-
 
 export const getProductsRequest = async () => {
     const { data } = await axios.get("/product");
@@ -294,3 +292,4 @@ export const getMercadopagoFeedback = async ({compra, email, paymentId, status, 
   const { data } = await axios.post(`/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`, {compra});;
   return data;
 };
+

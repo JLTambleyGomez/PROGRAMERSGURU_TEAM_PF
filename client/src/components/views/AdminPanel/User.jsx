@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Table } from "react-bootstrap";
+
 import {
     getAllUsersRequest,
     hideUserProfileRequest,
@@ -221,59 +223,74 @@ const User = () => {
                     <br />
                 </>
             )}
-            {allUsers.length &&
+         
+<Table striped bordered hover >
+                
+ 
+                <tbody >
+                <thead >
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                
+                {allUsers.length &&
                 allUsers.map((user, index) => {
                     return (
                         <span key={index}>
                             {!user.admin && (
                                 <div>
+                                    <td>
                                     <button
                                         onClick={() => hide_user(user)}
                                         name="banned"
                                     >
                                         {user.banned ? "Desbanear" : "Banear"}
-                                    </button>
+                                    </button></td>
+                                    <td>
                                     <button
                                         onClick={() => changeAdminUser(user)}
                                         name="admin"
                                     >
                                         Hacer Adminitrador
-                                    </button>
-                                 
+                                    </button></td>
+                                    <td>
                                     <button
                                         onClick={() => handlePutForm(user.id)}
                                     >
                                         Editar nombre
-                                    </button>
+                                    </button></td>
                                 </div>
                             )}
                             {user.admin && <p>Es un administrador!</p>}
 
                             <label key={index}>
-                                <p>Nombre: {user.name}</p>
-                                <p>Email: {user.email}</p>
-                                <p>Imagen: {user.picture}</p>
-                                <p>Admin: {user.admin ? "true" : "false"}</p>
-                                <p>Baneado: {user.banned ? "true" : "false"}</p>
-                                <p>Suscripción: user.expirationDate</p>
-                                {user.banned && <p>Usuario desactivado</p>}
-                                <p>
+                                <td>Nombre: {user.name}</td>
+                                <td>Email: {user.email}</td>
+                                <td>Admin: {user.admin ? "true" : "false"}</td>
+                                <td>Baneado: {user.banned ? "true" : "false"}</td>
+                                <td>Suscripción: user.expirationDate</td>
+                                {user.banned && <td>Usuario desactivado</td>}
+                                <td>
                                     Suscripción:{" "}
                                     {user.expirationDate
                                         ? user.expirationDate
                                         : false}
-                                </p>
-                                <p>Nickname: {user.nickName}</p>
+                                </td>
+                                <td>Nickname: {user.nickName}</td>
                                 {
                                     putForm === user.id && (
                                         <span>
                                             <input onChange={(event) => syncInputName(event, user)}/>
-                                            <button onClick={() => updateUser(user)}>
+                                          <td>  <button onClick={() => updateUser(user)}>
                                                 Actualizar usuario
-                                            </button>
+                                            </button></td>
+                                            <td>
                                             <button onClick={() => setPutForm(null)}>
                                                 x
-                                            </button>
+                                            </button></td>
                                         </span>
                                         
                                     )
@@ -283,6 +300,10 @@ const User = () => {
                         </span>
                     );
                 })}
+                </tbody>
+              </Table>
+
+                
         </div>
     );
 };

@@ -6,9 +6,9 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import axios from "axios";
+import URL from '../URL.JS';
 
-// axios.defaults.baseURL = 'https://pfserverdeploy-production.up.railway.app/'  
-axios.defaults.baseURL = 'http://localhost:3001/'  
+axios.defaults.baseURL = URL
 
 //__________________________________________________
 const rootElement = document.getElementById('root');
@@ -20,3 +20,5 @@ createRoot(rootElement).render(
     </BrowserRouter>
   </Provider>
 );
+
+

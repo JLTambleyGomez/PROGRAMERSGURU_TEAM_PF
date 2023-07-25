@@ -14,7 +14,9 @@ import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
 import { SubirImagenCurso } from "./SubirImagenCurso";
 import theme from "../../../theme/theme"
+import { Table } from "react-bootstrap";
 import SelectTechnologies from "./SelectTechnologies";
+
 
 function Courses() {
     // global state:
@@ -27,90 +29,74 @@ function Courses() {
 
     // states:
     const [change, setChange] = useState(false);
+    const [selectedTechnologies, setSelectedTechnologies] = useState([]);
+    const [modificarCourse, setModificarCourse] = useState(false);
+    const [courseId, setCourseId] = useState(null);
     const [messagePost, setMessagePost] = useState("");
+    const [postCourse, setPostCourse] = useState(false);
+    const [course, setCourse] = useState({})
     const [newCourse, setNewCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
-
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
-    const [modificarCourse, setModificarCourse] = useState(false);
-    const [postCourse, setPostCourse] = useState(false);
-    const [courseId, setCourseId] = useState(null);
     const [errorCourse, setErrorCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
- 
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
-    const [course, setCourse] = useState({})
-
     const [modifCourse, setModifCourse] = useState({
         title: "",
         description: "",
         imageURL: "",
         courseUrl: "",
-  
         released: "",
         isFree: false,
         language: "",
         tecnology: [],
     });
 
-    // functions:
-
-    //DESPACHA LA ACTION PARA HACER EL PUT
-
-    //modificar curso
-    const handleModificarCurso = (event) => {
-        const id = event.target.value;
-
+//modificar curso
+    const handleModificarCurso = (id) => {
         const courseModificar = courses.find((course) => course.id === +id )
         setCourse(courseModificar)
         setCourseId(id);
         setModificarCourse(true);
     };
 
+    //setea segun los cambios en los inputs
     const handleCourseChange = (event) => {
         const { name, value } = event.target;
         setChange(true);
+        
         setNewCourse((prevCourse) => ({
             ...prevCourse,
             [name]: (name==="imageURL" && localStorage.getItem("urlNewCourseImage")) || value,
         }));
         dispatch(clearMessage());
         setMessagePost('')
-
-        // if (postCourse)
-        //     setErrorCourse(validateCourse({ ...newCourse, [name]: value }));
     };
+    
 
-    const handleTechnologySelection = (event) => {
-        const selectedTechnologies = Array.from(
-            event.target.selectedOptions,
-            (option) => ({
-                id: option.value,
-            })
-        );
+
+    const HandleSelectTechnologies = (e) => {
+        e.preventDefault()
         setNewCourse((prevCourse) => ({
             ...prevCourse,
             tecnology: selectedTechnologies,
         }));
-        // if (postCourse)
-        //     setErrorCourse(
-        //         validateCourse({ ...newCourse, tecnology: selectedTechnologies })
-        //     );
-    };
+    }
+
 
     const handleDeleteCourse = async (id) => {
         try {
@@ -120,11 +106,13 @@ function Courses() {
             console.log("error");
         }
     };
-
+    
     //boton para cerrar el formulario
     const handleClosingModification = (event) => {
+        setLimpiar(true)
         setModificarCourse(false);
         setPostCourse(false);
+        setCourseId(0);
         setMessagePost("");
         setErrorCourse({
             title: "",
@@ -142,14 +130,26 @@ function Courses() {
             description: "",
             imageURL: "",
             courseUrl: "",
-         
             released: "",
             isFree: false,
             language: "",
             tecnology: [],
         });
+        setModifCourse({
+            title: "",
+            description: "",
+            imageURL: "",
+            courseUrl: "",
+            released: "",
+            isFree: false,
+            language: "",
+            tecnology: [],
+        });
+        console.log("borra")
     };
 
+    
+    //envia el formulario
     const handleCoursePost = async (event) => {
         event.preventDefault();
      
@@ -190,7 +190,6 @@ function Courses() {
                 !newCourse.imageURL ||
                 !newCourse.courseUrl ||
                 !newCourse.released ||
-                !newCourse.isFree ||
                 !newCourse.language 
             ) return setMessagePost('Debe completar los datos')
         
@@ -240,7 +239,6 @@ function Courses() {
         dispatch(get_tecnology());
         dispatch(get_courses_all());
         
-
         return () => {
             dispatch(clearMessage());
             dispatch(clearCourses());
@@ -267,29 +265,22 @@ function Courses() {
     // component:
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`}>
-            <div className={styles.contain}>
-                <div></div>
-
-                <section className={`${styles.Panel}`}>
-                    {postCourse || modificarCourse ? (
-                        <>
-                            <form className={`${styles.coursesForm}`}>
-                                {postCourse && (
-                                    <button onClick={handleClosingModification}>
-                                        X
-                                    </button>
-                                )}
-                                {modificarCourse && (
-                                    <button onClick={handleClosingModification}>
-                                        X
-                                    </button>
-                                )}
-                                {modificarCourse ? (
-                                    <h2>Modificar Curso</h2>
-                                ) : (
-                                    <h2>Nuevo Curso</h2>
-                                )}
-                                {messagePost && <p>{messagePost}</p>}
+        <div className={styles.contain}>
+            <section className={`${styles.Panel}`}>
+                {postCourse || modificarCourse ? (
+                    <>
+                        <form className={`${styles.coursesForm}`}>
+                            {postCourse || modificarCourse ? (
+                                <button onClick={handleClosingModification}>
+                                    X
+                                </button>
+                             ) : ''}
+                            {modificarCourse ? (
+                                <h2>Modificar Curso</h2>
+                            ) : (
+                                <h2>Nuevo Curso</h2>
+                            )}
+                             {messagePost && <p>{messagePost}</p>}
                                 <div className={`${styles.h1}`}>
                                     <label>Título:</label>
                                     <input
@@ -297,7 +288,7 @@ function Courses() {
                                         name="title"
                                         value={newCourse.title}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.title}
+                                        placeholder={modificarCourse ? course.title : 'Titulo'}
                                         />
                                     {errorCourse && <p>{errorCourse.title}</p>}
                                 </div>
@@ -308,7 +299,7 @@ function Courses() {
                                         name="description"
                                         value={newCourse.description}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.description}
+                                        placeholder={modificarCourse ? course.description : 'Descripción'}
                                         />
                                     {errorCourse && (
                                         <p>{errorCourse.description}</p>
@@ -322,12 +313,12 @@ function Courses() {
                                         name="imageURL"
                                         value={localStorage.getItem("urlNewCourseImage") || newCourse.imageURL}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.imageURL}
+                                        placeholder={modificarCourse ? course.imageURL : 'Url imagen'}
                                         />
                                     {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
-                                <div>
-                                    <SubirImagenCurso title={course?.title}/>
+                                <div >
+                                    <SubirImagenCurso handleCourseChange={handleCourseChange} title={modificarCourse ? modifCourse?.title : newCourse?.title}/>
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -337,7 +328,7 @@ function Courses() {
                                         name="courseUrl"
                                         value={newCourse.courseUrl}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.courseUrl}
+                                        placeholder={modificarCourse ? course.courseUrl : 'Url curso'}
                                         />
                                     {errorCourse.courseUrl && <p>{errorCourse.courseUrl}</p>}
                                 </div>
@@ -349,7 +340,7 @@ function Courses() {
                                         name="released"
                                         value={newCourse.released}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.released}
+                                        placeholder={modificarCourse ? course.released : 'Fecha de lanzamiento'}
                                         />
                                    {errorCourse.released && <p>{errorCourse.released}</p>}
                                  
@@ -380,75 +371,79 @@ function Courses() {
                                         name="language"
                                         value={newCourse.language}
                                         onChange={handleCourseChange}
-                                        placeholder={modifCourse && course.language}
+                                        placeholder={modificarCourse ? course.language : 'Idioma'}
                                         />
                                     
                                         {errorCourse.language && <p>{errorCourse.language}</p>}
-                                </div>
 
-                                <div >
+                                <div className={`${styles.h1}`}>
+                                    
+                                <div>
                                     <label>Tecnologías:</label>
-                                    <SelectTechnologies tecnology={tecnology} 
+                                    <SelectTechnologies 
                                     selectedTechnologies={selectedTechnologies} 
-                                    setSelectedTechnologies={setSelectedTechnologies}
-                                    />
+                                    setSelectedTechnologies={setSelectedTechnologies} 
+                                    tecnology={tecnology} />
                                     <button onClick={HandleSelectTechnologies}>Ok</button>
                                 </div>
+                        
+                                </div>
 
-                                <button onClick={handleCoursePost}>
-                                    {modificarCourse
-                                        ? "Editar"
-                                        : "Postear curso"}
-                                </button>
-                            </form>
-                        </>
-                    ) : (
-                        <>
-                            <h2>Crear un curso nuevo</h2>
-                            <button onClick={handlePostCourse}>
-                                Crear curso
+                                </div>
+                          
+
+                            <button onClick={handleCoursePost}>
+                                {modificarCourse
+                                    ? "Editar"
+                                    : "Postear curso"}
                             </button>
-                        </>
-                    )}
-                    {modificarCourse ? (
-                        <></>
-                    ) : (
-                        <div className={`${styles.coursesContainer}`}>
-                            <h1>Courses</h1>
-                            <div className={styles.conteiner}>
+                        </form>
+                    </>
+                ) : (
+                    <>
+                        <h2>Crear un curso nuevo</h2>
+                        <button onClick={handlePostCourse}>
+                            Crear curso
+                        </button>
+                    </>
+                )}
+                {modificarCourse ? (
+                    <></>
+                ) : (
+                    <div className={`${styles.coursesContainer}`}>
+                        <h1>Courses</h1>
+                        <Table className="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Rating</th>
+                                <th>Fecha de lanzamiento</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {!!courses.length && courses.map((course) => (
-                                    <div key={course.id}>
-                                        <button
-                                            onClick={handleModificarCurso}
-                                            value={course.id}
-                                        >
-                                            Modificar Curso
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDeleteCourse(course.id)
-                                            }
-                                        >
-                                            X
-                                        </button>
-                                        <p>ID: {course.id}</p>
-                                        <p>Titulo: {course.title}</p>
-                                        <p>Rating: {course.meanRating}</p>
-                                        <p>
-                                            Fecha De Lanzamiento:{" "}
-                                            {course.released}
-                                        </p>
-                                    </div>
+                                    <tr key={course.id}>
+                                        <td>{course.id}</td>
+                                        <td>{course.title}</td>
+                                        <td>{course.meanRating}</td>
+                                        <td>{course.released}</td>
+                                        <td>
+                                        <button onClick={() => handleModificarCurso(course.id)}>  Modificar Curso</button>
+                                            <button onClick={() => handleDeleteCourse(course.id)}>
+                                                X
+                                            </button>
+                                        </td>
+                                    </tr>
                                 ))}
-                            </div>
-                        </div>
-                    )}
-                </section>
-
-                <div></div>
-            </div>
+                            </tbody>
+                        </Table>
+                    </div>
+                )}
+            </section>
         </div>
-    );
+    </div>
+);
 }
-
 export default Courses;

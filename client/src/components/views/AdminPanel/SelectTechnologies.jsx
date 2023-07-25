@@ -1,4 +1,7 @@
+import { useState } from "react";
+
 const SelectTechnologies = ({ tecnology,selectedTechnologies, setSelectedTechnologies }) => {
+    // const [selectedTechnologies, setSelectedTechnologies] = useState([]);
     console.log(selectedTechnologies);
 
     return (
