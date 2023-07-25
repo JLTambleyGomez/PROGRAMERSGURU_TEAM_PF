@@ -10,3 +10,60 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+.Table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    border-collapse: collapse;
+  }
+  
+  /* Estilos para el encabezado de la tabla */
+  .Table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla */
+  .Table tbody td {
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última fila */
+  /* Si no quieres bordes en la última fila, puedes omitir este bloque */
+  .Table tbody tr:last-child td {
+    border-bottom: none;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
+  .Table tbody td:first-child {
+    border-left: 1px solid #dee2e6;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última columna */
+  .Table tbody td:last-child {
+    border-right: 1px solid #dee2e6;
+  }
+  
+  /* Estilos para los botones dentro de las celdas de la tabla */
+  .Table td button {
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #007bff;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+  }
+  
+  /* Estilos para los botones de eliminar */
+  /* Personaliza el color según tus preferencias */
+  .Table td button.delete-button {
+    background-color: #dc3545;
+  }
+  
+  /* Estilos para los botones de modificar */
+  /* Personaliza el color según tus preferencias */
+  .Table td button.modify-button {
+    background-color: #ffc107;
+  }

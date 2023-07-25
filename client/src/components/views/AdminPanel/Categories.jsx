@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Table } from "react-bootstrap";
 
 import {
     get_categories, postCategory, deleteCategory, clearMessage
@@ -7,7 +8,7 @@ import {
 import { validate } from "./validate";
 
 
-import styles from "./AdminPanel.module.css";
+import styles from "./Categories.module.css";
 
 
 //_________________________module_________________________
@@ -107,29 +108,29 @@ const Categories = () => {
                     </span>
                     <span>{error && <p>{error.category}</p>}</span>
                 </form>
-
-                <div >
-                    <h2>Categories</h2>
-                    <div>
-                        {categories.allCategories.map((category, index) => (
-                                <span
-                                    key={index}
-                                >
-                                    <label>
-                                        {category.id} : {category.name}
-                                    </label>
-                                    <button
-                                        onClick={() =>
-                                            deleteCategory1(category.id)
-                                        }
-                                    >
-                                        X
-                                    </button>
-                                </span>
-                            ))}
-                    </div>
-                </div>
-            </section>
+                <div className={styles.tableHover}>
+                <Table className="table table-striped table-bordered table-hover">
+      <thead>
+          <tr>
+            <th>#</th>
+            <th >Nombre</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody >
+        {categories.allCategories.map((category, index) => (
+            <tr key={category.id}>
+              <td>{category.id}</td>
+              <td>{category.name}</td>
+              <td>
+              <button onClick={() => deleteCategory1(category.id) } >X </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+</div>
+ </section>
         </div>
     );
 };

@@ -14,6 +14,8 @@ import styles from "./Courses.module.css";
 import { validateCourse } from "./validate";
 import { SubirImagenCurso } from "./SubirImagenCurso";
 import theme from "../../../theme/theme"
+import { Table } from "react-bootstrap";
+
 
 function Courses() {
     // global state:
@@ -71,14 +73,14 @@ function Courses() {
     //DESPACHA LA ACTION PARA HACER EL PUT
 
     //modificar curso
-    const handleModificarCurso = (event) => {
-        const id = event.target.value;
+//modificar curso
+const handleModificarCurso = (id) => {
+    const courseModificar = courses.find((course) => course.id === +id )
+    setCourse(courseModificar)
+    setCourseId(id);
+    setModificarCourse(true);
+};
 
-        const courseModificar = courses.find((course) => course.id === +id )
-        setCourse(courseModificar)
-        setCourseId(id);
-        setModificarCourse(true);
-    };
 
     const handleCourseChange = (event) => {
         const { name, value } = event.target;
@@ -266,29 +268,27 @@ function Courses() {
     // component:
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`}>
-            <div className={styles.contain}>
-                <div></div>
-
-                <section className={`${styles.Panel}`}>
-                    {postCourse || modificarCourse ? (
-                        <>
-                            <form className={`${styles.coursesForm}`}>
-                                {postCourse && (
-                                    <button onClick={handleClosingModification}>
-                                        X
-                                    </button>
-                                )}
-                                {modificarCourse && (
-                                    <button onClick={handleClosingModification}>
-                                        X
-                                    </button>
-                                )}
-                                {modificarCourse ? (
-                                    <h2>Modificar Curso</h2>
-                                ) : (
-                                    <h2>Nuevo Curso</h2>
-                                )}
-                                {messagePost && <p>{messagePost}</p>}
+        <div className={styles.contain}>
+            <section className={`${styles.Panel}`}>
+                {postCourse || modificarCourse ? (
+                    <>
+                        <form className={`${styles.coursesForm}`}>
+                            {postCourse && (
+                                <button onClick={handleClosingModification}>
+                                    X
+                                </button>
+                            )}
+                            {modificarCourse && (
+                                <button onClick={handleClosingModification}>
+                                    X
+                                </button>
+                            )}
+                            {modificarCourse ? (
+                                <h2>Modificar Curso</h2>
+                            ) : (
+                                <h2>Nuevo Curso</h2>
+                            )}
+                             {messagePost && <p>{messagePost}</p>}
                                 <div className={`${styles.h1}`}>
                                     <label>Título:</label>
                                     <input
@@ -326,7 +326,7 @@ function Courses() {
                                     {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
                                 <div>
-                                    <SubirImagenCurso title={course?.title}/>
+                                    {/* <SubirImagenCurso title={course?.title}/> */}
                                 </div>
 
                                 <div className={`${styles.h1}`}>
@@ -401,64 +401,60 @@ function Courses() {
                                             </option>
                                         ))}
                                     </select>
-                                        {/* {errorCourse.tecnology && <p>{errorCourse.tecnology}</p>} */}
+                                                </div>
 
-                                </div>
-
-                                <button onClick={handleCoursePost}>
-                                    {modificarCourse
-                                        ? "Editar"
-                                        : "Postear curso"}
-                                </button>
-                            </form>
-                        </>
-                    ) : (
-                        <>
-                            <h2>Crear un curso nuevo</h2>
-                            <button onClick={handlePostCourse}>
-                                Crear curso
+                            <button onClick={handleCoursePost}>
+                                {modificarCourse
+                                    ? "Editar"
+                                    : "Postear curso"}
                             </button>
-                        </>
-                    )}
-                    {modificarCourse ? (
-                        <></>
-                    ) : (
-                        <div className={`${styles.coursesContainer}`}>
-                            <h1>Courses</h1>
-                            <div className={styles.conteiner}>
+                        </form>
+                    </>
+                ) : (
+                    <>
+                        <h2>Crear un curso nuevo</h2>
+                        <button onClick={handlePostCourse}>
+                            Crear curso
+                        </button>
+                    </>
+                )}
+                {modificarCourse ? (
+                    <></>
+                ) : (
+                    <div className={`${styles.coursesContainer}`}>
+                        <h1>Courses</h1>
+                        <Table className="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                <th>#</th>
+                                <th>Nombre</th>
+                                <th>Rating</th>
+                                <th>Fecha de lanzamiento</th>
+                                <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {!!courses.length && courses.map((course) => (
-                                    <div key={course.id}>
-                                        <button
-                                            onClick={handleModificarCurso}
-                                            value={course.id}
-                                        >
-                                            Modificar Curso
-                                        </button>
-                                        <button
-                                            onClick={() =>
-                                                handleDeleteCourse(course.id)
-                                            }
-                                        >
-                                            X
-                                        </button>
-                                        <p>ID: {course.id}</p>
-                                        <p>Titulo: {course.title}</p>
-                                        <p>Rating: {course.meanRating}</p>
-                                        <p>
-                                            Fecha De Lanzamiento:{" "}
-                                            {course.released}
-                                        </p>
-                                    </div>
+                                    <tr key={course.id}>
+                                        <td>{course.id}</td>
+                                        <td>{course.title}</td>
+                                        <td>{course.meanRating}</td>
+                                        <td>{course.released}</td>
+                                        <td>
+                                        <button onClick={() => handleModificarCurso(course.id)}>  Modificar Curso</button>
+                                            <button onClick={() => handleDeleteCourse(course.id)}>
+                                                X
+                                            </button>
+                                        </td>
+                                    </tr>
                                 ))}
-                            </div>
-                        </div>
-                    )}
-                </section>
-
-                <div></div>
-            </div>
+                            </tbody>
+                        </Table>
+                    </div>
+                )}
+            </section>
         </div>
-    );
+    </div>
+);
 }
-
 export default Courses;
