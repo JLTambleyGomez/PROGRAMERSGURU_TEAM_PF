@@ -44,6 +44,7 @@ function PagoSubscripcion () {
                 description: subscripcion.title,
                 price: subscripcion.price,
                 quantity: 1,
+                image: subscripcion.image
             }
             localStorage.setItem("cart", JSON.stringify([referencia]));
             setCompra(referencia);

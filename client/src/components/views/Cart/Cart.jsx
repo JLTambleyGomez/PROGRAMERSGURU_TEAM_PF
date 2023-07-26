@@ -6,6 +6,7 @@ import { set_cart, get_User_By_Email } from "../../../Redux/actions";
 
 import styles from "./Cart.module.css";
 import Modal from "../ventanaemergente/ventana";
+import { ChangeQuantity } from "./ChangeQuantity";
 
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
@@ -34,7 +35,7 @@ function Cart() {
             P.quantity = P.quantity + 1;
             localStorage.setItem("cart", JSON.stringify(cart));
             dispatch(set_cart());
-        } else if (type === "resta" && P.quantity > 0) {
+        } else if (type === "resta" && P.quantity > 1) {
             P.quantity = P.quantity - 1;
             localStorage.setItem("cart", JSON.stringify(cart));
             dispatch(set_cart());
@@ -42,21 +43,45 @@ function Cart() {
         setMostrarPagos(false);
     };
 
-    const removeFromCart = async (id) => {
-        const cart = await localStorage.getItem("cart");
+    const removeFromCart = (id) => {
+        const cart = localStorage.getItem("cart");
         if (!cart) {
-            await localStorage.setItem("cart", "[]");
+            localStorage.setItem("cart", "[]");
         }
         const oldCart = JSON.parse(localStorage.getItem("cart")).filter(
             (item) => item.id !== id
-            );
-            localStorage.setItem("cart", JSON.stringify(oldCart));
-            dispatch(set_cart());
-        };
+        );
+        localStorage.setItem("cart", JSON.stringify(oldCart));
+        dispatch(set_cart());
+    };
+    // const handleAddButton = (type, P) => {
+    //     if (type === "suma" && P.quantity <= P.stock) {
+    //         P.quantity = P.quantity + 1;
+    //         localStorage.setItem("cart", JSON.stringify(cart));
+    //         dispatch(set_cart());
+    //     } else if (type === "resta" && P.quantity > 1) {
+    //         P.quantity = P.quantity - 1;
+    //         localStorage.setItem("cart", JSON.stringify(cart));
+    //         dispatch(set_cart());
+    //     }
+    //     setMostrarPagos(false);
+    // };
+
+    // const removeFromCart = async (id) => {
+    //     const cart = await localStorage.getItem("cart");
+    //     if (!cart) {
+    //         await localStorage.setItem("cart", "[]");
+    //     }
+    //     const oldCart = JSON.parse(localStorage.getItem("cart")).filter(
+    //         (item) => item.id !== id
+    //         );
+    //         localStorage.setItem("cart", JSON.stringify(oldCart));
+    //         dispatch(set_cart());
+    //     };
         
-        const handleDetailButtons = (id) => {
-            navigate(`/ProductDetail/${id}`);
-        };
+    //     const handleDetailButtons = (id) => {
+    //         navigate(`/ProductDetail/${id}`);
+    //     };
         
     const calculateTotal = () => {
         let total = 0;
@@ -109,6 +134,7 @@ function Cart() {
     }, [user]);
 
     //Modal
+    console.log(cart);
     // if (user.banned) return (<ModalBannedUser />);
     
     //component:
@@ -126,27 +152,18 @@ function Cart() {
                                 <li className={styles.product} key={index}>
                                     <div className={styles.info}>
                                         {/* NOMBRE */}
-                                        <h3
-                                            onClick={() =>
-                                                handleDetailButtons(P.id)
-                                            }
-                                            className={styles.name2}
-                                        >
-                                            {P.name}
+                                        <h3 className={styles.name2}>
+                                            {P.name || P.description}
                                         </h3>
                                         {/* PRECIO */}
                                         <h3 className={styles.price}>
-                                            Precio: {P.price}
+                                            Precio: $ {P.price}
                                         </h3>
                                     </div>
-                                    {/* IMAGEN */}
-                                    <img
-                                        className={styles.img}
-                                        src={P.image}
-                                        alt={P.name}
-                                    />
+                                    <div className={styles.right}>
                                     {/* CANTIDAD */}
-                                    <div>
+                                    <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
+                                    {/* <div>
                                         Cantidad
                                         <div className={styles.cantidad}>
                                             <button
@@ -177,6 +194,15 @@ function Cart() {
                                         </button>
                                         </div>
                                    
+                                    </div> */}                                    
+                                    {/* IMAGEN */}
+                                    <a href={P.id && `/ProductDetail/${P.id}`}>
+                                        <img
+                                            className={styles.img}
+                                            src={P.image}
+                                            alt={P.name}
+                                        />
+                                    </a>
                                     </div>
                                 </li>
                             ))
@@ -196,13 +222,13 @@ function Cart() {
                                 <ul>
                                     {/* PRODUCTOS DEL RESUMEN */}
                                     {cart?.map((product, index) =>
-                                        product.quantity !== 0 && product.name.length ? (
+                                        product.quantity !== 0 && (product.name || product.description) ? (
                                             <li
                                                 className={styles.items}
                                                 key={index}
                                             >
                                                 <h4>
-                                                    {product.name} x{" "}
+                                                    {product.name || product.description} x{" "}
                                                     {product.quantity}
                                                 </h4>
                                             </li>
@@ -217,7 +243,7 @@ function Cart() {
                                                 {calculateTotal()}
                                             </h1>
                                             <p className={styles.boton} onClick={handlePagarButton}>
-                                          <p className={styles.name}>ir a Pagar</p> 
+                                          <p className={styles.name}>Ir a Pagar</p> 
                                              </p>
                                         </div>
                                     )}
@@ -225,16 +251,16 @@ function Cart() {
                                     {MostrarPagos && (
                                         <div>
                                             <p>Escoge tu medio de Pago</p>
+                                            <p className={styles.metamask}>
+                                            <PagoMetamask
+                                                total={calculateTotal()}
+                                            /></p>
                                             {compra?.description && (
                                                 <PagoMercadopago
                                                     reference={compra}
                                                     mostrar={mostrar}
                                                 />
                                             )}
-                                            <p className={styles.metamask}>
-                                            <PagoMetamask
-                                                total={calculateTotal()}
-                                            /></p>
                                         </div>
                                     )}
                                 </ul>

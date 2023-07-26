@@ -31,7 +31,6 @@ function Success  () {
         if (!token) navigate("/IniciaSession")
      
     },[])
-    
 
     useEffect(() => {
         (async () => {
@@ -50,7 +49,7 @@ function Success  () {
             
             await new Promise(resolve => setTimeout(resolve, 2000));
             setPaymentInfo(data);
-
+            console.log(paymentInfo);
             localStorage.setItem("cart", "[]");
          
           } catch (error) {
@@ -63,7 +62,8 @@ function Success  () {
 
     //component:
     return (
-        <div className={styles.container}>
+        // { status === "approved" ? 
+        (<div className={styles.container}>
             <div className={styles.container2}>
                 <div className={styles.imgcontainer}>
                     <img
@@ -84,7 +84,8 @@ function Success  () {
                     </div>
                 )
             }
-        </div>
+        </div>)
+        // : null }
     );
 };
 

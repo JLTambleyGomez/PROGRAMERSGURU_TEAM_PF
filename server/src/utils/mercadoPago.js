@@ -47,7 +47,7 @@ const PagoconMercadopago = async (req, res) => {
 
 const FeedbackMercadoPago = async (req, res) => {
 try {
-  const { email, merchant_order_id, payment_id } = req.query;
+  const { email, merchant_order_id, payment_id, status } = req.query;
   const { compra } = req.body; 
   console.log(req.body)
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
@@ -55,10 +55,11 @@ try {
   const date = new Date()
   const formatedDate = date.toISOString().split('T')[0];
 
+  console.log(req.query.status)
   const newPayment = await Payment.create({
     id: payment_id,
     date: formatedDate,
-    status: "fullfiled",
+    status: status,
     totalPrice:totalAmount
   })
 
@@ -84,13 +85,13 @@ try {
       console.log("esta es la suscripcion");
       console.log(subscription);
       await subscription.addPayment(newPayment)
-
-      const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
-      date.setMonth(date.getMonth() + months);
-      const newExpirationDate = date.toISOString().split('T')[0];
-
-      user.expirationDate = newExpirationDate
-      await user.save() 
+      if (newPayment.status === "approved") {
+        const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
+        date.setMonth(date.getMonth() + months);
+        const newExpirationDate = date.toISOString().split('T')[0];
+        user.expirationDate = newExpirationDate
+        await user.save() 
+      }
     }
   }
 

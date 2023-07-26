@@ -24,14 +24,14 @@ export function PaymentOrders({ payments }) {
         <div className={`${s.payments} ${s[theme("payments")]}`}>
             {payments?.map((pay) => {
                 return (
-                    <div className={`${s.payment} ${s[theme("payment")]}`} key={pay.id}>
+                    <div className={pay?.status === "rejected" ? `${s.paymentRejected} ${s[theme("paymentRejected")]}` : `${s.payment} ${s[theme("payment")]}`} key={pay.id}>
                         <div
                             className={`${s.payHeader} ${
                                 s[theme("payHeader")]
                             }`}
                         >
                             <span className={s.payMethod}>
-                                Resumen de compra  
+                                {pay.status==="rejected" ? "Compra rechazada" : "Resumen de compra"}   
                             </span>
                             <img src={pay.id[1]==="x" ? mm : mp} alt="" />
                             <span className={s.date}>
@@ -46,7 +46,7 @@ export function PaymentOrders({ payments }) {
                             <div className={s.productsInfo}>
                                 {pay?.Products?.map(product => {
                                     return (
-                                        <div className={s.productInfo}>
+                                        <div key={product?.id} className={s.productInfo}>
                                             <div className={s.centrar}>
                                             <div className={s.image}>
                                                 <NavLink to={`/ProductDetail/${product.id}`}>
@@ -63,6 +63,19 @@ export function PaymentOrders({ payments }) {
                                         </div>
                                     )
                                 })}
+                                {pay?.Subscription && 
+                                    (<div className={s.productInfo}>
+                                        <div className={s.centrar}>
+                                        <div className={s.image}>
+                                            <img src={pay?.Subscription?.image} alt="" />
+                                        </div>
+                                        <div className={s.productData}>
+                                            <span className={s.productName}>{pay?.Subscription?.title}</span>
+                                        </div>
+                                        </div>
+                                        <span className={s.productPrice}>Precio: ${pay?.Subscription?.price}</span>
+                                    </div>)
+                                }
                                 <div className={s.footer}>
                                     <span className={s.totalPrice}>Monto total: ${pay?.totalPrice}</span>
                                 </div>
