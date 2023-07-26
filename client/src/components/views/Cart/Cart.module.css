@@ -1,6 +1,6 @@
 .container{
     margin-top: var(--navBarHeight);
-    width: 99.7%;
+    width: 99.6%;
     /* padding-top: 4%; */
     padding-bottom: var(--footerHeight);
     min-height: calc(100vh - var(--navBarHeight));

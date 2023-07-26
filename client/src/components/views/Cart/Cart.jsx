@@ -130,6 +130,31 @@ function Cart() {
         setMostrarPagos(true);
         console.log("mostrar")
     }
+    useEffect(() => {
+        (async () => {
+            const cartString = localStorage.getItem("cart");
+            if (cartString) {
+                const cart = JSON.parse(cartString);
+                if (Array.isArray(cart) && cart.length > 0) {
+                    const hasSubscripcion = cart.some(
+                        (product) => product.description.includes("Subscripcion")
+                    );
+
+                    console.log("está infectado:", hasSubscripcion);
+
+                    if (hasSubscripcion) {
+                        const cart2String = localStorage.getItem("cart2");
+                        if (cart2String) {
+                            const cart2 = JSON.parse(cart2String);
+                            if (Array.isArray(cart2)) {
+                                localStorage.setItem("cart",  localStorage.getItem("cart2"))
+                                }
+                        }
+                    }
+                }
+            }
+        })();
+    }, []);
 
     useEffect(()=>{
         if (Array.isArray(cart) && cart.length){
