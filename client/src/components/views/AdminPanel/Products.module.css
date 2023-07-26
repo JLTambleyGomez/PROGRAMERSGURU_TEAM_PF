@@ -18,20 +18,19 @@
   }
   
   /* Estilos para el encabezado de la tabla */
-  .Tabla thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
-    background-color: #ffdddd;
-    padding: 15px;
-    text-align:center;
-  
-  }
-  
+.Tablatheadth {
+  vertical-align: bottom;
+  border-bottom: 2px solid #2492ff;
+  background-color: #72dafd !important;
+  padding: 15px;
+  text-align: center;
+  width: 33.33%;
+}
+
   /* Estilos para las celdas del cuerpo de la tabla */
   .Tabla tbody td {
     padding: 15px;
     text-align:center;
-    vertical-align: middle;
     border-bottom: 1px solid #dee2e6;
     
   }

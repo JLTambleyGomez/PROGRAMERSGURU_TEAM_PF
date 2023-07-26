@@ -11,7 +11,7 @@ import {
 import { post_user, put_user, delete_user, clearMessage } from "../../../Redux/actions";
 import { validateUser } from "./validate";
 
-import styles from "./AdminPanel.module.css";   
+import styles from "./User.module.css";   
 
 
 //_________________________module_________________________
@@ -223,85 +223,51 @@ const User = () => {
                     <br />
                 </>
             )}
-         
-<Table striped bordered hover >
-                
- 
-                <tbody >
-                <thead >
-                  <tr>
-                    <th>#</th>
-                    <th>Nombre</th>
-                    <th>Acción</th>
-                  </tr>
+   <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Admin</th>
+                        <th>Baneado</th>
+                        <th>Suscripción</th>
+                        <th>Nickname</th>
+                        <th>Acción</th>
+                    </tr>
                 </thead>
-                
-                {allUsers.length &&
-                allUsers.map((user, index) => {
-                    return (
-                        <span key={index}>
-                            {!user.admin && (
-                                <div>
-                                    <td>
-                                    <button
-                                        onClick={() => hide_user(user)}
-                                        name="banned"
-                                    >
-                                        {user.banned ? "Desbanear" : "Banear"}
-                                    </button></td>
-                                    <td>
-                                    <button
-                                        onClick={() => changeAdminUser(user)}
-                                        name="admin"
-                                    >
-                                        Hacer Adminitrador
-                                    </button></td>
-                                    <td>
-                                    <button
-                                        onClick={() => handlePutForm(user.id)}
-                                    >
-                                        Editar nombre
-                                    </button></td>
-                                </div>
-                            )}
-                            {user.admin && <p>Es un administrador!</p>}
-
-                            <label key={index}>
-                                <td>Nombre: {user.name}</td>
-                                <td>Email: {user.email}</td>
-                                <td>Admin: {user.admin ? "true" : "false"}</td>
-                                <td>Baneado: {user.banned ? "true" : "false"}</td>
-                                <td>Suscripción: user.expirationDate</td>
-                                {user.banned && <td>Usuario desactivado</td>}
+                <tbody>
+                    {allUsers.length > 0 && allUsers.map((user, index) => {
+                        return (
+                            <tr key={index}>
+                                <td>{index + 1}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.admin ? "true" : "false"}</td>
+                                <td>{user.banned ? "true" : "false"}</td>
+                                <td>{user.expirationDate || "No disponible"}</td>
+                                <td>{user.nickName}</td>
                                 <td>
-                                    Suscripción:{" "}
-                                    {user.expirationDate
-                                        ? user.expirationDate
-                                        : false}
+                                    {!user.admin && (
+                                        <>
+                                            <button onClick={() => hide_user(user.email)}>
+                                                {user.banned ? "Desbanear" : "Banear"}
+                                            </button>
+                                            <button onClick={() => changeAdminUser(user)}>
+                                                Hacer Administrador
+                                            </button>
+                                            <button onClick={() => handlePutForm(user.id)}>
+                                                Editar nombre
+                                            </button>
+                                        </>
+                                    )}
+                                    {user.admin && <p>Es un administrador!</p>}
                                 </td>
-                                <td>Nickname: {user.nickName}</td>
-                                {
-                                    putForm === user.id && (
-                                        <span>
-                                            <input onChange={(event) => syncInputName(event, user)}/>
-                                          <td>  <button onClick={() => updateUser(user)}>
-                                                Actualizar usuario
-                                            </button></td>
-                                            <td>
-                                            <button onClick={() => setPutForm(null)}>
-                                                x
-                                            </button></td>
-                                        </span>
-                                        
-                                    )
-                                }
-                            </label>
-                            <br />
-                        </span>
-                    );
-                })}
+                            </tr>
+                        );
+                    })}
                 </tbody>
-              </Table>
+            </Table>
 
                 
         </div>
