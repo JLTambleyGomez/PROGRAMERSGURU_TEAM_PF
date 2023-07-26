@@ -113,6 +113,8 @@ auth.onIdTokenChanged(async (user) => {
     
     useEffect(() => {
         const handleScroll = () => {
+            const scrollY = window.scrollY;
+            
             const windowHeight =
                 "innerHeight" in window
                 ? window.innerHeight
@@ -128,17 +130,18 @@ auth.onIdTokenChanged(async (user) => {
             );
             const windowBottom = windowHeight + window.pageYOffset;
 
-            if (windowBottom >= docHeight) {
+            if (scrollY + windowHeight >= docHeight) {
                 setIsAtBottom(true);
             } else {
                 setIsAtBottom(false);
             }
         };
+        handleScroll();
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            };
+        };
     }, []);
 
     useEffect(() => {
@@ -181,7 +184,7 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />
                 <Route path="/MercadoPagoFeedback" element={<Success/>} />
-                <Route path ="/MercadoPagoFailure" element ={<MercadoPagoFailure/>}/>
+                <Route path ="/MercadoPagoFeedback" element ={<MercadoPagoFailure/>}/>
                 <Route path ="/MercadoPagoPending" element ={<MercadoPagoPendiente/>}/>
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>

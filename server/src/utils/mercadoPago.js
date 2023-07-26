@@ -12,10 +12,13 @@ mercadoPago.configure({
 
 const PagoconMercadopago = async (req, res) => {
   console.log(req.body);
+  const maxLength = 256;
+  const title = req.body.description.substring(0, maxLength);
+
   let preference = {
     items: [
       {
-        title: req.body.description,
+        title: title,
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       },
@@ -23,7 +26,7 @@ const PagoconMercadopago = async (req, res) => {
     back_urls: {
       // cambiar URL en el .env
       success: URL_FEEDBACKS+"/MercadoPagoFeedback",
-      failure: URL_FEEDBACKS+"/MercadoPagoFailure",
+      failure: URL_FEEDBACKS+"/MercadoPagoFeedback",
       pending: URL_FEEDBACKS,
     },
     auto_return: "approved",

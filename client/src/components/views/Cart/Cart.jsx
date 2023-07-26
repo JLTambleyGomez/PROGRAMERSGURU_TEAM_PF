@@ -23,6 +23,8 @@ function Cart() {
     const [MostrarPagos, setMostrarPagos] = useState(false);
     const [adressForm, setAdressForm] = useState(false);
     const [message, setMessage] = useState("");
+    const [cargasimulada,setCargasimulada]=useState(false)
+    const [carrovacio,setCarrovacio]=useState(true)
     
     
     //const:
@@ -43,8 +45,11 @@ function Cart() {
         setMostrarPagos(false);
     };
 
-    const removeFromCart = (id) => {
-        const cart = localStorage.getItem("cart");
+    const removeFromCart = async (id) => {
+        setMostrarPagos(false);
+        
+         
+        const cart = await localStorage.getItem("cart");
         if (!cart) {
             localStorage.setItem("cart", "[]");
         }
@@ -93,11 +98,12 @@ function Cart() {
     };
     
     const handlePagarButton = () => {
+        setCargasimulada(true);
         dispatch(set_cart());
         
         const arrayListOfProducts = cart?.map(
             (product) =>
-            `Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity}`
+            `Producto: ${product.name || product.description} - Precio: ${product.price} - Cantidad: ${product.quantity}`
             );
             const stringListOfProducts = arrayListOfProducts?.join("\n");
             const listOfProducts = stringListOfProducts
@@ -113,12 +119,26 @@ function Cart() {
 
         setCompra(referencia);
         setMostrarPagos(true);
+      
+       
+        const carga =async ()=>{
+        await new Promise(resolve => setTimeout(resolve, 4000));    setCargasimulada(false)}
+         carga()
     };
+     
     const mostrar = ()=>{
         setMostrarPagos(true);
         console.log("mostrar")
     }
 
+    useEffect(()=>{
+        if (Array.isArray(cart) && cart.length){
+            setCarrovacio(false)}else
+            if(Array.isArray(cart) &&!cart.length){
+                setCarrovacio(true)
+            }
+
+    },[cart])
     //life-cycles:
     useEffect(() => {
         (async () => {
@@ -130,13 +150,8 @@ function Cart() {
             }
         })();
         dispatch(set_cart());
-        // dispatch(get_User_By_Email());
     }, [user]);
 
-    //Modal
-    console.log(cart);
-    // if (user.banned) return (<ModalBannedUser />);
-    
     //component:
     return (
         <main>
@@ -221,7 +236,7 @@ function Cart() {
                                 )}
                                 <ul>
                                     {/* PRODUCTOS DEL RESUMEN */}
-                                    {cart?.map((product, index) =>
+                                    {Array.isArray(cart) && cart?.map((product, index) =>
                                         product.quantity !== 0 && (product.name || product.description) ? (
                                             <li
                                                 className={styles.items}
@@ -263,6 +278,10 @@ function Cart() {
                                             )}
                                         </div>
                                     )}
+                                    {cargasimulada &&
+                                    <div className={styles.cargasimulada}><p className={styles.cargandotxt}>Cargando Pagos</p></div> }
+                                    {carrovacio && 
+                                    <div className={styles.cargasimulada} ><p className={styles.cargandotxt}>Primero debes agregar productos</p></div>}
                                 </ul>
                             </div>
                         </div>

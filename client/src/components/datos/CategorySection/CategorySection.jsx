@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
-import { filter_product_by_category, get_categories } from "../../../Redux/actions";
+import { filter_product_by_category, get_categories, get_products_all } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import s from "./CategorySection.module.css";
@@ -45,7 +45,7 @@ function CategorySection( { menuRef, storeRef } ) {
         return {};
     };
 
-    const handleClick = (index) => {
+    const handleClick = async (category, index) => {
         if (!clicked) {
         setClicked(true);
         const labelCoords = labelRef.current.getBoundingClientRect();
@@ -76,10 +76,12 @@ function CategorySection( { menuRef, storeRef } ) {
         }
 
         setFly(index);
-
+        
+        await dispatch(get_products_all());
+        await dispatch(filter_product_by_category(category.name));
         const timer = setTimeout(() => {
             setFly(null);
-            // store ? navigate("/store") : navigate("/IniciaSession")
+            store ? navigate("/store") : navigate("/IniciaSession");
             setClicked(false);
         }, 3000);
         }
@@ -101,14 +103,14 @@ function CategorySection( { menuRef, storeRef } ) {
     //component:
     return (
         <div className={s.component}>
-        <h1 className={`${s.categoriesTitle} ${s[theme("categoriesTitle")]}`}>Encuentra lo que necesitas para despegar xD</h1>
+        <h1 className={`${s.categoriesTitle} ${s[theme("categoriesTitle")]}`}>Descubre nuestra tienda e impulsa tu carrera</h1>
         <div className={s.categories}>
             {
                 Array.isArray(categories) && categories.length && categories.map((category, index) => (
                     <label
                         key={index}
                         ref={labelRef}
-                        onClick={() => handleClick(index)}
+                        onClick={() => handleClick(category, index)}
                         className={index === fly ? s.flyingLabel : ""}
                         style={{
                             ...labelStyles(index),
