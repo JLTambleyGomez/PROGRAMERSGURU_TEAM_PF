@@ -21,7 +21,7 @@ import ModalBannedUser from '../ModalBannedUser/ModalBannedUser'
 import Footer from "../../bars/Footer/Footer";
 
 //_________________________module_________________________
-function HomePage ( { storeRef, isAtBottom, docWidth } ) {
+function HomePage ( { menuRef, storeRef, isAtBottom, docWidth } ) {
 
     //global state:
     const dark = useSelector((state) => state.darkMode);
@@ -98,7 +98,7 @@ function HomePage ( { storeRef, isAtBottom, docWidth } ) {
 
                     <section className={`${s.sectionFAQ}`}/> */}
             <section className={s.sectionCategories}>
-                <CategorySection storeRef={storeRef}/>
+                <CategorySection menuRef={menuRef} storeRef={storeRef}/>
             </section>
         {/* NEWS */}
         <section className={`${s.sectionNews}`}>

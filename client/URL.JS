@@ -10,7 +10,6 @@ const seleccionUrl =()=>{
         URL = 'https://pfserverdeploy-production.up.railway.app/' 
     }
 }
-
 seleccionUrl()
 
 

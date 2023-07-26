@@ -1,4 +1,4 @@
-const { User, Payment, Product } = require("../db")
+const { User, Payment, Product, Subscription } = require("../db")
 const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
@@ -21,6 +21,7 @@ const PagoconMercadopago = async (req, res) => {
       },
     ],
     back_urls: {
+      // cambiar URL en el .env
       success: URL_FEEDBACKS+"/MercadoPagoFeedback",
       failure: URL_FEEDBACKS+"/MercadoPagoFailure",
       pending: URL_FEEDBACKS,
@@ -48,7 +49,7 @@ const FeedbackMercadoPago = async (req, res) => {
 try {
   const { email, merchant_order_id, payment_id } = req.query;
   const { compra } = req.body; 
-  
+  console.log(req.body)
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const date = new Date()
@@ -61,39 +62,45 @@ try {
     totalPrice:totalAmount
   })
 
-  for (let i = 0 ; i < compra.length ; i++) {
-    const product = await Product.findByPk(compra[i].id)
-    const quantity = compra[i].quantity
-
-    await newPayment.addProduct(product, {
-      through: {
-        quantity: quantity,
-      },
-    });
-    product.stock = product.stock - quantity
-    await product.save()
-  }
-
-
   const user = await User.findOne({
     where: {email: email}
   })
+
+  for (let i = 0 ; i < compra.length ; i++) {
+    if (compra[i].name) {
+      const product = await Product.findByPk(compra[i].id)
+      const quantity = compra[i].quantity
+  
+      await newPayment.addProduct(product, {
+        through: {
+          quantity: quantity,
+        },
+      });
+      product.stock = product.stock - quantity
+      await product.save()
+    }
+    else {
+      const subscription = await Subscription.findOne({where: {price: compra[i].price}})
+      console.log("esta es la suscripcion");
+      console.log(subscription);
+      await subscription.addPayment(newPayment)
+
+      const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
+      date.setMonth(date.getMonth() + months);
+      const newExpirationDate = date.toISOString().split('T')[0];
+
+      user.expirationDate = newExpirationDate
+      await user.save() 
+    }
+  }
 
   await user.addPayment(newPayment)
 
 
 
-
   const listadeproductos = compra?.map(
-    (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
+   (product) => product.name? `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`:`<li> Producto: ${product.description} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
   );
-
-  const compraHTML = compra
-    ? compra.map(
-        (product) =>
-          ` <li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
-      )
-    : "No hay productos en el carrito prueba HTML";
 
   const stringListOfProducts = listadeproductos?.join("\n");
   const listOfProducts = stringListOfProducts
@@ -163,19 +170,21 @@ try {
 
   transtorpe.sendMail(destino, (error, info) => {
     if (error) {
+      console.log("error del subs")
       res.status(500).send(error.message);
     } else {
       console.log("se ha enviado");
     }
   });
 
-  res.json({
+  res.status(200).json({
     Payment: req.query.payment_id,
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
   });
 } catch (error) {
-  
+  console.log(error.message)
+  res.status(500).json({message:error.message})
 }
   
   

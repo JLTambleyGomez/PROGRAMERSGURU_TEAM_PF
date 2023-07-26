@@ -112,27 +112,24 @@ export const validateSuscription = (form) => {
     const error = {};
 
     //valida titulo
-    if (!form.title.length) error.title = "Debe ingresar un titulo";
-    else if (form.title.length) error.title = "";
+    if (!form?.title?.length) error.title = "Debe ingresar un titulo";
+    else if (form?.title?.length) error.title = "";
 
     //valida descripción
-    if (!form.description.length)
+    if (!form?.description?.length)
         error.description = "Debe agregar una descripción";
-    else if (form.description.length) error.description = "";
+    else if (form?.description?.length) error.description = "";
 
-    //valida imagen
-    if (!form.image.length) error.image = "Debe agregar una imagen";
-    else if (form.image.length) error.image = "";
-
+    
     //valida tipo
-    if (!form.type.length) error.type = "Debe ingresar un tipo";
-    else if (form.type.length) error.type = "";
+    if (!form?.type?.length) error.type = "Debe ingresar un tipo";
+    else if (form.type?.length) error.type = "";
 
 
     //valida precio
-    if (!form.price.length) error.price = "Debe ingresar un precio";
-    else if (form.price < 1) error.price = "Debe ingresar un precio válido";
-    else if (form.price && form.price > 0) error.price = "";
+    if (!form?.price?.length) error.price = "Debe ingresar un precio";
+    else if (form?.price < 1) error.price = "Debe ingresar un precio válido";
+    else if (form?.price && form.price > 0) error.price = "";
 
   
     return error;

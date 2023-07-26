@@ -206,8 +206,8 @@ function FilterBarShop () {
                     { true && (
                         <select value={order} onChange={sortProducts}>
                             <option value="">Destacados</option>
-                            <option value="ascendente">Ascendente</option>
-                            <option value="descendente">Descendente</option>
+                            <option value="ascendente">Z-A</option>
+                            <option value="descendente">A-Z</option>
                         </select>
                     )}
                 </div> 

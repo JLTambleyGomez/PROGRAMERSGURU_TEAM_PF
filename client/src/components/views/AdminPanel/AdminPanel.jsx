@@ -144,9 +144,10 @@ const AdminPanel = () => {
         <div className={`${styles.component} ${styles[theme("component")]}`}>
            
             <div>
-                <p className={styles.buton} onClick={handleShowCategories}>
-                    <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-                </p>
+            <p className={styles.buton} onClick={handleShowCategories}>
+        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
+            </p>
+
                 {showcategories && 
                 <Categories></Categories>}
 

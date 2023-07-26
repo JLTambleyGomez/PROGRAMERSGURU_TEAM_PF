@@ -87,9 +87,12 @@ function Cart() {
         };
 
         setCompra(referencia);
-        //quitar esto y dejarlo a manos del mercadopago, que como carga de ultimo nada mas se deberia cargar antes
         setMostrarPagos(true);
     };
+    const mostrar = ()=>{
+        setMostrarPagos(true);
+        console.log("mostrar")
+    }
 
     //life-cycles:
     useEffect(() => {
@@ -193,7 +196,7 @@ function Cart() {
                                 <ul>
                                     {/* PRODUCTOS DEL RESUMEN */}
                                     {cart?.map((product, index) =>
-                                        product.quantity !== 0 ? (
+                                        product.quantity !== 0 && product.name.length ? (
                                             <li
                                                 className={styles.items}
                                                 key={index}
@@ -225,6 +228,7 @@ function Cart() {
                                             {compra?.description && (
                                                 <PagoMercadopago
                                                     reference={compra}
+                                                    mostrar={mostrar}
                                                 />
                                             )}
                                             <p className={styles.metamask}>
