@@ -195,8 +195,8 @@ function FilterBar() {
                     <label>Ordenar por:</label>
                     <select value={orden} onChange={handleSortChange}>
                         <option value="">Destacados</option>
-                        <option value="Ascendente">Nombre Descendente</option>
-                        <option value="Desendente">Nombre Ascendente</option>
+                        <option value="Ascendente">Nombre Ascendente (A-Z)</option>
+                        <option value="Desendente">Nombre Descendente (Z-A)</option>
                     </select>
                 </div>
                 <div className={s.optionFilter}>

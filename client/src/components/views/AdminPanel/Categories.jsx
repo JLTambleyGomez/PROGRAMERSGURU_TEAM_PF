@@ -89,7 +89,8 @@ const Categories = () => {
     return (
         <section className={styles.contain}>
 
-            <form >
+            <form className={styles.form}>
+
                 <span className={styles.inputSpan}>
                     <input
                         onChange={hadleInputChange}
