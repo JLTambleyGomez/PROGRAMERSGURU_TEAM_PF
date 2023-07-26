@@ -308,7 +308,7 @@ function Courses() {
                                 {messagePost && <p>{messagePost}</p>}
                                 <div className={`${styles.h1}`}>
                                     <label>Título:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="title"
                                         value={newCourse.title}
@@ -324,7 +324,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Descripción:</label>
-                                    <textarea
+                                    <textarea className={styles.input}
                                         name="description"
                                         value={newCourse.description}
                                         onChange={handleCourseChange}
@@ -341,7 +341,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>URL de la imagen:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="imageURL"
                                         value={newCourse.imageURL}
@@ -369,7 +369,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>URL del curso:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="courseUrl"
                                         value={newCourse.courseUrl}
@@ -387,7 +387,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Fecha de lanzamiento:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="date"
                                         name="released"
                                         value={newCourse.released}
@@ -422,7 +422,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Idioma:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="language"
                                         value={newCourse.language}

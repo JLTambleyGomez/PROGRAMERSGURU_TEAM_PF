@@ -211,21 +211,21 @@ function Products() {
 
     //component:
     return (
-        <div className={styles.contenedor}>
+      <div className={styles.contain}>
           <section>
-            <div>
-              <h2>Productos</h2>
+            <div >
+              <h2  >Productos</h2>
               {postProduct || modificarProduct ? (
                 <>
-                  <button onClick={handleCloseForm}>X</button>
-                  <h2>
+                  <button className={styles.button} onClick={handleCloseForm}>X</button>
+                  <h2  className={styles.componentelocal}>
                     {postProduct
                       ? "Añadir un nuevo producto"
                       : "Editar producto"}
                   </h2>
                   {messagePost && <p>{messagePost}</p>}
-                  <form>
-                    <div>
+                  <form  >
+                    <div  >
                       {modificarProduct && (
                         <p>Debe ingresar al menos un dato a cambiar</p>
                       )} <label htmlFor="name">Nombre: </label>
@@ -330,6 +330,7 @@ function Products() {
             </div>
           </section>
         </div>
+        
       );
     }
     

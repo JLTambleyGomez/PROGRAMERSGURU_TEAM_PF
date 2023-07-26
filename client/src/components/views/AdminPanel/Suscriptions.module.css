@@ -8,12 +8,9 @@
     width: 100%;
   
   }
-  
-  
   .Tabla {
    width: 100%; 
     margin-bottom: 1rem;
-    
     border-collapse:separate;
   }
   
@@ -69,7 +66,7 @@ align-content: center;
   .Tabla td button:hover{
     scale: 1.1;
     background-color: blue;
-    color:bisque;
+    
   }
   .modificarButton{
     background-color:rgba(255, 255, 0, 0.505);

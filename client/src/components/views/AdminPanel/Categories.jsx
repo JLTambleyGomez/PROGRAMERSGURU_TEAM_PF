@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Table } from "react-bootstrap";
-
 import {
     get_categories, postCategory, deleteCategory, clearMessage
 } from "../../../Redux/actions";
-import { validate } from "./validate";
-
-
 import styles from "./Categories.module.css";
 import ObjectsListCategory from './Paginacion/ObjectListCategory'
 

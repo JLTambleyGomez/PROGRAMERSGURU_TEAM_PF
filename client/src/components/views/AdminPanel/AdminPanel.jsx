@@ -18,6 +18,7 @@ import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
 import ModalAdminPanel from "../ModalAdminPanel/ModalAdminPanel";
 import Tecnology from "./Tecnology";
+
 import Payments from "./Payments";
 import ObjectsList from "./Paginacion/ObjectsList";
 
@@ -155,20 +156,43 @@ const AdminPanel = () => {
 
     //component:
     return (
-        <div>
+        <main className={`${styles.component} ${styles[theme("component")]}`}>
             <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
 
-            <div
-                className={`${styles.component} ${styles[theme("component")]}`}
-            >
-                <div>
+            <div className={`${styles.content} ${styles[theme("content")]}`}>
+                <div className={styles.options}>
                     <p className={styles.buton} onClick={handleShowCategories}>
                         <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
                     </p>
+                    <p className={styles.buton} onClick={handleShowCursos}>
+                        <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowProducts}>
+                        <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowUsers}>
+                        <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowSubscription}>
+                        <h1 className={styles.h1}> ADMINISTRAR SUSCRIPCIONES </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowTecnology} >
+                        <h1 className={styles.h1}> ADMINISTRAR TECNOLOGIAS </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowPayment}>
+                        <h1 className={styles.h1}>ADMINISTRAR PAGOS</h1>
+                    </p>
+                </div>
 
+                <div className={styles.table}>
                     {showcategories && <Categories></Categories>}
+                    {showcursos && <Courses></Courses>}
+                    {showproducts && <Products></Products>}
+                    {showUsers && <User></User>}
+                    {showSubscriptions && <Subscriptions></Subscriptions>}
+                    {showTecnology && <Tecnology />}
 
                     <div />
 
@@ -232,7 +256,7 @@ const AdminPanel = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 };
 

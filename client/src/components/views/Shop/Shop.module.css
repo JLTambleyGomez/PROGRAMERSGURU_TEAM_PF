@@ -199,6 +199,7 @@
     align-items: center;
     height: 4rem;
     background-color: rgba(0, 0, 0, 0.672);
+    color: rgb(246, 251, 255);
     animation:scale-up-horizontal-left 0.4s 
     } @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
     .paginado a {

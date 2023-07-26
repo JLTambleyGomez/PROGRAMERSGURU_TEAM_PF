@@ -1,10 +1,11 @@
 .component {
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  height: 7rem;
-  background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
-  transition: transform 0.3s, filter 0.3s,width 0.2s;
+   display: flex;
+   align-items: center;
+   justify-content: space-around;
+   /* width: 100%; */
+   height: 6rem;
+   background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
+   transition: transform 0.3s, filter 0.3s,width 0.2s;
 }
 
 .component > div {
@@ -12,29 +13,59 @@
 }
 
 .optionSort {
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 15%;
-    height: 5rem;
-    gap: 1rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   width: 15%;
+   height: 5rem;
+   gap: 0.5rem;
 }
 
 .component select {
-    height: 3rem;
+   height: 2.5rem;
+   border-radius: 6px;
 }
 
 .optionFilter {
-    border: 1px solid;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 15%;
-    height: 5rem;
-    gap: 1rem;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   width: 40%;
+   height: 5rem;
+   gap: 0.5rem;
+}
+.filterSpan {
+   display: flex;
+   justify-content: center;
+   gap: 4vw;
+   width: 100%;
+}
+.priceSelect {
+   height: 2.5rem;
+   border-radius: 6px;
+   width: 50%;
+}
+.optionFilter select {
+   height: 2.5rem;
+   width: 50%;
+}
+.priceSelectPrice {
+   display: flex;
+   justify-content: space-between;
+   width: 100%;
+}
+.priceSelectPrice p {
+   margin: 0
+}
+
+.component label {
+   text-align: center;
+}
+
+.component button {
+   min-height: 100%;
+   width: 10%;
 }
 
 

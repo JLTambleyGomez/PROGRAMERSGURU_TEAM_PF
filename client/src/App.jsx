@@ -181,9 +181,9 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/Profile" element={<Profile />} />
                 <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/Cart" element={<Cart isAtBottom={isAtBottom} docWidth={docWidth}/>} />
-                <Route path="/AdminPanel" element={<AdminPanel />} />
+                {/* <Route path="/AdminPanel" element={<AdminPanel />} /> */}
 
-                <Route path="/AdminPanelV2" element={<AdminPanelV2 />} />
+                <Route path="/AdminPanel" element={<AdminPanelV2 />} />
 
                 <Route path="/CourseDetails/:id" element={<CourseDetails />} />
                 <Route path="/Commingsoon" element={<Commingsoon />} />

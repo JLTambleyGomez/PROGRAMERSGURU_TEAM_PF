@@ -1,111 +1,135 @@
-/* Agrega tus estilos existentes aquí */
-
-.contenedor {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 2px 2px;
-    width: 100%;
-  
-  }
-  
-  
-  .Tabla {
-   width: 100%; 
-    margin-bottom: 1rem;
-    color: #212529;
-    border-collapse: collapse;
-  }
-  
-  /* Estilos para el encabezado de la tabla */
-.Tablatheadth {
-  vertical-align: bottom;
-  border-bottom: 2px solid #2492ff;
-  background-color: #72dafd !important;
-  padding: 15px;
-  text-align: center;
-  width: 33.33%;
+/* Estilos para la tabla de Products */
+.Tabla {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: #0bc52d7a; /* Color de fondo diferente al de User */
+  border-collapse: separate;
 }
 
-  /* Estilos para las celdas del cuerpo de la tabla */
-  .Tabla tbody td {
-    padding: 15px;
-    text-align:center;
-    border-bottom: 1px solid #dee2e6;
-    
-  }
+/* Estilos para el encabezado de la tabla */
+.Tabla thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  background-color: #0cc3437a;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla */
+.Tabla tbody td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  border-bottom: 1px solid #0cc3437a;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la última fila */
+/* Si no deseas bordes en la última fila, puedes omitir este bloque */
+.Tabla tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la primera columna */
+.Tabla tbody td:first-child {
+  border-left: 1px solid #0cc3437a;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la última columna */
+.Tabla tbody td:last-child {
+  border-right: 1px solid #0cc3437a;
+}
+
+/* Estilos para los botones dentro de las celdas de la tabla */
+.Tabla td button {
+  margin-right: 5px;
+  cursor: pointer;
+  border: none;
   
-  /* Estilos para las celdas del cuerpo de la tabla en la última fila */
-  /* Si no deseas bordes en la última fila, puedes omitir este bloque */
-  .Tabla tbody tr:last-child td {
-    border-bottom: none;
-    
-  }
-  
-  /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
-  .Tabla tbody td:first-child {
-    border-left: 1px solid #dee2e6;
-    
-  }
-  
-  /* Estilos para las celdas del cuerpo de la tabla en la última columna */
-  .Tabla tbody td:last-child {
-    border-right: 1px solid #dee2e6;
-    
-  }
-  
-  /* Estilos para los botones dentro de las celdas de la tabla */
-  .Tabla td button {
-    margin-right: 5px;
-    cursor: pointer;
-    border: none;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-  }
-  
-  /* Estilos para los botones dentro de las celdas de la tabla */
-  
- /* Estilos para los botones de eliminar */
+  padding: 5px 10px;
+}
+
+/* Estilos para los botones de eliminar */
 /* Personaliza el color según tus preferencias */
-.modificarButton{
-    background-color:rgba(255, 255, 0, 0.505);
+.modificarButton {
+  background-color: rgba(255, 255, 0, 0.505);
   border-radius: 25%;
-    /* border: 1px solid red; */
-    border: none;
-    transition: transform 0.2s ease;
-    
-  }
-  .modificarButton:hover{
-    animation: shake 0.5s infinite;
-    cursor: pointer;
-    scale: 1.1;
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.modificarButton:hover {
+  animation: shake 0.5s infinite;
+  cursor: pointer;
+  scale: 1.1;
+}
+
+.mod {
+  fill: #e1d200;
+}
+
+.deleteButton {
+  background-color: #ffdddd;
+  border: none;
+  transition: transform 0.2s ease;
+  border-radius: 15%;
+}
+
+.deleteButton:hover {
+  scale: 1.1;
+  animation: shake 0.5s infinite;
+  cursor: pointer;
+}
+
+.bin {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: red;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
+
+.componentelocal{
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+  width: 100%;
+  border:2px solid white;
+  padding: 20px;
+  background-color: rgb(11, 138, 138);
+}
+
+.h1{
+  display: flex;
+  justify-content: flex-start;
+  font-size: 20px;
+  padding:5px;
+  color: white;
+  margin-left: 10%;
   
-  }
-  .mod{
-    fill:#e1d200;
-  }
-  .deleteButton {
-    background-color: #ffdddd;
-    /* border: 1px solid red; */
-    border: none;
-    transition: transform 0.2s ease;
-    border-radius: 15%;
-    
-  }
-  .deleteButton:hover{
-    scale: 1.1;
-    animation: shake 0.5s infinite;
-    cursor: pointer;
-  }
-  .bin {
-    height: 1.5rem;
-    width: 1.5rem;
-    fill: red;
-  }
-  @keyframes shake {
-    0%, 100% { transform: rotate(0deg); }
-    25% { transform: rotate(-10deg); }
-    50% { transform: rotate(10deg); }
-    75% { transform: rotate(-10deg); }
-  }
-  
+}
+.input{
+  height: 20px;
+}
+.button{
+
+ background-color:rgba(255, 255, 255, 0.637);
+}
+.button:hover{
+  cursor: pointer;
+  color: rgb(30, 167, 177);
+}
+
+.subirimagen{
+  color:white;
+  padding: 20px;
+  width: 200px;
+}
+.extra{
+  margin-left: -10%;
+}

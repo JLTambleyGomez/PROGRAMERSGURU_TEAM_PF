@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { set_cart, get_User_By_Email } from "../../../Redux/actions";
 
@@ -28,7 +27,6 @@ function Cart() {
     
     
     //const:
-    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     //function:
@@ -59,34 +57,7 @@ function Cart() {
         localStorage.setItem("cart", JSON.stringify(oldCart));
         dispatch(set_cart());
     };
-    // const handleAddButton = (type, P) => {
-    //     if (type === "suma" && P.quantity <= P.stock) {
-    //         P.quantity = P.quantity + 1;
-    //         localStorage.setItem("cart", JSON.stringify(cart));
-    //         dispatch(set_cart());
-    //     } else if (type === "resta" && P.quantity > 1) {
-    //         P.quantity = P.quantity - 1;
-    //         localStorage.setItem("cart", JSON.stringify(cart));
-    //         dispatch(set_cart());
-    //     }
-    //     setMostrarPagos(false);
-    // };
-
-    // const removeFromCart = async (id) => {
-    //     const cart = await localStorage.getItem("cart");
-    //     if (!cart) {
-    //         await localStorage.setItem("cart", "[]");
-    //     }
-    //     const oldCart = JSON.parse(localStorage.getItem("cart")).filter(
-    //         (item) => item.id !== id
-    //         );
-    //         localStorage.setItem("cart", JSON.stringify(oldCart));
-    //         dispatch(set_cart());
-    //     };
-        
-    //     const handleDetailButtons = (id) => {
-    //         navigate(`/ProductDetail/${id}`);
-    //     };
+  
         
     const calculateTotal = () => {
         let total = 0;
@@ -130,31 +101,7 @@ function Cart() {
         setMostrarPagos(true);
         console.log("mostrar")
     }
-    useEffect(() => {
-        (async () => {
-            const cartString = localStorage.getItem("cart");
-            if (cartString) {
-                const cart = JSON.parse(cartString);
-                if (Array.isArray(cart) && cart.length > 0) {
-                    const hasSubscripcion = cart.some(
-                        (product) => product.description.includes("Subscripcion")
-                    );
-
-                    console.log("está infectado:", hasSubscripcion);
-
-                    if (hasSubscripcion) {
-                        const cart2String = localStorage.getItem("cart2");
-                        if (cart2String) {
-                            const cart2 = JSON.parse(cart2String);
-                            if (Array.isArray(cart2)) {
-                                localStorage.setItem("cart",  localStorage.getItem("cart2"))
-                                }
-                        }
-                    }
-                }
-            }
-        })();
-    }, []);
+   
 
     useEffect(()=>{
         if (Array.isArray(cart) && cart.length){
@@ -203,38 +150,7 @@ function Cart() {
                                     <div className={styles.right}>
                                     {/* CANTIDAD */}
                                     <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
-                                    {/* <div>
-                                        Cantidad
-                                        <div className={styles.cantidad}>
-                                            <button
-                                                onClick={() =>
-                                                    handleAddButton("resta", P)
-                                                }
-                                                className={
-                                                    styles.cantidad_button
-                                                }
-                                            >
-                                                -
-                                            </button>
-                                            <p>{P.quantity}</p>
-                                            <button
-                                                onClick={() =>
-                                                    handleAddButton("suma", P)
-                                                }
-                                                className={
-                                                    styles.cantidad_button
-                                                }
-                                            >
-                                                +
-                                            </button>
-                                            <button
-                                            onClick={() => removeFromCart(P.id)}
-                                        >
-                                            x
-                                        </button>
-                                        </div>
-                                   
-                                    </div> */}                                    
+                                     
                                     {/* IMAGEN */}
                                     <a href={P.id && `/ProductDetail/${P.id}`}>
                                         <img
