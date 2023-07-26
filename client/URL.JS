@@ -1,6 +1,6 @@
 
 let URL = null
-const Seleccion = 2
+const Seleccion = 2 
 
 const seleccionUrl =()=>{
     if (Seleccion === 1){
