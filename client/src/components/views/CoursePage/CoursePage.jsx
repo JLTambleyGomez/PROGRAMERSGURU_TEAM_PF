@@ -51,17 +51,16 @@ function CoursePage ( { isAtBottom, docWidth } ) {
 
     useEffect(() => {
         if (!isloading) {
-          // Find the target element to scroll to (e.g., a div with the "mainBanner" class)
           const targetElement = document.querySelector(`.${styles.mainBanner}`);
           if (targetElement) {
-            scrollToElement(targetElement, 0.8); // Specify the duration in seconds (0.8 seconds in this example)
+            scrollToElement(targetElement, 0.8);
         }
         }
       }, [isloading]);
 
       const scrollToElement = (element, duration) => {
-        const targetPosition = element.getBoundingClientRect().top; // Distance from the target element to the top of the viewport
-        const startPosition = window.pageYOffset; // Current scroll position
+        const targetPosition = element.getBoundingClientRect().top;
+        const startPosition = window.pageYOffset;
         const distance = targetPosition - startPosition;
         let startTime = null;
     
@@ -79,7 +78,6 @@ function CoursePage ( { isAtBottom, docWidth } ) {
         };
     
         const easeInOutCubic = t => {
-          // Custom easing function for smoother animation
           t /= 1 / 2;
           if (t < 1) return (1 / 2) * t * t * t;
           t -= 2;

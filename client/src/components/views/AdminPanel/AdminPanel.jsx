@@ -8,7 +8,7 @@ import {
     clearMessage,
     get_courses_all,
     get_suscriptions,
-    get_User_By_Email
+    get_User_By_Email,
 } from "../../../Redux/actions";
 import Categories from "./Categories";
 import Courses from "./Courses";
@@ -16,15 +16,16 @@ import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
-import ModalAdminPanel from '../ModalAdminPanel/ModalAdminPanel'
-import Tecnology from './Tecnology'
+import ModalAdminPanel from "../ModalAdminPanel/ModalAdminPanel";
+import Tecnology from "./Tecnology";
+// import Payments from "./Payments";
 
 //_________________________module_________________________
 const AdminPanel = () => {
     //global state:
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
-    const user = useSelector((state)=>state.user)    
+    const user = useSelector((state) => state.user);
 
     //const:
     const dispatch = useDispatch();
@@ -35,6 +36,7 @@ const AdminPanel = () => {
     const [showUsers, setShowUsers] = useState(false);
     const [showSubscriptions, setShowSubscriptions] = useState(false);
     const [showTecnology, setShowTecnology] = useState(false);
+    const [showPayment, setShowPayment] = useState(false);
 
     //functions:
     const theme = (base) => {
@@ -43,14 +45,25 @@ const AdminPanel = () => {
     };
 
     const handleShowTecnology = (event) => {
-        event.preventDefault()
-        setShowTecnology(!showTecnology)
+        event.preventDefault();
+        setShowTecnology(!showTecnology);
         setshowcursos(false);
         setshowproducts(false);
         setShowUsers(false);
         setshowcategories(false);
         setShowSubscriptions(false);
-    }
+        setShowPayment(false);
+    };
+    const handleShowPayment = (event) => {
+        event.preventDefault();
+        setShowPayment(!showPayment);
+        setShowTecnology(false);
+        setshowcursos(false);
+        setshowproducts(false);
+        setShowUsers(false);
+        setshowcategories(false);
+        setShowSubscriptions(false);
+    };
 
     const handleShowCategories = (event) => {
         event.preventDefault();
@@ -59,60 +72,63 @@ const AdminPanel = () => {
         setshowproducts(false);
         setShowUsers(false);
         setShowSubscriptions(false);
-        setShowTecnology(false)
+        setShowTecnology(false);
+        setShowPayment(false);
     };
-    
+
     const handleShowCursos = (event) => {
         setshowcursos(!showcursos);
         setshowcategories(false);
         setshowproducts(false);
         setShowUsers(false);
         setShowSubscriptions(false);
-        setShowTecnology(false)
+        setShowTecnology(false);
+        setShowPayment(false);
     };
-    
+
     const handleShowProducts = (event) => {
         setshowproducts(!showproducts);
         setshowcategories(false);
         setshowcursos(false);
         setShowUsers(false);
         setShowSubscriptions(false);
-        setShowTecnology(false)
+        setShowTecnology(false);
+        setShowPayment(false);
     };
-    
+
     const handleShowUsers = (event) => {
         setShowUsers(!showUsers);
         setshowcategories(false);
         setshowcursos(false);
         setshowproducts(false);
         setShowSubscriptions(false);
-        setShowTecnology(false)
+        setShowTecnology(false);
+        setShowPayment(false);
     };
-    
+
     const handleShowSubscription = (event) => {
         setShowSubscriptions(!showSubscriptions);
         setshowcategories(false);
         setshowcursos(false);
         setshowproducts(false);
         setShowUsers(false);
-        setShowTecnology(false)
+        setShowTecnology(false);
+        setShowPayment(false);
     };
-    
 
     //life-cycles:
-    useEffect(()=>{
+    useEffect(() => {
         const email = localStorage.getItem("email");
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []);
 
     useEffect(() => {
-        get_tecnology,
-        dispatch(clearMessage());
+        get_tecnology, dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all());
         dispatch(get_products_all());
         dispatch(get_suscriptions());
-        dispatch(get_tecnology())
+        dispatch(get_tecnology());
         return () => {
             // return ocupar para hacer algo en el desmontaje
             dispatch(clearMessage()); // limpiar
@@ -122,83 +138,60 @@ const AdminPanel = () => {
 
     useEffect(() => {
         (async () => {
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await new Promise((resolve) => setTimeout(resolve, 5000));
             dispatch(clearMessage());
-        })()
-    }, [dispatch])
+        })();
+    }, [dispatch]);
 
     useEffect(() => {
-        console.log(message)
-    }, [message])
+        console.log(message);
+    }, [message]);
 
-    if (!user.admin) return (<ModalAdminPanel />);
+    if (!user.admin) return <ModalAdminPanel />;
 
     //component:
     return (
-        <div>
-            
-             <div className={styles.message}>
+        <main className={`${styles.component} ${styles[theme("component")]}`}>
+            <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
 
-        <div className={`${styles.component} ${styles[theme("component")]}`}>
-           
-            <div>
-            <p className={styles.buton} onClick={handleShowCategories}>
-        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-            </p>
-
-                {showcategories && 
-                <Categories></Categories>}
-
-                <div />
-
-                <div>
+            <div className={`${styles.content} ${styles[theme("content")]}`}>
+                <div className={styles.options}>
+                    <p className={styles.buton} onClick={handleShowCategories}>
+                        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
+                    </p>
                     <p className={styles.buton} onClick={handleShowCursos}>
                         <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
                     </p>
-                    {showcursos && <Courses></Courses>}
-                </div>
-
-                <div>
-                    <p
-                        className={styles.buton}
-                        onClick={handleShowProducts}
-                    >
+                    <p className={styles.buton} onClick={handleShowProducts}>
                         <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
                     </p>
-                    {showproducts && <Products></Products>}
-                </div>
-
-                <div>
                     <p className={styles.buton} onClick={handleShowUsers}>
                         <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
                     </p>
-                    {showUsers && <User></User>}
+                    <p className={styles.buton} onClick={handleShowSubscription}>
+                        <h1 className={styles.h1}> ADMINISTRAR SUSCRIPCIONES </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowTecnology} >
+                        <h1 className={styles.h1}> ADMINISTRAR TECNOLOGIAS </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowPayment}>
+                        <h1 className={styles.h1}>ADMINISTRAR PAGOS</h1>
+                    </p>
                 </div>
 
-                <div>
-                    <p
-                        className={styles.buton}
-                        onClick={handleShowSubscription}
-                    >
-                        <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
-                    </p>
+                <div className={styles.table}>
+                    {showcategories && <Categories></Categories>}
+                    {showcursos && <Courses></Courses>}
+                    {showproducts && <Products></Products>}
+                    {showUsers && <User></User>}
                     {showSubscriptions && <Subscriptions></Subscriptions>}
-                   
-                </div>
-                <div>
-                    <p
-                        className={styles.buton}
-                        onClick={handleShowTecnology}
-                    >
-                        <h1 className={styles.h1}>ADMINISTRAR TECNOLOGIAS</h1>
-                    </p>
                     {showTecnology && <Tecnology />}
-                
+                    {/* {showPayment && <Payments />} */}
                 </div>
             </div>
-        </div></div>
+        </main>
     );
 };
 

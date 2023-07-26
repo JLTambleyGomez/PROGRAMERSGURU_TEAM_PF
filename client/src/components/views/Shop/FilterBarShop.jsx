@@ -211,22 +211,21 @@ function FilterBarShop () {
     //component:
     return (
         <>
-            <aside className={`${s.component}`}>
+            <div className={`${s.component}`}>
                 <div className={s.optionSort}>
-                    <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                    { true && (
-                        <select value={order} onChange={sortProducts}>
-                            <option value="">Destacados</option>
-                            <option value="ascendente">Z-A</option>
-                            <option value="descendente">A-Z</option>
-                        </select>
-                    )}
+                    <label onClick={toggleVisibilitySortByName}>Ordenar por:</label>
+                    <select value={order} onChange={sortProducts}>
+                        <option value="">Destacados</option>
+                        <option value="ascendente">Nombre Ascendente (A-Z)</option>
+                        <option value="descendente">Nombre Descendente (Z-A)</option>
+                    </select>
                 </div> 
                 <div className={s.optionFilter}>
-                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
-                    {
-                        true && (
-                            <div className={`${s.filterPrice}`}>
+                    <label>Filtros</label>
+                        <span className={s.filterSpan}>
+                        {/* PRECIO: */}
+                            <span className={s.priceSelect}>
+                                <label>Por precio</label>
                                 <Slider
                                     className={`${s["filterPriceSlider"]}`}
                                     range
@@ -236,28 +235,30 @@ function FilterBarShop () {
                                     onChange={handlePriceChange}
                                     value={currentPriceRange}
                                 />
-                                <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
-                            </div>
-                        )
-                    }
-                </div>
-                <div className={s.option}>
-                    <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                        <select value={category} onChange={filterCategory}>
-                            <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
-                            { Array.isArray(categories) && categories?.length > 0  && (
-                                <>
-                                    {
-                                        categories.map((category, index) => (
-                                            <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
-                                        ))
-                                    }
-                                </>
-                            )}
-                        </select>
+                                <div className={s.priceSelectPrice}>
+                                    <p>${currentPriceRange[0]}</p>
+                                    <p>${currentPriceRange[1]}</p>
+                                </div>
+                            </span>
+
+                        {/* CATEGORIA */}
+                            <select value={category} onChange={filterCategory}>
+                                <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
+                                { Array.isArray(categories) && categories?.length > 0  && (
+                                    <>
+                                        {
+                                            categories.map((category, index) => (
+                                                <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
+                                            ))
+                                        }
+                                    </>
+                                )}
+                            </select>
+                        </span>
+                        
                 </div>
                 <button onClick={resetFilters}>Mostrar todos</button>
-            </aside>
+            </div>
 
             <div className={s["responsive-component"]}>
                 <button onClick={() => {setFilterModal(true)}}>

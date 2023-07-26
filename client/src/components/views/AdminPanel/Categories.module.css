@@ -1,60 +1,117 @@
 .contain {
-  color: rgb(0, 0, 0);
-  display: flex;
-  width: 100%;
-  justify-content:center ;
-  animation: blur-in 0.4s linear both;
-  flex-direction: row;
-  margin-left: 150%;
-  padding: 5%;
-  background-color: rgba(0, 0, 255, 0.31);
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    width: 94%;
+    margin: 0 3%;
+    gap: 5%;
+    min-height: 100%;
+    animation: blur-in 0.4s ease;
 }
 @keyframes blur-in {
-  0% {
-    filter: blur(12px);
-    opacity: 0;
-  }
-  100% {
-    filter: blur(0);
-    opacity: 1;
-  }
-}
-.item {
-  display: flex;
-  justify-content: center;
-  justify-items: center;
-  align-items: center;
+    0% {
+        filter: blur(12px);
+        opacity: 0;
+    }
+    100% {
+        filter: blur(0);
+        opacity: 1;
+    }
 }
 
-.button{
-  color: rgb(10, 10, 10);
-}
-
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    .inputSpan {
+        height: 150%;
+    }
+  
 /* Estilos para los botones de eliminar */
 /* Personaliza el color según tus preferencias */
 .deleteButton {
-  background-color: #dc3545;
-  width: 2rem;
-  height: 2rem;
-  background-color: transparent;
-  /* border: 1px solid red; */
-  border: none;
-  transition: transform 0.2s ease;
-  
+    background-color: #dc3545;
+    width: 2rem;
+    height: 2rem;
+    background-color: transparent;
+    /* border: 1px solid red; */
+    border: none;
+    transition: transform 0.2s ease;
 }
 .deleteButton:hover {
-  animation: shake 0.5s infinite;
-  cursor: pointer;
+    animation: shake 0.5s infinite;
+    cursor: pointer;
 }
 .bin {
-  height: 1.5rem;
-  width: 1.5rem;
-  fill: red;
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: red;
 }
 @keyframes shake {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-10deg); }
-  50% { transform: rotate(10deg); }
-  75% { transform: rotate(-10deg); }
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
 }
 
+.input{
+    width: 100%;
+}
+
+.inputSpan {
+    display: flex;
+    gap: 2%;
+    width: 100%;
+    height: 2rem;
+}
+
+.Tabla {
+    display: flex;
+    width: 30vw;
+    border-collapse: collapse;
+    justify-content: center;
+}
+
+/* Estilos para el encabezado de la tabla */
+.Tabla thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #8e13c3;
+    background-color:#bb37f494;
+    padding: 15px;
+    text-align: center;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla */
+.Tabla tbody td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid  #8e13c3;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la última fila */
+/* Si no deseas bordes en la última fila, puedes omitir este bloque */
+.Tabla tbody tr:last-child td {
+    border-bottom: 1px solid  #8e13c3;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la primera columna */
+.Tabla tbody td:first-child {
+    border-left: 1px solid #8e13c3;
+}
+
+/* Estilos para las celdas del cuerpo de la tabla en la última columna */
+.Tabla tbody td:last-child {
+    border-right: 1px solid  #8e13c3;
+}
+
+/* Estilos para los botones dentro de las celdas de la tabla */
+.button{
+    background-color:  #8e13c3;
+    color:white;
+    width: 59%;
+}
+.button:hover{
+    cursor: pointer;
+}
