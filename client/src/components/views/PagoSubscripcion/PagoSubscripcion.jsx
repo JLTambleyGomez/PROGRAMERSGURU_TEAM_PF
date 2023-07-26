@@ -17,7 +17,7 @@ function PagoSubscripcion () {
     // const cart = useSelector((state) => state.cart);
 
     //states:
-    const [compra, setCompra] = useState(null);
+    // const [compra, setCompra] = useState(null);
     const [blocked, setBlocked] = useState(false);
     const [elegido,setElegido] = useState(null)
 
@@ -33,11 +33,17 @@ function PagoSubscripcion () {
         const oldCart = JSON.parse(localStorage.getItem("cart")) 
         oldCart.push(selectedSubscripcion)
         localStorage.setItem("cart", JSON.stringify(oldCart))
-        // navigate("/Cart")
+        navigate("/Cart")
     }
 
+    const handleDeleteSubscripcion = (selectedSubscripcion) => {
+        setBlocked(false);
+        console.log(selectedSubscripcion.id);
+        const oldCart = JSON.parse(localStorage.getItem("cart"));
+        const newCart = oldCart.filter((sub) => sub.id !== selectedSubscripcion.id);
+        localStorage.setItem("cart", JSON.stringify(newCart));
+    }
 
-// a ver...
     //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
@@ -50,9 +56,7 @@ function PagoSubscripcion () {
 
     useEffect(() => {
         dispatch(get_suscriptions())
-        console.log({compra})
-    }, [compra])
-
+    }, [])
 
     useEffect(() => {
         (async () => {
@@ -88,12 +92,12 @@ function PagoSubscripcion () {
                                 {
                                     !blocked ? (
                                             <p className={styles.buton} onClick={() => handleAddSubscripcion(subscripcion)}>
-                                                    agregar
+                                                    Agregar
                                             </p>
                                     ) : (
                                         (blocked === subscripcion.id) ? (
-                                            <p className={styles.buton} onClick={() => handleAddSubscripcion(subscripcion)}>
-                                                borrar de carrito
+                                            <p className={styles.buton} onClick={() => handleDeleteSubscripcion(subscripcion)}>
+                                                Borrar del carrito
                                             </p>
                                         ) : (
                                             <p>YA TIENES ELECCION</p>
