@@ -78,7 +78,7 @@ function CategorySection( { menuRef, storeRef } ) {
         setFly(index);
 
         const timer = setTimeout(() => {
-            // setFly(null);
+            setFly(null);
             // store ? navigate("/store") : navigate("/IniciaSession")
             setClicked(false);
         }, 3000);
