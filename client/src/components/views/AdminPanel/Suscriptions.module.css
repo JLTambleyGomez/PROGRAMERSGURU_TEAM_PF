@@ -13,26 +13,29 @@
   .Tabla {
    width: 100%; 
     margin-bottom: 1rem;
-    color: #212529;
-    border-collapse: collapse;
+    
+    border-collapse:separate;
   }
   
   /* Estilos para el encabezado de la tabla */
-.Tablatheadth {
-  vertical-align: bottom;
-  border-bottom: 2px solid #2492ff;
-  background-color: #72dafd !important;
-  padding: 15px;
-  text-align: center;
-  width: 33.33%;
-}
-
+  .title {
+   display: flex;
+   padding-right: 20px;
+   width: 369.7%;
+   justify-content: space-around;
+   background-color: aqua;
+align-content: center;
+  }
+  
   /* Estilos para las celdas del cuerpo de la tabla */
   .Tabla tbody td {
-    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
     text-align:center;
+    vertical-align: middle;
     border-bottom: 1px solid #dee2e6;
-    
+     justify-content:center;
+     align-items: center;
   }
   
   /* Estilos para las celdas del cuerpo de la tabla en la última fila */
@@ -45,7 +48,7 @@
   /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
   .Tabla tbody td:first-child {
     border-left: 1px solid #dee2e6;
-    
+ 
   }
   
   /* Estilos para las celdas del cuerpo de la tabla en la última columna */
@@ -58,16 +61,17 @@
   .Tabla td button {
     margin-right: 5px;
     cursor: pointer;
-    border: none;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
+    margin-bottom: 7px;
+    border:2px solid blue;
+    transition: all 0.5s;
   }
   
-  /* Estilos para los botones dentro de las celdas de la tabla */
-  
- /* Estilos para los botones de eliminar */
-/* Personaliza el color según tus preferencias */
-.modificarButton{
+  .Tabla td button:hover{
+    scale: 1.1;
+    background-color: blue;
+    color:bisque;
+  }
+  .modificarButton{
     background-color:rgba(255, 255, 0, 0.505);
   border-radius: 25%;
     /* border: 1px solid red; */

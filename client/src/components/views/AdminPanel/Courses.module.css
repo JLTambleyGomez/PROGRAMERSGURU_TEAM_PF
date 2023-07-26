@@ -6,15 +6,9 @@
   grid-template-rows: 1fr 1fr 1fr;
   gap: 2px 2px;
   width: 100%;
-  
+
 }
 
-.contenedorProductos {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  
-}
 
 .Tabla {
  width: 100%; 
@@ -66,7 +60,7 @@
   margin-right: 5px;
   cursor: pointer;
   border: none;
-  color: white;
+  color: rgb(0, 0, 0);
   padding: 5px 10px;
 }
 
@@ -114,8 +108,3 @@ border-radius: 25%;
   75% { transform: rotate(-10deg); }
 }
 
-/* Estilos para los botones de modificar */
-/* Personaliza el color según tus preferencias */
-.Tabla td button.botonModificar {
-  background-color: #ffc107;
-}
