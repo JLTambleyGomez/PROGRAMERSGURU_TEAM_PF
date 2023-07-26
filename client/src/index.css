@@ -1,3 +1,4 @@
+/* 20px de margin del componente Footer  */
 :root {
   --navBarHeight: 12vh;
   --footerHeight: calc(25vh + 80px);
@@ -12,6 +13,12 @@
   --turquesa: rgba(27, 149, 155, 0.822);
   --morado: rgba(102, 51, 153, 0.658);
 }
+
+/* @media screen and (max-width: 750px){
+    :root {
+        --footerHeight: calc(70vh);
+    }
+} */
 
 /*html {
    box-sizing: border-box;

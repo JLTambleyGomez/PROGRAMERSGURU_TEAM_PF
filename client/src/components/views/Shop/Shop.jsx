@@ -94,8 +94,10 @@ function Shop ( { isAtBottom, docWidth } ) {
     useEffect(() => {
         const token = localStorage.getItem("accessToken")
         if (token) {
-            if (!products.length) {
+            console.log("dispatch")
+            if (products.length < 0) {
                 (async () => {
+                    console.log("dispatchAll    ")
                     setLoading(true);
                     await dispatch(get_products_all())
                     setLoading(false);
@@ -104,6 +106,48 @@ function Shop ( { isAtBottom, docWidth } ) {
         }
     }, [products])
 
+    
+
+    useEffect(() => {
+        if (!loading) {
+          // Find the target element to scroll to (e.g., a div with the "mainBanner" class)
+          const targetElement = document.querySelector(`.${s.mainBanner}`);
+          if (targetElement) {
+            scrollToElement(targetElement, 0.8); // Specify the duration in seconds (0.8 seconds in this example)
+        }
+        }
+      }, [loading]);
+
+      const scrollToElement = (element, duration) => {
+        const targetPosition = element.getBoundingClientRect().top; // Distance from the target element to the top of the viewport
+        const startPosition = window.pageYOffset; // Current scroll position
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+    
+        const animateScroll = currentTime => {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / (duration * 1000), 1);
+          const easedProgress = easeInOutCubic(progress);
+          const scrollY = startPosition + distance * easedProgress;
+          window.scrollTo(0, scrollY);
+    
+          if (timeElapsed < duration * 1000) {
+            requestAnimationFrame(animateScroll);
+          }
+        };
+    
+        const easeInOutCubic = t => {
+          // Custom easing function for smoother animation
+          t /= 1 / 2;
+          if (t < 1) return (1 / 2) * t * t * t;
+          t -= 2;
+          return (1 / 2) * (t * t * t + 2);
+        };
+    
+        requestAnimationFrame(animateScroll);
+      };
+    
     // CART:
     useEffect(() => {
         (async () => {
@@ -117,14 +161,19 @@ function Shop ( { isAtBottom, docWidth } ) {
 
     useEffect(() => {
         dispatch(set_cart());
-    }, [])
+        return()=>{
+            if (cart){
+                localStorage.setItem("cart2", localStorage.getItem("cart"))
+            }
+        }
+    }, [dispatch])
 
     useEffect(() => {
         if (Array.isArray(products) && products.length >= 1) {
             setLoading(true);
             setTimeout(() => {
                 setLoading(false);
-            }, 500);
+            }, 1000);
         }
     }, [products])
 

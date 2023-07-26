@@ -3,14 +3,16 @@ import { initMercadoPago, Wallet } from '@mercadopago/sdk-react';
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./PagoMercadoPago.module.css"
+import { useNavigate } from "react-router-dom";
 
-const PagoMercadopago = ({ reference, mostrar }) => {
+const PagoMercadopago = ({ reference, }) => {
     console.log(reference);
     initMercadoPago('TEST-85c02450-7173-4d7c-8ff0-0b7663fd6b8b');
 
     const [preferenceId, setPreferenceId] = useState(null);
     const [loading, setLoading] = useState(true); // Nuevo estado para el mensaje de carga
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const createMercadopagoReference = async () => {
         try {
@@ -39,9 +41,16 @@ const PagoMercadopago = ({ reference, mostrar }) => {
         // Verificar si se obtuvo el ID de referencia para ocultar el mensaje de carga
         if (preferenceId) {
             setLoading(false);
-            mostrar()
         }
     }, [preferenceId]);
+   
+    const handleVentanaEmergente=async()=>{
+        await new Promise(resolve => setTimeout(resolve, 4000));
+        navigate("/HomePage")
+
+
+    }
+
 
     return (
         <div>
@@ -49,8 +58,8 @@ const PagoMercadopago = ({ reference, mostrar }) => {
                 // Mostrar mensaje de carga mientras se espera la respuesta
                 <p className={styles.carga}>Cargando método de pago...</p>
             ) : preferenceId ? (
-                <div className={styles.component}>
-                <Wallet initialization={{ preferenceId }} />
+                <div className={styles.component} onClick={handleVentanaEmergente}>
+                <Wallet initialization={{ redirectMode: 'blank',preferenceId }} />
                 </div>
             ) : null}
         </div>

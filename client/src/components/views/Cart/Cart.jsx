@@ -22,6 +22,8 @@ function Cart() {
     const [MostrarPagos, setMostrarPagos] = useState(false);
     const [adressForm, setAdressForm] = useState(false);
     const [message, setMessage] = useState("");
+    const [cargasimulada,setCargasimulada]=useState(false)
+    const [carrovacio,setCarrovacio]=useState(true)
     
     
     //const:
@@ -43,6 +45,9 @@ function Cart() {
     };
 
     const removeFromCart = async (id) => {
+        setMostrarPagos(false);
+        
+         
         const cart = await localStorage.getItem("cart");
         if (!cart) {
             await localStorage.setItem("cart", "[]");
@@ -68,6 +73,7 @@ function Cart() {
     };
     
     const handlePagarButton = () => {
+        setCargasimulada(true);
         dispatch(set_cart());
         
         const arrayListOfProducts = cart?.map(
@@ -87,14 +93,52 @@ function Cart() {
         };
 
         setCompra(referencia);
-        //quitar esto y dejarlo a manos del mercadopago, que como carga de ultimo nada mas se deberia cargar antes
-        //setMostrarPagos(true);
+        setMostrarPagos(true);
+      
+       
+        const carga =async ()=>{
+        await new Promise(resolve => setTimeout(resolve, 4000));    setCargasimulada(false)}
+         carga()
     };
+     
     const mostrar = ()=>{
         setMostrarPagos(true);
         console.log("mostrar")
     }
+    useEffect(() => {
+        (async () => {
+            const cartString = localStorage.getItem("cart");
+            if (cartString) {
+                const cart = JSON.parse(cartString);
+                if (Array.isArray(cart) && cart.length > 0) {
+                    const hasSubscripcion = cart.some(
+                        (product) => product.description.includes("Subscripcion")
+                    );
 
+                    console.log("está infectado:", hasSubscripcion);
+
+                    if (hasSubscripcion) {
+                        const cart2String = localStorage.getItem("cart2");
+                        if (cart2String) {
+                            const cart2 = JSON.parse(cart2String);
+                            if (Array.isArray(cart2)) {
+                                localStorage.setItem("cart",  localStorage.getItem("cart2"))
+                                }
+                        }
+                    }
+                }
+            }
+        })();
+    }, []);
+
+    useEffect(()=>{
+        if (Array.isArray(cart) && cart.length){
+            setCarrovacio(false)}else
+            if(Array.isArray(cart) &&!cart.length){
+                setCarrovacio(true)
+            }
+
+    },[cart])
     //life-cycles:
     useEffect(() => {
         (async () => {
@@ -106,12 +150,8 @@ function Cart() {
             }
         })();
         dispatch(set_cart());
-        // dispatch(get_User_By_Email());
     }, [user]);
 
-    //Modal
-    // if (user.banned) return (<ModalBannedUser />);
-    
     //component:
     return (
         <main>
@@ -196,8 +236,8 @@ function Cart() {
                                 )}
                                 <ul>
                                     {/* PRODUCTOS DEL RESUMEN */}
-                                    {cart?.map((product, index) =>
-                                        product.quantity !== 0 ? (
+                                    {Array.isArray(cart) && cart?.map((product, index) =>
+                                        product.quantity !== 0 && product.name.length ? (
                                             <li
                                                 className={styles.items}
                                                 key={index}
@@ -238,6 +278,10 @@ function Cart() {
                                             /></p>
                                         </div>
                                     )}
+                                    {cargasimulada &&
+                                    <div className={styles.cargasimulada}><p className={styles.cargandotxt}>Cargando Pagos</p></div> }
+                                    {carrovacio && 
+                                    <div className={styles.cargasimulada} ><p className={styles.cargandotxt}>Primero debes agregar productos</p></div>}
                                 </ul>
                             </div>
                         </div>

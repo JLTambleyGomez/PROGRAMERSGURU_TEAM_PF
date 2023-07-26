@@ -149,14 +149,25 @@ function FilterBarShop () {
     useEffect(() => {
         (async () => {
             if (!categories.length) {
-                await dispatch(get_categories())
-                .then((data) => setCategories(data.payload.allCategories));
+                try {
+                    const data = await dispatch (get_categories());
+                    if (data.payload && data.payload.allCategories) {
+                        setCategories(data.payload.allCategories);
+                    } else {
+                        console.error(  "Invalid data format: ", data);
+                    }
+                } catch (error) {
+                    console.error("Error fetching categories: ", error);
+                }
             }
-        })()
-    }, [categories])
+        })();
+      }, []);
 
     useEffect(() => {
-        dispatch(get_products_all());
+        if (!products.length) {
+            dispatch(get_products_all());
+            console.log("dispatchenfilter")
+        }
     }, []);
 
 
@@ -206,8 +217,8 @@ function FilterBarShop () {
                     { true && (
                         <select value={order} onChange={sortProducts}>
                             <option value="">Destacados</option>
-                            <option value="ascendente">Ascendente</option>
-                            <option value="descendente">Descendente</option>
+                            <option value="ascendente">Z-A</option>
+                            <option value="descendente">A-Z</option>
                         </select>
                     )}
                 </div> 
@@ -234,7 +245,7 @@ function FilterBarShop () {
                     <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
                         <select value={category} onChange={filterCategory}>
                             <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
-                            { categories.length && (
+                            { Array.isArray(categories) && categories?.length > 0  && (
                                 <>
                                     {
                                         categories.map((category, index) => (
