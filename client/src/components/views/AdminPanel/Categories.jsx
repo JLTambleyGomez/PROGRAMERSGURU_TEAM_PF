@@ -108,8 +108,7 @@ const Categories = () => {
                     </span>
                     <span>{error && <p>{error.category}</p>}</span>
                 </form>
-                <div className={styles.tableHover}>
-                <Table className="table table-striped table-bordered table-hover">
+                <div className={styles.Tabla}>                 <Table className="table table-striped table-bordered table-hover">
       <thead>
           <tr>
             <th>#</th>
