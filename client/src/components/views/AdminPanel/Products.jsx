@@ -210,18 +210,18 @@ function Products() {
       <div className={styles.contain}>
           <section>
             <div>
-              <h2>Productos</h2>
+              <h2  >Productos</h2>
               {postProduct || modificarProduct ? (
                 <>
-                  <button onClick={handleCloseForm}>X</button>
+                  <button className={styles.button} onClick={handleCloseForm}>X</button>
                   <h2>
                     {postProduct
                       ? "Añadir un nuevo producto"
                       : "Editar producto"}
                   </h2>
                   {messagePost && <p>{messagePost}</p>}
-                  <form>
-                    <div>
+                  <form  >
+                    <div >
                       {modificarProduct && (
                         <p>Debe ingresar al menos un dato a cambiar</p>
                       )} <label htmlFor="name">Nombre: </label>
@@ -292,7 +292,8 @@ function Products() {
     
               {message && <span>{message}</span>}
                 <h2>Tabla de Productos</h2>
-                <Table class="table">                  <thead>
+                <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
+                 <thead>
                     <tr>
                       <th>#</th>
                       <th>Nombre</th>
