@@ -47,6 +47,47 @@ function CoursePage ( { isAtBottom, docWidth } ) {
         })()
     }, [allCourses])
 
+    
+
+    useEffect(() => {
+        if (!isloading) {
+          // Find the target element to scroll to (e.g., a div with the "mainBanner" class)
+          const targetElement = document.querySelector(`.${styles.mainBanner}`);
+          if (targetElement) {
+            scrollToElement(targetElement, 0.8); // Specify the duration in seconds (0.8 seconds in this example)
+        }
+        }
+      }, [isloading]);
+
+      const scrollToElement = (element, duration) => {
+        const targetPosition = element.getBoundingClientRect().top; // Distance from the target element to the top of the viewport
+        const startPosition = window.pageYOffset; // Current scroll position
+        const distance = targetPosition - startPosition;
+        let startTime = null;
+    
+        const animateScroll = currentTime => {
+          if (startTime === null) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / (duration * 1000), 1);
+          const easedProgress = easeInOutCubic(progress);
+          const scrollY = startPosition + distance * easedProgress;
+          window.scrollTo(0, scrollY);
+    
+          if (timeElapsed < duration * 1000) {
+            requestAnimationFrame(animateScroll);
+          }
+        };
+    
+        const easeInOutCubic = t => {
+          // Custom easing function for smoother animation
+          t /= 1 / 2;
+          if (t < 1) return (1 / 2) * t * t * t;
+          t -= 2;
+          return (1 / 2) * (t * t * t + 2);
+        };
+    
+        requestAnimationFrame(animateScroll);
+      };
 
     //component:
     return (

@@ -57,8 +57,8 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []) //testear con array vacio.
 
-    useEffect(() => {
-        const token = sessionStorage.getItem("accessToken");
+    useEffect(()=>{
+        const token = localStorage.getItem("accessToken");
         if (token) dispatch (get_products_all())
     },[])
 

@@ -84,6 +84,10 @@ const Categories = () => {
         })()
     }, [dispatch])
 
+    useEffect(() => {
+        console.log(categories)
+    }, [categories])
+
 
     //component:
     return (

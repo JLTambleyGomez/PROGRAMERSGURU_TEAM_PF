@@ -196,6 +196,9 @@
     .subscription-responsive {
         display: none;
     }
+    .admin-responsive {
+        display: none;
+    }
     .barsButton:hover {
         transform:scale(1.4);
     }
@@ -223,6 +226,9 @@
     .subscription-responsive {
         display: block;
     }
+    .admin-responsive {
+        display: block;
+    }
     .bolsita {
         order: 1;
     }
@@ -243,6 +249,9 @@
     }
     .barsButton {
         order: 5;
+    }
+    .admin {
+        display: none;
     }
 }
 
