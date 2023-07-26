@@ -2,8 +2,7 @@ const { Payment, Product, User } = require("../../db");
 
 const getAllPayments = async (req, res) => {
     try {
-        console.log("Entre a getAllPayment");
-
+      
         const allPayments = await Payment.findAll({
             attributes: ["date", "status", "totalPrice", "id"],
             include: [
@@ -14,7 +13,6 @@ const getAllPayments = async (req, res) => {
             ],
         });
 
-        console.log(allPayments);
 
         if (!allPayments.length)
             return res.status(404).json({ message: "No existen pagos" });

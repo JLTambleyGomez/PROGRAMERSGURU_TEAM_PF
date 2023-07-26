@@ -12,6 +12,7 @@ import { validateSuscription } from "./validate";
 import { Table } from "react-bootstrap";
 import {SubirImagenSuscription} from './SubirImagenSuscription'
 import styles from "./Suscriptions.module.css"
+import ObjectsListSubscription from './Paginacion/ObjectListSubscription'
 
 //_________________________module_________________________
 const Subscriptions = () => {
@@ -58,9 +59,7 @@ const Subscriptions = () => {
     };
 
     //setea el estado local con el id y abre el form
-    const handleEditSubscription = (event) => {
-        const id = event.target.value;
-
+    const handleEditSubscription = (id) => {
         const suscripcionesModificar = subscriptions.find(
             (sub) => sub.id === +id
         );
@@ -273,6 +272,7 @@ const Subscriptions = () => {
                                             : "Tipo"
                                     }
                                 >
+                                    <option value="default">Selecciona</option>
                                     <option value="trimestral">trimestral</option>
                                     <option value="semestral">
                                         semestral
@@ -308,7 +308,8 @@ const Subscriptions = () => {
                 ) : (
                     <></>
                 )}
-                <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
+                <ObjectsListSubscription objects={subscriptions} handleDeleteSubscription={handleDeleteSubscription} handleEditSubscription={handleEditSubscription} />
+                {/* <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
                  <tbody >
                 <thead >
                    <tr><div className={styles.title}>
@@ -345,7 +346,7 @@ const Subscriptions = () => {
                   ))}
                 </tbody>
               </Table>
-
+ */}
 
 
 

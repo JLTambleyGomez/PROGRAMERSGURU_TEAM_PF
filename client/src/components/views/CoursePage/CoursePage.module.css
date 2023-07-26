@@ -11,7 +11,7 @@
   } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
   
   .component-dark {
-     background-color: #000000;
+     background-color: #111111;
   }
   
   .mainBanner {

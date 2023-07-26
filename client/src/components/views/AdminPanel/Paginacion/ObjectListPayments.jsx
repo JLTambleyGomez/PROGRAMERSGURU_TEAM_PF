@@ -6,6 +6,11 @@ import s from "./Payments.module.css";
 export default function ObjectsListPayments({ objects, titulo }) {
     const [currentPage, setCurrentPage] = useState(1);
 
+    const filteredObjects = objects.filter(obj => obj?.User).sort((a,b)=> {
+        const date_a = new Date(a.date)
+        const date_b = new Date(b.date)
+        return date_b - date_a
+    })
     const ObjectsPerPage = 6;
     const numOfObjects = objects.length;
     const lastObj = currentPage * ObjectsPerPage;
@@ -24,9 +29,10 @@ export default function ObjectsListPayments({ objects, titulo }) {
             </div>
 
             <>
-                {objects.slice(firstObj, lastObj).map((obj) => {
+                {Array.isArray(filteredObjects) && filteredObjects?.slice(firstObj, lastObj).map((obj) => {
                     return (
-                        <div key={obj.id} className={s.fila}>
+                        <>{obj?.User?.name ?
+                        (<div key={obj.id} className={s.fila}>
                             <div key={obj.id} className={s.fila}>
                                 <div className={s.title}>{obj?.User?.name}</div>
                                 <div className={s.email}>{obj?.User?.email}</div>
@@ -39,7 +45,9 @@ export default function ObjectsListPayments({ objects, titulo }) {
                                 </div>
                                 <div className={s.total}>${obj?.totalPrice}</div>
                             </div>
-                        </div>
+                        </div>)
+                        : null
+                        }</>
                     );
                 })}
             </>

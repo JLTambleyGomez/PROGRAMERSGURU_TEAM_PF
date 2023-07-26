@@ -12,12 +12,16 @@ import { validateProduct } from "./validate";
 import styles from "./Courses.module.css";
 import { SubirImagenDeProducto } from "./SubirImagenDeProducto";
 import { Table } from "react-bootstrap";
+import ObjectListProducts from './Paginacion/ObjectListProducts'
+
 //_________________________module_________________________
+
 function Products() {
     
     //global state:
     const message = useSelector((state) => state.message);
-    const products = useSelector((state) => state.products);
+    //no sé si esta bien
+    const products = useSelector((state) => state.products)
     const categories = useSelector((state) => state.categories);
 
     //const:
@@ -292,8 +296,8 @@ function Products() {
     
               {message && <span>{message}</span>}
               <div>
-                <h2>Tabla de Productos</h2>
-                <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
+                <ObjectListProducts objects={products} name='Productos' handleProductDelete={handleProductDelete} handleModificarProducto={handleModificarProducto} />
+                {/* <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
                   <thead>
                     <tr>
                       <th>#</th>
@@ -321,7 +325,7 @@ function Products() {
                       </tr>
                     ))}
                   </tbody>
-                </Table>
+                </Table> */}
               </div>
             </div>
           </section>

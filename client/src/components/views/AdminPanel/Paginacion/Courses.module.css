@@ -1,0 +1,68 @@
+.component {
+width: 1000px;
+}
+/* .contain {
+
+    width: 1000px;
+}
+.panel {
+
+    width: 1000px;
+}
+.coursesContainer {
+    width: 1000px;
+} */
+
+.paginacion {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+    border-top: 1px solid rgb(143, 143, 143);
+}
+
+.fila {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    border-top: 1px solid rgb(143, 143, 143);
+    padding: 10px 0 10px 0;
+}
+
+.title {
+    width: 35%;
+}
+
+.id {
+    margin-left: 20px;
+    width: 5%;
+}
+
+.date {
+    text-align: center;
+    width: 25%;
+}
+
+.rating {
+    text-align: center;
+    width: 20%;
+}
+
+.actions {
+display: flex;
+justify-content: center;
+gap: 50px;
+    width: 25%;
+}

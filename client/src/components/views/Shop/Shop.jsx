@@ -184,7 +184,7 @@ function Shop ( { isAtBottom, docWidth } ) {
    
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 10
+    const productsPerPage = 12
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
