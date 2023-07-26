@@ -98,6 +98,7 @@ auth.onIdTokenChanged(async (user) => {
     //const:
     const location = useLocation().pathname;
     const storeRef = useRef(null)
+    const menuRef = useRef(null)
     const docWidth = window.innerWidth
 
     
@@ -164,12 +165,12 @@ auth.onIdTokenChanged(async (user) => {
     //component:
     return (
         <div className={`${s.component} ${s[theme("component")]}`}>
-            {location !== "/" && <NavBar storeRef={storeRef}/>}
+            {location !== "/" && <NavBar menuRef={menuRef} storeRef={storeRef}/>}
             {location !== "/" && <MusicBar/>}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
                 <Route path="/" element={<LandingPage2/>}/>
-                <Route path="/HomePage" element={<HomePage storeRef={storeRef} isAtBottom={isAtBottom} docWidth={docWidth}/>} />
+                <Route path="/HomePage" element={<HomePage storeRef={storeRef} menuRef={menuRef} isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/CoursePage" element={<CoursePage isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/Profile" element={<Profile />} />
                 <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />

@@ -18,7 +18,7 @@ import Menu from "../Menu/Menu";
 import ModalBannedUser from '../../views/ModalBannedUser/ModalBannedUser'
 
 //_________________________module_________________________
-function NavBar ( { logoutUser, storeRef } ) {
+function NavBar ( { logoutUser, storeRef, menuRef } ) {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
@@ -201,6 +201,7 @@ function NavBar ( { logoutUser, storeRef } ) {
                 className={s.barsButton}
                 icon={faBars}
                 onClick={toggleBars}
+                ref={menuRef}
             />
             {
                 isBarsOpen && (
