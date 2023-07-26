@@ -101,8 +101,7 @@
       /* border: 1px solid red; */
       border: none;
       border-radius: 10px;
-      transition: transform 0.2s ease;
-      
+      transition: transform 0.2s ease; 
     }
     .binBox:hover {
       animation: shake 0.5s infinite;

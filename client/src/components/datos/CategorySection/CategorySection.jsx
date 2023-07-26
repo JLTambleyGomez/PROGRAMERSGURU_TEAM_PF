@@ -79,7 +79,7 @@ function CategorySection( { menuRef, storeRef } ) {
 
         const timer = setTimeout(() => {
             setFly(null);
-            // store ? navigate("/store") : navigate("/IniciaSession")
+            store ? navigate("/store") : navigate("/IniciaSession")
             setClicked(false);
         }, 3000);
         }
@@ -101,7 +101,7 @@ function CategorySection( { menuRef, storeRef } ) {
     //component:
     return (
         <div className={s.component}>
-        <h1 className={`${s.categoriesTitle} ${s[theme("categoriesTitle")]}`}>Encuentra lo que necesitas para despegar xD</h1>
+        <h1 className={`${s.categoriesTitle} ${s[theme("categoriesTitle")]}`}>Descubre nuestra tienda e impulsa tu carrera</h1>
         <div className={s.categories}>
             {
                 Array.isArray(categories) && categories.length && categories.map((category, index) => (

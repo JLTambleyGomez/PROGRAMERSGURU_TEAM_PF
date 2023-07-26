@@ -100,7 +100,6 @@ auth.onIdTokenChanged(async (user) => {
     const storeRef = useRef(null)
     const menuRef = useRef(null)
     const docWidth = window.innerWidth
-
     
     //life-cycles:
     useEffect(()=>{
@@ -172,7 +171,7 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/" element={<LandingPage2/>}/>
                 <Route path="/HomePage" element={<HomePage storeRef={storeRef} menuRef={menuRef} isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/CoursePage" element={<CoursePage isAtBottom={isAtBottom} docWidth={docWidth}/>} />
-                <Route path="/Profile" element={<Profile />} />
+                <Route path="/Profile" element={<Profile/>} />
                 <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/Cart" element={<Cart isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />

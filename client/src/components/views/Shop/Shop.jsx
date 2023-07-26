@@ -287,7 +287,7 @@ function Shop ( { isAtBottom, docWidth } ) {
                         <p>Tu carrito de compras está vacío</p>
                     )
                 }
-            </section> 
+            </section>
             {
                 docWidth < 750 ? (
                     <Footer/>
