@@ -9,7 +9,7 @@ import {
 import Rating from "@mui/material/Rating";
 import theme from "../../../../theme/theme";
 
-export default function PublishComment({setDisabled, commentData, setCommentData}) {
+export default function PublishComment({setDisabled, commentData, setCommentData, setMeanRating}) {
 
     const user = useSelector(state => state.user)
 
@@ -30,7 +30,8 @@ export default function PublishComment({setDisabled, commentData, setCommentData
         if (data.message === "Se publicó tu comentario") {
             setDisabled(true)
         }
-        await computeCourseRating(id)
+        const {meanRating} = await computeCourseRating(id)
+        setMeanRating(meanRating)
     }
 
     useEffect(() => {

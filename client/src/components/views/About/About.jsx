@@ -1,4 +1,6 @@
-function About () {
+import styles from "./About.module.css"
+
+const About =()=> {
     return (
         <main>
             <div>

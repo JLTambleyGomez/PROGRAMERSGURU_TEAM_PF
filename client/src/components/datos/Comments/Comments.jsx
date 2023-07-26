@@ -8,7 +8,7 @@ import PublishComment from "./subComponents/PublishComment";
 import theme from "../../../theme/theme";
 
 //_________________________module_________________________
-function Comments({ disabled, comments, setDisabled }) {
+function Comments({ disabled, comments, setDisabled, setValue }) {
     const user = useSelector((state) => state.user);
 
     const expirationDate = new Date(user?.expirationDate);
@@ -49,6 +49,7 @@ function Comments({ disabled, comments, setDisabled }) {
                     setDisabled={setDisabled}
                     commentData={commentData}
                     setCommentData={setCommentData}
+                    setMeanRating={setValue}
                 />
             )) : null}
             <div className={s.allComments}>
