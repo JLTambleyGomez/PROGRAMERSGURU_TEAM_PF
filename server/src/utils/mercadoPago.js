@@ -3,6 +3,7 @@ const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const URL_FEEDBACKS = process.env.URL_FEEDBACKS
+const URL_LOCAL = "http://localhost:5173"
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
@@ -21,7 +22,7 @@ const PagoconMercadopago = async (req, res) => {
       },
     ],
     back_urls: {
-      success: URL_FEEDBACKS+"/MercadoPagoFeedback",
+      success: "http://localhost:5173/MercadoPagoFeedback",
       failure: URL_FEEDBACKS,
       pending: URL_FEEDBACKS,
     },
@@ -50,7 +51,7 @@ const FeedbackMercadoPago = async (req, res) => {
 try {
   const { email, merchant_order_id, payment_id } = req.query;
   const { compra } = req.body; 
-  
+  console.log(req.body)
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const date = new Date()
@@ -63,7 +64,8 @@ try {
     totalPrice:totalAmount
   })
 
-  for (let i = 0 ; i < compra.length ; i++) {
+  if(compra[0].name){
+    for (let i = 0 ; i < compra.length ; i++) {
     const product = await Product.findByPk(compra[i].id)
     const quantity = compra[i].quantity
 
@@ -74,7 +76,7 @@ try {
     });
     product.stock = product.stock - quantity
     await product.save()
-  }
+  }}
 
 
   const user = await User.findOne({
@@ -87,15 +89,8 @@ try {
 
 
   const listadeproductos = compra?.map(
-    (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
+   (product) => product.name? `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`:`<li> Producto: ${product.description} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
   );
-
-  const compraHTML = compra
-    ? compra.map(
-        (product) =>
-          ` <li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
-      )
-    : "No hay productos en el carrito prueba HTML";
 
   const stringListOfProducts = listadeproductos?.join("\n");
   const listOfProducts = stringListOfProducts
@@ -165,19 +160,21 @@ try {
 
   transtorpe.sendMail(destino, (error, info) => {
     if (error) {
+      console.log("error del subs")
       res.status(500).send(error.message);
     } else {
       console.log("se ha enviado");
     }
   });
 
-  res.json({
+  res.status(200).json({
     Payment: req.query.payment_id,
     Status: req.query.status,
     MerchantOrder: req.query.merchant_order_id,
   });
 } catch (error) {
-  
+  console.log(error.message)
+  res.status(500).json({message:error.message})
 }
   
   

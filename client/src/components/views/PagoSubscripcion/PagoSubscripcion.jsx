@@ -40,7 +40,7 @@ function PagoSubscripcion () {
         if (subscripcion) {
             const referencia = {
                 // en caso de ERROR: cambiar "name" por "description"
-                name: subscripcion.title,
+                description: subscripcion.title,
                 price: subscripcion.price,
                 quantity: 1,
             }

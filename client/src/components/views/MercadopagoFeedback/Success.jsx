@@ -19,15 +19,7 @@ function Success  () {
     //states:
     const [paymentInfo, setPaymentInfo] = useState(null);
 
-    //functions:
-    const calculateTotal = () => {
-        let total = 0;
-        cart?.forEach((product) => {
-            const productTotal = product.price * product.quantity;
-            total += productTotal;
-        });
-        return total;
-    };
+ 
 
     //const:
     const location = useLocation();
@@ -48,8 +40,6 @@ function Success  () {
             const compra = JSON.parse(compraString); // Convertir la cadena de texto a un arreglo de objetos
             const email = localStorage.getItem("email");
             await dispatch(get_User_By_Email(email));
-            console.log(cart);
-            console.log("este es el email:" + " " + email);
             const searchParams = new URLSearchParams(location.search);
             const paymentId = searchParams.get("payment_id");
             const status = searchParams.get("status");
@@ -58,11 +48,11 @@ function Success  () {
             const data = await getMercadopagoFeedback({email,paymentId,status,merchantOrderId,compra})
           
             
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            console.log(data);
-            localStorage.setItem("cart", "[]");
+            await new Promise(resolve => setTimeout(resolve, 2000));
             setPaymentInfo(data);
+
+            localStorage.setItem("cart", "[]");
+         
           } catch (error) {
             console.error("Error al obtener el recibo de Mercado Pago:", error);
           }
