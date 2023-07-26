@@ -113,6 +113,8 @@ auth.onIdTokenChanged(async (user) => {
     
     useEffect(() => {
         const handleScroll = () => {
+            const scrollY = window.scrollY;
+            
             const windowHeight =
                 "innerHeight" in window
                 ? window.innerHeight
@@ -128,17 +130,18 @@ auth.onIdTokenChanged(async (user) => {
             );
             const windowBottom = windowHeight + window.pageYOffset;
 
-            if (windowBottom >= docHeight) {
+            if (scrollY + windowHeight >= docHeight) {
                 setIsAtBottom(true);
             } else {
                 setIsAtBottom(false);
             }
         };
+        handleScroll();
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            };
+        };
     }, []);
 
     useEffect(() => {
