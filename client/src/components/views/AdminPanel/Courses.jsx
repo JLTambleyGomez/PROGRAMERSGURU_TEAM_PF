@@ -145,7 +145,7 @@ function Courses() {
     
     //boton para cerrar el formulario
     const handleClosingModification = (event) => {
-        setLimpiar(true)
+        event.preventDefault()
         setModificarCourse(false);
         setPostCourse(false);
         setCourseId(0);
@@ -307,19 +307,19 @@ function Courses() {
                     <>
                         <form className={`${styles.coursesForm}`}>
                             {postCourse || modificarCourse ? (
-                                <button onClick={handleClosingModification}>
+                                <button className={styles.button} onClick={handleClosingModification}>
                                     X
                                 </button>
                              ) : ''}
                             {modificarCourse ? (
-                                <h2>Modificar Curso</h2>
+                                <h2 className={styles.h1}>Modificar Curso</h2>
                             ) : (
-                                <h2>Nuevo Curso</h2>
+                                <h2 lassName={styles.h1}>Nuevo Curso</h2>
                             )}
                              {messagePost && <p>{messagePost}</p>}
                                 <div className={`${styles.h1}`}>
                                     <label>Título:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="title"
                                         value={newCourse.title}
@@ -331,7 +331,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Descripción:</label>
-                                    <textarea
+                                    <textarea className={styles.input}
                                         name="description"
                                         value={newCourse.description}
                                         onChange={handleCourseChange}
@@ -344,7 +344,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>URL de la imagen:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="imageURL"
                                         value={newCourse.imageURL}
@@ -353,13 +353,13 @@ function Courses() {
                                         />
                                     {errorCourse.imageURL && <p>{errorCourse.imageURL}</p>}
                                 </div>
-                                <div >
+                                <div className={styles.subirimagen} >
                                     <SubirImagenCurso handleCourseChange={handleCourseChange} title={modificarCourse ? modifCourse?.title : newCourse?.title}/>
                                 </div>
 
                                 <div className={`${styles.h1}`}>
                                     <label>URL del curso:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="courseUrl"
                                         value={newCourse.courseUrl}
@@ -371,7 +371,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Fecha de lanzamiento:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="date"
                                         name="released"
                                         value={newCourse.released}
@@ -385,14 +385,14 @@ function Courses() {
                                 <div className={`${styles.h1}`}>
                                     <label>Tipo</label>
                                     <label>Gratuito</label>
-                                        <input
+                                        <input className={styles.input}
                                             type="radio"
                                             name="isFree"
                                             checked={newCourse.isFree}
                                             onChange={handleCourseChange}
                                         />
                                     <label>Exclusivo</label>
-                                        <input
+                                        <input className={styles.input}
                                             type="radio"
                                             name="isFree"
                                         />
@@ -402,7 +402,7 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     <label>Idioma:</label>
-                                    <input
+                                    <input className={styles.input}
                                         type="text"
                                         name="language"
                                         value={newCourse.language}
@@ -414,13 +414,13 @@ function Courses() {
 
                                 <div className={`${styles.h1}`}>
                                     
-                                <div>
+                                <div className={styles.tecnologias} >
                                     <label>Tecnologías:</label>
                                     <SelectTechnologies 
                                     selectedTechnologies={selectedTechnologies} 
                                     setSelectedTechnologies={setSelectedTechnologies} 
                                     tecnology={tecnology} handleCourseChange={handleCourseChange} />
-                                    <button onClick={HandleSelectTechnologies}>Ok</button>
+                                    <button className={styles.button} onClick={HandleSelectTechnologies}>Ok</button>
                                 </div>
                         
                                 </div>
@@ -438,7 +438,7 @@ function Courses() {
                                 </div>
                           
 
-                            <button onClick={handleCoursePost}>
+                            <button className={styles.button} onClick={handleCoursePost}>
                                 {modificarCourse
                                     ? "Editar"
                                     : "Postear curso"}
@@ -448,7 +448,7 @@ function Courses() {
                 ) : (
                     <>
                         <h2>Crear un curso nuevo</h2>
-                        <button onClick={handlePostCourse}>
+                        <button className={styles.button} onClick={handlePostCourse}>
                             Crear curso
                         </button>
                     </>
@@ -479,7 +479,7 @@ function Courses() {
                                  <button onClick={() => handleModificarCurso(course.id)}className={styles.modificarButton}><svg xmlns="http://www.w3.org/2000/svg" className={styles.mod} width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 21v-4a4 4 0 1 1 4 4h-4"></path><path d="M21 3a16 16 0 0 0 -12.8 10.2"></path><path d="M21 3a16 16 0 0 1 -10.2 12.8"></path><path d="M10.6 9a9 9 0 0 1 4.4 4.4"></path>
                                     </svg></button>
-                                <button onClick={() => deleteCategory1(category.id)}className={styles.deleteButton}>
+                                <button onClick={() =>handleDeleteCourse (course.id)}className={styles.deleteButton}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className={styles.bin} viewBox="0 0 16 16">
                                        <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z"/>
                                     </svg></button>

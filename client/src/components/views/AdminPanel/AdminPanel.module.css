@@ -1,25 +1,51 @@
 .component {
-    width: 100%;
     margin-top: var(--navBarHeight);
+    min-height: calc(100vh - var(--navBarHeight));
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
     display: flex;
-    flex-direction: row;
-    padding: 4% 0;
-  }
+    /* padding: 4% 0; */
+    animation:blur-in 1s ease;
+} @keyframes blur-in {
+  0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
+}
+
+.message{
+  position:sticky;
+  top: var(--navBarHeight);
+  width:100%;
+  height: 4%;
+  background-color: black;
+  color: white;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 100%
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 20%;
+}
+
+.h1 {
+  margin: 12%;
+  font-size: 10px;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%
+}
+
   
-  .message{
-    position:sticky;
-    top:12%;
-    width:100%;
-    height: 4%;
-    background-color: black;
-    color: white;
-  }
-  
-  .h1{
-    margin: 12%;
-    font-size: 10px;
-   
-  }
   
   .buton{
     border: 2px solid rgb(8, 156, 137);
@@ -27,13 +53,14 @@
     justify-content: center;
     text-align: center;
     align-items: center;
-    width: 250px;
+    width: 80%;
     height: 60px;
     border-radius: 4px;
     box-sizing: border-box;
     animation: borderGradientAnimation1 4s linear infinite, borderGradientAnimation2 4s linear infinite, shadowGradientAnimation 4s linear infinite;
   }
   
+
   @keyframes borderGradientAnimation1 {
     0%, 100% {
       border-image: linear-gradient(to right, #ff0000, #0000ff) 1;
