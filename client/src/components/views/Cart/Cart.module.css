@@ -143,14 +143,20 @@
   
   }
   .icon{
-    display: inline-block; 
-    scale:2;
-    position: absolute;
-    top: 50%;
+    display:flex; 
+    scale:5;
+    top: 40%;
     left: 50%;
-    animation: spin 3s linear infinite;
-  }
-  
+    animation:blur-in 0.8s linear both}
+     @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+    .icon2{
+      display:flex; 
+      scale:1.5;
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      animation: spin 3s linear infinite; 
+    }
   @keyframes spin {
     0% {
       transform: rotate(0deg);
