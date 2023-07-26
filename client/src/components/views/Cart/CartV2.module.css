@@ -78,8 +78,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 25px;
+    margin-right: 20px;
   }
+  
   .add{
     width: 25px;
     margin: 0 3px 0 3px;

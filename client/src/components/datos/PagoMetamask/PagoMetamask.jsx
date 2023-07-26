@@ -22,6 +22,7 @@
     };
 
     const ethToWei = (ethValue) => {
+      console.log(ethValue);
       const weiValue = '0x' + (ethValue * Math.pow(10, 18)).toString(16);
       return weiValue;
     };
@@ -133,7 +134,7 @@
   const isPaymentDisabled = total < 10;
 
   return (
-    <div onClick={connectionWallet} className={styles.container}>
+    <div onClick={connectionWallet &&handlePayment} className={styles.container}>
       <img
         className={styles.img}
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/MetaMask_Fox.svg/512px-MetaMask_Fox.svg.png"
@@ -145,7 +146,7 @@
         {isPaymentDisabled ? (
           <p className={styles.disabledPaymentButton}>Pago mínimo 10 USD con Metamask</p>
         ) : (
-          <p onClick={handlePayment} className={styles.paymentButton} disabled={!defaultAccount}>
+          <p  className={styles.paymentButton} disabled={!defaultAccount}>
             Pay with Metamask
           </p>
         )}
