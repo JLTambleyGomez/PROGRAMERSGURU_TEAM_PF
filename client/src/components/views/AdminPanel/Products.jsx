@@ -207,7 +207,7 @@ function Products() {
 
     //component:
     return (
-        <div className={styles.contenedor}>
+      <div className={styles.contain}>
           <section>
             <div>
               <h2>Productos</h2>
@@ -291,10 +291,8 @@ function Products() {
               )}
     
               {message && <span>{message}</span>}
-              <div>
                 <h2>Tabla de Productos</h2>
-                <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
-                  <thead>
+                <Table class="table">                  <thead>
                     <tr>
                       <th>#</th>
                       <th>Nombre</th>
@@ -322,10 +320,11 @@ function Products() {
                     ))}
                   </tbody>
                 </Table>
-              </div>
+              
             </div>
           </section>
         </div>
+        
       );
     }
     

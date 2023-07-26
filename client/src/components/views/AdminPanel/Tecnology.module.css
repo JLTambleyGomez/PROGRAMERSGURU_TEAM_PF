@@ -39,7 +39,7 @@
   padding: 15px;
   text-align:center;
   vertical-align: middle;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid rgba(255, 68, 0, 0.653);
   
 }
 
@@ -52,13 +52,13 @@
 
 /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
 .Tabla tbody td:first-child {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid rgba(255, 68, 0, 0.653);
   
 }
 
 /* Estilos para las celdas del cuerpo de la tabla en la última columna */
 .Tabla tbody td:last-child {
-  border-right: 1px solid #dee2e6;
+  border-right: 1px solid rgba(255, 68, 0, 0.653);
   
 }
 

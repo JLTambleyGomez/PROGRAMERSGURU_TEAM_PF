@@ -302,7 +302,6 @@ function Courses() {
     return (
         <div className={`${styles.component} ${styles[theme("component")]}`}>
         <div className={styles.contain}>
-            
             <section className={`${styles.Panel}`}>
                 {postCourse || modificarCourse ? (
                     <>
