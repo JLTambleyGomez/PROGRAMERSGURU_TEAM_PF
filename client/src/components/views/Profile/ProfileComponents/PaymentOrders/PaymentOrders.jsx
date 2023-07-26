@@ -4,6 +4,9 @@ import theme from "../../../../../theme/theme";
 import { NavLink } from "react-router-dom";
 
 export function PaymentOrders({ payments }) {
+    const mp = "https://www.sitepro.com.ar/web/wp-content/uploads/2022/08/Mercado-pago-1024x267.png"
+    const mm = "https://altcoinsbox.com/wp-content/uploads/2023/03/full-metamask-logo.webp"
+
     if (!payments?.length) {
         return (
             <div className={`${styles.emptyTab} ${styles[theme("emptyTab")]}`}>
@@ -27,9 +30,10 @@ export function PaymentOrders({ payments }) {
                                 s[theme("payHeader")]
                             }`}
                         >
-                            <span className={s.payId}>
-                                Resumen de compra N°: {pay?.id}
+                            <span className={s.payMethod}>
+                                Resumen de compra  
                             </span>
+                            <img src={pay.id[1]==="x" ? mm : mp} alt="" />
                             <span className={s.date}>
                                 {pay?.date
                                     .slice(0, 10)
@@ -59,7 +63,10 @@ export function PaymentOrders({ payments }) {
                                         </div>
                                     )
                                 })}
-                            <span className={s.totalPrice}>Precio total: ${pay?.totalPrice}</span>
+                                <div className={s.footer}>
+                                    <span className={s.totalPrice}>Monto total: ${pay?.totalPrice}</span>
+                                </div>
+                                    <span className={s.payId}>Id de la transacción: {pay?.id}</span>
                             </div>
                         </div>
                     </div>

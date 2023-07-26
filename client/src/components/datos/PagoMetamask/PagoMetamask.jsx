@@ -22,6 +22,7 @@
     };
 
     const ethToWei = (ethValue) => {
+      console.log(ethValue);
       const weiValue = '0x' + (ethValue * Math.pow(10, 18)).toString(16);
       return weiValue;
     };

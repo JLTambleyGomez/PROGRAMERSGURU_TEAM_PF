@@ -15,20 +15,18 @@ const PagoconMercadopago = async (req, res) => {
   let preference = {
     items: [
       {
-        title: req.body.description.slice(0,256),
+        title: req.body.description,
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       },
     ],
     back_urls: {
       success: URL_FEEDBACKS+"/MercadoPagoFeedback",
-      failure: URL_FEEDBACKS,
+      failure: URL_FEEDBACKS+"/MercadoPagoFailure",
       pending: URL_FEEDBACKS,
     },
     auto_return: "approved",
   };
-
-  console.log(req.body)
 
   const result = mercadoPago.preferences
     .create(preference)
