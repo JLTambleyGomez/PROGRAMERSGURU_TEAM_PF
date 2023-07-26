@@ -74,7 +74,7 @@ function SignFreeForm2() {
         <div className={styles.loginFormContainer}>
             {showButton && (
                 <p onClick={handleToggleForm} className={styles.boton}>
-                    Ingresar
+                    Ingresa o Registrate
                 </p>
             )}
             {showForm && (

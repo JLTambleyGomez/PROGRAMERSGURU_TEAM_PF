@@ -200,7 +200,7 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
                 <Menu logoutUser={logoutUser}/>
             </div>)
             : 
-            <NavLink to="/" className={`${s.link} ${s[theme("link")]} ${s.admin}`}>Registrate</NavLink>}
+            <NavLink to="/IniciaSession" className={`${s.link} ${s[theme("link")]} ${s.admin}`}>Registrate</NavLink>}
             <FontAwesomeIcon
                 className={s.barsButton}
                 icon={faBars}
