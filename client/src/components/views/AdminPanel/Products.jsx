@@ -209,19 +209,19 @@ function Products() {
     return (
       <div className={styles.contain}>
           <section>
-            <div>
+            <div >
               <h2  >Productos</h2>
               {postProduct || modificarProduct ? (
                 <>
                   <button className={styles.button} onClick={handleCloseForm}>X</button>
-                  <h2>
+                  <h2  className={styles.componentelocal}>
                     {postProduct
                       ? "Añadir un nuevo producto"
                       : "Editar producto"}
                   </h2>
                   {messagePost && <p>{messagePost}</p>}
                   <form  >
-                    <div >
+                    <div  >
                       {modificarProduct && (
                         <p>Debe ingresar al menos un dato a cambiar</p>
                       )} <label htmlFor="name">Nombre: </label>

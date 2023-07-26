@@ -156,7 +156,7 @@ const User = () => {
             {newUser ? (
                 <div>
                     <button onClick={handleCloseForm}>X</button>
-                    <form>
+                    <form className={styles.componentelocal}>
                         {messagePost && <p>{messagePost}</p>}
                         <div>
                             <label htmlFor="name">Nombre:</label>
