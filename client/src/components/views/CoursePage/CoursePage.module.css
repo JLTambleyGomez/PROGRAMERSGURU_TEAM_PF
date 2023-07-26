@@ -1,49 +1,53 @@
 .component {
-  padding-bottom: var(--footerHeight);
-  margin-top: var(--navBarHeight);
-  min-height: calc(100vh - var(--navBarHeight) + 1vh);    
-  position: absolute;
-  width: 100%;
-  display: flex;
-  flex-direction: column; 
-  box-sizing: border-box;
-  animation:blur-in 1s ease;
-} @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
-
-.component-dark {
-   background-color: #000000;
-}
-
-.mainBanner {
-       background-image: linear-gradient(to right,  #000000, #434343);
-       height: 200%;
-       width: 100%;
-       left: 0;
-   }
-   .mainBanner h1 {
-       color: white;
-   }
-
-  .filterOrder {
-       top: var(--navBarHeight);
-       /* display: flex; */
-       position: sticky;
-       width: 100%;
-       z-index: 9000;
-       /* justify-content: space-evenly; */
-   }
-
-.cargando {
-   margin: 10px;
-   animation:vibrate .5s linear both
-} @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
-
-
-
-/* --------- RESPONSIVE ----------- */
-
-@media screen and (max-width: 750px) {
-   .component {
-       padding-bottom: 0;
-   }
-}
+    padding-bottom: var(--footerHeight);
+    margin-top: var(--navBarHeight);
+    min-height: calc(100vh - var(--navBarHeight) + 1vh);    
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-direction: column; 
+    box-sizing: border-box;
+    animation:blur-in 0.4s ease;
+  } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}} 
+  
+  .component-dark {
+     background-color: #000000;
+  }
+  
+  .mainBanner {
+        display: flex;
+        align-items: center;
+        background-image: linear-gradient(to right,  #000000, #434343);
+        min-height: var(--navBarHeight);
+        width: 100%;
+        left: 0;
+     }
+     .mainBanner h1 {
+         color: white;
+         font-size: 200%;
+         margin:0
+     }
+  
+    .filterOrder {
+         top: var(--navBarHeight);
+         /* display: flex; */
+         position: sticky;
+         width: 100%;
+         z-index: 9000;
+         /* justify-content: space-evenly; */
+     }
+  
+  .cargando {
+     margin: 10px;
+     animation:vibrate .5s linear both
+  } @keyframes vibrate{0%{transform:translate(0)}20%{transform:translate(-2px,2px)}40%{transform:translate(-2px,-2px)}60%{transform:translate(2px,2px)}80%{transform:translate(2px,-2px)}100%{transform:translate(0)}}
+  
+  
+  
+  /* --------- RESPONSIVE ----------- */
+  
+  @media screen and (max-width: 750px) {
+     .component {
+         padding-bottom: 0;
+     }
+  }

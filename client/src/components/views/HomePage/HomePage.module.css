@@ -1,169 +1,169 @@
 .component {
-  /* REGLA PARA TODOS LOS .component, DONDE SE RENDERICEN NAVBAR Y/O FOOTER*/
-  /* AJUSTAR MARGIN TOP DE ACUERDO A LA ALTURA DEL NAV BAR */
-  /* EJ. NAVBAR.module.css.styles.component {height: 10vh} => APLICAR: margin-top: 10vh al component actual*/
-  margin-top: var(--navBarHeight);
-  min-height: calc(100vh - var(--navBarHeight));
-    /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
-  /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
-  padding: 4% 10% var(--footerHeight);
-  display: flex;
-  /* 100% - (padding) */
-  width: 80%;
-  flex-direction: column;
-  justify-content: flex-start;
-  position: absolute;
-  animation:blur-in 1s ease
-}
-  @keyframes blur-in {
-    0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
-  }
-  .component-light {
-    background-color: rgba(251, 251, 252, 0.623);
-  }
-  .component-dark {
-    background-color: #111111;
-  }
-
-  .sectionCourses {
-    max-width: 100vw;
+    /* REGLA PARA TODOS LOS .component, DONDE SE RENDERICEN NAVBAR Y/O FOOTER*/
+    /* AJUSTAR MARGIN TOP DE ACUERDO A LA ALTURA DEL NAV BAR */
+    /* EJ. NAVBAR.module.css.styles.component {height: 10vh} => APLICAR: margin-top: 10vh al component actual*/
+    margin-top: var(--navBarHeight);
+    min-height: calc(100vh - var(--navBarHeight));
+      /* AJUSTAR LA ULTIMA PROPIEDAD DE ESTE PADDING DE ACUERDO A LA ALTURA DEL FOOTER */
+    /* EJ. FOOTER.module.css.styles.component {height: 10vh} => APLICAR: padding: X X 20vh */
+    padding: 4% 10% var(--footerHeight);
     display: flex;
+    /* 100% - (padding) */
+    width: 80%;
     flex-direction: column;
-    align-items: center;
-    transition: transform 0.3s, filter 0.3s;
- }
- .sectionCourses:hover {
-    transform: scale(1.025);
+    justify-content: flex-start;
+    position: absolute;
+    animation:blur-in 1s ease
+  }
+    @keyframes blur-in {
+      0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
     }
-    .coursesPreviewContainer {
-       display: flex;
-       align-items: center;
-       justify-content: center;
-       width: 100%;
+    .component-light {
+      background-color: rgba(251, 251, 252, 0.623);
     }
-
-    .sectionCategories {
+    .component-dark {
+      background-color: #111111;
+    }
+  
+    .sectionCourses {
+      max-width: 100vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s, filter 0.3s;
+   }
+   .sectionCourses:hover {
+      transform: scale(1.025);
+      }
+      .coursesPreviewContainer {
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+      }
+  
+     .sectionCategories {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
         min-height: 20%;
     }
-
-
- .sectionNews {
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s, filter 0.3s;
-    margin: 0 0 30px;
- }
- .sectionNews:hover {
-    transform: scale(1.025);
- }
- .newsBanner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 3%;
-    width: 97%;
- }
-    .imgContainer {
-       display: flex;
-       align-items: center;
-       width: 15%;
-    }
-    .newsImg {
-       border: none;
-       width: 150px;
-       height: 150px;
-       border-radius: 50%;
-       box-sizing: border-box;
-       border: 2px solid white;
-    }
- .newsText {
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-    line-clamp: 4;
-    text-overflow: ellipsis;
- }
- .newsLink {
-    text-decoration: none;
- }
- .newsLink:hover {
-    text-shadow:  0px 3px 12px rgb(128, 255, 255);
- }
-
-
- /* MAIN TITLE */
- /* .mainTitle-light {
-    text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
- }
- .mainTitle-dark {
-    text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
- } */
-
- /* COURSES TITLE */
- .coursesTitle {
-    display: flex;
-    justify-content: center;
-    /* align-items: center; */
-    letter-spacing: 10px;
-    text-align: start;
-    font-size: 3rem;
-    transition: transform 0.3s, filter 0.3s;
- }
- .coursesTitle:hover {
-    transform: scale(1.04);
-    transform-origin: center;
-    cursor: default;
- }
- .cargando{
-    font-size: 40px;
-    animation:bounce-top 2s linear both infinite} @keyframes bounce-top{0%{transform:translateY(-35px);animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{transform:translateY(-24px);animation-timing-function:ease-in}65%{transform:translateY(-12px);animation-timing-function:ease-in}82%{transform:translateY(-6px);animation-timing-function:ease-in}93%{transform:translateY(-4px);animation-timing-function:ease-in}25%,55%,75%,87%{transform:translateY(0);animation-timing-function:ease-out}100%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}}
-
-
- .coursesTitle-light{
-    color: rgb(0, 140, 158);
-    text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
- }
- .coursesTitle-dark {
-    color:  rgba(0, 221, 250, 0.672);
-    text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
-    /* text-shadow: 2px 3.5px 2px rgb(39, 126, 197); */
- }
-
- /* NEWS TITLE */
- .newsTitle {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    letter-spacing: 10px;
-    font-size: 3rem;
-    transition: transform 0.3s, filter 0.3s;
- }
- .newsTitle-light {
-    color: rgb(0, 140, 158);
-    text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
- }
- .newsTitle-dark {
-    color:  rgba(0, 221, 250, 0.672);
-    text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
- }
-
-
-
-/* ---------- RESPONSIVE ------------ */
-
-@media screen and (max-width: 750px) {
-    .component {
+  
+  
+  .sectionNews {
+     display: flex;
+     flex-direction: column;
+     transition: transform 0.3s, filter 0.3s;
+     margin: 0 0 30px;
+  }
+  .sectionNews:hover {
+     transform: scale(1.025);
+     }
+     .newsBanner {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 3%;
+        width: 97%;
+     }
+      .imgContainer {
+         display: flex;
+         align-items: center;
+         width: 15%;
+      }
+      .newsImg {
+         border: none;
+         width: 150px;
+         height: 150px;
+         border-radius: 50%;
+         box-sizing: border-box;
+         border: 2px solid white;
+      }
+   .newsText {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 4;
+      line-clamp: 4;
+      text-overflow: ellipsis;
+   }
+   .newsLink {
+      text-decoration: none;
+   }
+   .newsLink:hover {
+      text-shadow:  0px 3px 12px rgb(128, 255, 255);
+   }
+  
+  
+   /* MAIN TITLE */
+   /* .mainTitle-light {
+      text-shadow: 2px 3.5px 2px rgba(6, 103, 116, 0.774);
+   }
+   .mainTitle-dark {
+      text-shadow: 2px 3.5px 2px rgb(39, 126, 197);
+   } */
+  
+   /* COURSES TITLE */
+   .coursesTitle {
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+      letter-spacing: 10px;
+      text-align: start;
+      font-size: 3rem;
+      transition: transform 0.3s, filter 0.3s;
+   }
+   .coursesTitle:hover {
+      transform: scale(1.04);
+      transform-origin: center;
+      cursor: default;
+   }
+   .cargando{
+      font-size: 40px;
+      animation:bounce-top 2s linear both infinite} @keyframes bounce-top{0%{transform:translateY(-35px);animation-timing-function:ease-in;opacity:1}24%{opacity:1}40%{transform:translateY(-24px);animation-timing-function:ease-in}65%{transform:translateY(-12px);animation-timing-function:ease-in}82%{transform:translateY(-6px);animation-timing-function:ease-in}93%{transform:translateY(-4px);animation-timing-function:ease-in}25%,55%,75%,87%{transform:translateY(0);animation-timing-function:ease-out}100%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}}
+  
+  
+   .coursesTitle-light{
+      color: rgb(0, 140, 158);
+      text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+   }
+   .coursesTitle-dark {
+      color:  rgba(0, 221, 250, 0.672);
+      text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+      /* text-shadow: 2px 3.5px 2px rgb(39, 126, 197); */
+   }
+  
+   /* NEWS TITLE */
+   .newsTitle {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      letter-spacing: 10px;
+      font-size: 3rem;
+      transition: transform 0.3s, filter 0.3s;
+   }
+   .newsTitle-light {
+      color: rgb(0, 140, 158);
+      text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+   }
+   .newsTitle-dark {
+      color:  rgba(0, 221, 250, 0.672);
+      text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+   }
+  
+  
+  
+  /* ---------- RESPONSIVE ------------ */
+  
+  @media screen and (max-width: 750px) {
+     .component {
         padding-bottom: unset;
-    }
-}
-
-@media screen and (max-width: 1000px) {
-    .coursesPreviewContainer {
-       width:min-content;
-    }
-}
+     }
+  }
+  
+   @media screen and (max-width: 1000px) {
+     .coursesPreviewContainer {
+        width:min-content;
+     }
+  }

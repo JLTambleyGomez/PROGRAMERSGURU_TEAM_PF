@@ -100,6 +100,7 @@ auth.onIdTokenChanged(async (user) => {
     const storeRef = useRef(null)
     const menuRef = useRef(null)
     const docWidth = window.innerWidth
+
     
     //life-cycles:
     useEffect(()=>{
@@ -112,6 +113,8 @@ auth.onIdTokenChanged(async (user) => {
     
     useEffect(() => {
         const handleScroll = () => {
+            const scrollY = window.scrollY;
+            
             const windowHeight =
                 "innerHeight" in window
                 ? window.innerHeight
@@ -127,17 +130,18 @@ auth.onIdTokenChanged(async (user) => {
             );
             const windowBottom = windowHeight + window.pageYOffset;
 
-            if (windowBottom >= docHeight) {
+            if (scrollY + windowHeight >= docHeight) {
                 setIsAtBottom(true);
             } else {
                 setIsAtBottom(false);
             }
         };
+        handleScroll();
         window.addEventListener("scroll", handleScroll);
         //--desmontado
         return () => {
             window.removeEventListener("scroll", handleScroll);
-            };
+        };
     }, []);
 
     useEffect(() => {
@@ -171,7 +175,7 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/" element={<LandingPage2/>}/>
                 <Route path="/HomePage" element={<HomePage storeRef={storeRef} menuRef={menuRef} isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/CoursePage" element={<CoursePage isAtBottom={isAtBottom} docWidth={docWidth}/>} />
-                <Route path="/Profile" element={<Profile/>} />
+                <Route path="/Profile" element={<Profile />} />
                 <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/Cart" element={<Cart isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />

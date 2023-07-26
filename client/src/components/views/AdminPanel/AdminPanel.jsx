@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
 import {
     get_tecnology,
     get_products_all,
@@ -11,16 +10,14 @@ import {
     get_suscriptions,
     get_User_By_Email
 } from "../../../Redux/actions";
-import theme from "../../../theme/theme";
-
-import styles from "./AdminPanel.module.css";
 import Categories from "./Categories";
 import Courses from "./Courses";
 import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
-import Tecnology from './Tecnology'
+import styles from "./AdminPanel.module.css";
 import ModalAdminPanel from '../ModalAdminPanel/ModalAdminPanel'
+import Tecnology from './Tecnology'
 
 //_________________________module_________________________
 const AdminPanel = () => {
@@ -40,6 +37,11 @@ const AdminPanel = () => {
     const [showTecnology, setShowTecnology] = useState(false);
 
     //functions:
+    const theme = (base) => {
+        const suffix = dark ? "dark" : "light";
+        return `${base}-${suffix}`;
+    };
+
     const handleShowTecnology = (event) => {
         event.preventDefault()
         setShowTecnology(!showTecnology)
@@ -98,24 +100,24 @@ const AdminPanel = () => {
     
 
     //life-cycles:
-    useEffect(() => {
-        // ????????????
+    useEffect(()=>{
         const email = localStorage.getItem("email");
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []);
 
     useEffect(() => {
+        get_tecnology,
         dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all());
         dispatch(get_products_all());
         dispatch(get_suscriptions());
         dispatch(get_tecnology())
-            return () => {
-                // return ocupar para hacer algo en el desmontaje
-                dispatch(clearMessage()); // limpiar
-                dispatch(clearCourses());
-            };
+        return () => {
+            // return ocupar para hacer algo en el desmontaje
+            dispatch(clearMessage()); // limpiar
+            dispatch(clearCourses());
+        };
     }, [dispatch]);
 
     useEffect(() => {
@@ -133,72 +135,70 @@ const AdminPanel = () => {
 
     //component:
     return (
-        <main className={`${styles.component} ${styles[theme("component")]}`}>
-
-            <div className={styles.message}>
+        <div>
+            
+             <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
-            <div className={styles.container1}>
-                <div className={styles.buttons}>
-                    <button className={styles.buton} onClick={handleShowCategories}>
-                        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-                    </button>
-                </div>
-            </div>
 
-            <div className={`${styles.component} ${styles[theme("component")]}`}>
+        <div className={`${styles.component} ${styles[theme("component")]}`}>
            
-                <div>
-                            <p className={styles.buton} onClick={handleShowCategories}>
-                            <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-                            </p>
-                    {showcategories && 
-                    <Categories></Categories>}
+            <div>
+            <p className={styles.buton} onClick={handleShowCategories}>
+        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
+            </p>
 
+                {showcategories && 
+                <Categories></Categories>}
+
+                <div />
+
+                <div>
+                    <p className={styles.buton} onClick={handleShowCursos}>
+                        <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
+                    </p>
+                    {showcursos && <Courses></Courses>}
                 </div>
 
                 <div>
-                    <button>
-                    <p className={styles.buton} onClick={handleShowCursos}></p>
-                        <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
-                    </button>
-
-                    <button
+                    <p
                         className={styles.buton}
                         onClick={handleShowProducts}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
-                    </button>
+                    </p>
+                    {showproducts && <Products></Products>}
+                </div>
 
-                    <button className={styles.buton} onClick={handleShowUsers}>
+                <div>
+                    <p className={styles.buton} onClick={handleShowUsers}>
                         <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
-                    </button>
+                    </p>
+                    {showUsers && <User></User>}
+                </div>
 
-                    <button
+                <div>
+                    <p
                         className={styles.buton}
                         onClick={handleShowSubscription}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
-                    </button>
-                    
-                    <button
+                    </p>
+                    {showSubscriptions && <Subscriptions></Subscriptions>}
+                   
+                </div>
+                <div>
+                    <p
                         className={styles.buton}
                         onClick={handleShowTecnology}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR TECNOLOGIAS</h1>
-                    </button>
-
-                </div>
-                <div className={styles.content}>
-                    {showcategories && <Categories/>}
-                    {showcursos && <Courses/>}
-                    {showproducts && <Products/>}
-                    {showUsers && <User/>}
-                    {showSubscriptions && <Subscriptions/>}
+                    </p>
                     {showTecnology && <Tecnology />}
+                
                 </div>
             </div>
-        </main>
+        </div></div>
     );
 };
 
