@@ -16,6 +16,9 @@ import Shop from "./components/views/Shop/Shop";
 import Cart from "./components/views/Cart/Cart";
 import Footer from "./components/bars/Footer/Footer";
 import AdminPanel from "./components/views/AdminPanel/AdminPanel";
+
+import AdminPanelV2 from "./components/views/AdminPanel/AdminPanelV2";
+
 import Commingsoon from "./components/views/Commingsoon/Commingsoon";
 import ProductDetail from "./components/datos/ProductDetail/ProductDetail";
 import PagoMetamask from "./components/datos/PagoMetamask/PagoMetamask";
@@ -179,6 +182,9 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/Cart" element={<Cart isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
+
+                <Route path="/AdminPanelV2" element={<AdminPanelV2 />} />
+
                 <Route path="/CourseDetails/:id" element={<CourseDetails />} />
                 <Route path="/Commingsoon" element={<Commingsoon />} />
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />

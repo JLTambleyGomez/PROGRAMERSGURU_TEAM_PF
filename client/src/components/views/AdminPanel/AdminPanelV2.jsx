@@ -15,18 +15,14 @@ import Courses from "./Courses";
 import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
-import styles from "./AdminPanel.module.css";
+import styles from "./AdminPanelV2.module.css";
 import ModalAdminPanel from "../ModalAdminPanel/ModalAdminPanel";
 import Tecnology from "./Tecnology";
 import Payments from "./Payments";
-import ObjectsList from "./Paginacion/ObjectsList";
 
 //_________________________module_________________________
-const AdminPanel = () => {
+const AdminPanelV2 = () => {
     //global state:
-    
-    const courses = useSelector((state)=> state.courses)
-    const tecnology = useSelector((state)=> state.tecnology)
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
@@ -155,85 +151,48 @@ const AdminPanel = () => {
 
     //component:
     return (
-        <div>
+        <main className={`${styles.component} ${styles[theme("component")]}`}>
             <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
 
-            <div
-                className={`${styles.component} ${styles[theme("component")]}`}
-            >
-                <div>
+            <div className={`${styles.content} ${styles[theme("content")]}`}>
+                <div className={styles.options}>
                     <p className={styles.buton} onClick={handleShowCategories}>
                         <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
                     </p>
+                    <p className={styles.buton} onClick={handleShowCursos}>
+                        <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowProducts}>
+                        <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowUsers}>
+                        <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowSubscription}>
+                        <h1 className={styles.h1}> ADMINISTRAR SUSCRIPCIONES </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowTecnology} >
+                        <h1 className={styles.h1}> ADMINISTRAR TECNOLOGIAS </h1>
+                    </p>
+                    <p className={styles.buton} onClick={handleShowPayment}>
+                        <h1 className={styles.h1}>ADMINISTRAR PAGOS</h1>
+                    </p>
+                </div>
 
+                <div className={styles.table}>
                     {showcategories && <Categories></Categories>}
-
-                    <div />
-
-                    <div>
-                        <p className={styles.buton} onClick={handleShowCursos}>
-                            <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
-                        </p>
-                        {showcursos && <Courses></Courses>}
-                    </div>
-
-                    <div>
-                        <p
-                            className={styles.buton}
-                            onClick={handleShowProducts}
-                        >
-                            <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
-                        </p>
-                        {showproducts && <Products></Products>}
-                    </div>
-
-                    <div>
-                        <p className={styles.buton} onClick={handleShowUsers}>
-                            <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
-                        </p>
-                        {showUsers && <User></User>}
-                    </div>
-
-                    <div>
-                        <p
-                            className={styles.buton}
-                            onClick={handleShowSubscription}
-                        >
-                            <h1 className={styles.h1}>
-                                ADMINISTRAR SUSCRIPCIONES
-                            </h1>
-                        </p>
-                        {showSubscriptions && <Subscriptions></Subscriptions>}
-                    </div>
-                    <div>
-                        <p
-                            className={styles.buton}
-                            onClick={handleShowTecnology}
-                        >
-                            <h1 className={styles.h1}>
-                                ADMINISTRAR TECNOLOGIAS
-                            </h1>
-                        </p>
-                        {showTecnology && <Tecnology />}
-                    </div>
-                    <div>
-                        <p className={styles.buton} onClick={handleShowPayment}>
-                            <h1 className={styles.h1}>ADMINISTRAR PAGOS</h1>
-                        </p>
-                        {showPayment && <Payments />}
-                    </div>
-                    <div>
-                        {/* <ObjectsList objects={courses} titulo={"Cursos"}/> */}
-                    </div>
-                    <div>
-                        {/* <ObjectsList objects={tecnology} titulo={"Tecnologias"}/> */}
-                    </div>
+                    {showcursos && <Courses></Courses>}
+                    {showproducts && <Products></Products>}
+                    {showUsers && <User></User>}
+                    {showSubscriptions && <Subscriptions></Subscriptions>}
+                    {showTecnology && <Tecnology />}
+                    {showPayment && <Payments />}
                 </div>
             </div>
-        </div>
+        </main>
     );
 };
 
-export default AdminPanel;
+export default AdminPanelV2;

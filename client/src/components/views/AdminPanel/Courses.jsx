@@ -16,7 +16,8 @@ import { SubirImagenCurso } from "./SubirImagenCurso";
 import theme from "../../../theme/theme"
 import { Table } from "react-bootstrap";
 import SelectTechnologies from "./SelectTechnologies";
-
+//import ObjectListCourses from ""
+import ObjectsListCourses from './Paginacion/ObjectListCourses'
 
 function Courses() {
     // global state:
@@ -458,7 +459,8 @@ function Courses() {
                     <></>
                 ) : (
                     <div className={`${styles.coursesContainer}`}>
-                        <h1>Courses</h1>
+                        <ObjectsListCourses objects={courses} titulo='Cursos' handleModificarCurso={handleModificarCurso} handleDeleteCourse={handleDeleteCourse} />
+                        {/* <h1>Courses</h1>
                         <Table className={`${styles.Tabla} table table-striped table-bordered table-hover`}>
                             <thead>
                                 <tr>
@@ -488,7 +490,7 @@ function Courses() {
                                     </tr>
                                 ))}
                             </tbody>
-                        </Table>
+                        </Table> */}
                     </div>
                 )}
             </section>
