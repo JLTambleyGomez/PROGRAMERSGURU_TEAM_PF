@@ -14,12 +14,9 @@ function PagoSubscripcion () {
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const subscripciones = useSelector((state) => state.subscriptions);
-    // const cart = useSelector((state) => state.cart);
 
     //states:
-    // const [compra, setCompra] = useState(null);
     const [blocked, setBlocked] = useState(false);
-    const [elegido,setElegido] = useState(null)
 
 
     //const:
