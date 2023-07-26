@@ -142,7 +142,23 @@
       background-color: rgba(2, 11, 19, 0.26)
   
   }
+  .icon{
+    display: inline-block; 
+    scale:2;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    animation: spin 3s linear infinite;
+  }
   
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   .items{
       font-size: 20px;
       padding-right: -12%;
