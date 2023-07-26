@@ -87,8 +87,7 @@ function Cart() {
         };
 
         setCompra(referencia);
-        //quitar esto y dejarlo a manos del mercadopago, que como carga de ultimo nada mas se deberia cargar antes
-        //setMostrarPagos(true);
+        setMostrarPagos(true);
     };
     const mostrar = ()=>{
         setMostrarPagos(true);

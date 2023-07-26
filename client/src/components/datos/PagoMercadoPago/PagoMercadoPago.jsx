@@ -39,7 +39,6 @@ const PagoMercadopago = ({ reference, mostrar }) => {
         // Verificar si se obtuvo el ID de referencia para ocultar el mensaje de carga
         if (preferenceId) {
             setLoading(false);
-            mostrar()
         }
     }, [preferenceId]);
 
