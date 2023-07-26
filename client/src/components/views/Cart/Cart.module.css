@@ -248,6 +248,18 @@
             100% { border-color: rgb(0, 0, 0); }
           }
 
+          .completar{
+            background-color: #55a7aa;
+            color: white;
+            transition: all 0.5s;
+          }
+          .completar:hover{
+            scale:1.1;
+            color: black;
+            cursor: pointer;
+          }
+
+
           .metamask{
             height: 150px;
             width: 99%;
