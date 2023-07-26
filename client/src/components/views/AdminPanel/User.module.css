@@ -1,0 +1,74 @@
+/* Agrega tus estilos existentes aquí */
+
+.contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2px 2px;
+    width: 100%;
+  
+  }
+  
+  
+  .Tabla {
+   width: 100%; 
+    margin-bottom: 1rem;
+    
+    border-collapse:separate;
+  }
+  
+  /* Estilos para el encabezado de la tabla */
+  .Tabla thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+    background-color: #2678d06c;
+    padding: 15px;
+    text-align:center;
+  
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla */
+  .Tabla tbody td {
+    
+    padding-left: 20px;
+
+    padding-right: 20px;
+    text-align:center;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+     justify-content: flex-start;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última fila */
+  /* Si no deseas bordes en la última fila, puedes omitir este bloque */
+  .Tabla tbody tr:last-child td {
+    border-bottom: none;
+    
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
+  .Tabla tbody td:first-child {
+    border-left: 1px solid #dee2e6;
+ 
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última columna */
+  .Tabla tbody td:last-child {
+    border-right: 1px solid #dee2e6;
+    
+  }
+  
+  /* Estilos para los botones dentro de las celdas de la tabla */
+  .Tabla td button {
+    margin-right: 5px;
+    cursor: pointer;
+    margin-bottom: 7px;
+    border:2px solid blue;
+    transition: all 0.5s;
+  }
+  
+  .Tabla td button:hover{
+    scale: 1.1;
+    background-color: blue;
+    color:bisque;
+  }
