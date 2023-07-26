@@ -50,7 +50,7 @@ function PagoSubscripcion () {
         }
     }
 
-
+// a ver...
     //life-cycles:
     useEffect(() => {
         const token = localStorage.getItem("accessToken");
