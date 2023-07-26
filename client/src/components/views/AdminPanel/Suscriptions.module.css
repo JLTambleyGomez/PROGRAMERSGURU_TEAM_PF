@@ -1,0 +1,112 @@
+/* Agrega tus estilos existentes aquí */
+
+.contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2px 2px;
+    width: 100%;
+  
+  }
+  .Tabla {
+   width: 100%; 
+    margin-bottom: 1rem;
+    border-collapse:separate;
+  }
+  
+  /* Estilos para el encabezado de la tabla */
+  .title {
+   display: flex;
+   padding-right: 20px;
+   width: 369.7%;
+   justify-content: space-around;
+   background-color: aqua;
+align-content: center;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla */
+  .Tabla tbody td {
+    padding-left: 20px;
+    padding-right: 20px;
+    text-align:center;
+    vertical-align: middle;
+    border-bottom: 1px solid #dee2e6;
+     justify-content:center;
+     align-items: center;
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última fila */
+  /* Si no deseas bordes en la última fila, puedes omitir este bloque */
+  .Tabla tbody tr:last-child td {
+    border-bottom: none;
+    
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
+  .Tabla tbody td:first-child {
+    border-left: 1px solid #dee2e6;
+ 
+  }
+  
+  /* Estilos para las celdas del cuerpo de la tabla en la última columna */
+  .Tabla tbody td:last-child {
+    border-right: 1px solid #dee2e6;
+    
+  }
+  
+  /* Estilos para los botones dentro de las celdas de la tabla */
+  .Tabla td button {
+    margin-right: 5px;
+    cursor: pointer;
+    margin-bottom: 7px;
+    border:2px solid blue;
+    transition: all 0.5s;
+  }
+  
+  .Tabla td button:hover{
+    scale: 1.1;
+    background-color: blue;
+    
+  }
+  .modificarButton{
+    background-color:rgba(255, 255, 0, 0.505);
+  border-radius: 25%;
+    /* border: 1px solid red; */
+    border: none;
+    transition: transform 0.2s ease;
+    
+  }
+  .modificarButton:hover{
+    animation: shake 0.5s infinite;
+    cursor: pointer;
+    scale: 1.1;
+  
+  }
+  .mod{
+    fill:#e1d200;
+  }
+  .deleteButton {
+    background-color: #ffdddd;
+    /* border: 1px solid red; */
+    border: none;
+    transition: transform 0.2s ease;
+    border-radius: 15%;
+    
+  }
+  .deleteButton:hover{
+    scale: 1.1;
+    animation: shake 0.5s infinite;
+    cursor: pointer;
+  }
+  .bin {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: red;
+  }
+  @keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+  }
+  

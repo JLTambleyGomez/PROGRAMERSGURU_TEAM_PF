@@ -1,4 +1,4 @@
-const { User, Course, Comment, Payment, Product, shopping_cart, Category } = require("../../db");
+const { User, Course, Comment, Payment, Product, Category, Subscription } = require("../../db");
 
 const getUserByEmail = async (req, res) => {
     const { email } = req.query;
@@ -10,6 +10,7 @@ const getUserByEmail = async (req, res) => {
             include: [
                 {
                     model: Course,
+                    attributes: ["title", "meanRating", "id", "imageURL", "courseUrl", "language", "isFree"],
                 },
                 {
                     model: Comment,
@@ -32,6 +33,10 @@ const getUserByEmail = async (req, res) => {
                                     attributes: ["name"]
                                 }
                             ]
+                        },
+                        {
+                            model: Subscription,
+                            attributes: ["id","price","title","image"]
                         }
                     ]
                 }

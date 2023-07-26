@@ -184,7 +184,7 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path="/ProductDetail/:id" element={<ProductDetail />} />
                 <Route path="/PruebaMetamask" element={<PagoMetamask />} />
                 <Route path="/MercadoPagoFeedback" element={<Success/>} />
-                <Route path ="/MercadoPagoFailure" element ={<MercadoPagoFailure/>}/>
+                <Route path ="/MercadoPagoFeedback" element ={<MercadoPagoFailure/>}/>
                 <Route path ="/MercadoPagoPending" element ={<MercadoPagoPendiente/>}/>
                 <Route path="/MetamaskSuccess" element = {<MetaMaskSucces/>}/>
                 <Route path ="/MetaMaskFailure" element = {<MetaMaskFailure/>}/>

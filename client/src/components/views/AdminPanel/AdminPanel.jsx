@@ -18,7 +18,8 @@ import Subscriptions from "./Subscriptions";
 import styles from "./AdminPanel.module.css";
 import ModalAdminPanel from "../ModalAdminPanel/ModalAdminPanel";
 import Tecnology from "./Tecnology";
-// import Payments from "./Payments";
+
+import Payments from "./Payments";
 
 //_________________________module_________________________
 const AdminPanel = () => {
@@ -188,7 +189,8 @@ const AdminPanel = () => {
                     {showUsers && <User></User>}
                     {showSubscriptions && <Subscriptions></Subscriptions>}
                     {showTecnology && <Tecnology />}
-                    {/* {showPayment && <Payments />} */}
+
+                    {showPayment && <Payments />}
                 </div>
             </div>
         </main>

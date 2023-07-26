@@ -74,9 +74,9 @@ animation:bounce-top 3s linear both}
     }
 
     .x{
-        position: fixed;
-        top: -80%;
-        left: -20%;
+        position: absolute;
+        top: -90%;
+        left: -90%;
         color: rgb(255, 47, 47);
         font-size: 400px;
         animation:blur-in 3s linear both} 
