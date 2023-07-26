@@ -159,14 +159,6 @@ function Shop ( { isAtBottom, docWidth } ) {
         })()
     }, [])
 
-    useEffect(() => {
-        dispatch(set_cart());
-        return()=>{
-            if (cart){
-                localStorage.setItem("cart2", localStorage.getItem("cart"))
-            }
-        }
-    }, [dispatch])
 
     useEffect(() => {
         if (Array.isArray(products) && products.length >= 1) {
