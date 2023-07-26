@@ -6,7 +6,7 @@ import s from "./Payments.module.css";
 export default function ObjectsListPayments({ objects, titulo }) {
     const [currentPage, setCurrentPage] = useState(1);
 
-    const filteredObjects = objects.filter(obj => obj?.User).sort((a,b)=> {
+    const filteredObjects = objects.sort((a,b)=> {
         const date_a = new Date(a.date)
         const date_b = new Date(b.date)
         return date_b - date_a
@@ -31,11 +31,10 @@ export default function ObjectsListPayments({ objects, titulo }) {
             <>
                 {Array.isArray(filteredObjects) && filteredObjects?.slice(firstObj, lastObj).map((obj) => {
                     return (
-                        <>{obj?.User?.name ?
                         (<div key={obj.id} className={s.fila}>
                             <div key={obj.id} className={s.fila}>
-                                <div className={s.title}>{obj?.User?.name}</div>
-                                <div className={s.email}>{obj?.User?.email}</div>
+                                <div className={s.title}>{obj?.User?.name || "Usuario de prueba"}</div>
+                                <div className={s.email}>{obj?.User?.email || "usuariodeprueba@fakemail.com"}</div>
                                 <div className={s.date}>{obj?.date}</div>
                                 <div className={s.status}>
                                     {obj?.status === "fullfiled" ||
@@ -46,8 +45,6 @@ export default function ObjectsListPayments({ objects, titulo }) {
                                 <div className={s.total}>${obj?.totalPrice}</div>
                             </div>
                         </div>)
-                        : null
-                        }</>
                     );
                 })}
             </>
