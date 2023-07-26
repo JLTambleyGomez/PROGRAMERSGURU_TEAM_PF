@@ -1,9 +1,9 @@
 
 let URL = null
-const Seleccion = 2
+const Seleccion = 1
 
 const seleccionUrl =()=>{
-    if (Seleccion === 1){
+    if (Seleccion === 2){
         URL = 'http://localhost:3001/'
     } else
     if(Seleccion===2){
