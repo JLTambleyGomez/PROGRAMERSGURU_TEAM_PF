@@ -1,6 +1,6 @@
 
 let URL = null
-const Seleccion = 2
+const Seleccion = 1
 
 const seleccionUrl =()=>{
     if (Seleccion === 1){
@@ -10,7 +10,6 @@ const seleccionUrl =()=>{
         URL = 'https://pfserverdeploy-production.up.railway.app/' 
     }
 }
-
 seleccionUrl()
 
 

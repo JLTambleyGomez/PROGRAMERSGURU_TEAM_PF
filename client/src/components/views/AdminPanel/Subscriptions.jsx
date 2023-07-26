@@ -10,7 +10,7 @@ import {
 } from "../../../Redux/actions";
 import { validateSuscription } from "./validate";
 import { Table } from "react-bootstrap";
-
+import {SubirImagenSuscription} from './SubirImagenSuscription'
 
 
 //_________________________module_________________________
@@ -46,17 +46,14 @@ const Subscriptions = () => {
 
     //setea el estado local con los cambios que se producen en el input
     const handleInputChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-        if (postSuscription)
-            setErrorSuscription(
-                validateSuscription({
-                    ...formData,
-                    [event.target.name]: event.target.value,
-                })
-            );
+        const name = event.target.name
+        const value = event.target.value
+
+        setFormData((prevSuscription) => ({
+            ...prevSuscription, 
+            [name]: (name === 'image' && localStorage.getItem('urlNewSuscription')) || value,
+          }))
+
         setMessagePost("");
     };
 
@@ -259,6 +256,7 @@ const Subscriptions = () => {
                                             : "Imagen"
                                     }
                                 />
+                                <SubirImagenSuscription handleInputChange={handleInputChange} title={putSuscription ? formData.title : suscription.title}/>
                                 {erroSuscription.image && (
                                     <p>{erroSuscription.image}</p>
                                 )}

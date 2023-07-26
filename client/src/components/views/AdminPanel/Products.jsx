@@ -61,7 +61,11 @@ function Products() {
         const name = event.target.name;
         const value = event.target.value;
 
-        setNewProduct({ ...newProduct, [name]: value });
+        setNewProduct((prevProduct) => ({
+          ...prevProduct, 
+          [name]: (name === 'image' && localStorage.getItem('urlNewProductImage')) || value,
+        }))
+
         if (postProduct) setErrorProduct(validateProduct({ ...newProduct, [name]: value }));
         // <--- valida los errores solo cuando lo posteas
         else
@@ -154,6 +158,8 @@ function Products() {
             console.log(error);
         }
     };
+
+ 
 
     const handleCloseForm = () => {
         setModificarProduct(false);
@@ -285,7 +291,7 @@ function Products() {
                       )}
                     </div>
                     <div>
-                      <SubirImagenDeProducto name={newProduct.name} />
+                      <SubirImagenDeProducto handleChangeProductForm={handleChangeProductForm} name={modificarProduct ? newProduct?.name : product?.name} />
                     </div>
     
                     <div>
