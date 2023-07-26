@@ -9,7 +9,7 @@ import { ChangeQuantity } from "./ChangeQuantity";
 
 import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
-
+import { useNavigate } from "react-router-dom";
 //_________________________module_________________________
 function Cart() {
     //global states:
@@ -28,6 +28,7 @@ function Cart() {
     
     //const:
     const dispatch = useDispatch();
+    const navigate= useNavigate()
 
     //function:
     const handleAddButton = (type, P) => {
@@ -101,6 +102,10 @@ function Cart() {
         setMostrarPagos(true);
         console.log("mostrar")
     }
+
+    const handleNavigate=(id)=>{
+        navigate(`/ProductDetail/${id}`)
+    }
    
 
     useEffect(()=>{
@@ -150,15 +155,21 @@ function Cart() {
                                     <div className={styles.right}>
                                     {/* CANTIDAD */}
                                     <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
-                                     
+                                     {console.log(P)}
                                     {/* IMAGEN */}
-                                    <a href={P.id && `/ProductDetail/${P.id}`}>
+                                   {P.name ? (
                                         <img
+                                            className={styles.img2}
+                                            src={P.image}
+                                            alt={P.name}
+                                            onClick={()=>handleNavigate(P.id)}
+                                        />
+                                   ) : (<img
                                             className={styles.img}
                                             src={P.image}
                                             alt={P.name}
-                                        />
-                                    </a>
+                                        />)} 
+                                    
                                     </div>
                                 </li>
                             ))
@@ -205,17 +216,18 @@ function Cart() {
                                     )}
 
                                     {MostrarPagos && (
-                                        <div>
+                                        <div className={styles.pagos}>
                                             <p>Escoge tu medio de Pago</p>
                                             <p className={styles.metamask}>
                                             <PagoMetamask
                                                 total={calculateTotal()}
                                             /></p>
                                             {compra?.description && (
-                                                <PagoMercadopago
+                                                <p className={styles.mercadopago}>
+                                                <PagoMercadopago 
                                                     reference={compra}
                                                     mostrar={mostrar}
-                                                />
+                                                /></p>
                                             )}
                                         </div>
                                     )}

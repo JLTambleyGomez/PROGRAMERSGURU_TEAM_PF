@@ -190,3 +190,7 @@ border: 1px solid;
   display: none;
 }
 }
+
+.button{
+  height: 100%;
+}

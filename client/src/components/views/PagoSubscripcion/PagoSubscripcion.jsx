@@ -14,6 +14,7 @@ function PagoSubscripcion () {
     //global states:
     const dark = useSelector((state) => state.darkMode);
     const subscripciones = useSelector((state) => state.subscriptions);
+    // const cart = useSelector((state) => state.cart);
 
     //states:
     const [blocked, setBlocked] = useState(false);
@@ -70,6 +71,16 @@ function PagoSubscripcion () {
             }
         })();
     }, []);
+
+    useEffect(() => {
+        (async () => {
+            const cart = await localStorage.getItem("cart");
+            if (!cart) {
+                await localStorage.setItem("cart", "[]");
+                dispatch(set_cart());
+            }
+        })()
+    }, [])
  
 
 
