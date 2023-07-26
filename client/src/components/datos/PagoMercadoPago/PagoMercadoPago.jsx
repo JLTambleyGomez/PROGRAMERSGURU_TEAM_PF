@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./PagoMercadoPago.module.css"
 
-const PagoMercadopago = ({ reference }) => {
+const PagoMercadopago = ({ reference, mostrar }) => {
     console.log(reference);
     initMercadoPago('TEST-85c02450-7173-4d7c-8ff0-0b7663fd6b8b');
 
@@ -39,6 +39,7 @@ const PagoMercadopago = ({ reference }) => {
         // Verificar si se obtuvo el ID de referencia para ocultar el mensaje de carga
         if (preferenceId) {
             setLoading(false);
+            mostrar()
         }
     }, [preferenceId]);
 
