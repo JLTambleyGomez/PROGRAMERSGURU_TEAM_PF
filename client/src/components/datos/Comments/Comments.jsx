@@ -36,7 +36,7 @@ function Comments({ disabled, comments, setDisabled }) {
     return (
         <div>
             <h3>Comentarios</h3>
-            {expirationDate < actualDate ? (
+            {user.id ? (expirationDate < actualDate ? (
                 <div className={s.subscription}>
                     <a href="/pagosubscripcion" className={s.link}>
                         Suscribite
@@ -50,7 +50,7 @@ function Comments({ disabled, comments, setDisabled }) {
                     commentData={commentData}
                     setCommentData={setCommentData}
                 />
-            )}
+            )) : null}
             <div className={s.allComments}>
                 {comments?.map((comment) => {
                     return (
