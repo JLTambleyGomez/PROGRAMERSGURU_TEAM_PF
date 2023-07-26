@@ -42,7 +42,7 @@
       box-shadow: rgba(0, 0, 0, 0.50) 20px 0 0;
     }
     .shopbagOpen {
-          /* animation: sdf 0.4 ; */
+          animation: sdf 0.4 ;
       } @keyframes sdf {
           0% {
               transform: scaleX(1);
@@ -141,23 +141,23 @@
       }
   
   @media screen and (max-width: 700px) {
-      .shopbag {
-          height: 70vh;
-          width: 100%;
-          bottom: 0;
-          top: unset;
-          transition: height 0.3s ease;
-          animation: scale-up-vertical-up 0.4s;
-        } @keyframes scale-up-vertical-up {
-          0% {
-            transform: scaleY(0);
-            transform-origin: center bottom;
-            opacity: 0;
-          }
-          100% {
-            transform: scaleY(1);
-            transform-origin: bottom center;
-            opacity: 1;
-          }
+    .shopbag {
+        height: 70vh;
+        width: 100%;
+        bottom: 0;
+        top: unset;
+        transition: height 0.3s ease;
+        animation: scale-up-vertical-up 0.4s;
+      } @keyframes scale-up-vertical-up {
+        0% {
+          transform: scaleY(0);
+          transform-origin: center bottom;
+          opacity: 0;
         }
-  }
+        100% {
+          transform: scaleY(1);
+          transform-origin: bottom center;
+          opacity: 1;
+        }
+      }
+}

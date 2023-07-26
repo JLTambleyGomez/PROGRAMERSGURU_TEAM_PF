@@ -1,13 +1,14 @@
 .profileContainer {
     margin-top: var(--navBarHeight);
     min-height: calc(100vh - var(--navBarHeight));
-    margin: 6%;
+    padding: 1%;
     display: flex;
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 50px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    gap: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; */
 }
 
 .infoProfile {
@@ -16,17 +17,17 @@
     justify-content: flex-start;
     align-items: center;
     gap: 5px;
-    width: 300;
     min-width: 250px;
     height: fit-content;
     background-color: whitesmoke;
     border-radius: 15px;
     padding: 1%;
-    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: 1px 1px 5px -1px rgba(128, 128, 128);
 }
 .infoProfile-dark {
-    background-color: rgb(83,83,83);
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
 }
 
 .profileContainer h2 {
@@ -49,7 +50,7 @@
     align-items: center;
     width: 70%;
     min-width: 300px;
-    gap: 33px;
+    gap: 30px;
 }
 
 .navBarProfile {
@@ -59,11 +60,12 @@
     background-color: whitesmoke;
     width: 100%;
     height: 45px;
-    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: 1px 1px 5px -1px rgba(128, 128, 128);
 }
 .navBarProfile-dark {
-    background-color: rgb(83, 83, 83);
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
 }
 
 .emptyTab {
@@ -74,13 +76,14 @@
     width: 100%;
     border-radius: 8px;
     background-color: whitesmoke;
-    box-shadow: 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: 1px 1px 5px -1px rgba(128, 128, 128);
     height: 400px;
     color: gray;
 }
 .emptyTab-dark {
-    background-color: rgb(83, 83, 83);
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
 }
 .emptyTab img {
     width: 150px;
@@ -89,11 +92,10 @@
 }
 .profileContainer button {
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     padding: 8px;
     margin: 5px;
     color: whitesmoke;
-    height: 30px;
 }
 .profileContainer button:disabled {
     box-shadow: none;
@@ -201,13 +203,14 @@
     width: 100%;
     border-radius: 8px;
     background-color: whitesmoke;
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
     max-height: 400px;
     overflow-y: scroll;
 }
 .favorites-dark {
-    background-color: rgb(83, 83, 83);
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
 }
 
 .favorite {
@@ -250,83 +253,41 @@
     text-decoration-line: none;
 }
 
-/* ///////////////////////////REVIEWS//////////////////////////////// */
-.reviews {
+
+
+.cart {
     display: flex;
     flex-direction: column;
     width: 100%;
     border-radius: 8px;
     background-color: whitesmoke;
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
     height: 400px;
     overflow-y: scroll;
-    gap: 10px;
 }
-.reviews-dark {
-    background-color: rgb(83, 83, 83);
-    box-shadow: inset 1px 1px 5px rgba(128, 128, 128);
-}
-
-.oldComment {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 95%;
-    margin: 10px;
-    margin-bottom: 0;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgb(196, 196, 196);
+.cart-dark {
+    
+    background-color: rgb(51, 51, 51);
+    box-shadow: inset 1px 1px 5px -1px rgba(128, 128, 128);
 }
 
-.courseImage {
-    display: flex;
-    justify-content: center;
-}
 
-.courseImage img {
-    width: 130px;
-    height: 100px;
-    object-fit: cover;
-    border-radius: 10px;
-}
-
-.commentInfo {
+.subscription {
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    width: 80%;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
 }
 
-.message {
-    width: 100%;
-    font-size: 15px;
-    padding: 0 5px 0 5px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
-
-.delete {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: small;
-    color: gray;
-    padding: 0 5px 0 5px;
-}
-
-.delete img {
-    height: 25px;
-}
-
-.delete:hover img  {
-    cursor: pointer;
-    transform: scale(1.15);
-}
-
+.link {
+    text-decoration: none;
+    color: rgb(200, 0, 0);
+    font-weight: 600;  
+    border-radius: 10px;
+    padding: 3px;
+    border: 1px solid rgb(200, 0, 0);
+    background-color: whitesmoke;
+  }
+  .link:hover {
+    color: white;
+    background-color: rgb(200,0,0);
+  }

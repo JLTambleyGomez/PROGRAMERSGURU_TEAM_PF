@@ -1,0 +1,163 @@
+  .container {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    margin: 10px;
+  }
+
+  .flex {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .productscontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    padding: 5px;
+    width: 60%;
+    min-width: 280px;
+  }
+  .info {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 275px;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 1px 1px 5px -2px black;
+  }
+  .info-dark {
+    background-color: rgb(1, 80, 90);
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 5px;
+    max-width: 240px;
+  }
+  .productName {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .price {
+    font-size: 13px;
+  }
+  .masinfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 5px;
+    min-height: fit-content;
+  }
+
+  .img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 5px -2px black;
+    object-fit: cover;
+  }
+
+
+  .cantidad {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 25px;
+  }
+  .add{
+    width: 25px;
+    margin: 0 3px 0 3px;
+  }
+  .add-dark {
+    filter: invert();
+  }
+  .add:hover {
+    cursor: pointer
+  }
+
+  .trash {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 20px;
+  }
+  .trash-dark {
+    filter: invert();
+  }
+  .trash:hover {
+    cursor: pointer;
+  }
+
+  /* //////////////////TOTAL////////////////////////////// */
+  .total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 280px;
+    padding: 15px 0 15px 0;
+    width: 35%;
+    height: fit-content;
+    margin: 5px;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 1px 1px 5px -2px black;
+  }
+  .total-dark {
+    background-color: rgb(1, 80, 90);
+  }
+  .total ul {
+    margin: 15px;
+    color: gray;
+    border-bottom: 1px solid gray;
+    padding-bottom: 12px;
+  }
+
+  .finalizar {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .valorTotal {
+    display: flex;
+    justify-content: space-between;
+    width: 220px;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px;
+  }
+  .pagar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+.boton {
+    display: inline-block;
+    background-color: #28b0b4;
+    color: #ffffff;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    height: 40px;
+    width: 240px;
+    transition: all 0.5s;
+    cursor: pointer;
+  }
+  

@@ -7,15 +7,12 @@ import {
     inMemoryPersistence,
     createUserWithEmailAndPassword,
 } from "firebase/auth";
-
+import {postUserRequest} from '../axiosRequests/axiosRequests'
 
 //_________________________module_________________________
-const postUserRequest = async (userData) => {
+const post_UserRequest = async (userData) => {
     try {
-        const { data } = await axios.post(
-            "http://localhost:3001/user/signup",
-            userData
-        );
+        const data = await postUserRequest(userData)
         return data.message;
     } catch (error) {
         console.log(error);
@@ -28,7 +25,7 @@ export default function createUser(email, password) {
     setPersistence(auth, inMemoryPersistence)
         .then(() => {
             createUserWithEmailAndPassword(auth, email, password).then(
-                (userCredential) => {
+                async (userCredential) => {
                     const user = userCredential.user;
                     if (user) {
                         let userData = {
@@ -36,10 +33,13 @@ export default function createUser(email, password) {
                             picture: user.photoURL,
                             name: user.displayName,
                         };
+
                         const token = user.accessToken;
                         localStorage.setItem("accessToken", token);
                         localStorage.setItem("email", email)
-                        postUserRequest(userData)
+                        console.log(userData)
+                        await post_UserRequest(userData)
+                        
                         window.location.replace("/HomePage");
                     }
                 }

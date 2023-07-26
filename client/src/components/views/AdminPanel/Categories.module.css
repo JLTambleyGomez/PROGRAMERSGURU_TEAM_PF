@@ -1,29 +1,60 @@
 .contain {
-    color: aliceblue;
-    background-color: rgba(0, 0, 0, 0.774);
-    display: flex;  
-    position: fixed;
+  color: rgb(0, 0, 0);
+  display: flex;
+  width: 100%;
+  justify-content:center ;
+  animation: blur-in 0.4s linear both;
+  flex-direction: row;
+  margin-left: 150%;
+  padding: 5%;
+  background-color: rgba(0, 0, 255, 0.31);
+}
+@keyframes blur-in {
+  0% {
+    filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+.item {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+}
+
+.button{
+  color: rgb(10, 10, 10);
+}
+
+/* Estilos para los botones de eliminar */
+/* Personaliza el color según tus preferencias */
+.deleteButton {
+  background-color: #dc3545;
+  width: 2rem;
+  height: 2rem;
+  background-color: transparent;
+  /* border: 1px solid red; */
+  border: none;
+  transition: transform 0.2s ease;
   
-    animation: blur-in 0.4s linear both;
-    flex-direction: row;
-  }
-  @keyframes blur-in {
-    0% {
-      filter: blur(12px);
-      opacity: 0;
-    }
-    100% {
-      filter: blur(0);
-      opacity: 1;
-    }
-  }
-  .item {
-    display: flex;
-    justify-content: center;
-    justify-items: center;
-    align-items: center;
-  }
- 
-  .button{
-    color: white;
-  }
+}
+.deleteButton:hover {
+  animation: shake 0.5s infinite;
+  cursor: pointer;
+}
+.bin {
+  height: 1.5rem;
+  width: 1.5rem;
+  fill: red;
+}
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-10deg); }
+  50% { transform: rotate(10deg); }
+  75% { transform: rotate(-10deg); }
+}
+

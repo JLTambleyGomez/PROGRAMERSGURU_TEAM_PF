@@ -1,7 +1,6 @@
 import axios from "axios";
+import URL from "../../URL.JS";
 //HOST:
-const URL = "http://localhost:3001";
-
 // Agregar encabezado de autorización a todas las solicitudes
 let token = localStorage.getItem("accessToken");
 
@@ -21,7 +20,7 @@ axios.interceptors.request.use(function (config) {
 
 //COURSES______________________________
 export const getCoursesAllRequest = async () => {
-    const { data } = await axios.get("http://localhost:3001/course");
+    const { data } = await axios.get("/course");
     return data;
 };
 
@@ -36,12 +35,12 @@ export const getEthvalue = async () => {
 };
 
 export const getProductsRequest = async () => {
-    const { data } = await axios.get("http://localhost:3001/product");
+    const { data } = await axios.get("/product");
     return data;
 };
 
 export const postProductRequest = async (product) => {
-  const { data } = await axios.post("http://localhost:3001/product", product);
+  const { data } = await axios.post("/product", product);
   return data;
 };
 
@@ -57,7 +56,7 @@ export const getProductsByNameRequest = async (name) => {
 //////////////   PUT PRODUCTS   ////////////
 export const putProductsRequest = async (id, product) => {
   const { data } = await axios.put(
-      `http://localhost:3001/product/${id}`,
+      `/product/${id}`,
       product
   );
   return data;
@@ -134,7 +133,7 @@ export const putSuscriptionRequest = async (id, suscription) => {
 
 export const postSuscriptionRequest = async (suscription) => {
   const { data } = await axios.post(
-      "http://localhost:3001/subscription",
+      "/subscription",
       suscription
   );
   return data;
@@ -184,20 +183,20 @@ export const postUserRequest = async (user) => {
 
 export const hideUserProfileRequest = async (email) => {
     console.log(email);
-    const { data } = await axios.put(`http://localhost:3001/user/hide`, email);
+    const { data } = await axios.put(`/user/hide`, email);
     console.log(data);
     return data;
 };
 
 export const adminUserRequest = async (user) => {
-    const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    const { data } = await axios.put(`/user/admin`, user);
     return data;
 };
 
 
 export const deleteUserRequest = async (id) => {
   console.log({id});
-  const { data } = await axios.delete(`http://localhost:3001/user`, { data: { id } });
+  const { data } = await axios.delete(`/user`, { data: { id } });
   return data;
 }
 
@@ -254,18 +253,11 @@ export const editUserData = async (userData) => {
 };
 
 export const makeAdminUser = async (user) => {
-    const { data } = await axios.put(`http://localhost:3001/user/admin`, user);
+    const { data } = await axios.put(`/user/admin`, user);
     console.log(data);
     return data;
 };
 
-// export const hideUserProfile = async (email, isBanned) => {
-//     const { data } = await axios.put("http://localhost:3001/user/hide", {
-//         email: email,
-//         isBanned: isBanned,
-//     });
-//     return data;
-// };
 
 //Category
 export const getCategoryAllRequest = async () => {
@@ -282,3 +274,22 @@ export const deleteCategoryRequest = async (id) => {
   const {data} = await axios.delete(`/category/${id}`)
   return data
 }
+
+export const getProductByIdRequest = async (id) => {  
+  const { data } = await axios.get(`/product/${id}`);
+  return data;
+};
+
+//Metamask
+export const getMetamaskFeedback = async ({compra, transaction, email}) => {  
+ 
+  const { data } = await axios.post(`/Pagos/feedbackmetamask?payment_id=${transaction}&email=${email}`, {compra});
+  return data;
+};
+
+export const getMercadopagoFeedback = async ({compra, email, paymentId, status, merchantOrderId}) => {  
+ 
+  const { data } = await axios.post(`/Pagos/feedbackmercadopago/${email}?payment_id=${paymentId}&status=${status}&merchant_order_id=${merchantOrderId}&email=${email}`, {compra});;
+  return data;
+};
+

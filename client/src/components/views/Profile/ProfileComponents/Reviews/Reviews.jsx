@@ -1,15 +1,12 @@
-import s from "../Profile.module.css";
+import styles from "../../Profile.module.css";
+import s from "./Reviews.module.css"
 import { Rating } from "@mui/material";
-import { deleteComment } from "../../../../axiosRequests/axiosRequests";
+import { deleteComment } from "../../../../../axiosRequests/axiosRequests";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import theme from "../../../../../theme/theme";
 
-export function Reviews({ dark, comments, removeComment, setRemoveComment }) {
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-    console.log(comments);
+export function Reviews({ comments, removeComment, setRemoveComment }) {
 
     const handleDelete = async (event) => {
         event.preventDefault();
@@ -20,7 +17,7 @@ export function Reviews({ dark, comments, removeComment, setRemoveComment }) {
     useEffect(() => {}, [removeComment]);
     if (!comments?.length) {
         return (
-            <div className={`${s.emptyTab} ${s[theme("emptyTab")]}`}>
+            <div className={`${styles.emptyTab} ${styles[theme("emptyTab")]}`}>
                 <img
                     src="https://cdn-icons-png.flaticon.com/512/1356/1356326.png"
                     alt="comentarios"

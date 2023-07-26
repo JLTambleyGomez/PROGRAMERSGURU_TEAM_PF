@@ -1,7 +1,8 @@
+const { User, Payment, Product } = require("../db")
 const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
-
+const URL_FEEDBACKS = process.env.URL_FEEDBACKS
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
@@ -10,18 +11,19 @@ mercadoPago.configure({
 });
 
 const PagoconMercadopago = async (req, res) => {
+  console.log(req.body);
   let preference = {
     items: [
       {
-        title: req.body.description,
+        title: req.body.description.slice(0,256),
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       },
     ],
     back_urls: {
-      success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: "http://localhost:5173/HomePage",
-      pending: "http://localhost:5173/HomePage",
+      success: URL_FEEDBACKS+"/MercadoPagoFeedback",
+      failure: URL_FEEDBACKS,
+      pending: URL_FEEDBACKS,
     },
     auto_return: "approved",
   };
@@ -40,15 +42,49 @@ const PagoconMercadopago = async (req, res) => {
     });
 };
 
+
+
+
+
 const FeedbackMercadoPago = async (req, res) => {
 try {
   const { email, merchant_order_id, payment_id } = req.query;
   const { compra } = req.body; 
   
-  console.log(email,merchant_order_id,payment_id,compra)
-
-  
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
+
+  const date = new Date()
+  const formatedDate = date.toISOString().split('T')[0];
+
+  const newPayment = await Payment.create({
+    id: payment_id,
+    date: formatedDate,
+    status: "fullfiled",
+    totalPrice:totalAmount
+  })
+
+  for (let i = 0 ; i < compra.length ; i++) {
+    const product = await Product.findByPk(compra[i].id)
+    const quantity = compra[i].quantity
+
+    await newPayment.addProduct(product, {
+      through: {
+        quantity: quantity,
+      },
+    });
+    product.stock = product.stock - quantity
+    await product.save()
+  }
+
+
+  const user = await User.findOne({
+    where: {email: email}
+  })
+
+  await user.addPayment(newPayment)
+
+
+
 
   const listadeproductos = compra?.map(
     (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`

@@ -6,12 +6,14 @@ import { useEffect, useState } from "react";
 import { EditProfileForm } from "./ProfileComponents/EditProfileForm";
 import { EditProfilePicture } from "./ProfileComponents/EditProfilePicture";
 import { editUserData } from "../../../axiosRequests/axiosRequests";
-import { Favorites } from "./ProfileComponents/Favorites";
-import { Reviews } from "./ProfileComponents/Reviews";
-import { Carrito } from "./ProfileComponents/Carrito";
-import { Compras } from "./ProfileComponents/Compras";
 import { NavBarProfile } from "./ProfileComponents/navBarProfile";
 import { NavLink } from "react-router-dom";
+import theme from "../../../theme/theme";
+
+import { ShoppinngCart } from "./ProfileComponents/ShoppingCart/ShoppingCart";
+import { Reviews } from "./ProfileComponents/Reviews/Reviews";
+import { Favorites } from "./ProfileComponents/Favorites/Favorites";
+import { PaymentOrders } from "./ProfileComponents/PaymentOrders/PaymentOrders";
 
 //_________________________module_________________________
 function ProfileV2() {
@@ -19,12 +21,10 @@ function ProfileV2() {
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
-    console.log(userId);
 
     //local states
     const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
-    const [refresh, setRefresh] = useState(false);
     const [collapse, setCollapse] = useState(false);
     const [newUserData, setNewUserData] = useState({
         name: "",
@@ -36,19 +36,16 @@ function ProfileV2() {
 
     //const:
     const gearConfig = "https://www.svgrepo.com/show/491415/gear.svg";
-    const expirationDate = new Date(user.expirationDate);
+    const expirationDate = new Date(user?.expirationDate);
     const actualDate = new Date();
     const dispatch = useDispatch();
 
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
     //handlers
 
     const handleChange = (event) => {
         event.preventDefault();
         setNewUserData({
+            ...newUserData,
             [event.target.id]: event.target.value,
         });
     };
@@ -91,6 +88,7 @@ function ProfileV2() {
     const changeTab = (event) => {
         event.preventDefault();
         setTab(event.target.name);
+        localStorage.setItem("tab", event.target.name)
     };
 
     const openConfig = (event) => {
@@ -98,8 +96,9 @@ function ProfileV2() {
     };
 
     useEffect(() => {
+        setTab(localStorage.getItem("tab") || "favorites")
         dispatch(get_User_By_Email(localStorage.getItem("email")));
-    }, [dispatch, refresh, removeComment]);
+    }, [dispatch, removeComment, collapse]);
 
     //if (!user.name) return <Modal />
 
@@ -114,9 +113,7 @@ function ProfileV2() {
                                 <img src={gearConfig} alt="config" />
                             </NavLink>
                         </div>
-                    ) : (
-                        null
-                    )}
+                    ) : null}
                     {collapse ? (
                         <div className={s.camera}>
                             <EditProfilePicture
@@ -132,17 +129,13 @@ function ProfileV2() {
                 </div>
                 <h2>{user.name}</h2>
                 <h5>{user.nickName}</h5>
+                <p>{user.address}</p>
                 <div className={s.profileButton}>
                     {!collapse ? (
                         <div className={s.refresh}>
                             <button className={s.save} onClick={toggleCollapse}>
                                 Editar perfil
                             </button>
-                            <img
-                                onClick={() => setRefresh(!refresh)}
-                                src="https://www.svgrepo.com/show/437992/refresh-cw.svg"
-                                alt="actualizar"
-                            />
                         </div>
                     ) : (
                         <button className={s.save} onClick={saveChanges}>
@@ -165,28 +158,30 @@ function ProfileV2() {
                 </div>
                 <h5>
                     {actualDate > expirationDate
-                        ? "No posees suscripción activa"
+                        ? <div className={s.subscription}>
+                            <>No posees suscripción activa</> 
+                            <a href="/pagosubscripcion" className={s.link}>Suscribite aquí!</a>
+                        </div>
                         : `Su suscripción vence en ${
-                              (expirationDate - actualDate) /
-                              (1000 * 60 * 60 * 24)
+                              Math.round((expirationDate - actualDate) /
+                              (1000 * 60 * 60 * 24))
                           } días`}
                 </h5>
             </div>
             <div className={s.content}>
-                <NavBarProfile tab={tab} changeTab={changeTab} dark={dark} />
+                <NavBarProfile tab={tab} changeTab={changeTab} />
                 {tab === "favorites" && (
-                    <Favorites dark={dark} favorites={user?.Courses} />
+                    <Favorites  favorites={user?.Courses} />
                 )}
                 {tab === "reseñas" && (
-                    <Reviews
-                        dark={dark}
+                    <Reviews                        
                         comments={user?.Comments}
                         removeComment={removeComment}
                         setRemoveComment={setRemoveComment}
                     />
                 )}
-                {tab === "compras" && <Compras dark={dark} />}
-                {tab === "carrito" && <Carrito dark={dark} />}
+                {tab === "compras" && <PaymentOrders payments={user?.Payments}/>}
+                {tab === "carrito" && <ShoppinngCart />}
             </div>
         </div>
     );

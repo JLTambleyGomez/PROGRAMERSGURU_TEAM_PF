@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import { get_products_all, get_products_by_name, get_categories, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
+import { get_products_all, get_categories, sort_products, filter_product_by_category, filter_product_by_price } from "../../../Redux/actions";
 import theme from "../../../theme/theme";
 
 import Slider from 'rc-slider';
@@ -13,9 +13,9 @@ function FilterBarShop () {
 
     //global states:
     const products = useSelector((state) => state.products);
-    const categories = useSelector((state) => state.categories);
+    // const categoriesRed = useSelector((state) => state.categories);
   
-    console.log(products)
+    
 
     //states:
     const [priceRange, setPriceRange] = useState([0, 1000]);
@@ -24,6 +24,8 @@ function FilterBarShop () {
     const [isVisiblePrice, setIsVisiblePrice] = useState(false);
     const [minSliderValue, setMinSliderValue] = useState(0);
     const [maxSliderValue, setMaxSliderValue] = useState(1000);
+    const [categories, setCategories] = useState([])
+
 
     const [isVisibleCategory, setIsVisibleCategory] = useState(false);
     const [isVisibleSortByName, setIsVisibleSortByName] = useState(false);
@@ -87,10 +89,10 @@ function FilterBarShop () {
 
     const filterCategory = async (event) => {
         const { value } = event.target;
-      
+
+        await dispatch(get_products_all());
         if (value === "") {
             await setCategory("");
-            await dispatch(get_products_all());
             if (price.length !== 0) {
                 await dispatch(filter_product_by_price(price));
             }
@@ -99,7 +101,6 @@ function FilterBarShop () {
             }
         } else {
             await setCategory(value);
-            await dispatch(get_products_all());
             await dispatch(filter_product_by_category(value));
             if (price.length !== 0) {
                 await dispatch(filter_product_by_price(price));
@@ -142,23 +143,22 @@ function FilterBarShop () {
 
     //life-cycles:
     useEffect(() => {
-        console.log(priceRange)
-        console.log(initalPriceRange)
-    }, [priceRange, initalPriceRange])
-
-    useEffect(() => {
         console.log({price: price, order: order, category: category})
     }, [price, order, category])
 
     useEffect(() => {
         (async () => {
-            dispatch(get_categories())
-        })
-    }, [])
+            if (!categories.length) {
+                await dispatch(get_categories())
+                .then((data) => setCategories(data.payload.allCategories));
+            }
+        })()
+    }, [categories])
 
     useEffect(() => {
         dispatch(get_products_all());
     }, []);
+
 
     useEffect(() => {
         if (!initalPriceRange && products.length > 0) {
@@ -172,17 +172,17 @@ function FilterBarShop () {
 
     useEffect(() => {
         const handleResize = () => {
-          if (window.innerWidth >= 700) {
-            setFilterModal(false);
-            setSortModal(false);
-          }
+            if (window.innerWidth >= 700) {
+                setFilterModal(false);
+                setSortModal(false);
+            }
         };
         window.addEventListener('resize', handleResize);
 
         return () => {
-          window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
-      }, []);
+    }, []);
 
     useEffect(() => {
         const disableScroll = () => {
@@ -191,7 +191,8 @@ function FilterBarShop () {
         const enableScroll = () => {
             document.body.style.overflow = 'auto';
         };
-        (filterModal || sortModal) ? disableScroll()
+        (filterModal || sortModal) 
+        ? disableScroll()
         : enableScroll()
     }, [filterModal, sortModal])
 
@@ -281,7 +282,7 @@ function FilterBarShop () {
                                         { categories.length && (
                                             <>
                                                 {
-                                                    categories.map((category, index) => (
+                                                    categories.allCategories.map((category, index) => (
                                                         <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
                                                     ))
                                                 }

@@ -2,16 +2,20 @@ import { useState } from "react";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { storage } from "../../../config/firebase-config";
 
-// con esta funcion pueden subir imagenes de cursos al storage de firebase
-// es un componente. en el admin dashboard donde corresponda ponen: <SubirImagencurso name={name}/>
-// deben pasar por props el nombre "name" del curso
-// reemplazar name por lo que corresponda, debe ser algo distintivo de cada curso para que no se pisen las carpetas
-
-export function SubirImagenCurso({ name }) {
+export function SubirImagenCurso({ title, handleCourseChange }) {
     const [selectedFile, setSelectedFile] = useState(null);
 
-    async function uploadCoursePicture(file, name) {
-        const pictureRef = ref(storage, `courses/${name}/${file.name}`);
+    function reemplazarCaracteres(str, caracterAntiguo, caracterNuevo) {
+        let expresionRegular = new RegExp(caracterAntiguo, "g");
+        return str.replace(expresionRegular, caracterNuevo);
+    }
+    let caracterAntiguo = " ";
+    let caracterNuevo = "_";
+    let titulo = reemplazarCaracteres(title, caracterAntiguo, caracterNuevo);
+
+    console.log(titulo);
+    async function uploadCoursePicture(file, titulo) {
+        const pictureRef = ref(storage, `courses/${titulo}`);
         await uploadBytes(pictureRef, file);
         const url = await getDownloadURL(pictureRef);
         return url;
@@ -22,10 +26,13 @@ export function SubirImagenCurso({ name }) {
         setSelectedFile(file);
     };
 
-    const handleUploadClick = async () => {
+    const handleUploadClick = async (e) => {
+        e.preventDefault();
+
         if (selectedFile) {
             try {
-                const url = await uploadCoursePicture(selectedFile, name);
+                const url = await uploadCoursePicture(selectedFile, titulo);
+                localStorage.setItem("urlNewCourseImage", url);
                 console.log("URL del archivo subido:", url);
             } catch (error) {
                 console.log("Error al subir el archivo:", error);
@@ -33,13 +40,14 @@ export function SubirImagenCurso({ name }) {
         } else {
             console.log("Ningún archivo seleccionado.");
         }
+        handleCourseChange(e)
     };
 
     return (
         <div>
             <label htmlFor="fileInput"></label>
             <input type="file" id="fileInput" onChange={handleFileChange} />
-            <button onClick={handleUploadClick}>Subir Archivo</button>
+            <button onClick={handleUploadClick} name="imageURL" value={localStorage.getItem("urlNewCourseImage") || " "}>Subir Imagen</button>
         </div>
     );
 }

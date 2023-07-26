@@ -9,6 +9,8 @@ import {
     clearMessage
 } from "../../../Redux/actions";
 import { validateSuscription } from "./validate";
+import { Table } from "react-bootstrap";
+import {SubirImagenSuscription} from './SubirImagenSuscription'
 
 
 //_________________________module_________________________
@@ -44,17 +46,14 @@ const Subscriptions = () => {
 
     //setea el estado local con los cambios que se producen en el input
     const handleInputChange = (event) => {
-        setFormData({
-            ...formData,
-            [event.target.name]: event.target.value,
-        });
-        if (postSuscription)
-            setErrorSuscription(
-                validateSuscription({
-                    ...formData,
-                    [event.target.name]: event.target.value,
-                })
-            );
+        const name = event.target.name
+        const value = event.target.value
+
+        setFormData((prevSuscription) => ({
+            ...prevSuscription, 
+            [name]: (name === 'image' && localStorage.getItem('urlNewSuscription')) || value,
+          }))
+
         setMessagePost("");
     };
 
@@ -257,6 +256,7 @@ const Subscriptions = () => {
                                             : "Imagen"
                                     }
                                 />
+                                <SubirImagenSuscription handleInputChange={handleInputChange} title={putSuscription ? formData.title : suscription.title}/>
                                 {erroSuscription.image && (
                                     <p>{erroSuscription.image}</p>
                                 )}
@@ -308,45 +308,53 @@ const Subscriptions = () => {
                 ) : (
                     <></>
                 )}
+              
+<Table striped bordered hover >
+                
+ 
+                <tbody >
+                <thead >
+                  <tr>
+                    <th>#</th>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                  </tr>
+                </thead>
+                
                 {!!subscriptions.length &&
                     subscriptions?.map((subscription) => (
-                        <li key={subscription.id}>
-                            <h2>Titulo: {subscription.title}</h2>
-                            <p>Descripción: {subscription.description}</p>
-                            <p>Tipo: {subscription.type}</p>
-                            <p>Precio: {subscription.price}</p>
-                            <button
-                                onClick={() =>
-                                    handleDeleteSubscription(subscription.id)
-                                }
+                      
+                    <tr key={subscription.id}>
+                      <td>{subscription.id}</td>
+                      <td> {subscription.title}</td>
+                      <td> {subscription.description}</td>
+                            <td>{subscription.type}</td>
+                            <td>Precio: {subscription.price}</td>
+                            <td>
+                            <button   onClick={() => handleDeleteSubscription(subscription.id)}
                             >
                                 Eliminar
-                            </button>
+                            </button></td>
+                            <td>
                             <button
                                 onClick={handleEditSubscription}
                                 value={subscription.id}
                             >
                                 Editar
-                            </button>
-                        </li>
-                    ))}
+                            </button></td>
+                     
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+
+
+
+
+
             </ul>
 
-            {/* <h2>
-                {putSuscription ? "Editar suscripción" : "Añadir suscripción"}
-            </h2>
-
-            {formData.id ? (
-                <button onClick={handleEditSubscription}>
-                    Guardar Cambios
-                </button>
-            ) : (
-                <button onClick={handleAddSubscription}>
-                    {putSuscription ? "Editar" : "Agregar Suscripción"}
-                </button>
-            )}
-            {error && <p>Error: {error}</p>}
-            {message && <p>{message.message}</p>} */}
+           
         </div>
     );
 };

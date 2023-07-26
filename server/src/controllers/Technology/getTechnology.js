@@ -6,7 +6,6 @@ const getTechnology = async (req, res) => {
         let technologies = await Technology.findAll();
 
         technologies = technologies.map((cat) => cat.dataValues);
-        // categories = categories.map((cat) => cat.dataValues.name);
 
         return res.json(technologies);
 

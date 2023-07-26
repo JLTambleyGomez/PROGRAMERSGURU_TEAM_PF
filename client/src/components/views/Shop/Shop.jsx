@@ -19,6 +19,7 @@ function Shop ( { isAtBottom, docWidth } ) {
     const dark = useSelector((state) => state.darkMode);
     const products = useSelector((state) => state.products);
     const cart = useSelector((state) => state.cart);
+    const user = useSelector((state) => state.user);
 
 
     //states:
@@ -119,7 +120,7 @@ function Shop ( { isAtBottom, docWidth } ) {
     }, [])
 
     useEffect(() => {
-        if (Array.isArray(products) && products.length > 1) {
+        if (Array.isArray(products) && products.length >= 1) {
             setLoading(true);
             setTimeout(() => {
                 setLoading(false);
@@ -195,7 +196,7 @@ function Shop ( { isAtBottom, docWidth } ) {
                         { 
                             currentAllProducts? currentAllProducts?.map((product, index) => {
                                 if (product?.stock >= 0) { return (
-                                    <div className={`${s['item']}`} onClick={() => handledetailproduct(product.id)} key={index}>
+                                    <div className={`${s.item} ${s[theme('item')]}`} onClick={() => handledetailproduct(product.id)} key={index}>
                                         <div style={{display: "flex", flexDirection: "column"}}>
                                             <div className={s.imgContainer}>
                                                 <img  className={s["itemImage"]} src={product?.image}></img>

@@ -74,6 +74,7 @@ const globalStorage = {
     darkMode: false,
     access: false,
     products: [],
+    product: {},//
     user: {},
     cart: [],
     shopbag: false,
@@ -81,7 +82,7 @@ const globalStorage = {
     metamask: false,
     metamaskaddress: null,
     productsCopy: [],
-    subscriptions: [], ////   <---------- MODIFICADO
+    subscriptions: [], 
     allUsers: [],
     tecnology: []
 };
@@ -210,6 +211,8 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case GET_PRODUCTS:
             return { ...state, products: payload, productsCopy: payload };
 
+   
+
         case GET_PRODUCTS_BY_NAME:
             return { ...state, products: payload };
 
@@ -228,9 +231,7 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
         case FILTER_PRODUCTS_BY_CATEGORY:
             return {
                 ...state,
-                products: state.products.filter(
-                    (product) => product.category === payload
-                ),
+                products: state.products.filter((product) => product?.Category?.name === payload)
             };
 
         case FILTER_PRODUCTS_BY_PRICING:
@@ -238,9 +239,10 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
 
         case SORT_PRODUCTS:
             const productosOrdenados = [...state.products];
-
+            const  todos_productosOrdenados= [...state.productsCopy]
+            
             if (payload === "ascendente") {
-                todos_productosOrdenados.sort(
+                productosOrdenados.sort(
                     (a, b) =>
                         a.name.toLowerCase().charCodeAt(0) -
                         b.name.toLowerCase().charCodeAt(0)

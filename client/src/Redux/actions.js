@@ -95,6 +95,7 @@ export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE";
 //PRODUCTS:
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
+export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
 export const POST_PRODUCT = "POST_PRODUCT";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const FILTER_PRODUCTS_BY_CATEGORY = "FILTER_PRODUCTS_BY_CATEGORY";
@@ -439,6 +440,9 @@ export const get_products_all = () => {
     };
 };
 
+
+
+
 export const get_products_by_name = (name) => {
     return async (dispatch) => {
         try {
@@ -722,6 +726,7 @@ export const post_suscription = (suscription) => {
 
 //SHOP FILTERS_________________________________________//
 export const filter_product_by_category = (category) => {
+    console.log(category)
     return {
         type: FILTER_PRODUCTS_BY_CATEGORY,
         payload: category,

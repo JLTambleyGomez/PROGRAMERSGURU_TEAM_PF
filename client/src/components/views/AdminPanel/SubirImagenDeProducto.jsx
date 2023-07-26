@@ -7,7 +7,7 @@ import { storage } from "../../../config/firebase-config";
 // deben pasar por props el nombre "name" del producto
 // reemplazar name por lo que corresponda, debe ser algo distintivo de cada producto para que no se pisen las carpetas
 
-export function SubirImagenDeProducto({ name }) {
+export function SubirImagenDeProducto({ name , handleChangeProductForm }) {
     const [selectedFile, setSelectedFile] = useState(null);
 
     async function uploadProductPicture(file, name) {
@@ -22,10 +22,13 @@ export function SubirImagenDeProducto({ name }) {
         setSelectedFile(file);
     };
 
-    const handleUploadClick = async () => {
+    const handleUploadClick = async (e) => {
+        e.preventDefault()
+
         if (selectedFile) {
             try {
                 const url = await uploadProductPicture(selectedFile, name);
+                localStorage.setItem("urlNewProductImage", url);
                 console.log("URL del archivo subido:", url);
             } catch (error) {
                 console.log("Error al subir el archivo:", error);
@@ -33,13 +36,14 @@ export function SubirImagenDeProducto({ name }) {
         } else {
             console.log("Ningún archivo seleccionado.");
         }
+        handleChangeProductForm(e)
     };
 
     return (
         <div>
             <label htmlFor="fileInput"></label>
             <input type="file" id="fileInput" onChange={handleFileChange} />
-            <button onClick={handleUploadClick}>Subir Archivo</button>
+            <button onClick={handleUploadClick} name='image' value={localStorage.getItem("urlNewProductImage") || " "}>Subir Archivo</button>
         </div>
     );
 }

@@ -87,6 +87,7 @@ function Cart() {
         };
 
         setCompra(referencia);
+        //quitar esto y dejarlo a manos del mercadopago, que como carga de ultimo nada mas se deberia cargar antes
         setMostrarPagos(true);
     };
 
@@ -221,7 +222,7 @@ function Cart() {
                                     {MostrarPagos && (
                                         <div>
                                             <p>Escoge tu medio de Pago</p>
-                                            {compra.description && (
+                                            {compra?.description && (
                                                 <PagoMercadopago
                                                     reference={compra}
                                                 />

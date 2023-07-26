@@ -5,6 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 // import "./config/firebase";
 import './index.css';
 import App from './App';
+import axios from "axios";
+import URL from '../URL.JS';
+
+axios.defaults.baseURL = URL
 
 //__________________________________________________
 const rootElement = document.getElementById('root');
@@ -16,3 +20,5 @@ createRoot(rootElement).render(
     </BrowserRouter>
   </Provider>
 );
+
+

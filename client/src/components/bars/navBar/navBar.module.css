@@ -70,10 +70,20 @@
         letter-spacing: 0.2em;
         font-weight: bold;
       }
-  
       .hide{
           display:none;
       }
+  .link:hover +.hide {
+          display: block;
+          position: fixed;
+          width: 150px;
+          margin-left: -40%;
+          text-shadow: 0px 3px 12px rgb(128, 255, 255);
+          cursor: pointer;
+          color: rgb(38, 12, 233);
+  animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} } 
+   
+      
       .hideTienda{
           display:none;
       }
@@ -99,16 +109,7 @@
           color: rgb(38, 12, 233);
           animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} }       
           
-      .link:hover +.hide {
-          display: block;
-          position: fixed;
-          width: 150px;
-          margin-left: -40%;
-          text-shadow: 0px 3px 12px rgb(128, 255, 255);
-          cursor: pointer;
-          color: rgb(38, 12, 233);
-  animation:scale-up-center 0.4s; } @keyframes scale-up-center{ 0%{transform:scale(.5)} 100%{transform:scale(1)} } 
-   
+      
     .link-light {
       color: rgba(2, 14, 17, 0.932);
     }
@@ -186,6 +187,9 @@
     .inicio {
         display: none;
     }
+    .admin-responsive {
+        display: none;
+    }
     .searchBar-responsive {
         display: none;
     }
@@ -227,6 +231,12 @@
     }
     .bolsita {
         order: 1;
+    }
+    .admin {
+        display: none;
+    }
+    .admin-responsive {
+        display: block;
     }
     .metamask {
         order: 2;
