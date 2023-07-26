@@ -15,13 +15,14 @@
   margin-bottom: 1rem;
   color: #212529;
   border-collapse: collapse;
+  background-color: #c30c0c0e;
 }
 
 /* Estilos para el encabezado de la tabla */
 .Tabla thead th {
   vertical-align: bottom;
   border-bottom: 2px solid #dee2e6;
-  background-color: #ffdddd;
+  background-color: #c30c0c7a;
   padding: 15px;
   text-align:center;
 
@@ -32,7 +33,7 @@
   padding: 15px;
   text-align:center;
   vertical-align: middle;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid #c30c0c7a;
   
 }
 
@@ -45,13 +46,13 @@
 
 /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
 .Tabla tbody td:first-child {
-  border-left: 1px solid #dee2e6;
+  border-left: 1px solid #c30c0c7a;
   
 }
 
 /* Estilos para las celdas del cuerpo de la tabla en la última columna */
 .Tabla tbody td:last-child {
-  border-right: 1px solid #dee2e6;
+  border-right: 1px solid #c30c0c7a;
   
 }
 

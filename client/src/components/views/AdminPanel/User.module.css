@@ -14,7 +14,7 @@
    width: 100%; 
     margin-bottom: 1rem;
     
-    border-collapse:separate;
+    border-collapse:collapse;
   }
   
   /* Estilos para el encabezado de la tabla */
@@ -31,11 +31,11 @@
   .Tabla tbody td {
     
     padding-left: 20px;
-
+background-color:  #2678d015;
     padding-right: 20px;
     text-align:center;
     vertical-align: middle;
-    border-bottom: 1px solid #dee2e6;
+    border-bottom: 1px solid  #2678d06c;
      justify-content: flex-start;
   }
   
@@ -48,13 +48,13 @@
   
   /* Estilos para las celdas del cuerpo de la tabla en la primera columna */
   .Tabla tbody td:first-child {
-    border-left: 1px solid #dee2e6;
+    border-left: 1px solid  #2678d06c;
  
   }
   
   /* Estilos para las celdas del cuerpo de la tabla en la última columna */
   .Tabla tbody td:last-child {
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid  #2678d06c;
     
   }
   
