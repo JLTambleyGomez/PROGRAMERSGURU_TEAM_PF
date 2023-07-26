@@ -107,9 +107,9 @@ function Cart() {
     }
 
     useEffect(()=>{
-        if (cart.length){
+        if (Array.isArray(cart) && cart.length){
             setCarrovacio(false)}else
-            if(!cart.length){
+            if(Array.isArray(cart) &&!cart.length){
                 setCarrovacio(true)
             }
 
@@ -211,7 +211,7 @@ function Cart() {
                                 )}
                                 <ul>
                                     {/* PRODUCTOS DEL RESUMEN */}
-                                    {cart?.map((product, index) =>
+                                    {Array.isArray(cart) && cart?.map((product, index) =>
                                         product.quantity !== 0 && product.name.length ? (
                                             <li
                                                 className={styles.items}
