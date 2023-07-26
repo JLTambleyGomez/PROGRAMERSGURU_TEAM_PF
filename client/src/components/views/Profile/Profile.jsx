@@ -73,6 +73,8 @@ function ProfileV2() {
             nickName: "",
             address: "",
         });
+        dispatch(get_User_By_Email(localStorage.getItem("email")));
+
     };
     const discardChanges = (event) => {
         event.preventDefault();
@@ -129,7 +131,8 @@ function ProfileV2() {
                 </div>
                 <h2>{user.name}</h2>
                 <h5>{user.nickName}</h5>
-                <p>{user.address}</p>
+                {user.address && <p>Dirección: {user?.address}</p> }
+                
                 <div className={s.profileButton}>
                     {!collapse ? (
                         <div className={s.refresh}>
