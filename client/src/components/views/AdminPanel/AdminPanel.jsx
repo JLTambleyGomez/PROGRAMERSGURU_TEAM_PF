@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+
 import {
     get_tecnology,
     get_products_all,
@@ -10,14 +11,16 @@ import {
     get_suscriptions,
     get_User_By_Email
 } from "../../../Redux/actions";
+import theme from "../../../theme/theme";
+
+import styles from "./AdminPanel.module.css";
 import Categories from "./Categories";
 import Courses from "./Courses";
 import Products from "./Products";
 import User from "./User";
 import Subscriptions from "./Subscriptions";
-import styles from "./AdminPanel.module.css";
-import ModalAdminPanel from '../ModalAdminPanel/ModalAdminPanel'
 import Tecnology from './Tecnology'
+import ModalAdminPanel from '../ModalAdminPanel/ModalAdminPanel'
 
 //_________________________module_________________________
 const AdminPanel = () => {
@@ -37,11 +40,6 @@ const AdminPanel = () => {
     const [showTecnology, setShowTecnology] = useState(false);
 
     //functions:
-    const theme = (base) => {
-        const suffix = dark ? "dark" : "light";
-        return `${base}-${suffix}`;
-    };
-
     const handleShowTecnology = (event) => {
         event.preventDefault()
         setShowTecnology(!showTecnology)
@@ -100,24 +98,24 @@ const AdminPanel = () => {
     
 
     //life-cycles:
-    useEffect(()=>{
+    useEffect(() => {
+        // ????????????
         const email = localStorage.getItem("email");
         if (!user?.email) dispatch(get_User_By_Email(email));
     }, []);
 
     useEffect(() => {
-        get_tecnology,
         dispatch(clearMessage());
         dispatch(get_categories());
         dispatch(get_courses_all());
         dispatch(get_products_all());
         dispatch(get_suscriptions());
         dispatch(get_tecnology())
-        return () => {
-            // return ocupar para hacer algo en el desmontaje
-            dispatch(clearMessage()); // limpiar
-            dispatch(clearCourses());
-        };
+            return () => {
+                // return ocupar para hacer algo en el desmontaje
+                dispatch(clearMessage()); // limpiar
+                dispatch(clearCourses());
+            };
     }, [dispatch]);
 
     useEffect(() => {
@@ -135,69 +133,57 @@ const AdminPanel = () => {
 
     //component:
     return (
-        <div>
-            
-             <div className={styles.message}>
+        <main className={`${styles.component} ${styles[theme("component")]}`}>
+
+            <div className={styles.message}>
                 Respuesta desde Servidor: {message}
             </div>
+            <div className={styles.container1}>
+                <div className={styles.buttons}>
+                    <button className={styles.buton} onClick={handleShowCategories}>
+                        <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
+                    </button>
 
-        <div className={`${styles.component} ${styles[theme("component")]}`}>
-           
-            <div>
-                <p className={styles.buton} onClick={handleShowCategories}>
-                    <h1 className={styles.h1}>ADMINISTRAR CATEGORIAS</h1>
-                </p>
-                {showcategories && 
-                <Categories></Categories>}
-
-                <div />
-
-                <div>
-                    <p className={styles.buton} onClick={handleShowCursos}>
+                    <button className={styles.buton} onClick={handleShowCursos}>
                         <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
-                    </p>
-                    {showcursos && <Courses></Courses>}
-                </div>
+                    </button>
 
-                <div>
-                    <p
+                    <button
                         className={styles.buton}
                         onClick={handleShowProducts}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
-                    </p>
-                    {showproducts && <Products></Products>}
-                </div>
+                    </button>
 
-                <div>
-                    <p className={styles.buton} onClick={handleShowUsers}>
+                    <button className={styles.buton} onClick={handleShowUsers}>
                         <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
-                    </p>
-                    {showUsers && <User></User>}
-                </div>
+                    </button>
 
-                <div>
-                    <p
+                    <button
                         className={styles.buton}
                         onClick={handleShowSubscription}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR SUSCRIPCIONES</h1>
-                    </p>
-                    {showSubscriptions && <Subscriptions></Subscriptions>}
-                   
-                </div>
-                <div>
-                    <p
+                    </button>
+                    
+                    <button
                         className={styles.buton}
                         onClick={handleShowTecnology}
                     >
                         <h1 className={styles.h1}>ADMINISTRAR TECNOLOGIAS</h1>
-                    </p>
+                    </button>
+
+                </div>
+                <div className={styles.content}>
+                    {showcategories && <Categories/>}
+                    {showcursos && <Courses/>}
+                    {showproducts && <Products/>}
+                    {showUsers && <User/>}
+                    {showSubscriptions && <Subscriptions/>}
                     {showTecnology && <Tecnology />}
-                
                 </div>
             </div>
-        </div></div>
+        </main>
     );
 };
 

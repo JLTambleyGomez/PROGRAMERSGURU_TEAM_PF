@@ -7,7 +7,7 @@
   z-index: 1;
   color: aliceblue;
   background-color: rgba(0, 0, 0, 0.672);
-  animation:blur-in 1s linear both
+  animation:blur-in 1s ease
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
 
 /* .item {

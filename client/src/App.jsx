@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -88,7 +88,9 @@ auth.onIdTokenChanged(async (user) => {
     
     //const:
     const location = useLocation().pathname;
-
+    const storeRef = useRef(null)
+    const menuRef = useRef(null)
+    const docWidth = window.innerWidth
     
     //life-cycles:
     useEffect(()=>{
@@ -152,17 +154,17 @@ auth.onIdTokenChanged(async (user) => {
 
     //component:
     return (
-        <div className={`${s[theme("component")]}`}>
-            {location !== "/" && <NavBar />}
+        <div className={`${s.component} ${s[theme("component")]}`}>
+            {location !== "/" && <NavBar menuRef={menuRef} storeRef={storeRef}/>}
             {location !== "/" && <MusicBar/>}
             {location !== "/" && shopbag && <Bag/>}
             <Routes>
                 <Route path="/" element={<LandingPage2/>}/>
-                <Route path="/HomePage" element={<HomePage />} />
-                <Route path="/CoursePage" element={<CoursePage />} />
-                <Route path="/Profile" element={<Profile />} />
-                <Route path="/Store" element={<Shop />} />
-                <Route path="/Cart" element={<Cart />} />
+                <Route path="/HomePage" element={<HomePage storeRef={storeRef} menuRef={menuRef} isAtBottom={isAtBottom} docWidth={docWidth}/>} />
+                <Route path="/CoursePage" element={<CoursePage isAtBottom={isAtBottom} docWidth={docWidth}/>} />
+                <Route path="/Profile" element={<Profile/>} />
+                <Route path="/Store" element={<Shop isAtBottom={isAtBottom} docWidth={docWidth}/>} />
+                <Route path="/Cart" element={<Cart isAtBottom={isAtBottom} docWidth={docWidth}/>} />
                 <Route path="/AdminPanel" element={<AdminPanel />} />
                 <Route path="/CourseDetails/:id" element={<CourseDetails />} />
                 <Route path="/Commingsoon" element={<Commingsoon />} />
@@ -177,7 +179,13 @@ auth.onIdTokenChanged(async (user) => {
                 <Route path ="/IniciaSession" element ={<Modal/>}/>
                 <Route path ="/about" element = {<About/>}/>
             </Routes>
-            {location === "/HomePage" && isAtBottom && <Footer />}
+            {/* {
+                docWidth < 750 ? (
+                    <Footer/>
+                ) : (
+                    location === "/HomePage" || location === "/CoursePage" || location === "/Store" ? <null /> : null
+                )
+            } */}
         </div>
     );
 }

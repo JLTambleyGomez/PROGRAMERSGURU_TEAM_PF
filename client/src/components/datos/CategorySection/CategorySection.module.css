@@ -1,0 +1,108 @@
+.component {
+    height: 100%;
+    margin: 4rem 0;
+    width: 100%;
+  }
+  
+.categoriesTitle {
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    letter-spacing: 10px;
+    text-align: start;
+    font-size: 3rem;
+    transition: transform 0.3s, filter 0.3s;
+}
+
+.categoriesTitle-light {
+    color: rgb(0, 140, 158);
+    text-shadow: 2px 3.5px 2px rgba(0, 221, 250, 0.672);
+}
+
+.categoriesTitle-dark {
+    color:  rgba(0, 221, 250, 0.672);
+    text-shadow: 2px 3.5px 2px  rgb(36, 3, 73);
+}
+
+
+  .categories {
+    height: 100%;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(4, minmax(15vw, 1fr));
+    /* gap: 3rem; */
+    justify-content: center;
+  }
+  
+  .component label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10%;
+    margin: 10%;
+    font-size: 2vw;
+    border: 1px dotted;
+    transition: 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .component label:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+  }
+  
+  .flyingLabel {
+    position: fixed;
+    padding: 2% !important;
+    width: 10% !important;
+    max-height: 2vh;
+    margin: 0 !important;
+    font-size: 1vw !important;
+    color: aliceblue;
+    z-index: 9990;
+    background-color: black;
+    animation: flyInAnimation 2s ease forwards;
+  }
+  
+  @keyframes flyInAnimation {
+    from {
+        transform: translateY(var(--initial-top)) translateX(var(--initial-left)) rotate(0deg);
+    }
+    to {
+        transform: translateY(-30%) translateX(-20%) rotate(360deg);
+    }
+  }
+  
+@media screen and (max-width: 1000px) {
+    .categories {
+        grid-template-columns: repeat(3, minmax(15vw, 1fr));
+    }
+    .component label {
+        font-size: 125%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .categories {
+        grid-template-columns: repeat(2, minmax(15vw, 1fr));
+    }
+    .flyingLabel {
+        position: unset;
+        animation: none;
+        padding: 10% !important;
+        width: 100% !important;
+        max-height: unset !important;
+        margin: 0 !important;
+        font-size: 125% !important;
+        z-index: 9999;
+        color: aliceblue;
+        /* background-color: rgba(192, 63, 63, 0.427);
+        border: 2px solid var(--turquesa) !important; */
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .categories {
+        grid-template-columns: repeat(1, minmax(15vw, 1fr));
+    }
+}

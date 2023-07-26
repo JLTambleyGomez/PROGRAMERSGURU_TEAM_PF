@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -18,7 +18,7 @@ import Menu from "../Menu/Menu";
 import ModalBannedUser from '../../views/ModalBannedUser/ModalBannedUser'
 
 //_________________________module_________________________
-function NavBar ( { logoutUser } ) {
+function NavBar ( { logoutUser, storeRef, menuRef } ) {
 
     //global states:
     const dark = useSelector((state) => state.darkMode);
@@ -128,7 +128,7 @@ function NavBar ( { logoutUser } ) {
                 </NavLink>
             </button>
         {/* TIENDA */}
-            <button className={`${s.button} ${s[theme("button")]} ${s.inicio}`}>
+            <button className={`${s.button} ${s[theme("button")]} ${s.inicio}`} ref={storeRef}>
                 <NavLink to="/store" className={`${s.link} ${s[theme("link")]}`}>
                     Tienda 
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-shop" viewBox="0 0 16 16">
@@ -199,6 +199,7 @@ function NavBar ( { logoutUser } ) {
                 className={s.barsButton}
                 icon={faBars}
                 onClick={toggleBars}
+                ref={menuRef}
             />
             {
                 isBarsOpen && (

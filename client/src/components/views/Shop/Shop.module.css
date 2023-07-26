@@ -253,3 +253,12 @@
         }
      }
  }
+
+
+ /* ----------- RESPONSIVE --------------- */
+
+ @media screen and (max-width: 750px) {
+    .component {
+        padding-bottom: 0;
+    }
+}

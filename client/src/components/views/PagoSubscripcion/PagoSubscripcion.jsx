@@ -79,7 +79,7 @@ function PagoSubscripcion () {
             <div className={styles.content}>
                 <div className={styles.options}>
                     {
-                        subscripciones?.map((subscripcion) => (
+                        Array.isArray(subscripciones) && subscripciones.length > 0 && subscripciones?.map((subscripcion) => (
                             <div key={subscripcion.id} className={styles.product}>
                                 <img src={subscripcion.image} alt={subscripcion.title} className={styles.productImage} />
                                 <h3 className={styles.item}>{subscripcion.title}</h3>

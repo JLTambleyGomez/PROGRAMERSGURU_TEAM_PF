@@ -83,6 +83,10 @@ const Categories = () => {
         })()
     }, [dispatch])
 
+    useEffect(() => {
+        console.log(categories)
+    }, [categories])
+
 
     //component:
     return (
@@ -111,7 +115,7 @@ const Categories = () => {
                 <div >
                     <h2>Categories</h2>
                     <div>
-                        {categories.allCategories.map((category, index) => (
+                        {categories && Object.keys(categories).length > 0 && categories.allCategories.map((category, index) => (
                                 <span
                                     key={index}
                                 >

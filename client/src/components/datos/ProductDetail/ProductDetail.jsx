@@ -6,11 +6,7 @@ import axios from 'axios';
 function ProductDetail() {
   const [product, setProduct] = useState(null);
   const { id } = useParams();
-
-  useEffect(() => {
-    fetchProductById();
-  }, []);
-
+  
   const fetchProductById = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/product/${id}`);
@@ -18,6 +14,11 @@ function ProductDetail() {
     } catch (error) {
     }
   }
+
+  useEffect(() => {
+    fetchProductById();
+  }, []);
+
   console.log(product)
 
   return (
