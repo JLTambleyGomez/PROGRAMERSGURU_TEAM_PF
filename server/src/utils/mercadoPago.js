@@ -13,10 +13,13 @@ mercadoPago.configure({
 
 const PagoconMercadopago = async (req, res) => {
   console.log(req.body);
+  const maxLength = 256;
+  const title = req.body.description.substring(0, maxLength);
+
   let preference = {
     items: [
       {
-        title: req.body.description,
+        title: title,
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       },

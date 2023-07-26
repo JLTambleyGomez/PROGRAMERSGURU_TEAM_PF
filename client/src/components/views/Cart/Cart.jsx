@@ -22,6 +22,8 @@ function Cart() {
     const [MostrarPagos, setMostrarPagos] = useState(false);
     const [adressForm, setAdressForm] = useState(false);
     const [message, setMessage] = useState("");
+    const [cargasimulada,setCargasimulada]=useState(false)
+    const [carrovacio,setCarrovacio]=useState(true)
     
     
     //const:
@@ -43,6 +45,9 @@ function Cart() {
     };
 
     const removeFromCart = async (id) => {
+        setMostrarPagos(false);
+        
+         
         const cart = await localStorage.getItem("cart");
         if (!cart) {
             await localStorage.setItem("cart", "[]");
@@ -68,6 +73,7 @@ function Cart() {
     };
     
     const handlePagarButton = () => {
+        setCargasimulada(true);
         dispatch(set_cart());
         
         const arrayListOfProducts = cart?.map(
@@ -88,12 +94,26 @@ function Cart() {
 
         setCompra(referencia);
         setMostrarPagos(true);
+      
+       
+        const carga =async ()=>{
+        await new Promise(resolve => setTimeout(resolve, 4000));    setCargasimulada(false)}
+         carga()
     };
+     
     const mostrar = ()=>{
         setMostrarPagos(true);
         console.log("mostrar")
     }
 
+    useEffect(()=>{
+        if (cart.length){
+            setCarrovacio(false)}else
+            if(!cart.length){
+                setCarrovacio(true)
+            }
+
+    },[cart])
     //life-cycles:
     useEffect(() => {
         (async () => {
@@ -105,12 +125,8 @@ function Cart() {
             }
         })();
         dispatch(set_cart());
-        // dispatch(get_User_By_Email());
     }, [user]);
 
-    //Modal
-    // if (user.banned) return (<ModalBannedUser />);
-    
     //component:
     return (
         <main>
@@ -237,6 +253,10 @@ function Cart() {
                                             /></p>
                                         </div>
                                     )}
+                                    {cargasimulada &&
+                                    <div className={styles.cargasimulada}><p className={styles.cargandotxt}>Cargando Pagos</p></div> }
+                                    {carrovacio && 
+                                    <div className={styles.cargasimulada} ><p className={styles.cargandotxt}>Primero debes agregar productos</p></div>}
                                 </ul>
                             </div>
                         </div>
