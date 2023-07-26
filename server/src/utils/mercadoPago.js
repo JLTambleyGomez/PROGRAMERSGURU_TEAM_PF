@@ -15,7 +15,7 @@ const PagoconMercadopago = async (req, res) => {
   let preference = {
     items: [
       {
-        title: req.body.description.slice(0,256),
+        title: req.body.description,
         unit_price: Number(req.body.price),
         quantity: Number(req.body.quantity),
       },
