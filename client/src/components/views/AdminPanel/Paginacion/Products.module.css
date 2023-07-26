@@ -1,0 +1,92 @@
+.component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 900px;
+}
+.header {
+    font-weight: bold;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    height: 35px;
+    padding: 10px 0 10px 0;
+    border-top: 1px solid rgb(143, 143, 143);
+
+}
+
+.fila {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+    height: 60px;
+    padding: 10px 0 10px 0;
+    border-top: 1px solid rgb(143, 143, 143);
+    
+}
+.id {
+    text-align: center;
+    width: 55px;
+}
+.image {
+    text-align: center;
+    width: 80px;
+}
+.image img {
+    object-fit: cover;
+    height: 70px;
+    width: 70px;
+}
+.name {
+    margin: 10px;
+    width: 300px;   
+     
+}
+.category {
+    
+    text-align: center;
+    width: 20%;
+}
+.stock {
+    text-align: center;
+    width: 10%;
+}
+.price {
+    text-align: center;
+    width: 10%;
+}
+.action {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 18%;
+}
+
+.pagination{
+    list-style: none;
+    display: inline-block;
+    padding: 0;
+    margin: 20px;
+}
+.pagination button {
+    padding: 5px 10px;
+    border: 1px solid transparent;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(160, 160, 160);
+}
+.current {
+    color: #008c9e;
+    background-color: #008c9e;
+}
+.nocurrent {
+    background-color: #d3d3d3;
+}
+li{
+    display: inline;
+    text-align: center;
+}
+.arrow {
+    font-weight: 1000;
+}

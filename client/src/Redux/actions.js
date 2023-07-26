@@ -676,6 +676,7 @@ export const put_suscription = (id, suscription) => {
                 payload: data,
             });
         } catch (error) {
+          
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -688,14 +689,11 @@ export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
             const data = await deleteSuscriptionRequest(id);
-           
-            console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
                 payload: data.message,
             });
         } catch (error) {
-            console.log(error);
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,

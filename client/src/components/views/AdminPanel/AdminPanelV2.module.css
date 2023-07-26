@@ -1,0 +1,110 @@
+.component {
+    margin-top: var(--navBarHeight);
+    min-height: calc(100vh - var(--navBarHeight));
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    display: flex;
+    /* padding: 4% 0; */
+    animation:blur-in 1s ease;
+} @keyframes blur-in {
+    0% {filter:blur(12px); opacity:0} 100% {filter:blur(0); opacity:1}
+}
+
+.message {
+    position:fixed;
+    top: var(--navBarHeight);
+    width:100%;
+    height: 3vh;
+    background-color: black;
+    color: white;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin: 3vh 0 0;
+    min-height: calc(97vh - var(--navBarHeight));
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 20%;
+        }
+        .h1 {
+            margin: 12%;
+            font-size: 10px;
+        }
+
+    .table {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 80%
+        }
+        .buton{
+            border: 2px solid rgb(8, 156, 137);
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            width: 80%;
+            margin: 14px;
+            height: 60px;
+            border-radius: 4px;
+            box-sizing: border-box;
+            animation: borderGradientAnimation1 4s linear infinite, borderGradientAnimation2 4s linear infinite, shadowGradientAnimation 4s linear infinite;
+        }
+        .buton:hover {
+            transition:0.5s;
+            height: 60px; 
+            scale: 1.2;
+            background-color:rgb(76, 244, 221) ;
+            border: none;
+            color:black;
+            cursor: pointer;
+            animation:shadow-drop-center 0.4s linear both
+        }
+@keyframes shadow-drop-center {
+    0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 rgb(60, 247, 206)}
+}
+
+
+@keyframes borderGradientAnimation1 {
+    0%, 100% {
+    border-image: linear-gradient(to right, #ff0000, #0000ff) 1;
+    }
+    25%, 75% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+    }
+    50% {
+    border-image: linear-gradient(to right, #0000ff, #5b095b) 1;
+    }
+}
+
+@keyframes borderGradientAnimation2 {
+    0%, 100% {
+    border-image: linear-gradient(to left, black, #ff0000, #0000ff) 1;
+    }
+    25%, 75% {
+    border-image: linear-gradient(to left, #0000ff, black, #00ffff) 1;
+    }
+    50% {
+    border-image: linear-gradient(to left, #0000ff, #5b095b, black) 1;
+    }
+}
+
+@keyframes shadowGradientAnimation {
+    0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    }
+    25%, 75% {
+    box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+    }
+    50% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+    }
+}

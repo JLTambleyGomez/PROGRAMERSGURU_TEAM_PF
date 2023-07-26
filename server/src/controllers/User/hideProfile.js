@@ -3,7 +3,7 @@ const { User } = require("../../db");
 const hideProfile = async (req, res) => {
     try {
         const { email } = req.body;
-        console.log(req.body);
+
         const user = await User.findOne({ where: { email } });
 
         user.banned ? (user.banned = false) : (user.banned = true);

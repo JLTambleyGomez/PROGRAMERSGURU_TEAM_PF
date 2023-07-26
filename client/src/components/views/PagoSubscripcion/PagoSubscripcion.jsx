@@ -28,6 +28,7 @@ function PagoSubscripcion () {
         setBlocked(selectedSubscripcion.id)
         console.log(selectedSubscripcion.id)
         const oldCart = JSON.parse(localStorage.getItem("cart")) 
+        selectedSubscripcion.quantity = 1
         oldCart.push(selectedSubscripcion)
         localStorage.setItem("cart", JSON.stringify(oldCart))
         navigate("/Cart")
