@@ -36,7 +36,7 @@ const FeedbackMetamask = async (req, res) => {
         quantity: quantity,
       },
     });
-    product.stock = product.stock - quantity
+    product.stock = product.stock - product.quantity
     await product.save()
   }
 

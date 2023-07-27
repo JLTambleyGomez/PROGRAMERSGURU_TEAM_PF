@@ -15,14 +15,15 @@ import { Reviews } from "./ProfileComponents/Reviews/Reviews";
 import { Favorites } from "./ProfileComponents/Favorites/Favorites";
 import { PaymentOrders } from "./ProfileComponents/PaymentOrders/PaymentOrders";
 
+import ModalProfile from "../ModalProfile/ModalProfile";
 //_________________________module_________________________
 function ProfileV2() {
     //global states:
-    const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
     const userId = user?.id;
 
     //local states
+    const [picture, setPicture] = useState("")
     const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
     const [collapse, setCollapse] = useState(false);
@@ -100,9 +101,10 @@ function ProfileV2() {
     useEffect(() => {
         setTab(localStorage.getItem("tab") || "favorites")
         dispatch(get_User_By_Email(localStorage.getItem("email")));
+        setPicture(user?.picture)
     }, [dispatch, removeComment, collapse]);
 
-    //if (!user.name) return <Modal />
+    if (!user) return <ModalProfile />
 
     //component:
     return (
@@ -120,8 +122,7 @@ function ProfileV2() {
                         <div className={s.camera}>
                             <EditProfilePicture
                                 userId={userId}
-                                setNewUserData={setNewUserData}
-                                newUserData={newUserData}
+                                setPicture={setPicture}
                             />
                         </div>
                     ) : null}

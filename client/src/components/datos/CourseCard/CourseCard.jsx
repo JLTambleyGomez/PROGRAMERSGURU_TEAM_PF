@@ -61,8 +61,6 @@ function CourseCard ({ id, title, meanRating, isFree, language, courseUrl, relea
                             <Card.Title>Coste:{isFree ? "gratis" : "pago"}</Card.Title>  
                             <Card.Title>Rating : {meanRating}</Card.Title>  
                             <Card.Title>Idioma : {language}</Card.Title>  
-                            <Card.Title><a className={styles.link} href= {courseUrl} target="_blank" rel="noopener noreferrer">VISITAR</a>
-                            </Card.Title>  
                             <Card.Title>Fecha de lanzamiento {released}</Card.Title>  
                             <Card.Text className={styles.description}> {description}</Card.Text>
                         </Card.Body>

@@ -52,7 +52,7 @@ const FeedbackMercadoPago = async (req, res) => {
 try {
   const { email, merchant_order_id, payment_id, status } = req.query;
   const { compra } = req.body; 
-  console.log(req.body)
+  console.log("aquiva"+req.body)
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   const date = new Date()
@@ -80,7 +80,7 @@ try {
           quantity: quantity,
         },
       });
-      product.stock = product.stock - quantity
+      product.stock = product.stock - product.quantity
       await product.save()
     }
     else {

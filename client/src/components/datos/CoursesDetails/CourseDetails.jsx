@@ -209,7 +209,7 @@ function CourseDetails() {
                                         );
                                     })}
                                 </div>
-                                    <a href={course?.courseUrl}>Visita la página</a>
+                                <a href={course?.courseUrl}>Visita la página</a>
                             </div>
                             <div className={styles.comments}>
                                 <Comments disabled={disabled} setDisabled={setDisabled} comments={comments} setValue={setValue}/>
