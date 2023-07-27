@@ -40,6 +40,7 @@ import {
     SORT_PRODUCTS,
     PUT_PRODUCTS,
     POST_PRODUCT,
+    CLEAR_PRODUCTS,
     //CART,
     SET_CART,
     CLEAR_CART,
@@ -194,7 +195,11 @@ export default function rootReducer(state = globalStorage, { type, payload }) {
                 allCourses: [],
                 courses: [],
             };
-
+        case CLEAR_PRODUCTS:
+            return {
+                ...state,
+                products: [],
+            };
         case DARK_MODE:
             return {
                 ...state,

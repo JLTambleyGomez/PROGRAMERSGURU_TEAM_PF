@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMercadopagoFeedback } from "../../../axiosRequests/axiosRequests";
-import { get_User_By_Email } from "../../../Redux/actions";
+import { get_User_By_Email, get_products_all, clear_products} from "../../../Redux/actions";
 
 import styles from "./Success.module.css";
 
@@ -53,8 +53,10 @@ function Success() {
 
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 setPaymentInfo(data);
-                console.log(paymentInfo);
+                console.log(paymentInfo); 
                 localStorage.setItem("cart", "[]");
+                await dispatch(clear_products())
+                await dispatch(get_products_all())
             } catch (error) {
                 console.error(
                     "Error al obtener el recibo de Mercado Pago:",
@@ -69,6 +71,7 @@ function Success() {
     
     useEffect(() => {
         if (location.state && location.state.error) setError(location.state.error);
+    
     }, [location.state]);
 
     //component:

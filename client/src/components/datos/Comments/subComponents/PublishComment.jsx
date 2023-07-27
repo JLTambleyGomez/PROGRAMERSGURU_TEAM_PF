@@ -24,8 +24,7 @@ export default function PublishComment({setDisabled, commentData, setCommentData
     }
     const handleClick = async (event) => {
         event.preventDefault()
-        if (!value) return window.alert("Por favor introduzca la valoración")
-
+        if (!value) return 
         const data = await postComment(id, {...commentData, rating: value, userId: user?.id})
         if (data.message === "Se publicó tu comentario") {
             setDisabled(true)
