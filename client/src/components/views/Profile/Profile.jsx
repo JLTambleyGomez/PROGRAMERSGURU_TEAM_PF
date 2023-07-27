@@ -108,7 +108,7 @@ function ProfileV2() {
         setTab(localStorage.getItem("tab") || "favorites")
         dispatch(get_User_By_Email(localStorage.getItem("email")));
         setPicture(user?.picture)
-    }, [dispatch, removeComment, collapse]);
+    }, [dispatch, removeComment, collapse, loading]);
 
     if (!user.name) return <ModalProfile />
 
