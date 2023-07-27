@@ -50,7 +50,7 @@ export const deleteProductsRequest = async (id) => {
 };
 
 export const getProductsByNameRequest = async (name) => {
-  const { data } = await axios(`${URL}/product/name/${name}`);
+  const { data } = await axios(`/product/name/${name}`);
   return data;
 };
 //////////////   PUT PRODUCTS   ////////////

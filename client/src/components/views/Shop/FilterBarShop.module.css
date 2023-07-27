@@ -42,6 +42,10 @@
    width: 100%;
 }
 .priceSelect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
    height: 2.5rem;
    border-radius: 6px;
    width: 50%;
@@ -54,6 +58,7 @@
    display: flex;
    justify-content: space-between;
    width: 100%;
+   margin: 5px 0 0;
 }
 .priceSelectPrice p {
    margin: 0
@@ -63,9 +68,62 @@
    text-align: center;
 }
 
-.component button {
-   min-height: 100%;
-   width: 10%;
+.component button, .responsive-component button {
+    border: 2px solid rgb(8, 156, 137);
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 10%;
+    margin: 14px;
+    height: 60px;
+    border-radius: 4px;
+    box-sizing: border-box;
+    animation: borderGradientAnimation1 4s linear infinite, borderGradientAnimation2 4s linear infinite, shadowGradientAnimation 4s linear infinite;
+}
+.component button:hover, .responsive-component button:hover {
+    transition:0.5s;
+    height: 60px; 
+    scale: 1.2;
+    background-color:#4cf4dd ;
+    border: none;
+    color:black;
+    cursor: pointer;
+    animation:shadow-drop-center 0.4s linear both
+}
+
+@keyframes borderGradientAnimation1 {
+	0%, 100% {
+	    border-image: linear-gradient(to right, #ff0000, #0000ff) 1;
+	}
+	25%, 75% {
+	    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+	}
+	50% {
+	    border-image: linear-gradient(to right, #0000ff, #5b095b) 1;
+	}
+}
+@keyframes borderGradientAnimation2 {
+	0%, 100% {
+	    border-image: linear-gradient(to left, black, #ff0000, #0000ff) 1;
+	}
+	25%, 75% {
+	    border-image: linear-gradient(to left, #0000ff, black, #00ffff) 1;
+	}
+	50% {
+    	border-image: linear-gradient(to left, #0000ff, #5b095b, black) 1;
+	}
+}
+@keyframes shadowGradientAnimation {
+	0%, 100% {
+	box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+	}
+	25%, 75% {
+	box-shadow: 0 0 10px rgba(0, 0, 255, 0.7);
+	}
+	50% {
+	box-shadow: 0 0 10px rgba(0, 255, 255, 0.7);
+	}
 }
 
 
@@ -93,11 +151,14 @@
   flex-direction: column;
   align-items: center;
   align-self: center;
+  justify-content: space-evenly;
   background-color: white;
   position:absolute;
   height: 50%;
   width: 80%;
   border-radius: 10px;
+  box-sizing: border-box;
+  /* padding: 5rem 2rem; */
   }
   .modal-light {
      background-color: whitesmoke;
@@ -107,12 +168,34 @@
      background-color: #212121;
      box-shadow: 5px 5px 1rem 1rem #34333350 inset;
   }
+.filterPriceModal {
+    width: 100%;
+}
+
 
 .modal select {
-  width: 50%;
-  height: 10%;
-  border: 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 2.5rem;
+    border-radius: 6px;
+    width: 100%;
 }
+
+.modalDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.modalDiv2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+    width: 50%;
+} 
 
 /* -------- RESPONSIVE --------- */
 

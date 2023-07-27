@@ -2,7 +2,7 @@ import s from "./CoursesCard.module.css";
 import CourseCard from "../CourseCard/CourseCard";
 import { useEffect, useState, useRef } from "react";
 import { useSelector,useDispatch} from "react-redux";
-
+import theme from "../../../theme/theme";
 
 //_________________________module_________________________
 function CoursesCard () {
@@ -106,21 +106,8 @@ function CoursesCard () {
     return (
         <div>
             <div className={s.paginado}>
-                {
-                    pageNumbers.map((number, index) => {
-                        return (
-                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
-                                <div className={s.numberBox}>
-                                    {number}
-                                </div>
-                            </a>
-                        )
-                    })
-                }
-            <h2>Cursos encontrados : {allCourses.length}</h2>
-
+                <h2>Cursos encontrados : {allCourses.length}</h2>
             </div>
-
             <div className={s.coursesBox}>
                 {
                     currentAllCourses ? currentAllCourses.map((course, index) => {
@@ -174,6 +161,21 @@ function CoursesCard () {
                 }
 
                 </InfiniteScroll> */}
+                
+            </div>
+            <div className={`${s.paginado} ${s[theme("paginado")]}`}>
+                {
+                    pageNumbers.map((number, index) => {
+                        return (
+                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
+                                <div className={s.numberBox}>
+                                    {number}
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+
             </div>
         </div>
     )

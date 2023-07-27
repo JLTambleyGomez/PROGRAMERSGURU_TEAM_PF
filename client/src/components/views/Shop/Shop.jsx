@@ -177,7 +177,7 @@ function Shop ( { isAtBottom, docWidth } ) {
    
     // PAGINATION:
     const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 10
+    const productsPerPage = 12
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
     const currentAllProducts = Array.isArray(products) ? products.slice(indexOfFirstProduct, indexOfLastProduct) : [];
@@ -212,20 +212,9 @@ function Shop ( { isAtBottom, docWidth } ) {
             </div>
 
         {/* PAGINADO */}
-            <div className={`${s.paginado}`} >
-                {
-                    pageNumbers?.map((number, index) => {
-                        return (
-                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
-                                <div className={s.numberBox}>
-                                    {number}
-                                </div>
-                            </a>
-                        )
-                    })
-                }
-                <h2>Productos encontrados : {products.length}</h2>
-            </div>
+        <div className={`${s.paginado}`} >
+            <h2>Productos encontrados : {products.length}</h2>
+        </div>
 
             <section className={`${s.section3}`}>
 
@@ -331,6 +320,19 @@ function Shop ( { isAtBottom, docWidth } ) {
                     )
                 }
             </section> 
+            <div className={`${s.paginado}`} >
+                {
+                    pageNumbers?.map((number, index) => {
+                        return (
+                            <a key = {index} href = '#!' onClick = {() => {setCurrentPage(number)}}>
+                                <div className={s.numberBox}>
+                                    {number}
+                                </div>
+                            </a>
+                        )
+                    })
+                }
+            </div>
             {
                 docWidth < 750 ? (
                     <Footer/>
@@ -338,6 +340,7 @@ function Shop ( { isAtBottom, docWidth } ) {
                     isAtBottom ? <Footer /> : null
                 )
             }
+            
         </main>
     )
 }
