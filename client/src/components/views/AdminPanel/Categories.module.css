@@ -18,20 +18,16 @@
         filter: blur(0);
         opacity: 1;
     }
-}
-  width: 100%;
+  }
+  /* width: 100%;
   justify-content:center ;
-  /* animation: blur-in 0.4s linear both; */
-  animation: blur-in 0.4s ease;
+  animation: blur-in 0.4s linear both;
   padding: 3%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  /* display: grid;
+  display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr; */
+  grid-template-rows: 1fr 1fr 1fr; 
   gap: 2px 2px;
-}
+} */
 @keyframes blur-in {
   0% {
     filter: blur(12px);
@@ -198,4 +194,3 @@
   width: 100%;
   height: 2rem;
 }
-
