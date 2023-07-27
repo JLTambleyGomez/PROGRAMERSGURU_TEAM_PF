@@ -15,6 +15,7 @@ import { Reviews } from "./ProfileComponents/Reviews/Reviews";
 import { Favorites } from "./ProfileComponents/Favorites/Favorites";
 import { PaymentOrders } from "./ProfileComponents/PaymentOrders/PaymentOrders";
 
+
 import ModalProfile from "../ModalProfile/ModalProfile";
 //_________________________module_________________________
 function ProfileV2() {
@@ -104,7 +105,7 @@ function ProfileV2() {
         setPicture(user?.picture)
     }, [dispatch, removeComment, collapse]);
 
-    if (!user) return <ModalProfile />
+    if (!user.name) return <ModalProfile />
 
     //component:
     return (
