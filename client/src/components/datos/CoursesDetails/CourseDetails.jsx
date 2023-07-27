@@ -54,14 +54,14 @@ function CourseDetails() {
 
     //functions:
 
-    const [value, setValue] = useState(course?.meanRating)
+    const [value, setValue] = useState(0)
     const [disabled, setDisabled] = useState(false)
     const [comments, setComments] = useState([]);
     const getCourse = async (id) => {
         const data = await getCoursesByIdRequest(id);
         setCourse(data);
         setFav(data?.Users?.find((fav) => fav?.id === user?.id) || false);
-        setValue(course?.meanRating)
+        // setValue(course?.meanRating)
         setComments(data?.Comments.reverse());
 
         for (let i = 0 ; i < comments?.length ; i++) {
@@ -117,7 +117,7 @@ function CourseDetails() {
                     <div className={`${styles.title} ${styles[theme("title")]}`}>
                         <h1>{course?.title}</h1>
                         <Rating
-                            value={course?.meanRating}
+                            value={value || course?.meanRating}
                             precision={0.1}
                             name="read-only"
                             readOnly
@@ -209,9 +209,10 @@ function CourseDetails() {
                                         );
                                     })}
                                 </div>
+                                <a href={course?.courseUrl}>Visita la página</a>
                             </div>
                             <div className={styles.comments}>
-                                <Comments disabled={disabled} setDisabled={setDisabled} comments={comments}/>
+                                <Comments disabled={disabled} setDisabled={setDisabled} comments={comments} setValue={setValue}/>
                                 {/* <Comments/> */}
                             </div>
                         </div>

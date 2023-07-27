@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useLocation, NavLink } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getMercadopagoFeedback } from "../../../axiosRequests/axiosRequests";
-import { get_User_By_Email } from "../../../Redux/actions";
+import { get_User_By_Email, get_products_all } from "../../../Redux/actions";
 
 import styles from "./Success.module.css";
 
@@ -53,7 +53,7 @@ function Success() {
 
                 await new Promise((resolve) => setTimeout(resolve, 2000));
                 setPaymentInfo(data);
-                console.log(paymentInfo);
+                console.log(paymentInfo); 
                 localStorage.setItem("cart", "[]");
             } catch (error) {
                 console.error(
@@ -64,6 +64,8 @@ function Success() {
         })();
         return () => {
             localStorage.setItem("cart", "[]");
+            const email = localStorage.getItem("email");
+            dispatch(get_User_By_Email(email));
         };
     }, []);
     

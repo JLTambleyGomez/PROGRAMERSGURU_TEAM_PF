@@ -105,7 +105,7 @@ function Bag () {
                                     <hr style={{height: "1rem"}}/>
                                     {product.quantity}
                                 </div>
-                                <p>{product.name}</p>
+                                <p>{product.name ? product.name : product.title}</p>
                             </div>
                         )
                     })

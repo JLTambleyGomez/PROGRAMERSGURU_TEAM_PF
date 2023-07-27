@@ -1,0 +1,101 @@
+.component {
+    width: 1000px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+    /* .contain {
+    
+        width: 1000px;
+    }
+    .panel {
+    
+        width: 1000px;
+    }
+    .coursesContainer {
+        width: 1000px;
+    } */
+    
+    .paginacion {
+        width: 1000px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .header {
+        font-weight: bold;
+        width: 100%;
+        display: flex;
+        /* justify-content: space-between; */
+        align-items: center;
+        height: 35px;
+        border-top: 1px solid rgb(143, 143, 143);
+        padding: 10px 0 10px 0;
+    }
+    
+    .fila {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        /* justify-content: space-between; */
+        height: 35px;
+        border-top: 1px solid rgb(143, 143, 143);
+        padding: 10px 0 10px 0;
+        overflow: hidden;
+    }
+    
+    .picture {
+        width: 50px;
+        border-radius: 50%;
+    }
+    .picture img{
+        object-fit: cover;
+
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+    }
+    .name {
+        width: 25%;
+        word-wrap: break-word;
+        text-overflow: ellipsis;
+    }
+    
+    .id {
+        margin-left: 10px;
+        width: 5%;
+    }
+    
+    .email {
+        width: 30%;
+    }
+    
+    .admin {
+        text-align: center;
+        width: 7%;
+    }
+    .admin img {
+        height: 20px;
+        width: 20px;
+    }
+    .banned {
+        text-align: center;
+        width: 7%;
+    }
+    .banned img {
+        height: 20px;
+        width: 20px;
+    }
+
+    .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 25%;
+
+    }
+    .actions button {
+
+    }

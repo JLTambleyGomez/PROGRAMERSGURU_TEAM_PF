@@ -20,10 +20,14 @@ import ModalAdminPanel from "../ModalAdminPanel/ModalAdminPanel";
 import Tecnology from "./Tecnology";
 
 import Payments from "./Payments";
+import ObjectsList from "./Paginacion/ObjectsList";
 
 //_________________________module_________________________
 const AdminPanel = () => {
     //global state:
+    
+    const courses = useSelector((state)=> state.courses)
+    const tecnology = useSelector((state)=> state.tecnology)
     const message = useSelector((state) => state.message);
     const dark = useSelector((state) => state.darkMode);
     const user = useSelector((state) => state.user);
@@ -190,7 +194,66 @@ const AdminPanel = () => {
                     {showSubscriptions && <Subscriptions></Subscriptions>}
                     {showTecnology && <Tecnology />}
 
-                    {showPayment && <Payments />}
+                    <div />
+
+                    <div>
+                        <p className={styles.buton} onClick={handleShowCursos}>
+                            <h1 className={styles.h1}>ADMINISTRAR CURSOS</h1>
+                        </p>
+                        {showcursos && <Courses></Courses>}
+                    </div>
+
+                    <div>
+                        <p
+                            className={styles.buton}
+                            onClick={handleShowProducts}
+                        >
+                            <h1 className={styles.h1}>ADMINISTRAR PRODUCTOS</h1>
+                        </p>
+                        {showproducts && <Products></Products>}
+                    </div>
+
+                    <div>
+                        <p className={styles.buton} onClick={handleShowUsers}>
+                            <h1 className={styles.h1}>ADMINISTRAR USUARIOS</h1>
+                        </p>
+                        {showUsers && <User></User>}
+                    </div>
+
+                    <div>
+                        <p
+                            className={styles.buton}
+                            onClick={handleShowSubscription}
+                        >
+                            <h1 className={styles.h1}>
+                                ADMINISTRAR SUSCRIPCIONES
+                            </h1>
+                        </p>
+                        {showSubscriptions && <Subscriptions></Subscriptions>}
+                    </div>
+                    <div>
+                        <p
+                            className={styles.buton}
+                            onClick={handleShowTecnology}
+                        >
+                            <h1 className={styles.h1}>
+                                ADMINISTRAR TECNOLOGIAS
+                            </h1>
+                        </p>
+                        {showTecnology && <Tecnology />}
+                    </div>
+                    <div>
+                        <p className={styles.buton} onClick={handleShowPayment}>
+                            <h1 className={styles.h1}>ADMINISTRAR PAGOS</h1>
+                        </p>
+                        {showPayment && <Payments />}
+                    </div>
+                    <div>
+                        {/* <ObjectsList objects={courses} titulo={"Cursos"}/> */}
+                    </div>
+                    <div>
+                        {/* <ObjectsList objects={tecnology} titulo={"Tecnologias"}/> */}
+                    </div>
                 </div>
             </div>
         </main>

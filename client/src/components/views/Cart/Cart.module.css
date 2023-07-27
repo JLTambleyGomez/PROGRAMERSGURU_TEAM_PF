@@ -16,7 +16,18 @@
   @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
    
   .img{
-   
+    width:80px;
+    height: 80px;
+    /* margin-left: 5%;
+    margin-right: 4%; */
+    border-radius: 100%;
+    border: solid 2px;
+    border-color: rgba(248, 248, 248, 0.658);
+    object-fit: cover;
+  }
+
+  .img2{
+    
       width:80px;
       height: 80px;
       /* margin-left: 5%;
@@ -25,6 +36,10 @@
       border: solid 2px;
       border-color: rgba(248, 248, 248, 0.658);
       object-fit: cover;
+  }
+
+  .img2:hover{
+    cursor: pointer;
   }
   .price{
       font-size: 14px;
@@ -127,16 +142,38 @@
       background-color: rgba(2, 11, 19, 0.26)
   
   }
-  
+  .icon{
+    display:flex; 
+    scale:5;
+    top: 40%;
+    left: 50%;
+    animation:blur-in 0.8s linear both}
+     @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+    .icon2{
+      display:flex; 
+      scale:1.5;
+      position: fixed;
+      top: 40%;
+      left: 50%;
+      animation: spin 3s linear infinite; 
+    }
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   .items{
-      font-size: 14px;
-      /* padding: 2%; */
+      font-size: 20px;
+      padding-right: -12%;
       height: 25px;
       /* width: max-content; */
       /* margin-bottom: 4%;    */}
 
       .boton {
-        display: inline-block;
+       
         border-radius: 4px;
         background-color: #28b0b4;
         border: none;
@@ -145,10 +182,15 @@
         font-size: 28px;
         padding: 20px;
         height: 30px;
-        width: 300px;
+        width: 61.4%;
         transition: all 0.5s;
         cursor: pointer;
         margin: 5px;
+        padding-left: 10%;
+        padding-right: 10%;
+        display: flex;
+        flex-direction: column;
+         margin-left: 4.2%;
       }
       
       .buttonDisabled {
@@ -206,11 +248,38 @@
             100% { border-color: rgb(0, 0, 0); }
           }
 
+          .completar{
+            background-color: #55a7aa;
+            color: white;
+            transition: all 0.5s;
+          }
+          .completar:hover{
+            scale:1.1;
+            color: black;
+            cursor: pointer;
+          }
+
+
           .metamask{
-            height: 190px;
+            height: 150px;
+            width: 99%;
+          }
+          .mercadopago{
+            margin-top: -50%;
           }
           .cargandotxt{
             position: fixed;
             top:7%;
             animation:scale-up-vertical-center 0.4s} 
             @keyframes scale-up-vertical-center{0%{transform:scaleY(.2)}100%{transform:scaleY(1)}}
+
+
+            .pagos{
+              padding-left: 10%;
+              padding-right: 10%;
+              display: flex;
+              flex-direction: column;
+              scale: 0.9;
+              margin-left: -10%;
+
+            }

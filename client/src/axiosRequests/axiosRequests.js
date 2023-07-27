@@ -183,7 +183,7 @@ export const postUserRequest = async (user) => {
 
 export const hideUserProfileRequest = async (email) => {
     console.log(email);
-    const { data } = await axios.put(`/user/hide`, email);
+    const { data } = await axios.put(`/user/hide`, {email});
     console.log(data);
     return data;
 };

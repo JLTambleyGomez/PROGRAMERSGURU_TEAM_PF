@@ -93,6 +93,7 @@ export const GET_COMMENTS_BY_USER = "GET_COMMENTS_BY_USER";
 export const GET_COMMENTS_BY_COURSE = "GET_COMMENTS_BY_COURSE";
 
 //PRODUCTS:
+export const CLEAR_PRODUCTS = "CLEAR_PRODUCTS";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_PRODUCTS_BY_NAME = "GET_PRODUCTS_BY_NAME";
 export const GET_PRODUCT_BY_ID = "GET_PRODUCT_BY_ID";
@@ -367,6 +368,12 @@ export const clear_cart = () => {
         type: CLEAR_CART,
     };
 };
+
+export const clear_products = () =>{
+    return {
+        type: CLEAR_PRODUCTS
+    }
+}
 
 //FAVOURITES_____________________________________________//
 
@@ -676,6 +683,7 @@ export const put_suscription = (id, suscription) => {
                 payload: data,
             });
         } catch (error) {
+          
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,
@@ -688,14 +696,11 @@ export const delete_suscription = (id) => {
     return async function (dispatch) {
         try {
             const data = await deleteSuscriptionRequest(id);
-           
-            console.log(data);
             return dispatch({
                 type: DELETE_SUSCRIPTION,
                 payload: data.message,
             });
         } catch (error) {
-            console.log(error);
             return dispatch({
                 type: ERROR,
                 payload: error.response.data.message,

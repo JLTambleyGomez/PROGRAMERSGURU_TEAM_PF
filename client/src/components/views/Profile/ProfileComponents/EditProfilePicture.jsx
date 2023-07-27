@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { uploadProfilePicture } from "./uploadProfilePicture";
 import { editUserData } from "../../../../axiosRequests/axiosRequests";
 
-export function EditProfilePicture({ userId }) {
+export function EditProfilePicture({ userId, setLoading }) {
     const cameraImage = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Circle-icons-camera.svg/768px-Circle-icons-camera.svg.png"
     let fileInputRef = useRef(null);
 
@@ -20,6 +20,7 @@ export function EditProfilePicture({ userId }) {
             const url = await uploadProfilePicture(file, userId);
             const email = localStorage.getItem("email")
             editUserData({email: email, picture: url})
+            setPicture(url)
             return url;
         } catch (error) {
             // proximamente manejo de errores y animacion de cargando imagen...
