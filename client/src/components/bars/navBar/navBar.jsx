@@ -50,6 +50,7 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
     const handlegohome = () => {
         navigate("/HomePage")
     }
+    const token = localStorage.getItem("accessToken");
 
     //life-cycles:
     useEffect(() => {
@@ -153,7 +154,7 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
                 <SearchBar/>
             </div>
         {/* SUSCRIPCION */}
-            {expirationDate < actualDate 
+            { expirationDate && expirationDate < actualDate 
                 ? <div className={s.subscription}>
                     <SubscripcionesButton/>
                 </div>
@@ -194,9 +195,12 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
 
 
         {/* MENU */}
-            <div className={s.menu}>
+        {token ?
+            (<div className={s.menu}>
                 <Menu logoutUser={logoutUser}/>
-            </div>
+            </div>)
+            : 
+            <NavLink to="/" className={`${s.link} ${s[theme("link")]} ${s.admin}`}>Registrate</NavLink>}
             <FontAwesomeIcon
                 className={s.barsButton}
                 icon={faBars}
@@ -269,7 +273,8 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
                             </div>
                             : null
                         }
-                        <div>
+                        {token ? 
+                        (<div>
                             <button className={`${s["buttonProfile-responsive"]} ${s[theme("button")]}`}>
                                 <NavLink to="/Cart" className={`${s.link} ${s[theme("link")]}`}>
                                     Tu perfil
@@ -278,7 +283,8 @@ function NavBar ( { logoutUser, storeRef, menuRef } ) {
                                     />
                                 </NavLink>
                             </button>
-                        </div>
+                        </div>)
+                        : null}
                     </section>
                 )
             }

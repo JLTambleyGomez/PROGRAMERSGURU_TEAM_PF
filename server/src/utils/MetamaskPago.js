@@ -1,3 +1,4 @@
+const { User, Payment, Product } = require("../db")
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -11,6 +12,41 @@ const FeedbackMetamask = async (req, res) => {
   const { compra } = req.body; 
 
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
+
+  console.log("FeedbackMetamask");
+  console.log(email);
+  console.log(payment_id);
+  console.log(compra);
+  const date = new Date()
+  const formatedDate = date.toISOString().split('T')[0];
+
+  const newPayment = await Payment.create({
+    id: payment_id,
+    date: formatedDate,
+    status: "fullfiled",
+    totalPrice: totalAmount
+  })
+
+  for (let i = 0 ; i < compra.length ; i++) {
+    const product = await Product.findByPk(compra[i].id)
+    const quantity = compra[i].quantity
+
+    await newPayment.addProduct(product, {
+      through: {
+        quantity: quantity,
+      },
+    });
+    product.stock = product.stock - quantity
+    await product.save()
+  }
+
+
+  const user = await User.findOne({
+    where: {email: email}
+  })
+
+  await user.addPayment(newPayment)
+
 
   const listadeproductos = compra?.map(
     (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
@@ -35,7 +71,7 @@ const FeedbackMetamask = async (req, res) => {
 
   const destino = {
     from: "yo",
-    to: `${req.query.email}`,
+    to: `${email}`,
     subject: "Notificacion de ProgrammersGurú (Compra)",
     html: `
       <!DOCTYPE html>

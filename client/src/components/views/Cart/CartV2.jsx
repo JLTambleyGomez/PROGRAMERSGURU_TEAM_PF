@@ -7,6 +7,7 @@ import theme from "../../../theme/theme";
 
 import styles from "./CartV2.module.css";
 import Modal from "../ventanaemergente/ventana";
+import { ChangeQuantity } from "./ChangeQuantity";
 
 // import PagoMercadopago from "../../datos/PagoMercadoPago/PagoMercadoPago";
 // import PagoMetamask from "../../datos/PagoMetamask/PagoMetamask";
@@ -103,6 +104,7 @@ function Cart() {
         })();
         dispatch(set_cart());
     }, [user]);
+    console.log(cart);
 
     //component:
     return (
@@ -124,7 +126,7 @@ function Cart() {
                                             }
                                             className={styles.productName}
                                         >
-                                            {P.name}
+                                            {P.name || P.description}
                                         </span>
                                         {/* PRECIO */}
                                         <span className={styles.price}>
@@ -140,33 +142,9 @@ function Cart() {
                                             alt={P.name}
                                         />
                                         {/* Cantidad */}
-                                        <div className={styles.cantidad}>
-                                            <img
-                                                src="https://www.svgrepo.com/show/527587/add-square.svg"
-                                                alt=""
-                                                className={`${styles.add} ${styles[theme("add")]}`}
-                                                onClick={() =>
-                                                    handleAddButton("suma", P)
-                                                }
-                                            />
-                                            <p>{P.quantity}</p>
-                                            <img
-                                                src="https://www.svgrepo.com/show/527816/minus-square.svg"
-                                                alt=""
-                                                className={`${styles.add} ${styles[theme("add")]}`}
-                                                onClick={() =>
-                                                    handleAddButton("resta", P)
-                                                }
-                                            />
-                                            <img
-                                                src="https://www.svgrepo.com/show/525134/trash-bin-trash.svg"
-                                                alt=""
-                                                className={`${styles.trash} ${styles[theme("trash")]}`}
-                                                onClick={() =>
-                                                    removeFromCart(P.id)
-                                                }
-                                            />
-                                        </div>
+                                        {P.id && 
+                                        <ChangeQuantity P={P} handleAddButton={handleAddButton} removeFromCart={removeFromCart}/>
+                                        }
                                     </div>
                                 </div>
                             ))}
@@ -192,8 +170,7 @@ function Cart() {
                                             key={index}
                                         >
                                             <h4>
-                                                {product.name} x{" "}
-                                                {product.quantity}
+                                            {!!product.id && product.quantity+ " x "} {product.name || product.description} 
                                             </h4>
                                         </li>
                                     ) : null

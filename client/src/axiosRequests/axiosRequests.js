@@ -293,3 +293,8 @@ export const getMercadopagoFeedback = async ({compra, email, paymentId, status, 
   return data;
 };
 
+export const getAllPayments = async () => {
+  const { data } = await axios.get("/payment/pagos/all");
+  console.log(data);
+  return data;
+};

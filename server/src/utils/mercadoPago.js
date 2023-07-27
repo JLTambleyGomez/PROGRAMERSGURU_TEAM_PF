@@ -1,9 +1,8 @@
-const { User, Payment, Product } = require("../db")
+const { User, Payment, Product, Subscription } = require("../db")
 const mercadoPago = require("mercadopago");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 const URL_FEEDBACKS = process.env.URL_FEEDBACKS
-const URL_LOCAL = "http://localhost:5173"
 const OUR_EMAIL = process.env.OUR_EMAIL;
 const OUR_PASSWORD = process.env.OUR_PASSWORD;
 
@@ -25,14 +24,13 @@ const PagoconMercadopago = async (req, res) => {
       },
     ],
     back_urls: {
-      success: "http://localhost:5173/MercadoPagoFeedback",
-      failure: URL_FEEDBACKS,
+      // cambiar URL en el .env
+      success: URL_FEEDBACKS+"/MercadoPagoFeedback",
+      failure: URL_FEEDBACKS+"/MercadoPagoFeedback",
       pending: URL_FEEDBACKS,
     },
     auto_return: "approved",
   };
-
-  console.log(req.body)
 
   const result = mercadoPago.preferences
     .create(preference)
@@ -52,7 +50,7 @@ const PagoconMercadopago = async (req, res) => {
 
 const FeedbackMercadoPago = async (req, res) => {
 try {
-  const { email, merchant_order_id, payment_id } = req.query;
+  const { email, merchant_order_id, payment_id, status } = req.query;
   const { compra } = req.body; 
   console.log(req.body)
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
@@ -60,34 +58,47 @@ try {
   const date = new Date()
   const formatedDate = date.toISOString().split('T')[0];
 
+  console.log(req.query.status)
   const newPayment = await Payment.create({
     id: payment_id,
     date: formatedDate,
-    status: "fullfiled",
+    status: status,
     totalPrice:totalAmount
   })
-
-  if(compra[0].name){
-    for (let i = 0 ; i < compra.length ; i++) {
-    const product = await Product.findByPk(compra[i].id)
-    const quantity = compra[i].quantity
-
-    await newPayment.addProduct(product, {
-      through: {
-        quantity: quantity,
-      },
-    });
-    product.stock = product.stock - quantity
-    await product.save()
-  }}
-
 
   const user = await User.findOne({
     where: {email: email}
   })
 
-  await user.addPayment(newPayment)
+  for (let i = 0 ; i < compra.length ; i++) {
+    if (compra[i].name) {
+      const product = await Product.findByPk(compra[i].id)
+      const quantity = compra[i].quantity
+  
+      await newPayment.addProduct(product, {
+        through: {
+          quantity: quantity,
+        },
+      });
+      product.stock = product.stock - quantity
+      await product.save()
+    }
+    else {
+      const subscription = await Subscription.findOne({where: {price: compra[i].price}})
+      console.log("esta es la suscripcion");
+      console.log(subscription);
+      await subscription.addPayment(newPayment)
+      if (newPayment.status === "approved") {
+        const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
+        date.setMonth(date.getMonth() + months);
+        const newExpirationDate = date.toISOString().split('T')[0];
+        user.expirationDate = newExpirationDate
+        await user.save() 
+      }
+    }
+  }
 
+  await user.addPayment(newPayment)
 
 
 

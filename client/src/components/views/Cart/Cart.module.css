@@ -1,6 +1,6 @@
 .container{
     margin-top: var(--navBarHeight);
-    width: 99.7%;
+    width: 99.6%;
     /* padding-top: 4%; */
     padding-bottom: var(--footerHeight);
     min-height: calc(100vh - var(--navBarHeight));
@@ -19,11 +19,12 @@
    
       width:80px;
       height: 80px;
-      margin-left: 5%;
-      margin-right: 4%;
+      /* margin-left: 5%;
+      margin-right: 4%; */
       border-radius: 100%;
       border: solid 2px;
       border-color: rgba(248, 248, 248, 0.658);
+      object-fit: cover;
   }
   .price{
       font-size: 14px;
@@ -32,18 +33,24 @@
   
   .product {
       display: flex;
+      justify-content: space-between;
       align-items: center;
       width: 600px;
       height:100px;
+      position: relative;
 
-  
       border-radius: 5px;
       padding: 10px;
+      padding-right: 20px;
       margin: 10px;
       background-color: rgba(240, 248, 255, 0.26);
     }
     
-  
+    .right {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
   
   .productscontainer{
       /* display: grid; */

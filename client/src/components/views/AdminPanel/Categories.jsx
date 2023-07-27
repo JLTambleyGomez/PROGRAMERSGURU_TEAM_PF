@@ -90,6 +90,7 @@ const Categories = () => {
         <section className={styles.contain}>
 
             <form className={styles.form}>
+
                 <span className={styles.inputSpan}>
                     <input
                         onChange={hadleInputChange}
