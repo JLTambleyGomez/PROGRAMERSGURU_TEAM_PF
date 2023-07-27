@@ -19,7 +19,7 @@
       gap: 1%;
       z-index: 9999;
       overflow-y: auto;
-      transition: height 0.3s ease;
+      transition: height 1s ease;
       animation: scale-up-horizontal-right 0.4s;
     } @keyframes scale-up-horizontal-right {
       0% {

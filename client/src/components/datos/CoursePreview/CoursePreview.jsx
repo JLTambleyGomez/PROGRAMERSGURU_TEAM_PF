@@ -36,9 +36,9 @@ function CoursePreview ({ id, title, description, rating, isFree, language, imag
                 <img src={imageURL} alt="sample45" /> 
                 {
                     isFree === true ? (
-                        <h2 className={styles.free}>This course is free</h2>
+                        <h2 className={styles.free}>Este curso es gratuito</h2>
                     ) : (
-                        <h2 className={styles.payment}>This course requires payment</h2>
+                        <h2 className={styles.payment}>Este curso require pago</h2>
                     )
                 }
             </div>

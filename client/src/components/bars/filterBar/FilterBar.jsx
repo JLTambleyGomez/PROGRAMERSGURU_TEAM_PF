@@ -192,7 +192,7 @@ function FilterBar() {
         <>
             <div className={`${s.component}`}>
                 <div className={s.optionSort}>
-                    <label>Ordenar por:</label>
+                    <label>ORDENAR POR:</label>
                     <select value={orden} onChange={handleSortChange}>
                         <option value="">Destacados</option>
                         <option value="Ascendente">Nombre Descendente (A-Z)</option>
@@ -200,7 +200,7 @@ function FilterBar() {
                     </select>
                 </div>
                 <div className={s.optionFilter}>
-                    <label>Filtros</label>
+                    <label>FILTROS:</label>
                     <span>
                         <select value={idioma} onChange={handleLanguageChange}>
                             <option value="">Idioma</option>
@@ -208,7 +208,7 @@ function FilterBar() {
                             <option value="Español">Cursos en Español</option>
                         </select>
                         <select value={price} onChange={handlePriceChange}>
-                            <option value="">Precio</option>
+                            <option value="">Acceso</option>
                             <option value="true">Gratis</option>
                             <option value="false">De Pago</option>
                         </select>
@@ -231,19 +231,24 @@ function FilterBar() {
                     filterModal && (
                         <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-                                <label>Filtros</label>
-                                <select value={idioma} onChange={handleLanguageChange}>
-                                    <option value="">Idioma</option>
-                                    <option value="Inglés">Cursos en Inglés</option>
-                                    <option value="Español">Cursos en Español</option>
-                                </select>
-                                <label>Acceso</label>
-                                <select value={price} onChange={handlePriceChange}>
-                                    <option value="">Acceso</option>
-                                    <option value="true">Gratuito</option>
-                                    <option value="false">Exclusivo</option>
-                                </select>
-                                <button onClick={handleFilterReset}>Mostrar Todos</button>
+                                <div className={s.modalDiv2}>
+
+                                    <label>POR IDIOMA:</label>
+                                    <select value={idioma} onChange={handleLanguageChange}>
+                                        <option value="">Idioma</option>
+                                        <option value="Inglés">Cursos en Inglés</option>
+                                        <option value="Español">Cursos en Español</option>
+                                    </select>
+                                </div>
+                                <div className={s.modalDiv2}>
+                                    <label>POR ACCESO:</label>
+                                    <select value={price} onChange={handlePriceChange}>
+                                        <option value="">Acceso</option>
+                                        <option value="true">Gratuito</option>
+                                        <option value="false">Exclusivo</option>
+                                    </select>
+                                </div>
+                                    <button style={{fontWeight: "bold"}} onClick={handleFilterReset}>MOSTRAR TODOS</button>
                             </div>
                         </div>
                     )
@@ -252,13 +257,15 @@ function FilterBar() {
                     sortModal && (
                         <div className={s.overlay} onClick={() => {setSortModal(false)}}>
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-                                <label>Orden</label>
-                                <select value={orden} onChange={handleSortChange}>
-                                    <option value="">Destacados 
-                                    </option>
-                                    <option value="Ascendente">Nombre Descendente</option>
-                                    <option value="Desendente">Nombre Ascendente</option>
-                                </select>
+                                <div className={s.modalDiv2}>
+                                    <label>ORDENAR POR:</label>
+                                    <select value={orden} onChange={handleSortChange}>
+                                        <option value="">Destacados 
+                                        </option>
+                                        <option value="Ascendente">Nombre Ascendente (A-Z)</option>
+                                        <option value="Desendente">Nombre Descendente (Z-A)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     )

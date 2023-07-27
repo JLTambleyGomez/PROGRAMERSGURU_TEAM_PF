@@ -213,7 +213,7 @@ function FilterBarShop () {
         <>
             <div className={`${s.component}`}>
                 <div className={s.optionSort}>
-                    <label onClick={toggleVisibilitySortByName}>Ordenar por:</label>
+                    <label onClick={toggleVisibilitySortByName}>ORDENAR POR:</label>
                     <select value={order} onChange={sortProducts}>
                         <option value="">Destacados</option>
                         <option value="ascendente">Nombre Ascendente (A-Z)</option>
@@ -221,11 +221,11 @@ function FilterBarShop () {
                     </select>
                 </div> 
                 <div className={s.optionFilter}>
-                    <label>Filtros</label>
+                    <label>FILTROS</label>
                         <span className={s.filterSpan}>
                         {/* PRECIO: */}
                             <span className={s.priceSelect}>
-                                <label>Por precio</label>
+                                <label>RANGO DE PRECIOS</label>
                                 <Slider
                                     className={`${s["filterPriceSlider"]}`}
                                     range
@@ -234,6 +234,24 @@ function FilterBarShop () {
                                     defaultValue={priceRange}
                                     onChange={handlePriceChange}
                                     value={currentPriceRange}
+                                    handleStyle={{
+                                        border: "1px solid #1b959bd2"
+                                    }}
+                                    trackStyle={{
+                                        backgroundColor: "#1b959b",
+                                        // height: "0.2rem"
+                                    }}
+                                    dotStyle={{
+                                        fill: "#000",
+                                        borderRadius: "none"
+                                    }}
+                                    railStyle={{
+                                        backgroundColor: "transparent",
+                                        border: "1px solid white"
+                                    }}
+                                    activeDotStyle={{
+                                        color: "red"
+                                    }}
                                 />
                                 <div className={s.priceSelectPrice}>
                                     <p>${currentPriceRange[0]}</p>
@@ -272,36 +290,61 @@ function FilterBarShop () {
                         <div className={s.overlay} onClick={() => {setFilterModal(false)}}>
                             {/* <div className={s.option}> */}
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-                                <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
-                                {
-                                    <div className={`${s.filterPrice}`}>
-                                        <Slider
-                                            className={`${s["filterPriceSlider"]}`}
-                                            range
-                                            min={minSliderValue}
-                                            max={maxSliderValue}
-                                            defaultValue={priceRange}
-                                            onChange={handlePriceChange}
-                                            value={currentPriceRange}
-                                        />
-                                        <div>Rango de Precio: ${currentPriceRange[0]} - ${currentPriceRange[1]}</div>
-                                    </div>
-                                }
+                                <span className={s.priceSelect}>
+                                    <label onClick={toggleVisibilityPrice}> POR PRECIO:</label>
+                                    {
+                                        <div className={`${s.filterPriceModal}`}>
+                                            <Slider
+                                                className={`${s["filterPriceSlider"]}`}
+                                                range
+                                                min={minSliderValue}
+                                                max={maxSliderValue}
+                                                defaultValue={priceRange}
+                                                onChange={handlePriceChange}
+                                                value={currentPriceRange}
+                                                handleStyle={{
+                                                    border: "1px solid #1b959bd2"
+                                                }}
+                                                trackStyle={{
+                                                    backgroundColor: "#1b959b",
+                                                    // height: "0.2rem"
+                                                }}
+                                                dotStyle={{
+                                                    fill: "#000",
+                                                    borderRadius: "none"
+                                                }}
+                                                railStyle={{
+                                                    backgroundColor: "transparent",
+                                                    border: "1px solid white"
+                                                }}
+                                                activeDotStyle={{
+                                                    color: "red"
+                                                }}
+                                            />
+                                            <div className={s.priceSelectPrice}>
+                                                <p>${currentPriceRange[0]}</p>
+                                                <p>${currentPriceRange[1]}</p>
+                                            </div>
+                                        </div>
+                                    }
+                                </span>
                             {/* <div className={s.option}> */}
-                                <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
-                                    <select value={category} onChange={filterCategory}>
-                                        <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
-                                        { categories.length && (
-                                            <>
-                                                {
-                                                    categories.allCategories.map((category, index) => (
-                                                        <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
-                                                    ))
-                                                }
-                                            </>
-                                        )}
-                                    </select>
-                                    <button onClick={resetFilters}>Mostrar todos</button>
+                                <div className={s.modalDiv2}>
+                                    <label onClick={toggleVisibilityCategory}>POR CATEGORÍA:</label>
+                                        <select value={category} onChange={filterCategory}>
+                                            <option value="">{categories.length > 0 ? "Categorías" : "No hay categorías"}</option>
+                                            { categories.length && (
+                                                <>
+                                                    {
+                                                        Array.isArray(categories.allCategories) && categories.allCategories.length > 0 && categories.allCategories.map((category, index) => (
+                                                            <option key={index} style={{display: "flex", alignItems: "center", margin: "0.5rem 0"}} value={category.name}>{category.name}</option>
+                                                        ))
+                                                    }
+                                                </>
+                                            )}
+                                        </select>
+                                </div>
+                                    <button style={{fontWeight: "bold"}} onClick={resetFilters}>MOSTRAR TODOS</button>
                             </div>
                         </div>
                     )
@@ -310,13 +353,14 @@ function FilterBarShop () {
                     sortModal && (
                         <div className={s.overlay} onClick={() => {setSortModal(false)}}>
                             <div className={`${s.modal} ${s[theme("modal")]}`} onClick={(event) => {event.stopPropagation()}}>
-
-                                <label onClick={toggleVisibilitySortByName}>ORDERNAR POR:</label>
-                                    <select value={order} onChange={sortProducts}>
-                                        <option value="">Destacados</option>
-                                        <option value="ascendente">Ascendente</option>
-                                        <option value="descendente">Descendente</option>
-                                    </select>
+                                <div className={s.modalDiv2}>
+                                    <label onClick={toggleVisibilitySortByName}>ORDENAR POR:</label>
+                                        <select value={order} onChange={sortProducts}>
+                                            <option value="">Destacados</option>
+                                            <option value="ascendente">Nombre Ascendente (A-Z)</option>
+                                            <option value="descendente">Nombre Descendente (Z-A)</option>
+                                        </select>
+                                </div>
                             </div>
                         </div>
                     )

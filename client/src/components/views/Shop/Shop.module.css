@@ -27,7 +27,7 @@
  .section3 {
     display: flex;
     align-self: center;
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
  }
  
  .sectionBanner {
@@ -37,7 +37,7 @@
     /* left: 0; */
     width: 100%;
     /* padding-bottom: 25%; */
-    background: linear-gradient(to right, rgba(0, 180, 204, 0.623) 0%, rgba(161,247,190,1) 100%);
+    background: linear-gradient(to right, #00b4cc9f 0%, #a1f7be 100%);
  }
  
  .bannerImg {
@@ -78,13 +78,16 @@
           min-height: 18rem;
           padding: 1.5%;
           margin: 2vw;
-          border-radius: 5%;
+          border-radius: 10px;
           background-color: #fff;
           border: 2px solid #000;
           transition: transform 0.3s, filter 0.3s;
        }
        .item:hover {
           transform: scale(1.1);
+       }
+       .item:hover .name {
+        color:#111111
        }
        .imgContainer {
             display: flex; 
@@ -197,10 +200,10 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    height: 4rem;
     background-color: rgba(0, 0, 0, 0.672);
     color: rgb(246, 251, 255);
-    animation:scale-up-horizontal-left 0.4s 
+    height: 4rem;
+    /* animation:scale-up-horizontal-left 0.4s  */
     } @keyframes scale-up-horizontal-left{0%{transform:scaleX(.4);transform-origin:left center}100%{transform:scaleX(1);transform-origin:left center}}
     .paginado a {
        text-decoration: none;
@@ -214,8 +217,18 @@
        width: 10%;
        padding: 7px 100%;
        border-radius: 4px;
-    } 
- 
+    }
+    .paginado a:hover .numberBox {
+        border: 3px solid black;
+        background-color: black;
+    }
+    .component-dark .paginado a:hover .numberBox {
+        border: 3px solid white;
+        background-color: white;
+    }
+    .component-dark .paginado a:hover {
+        color: black;
+    }
  
  /* -------- RESPONSIVE --------- */
  
@@ -228,7 +241,8 @@
         padding: 3%;
         width: 50vw;
         box-sizing: border-box;
-        outline: 0.5px solid;
+        outline: 0.5px solid black;
+        min-height: 18rem;
         border: 0;
         border-radius: 0;
     }
