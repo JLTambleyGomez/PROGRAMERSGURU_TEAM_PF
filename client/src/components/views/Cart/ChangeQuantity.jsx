@@ -5,7 +5,7 @@ export function ChangeQuantity({handleAddButton, removeFromCart, P}) {
     return (
         <div className={styles.cantidad}>
             
-            {P.id && (<>
+            {P.id && P.name && (<>
             <img
                 src="https://www.svgrepo.com/show/527587/add-square.svg"
                 alt=""

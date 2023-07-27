@@ -158,7 +158,7 @@ function Cart() {
                                     </div>
                                     <div className={styles.right}>
                                     {/* CANTIDAD */}
-                                    <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
+                                        <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
                                      {console.log(P)}
                                     {/* IMAGEN */}
                                    {P.name ? (

@@ -24,6 +24,11 @@ function ProfileV2() {
     const userId = user?.id;
 
     //local states
+    const loadingFunction = (base) => {
+        const suffix = loading ? "loading" : "";
+            return `${base}-${suffix}`;
+    }
+    const [loading, setLoading] = useState(false)
     const [picture, setPicture] = useState("")
     const [removeComment, setRemoveComment] = useState(false);
     const [email, setEmail] = useState("");
@@ -112,6 +117,7 @@ function ProfileV2() {
         <div className={s.profileContainer}>
             <div className={`${s.infoProfile} ${s[theme("infoProfile")]}`}>
                 <div className={s.profileImage}>
+                {loading && <div className={s.spinner}></div>}
                     {user?.admin ? (
                         <div className={s.config} onClick={openConfig}>
                             <NavLink to="/adminpanel">
@@ -120,15 +126,18 @@ function ProfileV2() {
                         </div>
                     ) : null}
                     {collapse ? (
+                        <>
                         <div className={s.camera}>
                             <EditProfilePicture
                                 userId={userId}
                                 setPicture={setPicture}
+                                setLoading={setLoading}
                             />
                         </div>
+                        </>
                     ) : null}
-                    <div className={!collapse ? s.picture : s.editPicture}>
-                        <img className={s.image} src={user.picture} />
+                    <div className={`${collapse ? s.picture : s.editPicture} ${s[loadingFunction(collapse ? "picture" : "editPicture")]}`}>
+                        <img className={s.image} src={picture} />
                     </div>
                 </div>
                 <h2>{user.name}</h2>

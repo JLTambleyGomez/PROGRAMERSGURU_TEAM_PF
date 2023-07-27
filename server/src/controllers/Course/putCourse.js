@@ -24,7 +24,8 @@ const putCourse = async (req, res) => {
             !rating &&
             !released &&
             !isFree &&
-            !language
+            !language &&
+            !tecnology.length
         )
             return res
                 .status(400)
