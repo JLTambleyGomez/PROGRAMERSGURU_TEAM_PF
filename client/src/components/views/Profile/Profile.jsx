@@ -142,7 +142,7 @@ function ProfileV2() {
                 </div>
                 <h2>{user.name}</h2>
                 <h5>{user.nickName}</h5>
-                {user.address && <p>Dirección: {user?.address}</p> }
+                {user.address && <h5>Dirección: {user?.address}</h5> }
                 
                 <div className={s.profileButton}>
                     {!collapse ? (

@@ -1,6 +1,6 @@
 .container{
     margin-top: var(--navBarHeight);
-    width: 99.6%;
+    width: 100%;
     /* padding-top: 4%; */
     padding-bottom: var(--footerHeight);
     min-height: calc(100vh - var(--navBarHeight));
@@ -235,6 +235,7 @@
             text-align: center;
             z-index: 9999;
             width: 100%;
+            box-sizing: border-box;
             height: 100%;
             background-color: rgb(16, 91, 134);
             border: 3px solid rgb(255, 255, 255); 
