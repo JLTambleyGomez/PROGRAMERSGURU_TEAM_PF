@@ -1,0 +1,138 @@
+.component {
+    position:absolute;
+    top: var(--navBarHeight);
+    width: 100%;
+    min-height: calc(100vh - var(--navBarHeight));
+    animation: blur-in 1s ease;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+@keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
+
+.component-dark {
+    background-color: #111111;
+}
+
+.title {
+}
+
+.title h1 {
+    margin: 60px
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    min-height: 60vh;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    gap: 3rem;
+    padding: 2%;
+    box-sizing: border-box;
+}
+
+/* .team {
+    width: 70%;
+    min-height: 80%;
+    border-radius: 15px;
+    gap: 5%;
+}
+
+.img {
+    max-width: 100%;
+    border-radius: 10px;
+    height: auto;
+    object-fit:cover;
+    position: relative;
+} */
+
+.team {
+    width: 20rem;
+    margin-top: 5%;
+    height: 90%;
+    border-radius: 10px 10px 0 0;
+    /* background: linear-gradient(135deg, #009fff, #ec2f4b); */
+}
+
+.imageWrapper {
+    /* width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: transparent; */
+    /* transform: translateY(-10%);  */
+}
+
+.imageWrapper img {
+    width: 100%;
+    display: flex;
+    margin-top: -20%;
+    height: auto;
+}
+
+
+
+
+/* ----------------------- */
+
+.francisco {
+    /* background-color: #ffd277; */
+    /* background: linear-gradient(#ffdc95, #99e4ff); */
+    /* background: linear-gradient(#ffdc95, #f6a212); */
+    /* background: linear-gradient(135deg, #ffd452, #9a6df4); */
+    background: linear-gradient(135deg, #009fff, #ec2f4b);
+}
+
+.gianina {
+    /* background-color: #ffafaf; */
+    /* background: linear-gradient(#ffc7c7, #ff8b8b); */
+    /* background: linear-gradient(#fba9a9, #ff4f4f); */
+    /* background: linear-gradient(#beffda, #ff9494); */
+    /* background: linear-gradient(135deg, #ff91a4, #ffce8e); */
+    /* background: linear-gradient(135deg, #fccc82, #ba23ba); */
+    /* background: linear-gradient(135deg, #b1fc7f, #fe57d7); */
+    /* background: linear-gradient(135deg, #ffe100, #d227d5); */
+    background: linear-gradient(135deg, #d0ff00, #d227d5);
+}
+
+.jorge {
+    /* background-color: #ccffa9; */
+    /* background: linear-gradient(#ccffa9, #a3fd67); */
+    /* background: linear-gradient(#c2c8ff, #5667fc); */
+    /* background: linear-gradient(#85fff7, #6776fd); */
+    /* background: linear-gradient(135deg, #009fff, #ec2f4b); */
+    background: linear-gradient(135deg, #66edd2, #ff3eb8);
+}
+
+.micaela {
+    /* background-color: #58fff4; */
+    /* background: linear-gradient(#bdfffb, #58fff4); */
+    /* background: linear-gradient(135deg, #ff91a4, #ffce8e); */
+    background: linear-gradient(135deg, #a462ff, #bdfffb);
+}
+
+.santiago {
+    /* background-color: #1fc3ff; */
+    /* background: linear-gradient(#99e4ff, #1fc3ff); */
+    /* background: linear-gradient(135deg, #9b1df0, #00f0b5); */
+    /* background: linear-gradient(135deg, #ffb400, #06cc8a); */
+    background: linear-gradient(135deg,#81ddff, #a3fd67);
+}
+
+.sebastian {
+    /* background-color: #ffed26; */
+    /* background: linear-gradient(#fff9b2, #ffed26); */
+    /* background: linear-gradient(#f6a212, #ffed26); */
+    /* background: linear-gradient(135deg, #fdd819, #e80505); */
+    background: linear-gradient(135deg, #fdd819, #e12c2c);
+}
+
+.sol {
+    /* background-color: #ffd07f; */
+    /* background: linear-gradient(#ddc5ff, #b683ff); */
+    /* background: linear-gradient(#ffe1ae, #ffc258); */
+    /* background: linear-gradient(135deg, #ff8b8b, #ffc258); */
+    /* background: linear-gradient(135deg, #ff6b6b, #ffa69e); */
+    background: linear-gradient(135deg, #00a1a1, #b7f8db);
+}

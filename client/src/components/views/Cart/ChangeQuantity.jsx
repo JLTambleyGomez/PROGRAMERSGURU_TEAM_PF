@@ -5,20 +5,22 @@ export function ChangeQuantity({handleAddButton, removeFromCart, P}) {
     return (
         <div className={styles.cantidad}>
             
-            {P.id && (<>
-            <img
-                src="https://www.svgrepo.com/show/527587/add-square.svg"
-                alt=""
-                className={`${styles.add} ${styles[theme("add")]}`}
-                onClick={() => handleAddButton("suma", P)}
-            />
-            <p>{P.quantity}</p>
-            <img
-                src="https://www.svgrepo.com/show/527816/minus-square.svg"
-                alt=""
-                className={`${styles.add} ${styles[theme("add")]}`}
-                onClick={() => handleAddButton("resta", P)}
-            /></>
+            {P.id && P.name && (
+                <>
+                    <img
+                        src="https://www.svgrepo.com/show/527587/add-square.svg"
+                        alt=""
+                        className={`${styles.add} ${styles[theme("add")]}`}
+                        onClick={() => handleAddButton("suma", P)}
+                    />
+                    <p>{P.quantity}</p>
+                    <img
+                        src="https://www.svgrepo.com/show/527816/minus-square.svg"
+                        alt=""
+                        className={`${styles.add} ${styles[theme("add")]}`}
+                        onClick={() => handleAddButton("resta", P)}
+                    />
+                </>
             )}
                 <img
                     src="https://www.svgrepo.com/show/525134/trash-bin-trash.svg"
