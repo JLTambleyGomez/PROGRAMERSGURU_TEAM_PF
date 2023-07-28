@@ -15,16 +15,16 @@ const About = () => {
 
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
-            <div className={s.title}>
+            {/* <div className={s.title}>
                 <h1>
                     Conoce a nuestro equipo
                 </h1>
-            </div>
+            </div> */}
 
             <div className={s.content}>
                 <div className={`${s.team}`}>
                     <div className={`${s.imageWrapper} ${s.francisco}`}>
-                        <img src={Francisco} alt="Francisco Passetti" />
+                        <img className={s.img2} src={Francisco} alt="Francisco Passetti" />
                     </div>
                     <label>Francisco Passetti</label>
                 </div>
@@ -56,7 +56,7 @@ const About = () => {
                     <div className={`${s.imageWrapper} ${s.sebastian}`}>
                         <img src={Sebastian} alt="Sebastian Menacho" />
                     </div>
-                    <label>Sebastian Menacho</label>
+                    <div>Sebastian Menacho</div>
                 </div>
                 <div className={`${s.team}`}>
                     <div className={`${s.imageWrapper} ${s.sol}`}>
