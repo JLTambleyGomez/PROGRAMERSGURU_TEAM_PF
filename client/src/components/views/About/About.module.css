@@ -24,50 +24,32 @@
 .content {
     display: flex;
     flex-wrap: wrap;
-    width: 100%;
-    min-height: 60vh;
-    box-sizing: border-box;
     justify-content: space-evenly;
+    box-sizing: border-box;
+    width: 100%;
     gap: 3rem;
     padding: 2%;
-    box-sizing: border-box;
 }
-
-/* .team {
-    width: 70%;
-    min-height: 80%;
-    border-radius: 15px;
-    gap: 5%;
-}
-
-.img {
-    max-width: 100%;
-    border-radius: 10px;
-    height: auto;
-    object-fit:cover;
-    position: relative;
-} */
 
 .team {
+    display: flex;
+    flex-direction: column;
     width: 20rem;
-    margin-top: 5%;
-    height: 90%;
-    border-radius: 10px 10px 0 0;
-    /* background: linear-gradient(135deg, #009fff, #ec2f4b); */
+    margin-top: 4rem;
 }
 
 .imageWrapper {
-    /* width: 100%;
     display: flex;
     justify-content: center;
-    background-color: transparent; */
-    /* transform: translateY(-10%);  */
+    width: 100%;
+    background-color: transparent;
+    border-radius: 15px 15px 0 0;
 }
 
 .imageWrapper img {
     width: 100%;
     display: flex;
-    margin-top: -20%;
+    margin-top: -4rem;
     height: auto;
 }
 
