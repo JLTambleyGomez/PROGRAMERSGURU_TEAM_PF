@@ -64,45 +64,49 @@
    display: flex;
    margin-top: -4rem;
    height: auto;
+   z-index: 699   ;
 }
 
 .imageWrapper:hover {
    box-shadow: 0 0 15px 5px rgba(255, 202, 61, 1), 0 0 30px 8px rgba(0, 221, 250, 0.9);
    /* box-shadow: 0 0 15px 5px rgba(255, 210, 60, 0.8), 0 0 30px 8px rgba(0, 195, 255, 0.8); */
    animation: shining 1s linear infinite;
-
    cursor: pointer;
 }
-
 
 .imageWrapper::before {
    content: "";
    position: absolute;
    top: 0;
-   left: -100%;
+   left: 0;
    width: 100%;
-   height: 100%;
-   background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-   opacity: 0;
-   pointer-events: none;
    border-radius: 15px 15px 0 0;
-   transition: opacity 0.5s, transform 0.5s;
-   z-index: -1; 
- }
- 
- .imageWrapper:hover::before {
-   opacity: 1;
-   transform: translateX(100%); 
- }
- 
+   height: 100%;
+   background: linear-gradient(135deg, #ff0000, #00ff00);
+   background-size: 200% 100%;
+   animation: shining 4s linear infinite;
+   z-index: 1;
+   animation-play-state: paused;
+
+}
+.imageWrapper:hover::before {
+   animation-play-state: running;
+   background-position: 100% 100%;
+}
 
 @keyframes shining {
-   0% {
-     background-position: 0 0; 
-   }
-   100% {
-     background-position: 200% 0; 
-   }
+   0%, 100% {
+      background-position: 0 0;
+    }
+    25% {
+      background-position: 100% 0;
+    }
+    50% {
+      background-position: 100% 100%;
+    }
+    75% {
+      background-position: 0 100%;
+    }
 }
 
  @keyframes slideInFadeIn {
@@ -146,6 +150,7 @@
    /* background: linear-gradient(#ffdc95, #f6a212); */
    /* background: linear-gradient(135deg, #ffd452, #9a6df4); */
    background: linear-gradient(135deg, #009fff, #ec2f4b);
+   animation: shining 1s linear infinite; 
 }
 
 .gianina {

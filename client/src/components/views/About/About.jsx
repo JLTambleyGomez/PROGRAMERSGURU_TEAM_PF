@@ -21,6 +21,10 @@ const About = () => {
                 </h1>
             </div> */}
 
+            <div className={s.test}>
+
+            </div>
+
             <div className={s.content}>
                 <div className={`${s.team}`}>
                     <div className={`${s.imageWrapper} ${s.francisco}`}>
