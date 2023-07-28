@@ -52,13 +52,20 @@ const FeedbackMercadoPago = async (req, res) => {
 try {
   const { email, merchant_order_id, payment_id, status } = req.query;
   const { compra } = req.body; 
-  console.log("aquiva"+req.body)
-  const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
+  
+  compra.forEach((item) => {
+    item.price = Number(item.price);
+    item.quantity = Number(item.quantity); 
+  });
+
+  const totalAmount = compra.reduce((total, product) => total + +product.price * +product.quantity, 0);
+ 
+
 
   const date = new Date()
   const formatedDate = date.toISOString().split('T')[0];
 
-  console.log(req.query.status)
+  
   const newPayment = await Payment.create({
     id: payment_id,
     date: formatedDate,
@@ -74,19 +81,20 @@ try {
     if (compra[i].name) {
       const product = await Product.findByPk(compra[i].id)
       const quantity = compra[i].quantity
-  
       await newPayment.addProduct(product, {
         through: {
           quantity: quantity,
         },
-      });
-      product.stock = product.stock - product.quantity
+      });      
+
+      if (product.stock <= quantity) return res.status(403).json({message: "No hay stock"})
+      product.stock = Number(product.stock) - Number(quantity);
+   
       await product.save()
+    
     }
     else {
       const subscription = await Subscription.findOne({where: {price: compra[i].price}})
-      console.log("esta es la suscripcion");
-      console.log(subscription);
       await subscription.addPayment(newPayment)
       if (newPayment.status === "approved") {
         const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
@@ -96,15 +104,12 @@ try {
         await user.save() 
       }
     }
-  }
-
+  }  
   await user.addPayment(newPayment)
-
-
-
+  
   const listadeproductos = compra?.map(
-   (product) => product.name? `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`:`<li> Producto: ${product.description} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
-  );
+    (product) => product.name? `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`:`<li> Producto: ${product.description} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
+    );
 
   const stringListOfProducts = listadeproductos?.join("\n");
   const listOfProducts = stringListOfProducts

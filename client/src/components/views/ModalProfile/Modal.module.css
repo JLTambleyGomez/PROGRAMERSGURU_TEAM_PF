@@ -1,0 +1,49 @@
+.container {
+    color: aliceblue;
+    background-color: rgba(0, 0, 0, 0.774);
+    width: 100%;
+    height: 100%;
+    display: flex;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    animation: blur-in 0.4s linear both;
+    flex-direction: column;
+  }
+  @keyframes blur-in {
+    0% {
+      filter: blur(12px);
+      opacity: 0;
+    }
+    100% {
+      filter: blur(0);
+      opacity: 1;
+    }
+  }
+  .item {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+  }
+  
+  .subscriptionButtons {
+    display: flex;
+    flex-direction: row;
+    margin: 2%;
+  
+  }
+  .boton{
+    background-color: black;
+    color:white;
+    border:2px solid rgb(241, 241, 241)
+  }
+  .boton:hover{
+    background-color: aliceblue;
+    color:black;
+  }

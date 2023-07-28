@@ -135,6 +135,7 @@ function Courses() {
     const handleClosingModification = (event) => {
         event.preventDefault()
         // setLimpiar(true);
+        console.log(newCourse)
         setModificarCourse(false);
         setPostCourse(false);
         setCourseId(0);
