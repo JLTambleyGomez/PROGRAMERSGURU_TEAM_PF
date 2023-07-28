@@ -15,11 +15,11 @@ const About = () => {
 
     return (
         <main className={`${s.component} ${s[theme("component")]}`}>
-            {/* <div className={s.title}>
+            <div className={s.title}>
                 <h1>
                     Conoce a nuestro equipo
                 </h1>
-            </div> */}
+            </div>
 
             <div className={s.test}>
 
