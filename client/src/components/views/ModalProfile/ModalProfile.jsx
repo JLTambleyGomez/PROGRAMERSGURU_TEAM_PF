@@ -1,20 +1,37 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-//import s from "./Modal.module.css";
+import styles from "./Modal.module.css";
+import SignFreeForm2 from "../../datos/LoginForm/SignFreeForm2";
 
+//_________________________module_________________________
 const ModalProfile = () => {
+    //states:
+    const [modal, setModal] = useState(true);
+
+    //const:
     const navigate = useNavigate();
 
-    const closeModal = () => {
-       navigate("/HomePage");
-    }
+    //functions:
+    const handlebuttonModal = () => {
+        setModal(!modal);
+        navigate("/HomePage");
+    };
 
+    //component:
     return (
         <div>
-            <h1>No tienes acceso a esta sección de la página</h1>
-            <p>Si quieres ingresar, regístrate</p>
-            <button onClick ={closeModal}>Aceptar</button>
+            {modal && (
+                <div className={styles.container}>
+                    <h1 className={styles.item}>Bienvenido</h1>
+                    <h2>Comienza Tu Registro Ya! </h2>
+                    <div className={styles.subscriptionButtons}></div>
+                    <SignFreeForm2 />
+
+                    <button className={styles.boton} onClick={handlebuttonModal}>CERRAR</button>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default ModalProfile;

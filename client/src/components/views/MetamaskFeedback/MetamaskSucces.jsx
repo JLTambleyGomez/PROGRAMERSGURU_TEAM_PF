@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from "react-router-dom";
-import { set_cart } from '../../../Redux/actions';
+import { set_cart, get_User_By_Email} from '../../../Redux/actions';
 import styles from './MetamaskFeedback.module.css';
 import {getMetamaskFeedback} from '../../../axiosRequests/axiosRequests'
 
@@ -51,7 +51,10 @@ const MetaMaskSucces = () => {
 
             }
             })();
-            return ()=>{ localStorage.setItem("cart", "[]");}
+            return ()=>{ localStorage.setItem("cart", "[]");
+            dispatch(get_User_By_Email(email));
+        }
+            
         }, []);
         
         

@@ -21,6 +21,7 @@ export function ChangeQuantity({handleAddButton, removeFromCart, P}) {
                         onClick={() => handleAddButton("resta", P)}
                     />
                 </>
+
             )}
                 <img
                     src="https://www.svgrepo.com/show/525134/trash-bin-trash.svg"

@@ -1,4 +1,4 @@
-const { User, Payment, Product } = require("../db")
+const { User, Payment, Product, Subscription } = require("../db")
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
@@ -11,55 +11,85 @@ const FeedbackMetamask = async (req, res) => {
   const { email, payment_id } = req.query;
   const { compra } = req.body; 
 
+  compra.forEach((item) => {
+    item.price = Number(item.price);
+    item.quantity = Number(item.quantity); 
+  });
+
   const totalAmount = compra.reduce((total, product) => total + product.price * product.quantity, 0);
 
   console.log("FeedbackMetamask");
   console.log(email);
   console.log(payment_id);
+  console.log('llegue aca');
   console.log(compra);
   const date = new Date()
   const formatedDate = date.toISOString().split('T')[0];
-
+  
+  console.log('llegue aca 1');
   const newPayment = await Payment.create({
     id: payment_id,
     date: formatedDate,
-    status: "fullfiled",
+    status: "approved",
     totalPrice: totalAmount
   })
 
+  const user = await User.findOne({
+    where: {email: email}
+  })
+  
+  console.log('llegue aca 2');
   for (let i = 0 ; i < compra.length ; i++) {
+    if (compra[i].name) {
     const product = await Product.findByPk(compra[i].id)
     const quantity = compra[i].quantity
-
+    console.log(quantity);
+    
     await newPayment.addProduct(product, {
       through: {
         quantity: quantity,
       },
     });
-    product.stock = product.stock - product.quantity
+    product.stock = product.stock - quantity
+    console.log('llegue aca 3');
+    
     await product.save()
+  }else{
+    console.log('entre suscription else')
+    const subscription = await Subscription.findOne({where: {price: compra[i].price}})
+    console.log(subscription)
+    await subscription.addPayment(newPayment)
+    if (newPayment.status === "approved") {
+      const months = subscription.type === "trimestral" ? 3 : subscription.type === "semestral" ? 6 : 12
+      date.setMonth(date.getMonth() + months);
+      const newExpirationDate = date.toISOString().split('T')[0];
+      console.log(newExpirationDate)
+      user.expirationDate = newExpirationDate
+  
+      await user.save() 
+    
+    }
+    }
   }
-
-
-  const user = await User.findOne({
-    where: {email: email}
-  })
-
+  
+  
   await user.addPayment(newPayment)
-
-
+  console.log('llegue aca 4');
+  
+  
   const listadeproductos = compra?.map(
     (product) => `<li> Producto: ${product.name} - Precio: ${product.price} - Cantidad: ${product.quantity} </li>`
-  );
-
-
-
-  const stringListOfProducts = listadeproductos?.join("\n");
-  const listOfProducts = stringListOfProducts
+    );
+    
+    
+    
+    const stringListOfProducts = listadeproductos?.join("\n");
+    const listOfProducts = stringListOfProducts
     ? "Lista de productos comprados: \n" + stringListOfProducts
     : "No hay productos en el carrito";
-
-  var transtorpe = nodemailer.createTransport({
+    
+    console.log('llegue aca 5');
+    var transtorpe = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
     secure: true,

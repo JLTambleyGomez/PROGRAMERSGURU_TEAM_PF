@@ -151,6 +151,7 @@ function Cart() {
                                     {/* CANTIDAD */}
                                     <ChangeQuantity handleAddButton={handleAddButton} removeFromCart={removeFromCart} P={P}/>
                                      
+
                                     {/* IMAGEN */}
                                     <a href={P.id && `/ProductDetail/${P.id}`}>
                                         <img
