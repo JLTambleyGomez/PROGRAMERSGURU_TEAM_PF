@@ -10,7 +10,7 @@ import ModalBannedUser from "../../views/ModalBannedUser/ModalBannedUser";
 import GoogleButton from "./GoogleButton"
 
 //_________________________module_________________________
-function SignFreeForm() {
+function SignFreeForm () {
     // const dispatch = useDispatch()
 
     //global states:
@@ -86,103 +86,117 @@ function SignFreeForm() {
     //component:
     return (
         <div className={styles.loginFormContainer}>
-            {showButton && (
-                <p onClick={handleToggleForm} className={styles.boton}>
-                    Ingresar
-                </p>
-            )}
-            {showForm && (
-                <div className={styles.container}>
-                    <div className={styles.form}>
+            {
+                showButton && (
+                    <button onClick={handleToggleForm} className={styles.boton1}>
+                        <p>
+                            Ingresar
+                        </p>
+                    </button>
+                )
+            }
+            {
+                showForm && (
+                    <div className={styles.container}>
+                        <div className={styles.form}>
                         {/* CLOSE FORM */}
-                        <button
-                            onClick={handleCloseForm}
-                            className={styles.closeButton}
-                        >
-                            <span className={styles.closeIcon}>x</span>
-                        </button>
+                            <button
+                                onClick={handleCloseForm}
+                                className={styles.closeButton}
+                            >
+                                <span className={styles.closeIcon}>x</span>
+                            </button>
                         {/* FORM */}
-                        <form>
-                            <h1 className={styles.title}>BIENVENIDO</h1>
-                            {/* EMAIL */}
-                            <label className={styles.label} htmlFor="email">
-                                Email
-                            </label>
-                            <input
-                                onChange={handleChange}
-                                className={styles.input}
-                                name="email"
-                                type="email"
-                                placeholder="Ingresa Email"
-                            />
-                            {errors.email && (
-                                <p className={styles.error}>{errors.email}</p>
-                            )}
-
-                            {/* PASSWORD */}
-                            <label className={styles.label} htmlFor="password">
-                                Contraseña
-                            </label>
-                            <div className={styles.password}>
+                            <form>
+                                <h1 className={styles.title}>BIENVENIDO</h1>
+                        {/* EMAIL */}
+                                <label className={styles.label} htmlFor="email">
+                                    Email
+                                </label>
                                 <input
                                     onChange={handleChange}
                                     className={styles.input}
-                                    name="password"
-                                    type={passwordVisible ? "text" : "password"}
-                                    placeholder="Ingrese Password"
+                                    name="email"
+                                    type="email"
+                                    placeholder="Ingresa Email"
                                 />
-                            </div>
-                            {/* TOGGLE PASSWORD VISIBILITY */}
-                            <button
-                                className={styles.button}
-                                onClick={showPassword}
-                            >
-                                {passwordVisible
-                                    ? "Hide Password"
-                                    : "Show Password"}
-                            </button>
-                            {errors.password && (
-                                <p className={styles.error}>
-                                    {errors.password}
+                                {
+                                    errors.email && (
+                                        <p className={styles.error}>{errors.email}</p>
+                                    )
+                                }
+
+                        {/* PASSWORD */}
+                                <label className={styles.label} htmlFor="password">
+                                    Contraseña
+                                </label>
+                                <div className={styles.password}>
+                                    <input
+                                        onChange={handleChange}
+                                        className={styles.input}
+                                        name="password"
+                                        type={passwordVisible ? "text" : "password"}
+                                        placeholder="Ingrese Password"
+                                    />
+                                </div>
+                        {/* TOGGLE PASSWORD VISIBILITY */}
+                                <button
+                                    className={styles.button}
+                                    onClick={showPassword}
+                                >
+                                    {
+                                        passwordVisible
+                                        ? "Hide Password"
+                                        : "Show Password"
+                                    }
+                                </button>
+                                {
+                                    errors.password && (
+                                        <p className={styles.error}>
+                                            {errors.password}
+                                        </p>
+                                    )
+                                }
+
+                                <p className={styles.recommendation}>
+                                    Recomendamos usar una contraseña que incluya una
+                                    combinación de letras mayúsculas y minúsculas,
+                                    números y caracteres especiales para mayor
+                                    seguridad.
                                 </p>
-                            )}
 
-                            <p className={styles.recommendation}>
-                                Recomendamos usar una contraseña que incluya una
-                                combinación de letras mayúsculas y minúsculas,
-                                números y caracteres especiales para mayor
-                                seguridad.
-                            </p>
-
-                            {/* SUBMIT */}
-                            <button
-                                // disabled={accessButton}
-                                className={`${styles.button} ${
-                                    accessButton ? styles.buttonDisabled : ""
-                                }`}
-                                type="submit"
-                                onClick={handleLogIn}
-                            >
-                                Acceder
-                            </button>
-                            <button
-                                className={`${styles.button} ${
-                                    !accessButton ? styles.buttonDisabled : ""
-                                }`}
-                                type="submit"
-                                onClick={handleSignUp}
-                            >
-                                Registrarme
-                            </button>
-                            <hr />
-                        </form>
-                        <GoogleButton onClick={handleLoginWithGoogle}/>
+                        {/* SUBMIT */}
+                            <div className={styles.options}>
+                                <button
+                                    // disabled={accessButton}
+                                    className={`${styles.button} ${styles.button2} ${
+                                        accessButton ? styles.buttonDisabled : ""
+                                    }`}
+                                    type="submit"
+                                    onClick={handleLogIn}
+                                >
+                                    Acceder
+                                </button>
+                                <button
+                                    className={`${styles.button} ${styles.button2} ${
+                                        !accessButton ? styles.buttonDisabled : ""
+                                    }`}
+                                    type="submit"
+                                    onClick={handleSignUp}
+                                >
+                                    Registrarme
+                                </button>
+                            </div>
+                                <hr />
+                            </form>
+                            <GoogleButton onClick={handleLoginWithGoogle}/>
+                        </div>
+                        {
+                            modal && <ModalBannedUser/>
+                        }
                     </div>
-                    {
-                        modal && <ModalBannedUser/>
-                    }
-                </div>
-            )}
+                )
+            }
         </div>
     );
 }

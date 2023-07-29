@@ -66,7 +66,8 @@
 }
 
 .imageWrapper:hover {
-   box-shadow: 0 0 15px 5px rgba(255, 202, 61, 1), 0 0 30px 8px rgba(0, 221, 250, 0.9);
+   /* box-shadow: 0 0 15px 5px rgba(255, 202, 61, 1), 0 0 30px 8px rgba(0, 221, 250, 0.9); */
+   box-shadow: 0 0 30px 8px rgba(0, 221, 250, 0.9);
    /* box-shadow: 0 0 15px 5px rgba(255, 210, 60, 0.8), 0 0 30px 8px rgba(0, 195, 255, 0.8); */  
    cursor: pointer;
    background-position: 100% 100%;
