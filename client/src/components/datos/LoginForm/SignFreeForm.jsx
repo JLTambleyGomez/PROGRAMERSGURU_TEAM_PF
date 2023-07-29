@@ -166,9 +166,10 @@ function SignFreeForm () {
                                 </p>
 
                         {/* SUBMIT */}
+                            <div className={styles.options}>
                                 <button
                                     // disabled={accessButton}
-                                    className={`${styles.button} ${
+                                    className={`${styles.button} ${styles.button2} ${
                                         accessButton ? styles.buttonDisabled : ""
                                     }`}
                                     type="submit"
@@ -177,7 +178,7 @@ function SignFreeForm () {
                                     Acceder
                                 </button>
                                 <button
-                                    className={`${styles.button} ${
+                                    className={`${styles.button} ${styles.button2} ${
                                         !accessButton ? styles.buttonDisabled : ""
                                     }`}
                                     type="submit"
@@ -185,6 +186,7 @@ function SignFreeForm () {
                                 >
                                     Registrarme
                                 </button>
+                            </div>
                                 <hr />
                             </form>
                             <GoogleButton onClick={handleLoginWithGoogle}/>
