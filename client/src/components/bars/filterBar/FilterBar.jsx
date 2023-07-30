@@ -190,13 +190,13 @@ function FilterBar() {
     //component:
     return (
         <>
-            <div className={`${s.component}`}>
+            <div className={`${s.component} ${s[theme("component")]}`}>
                 <div className={s.optionSort}>
                     <label>ORDENAR POR:</label>
                     <select value={orden} onChange={handleSortChange}>
                         <option value="">Destacados</option>
-                        <option value="Ascendente">Nombre Descendente (A-Z)</option>
-                        <option value="Desendente">Nombre Ascendente (Z-A)</option>
+                        <option value="Ascendente">Nombre ascendente (A-Z)</option>
+                        <option value="Desendente">Nombre descendente (Z-A)</option>
                     </select>
                 </div>
                 <div className={s.optionFilter}>
@@ -209,8 +209,8 @@ function FilterBar() {
                         </select>
                         <select value={price} onChange={handlePriceChange}>
                             <option value="">Acceso</option>
-                            <option value="true">Gratis</option>
-                            <option value="false">De Pago</option>
+                            <option value="true">Gratuito</option>
+                            <option value="false">Exclusivo</option>
                         </select>
                     </span>
 
@@ -220,7 +220,7 @@ function FilterBar() {
             </div>
 
         {/* RESPONSIVE */}
-            <div className={`${s["responsive-component"]}`}>
+            <div className={`${s["responsive-component"]} ${s[theme("responsive-component")]}`}>
                 <button onClick={() => {setFilterModal(true)}}>
                     FILTRAR
                 </button>
@@ -262,8 +262,8 @@ function FilterBar() {
                                     <select value={orden} onChange={handleSortChange}>
                                         <option value="">Destacados 
                                         </option>
-                                        <option value="Ascendente">Nombre Ascendente (A-Z)</option>
-                                        <option value="Desendente">Nombre Descendente (Z-A)</option>
+                                        <option value="Ascendente">Nombre ascendente (A-Z)</option>
+                                        <option value="Desendente">Nombre descendente (Z-A)</option>
                                     </select>
                                 </div>
                             </div>

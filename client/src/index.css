@@ -1,5 +1,6 @@
 /* 20px de margin del componente Footer  */
 :root {
+    /* 9vh, bug: 9.9-10.1vh*/
   --navBarHeight: 12vh;
   --footerHeight: calc(25vh + 80px);
   /* --footerHeight: 14vh; */
