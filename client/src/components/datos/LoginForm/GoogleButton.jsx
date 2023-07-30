@@ -11,7 +11,7 @@ function GoogleButton({ onClick }) {
           alt="Google Icon"
         />
       </div>
-      <p className={styles.btnText}><b>Sign in with Google</b></p>
+      <p className={styles.btnText}><b>Inicie sesión con Google</b></p>
     </button>
   );
 }
