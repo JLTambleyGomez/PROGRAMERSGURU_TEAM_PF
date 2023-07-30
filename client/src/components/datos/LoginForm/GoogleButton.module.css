@@ -21,3 +21,13 @@
     font-weight: bold;
   }
     
+  .buttonDisabled {
+    background-color: white;
+    opacity: 0.8;
+    border: none;
+    color: black !important;
+ }
+ .buttonDisabled:hover {
+    cursor: default;
+    background-color: #ffffff !important;
+ }

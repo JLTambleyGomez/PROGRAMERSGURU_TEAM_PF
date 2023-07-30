@@ -14,9 +14,6 @@
    height: 100vh;
    color: aliceblue;
    background-color: rgba(0, 0, 0, 0.672);
-   /* left: 31.9%; */
-   /* top: -240%; */
-   /* justify-items: center; */
    animation: blur-in 0.4s linear both;
 } @keyframes blur-in {
    0% {
@@ -101,7 +98,6 @@
 
 .button2 {
    width: 35%;
-   /* font-size: 10%; */
 }
 
 @keyframes borderGradientAnimation1 {
@@ -139,7 +135,6 @@
    height: 66px;
    width: 100%;
    padding: 0;
-   padding: 20px;
    border-radius: 4px;
    border: none;
    text-align: center;
@@ -153,21 +148,23 @@
 
 .boton1 p {
    margin: 0 15px;
+   font-size: 1.25rem;
 }
 .boton1:hover {
    background-color: #0023944f;
    opacity: 1;
    width: 100%;
-   /* padding-right: 325px; */
 }
 
 .buttonDisabled {
    background-color: white;
+   opacity: 0.8;
    border: none;
-   color: white;
+   color: black !important;
 }
 .buttonDisabled:hover {
    cursor: default;
+   background-color: #ffffff !important;
 }
 
 /* ----------- RESPONSIVE ---------- */

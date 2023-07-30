@@ -11,7 +11,6 @@ import GoogleButton from "./GoogleButton"
 
 //_________________________module_________________________
 function SignFreeForm () {
-    // const dispatch = useDispatch()
 
     //global states:
     const user = useSelector((state) => state.user);
@@ -21,16 +20,17 @@ function SignFreeForm () {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showButton, setShowButton] = useState(true);
-    const [accessButton, setAccessButton] = useState(true);
+    const [accessButton, setAccessButton] = useState(false);
     const [modal, setModal] = useState(false)
+    const [passwordButton, setPassworButton] = useState(false);
 
     const [userData, setUserData] = useState({
-        email: "",
-        password: "",
+        email: " ",
+        password: " ",
     });
     const [errors, setErrors] = useState({
-        email: "",
-        password: "",
+        email: " ",
+        password: " ",
     });
 
     //functions:
@@ -55,6 +55,7 @@ function SignFreeForm () {
         setPasswordVisible(!passwordVisible);
     };
 
+// usar async:
     const handleLogIn = (event) => {
         event.preventDefault();
         get_User_By_Email(userData.email);
@@ -70,19 +71,29 @@ function SignFreeForm () {
     };
 
     const handleLoginWithGoogle = (event) => {
-
         event.preventDefault();
         signInwithGoogle();
     };
 
+    //LIFE-CYCLES:
     useEffect(() => {
-        const errorLength = Object.keys(errors).length;
-        if (!errorLength) setAccessButton(false);
-        console.log(errors);
-        console.log(accessButton);
+        (!errors.email && !errors.password)
+        ? setAccessButton(true)
+        : setAccessButton(false);
+        console.log(errors)
     }, [errors]);
 
+    useEffect(() => {
+        if (userData.password !== " ") {
+            userData.password != ""
+            ? setPassworButton(true)
+            : setPassworButton(false)
+            console.log("userData")
+            console.log(userData)
+        }
+    }, [userData])
    
+
     //component:
     return (
         <div className={styles.loginFormContainer}>
@@ -140,16 +151,20 @@ function SignFreeForm () {
                                     />
                                 </div>
                         {/* TOGGLE PASSWORD VISIBILITY */}
-                                <button
-                                    className={styles.button}
-                                    onClick={showPassword}
-                                >
-                                    {
-                                        passwordVisible
-                                        ? "Hide Password"
-                                        : "Show Password"
-                                    }
-                                </button>
+                                {
+                                    passwordButton && (
+                                        <button
+                                            className={styles.button}
+                                            onClick={showPassword}
+                                        >
+                                            {
+                                                passwordVisible
+                                                ? "Hide Password"
+                                                : "Show Password"
+                                            }
+                                        </button>
+                                    )
+                                }
                                 {
                                     errors.password && (
                                         <p className={styles.error}>
@@ -169,18 +184,20 @@ function SignFreeForm () {
                             <div className={styles.options}>
                                 <button
                                     // disabled={accessButton}
-                                    className={`${styles.button} ${styles.button2} ${
-                                        accessButton ? styles.buttonDisabled : ""
+                                    className={`${styles.button2} ${
+                                        !accessButton ? styles.buttonDisabled : ""
                                     }`}
+                                    disabled={!accessButton ? true : false}
                                     type="submit"
                                     onClick={handleLogIn}
                                 >
                                     Acceder
                                 </button>
                                 <button
-                                    className={`${styles.button} ${styles.button2} ${
+                                    className={`${styles.button2} ${
                                         !accessButton ? styles.buttonDisabled : ""
                                     }`}
+                                    disabled={!accessButton ? true : false}
                                     type="submit"
                                     onClick={handleSignUp}
                                 >
