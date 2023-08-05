@@ -99,9 +99,11 @@ const LandingPage2 = () => {
                                         <div className={styles.boton2Container}>
                                             <SignFreeForm />
                                         </div>
-                                        <NavLink className={styles.boton1} to="/HomePage">
-                                            <p className={styles.name}>Entrar sin Registrarme</p> 
-                                        </NavLink>
+                                        <button className={styles.boton1}>
+                                            <NavLink style={{textDecoration: "none", color: "inherit"}} to="/HomePage">
+                                                <p style={{textAlign: "start"}}>Entrar sin Registrarme</p> 
+                                            </NavLink>
+                                        </button>
                                     </>
                                 )
                             }

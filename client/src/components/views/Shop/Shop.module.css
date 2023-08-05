@@ -37,7 +37,9 @@
     /* left: 0; */
     width: 100%;
     /* padding-bottom: 25%; */
-    background: linear-gradient(to right, #00b4cc9f 0%, #a1f7be 100%);
+    background: linear-gradient(to right, rgba(7, 154, 173, 0.979) 0%, rgb(161, 247, 190) 100%);
+
+    /* background: linear-gradient(to right, #00b4cc9f 0%, #a1f7be 100%); */
  }
  
  .bannerImg {

@@ -216,8 +216,8 @@ function FilterBarShop () {
                     <label onClick={toggleVisibilitySortByName}>ORDENAR POR:</label>
                     <select value={order} onChange={sortProducts}>
                         <option value="">Destacados</option>
-                        <option value="ascendente">Nombre Ascendente (A-Z)</option>
-                        <option value="descendente">Nombre Descendente (Z-A)</option>
+                        <option value="ascendente">Nombre ascendente (A-Z)</option>
+                        <option value="descendente">Nombre descendente (Z-A)</option>
                     </select>
                 </div> 
                 <div className={s.optionFilter}>
@@ -278,7 +278,7 @@ function FilterBarShop () {
                 <button onClick={resetFilters}>Mostrar todos</button>
             </div>
 
-            <div className={s["responsive-component"]}>
+            <div className={`${s["responsive-component"]} ${s[theme("responsive-component")]}`}>
                 <button onClick={() => {setFilterModal(true)}}>
                     FILTRAR
                 </button>
@@ -357,8 +357,8 @@ function FilterBarShop () {
                                     <label onClick={toggleVisibilitySortByName}>ORDENAR POR:</label>
                                         <select value={order} onChange={sortProducts}>
                                             <option value="">Destacados</option>
-                                            <option value="ascendente">Nombre Ascendente (A-Z)</option>
-                                            <option value="descendente">Nombre Descendente (Z-A)</option>
+                                            <option value="ascendente">Nombre ascendente (A-Z)</option>
+                                            <option value="descendente">Nombre descendente (Z-A)</option>
                                         </select>
                                 </div>
                             </div>

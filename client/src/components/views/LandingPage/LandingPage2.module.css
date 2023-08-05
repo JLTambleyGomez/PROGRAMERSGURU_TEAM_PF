@@ -4,13 +4,11 @@
    left: 0;
    width: 100%;
    height: 100%;
-   /* background-color: #000000; */
    background-image: url('./landing2.png');
    background-size: cover;
    background-position: center;
    animation: moveBackground 20s infinite;
 }
-
 @keyframes moveBackground {
    0% {
       background-position: 0 0; /* Posición inicial de la imagen */
@@ -55,14 +53,6 @@
    font-weight: bold;
    color: #2081addc;
    z-index: 11;
-   /* left: 0; */
-   /* position: center; */
-   /* position: fixed; */
-   /* top: -15%; */
-   /* padding-top: 5%; */
-   /* height: 100%; */
-   /* background-color: rgba(255, 255, 255, 0.548); */
-   /* margin-bottom: 20px; */
 }
 
 .sectionBanner {
@@ -73,21 +63,17 @@
    width: 100%;
    gap: 1%;
    z-index: 9;
-   /* height:80%; */
-   /* margin-top: 2%; */
 }
 .bannerImg {
-   /* margin-right: 1%; */
    width: 10%;
    height:auto;
    border-radius: 50%;
 }
+.sectionBanner h2 {
+   text-align: center;
+}
 
 .container {
-   /* position: absolute; */
-   /* left:53.6%; */
-   /* transform: translateX(-50%); */
-   /* bottom: 20px; */
    display: flex;
    flex-direction: column;
    align-items: flex-start;
@@ -98,28 +84,8 @@
    box-sizing: border-box;
    padding: 0 33%;
    transition: all 0.5s;
-   /* margin: 12% 0 0; */
 }
 
-/* .subtitle {
-   font-size: 18px;
-   color: #66666698;
-} */
-
-   /* .boton {
-      display: inline-block;
-      border-radius: 4px;
-      background-color: #28b0b4;
-      border: none;
-      color: #ffffff;
-      font-size: 28px;
-      padding: 20px;
-      width: 310px;
-      transition: all 0.5s;
-      cursor: pointer;
-      margin: 5px;
-      text-decoration: none;
-   } */
    .boton1 {
       display: flex;
       align-items: center;
@@ -129,13 +95,11 @@
       height: 66px;
       border-radius: 4px;
       font-size: 28px;
-      /* width: 400px; */
-      /* padding-left: 2%; */
       border: none;
       color: #ffffff;
       background-color: #28b0b4;
       cursor: pointer;
-      text-decoration: none;
+      /* text-decoration: none; */
       transition: all 0.5s;
       animation:shadow-drop-center 0.4s linear both;
 
@@ -143,9 +107,7 @@
    .boton1:hover {
       background-color: #0023944f;
       opacity: 1;
-      width: 100%;
-      /* transition: ease 2s linear; */
-      /* padding-right: 425px; */
+      width: calc(100% - 10px);
    }
    .boton1 p {
       margin: 0 15px;
@@ -158,24 +120,13 @@
       transition: all 0.5s;
    }
    .boton2Container:hover {
-      width: 100%;
+      width: calc(100% - 10px);
    }
-   /* .boton:hover {
-      background-color: #0023944f;
-      opacity: 1;
-      padding-right: 425px;
-   } */
-
-   /* .botoncontainer {
-      text-align:auto;
-      width: 100px;
-      height: 100px;
-   } */
 
 
 /* ---------- RESPONSIVE ----------- */
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
    .container {
       padding: 0 28%;
    }
@@ -183,36 +134,48 @@
 
 @media screen and (max-width: 900px) {
    .container {
-      padding: 0 24%;
+      padding: 0 22%;
    }
 }
 
 @media screen and (max-width: 750px) {
    .container {
-      padding: 0 20%;
+      padding: 0 18%;
    }
 }
 
 @media screen and (max-width: 650px) {
    .container {
-      padding: 0 16%;
+      padding: 0 14%;
    }
 }
 
 @media screen and (max-width: 580px) {
    .container {
-      padding: 0 10%;
+      padding: 0 9%;
    }
    .title {
-      font-size: 19vw;
-   }
-   .sectionBanner {
-
+      font-size: 15vw;
    }
 }
 
 @media screen and (max-width: 500px) {
+   .content {
+      padding: 30px 0;
+   }
+}
+
+@media screen and (max-width: 450px) {
    .container {
-      /* padding: 0 -30px; */
+      padding: 0;
+   }
+   .sectionBanner {
+      flex-direction: column;
+   }
+   .bannerImg {
+      width: 25%;
+   }
+   .sectionBanner h2 {
+      font-size: 8vw;
    }
 }

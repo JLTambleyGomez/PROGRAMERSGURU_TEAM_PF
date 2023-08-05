@@ -4,12 +4,9 @@
    justify-content: space-around;
    /* width: 100%; */
    height: 6rem;
-   background: linear-gradient(to right, rgba(7, 154, 173, 0.979) 0%, rgb(161, 247, 190) 100%);
+   color: white;
+   background: linear-gradient(to right, rgba(7, 154, 173) 0%, rgb(161, 247, 190) 100%);
    transition: transform 0.3s, filter 0.3s,width 0.2s;
-}
-
-.component > div {
-  /* height: 4rem; */
 }
 
 .optionSort {
@@ -152,7 +149,6 @@
   align-items: center;
   align-self: center;
   justify-content: space-evenly;
-  background-color: white;
   position:absolute;
   height: 50%;
   width: 80%;
@@ -214,12 +210,15 @@
      gap: 1rem;
      width: 100%;
      height: 4%;
-     padding: 1rem;
-     color: aliceblue;
+     padding: 0.5rem;
      box-sizing: border-box;
-     background-color: rgba(0, 0, 0, 0.672);
+     color: black;
+     background: linear-gradient(to right, rgba(7, 154, 173, 0.979) 0%, rgb(161, 247, 190) 100%);
      overflow: hidden;
   }
+  .responsive-component-dark {
+    color: white
+}   
 
   .responsive-component button {
      width: 40%;

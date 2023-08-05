@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+
+import { get_User_By_Email } from "../../../Redux/actions";
 import validate from "./validate";
+
 import styles from "./LoginForm.module.css";
 import signIn from "../../../user/signIn";
 import createUser from "../../../user/createUser";
 import signInwithGoogle from "../../../user/signInWithGoogle";
-import { get_User_By_Email } from "../../../Redux/actions";
-import ModalBannedUser from "../../views/ModalBannedUser/ModalBannedUser";
 import GoogleButton from "./GoogleButton"
+import ModalBannedUser from "../../views/ModalBannedUser/ModalBannedUser";
 
 //_________________________module_________________________
 function SignFreeForm () {
-    // const dispatch = useDispatch()
 
     //global states:
     const user = useSelector((state) => state.user);
@@ -21,16 +22,21 @@ function SignFreeForm () {
     const [passwordVisible, setPasswordVisible] = useState(false);
     const [showForm, setShowForm] = useState(false);
     const [showButton, setShowButton] = useState(true);
-    const [accessButton, setAccessButton] = useState(true);
+    const [accessButton, setAccessButton] = useState(false);
     const [modal, setModal] = useState(false)
+    const [passwordButton, setPassworButton] = useState(false);
+    const [focus, setFocus] = useState({
+        email: false,
+        password: false
+    });
 
     const [userData, setUserData] = useState({
-        email: "",
-        password: "",
+        email: " ",
+        password: " ",
     });
     const [errors, setErrors] = useState({
-        email: "",
-        password: "",
+        email: " ",
+        password: " ",
     });
 
     //functions:
@@ -46,6 +52,10 @@ function SignFreeForm () {
     };
 
     const handleCloseForm = () => {
+        setErrors({
+            email: " ",
+            password: " ",
+        })
         setShowForm(false);
         setShowButton(true);
     };
@@ -55,6 +65,7 @@ function SignFreeForm () {
         setPasswordVisible(!passwordVisible);
     };
 
+// usar async y dispatch:
     const handleLogIn = (event) => {
         event.preventDefault();
         get_User_By_Email(userData.email);
@@ -63,6 +74,7 @@ function SignFreeForm () {
         } else signIn(userData.email, userData.password);
     };
 
+// usar async y dispatch:
     const handleSignUp = (event) => {
         event.preventDefault();
         get_User_By_Email(userData.email);
@@ -70,19 +82,26 @@ function SignFreeForm () {
     };
 
     const handleLoginWithGoogle = (event) => {
-
         event.preventDefault();
         signInwithGoogle();
     };
 
+    //LIFE-CYCLES:
     useEffect(() => {
-        const errorLength = Object.keys(errors).length;
-        if (!errorLength) setAccessButton(false);
-        console.log(errors);
-        console.log(accessButton);
+        (!errors.email && !errors.password)
+        ? setAccessButton(true)
+        : setAccessButton(false);
     }, [errors]);
 
-   
+    useEffect(() => {
+        if (userData.password !== " ") {
+            userData.password != ""
+            ? setPassworButton(true)
+            : setPassworButton(false)
+        }
+    }, [userData])
+
+
     //component:
     return (
         <div className={styles.loginFormContainer}>
@@ -97,8 +116,8 @@ function SignFreeForm () {
             }
             {
                 showForm && (
-                    <div className={styles.container}>
-                        <div className={styles.form}>
+                    <div className={styles.container} onClick={handleCloseForm}>
+                        <div className={styles.form} onClick={(event) => event.stopPropagation()}>
                         {/* CLOSE FORM */}
                             <button
                                 onClick={handleCloseForm}
@@ -110,15 +129,21 @@ function SignFreeForm () {
                             <form>
                                 <h1 className={styles.title}>BIENVENIDO</h1>
                         {/* EMAIL */}
-                                <label className={styles.label} htmlFor="email">
+                                <label className={styles.label} name="email" htmlFor="email">
                                     Email
                                 </label>
                                 <input
-                                    onChange={handleChange}
-                                    className={styles.input}
+                                    id="email"
                                     name="email"
                                     type="email"
-                                    placeholder="Ingresa Email"
+                                    onChange={handleChange}
+                                    className={`
+                                        ${styles.input} 
+                                        ${focus.email ? styles.focused : ""} 
+                                        ${errors.email !== " " && errors.email ? styles.errorIn : ""}`}
+                                    onFocus={() => setFocus({...focus, email: true })}
+                                    onBlur={() => setFocus({...focus, email: false })}
+                                    placeholder="Ingresa tu email"
                                 />
                                 {
                                     errors.email && (
@@ -127,29 +152,40 @@ function SignFreeForm () {
                                 }
 
                         {/* PASSWORD */}
-                                <label className={styles.label} htmlFor="password">
+                                <label style={{marginTop: "30px"}} className={styles.label} htmlFor="password">
                                     Contraseña
                                 </label>
                                 <div className={styles.password}>
                                     <input
-                                        onChange={handleChange}
-                                        className={styles.input}
+                                        id="password"
                                         name="password"
                                         type={passwordVisible ? "text" : "password"}
-                                        placeholder="Ingrese Password"
+                                        onChange={handleChange}
+                                        className={`
+                                            ${styles.input} 
+                                            ${focus.password ? styles.focused : ""} 
+                                            ${errors.password !== " " && errors.password ? styles.errorIn : ""}`}
+                                        onFocus={() => setFocus({...focus, password: true })}
+                                        onBlur={() => setFocus({...focus, password: false })}
+                                        placeholder="Ingresa tu contraseña"
                                     />
                                 </div>
                         {/* TOGGLE PASSWORD VISIBILITY */}
-                                <button
-                                    className={styles.button}
-                                    onClick={showPassword}
-                                >
-                                    {
-                                        passwordVisible
-                                        ? "Hide Password"
-                                        : "Show Password"
-                                    }
-                                </button>
+                                {
+                                    passwordButton && (
+                                        <button
+                                            style={{marginBottom: "3%"}}
+                                            className={styles.button}
+                                            onClick={showPassword}
+                                        >
+                                            {
+                                                passwordVisible
+                                                ? "Mostrar contraseña"
+                                                : "Ocultar contraseña"
+                                            }
+                                        </button>
+                                    )
+                                }
                                 {
                                     errors.password && (
                                         <p className={styles.error}>
@@ -169,18 +205,20 @@ function SignFreeForm () {
                             <div className={styles.options}>
                                 <button
                                     // disabled={accessButton}
-                                    className={`${styles.button} ${styles.button2} ${
-                                        accessButton ? styles.buttonDisabled : ""
+                                    className={`${styles.boton2} ${
+                                        !accessButton ? styles.buttonDisabled : ""
                                     }`}
+                                    disabled={!accessButton ? true : false}
                                     type="submit"
                                     onClick={handleLogIn}
                                 >
                                     Acceder
                                 </button>
                                 <button
-                                    className={`${styles.button} ${styles.button2} ${
+                                    className={`${styles.boton2} ${
                                         !accessButton ? styles.buttonDisabled : ""
                                     }`}
+                                    disabled={!accessButton ? true : false}
                                     type="submit"
                                     onClick={handleSignUp}
                                 >

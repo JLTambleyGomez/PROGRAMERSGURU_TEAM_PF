@@ -5,7 +5,7 @@
   width: 100%;
   height: 6rem;
   z-index: 1;
-  color: aliceblue;
+  color: white;
   background-image: linear-gradient(to right,  #000000, #434343);
   animation:blur-in 1s ease;
 } @keyframes blur-in{0%{filter:blur(12px);opacity:0}100%{filter:blur(0);opacity:1}}
@@ -142,57 +142,57 @@
 }
 
 @keyframes borderGradientAnimation1 {
-0% {
-  border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
-}
-20% {
-  border-image: linear-gradient(to right, #ff0000, #800080) 1;
-}
-40% {
-  border-image: linear-gradient(to right, #800080, #0000ff) 1;
-}
-60% {
-  border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
-}
-80% {
-  border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
-}
-100% {
-  border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
-}
+    0% {
+    border-image: linear-gradient(to right, #ff00ff, #ff0000) 1;
+    }
+    20% {
+    border-image: linear-gradient(to right, #ff0000, #800080) 1;
+    }
+    40% {
+    border-image: linear-gradient(to right, #800080, #0000ff) 1;
+    }
+    60% {
+    border-image: linear-gradient(to right, #0000ff, #00ffff) 1;
+    }
+    80% {
+    border-image: linear-gradient(to right, #00ffff, #ff00ff) 1;
+    }
+    100% {
+    border-image: linear-gradient(to right, #ff00ff, #ff00ff) 1;
+    }
 }
 
 .overlay {
-position: fixed;
-display: flex;
-align-items: center;
-justify-content: center;
-top: 0;
-bottom: 0;
-left: 0;
-right: 0;
-z-index: 9998;
-width: 100vw;
-height: 100vh;
-background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9998;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal {
-margin:15% 0 0 10%;
-right: 0;
-left: 0;
-z-index: 9999;
-display: flex;
-flex-direction: column;
-align-items: center;
-align-self: center;
-background-color: white;
-position:absolute;
-justify-content: space-evenly;
-height: 50%;
-width: 80%;
-box-sizing: border-box;
-border-radius: 10px;
+    margin:15% 0 0 10%;
+    right: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    background-color: white;
+    position:absolute;
+    justify-content: space-evenly;
+    height: 50%;
+    width: 80%;
+    box-sizing: border-box;
+    border-radius: 10px;
 }
 .modal-light {
   background-color: whitesmoke;
@@ -221,6 +221,9 @@ border-radius: 10px;
     width: 50%;
 } 
 
+
+
+
 /* ----------- RESPONSIVE ------------ */
 
 @media screen and (width > 700px) {
@@ -237,11 +240,15 @@ border-radius: 10px;
   justify-content: center;
   gap: 1rem;
   width: 100%;
-  height: 4%;
-  padding: 1rem;
+  /* height: 2%; */
+  padding: 0.5rem;
   box-sizing: border-box;
-  background-color: rgba(0, 0, 0, 0.672);
+  color: black;
+  background-image: linear-gradient(to right,  #000000, #434343);
   overflow: hidden;
+}
+.responsive-component-dark {
+    color: white;
 }
 /* .reponsiveFilter {
   position: absolute;

@@ -11,13 +11,13 @@
     background-color: #f1f1f1;
   }
   .iconWrapper {
+    display: flex;
     margin-right:8px;
   }
   .icon {
     width: 30px;
-    height: 30px;
+    height: auto;
   }
   .btnText {
     font-weight: bold;
   }
-    
